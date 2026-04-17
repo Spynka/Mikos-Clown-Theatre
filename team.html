@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Театр клоунады «Микос» | Команда</title>
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+	<link rel="stylesheet" href="css/style.css">
+    <style>
+
+    </style>
+</head>
+<body>
+<div class="shop-container">
+    <!-- HEADER -->
+    <header class="main-header">
+        <div class="header-inner">
+            <div class="header-left">
+                <div class="logo-group">
+                    <img class="logo-img" src="SVG/logo-2.svg" alt="Логотип">
+                    <img class="logo-img" src="SVG/logo.svg" alt="Логотип текст">
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Главная</a></li><li><a href="affiche.html">Афиша</a></li><li><a href="for-customers.html">Заказчикам</a></li><li><a href="brandbook.html">Брендбук</a></li>
+                    <li><span class="dots-icon" id="dotsIcon">⋯</span><span class="close-icon" id="closeIcon">✕</span></li>
+                </ul>
+                <div class="burger-icon" id="burgerIcon"><i class="fas fa-bars"></i></div>
+            </div>
+            <button class="buy-ticket-btn">Купить билет</button>
+        </div>
+        <div class="extra-menu-row" id="extraMenuRow">
+            <ul class="extra-nav-list"><li><a href="performances.html">Спектакли</a></li><li><a href="team.html">Команда</a></li><li><a href="history.html">О театре</a></li><li><a href="shop.html">Магазин</a></li><li><a href="contacts.html">Контакты</a></li></ul>
+        </div>
+    </header>
+    <div class="mobile-nav" id="mobileNav"><div class="close-mobile-menu" id="closeMobileMenu">✕</div><ul><li><a href="#">Главная</a></li><li><a href="#">Афиша</a></li><li><a href="#">Заказчикам</a></li><li><a href="#">Брендбук</a></li><li><a href="#">Спектакли</a></li><li><a href="#">Команда</a></li><li><a href="#">О театре</a></li><li><a href="#">Магазин</a></li><li><a href="#">Контакты</a></li></ul></div>
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Основной контент страницы Команда -->
+    <div class="team-page">
+        <div class="page-header-team">
+            <h1 class="page-title-team">Команда</h1>
+            <p class="page-subtitle-team">Люди, создающие искусство каждый день.</p>
+        </div>
+
+        <!-- Художественный руководитель -->
+        <div class="director-highlight">
+            <div class="director-photo">
+                <img src="https://placehold.co/360x396/E9ECEF/white?text=Сергей+Давыдов" alt="Сергей Давыдов">
+            </div>
+            <div class="director-info">
+                <div class="director-tag">ХУДОЖЕСТВЕННЫЙ РУКОВОДИТЕЛЬ</div>
+                <div class="director-name">Сергей <span>«Паганель»</span> Давыдов</div>
+                <div class="director-position">Основатель театра, режиссер, народный артист РФ</div>
+                <div class="director-bio">Выпускник ГИТИСа, ученик Петра Фоменко. За 28 лет поставил более 40 спектаклей. Обладатель трех премий «Золотая маска», лауреат международных фестивалей. Разработал авторскую систему актерского тренинга.</div>
+                <button class="director-btn">Подробнее</button>
+            </div>
+        </div>
+
+        <!-- Статистика -->
+        <div class="stats-row">
+            <div class="stat-item"><div class="stat-number">6</div><div class="stat-label">актеров</div></div>
+            <div class="stat-item"><div class="stat-number">35</div><div class="stat-label">лет истории</div></div>
+            <div class="stat-item"><div class="stat-number">16</div><div class="stat-label">спектаклей</div></div>
+        </div>
+
+        <!-- Блок "Хотите с нами работать?" (перед актерами) -->
+        <div class="work-with-us">
+            <div class="work-image">
+                <img src="https://placehold.co/541x451/E8EEF7/white?text=Присоединяйтесь" alt="Присоединяйтесь">
+            </div>
+            <div class="work-content">
+                <h3 class="work-title">Хотите с нами работать?</h3>
+                <p class="work-text">Заполните небольшую анкету, перейдя по кнопке ниже.<br>Мы вам обязательно напишем в течение одного дня.</p>
+                <button class="work-btn">Хочу тут работать</button>
+            </div>
+        </div>
+
+        <!-- Актерская труппа (одна строка с тремя фото на каждого актера) -->
+        <div class="section-header-team">
+            <h2 class="section-title-team">Актерская труппа</h2>
+            <span class="section-count">6 актеров</span>
+        </div>
+        <div class="actors-grid" id="actorsGrid"></div>
+
+        <!-- Показать еще (для возможного расширения) -->
+        <div class="show-more-wrapper">
+            <button class="show-more-btn" id="showMoreActorsBtn">Показать еще</button>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <div class="footer-logo"><img class="footer-logo-img" src="SVG/logo-black.svg" alt="Микос"><div class="footer-theater-title">Театр клоунады «Микос»</div></div>
+                    <div class="footer-description">Новаторские постановки, экспериментальные формы, классика в современном прочтении.<br>Откройте для себя театр заново.</div>
+                    <div class="newsletter-title">Подписаться на новости</div>
+                    <div class="subscribe-form"><input type="email" placeholder="Ваш email" class="subscribe-input" id="subscribeEmail"><button class="subscribe-btn" id="subscribeBtn">Подписаться</button></div>
+                    <label class="checkbox-custom" id="consentLabel"><input type="checkbox" id="consentCheckbox"><span class="checkmark"></span><span>Я согласен на обработку персональных данных</span></label>
+                    <div class="error-tooltip" id="consentError">Для подписки необходимо согласие на обработку данных</div>
+                    <div class="social-icons"><a href="#" class="social-circle"><i class="fab fa-vk"></i></a><a href="#" class="social-circle"><i class="fab fa-telegram-plane"></i></a></div>
+                </div>
+                <div class="footer-nav"><h4>Навигация</h4><ul><li><a href="#">Главная</a></li><li><a href="#">Афиша</a></li><li><a href="#">Спектакли</a></li><li><a href="#">Заказчикам</a></li><li><a href="#">О театре</a></li><li><a href="#">Команда</a></li><li><a href="#">Магазин</a></li><li><a href="#">Контакты</a></li><li><a href="#">Брендбук</a></li></ul></div>
+                <div class="footer-nav"><h4>Контакты</h4><ul><li><a href="#">Москва, ул. Театральная, 1</a></li><li><a href="tel:+74951234567">+7 (495) 123-45-67</a></li><li><a href="mailto:info@theatre.ru">info@theatre.ru</a></li><li><a href="#">Как добраться</a></li></ul></div>
+            </div>
+            <div class="footer-bottom"><div class="copyright">© 2026 Театр клоунады «Микос». Все права защищены.</div><div class="footer-buttons"><button class="footer-btn-primary">Купить билет</button><button class="footer-btn-secondary">Заказать шоу</button></div></div>
+        </div>
+    </footer>
+</div>
+
+<script>
+    // Данные актеров (6 актеров — одна строка по 3 фото = 2 строки)
+    const actors = [
+        { name: 'Сергей Давыдов', img: 'https://placehold.co/428x428/E8EEF7/white?text=Сергей+Давыдов' },
+        { name: 'Ксения Иванова', img: 'https://placehold.co/428x428/E8EEF7/white?text=Ксения+Иванова' },
+        { name: 'Тотраз Циукаев', img: 'https://placehold.co/428x428/E8EEF7/white?text=Тотраз+Циукаев' },
+        { name: 'Максим Гамаюнов', img: 'https://placehold.co/428x428/E8EEF7/white?text=Максим+Гамаюнов' },
+        { name: 'Алексей Петров', img: 'https://placehold.co/428x428/E8EEF7/white?text=Алексей+Петров' },
+        { name: 'Елена Смирнова', img: 'https://placehold.co/428x428/E8EEF7/white?text=Елена+Смирнова' }
+    ];
+    let visibleActors = 6;
+
+    function renderActors() {
+        const grid = document.getElementById('actorsGrid');
+        const displayActors = actors.slice(0, visibleActors);
+        grid.innerHTML = '';
+        displayActors.forEach(actor => {
+            const card = document.createElement('div');
+            card.className = 'actor-card';
+            card.innerHTML = `
+                <div class="actor-name">${actor.name}</div>
+                <div class="actor-photo"><img src="${actor.img}" alt="${actor.name}"></div>
+            `;
+            grid.appendChild(card);
+        });
+        const showMoreBtn = document.getElementById('showMoreActorsBtn');
+        if (showMoreBtn) {
+            showMoreBtn.style.display = visibleActors >= actors.length ? 'none' : 'block';
+        }
+    }
+
+    document.getElementById('showMoreActorsBtn')?.addEventListener('click', () => {
+        if (visibleActors < actors.length) {
+            visibleActors = Math.min(visibleActors + 3, actors.length);
+            renderActors();
+        }
+    });
+
+    // Кнопки
+    document.querySelector('.director-btn')?.addEventListener('click', () => alert('Подробнее о художественном руководителе'));
+    document.querySelector('.work-btn')?.addEventListener('click', () => alert('Форма для заполнения анкеты будет доступна скоро'));
+
+    // Header dropdown
+    const dotsIcon = document.getElementById('dotsIcon'), closeIcon = document.getElementById('closeIcon'), extraRow = document.getElementById('extraMenuRow');
+    function openExtraMenu() { extraRow.classList.add('open'); if (dotsIcon) dotsIcon.style.display = 'none'; if (closeIcon) closeIcon.style.display = 'inline-flex'; }
+    function closeExtraMenu() { extraRow.classList.remove('open'); if (dotsIcon) dotsIcon.style.display = 'inline-flex'; if (closeIcon) closeIcon.style.display = 'none'; }
+    if (dotsIcon) dotsIcon.addEventListener('click', openExtraMenu);
+    if (closeIcon) closeIcon.addEventListener('click', closeExtraMenu);
+
+    // Бургер-меню
+    const burgerIcon = document.getElementById('burgerIcon'), mobileNav = document.getElementById('mobileNav'), overlay = document.getElementById('overlay'), closeMobileBtn = document.getElementById('closeMobileMenu');
+    function openMobileMenu() { mobileNav.classList.add('open'); overlay.classList.add('active'); document.body.style.overflow = 'hidden'; }
+    function closeMobileMenu() { mobileNav.classList.remove('open'); overlay.classList.remove('active'); document.body.style.overflow = ''; }
+    if (burgerIcon) burgerIcon.addEventListener('click', openMobileMenu);
+    if (closeMobileBtn) closeMobileBtn.addEventListener('click', closeMobileMenu);
+    if (overlay) overlay.addEventListener('click', closeMobileMenu);
+
+    // Подписка
+    document.getElementById('subscribeBtn')?.addEventListener('click', () => { const chk = document.getElementById('consentCheckbox'), err = document.getElementById('consentError'); if (!chk.checked) { err.style.display = 'block'; setTimeout(() => err.style.display = 'none', 2500); } else { alert('Спасибо за подписку!'); document.getElementById('subscribeEmail').value = ''; chk.checked = false; } });
+    document.querySelectorAll('.footer-btn-primary, .buy-ticket-btn').forEach(btn => btn.addEventListener('click', () => alert('Билеты скоро в продаже')));
+
+    renderActors();
+</script>
+</body>
+</html>

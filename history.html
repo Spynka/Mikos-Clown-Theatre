@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Театр клоунады «Микос» | О театре</title>
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+	<link rel="stylesheet" href="css/style.css">
+    <style>
+
+    </style>
+</head>
+<body>
+<div class="shop-container">
+    <!-- HEADER -->
+    <header class="main-header">
+        <div class="header-inner">
+            <div class="header-left">
+                <div class="logo-group">
+                    <img class="logo-img" src="SVG/logo-2.svg" alt="Логотип">
+                    <img class="logo-img" src="SVG/logo.svg" alt="Логотип текст">
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Главная</a></li><li><a href="affiche.html">Афиша</a></li><li><a href="for-customers.html">Заказчикам</a></li><li><a href="brandbook.html">Брендбук</a></li>
+                    <li><span class="dots-icon" id="dotsIcon">⋯</span><span class="close-icon" id="closeIcon">✕</span></li>
+                </ul>
+                <div class="burger-icon" id="burgerIcon"><i class="fas fa-bars"></i></div>
+            </div>
+            <button class="buy-ticket-btn">Купить билет</button>
+        </div>
+        <div class="extra-menu-row" id="extraMenuRow">
+            <ul class="extra-nav-list"><li><a href="performances.html">Спектакли</a></li><li><a href="team.html">Команда</a></li><li><a href="history.html">О театре</a></li><li><a href="shop.html">Магазин</a></li><li><a href="contacts.html">Контакты</a></li></ul>
+        </div>
+    </header>
+    <div class="mobile-nav" id="mobileNav"><div class="close-mobile-menu" id="closeMobileMenu">✕</div><ul><li><a href="#">Главная</a></li><li><a href="#">Афиша</a></li><li><a href="#">Заказчикам</a></li><li><a href="#">Брендбук</a></li><li><a href="#">Спектакли</a></li><li><a href="#">Команда</a></li><li><a href="#">О театре</a></li><li><a href="#">Магазин</a></li><li><a href="#">Контакты</a></li></ul></div>
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Основной контент страницы О театре -->
+    <div class="about-page">
+        <div class="page-header-about">
+            <h1 class="page-title-about">О театре</h1>
+            <p class="page-subtitle-about">Тридцать лет на сцене. Классика и эксперимент. Диалог со зрителем.</p>
+        </div>
+
+        <!-- История театра (таймлайн) -->
+        <div class="timeline-section">
+            <h2 class="section-title">История театра</h2>
+            <div class="timeline-container">
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <div class="timeline-photo"><img src="https://placehold.co/100x100/EFEEED/white?text=1995" alt="1995"></div>
+                        <div class="timeline-year">1995</div>
+                        <div class="timeline-title">Основание</div>
+                        <div class="timeline-desc">Группа выпускников ГИТИСа создаёт независимую труппу. Первый спектакль — «Игроки».</div>
+                    </div>
+                    <div class="timeline-marker"></div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <div class="timeline-photo"><img src="https://placehold.co/100x100/EFEEED/white?text=2003" alt="2003"></div>
+                        <div class="timeline-year">2003</div>
+                        <div class="timeline-title">Собственная сцена</div>
+                        <div class="timeline-desc">Театр получает здание в центре Москвы. Премьера «Гамлета» открывает новый этап.</div>
+                    </div>
+                    <div class="timeline-marker"></div>
+                </div>
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <div class="timeline-photo"><img src="https://placehold.co/100x100/EFEEED/white?text=2010" alt="2010"></div>
+                        <div class="timeline-year">2010</div>
+                        <div class="timeline-title">Первая «Золотая маска»</div>
+                        <div class="timeline-desc">«Вишневый сад» получает главную театральную премию страны.</div>
+                    </div>
+                    <div class="timeline-marker"></div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <div class="timeline-photo"><img src="https://placehold.co/100x100/EFEEED/white?text=2018" alt="2018"></div>
+                        <div class="timeline-year">2018</div>
+                        <div class="timeline-title">Международное признание</div>
+                        <div class="timeline-desc">Гастроли в Париже, Лондоне, Берлине. Вхождение в топ-10 независимых театров Европы.</div>
+                    </div>
+                    <div class="timeline-marker"></div>
+                </div>
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <div class="timeline-photo"><img src="https://placehold.co/100x100/EFEEED/white?text=2025" alt="2025"></div>
+                        <div class="timeline-year">2025</div>
+                        <div class="timeline-title">30-й сезон</div>
+                        <div class="timeline-desc">Юбилейный год: новая сцена, премьера «Мастера и Маргариты», фестиваль современной драматургии.</div>
+                    </div>
+                    <div class="timeline-marker"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Миссия и философия -->
+        <div class="mission-section">
+            <div class="mission-block">
+                <h2>Миссия</h2>
+                <p>Мы создаём театр, в котором классическая традиция встречается с языком сегодняшнего дня. Наша задача — говорить со зрителем о сложном просто, честно и без пафоса.</p>
+                <p>Каждый спектакль — это исследование. Мы не даём готовых ответов, но задаём вопросы, которые важны здесь и сейчас.</p>
+                <div class="quote"><p>«Театр начинается не с вешалки, а с диалога. И этот диалог длится уже тридцать лет».</p></div>
+            </div>
+            <div class="mission-block">
+                <h2>Философия</h2>
+                <p>Мы убеждены, что искусство — это территория свободы. В нашей труппе нет деления на «звёзд» и «массовку». Каждый актёр — соавтор спектакля.</p>
+                <p>Мы за медленный театр. Долгие репетиции, глубокий разбор материала, внимание к деталям. Нам важно не количество премьер, а их качество.</p>
+                <p>Открытость, уважение к зрителю, смелость в экспериментах — три принципа, которым мы не изменяем.</p>
+            </div>
+        </div>
+
+        <!-- Художественный руководитель -->
+        <div class="director-section">
+            <div class="director-info">
+                <h3>Сергей «Паганель» Давыдов</h3>
+                <div class="director-title">Художественный руководитель, основатель</div>
+                <div class="director-bio">
+                    <p>Родился в 1970 году в Москве. Окончил режиссёрский факультет ГИТИСа (мастерская Петра Фоменко). В 1995 году вместе с единомышленниками основал театр.</p>
+                    <p>За 30 лет поставил более 40 спектаклей. Трёхкратный лауреат премии «Золотая маска». Народный артист РФ (2018). Автор книги «Театр как путешествие».</p>
+                    <p>Творческий псевдоним «Паганель» получил в студенческие годы за страсть к открытиям и экспериментам.</p>
+                </div>
+                <div class="director-signature"><p>— «Театр — это встреча. Каждый вечер заново».</p></div>
+            </div>
+            <div class="director-photo">
+                <img src="https://placehold.co/318x382/E8EEF7/white?text=Сергей+Давыдов" alt="Сергей Давыдов">
+            </div>
+        </div>
+
+        <!-- Награды и признание -->
+        <div class="awards-section">
+            <h2 class="section-title">Награды и признание</h2>
+            <div class="awards-grid">
+                <div class="award-card"><div class="award-year">2010, 2015, 2021</div><div class="award-title">Золотая маска</div><div class="award-desc">Лучший драматический спектакль, лучшая мужская роль, лучшая работа режиссёра.</div></div>
+                <div class="award-card"><div class="award-year">2012, 2019</div><div class="award-title">Хрустальная Турандот</div><div class="award-desc">За лучший актёрский ансамбль и новаторство в сценографии.</div></div>
+                <div class="award-card"><div class="award-year">2018</div><div class="award-title">Государственная премия РФ</div><div class="award-desc">За вклад в развитие театрального искусства и воспитание молодых актёров.</div></div>
+                <div class="award-card"><div class="award-year">2020</div><div class="award-title">Премия Станиславского</div><div class="award-desc">Международная премия за сохранение традиций русской театральной школы.</div></div>
+                <div class="award-card"><div class="award-year">2022</div><div class="award-title">Фестиваль «СРЕДА»</div><div class="award-desc">Золото за визуальное оформление спектакля «Мастер и Маргарита».</div></div>
+                <div class="award-card"><div class="award-year">2024</div><div class="award-title">ТОП-10 независимых театров</div><div class="award-desc">По версии европейской театральной ассоциации.</div></div>
+            </div>
+        </div>
+
+        <!-- Галерея -->
+        <div class="gallery-section">
+            <h2 class="section-title">Галерея</h2>
+            <div class="gallery-grid" id="galleryGrid"></div>
+            <div class="show-more-wrapper">
+                <button class="show-more-btn" id="showMoreGalleryBtn">Показать еще</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <div class="footer-logo"><img class="footer-logo-img" src="SVG/logo-black.svg" alt="Микос"><div class="footer-theater-title">Театр клоунады «Микос»</div></div>
+                    <div class="footer-description">Новаторские постановки, экспериментальные формы, классика в современном прочтении.<br>Откройте для себя театр заново.</div>
+                    <div class="newsletter-title">Подписаться на новости</div>
+                    <div class="subscribe-form"><input type="email" placeholder="Ваш email" class="subscribe-input" id="subscribeEmail"><button class="subscribe-btn" id="subscribeBtn">Подписаться</button></div>
+                    <label class="checkbox-custom" id="consentLabel"><input type="checkbox" id="consentCheckbox"><span class="checkmark"></span><span>Я согласен на обработку персональных данных</span></label>
+                    <div class="error-tooltip" id="consentError">Для подписки необходимо согласие на обработку данных</div>
+                    <div class="social-icons"><a href="#" class="social-circle"><i class="fab fa-vk"></i></a><a href="#" class="social-circle"><i class="fab fa-telegram-plane"></i></a></div>
+                </div>
+                <div class="footer-nav"><h4>Навигация</h4><ul><li><a href="#">Главная</a></li><li><a href="#">Афиша</a></li><li><a href="#">Спектакли</a></li><li><a href="#">Заказчикам</a></li><li><a href="#">О театре</a></li><li><a href="#">Команда</a></li><li><a href="#">Магазин</a></li><li><a href="#">Контакты</a></li><li><a href="#">Брендбук</a></li></ul></div>
+                <div class="footer-nav"><h4>Контакты</h4><ul><li><a href="#">Москва, ул. Театральная, 1</a></li><li><a href="tel:+74951234567">+7 (495) 123-45-67</a></li><li><a href="mailto:info@theatre.ru">info@theatre.ru</a></li><li><a href="#">Как добраться</a></li></ul></div>
+            </div>
+            <div class="footer-bottom"><div class="copyright">© 2026 Театр клоунады «Микос». Все права защищены.</div><div class="footer-buttons"><button class="footer-btn-primary">Купить билет</button><button class="footer-btn-secondary">Заказать шоу</button></div></div>
+        </div>
+    </footer>
+</div>
+
+<script>
+    // Галерея (6 фото)
+    const galleryImages = [
+        'https://placehold.co/422x237/E8EEF7/white?text=Спектакль+1',
+        'https://placehold.co/422x237/E8EEF7/white?text=Спектакль+2',
+        'https://placehold.co/422x237/E8EEF7/white?text=Спектакль+3',
+        'https://placehold.co/422x237/E8EEF7/white?text=Спектакль+4',
+        'https://placehold.co/422x237/E8EEF7/white?text=Спектакль+5',
+        'https://placehold.co/422x237/E8EEF7/white?text=Спектакль+6'
+    ];
+    let visibleGallery = 3;
+
+    function renderGallery() {
+        const grid = document.getElementById('galleryGrid');
+        const displayItems = galleryImages.slice(0, visibleGallery);
+        grid.innerHTML = '';
+        displayItems.forEach(img => {
+            const item = document.createElement('div');
+            item.className = 'gallery-item';
+            item.innerHTML = `<img src="${img}" alt="Сцена из спектакля">`;
+            grid.appendChild(item);
+        });
+        const showMoreBtn = document.getElementById('showMoreGalleryBtn');
+        if (showMoreBtn) {
+            showMoreBtn.style.display = visibleGallery >= galleryImages.length ? 'none' : 'block';
+        }
+    }
+
+    document.getElementById('showMoreGalleryBtn')?.addEventListener('click', () => {
+        if (visibleGallery < galleryImages.length) {
+            visibleGallery = Math.min(visibleGallery + 3, galleryImages.length);
+            renderGallery();
+        }
+    });
+
+    // Header dropdown
+    const dotsIcon = document.getElementById('dotsIcon'), closeIcon = document.getElementById('closeIcon'), extraRow = document.getElementById('extraMenuRow');
+    function openExtraMenu() { extraRow.classList.add('open'); if (dotsIcon) dotsIcon.style.display = 'none'; if (closeIcon) closeIcon.style.display = 'inline-flex'; }
+    function closeExtraMenu() { extraRow.classList.remove('open'); if (dotsIcon) dotsIcon.style.display = 'inline-flex'; if (closeIcon) closeIcon.style.display = 'none'; }
+    if (dotsIcon) dotsIcon.addEventListener('click', openExtraMenu);
+    if (closeIcon) closeIcon.addEventListener('click', closeExtraMenu);
+
+    // Бургер-меню
+    const burgerIcon = document.getElementById('burgerIcon'), mobileNav = document.getElementById('mobileNav'), overlay = document.getElementById('overlay'), closeMobileBtn = document.getElementById('closeMobileMenu');
+    function openMobileMenu() { mobileNav.classList.add('open'); overlay.classList.add('active'); document.body.style.overflow = 'hidden'; }
+    function closeMobileMenu() { mobileNav.classList.remove('open'); overlay.classList.remove('active'); document.body.style.overflow = ''; }
+    if (burgerIcon) burgerIcon.addEventListener('click', openMobileMenu);
+    if (closeMobileBtn) closeMobileBtn.addEventListener('click', closeMobileMenu);
+    if (overlay) overlay.addEventListener('click', closeMobileMenu);
+
+    // Подписка
+    document.getElementById('subscribeBtn')?.addEventListener('click', () => { const chk = document.getElementById('consentCheckbox'), err = document.getElementById('consentError'); if (!chk.checked) { err.style.display = 'block'; setTimeout(() => err.style.display = 'none', 2500); } else { alert('Спасибо за подписку!'); document.getElementById('subscribeEmail').value = ''; chk.checked = false; } });
+    document.querySelectorAll('.footer-btn-primary, .buy-ticket-btn').forEach(btn => btn.addEventListener('click', () => alert('Билеты скоро в продаже')));
+    document.querySelector('.footer-btn-secondary')?.addEventListener('click', () => alert('Заказ шоу: свяжитесь с нами по телефону'));
+
+    renderGallery();
+</script>
+</body>
+</html>

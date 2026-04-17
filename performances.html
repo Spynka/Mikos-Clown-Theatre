@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Театр клоунады «Микос» | Спектакли</title>
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+	<link rel="stylesheet" href="css/style.css">
+    <style>
+    </style>
+</head>
+<body>
+<div class="shop-container">
+    <!-- HEADER (полностью сохранен) -->
+    <header class="main-header">
+        <div class="header-inner">
+            <div class="header-left">
+                <div class="logo-group">
+                    <img class="logo-img" src="SVG/logo-2.svg" alt="Логотип">
+                    <img class="logo-img" src="SVG/logo.svg" alt="Логотип текст">
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Главная</a></li><li><a href="affiche.html">Афиша</a></li><li><a href="for-customers.html">Заказчикам</a></li><li><a href="brandbook.html">Брендбук</a></li>
+                    <li><span class="dots-icon" id="dotsIcon">⋯</span><span class="close-icon" id="closeIcon">✕</span></li>
+                </ul>
+                <div class="burger-icon" id="burgerIcon"><i class="fas fa-bars"></i></div>
+            </div>
+            <button class="buy-ticket-btn">Купить билет</button>
+        </div>
+        <div class="extra-menu-row" id="extraMenuRow">
+            <ul class="extra-nav-list"><li><a href="performances.html">Спектакли</a></li><li><a href="team.html">Команда</a></li><li><a href="history.html">О театре</a></li><li><a href="shop.html">Магазин</a></li><li><a href="contacts.html">Контакты</a></li></ul>
+        </div>
+    </header>
+    <div class="mobile-nav" id="mobileNav"><div class="close-mobile-menu" id="closeMobileMenu">✕</div><ul><li><a href="#">Главная</a></li><li><a href="#">Афиша</a></li><li><a href="#">Заказчикам</a></li><li><a href="#">Брендбук</a></li><li><a href="#">Спектакли</a></li><li><a href="#">Команда</a></li><li><a href="#">О театре</a></li><li><a href="#">Магазин</a></li><li><a href="#">Контакты</a></li></ul></div>
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Основной контент страницы Спектакли (отступ 60px от хедера) -->
+    <div class="performances-page">
+        <div class="section-header">
+            <h1 class="section-title">Спектакли</h1>
+            <a href="#" class="section-link">Вся афиша <i class="fas fa-arrow-right"></i></a>
+        </div>
+        
+        <div class="performances-grid" id="performancesGrid"></div>
+        
+        <div class="show-more-wrapper">
+            <button class="show-more-btn" id="showMorePerformancesBtn">Показать еще</button>
+        </div>
+    </div>
+
+    <!-- FOOTER (полностью сохранен) -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <div class="footer-logo"><img class="footer-logo-img" src="SVG/logo-black.svg" alt="Микос"><div class="footer-theater-title">Театр клоунады «Микос»</div></div>
+                    <div class="footer-description">Новаторские постановки, экспериментальные формы, классика в современном прочтении.<br>Откройте для себя театр заново.</div>
+                    <div class="newsletter-title">Подписаться на новости</div>
+                    <div class="subscribe-form"><input type="email" placeholder="Ваш email" class="subscribe-input" id="subscribeEmail"><button class="subscribe-btn" id="subscribeBtn">Подписаться</button></div>
+                    <label class="checkbox-custom" id="consentLabel"><input type="checkbox" id="consentCheckbox"><span class="checkmark"></span><span>Я согласен на обработку персональных данных</span></label>
+                    <div class="error-tooltip" id="consentError">Для подписки необходимо согласие на обработку данных</div>
+                    <div class="social-icons"><a href="#" class="social-circle"><i class="fab fa-vk"></i></a><a href="#" class="social-circle"><i class="fab fa-telegram-plane"></i></a></div>
+                </div>
+                <div class="footer-nav"><h4>Навигация</h4><ul><li><a href="#">Главная</a></li><li><a href="#">Афиша</a></li><li><a href="#">Спектакли</a></li><li><a href="#">Заказчикам</a></li><li><a href="#">О театре</a></li><li><a href="#">Команда</a></li><li><a href="#">Магазин</a></li><li><a href="#">Контакты</a></li><li><a href="#">Брендбук</a></li></ul></div>
+                <div class="footer-nav"><h4>Контакты</h4><ul><li><a href="#">Москва, ул. Театральная, 1</a></li><li><a href="tel:+74951234567">+7 (495) 123-45-67</a></li><li><a href="mailto:info@theatre.ru">info@theatre.ru</a></li><li><a href="#">Как добраться</a></li></ul></div>
+            </div>
+            <div class="footer-bottom"><div class="copyright">© 2026 Театр клоунады «Микос». Все права защищены.</div><div class="footer-buttons"><button class="footer-btn-primary">Купить билет</button><button class="footer-btn-secondary">Заказать шоу</button></div></div>
+        </div>
+    </footer>
+</div>
+
+<script>
+    // Данные спектаклей (9 штук - 3 строки по 3 карточки)
+    const performances = [
+        { id: 1, name: 'Гамлет. Версия', desc: 'Классическая трагедия в современном прочтении. Режиссерский дебют Алексея Иванова.', age: '16+', time: '3 часа', tickets: true, img: 'https://placehold.co/428x200/2A3D5E/white?text=Гамлет' },
+        { id: 2, name: 'Чайка. Контекст', desc: 'Знаменитая пьеса Чехова, действие которой перенесено в современный арт-кластер.', age: '12+', time: '2.5 часа', tickets: true, img: 'https://placehold.co/428x200/4A6294/white?text=Чайка' },
+        { id: 3, name: 'Мастер и Маргарита', desc: 'Масштабная постановка бессмертного романа Булгакова с использованием мультимедиа.', age: '18+', time: '3.5 часа', tickets: false, img: 'https://placehold.co/428x200/3A5078/white?text=Мастер+и+Маргарита' },
+        { id: 4, name: 'Вишневый сад. Элегия', desc: 'Трогательная история о прощании с прошлым и надежде на будущее.', age: '12+', time: '2 часа 40 мин', tickets: true, img: 'https://placehold.co/428x200/2A3D5E/white?text=Вишневый+сад' },
+        { id: 5, name: 'Ревизор. Смех сквозь слезы', desc: 'Остроумная комедия о чиновниках и случайном ревизоре.', age: '14+', time: '2 часа 30 мин', tickets: true, img: 'https://placehold.co/428x200/4A6294/white?text=Ревизор' },
+        { id: 6, name: 'На дне. Документальная версия', desc: 'Жесткая и честная история о людях на дне общества.', age: '16+', time: '2 часа 50 мин', tickets: false, img: 'https://placehold.co/428x200/3A5078/white?text=На+дне' },
+        { id: 7, name: 'Три сестры. В ожидании', desc: 'Философская притча о надежде и вере в лучшее.', age: '12+', time: '3 часа 10 мин', tickets: true, img: 'https://placehold.co/428x200/2A3D5E/white?text=Три+сестры' },
+        { id: 8, name: 'Идиот. Наивность', desc: 'История о князе Мышкине в современном мире.', age: '16+', time: '3 часа 20 мин', tickets: true, img: 'https://placehold.co/428x200/4A6294/white?text=Идиот' },
+        { id: 9, name: 'Преступление и наказание', desc: 'Экспериментальная постановка по роману Достоевского.', age: '18+', time: '3 часа 30 мин', tickets: false, img: 'https://placehold.co/428x200/3A5078/white?text=Преступление+и+наказание' }
+    ];
+    
+    let visibleCount = 6; // Показываем первые 6 (2 строки по 3)
+    
+    function renderPerformances() {
+        const grid = document.getElementById('performancesGrid');
+        const displayItems = performances.slice(0, visibleCount);
+        grid.innerHTML = '';
+        displayItems.forEach(p => {
+            const card = document.createElement('div');
+            card.className = 'performance-card';
+            const ticketsClass = p.tickets ? 'tag-tickets' : 'tag-tickets';
+            const ticketsText = p.tickets ? 'Есть билеты' : 'Билетов нет';
+            card.innerHTML = `
+                <img class="performance-img" src="${p.img}" alt="${p.name}">
+                <div class="performance-content">
+                    <div class="performance-tags">
+                        <span class="tag tag-age">${p.age}</span>
+                        <span class="tag tag-time">${p.time}</span>
+                        <span class="tag ${ticketsClass}">${ticketsText}</span>
+                    </div>
+                    <h3 class="performance-name">${p.name}</h3>
+                    <p class="performance-desc">${p.desc}</p>
+                    <div class="performance-btns">
+                        <button class="btn-details" data-id="${p.id}">Подробнее</button>
+                        <button class="btn-buy-performance" data-id="${p.id}">Купить билет</button>
+                    </div>
+                </div>
+            `;
+            grid.appendChild(card);
+        });
+        
+        // Добавляем обработчики для кнопок
+        document.querySelectorAll('.btn-details').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const id = parseInt(btn.dataset.id);
+                const perf = performances.find(p => p.id === id);
+                alert(`Подробнее о спектакле "${perf.name}"\n\nВозраст: ${perf.age}\nПродолжительность: ${perf.time}\n\n${perf.desc}`);
+            });
+        });
+        document.querySelectorAll('.btn-buy-performance').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const id = parseInt(btn.dataset.id);
+                const perf = performances.find(p => p.id === id);
+                if(perf.tickets) {
+                    alert(`Билеты на спектакль "${perf.name}" скоро появятся в продаже!`);
+                } else {
+                    alert(`К сожалению, билетов на спектакль "${perf.name}" пока нет в продаже.`);
+                }
+            });
+        });
+        
+        const showMoreBtn = document.getElementById('showMorePerformancesBtn');
+        if (showMoreBtn) {
+            showMoreBtn.style.display = visibleCount >= performances.length ? 'none' : 'block';
+        }
+    }
+    
+    // Показать еще
+    document.getElementById('showMorePerformancesBtn')?.addEventListener('click', () => {
+        if (visibleCount < performances.length) {
+            visibleCount = Math.min(visibleCount + 3, performances.length);
+            renderPerformances();
+        }
+    });
+    
+    // Header dropdown (три точки)
+    const dotsIcon = document.getElementById('dotsIcon');
+    const closeIcon = document.getElementById('closeIcon');
+    const extraRow = document.getElementById('extraMenuRow');
+    function openExtraMenu() {
+        extraRow.classList.add('open');
+        if (dotsIcon) dotsIcon.style.display = 'none';
+        if (closeIcon) closeIcon.style.display = 'inline-flex';
+    }
+    function closeExtraMenu() {
+        extraRow.classList.remove('open');
+        if (dotsIcon) dotsIcon.style.display = 'inline-flex';
+        if (closeIcon) closeIcon.style.display = 'none';
+    }
+    if (dotsIcon) dotsIcon.addEventListener('click', openExtraMenu);
+    if (closeIcon) closeIcon.addEventListener('click', closeExtraMenu);
+    
+    // Бургер-меню
+    const burgerIcon = document.getElementById('burgerIcon');
+    const mobileNav = document.getElementById('mobileNav');
+    const overlay = document.getElementById('overlay');
+    const closeMobileBtn = document.getElementById('closeMobileMenu');
+    function openMobileMenu() { mobileNav.classList.add('open'); overlay.classList.add('active'); document.body.style.overflow = 'hidden'; }
+    function closeMobileMenu() { mobileNav.classList.remove('open'); overlay.classList.remove('active'); document.body.style.overflow = ''; }
+    if (burgerIcon) burgerIcon.addEventListener('click', openMobileMenu);
+    if (closeMobileBtn) closeMobileBtn.addEventListener('click', closeMobileMenu);
+    if (overlay) overlay.addEventListener('click', closeMobileMenu);
+    
+    // Подписка в футере
+    document.getElementById('subscribeBtn')?.addEventListener('click', () => {
+        const chk = document.getElementById('consentCheckbox');
+        const err = document.getElementById('consentError');
+        if (!chk.checked) {
+            err.style.display = 'block';
+            setTimeout(() => err.style.display = 'none', 2500);
+        } else {
+            alert('Спасибо за подписку!');
+            document.getElementById('subscribeEmail').value = '';
+            chk.checked = false;
+        }
+    });
+    
+    // Кнопки билетов и шоу (уже имеют стили при наведении)
+    document.querySelectorAll('.footer-btn-primary, .buy-ticket-btn').forEach(btn => btn.addEventListener('click', () => alert('Билеты скоро в продаже')));
+    document.querySelector('.footer-btn-secondary')?.addEventListener('click', () => alert('Заказ шоу: свяжитесь с нами по телефону'));
+    
+    renderPerformances();
+</script>
+</body>
+</html>
