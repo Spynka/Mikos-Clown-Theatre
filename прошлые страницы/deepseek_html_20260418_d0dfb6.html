@@ -8,10 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
     <style>
-        /* Добавляем отступ снизу для контейнера с карточками */
-        .performances-page {
-            margin-bottom: 0px;
-        }
+
     </style>
 </head>
 <body>
@@ -47,7 +44,7 @@
         </div>
         
         <div class="performances-grid" id="performancesGrid"></div>
-        <!-- Кнопка "показать еще" скрыта -->
+        <!-- Кнопка "показать еще" можно оставить, но у нас ровно 5 -->
         <div class="show-more-wrapper">
             <button class="show-more-btn" id="showMorePerformancesBtn" style="display: none;">Показать еще</button>
         </div>
@@ -76,7 +73,7 @@
 
 <script>
     (function() {
-        // ----- СПИСОК ИЗ 5 СПЕКТАКЛЕЙ -----
+        // ----- СПИСОК ИЗ 5 СПЕКТАКЛЕЙ (по заданию) -----
         const performances = [
             { id: 1, name: 'Лишь бы не было детей', desc: 'История сосуществования очень разных людей. Клоунада о страхах и близости.', age: '18+', time: '90 мин', tickets: true, img: 'https://placehold.co/428x220/2a3f5e/white?text=Лишь+бы+не+было+детей' },
             { id: 2, name: 'Богатыри', desc: 'Былины в современном прочтении. Сила, честь и юмор — эпическая комедия.', age: '12+', time: '100 мин', tickets: true, img: 'https://placehold.co/428x220/4a6294/white?text=Богатыри' },
@@ -89,7 +86,8 @@
         function renderCards() {
             let html = '';
             performances.forEach(p => {
-                // Убрали тег с билетами, оставили только возраст и время
+                const ticketsClass = p.tickets ? 'tag-tickets' : 'tag-no-tickets';
+                const ticketsText = p.tickets ? 'Есть билеты' : 'Билетов нет';
                 html += `
                     <div class="performance-card">
                         <img class="performance-img" src="${p.img}" alt="${p.name}">
@@ -97,6 +95,7 @@
                             <div class="performance-tags">
                                 <span class="tag tag-age">${p.age}</span>
                                 <span class="tag tag-time">${p.time}</span>
+                                <span class="tag ${ticketsClass}">${ticketsText}</span>
                             </div>
                             <h3 class="performance-name">${p.name}</h3>
                             <p class="performance-desc">${p.desc}</p>
@@ -112,16 +111,19 @@
         }
         renderCards();
 
-        // Обработчики кликов
+        // Обработчики кликов (делегирование)
         grid.addEventListener('click', (e) => {
             const btn = e.target.closest('button');
             if (!btn) return;
+            const card = btn.closest('.performance-card');
             const id = btn.getAttribute('data-id');
             if (!id) return;
             const perf = performances.find(p => p.id == id);
             
             if (btn.classList.contains('btn-details')) {
-                window.location.href = `performance.html?id=${perf.id}`;
+                // ПЕРЕХОД НА СТРАНИЦУ СПЕКТАКЛЯ (второй html)
+                // Используем параметр id, чтобы страница знала, какой спектакль загружать
+                window.location.href = `performance-details.html?id=${perf.id}`;
             } else if (btn.classList.contains('btn-buy-performance')) {
                 if (perf.tickets) {
                     alert(`Билеты на спектакль "${perf.name}" доступны.`);
@@ -131,7 +133,8 @@
             }
         });
 
-        // Хедер, бургер, подписка
+        // Кнопка "Показать еще" скрыта — все 5 на виду
+        // header, бургер, подписка (базовая функциональность)
         const dotsIcon = document.getElementById('dotsIcon');
         const closeIcon = document.getElementById('closeIcon');
         const extraRow = document.getElementById('extraMenuRow');
