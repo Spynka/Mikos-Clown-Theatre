@@ -345,7 +345,7 @@
             });
 
             document.querySelectorAll('.btn-details-afisha').forEach(btn => {
-                btn.addEventListener('click', () => window.location.href = `performance-details.html?id=${btn.dataset.id}`);
+                btn.addEventListener('click', () => window.location.href = `performance.html?id=${btn.dataset.id}`);
             });
             document.querySelectorAll('.btn-buy-afisha').forEach(btn => {
                 btn.addEventListener('click', () => {
@@ -394,7 +394,7 @@
         setInterval(nextSlide, 5000);
 
         document.querySelectorAll('.hero-btn-light').forEach(btn => {
-            btn.addEventListener('click', () => { const id = btn.dataset.id; if (id) window.location.href = `performance-details.html?id=${id}`; });
+            btn.addEventListener('click', () => { const id = btn.dataset.id; if (id) window.location.href = `performance.html?id=${id}`; });
         });
         document.querySelectorAll('.hero-btn-dark').forEach(btn => {
             btn.addEventListener('click', () => { const id = btn.dataset.id; const ev = events.find(p => p.id == id); if(ev) alert(`Билеты на спектакль "${ev.name}" скоро в продаже!`); });
@@ -459,5 +459,6 @@
         renderEvents();
     })();
 </script>
+<script src="js/common.js"></script>
 </body>
 </html>

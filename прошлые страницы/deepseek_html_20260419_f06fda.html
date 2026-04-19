@@ -40,15 +40,9 @@
         </div>
     </header>
 
-    <!-- Мобильное меню (выезжает слева) -->
+    <!-- Мобильное меню (выезжает справа) -->
     <div class="mobile-nav" id="mobileNav">
         <div class="close-mobile-menu" id="closeMobileMenu">✕</div>
-        <div class="mobile-logo-group">
-            <img src="SVG/logo-black.svg" alt="Логотип">
-            <img src="SVG/logo-black-2.svg" alt="Логотип текст">
-        </div>
-		<button class="buy-ticket-btn" onclick="window.location.href='performance.html'">Купить билет</button>
-		
         <ul>
             <li><a href="index.html" class="active">Главная</a></li>
             <li><a href="affiche.html">Афиша</a></li>
@@ -60,7 +54,6 @@
             <li><a href="shop.html">Магазин</a></li>
             <li><a href="contacts.html">Контакты</a></li>
         </ul>
-		 
     </div>
     <div class="overlay" id="overlay"></div>
 
@@ -74,7 +67,7 @@
         </div>
     </div>
 
-    <!-- Hero слайдер как на странице афиши -->
+    <!-- Hero слайдер как на странице афиши (5 спектаклей) -->
     <div class="hero-slider-afisha" id="heroSliderAfisha">
         <button class="slider-arrow slider-arrow-left" id="sliderArrowLeft"><i class="fas fa-chevron-left"></i></button>
         <button class="slider-arrow slider-arrow-right" id="sliderArrowRight"><i class="fas fa-chevron-right"></i></button>
@@ -143,7 +136,7 @@
         </div>
     </div>
 
-    <!-- Ближайшие спектакли -->
+    <!-- Ближайшие спектакли (горизонтальный скролл) -->
     <div class="container-main" style="margin-top: 80px;">
         <div class="section-header">
             <h2 class="section-title">Ближайшие спектакли</h2>
@@ -255,7 +248,7 @@
         </div>
     </div>
 
-    <!-- Магазин (стрелки появляются при наведении) -->
+    <!-- Магазин (горизонтальный скролл, стрелки появляются при наведении) -->
     <div class="shop-section">
         <div class="container-main">
             <div class="section-header">
@@ -284,7 +277,7 @@
                     <div class="social-icons"><a href="#" class="social-circle"><i class="fab fa-vk"></i></a><a href="#" class="social-circle"><i class="fab fa-telegram-plane"></i></a></div>
                 </div>
                 <div class="footer-nav"><h4>Навигация</h4><ul><li><a href="index.html">Главная</a></li><li><a href="affiche.html">Афиша</a></li><li><a href="performances.html">Спектакли</a></li><li><a href="for-customers.html">Заказчикам</a></li><li><a href="history.html">О театре</a></li><li><a href="team.html">Команда</a></li><li><a href="shop.html">Магазин</a></li><li><a href="contacts.html">Контакты</a></li><li><a href="brandbook.html">Брендбук</a></li></ul></div>
-                <div class="footer-nav"><h4>Контакты</h4><ul><li><a href="#">Москва, ул. Театральная, 1</a></li><li><a href="tel:+74951234567">+7 (495) 123-45-67</a></li><li><a href="mailto:info@theatre.ru">info@theatre.ru</a></li></ul></div>
+                <div class="footer-nav"><h4>Контакты</h4><ul><li><a href="#">Москва, ул. Театральная, 1</a></li><li><a href="tel:+74951234567">+7 (495) 123-45-67</a></li><li><a href="mailto:info@theatre.ru">info@theatre.ru</a></li><li><a href="#">Как добраться</a></li></ul></div>
             </div>
             <div class="footer-bottom"><div class="copyright">© 2026 Театр клоунады «Микос». Все права защищены.</div><div class="footer-buttons"><button class="footer-btn-primary" onclick="window.location.href='checkout.html'">Купить билет</button><button class="footer-btn-secondary">Заказать шоу</button></div></div>
         </div>
@@ -292,7 +285,7 @@
 </div>
 
 <script>
-    // Данные для спектаклей и товаров
+    // === ДАННЫЕ ДЛЯ СПЕКТАКЛЕЙ И МАГАЗИНА ===
     const allPerformances = [
         { id: 1, name: 'Лишь бы не было детей', desc: 'История сосуществования очень разных людей. Клоунада о страхах и близости.', age: '18+', time: '90 мин', date: '25 октября 19:00', venue: 'Основная сцена', img: 'https://placehold.co/428x200/2a3f5e/white?text=Лишь+бы+не+было+детей' },
         { id: 2, name: 'Богатыри', desc: 'Былины в современном прочтении. Сила, честь и юмор — эпическая комедия.', age: '12+', time: '100 мин', date: '28 октября 19:00', venue: 'Основная сцена', img: 'https://placehold.co/428x200/4a6294/white?text=Богатыри' },
@@ -312,7 +305,7 @@
         { id: 8, name: 'Программа спектакля', desc: 'Иллюстрированная', price: 350, img: 'https://placehold.co/428x220/2A3D5E/white?text=Программа' }
     ];
 
-    // Рендер ближайших спектаклей
+    // === РЕНДЕР БЛИЖАЙШИХ СПЕКТАКЛЕЙ ===
     function renderUpcomingPerformances() {
         const wrapper = document.getElementById('upcomingPerformancesScroll');
         if (!wrapper) return;
@@ -343,6 +336,7 @@
         attachPerformanceEvents();
     }
 
+    // === РЕНДЕР СПЕКТАКЛЕЙ (горизонтальный скролл) ===
     function renderPlaysScroll() {
         const wrapper = document.getElementById('playsScroll');
         if (!wrapper) return;
@@ -396,7 +390,7 @@
         });
     }
 
-    // Рендер магазина (без описания)
+    // === РЕНДЕР МАГАЗИНА ===
     function renderMerchScroll() {
         const wrapper = document.getElementById('merchScroll');
         if (!wrapper) return;
@@ -409,6 +403,7 @@
                 <img class="merch-img" src="${item.img}" alt="${item.name}">
                 <div class="merch-content">
                     <h3 class="merch-name">${item.name}</h3>
+                    <div class="merch-desc">${item.desc}</div>
                     <div class="merch-price">${item.price.toLocaleString('ru-RU')} ₽</div>
                     <button class="merch-btn" data-id="${item.id}">Купить</button>
                 </div>
@@ -422,12 +417,21 @@
         });
     }
 
-    // Скролл функции
-    function scrollUpcoming(amount) { document.getElementById('upcomingPerformancesScroll')?.scrollBy({ left: amount, behavior: 'smooth' }); }
-    function scrollPlays(amount) { document.getElementById('playsScroll')?.scrollBy({ left: amount, behavior: 'smooth' }); }
-    function scrollMerch(amount) { document.getElementById('merchScroll')?.scrollBy({ left: amount, behavior: 'smooth' }); }
+    // === СКРОЛЛ ФУНКЦИИ ===
+    function scrollUpcoming(amount) {
+        const wrapper = document.getElementById('upcomingPerformancesScroll');
+        if (wrapper) wrapper.scrollBy({ left: amount, behavior: 'smooth' });
+    }
+    function scrollPlays(amount) {
+        const wrapper = document.getElementById('playsScroll');
+        if (wrapper) wrapper.scrollBy({ left: amount, behavior: 'smooth' });
+    }
+    function scrollMerch(amount) {
+        const wrapper = document.getElementById('merchScroll');
+        if (wrapper) wrapper.scrollBy({ left: amount, behavior: 'smooth' });
+    }
 
-    // Hero слайдер
+    // === HERO СЛАЙДЕР (как на афише) ===
     let currentSlide = 0;
     const slides = document.querySelectorAll('.hero-slide-afisha');
     const dots = document.querySelectorAll('.slider-dot');
@@ -438,26 +442,40 @@
     function showSlide(index) {
         if (index < 0) index = slides.length - 1;
         if (index >= slides.length) index = 0;
-        slides.forEach((slide, i) => slide.classList.toggle('active', i === index));
-        dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
+        slides.forEach((slide, i) => {
+            slide.classList.toggle('active', i === index);
+        });
+        dots.forEach((dot, i) => {
+            dot.classList.toggle('active', i === index);
+        });
         currentSlide = index;
         resetAutoSlide();
     }
+
     function nextSlide() { showSlide(currentSlide + 1); }
     function prevSlide() { showSlide(currentSlide - 1); }
-    function resetAutoSlide() { if (autoInterval) clearInterval(autoInterval); autoInterval = setInterval(nextSlide, 6000); }
-    if (leftArrow && rightArrow) { leftArrow.addEventListener('click', prevSlide); rightArrow.addEventListener('click', nextSlide); }
-    dots.forEach((dot, i) => dot.addEventListener('click', () => showSlide(i)));
+    function resetAutoSlide() {
+        if (autoInterval) clearInterval(autoInterval);
+        autoInterval = setInterval(() => nextSlide(), 6000);
+    }
+
+    if (leftArrow && rightArrow) {
+        leftArrow.addEventListener('click', prevSlide);
+        rightArrow.addEventListener('click', nextSlide);
+    }
+    dots.forEach((dot, i) => {
+        dot.addEventListener('click', () => showSlide(i));
+    });
     resetAutoSlide();
 
-    // Header dropdown (для десктопа)
+    // === HEADER DROPDOWN ===
     const dotsIcon = document.getElementById('dotsIcon'), closeIcon = document.getElementById('closeIcon'), extraRow = document.getElementById('extraMenuRow');
     function openExtraMenu() { extraRow?.classList.add('open'); if (dotsIcon) dotsIcon.style.display = 'none'; if (closeIcon) closeIcon.style.display = 'inline-flex'; }
     function closeExtraMenu() { extraRow?.classList.remove('open'); if (dotsIcon) dotsIcon.style.display = 'inline-flex'; if (closeIcon) closeIcon.style.display = 'none'; }
     if (dotsIcon) dotsIcon.addEventListener('click', openExtraMenu);
     if (closeIcon) closeIcon.addEventListener('click', closeExtraMenu);
 
-    // Мобильное меню (выезжает слева)
+    // === БУРГЕР-МЕНЮ ===
     const burgerIcon = document.getElementById('burgerIcon'), mobileNav = document.getElementById('mobileNav'), overlay = document.getElementById('overlay'), closeMobileBtn = document.getElementById('closeMobileMenu');
     function openMobileMenu() { mobileNav?.classList.add('open'); overlay?.classList.add('active'); document.body.style.overflow = 'hidden'; }
     function closeMobileMenu() { mobileNav?.classList.remove('open'); overlay?.classList.remove('active'); document.body.style.overflow = ''; }
@@ -465,7 +483,7 @@
     if (closeMobileBtn) closeMobileBtn.addEventListener('click', closeMobileMenu);
     if (overlay) overlay.addEventListener('click', closeMobileMenu);
 
-    // Формы
+    // === ФОРМЫ ===
     document.getElementById('clientFormMain')?.addEventListener('submit', (e) => { e.preventDefault(); alert('Заявка отправлена! Мы свяжемся с вами.'); e.target.reset(); });
     document.getElementById('subscribeBtn')?.addEventListener('click', () => { 
         const chk = document.getElementById('consentCheckbox'), err = document.getElementById('consentError'); 
@@ -473,10 +491,10 @@
         else { alert('Спасибо за подписку!'); document.getElementById('subscribeEmail').value = ''; chk.checked = false; } 
     });
 
+    // === ИНИЦИАЛИЗАЦИЯ ===
     renderUpcomingPerformances();
     renderPlaysScroll();
     renderMerchScroll();
 </script>
-<script src="js/common.js"></script>
 </body>
 </html>

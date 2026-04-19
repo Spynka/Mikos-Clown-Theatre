@@ -7,6 +7,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <style>
+      
+    </style>
 </head>
 <body>
 <div class="shop-container">
@@ -18,39 +21,32 @@
                     <img class="logo-img" src="SVG/logo-2.svg" alt="Логотип">
                     <img class="logo-img" src="SVG/logo.svg" alt="Логотип текст">
                 </div>
-                <ul class="nav-menu">
-                    <li><a href="index.html" class="active">Главная</a></li>
-                    <li><a href="affiche.html">Афиша</a></li>
-                    <li><a href="for-customers.html">Заказчикам</a></li>
-                    <li><a href="brandbook.html">Брендбук</a></li>
+                <ul class="nav-menu" id="mainNavMenu">
+                    <li><a href="index.html" class="nav-link">Главная</a></li>
+                    <li><a href="affiche.html" class="nav-link">Афиша</a></li>
+                    <li><a href="for-customers.html" class="nav-link">Заказчикам</a></li>
+                    <li><a href="brandbook.html" class="nav-link">Брендбук</a></li>
                     <li><span class="dots-icon" id="dotsIcon">⋯</span><span class="close-icon" id="closeIcon">✕</span></li>
                 </ul>
                 <div class="burger-icon" id="burgerIcon"><i class="fas fa-bars"></i></div>
             </div>
-            <button class="buy-ticket-btn" onclick="window.location.href='performance.html'">Купить билет</button>
+            <button class="buy-ticket-btn" onclick="window.location.href='checkout.html'">Купить билет</button>
         </div>
         <div class="extra-menu-row" id="extraMenuRow">
             <ul class="extra-nav-list">
-                <li><a href="performances.html">Спектакли</a></li>
-                <li><a href="team.html">Команда</a></li>
-                <li><a href="history.html">О театре</a></li>
-                <li><a href="shop.html">Магазин</a></li>
-                <li><a href="contacts.html">Контакты</a></li>
+                <li><a href="performances.html" class="extra-link">Спектакли</a></li>
+                <li><a href="team.html" class="extra-link">Команда</a></li>
+                <li><a href="history.html" class="extra-link">О театре</a></li>
+                <li><a href="shop.html" class="extra-link">Магазин</a></li>
+                <li><a href="contacts.html" class="extra-link">Контакты</a></li>
             </ul>
         </div>
     </header>
-
-    <!-- Мобильное меню (выезжает слева) -->
+    
     <div class="mobile-nav" id="mobileNav">
         <div class="close-mobile-menu" id="closeMobileMenu">✕</div>
-        <div class="mobile-logo-group">
-            <img src="SVG/logo-black.svg" alt="Логотип">
-            <img src="SVG/logo-black-2.svg" alt="Логотип текст">
-        </div>
-		<button class="buy-ticket-btn" onclick="window.location.href='performance.html'">Купить билет</button>
-		
         <ul>
-            <li><a href="index.html" class="active">Главная</a></li>
+            <li><a href="index.html">Главная</a></li>
             <li><a href="affiche.html">Афиша</a></li>
             <li><a href="for-customers.html">Заказчикам</a></li>
             <li><a href="brandbook.html">Брендбук</a></li>
@@ -60,7 +56,6 @@
             <li><a href="shop.html">Магазин</a></li>
             <li><a href="contacts.html">Контакты</a></li>
         </ul>
-		 
     </div>
     <div class="overlay" id="overlay"></div>
 
@@ -74,87 +69,39 @@
         </div>
     </div>
 
-    <!-- Hero слайдер как на странице афиши -->
-    <div class="hero-slider-afisha" id="heroSliderAfisha">
-        <button class="slider-arrow slider-arrow-left" id="sliderArrowLeft"><i class="fas fa-chevron-left"></i></button>
-        <button class="slider-arrow slider-arrow-right" id="sliderArrowRight"><i class="fas fa-chevron-right"></i></button>
-        
-        <div class="hero-slide-afisha active">
-            <img class="hero-bg-afisha" src="https://placehold.co/1440x630/2a3f5e/white?text=Лишь+бы+не+было+детей" alt="Лишь бы не было детей">
-            <div class="hero-content-afisha">
-                <div class="hero-title-afisha">Лишь бы не было детей</div>
-                <div class="hero-subtitle-afisha">История сосуществования очень разных людей. Клоунада о выживании.</div>
-                <div class="hero-buttons-afisha">
-                    <button class="hero-btn-dark" data-id="1">Купить билет</button>
-                    <button class="hero-btn-light" data-id="1">О спектакле</button>
+    <!-- Hero слайдер -->
+    <div class="hero-slider" id="heroSlider">
+        <div class="hero-slide active">
+            <img class="hero-bg" src="https://placehold.co/1440x720/2A3D5E/white?text=Театр+Микос" alt="Театр">
+            <div class="hero-content">
+                <div class="hero-title">
+                    <span class="white">Современный театр<br></span>
+                    <span class="red">клоунады<br></span>
+                    <span class="white">в центре Москвы</span>
+                </div>
+                <div class="hero-subtitle">Новаторские постановки, экспериментальные формы, классика в современном прочтении. Откройте для себя театр заново.</div>
+                <div class="hero-buttons">
+                    <button class="hero-btn-primary" onclick="window.location.href='checkout.html'">Купить билет</button>
+                    <button class="hero-btn-secondary" onclick="window.location.href='history.html'">Подробнее</button>
                 </div>
             </div>
-        </div>
-        <div class="hero-slide-afisha">
-            <img class="hero-bg-afisha" src="https://placehold.co/1440x630/4a6294/white?text=Богатыри" alt="Богатыри">
-            <div class="hero-content-afisha">
-                <div class="hero-title-afisha">Богатыри</div>
-                <div class="hero-subtitle-afisha">Былины в современном прочтении. Эпическая комедия для всей семьи.</div>
-                <div class="hero-buttons-afisha">
-                    <button class="hero-btn-dark" data-id="2">Купить билет</button>
-                    <button class="hero-btn-light" data-id="2">О спектакле</button>
-                </div>
-            </div>
-        </div>
-        <div class="hero-slide-afisha">
-            <img class="hero-bg-afisha" src="https://placehold.co/1440x630/3a5078/white?text=Ожидание" alt="Ожидание">
-            <div class="hero-content-afisha">
-                <div class="hero-title-afisha">Ожидание</div>
-                <div class="hero-subtitle-afisha">Трогательная история о времени, надежде и встречах.</div>
-                <div class="hero-buttons-afisha">
-                    <button class="hero-btn-dark" data-id="3">Купить билет</button>
-                    <button class="hero-btn-light" data-id="3">О спектакле</button>
-                </div>
-            </div>
-        </div>
-        <div class="hero-slide-afisha">
-            <img class="hero-bg-afisha" src="https://placehold.co/1440x630/2e4c7a/white?text=Кабаре-Шапито" alt="Кабаре-Шапито">
-            <div class="hero-content-afisha">
-                <div class="hero-title-afisha">Кабаре-Шапито</div>
-                <div class="hero-subtitle-afisha">Феерия клоунады и музыки. Кабаре с цирковыми номерами.</div>
-                <div class="hero-buttons-afisha">
-                    <button class="hero-btn-dark" data-id="4">Купить билет</button>
-                    <button class="hero-btn-light" data-id="4">О спектакле</button>
-                </div>
-            </div>
-        </div>
-        <div class="hero-slide-afisha">
-            <img class="hero-bg-afisha" src="https://placehold.co/1440x630/1f3a5f/white?text=Авиаторы" alt="Авиаторы">
-            <div class="hero-content-afisha">
-                <div class="hero-title-afisha">Авиаторы</div>
-                <div class="hero-subtitle-afisha">О мечтах, полетах и свободе. Вдохновляющая драма.</div>
-                <div class="hero-buttons-afisha">
-                    <button class="hero-btn-dark" data-id="5">Купить билет</button>
-                    <button class="hero-btn-light" data-id="5">О спектакле</button>
-                </div>
-            </div>
-        </div>
-        <div class="slider-dots">
-            <div class="slider-dot active"></div>
-            <div class="slider-dot"></div>
-            <div class="slider-dot"></div>
-            <div class="slider-dot"></div>
-            <div class="slider-dot"></div>
         </div>
     </div>
 
-    <!-- Ближайшие спектакли -->
-    <div class="container-main" style="margin-top: 80px;">
-        <div class="section-header">
-            <h2 class="section-title">Ближайшие спектакли</h2>
-            <a href="affiche.html" class="section-link">Вся афиша <i class="fas fa-arrow-right"></i></a>
-        </div>
-        <div class="scroll-container" id="upcomingScrollContainer">
-            <div class="scroll-wrapper" id="upcomingPerformancesScroll"></div>
-            <div class="scroll-btn left" onclick="scrollUpcoming(-400)"><i class="fas fa-chevron-left"></i></div>
-            <div class="scroll-btn right" onclick="scrollUpcoming(400)"><i class="fas fa-chevron-right"></i></div>
-        </div>
-    </div>
+		<!-- Ближайшие спектакли -->
+	<div class="container-main" style="margin-top: 80px;">
+		<div class="section-header">
+			<h2 class="section-title">Ближайшие спектакли</h2>
+			<a href="affiche.html" class="section-link">Вся афиша <i class="fas fa-arrow-right"></i></a>
+		</div>
+		
+		<!-- Обёртка для слайдера -->
+		<div class="scroll-container">
+			<div class="scroll-wrapper" id="upcomingPerformancesScroll"></div>
+			<div class="scroll-btn left" onclick="scrollUpcoming(-400)"><i class="fas fa-chevron-left"></i></div>
+			<div class="scroll-btn right" onclick="scrollUpcoming(400)"><i class="fas fa-chevron-right"></i></div>
+		</div>
+	</div>
 
     <!-- О театре -->
     <div class="about-section">
@@ -215,7 +162,7 @@
                 <h2 class="section-title">Спектакли</h2>
                 <a href="performances.html" class="section-link">Все спектакли <i class="fas fa-arrow-right"></i></a>
             </div>
-            <div class="scroll-container" id="playsScrollContainer">
+            <div class="scroll-container">
                 <div class="scroll-wrapper" id="playsScroll"></div>
                 <div class="scroll-btn left" onclick="scrollPlays(-400)"><i class="fas fa-chevron-left"></i></div>
                 <div class="scroll-btn right" onclick="scrollPlays(400)"><i class="fas fa-chevron-right"></i></div>
@@ -223,46 +170,47 @@
         </div>
     </div>
 
-    <!-- Команда -->
-    <div class="team-section">
-        <div class="container-main">
-            <div class="section-header">
-                <h2 class="section-title">Команда</h2>
-                <a href="team.html" class="section-link">Вся команда <i class="fas fa-arrow-right"></i></a>
+<!-- Команда -->
+<div class="team-section">
+    <div class="container-main">
+        <div class="section-header">
+            <h2 class="section-title">Команда</h2>
+            <a href="team.html" class="section-link">Вся команда <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="team-scroll-wrapper">
+            <div class="team-card">
+                <img class="team-img" src="https://placehold.co/318x260/E8EEF7/white?text=Сергей+Давыдов" alt="Сергей Давыдов">
+                <h3 class="team-name">Сергей Давыдов</h3>
+                <p class="team-position">Художественный руководитель</p>
             </div>
-            <div class="team-scroll-wrapper">
-                <div class="team-card">
-                    <img class="team-img" src="https://placehold.co/318x260/E8EEF7/white?text=Сергей+Давыдов" alt="Сергей Давыдов">
-                    <h3 class="team-name">Сергей Давыдов</h3>
-                    <p class="team-position">Художественный руководитель</p>
-                </div>
-                <div class="team-card">
-                    <img class="team-img" src="https://placehold.co/318x260/E8EEF7/white?text=Ксения+Иванова" alt="Ксения Иванова">
-                    <h3 class="team-name">Ксения Иванова</h3>
-                    <p class="team-position">Актриса, директор, продюсер</p>
-                </div>
-                <div class="team-card">
-                    <img class="team-img" src="https://placehold.co/318x260/E8EEF7/white?text=Максим+Гамаюнов" alt="Максим Гамаюнов">
-                    <h3 class="team-name">Максим Гамаюнов</h3>
-                    <p class="team-position">Актер</p>
-                </div>
-                <div class="team-card">
-                    <img class="team-img" src="https://placehold.co/318x260/E8EEF7/white?text=Тотраз+Циукаев" alt="Тотраз Циукаев">
-                    <h3 class="team-name">Тотраз Циукаев</h3>
-                    <p class="team-position">Актер</p>
-                </div>
+            <div class="team-card">
+                <img class="team-img" src="https://placehold.co/318x260/E8EEF7/white?text=Ксения+Иванова" alt="Ксения Иванова">
+                <h3 class="team-name">Ксения Иванова</h3>
+                <p class="team-position">Актриса, директор, продюсер</p>
+            </div>
+            <div class="team-card">
+                <img class="team-img" src="https://placehold.co/318x260/E8EEF7/white?text=Максим+Гамаюнов" alt="Максим Гамаюнов">
+                <h3 class="team-name">Максим Гамаюнов</h3>
+                <p class="team-position">Актер</p>
+            </div>
+            <div class="team-card">
+                <img class="team-img" src="https://placehold.co/318x260/E8EEF7/white?text=Тотраз+Циукаев" alt="Тотраз Циукаев">
+                <h3 class="team-name">Тотраз Циукаев</h3>
+                <p class="team-position">Актер</p>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Магазин (стрелки появляются при наведении) -->
+    <!-- Магазин -->
     <div class="shop-section">
         <div class="container-main">
             <div class="section-header">
                 <h2 class="section-title">Магазин</h2>
                 <a href="shop.html" class="section-link">Весь магазин <i class="fas fa-arrow-right"></i></a>
             </div>
-            <div class="scroll-container" id="merchScrollContainer">
+            <!-- Горизонтальный скролл для магазина -->
+            <div class="scroll-container">
                 <div class="scroll-wrapper" id="merchScroll"></div>
                 <div class="scroll-btn left" onclick="scrollMerch(-320)"><i class="fas fa-chevron-left"></i></div>
                 <div class="scroll-btn right" onclick="scrollMerch(320)"><i class="fas fa-chevron-right"></i></div>
@@ -284,7 +232,7 @@
                     <div class="social-icons"><a href="#" class="social-circle"><i class="fab fa-vk"></i></a><a href="#" class="social-circle"><i class="fab fa-telegram-plane"></i></a></div>
                 </div>
                 <div class="footer-nav"><h4>Навигация</h4><ul><li><a href="index.html">Главная</a></li><li><a href="affiche.html">Афиша</a></li><li><a href="performances.html">Спектакли</a></li><li><a href="for-customers.html">Заказчикам</a></li><li><a href="history.html">О театре</a></li><li><a href="team.html">Команда</a></li><li><a href="shop.html">Магазин</a></li><li><a href="contacts.html">Контакты</a></li><li><a href="brandbook.html">Брендбук</a></li></ul></div>
-                <div class="footer-nav"><h4>Контакты</h4><ul><li><a href="#">Москва, ул. Театральная, 1</a></li><li><a href="tel:+74951234567">+7 (495) 123-45-67</a></li><li><a href="mailto:info@theatre.ru">info@theatre.ru</a></li></ul></div>
+                <div class="footer-nav"><h4>Контакты</h4><ul><li><a href="#">Москва, ул. Театральная, 1</a></li><li><a href="tel:+74951234567">+7 (495) 123-45-67</a></li><li><a href="mailto:info@theatre.ru">info@theatre.ru</a></li><li><a href="#">Как добраться</a></li></ul></div>
             </div>
             <div class="footer-bottom"><div class="copyright">© 2026 Театр клоунады «Микос». Все права защищены.</div><div class="footer-buttons"><button class="footer-btn-primary" onclick="window.location.href='checkout.html'">Купить билет</button><button class="footer-btn-secondary">Заказать шоу</button></div></div>
         </div>
@@ -292,7 +240,7 @@
 </div>
 
 <script>
-    // Данные для спектаклей и товаров
+    // ========== ДАННЫЕ СПЕКТАКЛЕЙ (5 штук) ==========
     const allPerformances = [
         { id: 1, name: 'Лишь бы не было детей', desc: 'История сосуществования очень разных людей. Клоунада о страхах и близости.', age: '18+', time: '90 мин', date: '25 октября 19:00', venue: 'Основная сцена', img: 'https://placehold.co/428x200/2a3f5e/white?text=Лишь+бы+не+было+детей' },
         { id: 2, name: 'Богатыри', desc: 'Былины в современном прочтении. Сила, честь и юмор — эпическая комедия.', age: '12+', time: '100 мин', date: '28 октября 19:00', venue: 'Основная сцена', img: 'https://placehold.co/428x200/4a6294/white?text=Богатыри' },
@@ -301,26 +249,16 @@
         { id: 5, name: 'Авиаторы', desc: 'О мечтах, полетах и свободе.', age: '16+', time: '95 мин', date: '10 ноября 19:00', venue: 'Основная сцена', img: 'https://placehold.co/428x200/1f3a5f/white?text=Авиаторы' }
     ];
 
-    const products = [
-        { id: 1, name: 'Футболка "Театр"', desc: 'Хлопковая футболка с логотипом', price: 2500, img: 'https://placehold.co/428x220/2A3D5E/white?text=Футболка' },
-        { id: 2, name: 'Футболка "Микос"', desc: 'Принт с символикой клоунады', price: 2500, img: 'https://placehold.co/428x220/4A6294/white?text=Микос' },
-        { id: 3, name: 'Толстовка оверсайз', desc: 'Уютная толстовка', price: 4900, img: 'https://placehold.co/428x220/3A5078/white?text=Толстовка' },
-        { id: 4, name: 'Кепка "Микос"', desc: 'Хлопковая кепка', price: 2200, img: 'https://placehold.co/428x220/1A2840/white?text=Кепка' },
-        { id: 5, name: 'Кружка театральная', desc: 'Фарфор', price: 1200, img: 'https://placehold.co/428x220/2A3D5E/white?text=Кружка' },
-        { id: 6, name: 'Магнит символ', desc: 'Сувенирный магнит', price: 450, img: 'https://placehold.co/428x220/4A6294/white?text=Магнит' },
-        { id: 7, name: 'Сумка шоппер', desc: 'Эко-сумка', price: 1800, img: 'https://placehold.co/428x220/5A74A8/white?text=Сумка' },
-        { id: 8, name: 'Программа спектакля', desc: 'Иллюстрированная', price: 350, img: 'https://placehold.co/428x220/2A3D5E/white?text=Программа' }
-    ];
-
-    // Рендер ближайших спектаклей
+    // Ближайшие спектакли (горизонтальный скролл)
     function renderUpcomingPerformances() {
         const wrapper = document.getElementById('upcomingPerformancesScroll');
         if (!wrapper) return;
+        
         wrapper.innerHTML = '';
         allPerformances.forEach(p => {
             const card = document.createElement('div');
             card.className = 'performance-card';
-            card.style.flex = '0 0 380px';
+            card.style.flex = '0 0 400px';
             card.innerHTML = `
                 <img class="performance-img" src="${p.img}" alt="${p.name}">
                 <div class="performance-content">
@@ -340,18 +278,35 @@
             `;
             wrapper.appendChild(card);
         });
-        attachPerformanceEvents();
+        
+        document.querySelectorAll('#upcomingPerformancesScroll .btn-details').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const id = e.target.dataset.id;
+                window.location.href = `performance.html?id=${id}`;
+            });
+        });
+        document.querySelectorAll('#upcomingPerformancesScroll .btn-buy').forEach(btn => {
+            btn.addEventListener('click', () => window.location.href = 'checkout.html');
+        });
     }
 
+    // Функция скролла для блока "Ближайшие спектакли"
+    function scrollUpcoming(amount) {
+        const wrapper = document.getElementById('upcomingPerformancesScroll');
+        if (wrapper) wrapper.scrollBy({ left: amount, behavior: 'smooth' });
+    }
+
+    // Горизонтальный скролл спектаклей (все 5)
     function renderPlaysScroll() {
         const wrapper = document.getElementById('playsScroll');
         if (!wrapper) return;
+        
         wrapper.innerHTML = '';
         allPerformances.forEach(p => {
             const card = document.createElement('div');
             card.className = 'play-card';
             card.innerHTML = `
-                <img class="play-img" src="${p.img}" alt="${p.name}">
+                <img class="play-img" src="${p.img.replace('428x200', '400x200')}" alt="${p.name}">
                 <div class="play-content">
                     <div class="performance-tags">
                         <span class="tag tag-age">${p.age}</span>
@@ -365,118 +320,117 @@
             `;
             wrapper.appendChild(card);
         });
-        attachPerformanceEvents();
-    }
-
-    function attachPerformanceEvents() {
-        document.querySelectorAll('.btn-details').forEach(btn => {
+        
+        document.querySelectorAll('#playsScroll .btn-details').forEach(btn => {
             btn.addEventListener('click', (e) => {
-                const id = e.currentTarget.dataset.id;
+                const id = e.target.dataset.id;
                 window.location.href = `performance.html?id=${id}`;
             });
         });
-        document.querySelectorAll('.btn-buy').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const id = parseInt(e.currentTarget.dataset.id);
-                const perf = allPerformances.find(p => p.id === id);
-                if (perf) {
-                    const performanceData = {
-                        id: perf.id,
-                        title: perf.name,
-                        dateTime: perf.date,
-                        hall: perf.venue,
-                        poster: perf.img
-                    };
-                    localStorage.setItem('selectedPerformance', JSON.stringify(performanceData));
-                    window.location.href = 'checkout.html';
-                } else {
-                    window.location.href = 'checkout.html';
-                }
-            });
+        document.querySelectorAll('#playsScroll .btn-buy').forEach(btn => {
+            btn.addEventListener('click', () => window.location.href = 'checkout.html');
         });
     }
 
-    // Рендер магазина (без описания)
+    // Товары для магазина (горизонтальный скролл)
+    const merchItems = [
+        { id: 1, name: 'Футболка «Театр»', price: '2 500 ₽', img: 'https://placehold.co/316x218/2A3D5E/white?text=Футболка' },
+        { id: 2, name: 'Футболка «Микос»', price: '2 500 ₽', img: 'https://placehold.co/316x218/4A6294/white?text=Микос' },
+        { id: 3, name: 'Толстовка оверсайз', price: '4 900 ₽', img: 'https://placehold.co/316x218/3A5078/white?text=Толстовка' },
+        { id: 4, name: 'Кепка «Микос»', price: '2 200 ₽', img: 'https://placehold.co/316x218/1A2840/white?text=Кепка' },
+        { id: 5, name: 'Шопер', price: '1 500 ₽', img: 'https://placehold.co/316x218/2A3D5E/white?text=Шопер' },
+        { id: 6, name: 'Кружка', price: '900 ₽', img: 'https://placehold.co/316x218/4A6294/white?text=Кружка' }
+    ];
+    
     function renderMerchScroll() {
         const wrapper = document.getElementById('merchScroll');
         if (!wrapper) return;
+        
         wrapper.innerHTML = '';
-        products.forEach(item => {
+        merchItems.forEach(item => {
             const card = document.createElement('div');
             card.className = 'merch-card';
-            card.style.flex = '0 0 280px';
+            card.style.flex = '0 0 300px';
             card.innerHTML = `
                 <img class="merch-img" src="${item.img}" alt="${item.name}">
                 <div class="merch-content">
                     <h3 class="merch-name">${item.name}</h3>
-                    <div class="merch-price">${item.price.toLocaleString('ru-RU')} ₽</div>
-                    <button class="merch-btn" data-id="${item.id}">Купить</button>
+                    <div class="merch-price">${item.price}</div>
+                    <button class="merch-btn" onclick="window.location.href='checkout.html'">Купить</button>
                 </div>
             `;
             wrapper.appendChild(card);
         });
-        document.querySelectorAll('.merch-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                alert('Товар добавлен в корзину');
-            });
+    }
+
+    // Функции скролла
+    function scrollPlays(amount) { 
+        const wrapper = document.getElementById('playsScroll');
+        if (wrapper) wrapper.scrollBy({ left: amount, behavior: 'smooth' }); 
+    }
+    function scrollTeam(amount) { 
+        const wrapper = document.getElementById('teamScroll');
+        if (wrapper) wrapper.scrollBy({ left: amount, behavior: 'smooth' }); 
+    }
+    function scrollMerch(amount) { 
+        const wrapper = document.getElementById('merchScroll');
+        if (wrapper) wrapper.scrollBy({ left: amount, behavior: 'smooth' }); 
+    }
+
+    // ========== ВЫДЕЛЕНИЕ АКТИВНОГО ПУНКТА МЕНЮ ==========
+    function setActiveMenu() {
+        const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+        document.querySelectorAll('.nav-link, .extra-link').forEach(link => {
+            link.classList.remove('active');
+            const href = link.getAttribute('href');
+            if (href === currentPath || (currentPath === '' && href === 'index.html')) {
+                link.classList.add('active');
+            }
         });
     }
 
-    // Скролл функции
-    function scrollUpcoming(amount) { document.getElementById('upcomingPerformancesScroll')?.scrollBy({ left: amount, behavior: 'smooth' }); }
-    function scrollPlays(amount) { document.getElementById('playsScroll')?.scrollBy({ left: amount, behavior: 'smooth' }); }
-    function scrollMerch(amount) { document.getElementById('merchScroll')?.scrollBy({ left: amount, behavior: 'smooth' }); }
-
-    // Hero слайдер
-    let currentSlide = 0;
-    const slides = document.querySelectorAll('.hero-slide-afisha');
-    const dots = document.querySelectorAll('.slider-dot');
-    const leftArrow = document.getElementById('sliderArrowLeft');
-    const rightArrow = document.getElementById('sliderArrowRight');
-    let autoInterval;
-
-    function showSlide(index) {
-        if (index < 0) index = slides.length - 1;
-        if (index >= slides.length) index = 0;
-        slides.forEach((slide, i) => slide.classList.toggle('active', i === index));
-        dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
-        currentSlide = index;
-        resetAutoSlide();
-    }
-    function nextSlide() { showSlide(currentSlide + 1); }
-    function prevSlide() { showSlide(currentSlide - 1); }
-    function resetAutoSlide() { if (autoInterval) clearInterval(autoInterval); autoInterval = setInterval(nextSlide, 6000); }
-    if (leftArrow && rightArrow) { leftArrow.addEventListener('click', prevSlide); rightArrow.addEventListener('click', nextSlide); }
-    dots.forEach((dot, i) => dot.addEventListener('click', () => showSlide(i)));
-    resetAutoSlide();
-
-    // Header dropdown (для десктопа)
+    // Header dropdown
     const dotsIcon = document.getElementById('dotsIcon'), closeIcon = document.getElementById('closeIcon'), extraRow = document.getElementById('extraMenuRow');
-    function openExtraMenu() { extraRow?.classList.add('open'); if (dotsIcon) dotsIcon.style.display = 'none'; if (closeIcon) closeIcon.style.display = 'inline-flex'; }
-    function closeExtraMenu() { extraRow?.classList.remove('open'); if (dotsIcon) dotsIcon.style.display = 'inline-flex'; if (closeIcon) closeIcon.style.display = 'none'; }
+    function openExtraMenu() { extraRow.classList.add('open'); if (dotsIcon) dotsIcon.style.display = 'none'; if (closeIcon) closeIcon.style.display = 'inline-flex'; }
+    function closeExtraMenu() { extraRow.classList.remove('open'); if (dotsIcon) dotsIcon.style.display = 'inline-flex'; if (closeIcon) closeIcon.style.display = 'none'; }
     if (dotsIcon) dotsIcon.addEventListener('click', openExtraMenu);
     if (closeIcon) closeIcon.addEventListener('click', closeExtraMenu);
 
-    // Мобильное меню (выезжает слева)
+    // Бургер-меню
     const burgerIcon = document.getElementById('burgerIcon'), mobileNav = document.getElementById('mobileNav'), overlay = document.getElementById('overlay'), closeMobileBtn = document.getElementById('closeMobileMenu');
-    function openMobileMenu() { mobileNav?.classList.add('open'); overlay?.classList.add('active'); document.body.style.overflow = 'hidden'; }
-    function closeMobileMenu() { mobileNav?.classList.remove('open'); overlay?.classList.remove('active'); document.body.style.overflow = ''; }
+    function openMobileMenu() { mobileNav.classList.add('open'); overlay.classList.add('active'); document.body.style.overflow = 'hidden'; }
+    function closeMobileMenu() { mobileNav.classList.remove('open'); overlay.classList.remove('active'); document.body.style.overflow = ''; }
     if (burgerIcon) burgerIcon.addEventListener('click', openMobileMenu);
     if (closeMobileBtn) closeMobileBtn.addEventListener('click', closeMobileMenu);
     if (overlay) overlay.addEventListener('click', closeMobileMenu);
 
-    // Формы
-    document.getElementById('clientFormMain')?.addEventListener('submit', (e) => { e.preventDefault(); alert('Заявка отправлена! Мы свяжемся с вами.'); e.target.reset(); });
-    document.getElementById('subscribeBtn')?.addEventListener('click', () => { 
-        const chk = document.getElementById('consentCheckbox'), err = document.getElementById('consentError'); 
-        if (!chk?.checked) { if (err) { err.style.display = 'block'; setTimeout(() => err.style.display = 'none', 2500); } }
-        else { alert('Спасибо за подписку!'); document.getElementById('subscribeEmail').value = ''; chk.checked = false; } 
+    // Форма заявки
+    document.getElementById('clientFormMain')?.addEventListener('submit', (e) => { 
+        e.preventDefault(); 
+        alert('Заявка отправлена! Мы свяжемся с вами.'); 
+        e.target.reset(); 
     });
 
+    // Подписка
+    document.getElementById('subscribeBtn')?.addEventListener('click', () => { 
+        const chk = document.getElementById('consentCheckbox'), err = document.getElementById('consentError'); 
+        if (!chk.checked) { 
+            err.style.display = 'block'; 
+            setTimeout(() => err.style.display = 'none', 2500); 
+        } else { 
+            alert('Спасибо за подписку!'); 
+            document.getElementById('subscribeEmail').value = ''; 
+            chk.checked = false; 
+        } 
+    });
+    
+    document.querySelectorAll('.footer-btn-secondary').forEach(btn => btn.addEventListener('click', () => alert('Заказ шоу: свяжитесь с нами по телефону')));
+
+    // Инициализация
     renderUpcomingPerformances();
     renderPlaysScroll();
     renderMerchScroll();
+    setActiveMenu();
 </script>
-<script src="js/common.js"></script>
 </body>
 </html>
