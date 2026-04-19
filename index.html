@@ -10,59 +10,9 @@
 </head>
 <body>
 <div class="shop-container">
-    <!-- HEADER -->
-    <header class="main-header">
-        <div class="header-inner">
-            <div class="header-left">
-                <div class="logo-group">
-                    <img class="logo-img" src="SVG/logo-2.svg" alt="Логотип">
-                    <img class="logo-img" src="SVG/logo.svg" alt="Логотип текст">
-                </div>
-                <ul class="nav-menu">
-                    <li><a href="index.html" class="active">Главная</a></li>
-                    <li><a href="affiche.html">Афиша</a></li>
-                    <li><a href="for-customers.html">Заказчикам</a></li>
-                    <li><a href="brandbook.html">Брендбук</a></li>
-                    <li><span class="dots-icon" id="dotsIcon">⋯</span><span class="close-icon" id="closeIcon">✕</span></li>
-                </ul>
-                <div class="burger-icon" id="burgerIcon"><i class="fas fa-bars"></i></div>
-            </div>
-            <button class="buy-ticket-btn" onclick="window.location.href='performance.html'">Купить билет</button>
-        </div>
-        <div class="extra-menu-row" id="extraMenuRow">
-            <ul class="extra-nav-list">
-                <li><a href="performances.html">Спектакли</a></li>
-                <li><a href="team.html">Команда</a></li>
-                <li><a href="history.html">О театре</a></li>
-                <li><a href="shop.html">Магазин</a></li>
-                <li><a href="contacts.html">Контакты</a></li>
-            </ul>
-        </div>
-    </header>
-
-    <!-- Мобильное меню (выезжает слева) -->
-    <div class="mobile-nav" id="mobileNav">
-        <div class="close-mobile-menu" id="closeMobileMenu">✕</div>
-        <div class="mobile-logo-group">
-            <img src="SVG/logo-black.svg" alt="Логотип">
-            <img src="SVG/logo-black-2.svg" alt="Логотип текст">
-        </div>
-		<button class="buy-ticket-btn" onclick="window.location.href='performance.html'">Купить билет</button>
-		
-        <ul>
-            <li><a href="index.html" class="active">Главная</a></li>
-            <li><a href="affiche.html">Афиша</a></li>
-            <li><a href="for-customers.html">Заказчикам</a></li>
-            <li><a href="brandbook.html">Брендбук</a></li>
-            <li><a href="performances.html">Спектакли</a></li>
-            <li><a href="team.html">Команда</a></li>
-            <li><a href="history.html">О театре</a></li>
-            <li><a href="shop.html">Магазин</a></li>
-            <li><a href="contacts.html">Контакты</a></li>
-        </ul>
-		 
-    </div>
-    <div class="overlay" id="overlay"></div>
+    
+    <!-- 🔥 Заглушка для подгрузки хедера -->
+    <div id="site-header"></div>
 
     <!-- Бегущая строка -->
     <div class="ticker">
@@ -74,7 +24,7 @@
         </div>
     </div>
 
-    <!-- Hero слайдер как на странице афиши -->
+    <!-- Hero слайдер -->
     <div class="hero-slider-afisha" id="heroSliderAfisha">
         <button class="slider-arrow slider-arrow-left" id="sliderArrowLeft"><i class="fas fa-chevron-left"></i></button>
         <button class="slider-arrow slider-arrow-right" id="sliderArrowRight"><i class="fas fa-chevron-right"></i></button>
@@ -255,7 +205,7 @@
         </div>
     </div>
 
-    <!-- Магазин (стрелки появляются при наведении) -->
+    <!-- Магазин -->
     <div class="shop-section">
         <div class="container-main">
             <div class="section-header">
@@ -270,27 +220,18 @@
         </div>
     </div>
 
-    <!-- FOOTER -->
-    <footer class="main-footer">
-        <div class="footer-container">
-            <div class="footer-top">
-                <div class="footer-brand">
-                    <div class="footer-logo"><img class="footer-logo-img" src="SVG/logo-black.svg" alt="Микос"><div class="footer-theater-title">Театр клоунады «Микос»</div></div>
-                    <div class="footer-description">Откройте для себя театр заново.</div>
-                    <div class="newsletter-title">Подписаться на новости</div>
-                    <div class="subscribe-form"><input type="email" placeholder="Ваш email" class="subscribe-input" id="subscribeEmail"><button class="subscribe-btn" id="subscribeBtn">Подписаться</button></div>
-                    <label class="checkbox-custom" id="consentLabel"><input type="checkbox" id="consentCheckbox"><span class="checkmark"></span><span>Я согласен на обработку персональных данных</span></label>
-                    <div class="error-tooltip" id="consentError">Для подписки необходимо согласие на обработку данных</div>
-                    <div class="social-icons"><a href="#" class="social-circle"><i class="fab fa-vk"></i></a><a href="#" class="social-circle"><i class="fab fa-telegram-plane"></i></a></div>
-                </div>
-                <div class="footer-nav"><h4>Навигация</h4><ul><li><a href="index.html">Главная</a></li><li><a href="affiche.html">Афиша</a></li><li><a href="performances.html">Спектакли</a></li><li><a href="for-customers.html">Заказчикам</a></li><li><a href="history.html">О театре</a></li><li><a href="team.html">Команда</a></li><li><a href="shop.html">Магазин</a></li><li><a href="contacts.html">Контакты</a></li><li><a href="brandbook.html">Брендбук</a></li></ul></div>
-                <div class="footer-nav"><h4>Контакты</h4><ul><li><a href="#">Москва, ул. Театральная, 1</a></li><li><a href="tel:+74951234567">+7 (495) 123-45-67</a></li><li><a href="mailto:info@theatre.ru">info@theatre.ru</a></li></ul></div>
-            </div>
-            <div class="footer-bottom"><div class="copyright">© 2026 Театр клоунады «Микос». Все права защищены.</div><div class="footer-buttons"><button class="footer-btn-primary" onclick="window.location.href='checkout.html'">Купить билет</button><button class="footer-btn-secondary">Заказать шоу</button></div></div>
-        </div>
-    </footer>
+    <!-- 🔥 Заглушка для подгрузки футера -->
+    <div id="site-footer"></div>
+    
 </div>
 
+<!-- 🔥 Скрипты в правильном порядке -->
+<!-- 1. Загрузчик компонентов -->
+<script src="js/components-loader.js"></script>
+<!-- 2. Логика хедера/футера -->
+<script src="js/header-scripts.js"></script>
+
+<!-- 3. Основной скрипт страницы -->
 <script>
     // Данные для спектаклей и товаров
     const allPerformances = [
@@ -396,7 +337,7 @@
         });
     }
 
-    // Рендер магазина (без описания)
+    // Рендер магазина
     function renderMerchScroll() {
         const wrapper = document.getElementById('merchScroll');
         if (!wrapper) return;
@@ -450,33 +391,15 @@
     dots.forEach((dot, i) => dot.addEventListener('click', () => showSlide(i)));
     resetAutoSlide();
 
-    // Header dropdown (для десктопа)
-    const dotsIcon = document.getElementById('dotsIcon'), closeIcon = document.getElementById('closeIcon'), extraRow = document.getElementById('extraMenuRow');
-    function openExtraMenu() { extraRow?.classList.add('open'); if (dotsIcon) dotsIcon.style.display = 'none'; if (closeIcon) closeIcon.style.display = 'inline-flex'; }
-    function closeExtraMenu() { extraRow?.classList.remove('open'); if (dotsIcon) dotsIcon.style.display = 'inline-flex'; if (closeIcon) closeIcon.style.display = 'none'; }
-    if (dotsIcon) dotsIcon.addEventListener('click', openExtraMenu);
-    if (closeIcon) closeIcon.addEventListener('click', closeExtraMenu);
-
-    // Мобильное меню (выезжает слева)
-    const burgerIcon = document.getElementById('burgerIcon'), mobileNav = document.getElementById('mobileNav'), overlay = document.getElementById('overlay'), closeMobileBtn = document.getElementById('closeMobileMenu');
-    function openMobileMenu() { mobileNav?.classList.add('open'); overlay?.classList.add('active'); document.body.style.overflow = 'hidden'; }
-    function closeMobileMenu() { mobileNav?.classList.remove('open'); overlay?.classList.remove('active'); document.body.style.overflow = ''; }
-    if (burgerIcon) burgerIcon.addEventListener('click', openMobileMenu);
-    if (closeMobileBtn) closeMobileBtn.addEventListener('click', closeMobileMenu);
-    if (overlay) overlay.addEventListener('click', closeMobileMenu);
-
-    // Формы
-    document.getElementById('clientFormMain')?.addEventListener('submit', (e) => { e.preventDefault(); alert('Заявка отправлена! Мы свяжемся с вами.'); e.target.reset(); });
-    document.getElementById('subscribeBtn')?.addEventListener('click', () => { 
-        const chk = document.getElementById('consentCheckbox'), err = document.getElementById('consentError'); 
-        if (!chk?.checked) { if (err) { err.style.display = 'block'; setTimeout(() => err.style.display = 'none', 2500); } }
-        else { alert('Спасибо за подписку!'); document.getElementById('subscribeEmail').value = ''; chk.checked = false; } 
+    // Инициализация после загрузки компонентов
+    document.addEventListener('DOMContentLoaded', () => {
+        // Ждём, пока загрузятся хедер/футер
+        setTimeout(() => {
+            renderUpcomingPerformances();
+            renderPlaysScroll();
+            renderMerchScroll();
+        }, 100);
     });
-
-    renderUpcomingPerformances();
-    renderPlaysScroll();
-    renderMerchScroll();
 </script>
-<script src="js/common.js"></script>
 </body>
 </html>
