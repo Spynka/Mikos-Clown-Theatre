@@ -13,25 +13,7 @@
 </head>
 <body>
 <div class="shop-container" id="shopContainer">
-    <header class="main-header">
-        <div class="header-inner">
-            <div class="header-left">
-                <div class="logo-group">
-                    <img class="logo-img" src="SVG/logo-2.svg" alt="Логотип">
-                    <img class="logo-img" src="SVG/logo.svg" alt="Логотип текст">
-                </div>
-                <ul class="nav-menu">
-                    <li><a href="index.html">Главная</a></li><li><a href="affiche.html">Афиша</a></li><li><a href="for-customers.html">Заказчикам</a></li><li><a href="brandbook.html">Брендбук</a></li>
-                    <li><span class="dots-icon" id="dotsIcon">⋯</span><span class="close-icon" id="closeIcon">✕</span></li>
-                </ul>
-                <div class="burger-icon" id="burgerIcon"><i class="fas fa-bars"></i></div>
-            </div>
-            <button class="buy-ticket-btn">Купить билет</button>
-        </div>
-        <div class="extra-menu-row" id="extraMenuRow">
-            <ul class="extra-nav-list"><li><a href="performances.html">Спектакли</a></li><li><a href="team.html">Команда</a></li><li><a href="history.html">О театре</a></li><li><a href="shop.html">Магазин</a></li><li><a href="contacts.html">Контакты</a></li></ul>
-        </div>
-    </header>
+    <div id="site-header"></div>
     <div class="mobile-nav" id="mobileNav"><div class="close-mobile-menu" id="closeMobileMenu">✕</div><ul><li><a href="#">Главная</a></li><li><a href="#">Афиша</a></li><li><a href="#">Заказчикам</a></li><li><a href="#">Брендбук</a></li><li><a href="#">Спектакли</a></li><li><a href="#">Команда</a></li><li><a href="#">О театре</a></li><li><a href="#">Магазин</a></li><li><a href="#">Контакты</a></li></ul></div>
     <div class="overlay" id="overlay"></div>
 
@@ -43,30 +25,15 @@
     </div>
 
     <!-- FOOTER - обновленный с эффектами наведения -->
-    <footer class="main-footer">
-        <div class="footer-container">
-            <div class="footer-top">
-                <div class="footer-brand">
-                    <div class="footer-logo"><img class="footer-logo-img" src="SVG/logo-black.svg" alt="Микос"><div class="footer-theater-title">Театр клоунады «Микос»</div></div>
-                    <div class="footer-description">Откройте для себя театр заново.</div>
-                    <div class="newsletter-title">Подписаться на новости</div>
-                    <div class="subscribe-form"><input type="email" placeholder="Ваш email" class="subscribe-input" id="subscribeEmail"><button class="subscribe-btn" id="subscribeBtn">Подписаться</button></div>
-                    <label class="checkbox-custom" id="consentLabel"><input type="checkbox" id="consentCheckbox"><span class="checkmark"></span><span>Я согласен на обработку персональных данных</span></label>
-                    <div class="error-tooltip" id="consentError">Для подписки необходимо согласие на обработку данных</div>
-                    <div class="social-icons"><a href="#" class="social-circle"><i class="fab fa-vk"></i></a><a href="#" class="social-circle"><i class="fab fa-telegram-plane"></i></a></div>
-                </div>
-                <div class="footer-nav"><h4>Навигация</h4><ul><li><a href="index.html">Главная</a></li><li><a href="affiche.html">Афиша</a></li><li><a href="performances.html">Спектакли</a></li><li><a href="for-customers.html">Заказчикам</a></li><li><a href="history.html">О театре</a></li><li><a href="team.html">Команда</a></li><li><a href="shop.html">Магазин</a></li><li><a href="contacts.html">Контакты</a></li><li><a href="brandbook.html">Брендбук</a></li></ul></div>
-                <div class="footer-nav"><h4>Контакты</h4><ul><li><a href="#">Москва, ул. Театральная, 1</a></li><li><a href="tel:+74951234567">+7 (495) 123-45-67</a></li><li><a href="mailto:info@theatre.ru">info@theatre.ru</a></li><li><a href="#">Как добраться</a></li></ul></div>
-            </div>
-            <div class="footer-bottom"><div class="copyright">© 2026 Театр клоунады «Микос». Все права защищены.</div><div class="footer-buttons"><button class="footer-btn-primary">Купить билет</button><button class="footer-btn-secondary">Заказать шоу</button></div></div>
-        </div>
-    </footer>
+    <div id="site-footer"></div>
 </div>
 
 <!-- Модальные окна -->
 <div id="modalProduct" class="modal-overlay"><div class="modal-container"><span class="modal-close" id="closeModal1">&times;</span><div id="dynamicModalContent"></div><div class="modal-buttons" id="modalButtonsContainer"></div></div></div>
 <div id="modalContacts" class="modal-overlay"><div class="modal-container"><span class="modal-close" id="closeModal2">&times;</span><div class="modal-title" style="font-size:24px; font-family:'Unbounded',sans-serif; font-weight:700; margin-bottom:28px;">Оформление заказа</div><div id="orderSummaryFull" class="cart-summary"></div><div class="form-group"><label>Имя</label><input type="text" id="contactName" class="form-input" placeholder="Иван Иванов"></div><div class="form-group"><label>Телефон</label><input type="tel" id="contactPhone" class="form-input" placeholder="+7 (___) ___-__-__"></div><div class="form-group"><label>Email</label><input type="email" id="contactEmail" class="form-input" placeholder="mail@example.com"></div><div class="form-group"><label>Способ связи</label><input type="text" id="contactMethod" class="form-input" placeholder="Telegram / WhatsApp / звонок"></div><div class="modal-buttons"><button id="submitOrderBtn" class="modal-btn btn-primary-modal" style="width:100%;">Оформить заказ</button></div></div></div>
-
+<script src="js/components-loader.js"></script>
+<script src="js/header-scripts.js"></script>
+<script src="js/common.js"></script>
 <script>
     const products = [
         { id: 1, name: 'Футболка "Театр"', desc: 'Хлопковая футболка с логотипом', price: 2500, isClothing: true, img: 'https://placehold.co/428x220/2A3D5E/white?text=Футболка', category: 'clothes' },

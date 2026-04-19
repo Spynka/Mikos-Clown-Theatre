@@ -14,25 +14,7 @@
 <body>
 <div class="shop-container">
     <!-- HEADER (идентичен) -->
-    <header class="main-header">
-        <div class="header-inner">
-            <div class="header-left">
-                <div class="logo-group">
-                    <img class="logo-img" src="SVG/logo-2.svg" alt="Логотип">
-                    <img class="logo-img" src="SVG/logo.svg" alt="Логотип текст">
-                </div>
-                <ul class="nav-menu">
-                    <li><a href="index.html">Главная</a></li><li><a href="affiche.html">Афиша</a></li><li><a href="for-customers.html">Заказчикам</a></li><li><a href="brandbook.html">Брендбук</a></li>
-                    <li><span class="dots-icon" id="dotsIcon">⋯</span><span class="close-icon" id="closeIcon">✕</span></li>
-                </ul>
-                <div class="burger-icon" id="burgerIcon"><i class="fas fa-bars"></i></div>
-            </div>
-            <button class="buy-ticket-btn">Купить билет</button>
-        </div>
-        <div class="extra-menu-row" id="extraMenuRow">
-            <ul class="extra-nav-list"><li><a href="performances.html">Спектакли</a></li><li><a href="team.html">Команда</a></li><li><a href="history.html">О театре</a></li><li><a href="shop.html">Магазин</a></li><li><a href="contacts.html">Контакты</a></li></ul>
-        </div>
-    </header>
+    <div id="site-header"></div>
     <div class="mobile-nav" id="mobileNav"><div class="close-mobile-menu" id="closeMobileMenu">✕</div><ul><li><a href="#">Главная</a></li><li><a href="#">Афиша</a></li><li><a href="#">Заказчикам</a></li><li><a href="#">Брендбук</a></li><li><a href="#">Спектакли</a></li><li><a href="#">Команда</a></li><li><a href="#">О театре</a></li><li><a href="#">Магазин</a></li><li><a href="#">Контакты</a></li></ul></div>
     <div class="overlay" id="overlay"></div>
 
@@ -42,26 +24,11 @@
     </div>
 
     <!-- FOOTER -->
-    <footer class="main-footer">
-        <div class="footer-container">
-            <div class="footer-top">
-                <div class="footer-brand">
-                    <div class="footer-logo"><img class="footer-logo-img" src="SVG/logo-black.svg" alt="Микос"><div class="footer-theater-title">Театр клоунады «Микос»</div></div>
-                    <div class="footer-description">Откройте для себя театр заново.</div>
-                    <div class="newsletter-title">Подписаться на новости</div>
-                    <div class="subscribe-form"><input type="email" placeholder="Ваш email" class="subscribe-input" id="subscribeEmail"><button class="subscribe-btn" id="subscribeBtn">Подписаться</button></div>
-                    <label class="checkbox-custom"><input type="checkbox" id="consentCheckbox"><span class="checkmark"></span><span>Я согласен на обработку данных</span></label>
-                    <div class="error-tooltip" id="consentError">Нужно согласие</div>
-                    <div class="social-icons"><a href="#" class="social-circle"><i class="fab fa-vk"></i></a><a href="#" class="social-circle"><i class="fab fa-telegram-plane"></i></a></div>
-                </div>
-                <div class="footer-nav"><h4>Навигация</h4><ul><li><a href="index.html">Главная</a></li><li><a href="affiche.html">Афиша</a></li><li><a href="performances.html">Спектакли</a></li><li><a href="for-customers.html">Заказчикам</a></li><li><a href="history.html">О театре</a></li><li><a href="team.html">Команда</a></li><li><a href="shop.html">Магазин</a></li><li><a href="contacts.html">Контакты</a></li></ul></div>
-                <div class="footer-nav"><h4>Контакты</h4><ul><li><a href="#">Москва, ул. Театральная, 1</a></li><li><a href="tel:+74951234567">+7 (495) 123-45-67</a></li><li><a href="mailto:info@theatre.ru">info@theatre.ru</a></li></ul></div>
-            </div>
-            <div class="footer-bottom"><div class="copyright">© 2026 Театр клоунады «Микос»</div></div>
-        </div>
-    </footer>
+    <div id="site-footer"></div>
 </div>
-
+<script src="js/components-loader.js"></script>
+<script src="js/header-scripts.js"></script>
+<script src="js/common.js"></script>
 <script>
     (function(){
         // ---------- БАЗА ДАННЫХ 5 СПЕКТАКЛЕЙ ----------

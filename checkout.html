@@ -223,23 +223,7 @@
 <body>
 <div class="shop-container">
     <!-- HEADER -->
-    <header class="main-header">
-        <div class="header-inner">
-            <div class="header-left">
-                <div class="logo-group">
-                    <img class="logo-img" src="SVG/logo-2.svg" alt="Логотип">
-                    <img class="logo-img" src="SVG/logo.svg" alt="Логотип текст">
-                </div>
-                <ul class="nav-menu">
-                    <li><a href="index.html">Главная</a></li><li><a href="affiche.html">Афиша</a></li><li><a href="for-customers.html">Заказчикам</a></li><li><a href="brandbook.html">Брендбук</a></li>
-                    <li><span class="dots-icon" id="dotsIcon">⋯</span><span class="close-icon" id="closeIcon">✕</span></li>
-                </ul>
-                <div class="burger-icon" id="burgerIcon"><i class="fas fa-bars"></i></div>
-            </div>
-            <button class="buy-ticket-btn" onclick="window.location.href='performance.html'">Купить билет</button>
-        </div>
-        <div class="extra-menu-row" id="extraMenuRow"><ul class="extra-nav-list"><li><a href="performances.html">Спектакли</a></li><li><a href="team.html">Команда</a></li><li><a href="history.html">О театре</a></li><li><a href="shop.html">Магазин</a></li><li><a href="contacts.html">Контакты</a></li></ul></div>
-    </header>
+    <div id="site-header"></div>
     <div class="mobile-nav" id="mobileNav"><div class="close-mobile-menu" id="closeMobileMenu">✕</div><ul><li><a href="index.html">Главная</a></li><li><a href="affiche.html">Афиша</a></li><li><a href="for-customers.html">Заказчикам</a></li><li><a href="brandbook.html">Брендбук</a></li></ul></div>
     <div class="overlay" id="overlay"></div>
 
@@ -322,9 +306,12 @@
         </div>
     </div>
 
-    <footer class="main-footer"><div class="footer-container"><div class="copyright">© 2026 Театр клоунады «Микос»</div></div></footer>
+    <div id="site-footer"></div>
 </div>
-
+<script src="js/components-loader.js"></script>
+<!-- 2. Логика хедера/футера -->
+<script src="js/header-scripts.js"></script>
+<script src="js/common.js"></script>
 <script>
     (function(){
         // Данные спектаклей (синхронизированы с performance.html)

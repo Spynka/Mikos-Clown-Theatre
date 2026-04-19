@@ -162,26 +162,12 @@
     </section>
 
     <!-- FOOTER -->
-    <footer class="main-footer">
-        <div class="footer-container">
-            <div class="footer-top">
-                <div class="footer-brand">
-                    <div class="footer-logo"><img class="footer-logo-img" src="SVG/logo-black.svg" alt="Микос"><div class="footer-theater-title">Театр клоунады «Микос»</div></div>
-                    <div class="footer-description">Откройте для себя театр заново.</div>
-                    <div class="newsletter-title">Подписаться на новости</div>
-                    <div class="subscribe-form"><input type="email" placeholder="Ваш email" class="subscribe-input" id="subscribeEmail"><button class="subscribe-btn" id="subscribeBtn">Подписаться</button></div>
-                    <label class="checkbox-custom" id="consentLabel"><input type="checkbox" id="consentCheckbox"><span class="checkmark"></span><span>Я согласен на обработку персональных данных</span></label>
-                    <div class="error-tooltip" id="consentError">Для подписки необходимо согласие на обработку данных</div>
-                    <div class="social-icons"><a href="#" class="social-circle"><i class="fab fa-vk"></i></a><a href="#" class="social-circle"><i class="fab fa-telegram-plane"></i></a></div>
-                </div>
-                <div class="footer-nav"><h4>Навигация</h4><ul><li><a href="index.html">Главная</a></li><li><a href="affiche.html">Афиша</a></li><li><a href="performances.html">Спектакли</a></li><li><a href="for-customers.html">Заказчикам</a></li><li><a href="history.html">О театре</a></li><li><a href="team.html">Команда</a></li><li><a href="shop.html">Магазин</a></li><li><a href="contacts.html">Контакты</a></li><li><a href="brandbook.html">Брендбук</a></li></ul></div>
-                <div class="footer-nav"><h4>Контакты</h4><ul><li><a href="#">Москва, ул. Театральная, 1</a></li><li><a href="tel:+74951234567">+7 (495) 123-45-67</a></li><li><a href="mailto:info@theatre.ru">info@theatre.ru</a></li><li><a href="#">Как добраться</a></li></ul></div>
-            </div>
-            <div class="footer-bottom"><div class="copyright">© 2026 Театр клоунады «Микос». Все права защищены.</div><div class="footer-buttons"><button class="footer-btn-primary">Купить билет</button><button class="footer-btn-secondary">Заказать шоу</button></div></div>
-        </div>
-    </footer>
+    <div id="site-footer"></div>
 </div>
-
+<script src="js/components-loader.js"></script>
+<!-- 2. Логика хедера/футера -->
+<script src="js/header-scripts.js"></script>
+<script src="js/common.js"></script>
 <script>
     // Переключение страниц брендбука (основное меню)
     const navBtns = document.querySelectorAll('.nav-btn');
