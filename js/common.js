@@ -1,4 +1,45 @@
 (function() {
+	
+		document.addEventListener('DOMContentLoaded', function() {
+		const burgerIcon = document.getElementById('burgerIcon');
+		const mobileNav = document.getElementById('mobileNav');
+		const closeMobileMenu = document.getElementById('closeMobileMenu');
+		const overlay = document.getElementById('overlay');
+		const body = document.body;
+
+		function openMobileMenu() {
+			mobileNav.classList.add('open');
+			overlay.classList.add('active');
+			body.classList.add('menu-open'); // Блокируем скролл фона
+		}
+
+		function closeMobileMenuFn() {
+			mobileNav.classList.remove('open');
+			overlay.classList.remove('active');
+			body.classList.remove('menu-open');
+		}
+
+		// Обработчики
+		if (burgerIcon) burgerIcon.addEventListener('click', openMobileMenu);
+		if (closeMobileMenu) closeMobileMenu.addEventListener('click', closeMobileMenuFn);
+		if (overlay) overlay.addEventListener('click', closeMobileMenuFn);
+
+		// Закрытие по Escape
+		document.addEventListener('keydown', (e) => {
+			if (e.key === 'Escape' && mobileNav.classList.contains('open')) {
+				closeMobileMenuFn();
+			}
+		});
+
+		// Предотвращаем скролл внутри меню, когда достигнут край
+		mobileNav?.addEventListener('touchmove', (e) => {
+			if (mobileNav.scrollTop === 0) {
+				mobileNav.scrollTop = 1;
+			} else if (mobileNav.scrollTop + mobileNav.clientHeight >= mobileNav.scrollHeight) {
+				mobileNav.scrollTop = mobileNav.scrollHeight - mobileNav.clientHeight - 1;
+			}
+		}, { passive: false });
+	});
     // 1. Подсветка активного пункта меню (жирный чёрный)
     function setActiveMenu() {
         const currentPath = window.location.pathname.split('/').pop() || 'index.html';
@@ -101,4 +142,5 @@
         initNewsletter();
         initButtons();
     });
+	
 })();
