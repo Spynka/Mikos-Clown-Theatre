@@ -238,7 +238,7 @@ body {
 }
 
 /* ============================================
-   MOBILE NAVIGATION — 75% ширины
+   MOBILE NAVIGATION — 75% ширины, без скруглений
 ============================================ */
 .mobile-nav {
     position: fixed;
@@ -246,37 +246,37 @@ body {
     right: -100%;
     left: auto !important;
     
-    /* 🔥 75% от ширины экрана */
     width: 75%;
-    max-width: 320px;        /* Не шире этого на планшетах */
-    
+    max-width: 320px;
     height: 100vh;
-    height: -webkit-fill-available; /* Фикс для iOS Safari */
+    height: -webkit-fill-available; /* 🔥 Фикс высоты для iOS Safari */
     
     background: #1A1A1A;
     z-index: 1000;
     transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    padding: 65px 18px 25px 18px;  /* Чуть уже отступы для 75% */
+    padding: 70px 20px 30px 20px;
     overflow-y: auto;
     overflow-x: hidden;
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
-    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.35);
-    border-top-left-radius: 16px;
-    border-bottom-left-radius: 16px;
+    
+    /* 🔥 Строго прямые края */
+    border-radius: 0 !important;
+    box-shadow: -3px 0 12px rgba(0, 0, 0, 0.2); /* Тень для контраста с фоном */
 }
 
 .mobile-nav.open {
     right: 0;
 }
 
-/* 🔥 Точные значения для iPhone SE */
+/* 🔥 Точные значения для iPhone SE (перебивают любые конфликты) */
 @media screen and (max-width: 375px) {
     .mobile-nav {
         width: 281px !important;   /* 75% от 375px */
         max-width: 281px !important;
         min-width: 281px !important;
+        border-radius: 0 !important;
     }
 }
 
@@ -285,7 +285,8 @@ body {
         width: 240px !important;   /* 75% от 320px (SE 1st gen) */
         max-width: 240px !important;
         min-width: 240px !important;
-        padding: 60px 14px 20px 14px;
+        padding: 60px 16px 20px 16px;
+        border-radius: 0 !important;
     }
     
     .mobile-nav ul li a {
@@ -294,28 +295,16 @@ body {
     }
     
     .close-mobile-menu {
-        width: 34px;
-        height: 34px;
+        width: 32px;
+        height: 32px;
         top: 14px;
         right: 14px;
         font-size: 18px;
     }
 }
 
-/* 🔥 Адаптация кнопки "Купить билет" под узкое меню */
-.mobile-nav .buy-ticket-btn {
-    width: 100%;
-    margin: 14px 0 20px 0;
-    padding: 11px 16px;
-    font-size: 13px;
-}
-
-/* 🔥 Запрет переноса длинных слов и защита от гориз. скролла внутри меню */
-.mobile-nav ul {
-    word-break: break-word;
-    overflow-wrap: break-word;
-    hyphens: auto;
-}
+/* Если нужен абсолютно "плоский" вид без тени, добавьте сюда: */
+/* .mobile-nav { box-shadow: none !important; } */
 
 .mobile-nav.open {
     right: 0;
