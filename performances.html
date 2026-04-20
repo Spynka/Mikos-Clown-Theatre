@@ -46,11 +46,11 @@
     (function() {
         // ----- СПИСОК ИЗ 5 СПЕКТАКЛЕЙ -----
         const performances = [
-            { id: 1, name: 'Лишь бы не было детей', desc: 'История сосуществования очень разных людей. Клоунада о страхах и близости.', age: '18+', time: '90 мин', tickets: true, img: 'https://placehold.co/428x220/2a3f5e/white?text=Лишь+бы+не+было+детей' },
-            { id: 2, name: 'Богатыри', desc: 'Былины в современном прочтении. Сила, честь и юмор — эпическая комедия.', age: '12+', time: '100 мин', tickets: true, img: 'https://placehold.co/428x220/4a6294/white?text=Богатыри' },
-            { id: 3, name: 'Ожидание', desc: 'Трогательная история о времени, надежде и встречах, которые меняют всё.', age: '16+', time: '80 мин', tickets: false, img: 'https://placehold.co/428x220/3a5078/white?text=Ожидание' },
-            { id: 4, name: 'Кабаре-Шапито', desc: 'Феерия клоунады и музыки. Яркое кабаре с цирковыми номерами и живым оркестром.', age: '18+', time: '110 мин', tickets: true, img: 'https://placehold.co/428x220/2e4c7a/white?text=Кабаре-Шапито' },
-            { id: 5, name: 'Авиаторы', desc: 'О мечтах, полетах и свободе. Спектакль о людях, стремящихся в небо.', age: '16+', time: '95 мин', tickets: true, img: 'https://placehold.co/428x220/1f3a5f/white?text=Авиаторы' }
+            { id: 1, name: 'Лишь бы не было детей', date: '15 апреля 19:00', monthKey: 'апрель', year: 2026, desc: 'История сосуществования очень разных людей. Клоунада о выживании.', age: '18+', time: '90 минут', tickets: true, venue: 'Основная сцена', img: 'images/content/performances/15.jpg' },
+            { id: 2, name: 'Богатыри', date: '22 апреля 18:00', monthKey: 'апрель', year: 2026, desc: 'Былины в современном прочтении. Эпическая комедия для всей семьи.', age: '12+', time: '100 минут', tickets: true, venue: 'Основная сцена', img: 'images/content/performances/3.jpg' },
+            { id: 3, name: 'Ожидание', date: '5 мая 20:00', monthKey: 'май', year: 2026, desc: 'Трогательная история о времени, надежде и встречах.', age: '16+', time: '80 минут', tickets: true, venue: 'Малая сцена', img: 'images/content/performances/9.jpg' },
+            { id: 4, name: 'Кабаре-Шапито', date: '12 мая 19:00', monthKey: 'май', year: 2026, desc: 'Феерия клоунады и музыки. Кабаре с цирковыми номерами.', age: '18+', time: '110 минут', tickets: true, venue: 'Основная сцена', img: 'images/content/performances/10.jpg' },
+            { id: 5, name: 'Авиаторы', date: '20 октября 19:00', monthKey: 'октябрь', year: 2026, desc: 'О мечтах, полетах и свободе. Вдохновляющая драма.', age: '16+', time: '95 минут', tickets: true, venue: 'Основная сцена', img: 'images/content/performances/6.jpg' }
         ];
 
         const grid = document.getElementById('performancesGrid');

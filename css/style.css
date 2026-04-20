@@ -7627,13 +7627,7 @@ html, body {
     padding-left: 60px !important;   /* Отступ слева */
 }
 
-/* Стрелки — СКРЫТЫ по умолчанию */
-.slider-arrow {
-    opacity: 0 !important;
-    visibility: hidden !important;
-    pointer-events: none !important;
-    transition: opacity 0.2s ease !important;
-}
+
 
 /* На мобильных стрелки не показываем НИКОГДА */
 @media (max-width: 768px) {
@@ -7688,4 +7682,702 @@ html, body {
     .slider-arrow {
         display: none !important;
     }
+}
+
+
+/* 🔹 Фикс бургера для узких экранов (до 400px) */
+@media (max-width: 400px) {
+  .header-inner {
+    height: 60px !important;
+    padding: 0 12px !important;
+  }
+  .burger-icon {
+    display: flex !important;
+    width: 44px !important;
+    height: 44px !important;
+    font-size: 22px !important;
+    order: 99 !important;
+  }
+  /* Гарантированно скрываем десктоп-меню */
+  .header-inner .logo-group,
+  .header-inner .nav-menu,
+  .header-inner .buy-ticket-btn,
+  .extra-menu-row {
+    display: none !important;
+  }
+}
+
+
+/* 🔹 Фикс горизонтального переполнения для мобильных */
+@media (max-width: 400px) {
+  .scroll-wrapper,
+  #upcomingPerformancesScroll,
+  #playsScroll,
+  #merchScroll {
+    padding: 16px !important;
+    margin: 0 !important; /* ← Убираем отрицательные отступы */
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory !important;
+  }
+  .performance-card,
+  .play-card,
+  .merch-card {
+    flex: 0 0 calc(100vw - 32px) !important; /* ← Карточка = ширина экрана минус отступы */
+    scroll-snap-align: start !important;
+  }
+  /* Убираем белую линию — проверяем outline/border */
+  .performance-card,
+  .play-card,
+  .merch-card,
+  .service-card,
+  .team-card {
+    outline: none !important;
+    border: 1px solid #E5E3E1 !important;
+  }
+}
+
+/* 🔹 Убираем лишние обводки на мобильных */
+@media (max-width: 400px) {
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+  [class*="card"],
+  [class*="section"],
+  .performance-card,
+  .play-card,
+  .merch-card,
+  .service-card,
+  .team-card,
+  .cast-card,
+  .similar-card {
+    outline: none !important;
+    box-shadow: none !important;
+    border: 1px solid #E5E3E1 !important;
+    border-radius: 8px !important;
+  }
+}
+
+
+
+
+
+/* ============================================
+🔥 MOBILE FIX - FINAL CORRECT VERSION (добавить в КОНЕЦ style.css)
+============================================ */
+
+/* 1. Глобальные настройки для мобильных */
+@media (max-width: 860px) {
+    /* Убираем горизонтальный скролл */
+    html, body {
+        overflow-x: hidden !important;
+        width: 100% !important;
+        max-width: 100vw !important;
+    }
+    
+    /* 🔹 Хедер: прозрачный, без размытия, только бургер */
+    .main-header {
+        background: transparent !important;
+        backdrop-filter: none !important;
+        border-bottom: none !important;
+        box-shadow: none !important;
+        position: absolute !important;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100 !important;
+    }
+    
+    .header-inner {
+        height: 60px !important;
+        padding: 0 16px !important;
+        background: transparent !important;
+        justify-content: flex-end !important;
+        flex-wrap: nowrap !important;
+    }
+    
+    /* Скрываем десктопные элементы хедера */
+    .header-inner .logo-group,
+    .header-inner .nav-menu,
+    .header-inner .buy-ticket-btn,
+    .header-inner .dots-icon,
+    .header-inner .close-icon,
+    .extra-menu-row {
+        display: none !important;
+    }
+    
+    /* 🔹 Бургер: показываем, стилизуем */
+    .burger-icon {
+        display: flex !important;
+        width: 48px !important;
+        height: 48px !important;
+        background: white !important;
+        border-radius: 50% !important;
+        box-shadow: 0 2px 12px rgba(0,0,0,0.15) !important;
+        align-items: center !important;
+        justify-content: center !important;
+        font-size: 22px !important;
+        color: #231F20 !important;
+        margin-left: auto !important;
+        order: 99 !important;
+        cursor: pointer !important;
+        transition: all 0.2s !important;
+    }
+    .burger-icon:hover {
+        color: var(--primary-red) !important;
+        transform: scale(1.05) !important;
+    }
+    
+    /* 🔹 Бегущая строка: отступ под хедер */
+    .ticker {
+        margin-top: 60px !important;
+        padding: 8px 0 !important;
+    }
+    .ticker-content {
+        font-size: 12px !important;
+    }
+    .ticker-content span {
+        margin: 0 20px !important;
+    }
+    
+    /* 🔹 Слайдер афиши */
+    .hero-slider-afisha {
+        height: 480px !important;
+        margin-bottom: 40px !important;
+    }
+    .hero-title-afisha {
+        font-size: 28px !important;
+        padding-left: 16px !important;
+        max-width: 100% !important;
+    }
+    .hero-subtitle-afisha {
+        font-size: 14px !important;
+        padding-left: 16px !important;
+        max-width: 100% !important;
+    }
+    .hero-buttons-afisha {
+        flex-direction: column !important;
+        width: 100% !important;
+        padding: 0 16px !important;
+        gap: 12px !important;
+    }
+    .hero-buttons-afisha button {
+        width: 100% !important;
+        padding: 12px !important;
+    }
+    
+    /* 🔹 Контейнеры: уменьшаем отступы */
+    .container-main,
+    .about-section .container-main,
+    .clients-section .container-main,
+    .plays-section .container-main,
+    .team-section .container-main,
+    .shop-section .container-main {
+        padding: 0 16px !important;
+        max-width: 100% !important;
+    }
+    
+    /* 🔹 Заголовки секций */
+    .section-header {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 12px !important;
+        margin-bottom: 24px !important;
+        padding: 0 !important;
+    }
+    .section-title {
+        font-size: 24px !important;
+        padding-left: 0 !important;
+        margin: 0 !important;
+    }
+    .section-title::before {
+        display: none !important;
+    }
+    .section-link {
+        font-size: 13px !important;
+        padding-left: 0 !important;
+    }
+    
+    /* 🔹 Горизонтальные скролл-контейнеры */
+    .scroll-container {
+        overflow: visible !important;
+    }
+    .scroll-wrapper {
+        padding: 0 4px !important;
+        margin: 0 -4px !important;
+        scroll-snap-type: x mandatory !important;
+        -webkit-overflow-scrolling: touch !important;
+        gap: 8px !important;
+    }
+    .scroll-wrapper::-webkit-scrollbar {
+        display: none !important;
+    }
+    
+    /* Карточки в скролле */
+    .performance-card,
+    .play-card,
+    .merch-card {
+        flex: 0 0 85vw !important;
+        scroll-snap-align: start !important;
+        margin: 0 4px !important;
+        border-radius: 12px !important;
+    }
+    .performance-img,
+    .play-img,
+    .merch-img {
+        height: 160px !important;
+        object-fit: cover !important;
+    }
+    .performance-content,
+    .play-content,
+    .merch-content {
+        padding: 12px !important;
+        gap: 8px !important;
+    }
+    .performance-name,
+    .play-name,
+    .merch-name {
+        font-size: 16px !important;
+        line-height: 1.3 !important;
+        margin-bottom: 4px !important;
+    }
+    .performance-desc,
+    .play-desc {
+        font-size: 13px !important;
+        line-height: 1.4 !important;
+        display: -webkit-box !important;
+        -webkit-line-clamp: 2 !important;
+        -webkit-box-orient: vertical !important;
+        overflow: hidden !important;
+    }
+    .performance-btns,
+    .play-content .btn-details,
+    .play-content .btn-buy {
+        flex-direction: column !important;
+        gap: 8px !important;
+        margin-top: 8px !important;
+    }
+    .performance-btns button,
+    .play-content button,
+    .merch-btn {
+        width: 100% !important;
+        padding: 10px !important;
+        font-size: 13px !important;
+        border-radius: 8px !important;
+    }
+    
+    /* Стрелки скролла: скрываем на мобильных (свайп удобнее) */
+    .scroll-btn {
+        display: none !important;
+    }
+    
+    /* 🔹 Блок "О театре" */
+    .about-section {
+        padding: 40px 0 !important;
+    }
+    .about-content {
+        flex-direction: column !important;
+        gap: 24px !important;
+    }
+    .about-text h3 {
+        font-size: 20px !important;
+        margin-bottom: 16px !important;
+    }
+    .about-text p {
+        font-size: 14px !important;
+        line-height: 1.5 !important;
+        margin-bottom: 12px !important;
+    }
+    .about-img {
+        width: 100% !important;
+    }
+    .about-img img {
+        width: 100% !important;
+        border-radius: 12px !important;
+    }
+    
+    /* 🔹 Блок "Заказчикам" */
+    .clients-section {
+        padding: 40px 0 !important;
+    }
+    .clients-grid {
+        flex-direction: column !important;
+        gap: 32px !important;
+    }
+    .clients-form {
+        padding: 24px 20px !important;
+        border-radius: 12px !important;
+    }
+    .clients-form h3 {
+        font-size: 20px !important;
+        margin-bottom: 20px !important;
+    }
+    .clients-form .form-group {
+        margin-bottom: 16px !important;
+    }
+    .clients-form .form-group label {
+        font-size: 13px !important;
+        margin-bottom: 6px !important;
+    }
+    .clients-form .form-group input,
+    .clients-form .form-group textarea {
+        padding: 12px 14px !important;
+        font-size: 14px !important;
+        border-radius: 8px !important;
+    }
+    .clients-form .form-group textarea {
+        min-height: 80px !important;
+    }
+    .submit-client-btn {
+        width: 100% !important;
+        padding: 12px !important;
+        font-size: 14px !important;
+        border-radius: 8px !important;
+    }
+    .features-list {
+        gap: 12px !important;
+    }
+    .feature-item {
+        padding: 12px 16px 12px 44px !important;
+        font-size: 13px !important;
+        border-radius: 8px !important;
+    }
+    .feature-item i {
+        left: 16px !important;
+        top: 14px !important;
+        font-size: 16px !important;
+    }
+    .feature-item strong {
+        display: block !important;
+        margin-bottom: 2px !important;
+    }
+    .download-btn-tech {
+        width: 100% !important;
+        justify-content: center !important;
+        padding: 10px 16px !important;
+        font-size: 13px !important;
+    }
+    
+    /* 🔹 Команда */
+    .team-section {
+        padding: 40px 0 !important;
+    }
+    .team-scroll-wrapper {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 16px !important;
+    }
+    .team-card {
+        text-align: center !important;
+    }
+    .team-img {
+        height: 180px !important;
+        border-radius: 12px !important;
+        object-fit: cover !important;
+    }
+    .team-name {
+        font-size: 14px !important;
+        margin-top: 12px !important;
+    }
+    .team-position {
+        font-size: 12px !important;
+    }
+    
+    /* 🔹 Футер на мобильных */
+    .main-footer {
+        padding: 40px 20px 30px !important;
+        margin-top: 40px !important;
+        text-align: center !important;
+    }
+    .footer-top {
+        flex-direction: column !important;
+        gap: 24px !important;
+        align-items: center !important;
+    }
+    .footer-brand {
+        text-align: center !important;
+        max-width: 100% !important;
+    }
+    .footer-logo {
+        justify-content: center !important;
+    }
+    .footer-theater-title {
+        font-size: 16px !important;
+        white-space: normal !important;
+        line-height: 1.3 !important;
+    }
+    .footer-description {
+        text-align: center !important;
+    }
+    .newsletter-title {
+        text-align: center !important;
+    }
+    .subscribe-form {
+        flex-direction: column !important;
+        height: auto !important;
+        gap: 10px !important;
+        max-width: 100% !important;
+    }
+    .subscribe-input,
+    .subscribe-btn {
+        width: 100% !important;
+        border-radius: 8px !important;
+        padding: 12px !important;
+        font-size: 14px !important;
+        text-align: center !important;
+    }
+    .checkbox-custom {
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        gap: 6px !important;
+        margin-top: 12px !important;
+    }
+    .checkbox-custom span:last-child {
+        font-size: 12px !important;
+        width: 100% !important;
+        text-align: center !important;
+    }
+    .social-icons {
+        justify-content: center !important;
+    }
+    .footer-nav {
+        text-align: center !important;
+    }
+    .footer-nav ul {
+        align-items: center !important;
+    }
+    .footer-buttons {
+        flex-direction: column !important;
+        width: 100% !important;
+        max-width: 300px !important;
+        gap: 10px !important;
+    }
+    .footer-btn-primary,
+    .footer-btn-secondary {
+        width: 100% !important;
+        padding: 12px !important;
+        font-size: 14px !important;
+    }
+    .footer-bottom {
+        flex-direction: column-reverse !important;
+        text-align: center !important;
+        gap: 12px !important;
+        padding-top: 20px !important;
+    }
+    
+    /* 🔹 Общие улучшения для мобильных */
+    * {
+        -webkit-tap-highlight-color: transparent !important;
+    }
+    button,
+    .btn-details,
+    .btn-buy,
+    .merch-btn,
+    .submit-client-btn,
+    .buy-ticket-btn {
+        min-height: 44px !important;
+        min-width: 44px !important;
+    }
+    input,
+    textarea,
+    select {
+        font-size: 16px !important;
+    }
+}
+
+/* Очень маленькие экраны (до 400px) */
+@media (max-width: 400px) {
+    .section-title {
+        font-size: 20px !important;
+    }
+    .performance-name,
+    .play-name,
+    .merch-name {
+        font-size: 14px !important;
+    }
+    .team-scroll-wrapper {
+        grid-template-columns: 1fr !important;
+    }
+    .ticker-content {
+        font-size: 11px !important;
+    }
+    .hero-slider-afisha {
+        height: 420px !important;
+    }
+    .hero-title-afisha {
+        font-size: 24px !important;
+    }
+}
+
+/* iOS safe area fix */
+@supports (padding: max(0px)) {
+    @media (max-width: 860px) {
+        .main-header {
+            padding-top: max(0px, env(safe-area-inset-top)) !important;
+        }
+        .main-footer {
+            padding-bottom: max(30px, env(safe-area-inset-bottom)) !important;
+        }
+    }
+}
+
+/* ============================================
+🔥 MOBILE FIX - FINAL (вставить в САМЫЙ КОНЕЦ style.css)
+============================================ */
+@media (max-width: 860px) {
+    /* Убираем горизонтальный скролл */
+    html, body {
+        overflow-x: hidden !important;
+        width: 100% !important;
+    }
+
+    /* 🔹 Скролл-контейнеры: убираем отрицательные отступы */
+    .scroll-wrapper,
+    #upcomingPerformancesScroll,
+    #playsScroll,
+    #merchScroll {
+        padding: 16px !important;
+        margin: 0 !important; /* ← Ключевое: убираем -60px/-40px */
+        gap: 12px !important;
+        scroll-snap-type: x mandatory !important;
+    }
+
+    /* 🔹 Карточки: точная ширина + убираем outline */
+    .performance-card,
+    .play-card,
+    .merch-card {
+        flex: 0 0 calc(100vw - 32px) !important; /* ← 16px padding × 2 */
+        scroll-snap-align: start !important;
+        margin: 0 !important;
+        outline: none !important; /* ← Убираем белую линию */
+        border: 1px solid #E5E3E1 !important; /* ← Заменяем outline на border */
+        border-radius: 12px !important;
+    }
+
+    /* 🔹 Скрываем стрелки скролла на мобильных */
+    .scroll-btn {
+        display: none !important;
+    }
+}
+
+/* Очень маленькие экраны */
+@media (max-width: 400px) {
+    .scroll-wrapper,
+    #upcomingPerformancesScroll,
+    #playsScroll,
+    #merchScroll {
+        padding: 12px !important;
+    }
+    .performance-card,
+    .play-card,
+    .merch-card {
+        flex: 0 0 calc(100vw - 24px) !important;
+    }
+}
+
+
+
+
+
+/* ============================================
+🔥 FIX: БЕГУЩАЯ СТРОКА — УБИРАЕМ БЕЛУЮ ПОЛОСУ НА МОБИЛЬНЫХ
+============================================ */
+@media (max-width: 1100px) {
+  .ticker {
+    overflow: hidden !important;
+    position: relative !important;
+    background: #2A3D5E !important;
+    /* Убираем возможные отступы, создающие зазоры */
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  
+  .ticker-content {
+    /* Включаем аппаратное ускорение для плавности и устранения артефактов */
+    will-change: transform !important;
+    transform: translateZ(0) !important;
+    backface-visibility: hidden !important;
+    /* Гарантируем, что контент достаточно широкий */
+    padding-right: 50% !important;
+  }
+  
+  /* Псевдоэлемент-«заплатка» на фон, если анимация оставит зазор */
+  .ticker::after {
+    content: '' !important;
+    position: absolute !important;
+    top: 0 !important;
+    right: 0 !important;
+    width: 100px !important;
+    height: 100% !important;
+    background: #2A3D5E !important;
+    z-index: 1 !important;
+    pointer-events: none !important;
+  }
+}
+
+/* Для очень маленьких экранов — можно упростить или отключить анимацию */
+@media (max-width: 480px) {
+  .ticker-content {
+    /* Опционально: отключаем анимацию на самых узких экранах для надёжности */
+    /* animation: none !important; */
+    /* Или оставляем, но с более плавными параметрами */
+    animation-duration: 35s !important;
+  }
+}
+
+/* 🔥 ФИНАЛЬНЫЙ ФИКС ДЛЯ TICKER НА МОБИЛЬНЫХ */
+@media (max-width: 860px) {
+  /* Сброс глобальных отступов */
+  html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow-x: hidden !important;
+  }
+  
+  /* Контейнер тикера */
+  .ticker {
+    overflow: hidden !important;
+    position: relative !important;
+    background: #2A3D5E !important;
+    margin: 0 !important;
+    padding: 8px 0 !important;
+    width: 100vw !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    left: 0 !important;
+    right: 0 !important;
+  }
+  
+  /* Анимированный контент */
+  .ticker-content {
+    display: inline-block !important;
+    white-space: nowrap !important;
+    min-width: 200% !important; /* 🔑 Обязательно для анимации */
+    padding-right: 100% !important; /* 🔑 Запас для плавного цикла */
+    animation: ticker 25s linear infinite !important;
+    will-change: transform !important;
+    transform: translateZ(0) !important;
+    backface-visibility: hidden !important;
+    -webkit-font-smoothing: antialiased !important;
+  }
+  
+  /* Заплатка на правый край (если анимация оставит зазор) */
+  .ticker::after {
+    content: '' !important;
+    position: absolute !important;
+    top: 0 !important;
+    right: 0 !important;
+    width: 50% !important;
+    height: 100% !important;
+    background: #2A3D5E !important;
+    z-index: 1 !important;
+    pointer-events: none !important;
+  }
+  
+  /* Исправление для очень узких экранов */
+  @media (max-width: 400px) {
+    .ticker-content {
+      animation-duration: 35s !important; /* Медленнее = плавнее */
+    }
+  }
 }
