@@ -2,10 +2,12 @@
 <header class="main-header">
     <div class="header-inner">
         <div class="header-left">
-            <div class="logo-group">
-                <img class="logo-img" src="SVG/logo-2.svg" alt="Логотип">
-                <img class="logo-img" src="SVG/logo.svg" alt="Логотип текст">
-            </div>
+            <a href="index.html" class="logo-link" aria-label="На главную">
+					<div class="logo-group">
+						<img class="logo-img" src="SVG/logo-2.svg" alt="Знак" loading="lazy">
+						<img class="logo-img" src="SVG/logo.svg" alt="Логотип" loading="lazy">
+					</div>
+				</a>
             <ul class="nav-menu">
                 <li><a href="index.html" class="nav-link" data-page="index">Главная</a></li>
                 <li><a href="affiche.html" class="nav-link" data-page="affiche">Афиша</a></li>
@@ -15,7 +17,7 @@
             </ul>
             <div class="burger-icon" id="burgerIcon"><i class="fas fa-bars"></i></div>
         </div>
-        <button class="buy-ticket-btn" onclick="window.location.href='performance.html'">Купить билет</button>
+        <button class="buy-ticket-btn" onclick="window.location.href='affiche.html'">Купить билет</button>
     </div>
     <div class="extra-menu-row" id="extraMenuRow">
         <ul class="extra-nav-list">
@@ -31,11 +33,13 @@
 <!-- Мобильное меню -->
 <div class="mobile-nav" id="mobileNav">
     <div class="close-mobile-menu" id="closeMobileMenu">✕</div>
-    <div class="mobile-logo-group">
-        <img src="SVG/logo-black.svg" alt="Логотип">
-        <img src="SVG/logo-black-2.svg" alt="Логотип текст">
-    </div>
-    <button class="buy-ticket-btn" onclick="window.location.href='performance.html'">Купить билет</button>
+	<a href="index.html" class="logo-link" aria-label="На главную">
+			<div class="mobile-logo-group">
+				<img src="SVG/logo-black.svg" alt="Логотип">
+				<img src="SVG/logo-black-2.svg" alt="Логотип текст">
+			</div>
+		</a>	
+    <button class="buy-ticket-btn" onclick="window.location.href='affiche.html'">Купить билет</button>
     <ul>
         <li><a href="index.html" class="nav-link" data-page="index">Главная</a></li>
         <li><a href="affiche.html" class="nav-link" data-page="affiche">Афиша</a></li>
