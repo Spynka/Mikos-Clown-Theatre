@@ -6322,6 +6322,311 @@ html, body {
 
 
 
+/* Общие сбросы и основные стили (оставлены как есть) */
+.team-page {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+.page-header-team {
+    margin: 60px 0 50px;
+}
+
+.page-title-team {
+    font-size: 48px;
+    font-family: 'Unbounded', cursive;
+    font-weight: 700;
+    border-left: 4px solid #E53E3E;
+    padding-left: 20px;
+    margin: 0 0 10px;
+}
+
+.page-subtitle-team {
+    font-size: 20px;
+    color: #231F20;
+    font-family: 'Nunito Sans', sans-serif;
+}
+
+.director-highlight {
+    display: flex;
+    gap: 48px;
+    background: #1A2840;
+    padding: 60px;
+    border-radius: 12px;
+    margin: 60px 0 70px;
+    flex-wrap: wrap;
+}
+
+.director-photo {
+    flex: 0 0 360px;
+}
+
+.director-photo img {
+    width: 100%;
+    border-radius: 12px;
+}
+
+.director-info {
+    flex: 1;
+    color: white;
+}
+
+.director-tag {
+    background: #F43139;
+    display: inline-block;
+    padding: 6px 17px;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.director-name {
+    font-size: 32px;
+    font-weight: 700;
+    font-family: 'Unbounded', cursive;
+    margin-bottom: 15px;
+}
+
+.director-name span {
+    color: #F2F1F0;
+}
+
+.director-position {
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.director-bio {
+    font-size: 16px;
+    line-height: 24px;
+    margin-bottom: 25px;
+}
+
+.director-btn {
+    background: white;
+    color: #1A1A1A;
+    border: none;
+    padding: 14px 56px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-family: 'Unbounded', cursive;
+    cursor: pointer;
+}
+
+.stats-row {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    margin: 70px 0 80px;
+    flex-wrap: wrap;
+}
+
+.stat-item {
+    background: #F8F7F6;
+    border-radius: 24px;
+    padding: 24px 20px;
+    text-align: center;
+    flex: 1;
+    min-width: 180px;
+}
+
+.stat-number {
+    font-size: 48px;
+    font-weight: 700;
+    color: #F43139;
+    font-family: 'Unbounded', cursive;
+}
+
+.stat-label {
+    font-size: 16px;
+    font-weight: 700;
+    color: #2C4068;
+    font-family: 'Unbounded', cursive;
+}
+
+.work-with-us {
+    display: flex;
+    gap: 60px;
+    background: #F8F7F6;
+    border-radius: 24px;
+    padding: 60px;
+    margin: 80px 0 90px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.work-image {
+    flex: 1;
+}
+
+.work-image img {
+    width: 100%;
+    border-radius: 24px;
+}
+
+.work-content {
+    flex: 1;
+}
+
+.work-title {
+    font-size: 32px;
+    font-weight: 700;
+    font-family: 'Unbounded', cursive;
+    border-left: 3px solid #E8454D;
+    padding-left: 16px;
+    margin-bottom: 20px;
+}
+
+.work-text {
+    font-size: 16px;
+    line-height: 27px;
+    margin-bottom: 30px;
+}
+
+.work-btn {
+    background: #E8454D;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-family: 'Unbounded', cursive;
+    cursor: pointer;
+}
+
+.section-header-team {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    margin: 60px 0 40px;
+}
+
+.section-title-team {
+    font-size: 40px;
+    font-weight: 700;
+    font-family: 'Unbounded', cursive;
+    border-left: 4px solid #E8454D;
+    padding-left: 20px;
+    margin: 0;
+}
+
+.section-count {
+    font-size: 14px;
+    font-weight: 600;
+    color: #4A6294;
+    font-family: 'Unbounded', cursive;
+}
+
+/* Блоки актёров */
+.actor-block {
+    margin-bottom: 80px;
+}
+
+.actor-name {
+    font-family: 'Unbounded', cursive;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 40px;
+    color: #1A1718;
+    margin-bottom: 36px;
+    padding-left: 0;
+}
+
+.actor-photos-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.actor-photo-card {
+    background: #FAFAFA;
+    border-radius: 24px;
+    overflow: hidden;
+    aspect-ratio: 1 / 1;
+}
+
+.actor-photo-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.actor-photo-card img:hover {
+    transform: scale(1.02);
+}
+
+.show-more-wrapper {
+    text-align: center;
+    margin: 70px 0 90px;
+}
+
+.show-more-btn {
+    background: #F8F7F6;
+    border: none;
+    padding: 14px 56px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-family: 'Unbounded', cursive;
+    cursor: pointer;
+}
+
+/* Адаптив */
+@media (max-width: 768px) {
+    .team-page {
+        padding: 0 20px;
+    }
+    .page-header-team {
+        margin: 40px 0 30px;
+    }
+    .director-highlight {
+        padding: 30px;
+        gap: 30px;
+        margin: 40px 0;
+    }
+    .stats-row {
+        margin: 50px 0;
+        gap: 16px;
+    }
+    .work-with-us {
+        padding: 30px;
+        gap: 30px;
+        margin: 50px 0;
+    }
+    .actor-block {
+        margin-bottom: 60px;
+    }
+    .actor-name {
+        font-size: 24px;
+        line-height: 32px;
+        margin-bottom: 24px;
+    }
+    .actor-photos-grid {
+        gap: 16px;
+    }
+    .section-header-team {
+        margin: 50px 0 30px;
+    }
+    .show-more-wrapper {
+        margin: 50px 0 60px;
+    }
+}
+
+@media (max-width: 576px) {
+    .actor-photos-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    .stat-item {
+        min-width: 140px;
+    }
+}
+
+
 
 
 
