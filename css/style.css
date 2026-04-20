@@ -8327,7 +8327,7 @@ html, body {
   }
 }
 
-@media (max-width: 400px) {
+/*@media (max-width: 400px) {
     [class*="card"],
     .performance-card,
     .play-card,
@@ -8341,7 +8341,7 @@ html, body {
         border: 1px solid #E5E3E1 !important;
         border-radius: 8px !important;
     }
-}
+}*/
 
 @media (max-width: 860px) {
     /* ... другие стили ... */
