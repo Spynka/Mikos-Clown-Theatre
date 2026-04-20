@@ -8,55 +8,192 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" type="image/svg+xml" href="SVG/logo-2.svg" sizes="any">
-    
-    <!-- 🔥 МОБИЛЬНЫЕ СТИЛИ (добавить в style.css или здесь) -->
-    <style>
- 
-    </style>
 </head>
+    <style>
+        /* Мобильные стили прямо в HTML */
+        @media (max-width: 860px) {
+            /* Уменьшаем отступы между секциями */
+            .plays-section,
+            .about-section,
+            .clients-section,
+            .team-section,
+            .shop-section {
+                padding: 30px 0 !important;
+                margin: 0 !important;
+            }
+            
+            /* Первый блок после хедера */
+            .plays-section:first-of-type {
+                padding-top: 0 !important;
+                margin-top: 0 !important;
+            }
+            
+            /* Контейнеры с отступами */
+            .container-main {
+                padding: 0 16px !important;
+            }
+            
+            /* Заголовки секций с меньшим отступом */
+            .section-header {
+                margin-bottom: 20px !important;
+                gap: 8px !important;
+            }
+            
+            .section-title {
+                font-size: 22px !important;
+            }
+            
+            /* Скролл-контейнеры */
+            .scroll-wrapper,
+            #upcomingScroll,
+            #allPlaysScroll,
+            #merchScroll {
+                padding: 12px !important;
+                gap: 12px !important;
+            }
+            
+            /* Карточки */
+            .performance-card,
+            .play-card,
+            .merch-card {
+                flex: 0 0 calc(100vw - 32px) !important;
+                max-width: calc(100vw - 32px) !important;
+                min-width: calc(100vw - 32px) !important;
+            }
+            
+            /* О театре - компактнее */
+            .about-text h3,
+            .clients-info h3 {
+                font-size: 18px !important;
+                margin-bottom: 12px !important;
+            }
+            
+            .about-text p {
+                font-size: 14px !important;
+                margin-bottom: 12px !important;
+            }
+            
+            .about-content {
+                gap: 20px !important;
+            }
+            
+            /* Заказчикам - компактнее */
+            .clients-grid {
+                gap: 24px !important;
+            }
+            
+            .clients-form {
+                padding: 20px !important;
+            }
+            
+            .clients-form h3 {
+                font-size: 18px !important;
+                margin-bottom: 16px !important;
+            }
+            
+            .form-group {
+                margin-bottom: 12px !important;
+            }
+            
+            .feature-item {
+                padding: 10px 12px 10px 40px !important;
+                font-size: 12px !important;
+            }
+            
+            .feature-item i {
+                left: 12px !important;
+                top: 12px !important;
+                font-size: 14px !important;
+            }
+            
+            /* Команда */
+            .team-scroll-wrapper {
+                gap: 12px !important;
+            }
+            
+            .team-img {
+                height: 150px !important;
+            }
+            
+            .team-name {
+                font-size: 13px !important;
+                margin-top: 8px !important;
+            }
+            
+            /* Скрываем стрелки скролла */
+            .scroll-btn {
+                display: none !important;
+            }
+        }
+        
+        /* Очень маленькие экраны */
+        @media (max-width: 400px) {
+            .plays-section,
+            .about-section,
+            .clients-section,
+            .team-section,
+            .shop-section {
+                padding: 20px 0 !important;
+            }
+            
+            .section-title {
+                font-size: 20px !important;
+            }
+            
+            .scroll-wrapper,
+            #upcomingScroll,
+            #allPlaysScroll,
+            #merchScroll {
+                padding: 8px !important;
+                gap: 10px !important;
+            }
+            
+            .performance-card,
+            .play-card,
+            .merch-card {
+                flex: 0 0 calc(100vw - 24px) !important;
+                max-width: calc(100vw - 24px) !important;
+                min-width: calc(100vw - 24px) !important;
+            }
+        }
+    </style>
 <body>
 <div class="shop-container">
     
-    <!-- 🔥 Заглушка для подгрузки хедера -->
-    <div id="site-header"></div>
-
-
-<div class="shop-container">
-    <!-- HEADER (без изменений) -->
+    <!-- Заглушка для подгрузки хедера -->
     <div id="site-header"></div>
 
     <div class="overlay" id="overlay"></div>
 
     <!-- Бегущая строка -->
     <div class="ticker">
-		<div class="ticker-content">
-			<!-- 🔹 ПЕРВАЯ КОПИЯ -->
-			<span class="red-dot">•</span><span>Премьера 25 октября: «Лишь бы не было детей» • Билеты уже в продаже</span>
-			<span class="red-dot">•</span><span>Специальные условия для корпоративных клиентов</span>
-			<span class="red-dot">•</span><span>Новая коллекция мерча уже в магазине</span>
-			<span class="red-dot">•</span><span>Премьера 25 октября: «Лишь бы не было детей» • Билеты уже в продаже</span>
-
-			<!-- 🔹 ВТОРАЯ КОПИЯ (ТОЧНО ТАКАЯ ЖЕ!) -->
-			<span class="red-dot">•</span><span>Премьера 25 октября: «Лишь бы не было детей» • Билеты уже в продаже</span>
-			<span class="red-dot">•</span><span>Специальные условия для корпоративных клиентов</span>
-			<span class="red-dot">•</span><span>Новая коллекция мерча уже в магазине</span>
-			<span class="red-dot">•</span><span>Премьера 25 октября: «Лишь бы не было детей» • Билеты уже в продаже</span>
-		</div>
-	</div>
+        <div class="ticker-content">
+            <span class="red-dot">•</span><span>Премьера 25 октября: «Лишь бы не было детей» • Билеты уже в продаже</span>
+            <span class="red-dot">•</span><span>Специальные условия для корпоративных клиентов</span>
+            <span class="red-dot">•</span><span>Новая коллекция мерча уже в магазине</span>
+            <span class="red-dot">•</span><span>Премьера 25 октября: «Лишь бы не было детей» • Билеты уже в продаже</span>
+            <span class="red-dot">•</span><span>Премьера 25 октября: «Лишь бы не было детей» • Билеты уже в продаже</span>
+            <span class="red-dot">•</span><span>Специальные условия для корпоративных клиентов</span>
+            <span class="red-dot">•</span><span>Новая коллекция мерча уже в магазине</span>
+            <span class="red-dot">•</span><span>Премьера 25 октября: «Лишь бы не было детей» • Билеты уже в продаже</span>
+        </div>
+    </div>
 
     <!-- Hero слайдер -->
     <div id="site-hero-slider"></div>
 
     <!-- Ближайшие спектакли -->
-    <div class="container-main" style="margin-top: 60px;">
-        <div class="section-header">
-            <h2 class="section-title">Ближайшие спектакли</h2>
-            <a href="affiche.html" class="section-link">Вся афиша <i class="fas fa-arrow-right"></i></a>
-        </div>
-        <div class="scroll-container" id="upcomingScrollContainer">
-            <div class="scroll-wrapper" id="upcomingPerformancesScroll"></div>
-            <div class="scroll-btn left" onclick="scrollUpcoming(-400)"><i class="fas fa-chevron-left"></i></div>
-            <div class="scroll-btn right" onclick="scrollUpcoming(400)"><i class="fas fa-chevron-right"></i></div>
+    <div class="plays-section" style="margin-top: 60px;">
+        <div class="container-main">
+            <div class="section-header">
+                <h2 class="section-title">Ближайшие спектакли</h2>
+                <a href="affiche.html" class="section-link">Вся афиша <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="scroll-container">
+                <div class="scroll-wrapper" id="upcomingScroll"></div>
+                <div class="scroll-btn left" onclick="scrollHorizontally('upcomingScroll', -400)"><i class="fas fa-chevron-left"></i></div>
+                <div class="scroll-btn right" onclick="scrollHorizontally('upcomingScroll', 400)"><i class="fas fa-chevron-right"></i></div>
+            </div>
         </div>
     </div>
 
@@ -112,17 +249,17 @@
         </div>
     </div>
 
-    <!-- Спектакли (горизонтальный скролл) -->
+    <!-- Спектакли (все, горизонтальный скролл) -->
     <div class="plays-section">
         <div class="container-main">
             <div class="section-header">
                 <h2 class="section-title">Спектакли</h2>
                 <a href="performances.html" class="section-link">Все спектакли <i class="fas fa-arrow-right"></i></a>
             </div>
-            <div class="scroll-container" id="playsScrollContainer">
-                <div class="scroll-wrapper" id="playsScroll"></div>
-                <div class="scroll-btn left" onclick="scrollPlays(-400)"><i class="fas fa-chevron-left"></i></div>
-                <div class="scroll-btn right" onclick="scrollPlays(400)"><i class="fas fa-chevron-right"></i></div>
+            <div class="scroll-container">
+                <div class="scroll-wrapper" id="allPlaysScroll"></div>
+                <div class="scroll-btn left" onclick="scrollHorizontally('allPlaysScroll', -400)"><i class="fas fa-chevron-left"></i></div>
+                <div class="scroll-btn right" onclick="scrollHorizontally('allPlaysScroll', 400)"><i class="fas fa-chevron-right"></i></div>
             </div>
         </div>
     </div>
@@ -166,28 +303,26 @@
                 <h2 class="section-title">Магазин</h2>
                 <a href="shop.html" class="section-link">Весь магазин <i class="fas fa-arrow-right"></i></a>
             </div>
-            <div class="scroll-container" id="merchScrollContainer">
+            <div class="scroll-container">
                 <div class="scroll-wrapper" id="merchScroll"></div>
-                <div class="scroll-btn left" onclick="scrollMerch(-320)"><i class="fas fa-chevron-left"></i></div>
-                <div class="scroll-btn right" onclick="scrollMerch(320)"><i class="fas fa-chevron-right"></i></div>
+                <div class="scroll-btn left" onclick="scrollHorizontally('merchScroll', -320)"><i class="fas fa-chevron-left"></i></div>
+                <div class="scroll-btn right" onclick="scrollHorizontally('merchScroll', 320)"><i class="fas fa-chevron-right"></i></div>
             </div>
         </div>
     </div>
 
-    <!-- 🔥 Заглушка для подгрузки футера -->
+    <!-- Заглушка для подгрузки футера -->
     <div id="site-footer"></div>
     
 </div>
 
-<!-- 🔥 Скрипты в правильном порядке -->
-<!-- 1. Загрузчик компонентов -->
+<!-- Скрипты -->
 <script src="js/components-loader.js"></script>
-<!-- 2. Логика хедера/футера -->
 <script src="js/header-scripts.js"></script>
 <script src="js/common.js"></script>
 <script src="js/slider-scripts.js"></script>
 
-<!-- 3. Основной скрипт страницы -->
+<!-- Основной скрипт страницы -->
 <script>
     // Данные для спектаклей и товаров
     const allPerformances = [
@@ -209,15 +344,14 @@
         { id: 8, name: 'Программа спектакля', desc: 'Иллюстрированная', price: 350, img: 'https://placehold.co/428x220/2A3D5E/white?text=Программа' }
     ];
 
-    // Рендер ближайших спектаклей
-    function renderUpcomingPerformances() {
-        const wrapper = document.getElementById('upcomingPerformancesScroll');
+    // Рендер ближайших спектаклей (с датой и местом)
+    function renderUpcomingScroll() {
+        const wrapper = document.getElementById('upcomingScroll');
         if (!wrapper) return;
         wrapper.innerHTML = '';
         allPerformances.forEach(p => {
             const card = document.createElement('div');
             card.className = 'performance-card';
-            //card.style.flex = '0 0 380px';
             card.innerHTML = `
                 <img class="performance-img" src="${p.img}" alt="${p.name}">
                 <div class="performance-content">
@@ -240,24 +374,30 @@
         attachPerformanceEvents();
     }
 
-    function renderPlaysScroll() {
-        const wrapper = document.getElementById('playsScroll');
+    // Рендер всех спектаклей (ТАКИЕ ЖЕ КАРТОЧКИ, как в ближайших)
+    function renderAllPlaysScroll() {
+        const wrapper = document.getElementById('allPlaysScroll');
         if (!wrapper) return;
         wrapper.innerHTML = '';
         allPerformances.forEach(p => {
             const card = document.createElement('div');
-            card.className = 'play-card';
+            // Используем ТОТ ЖЕ КЛАСС performance-card, что и в ближайших спектаклях
+            card.className = 'performance-card';
             card.innerHTML = `
-                <img class="play-img" src="${p.img}" alt="${p.name}">
-                <div class="play-content">
+                <img class="performance-img" src="${p.img}" alt="${p.name}">
+                <div class="performance-content">
                     <div class="performance-tags">
                         <span class="tag tag-age">${p.age}</span>
                         <span class="tag tag-time">${p.time}</span>
                     </div>
-                    <h3 class="play-name">${p.name}</h3>
-                    <p class="play-desc">${p.desc}</p>
-                    <button class="btn-details" data-id="${p.id}">Подробнее</button>
-                    <button class="btn-buy" data-id="${p.id}">Купить билет</button>
+                    <h3 class="performance-name">${p.name}</h3>
+                    <div class="performance-date">${p.date}</div>
+                    <p class="performance-desc">${p.desc}</p>
+                    <div class="event-venue"><i class="fas fa-map-marker-alt"></i><span>${p.venue}</span></div>
+                    <div class="performance-btns">
+                        <button class="btn-details" data-id="${p.id}">Подробнее</button>
+                        <button class="btn-buy" data-id="${p.id}">Купить билет</button>
+                    </div>
                 </div>
             `;
             wrapper.appendChild(card);
@@ -301,7 +441,6 @@
         products.forEach(item => {
             const card = document.createElement('div');
             card.className = 'merch-card';
-            // card.style.flex = '0 0 280px';
             card.innerHTML = `
                 <img class="merch-img" src="${item.img}" alt="${item.name}">
                 <div class="merch-content">
@@ -319,19 +458,25 @@
         });
     }
 
-    // Скролл функции
-    function scrollUpcoming(amount) { document.getElementById('upcomingPerformancesScroll')?.scrollBy({ left: amount, behavior: 'smooth' }); }
-    function scrollPlays(amount) { document.getElementById('playsScroll')?.scrollBy({ left: amount, behavior: 'smooth' }); }
-    function scrollMerch(amount) { document.getElementById('merchScroll')?.scrollBy({ left: amount, behavior: 'smooth' }); }
+    // Универсальная функция скролла
+    function scrollHorizontally(elementId, amount) {
+        const element = document.getElementById(elementId);
+        if (element) {
+            element.scrollBy({ left: amount, behavior: 'smooth' });
+        }
+    }
 
     // Инициализация после загрузки компонентов
     document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
-            renderUpcomingPerformances();
-            renderPlaysScroll();
+            renderUpcomingScroll();
+            renderAllPlaysScroll();
             renderMerchScroll();
         }, 100);
     });
+
+    // Делаем функции глобальными
+    window.scrollHorizontally = scrollHorizontally;
 </script>
 </body>
 </html>

@@ -639,8 +639,7 @@ body {
     overflow-x: auto;
     scroll-behavior: smooth;
     scrollbar-width: none;
-    padding: 20px 60px 30px 60px;
-    margin: 0 -60px;
+
     width: auto;
     -webkit-overflow-scrolling: touch;
 }
@@ -4894,101 +4893,8 @@ body {
     gap: 8px;
 }
 
-/* Дополнительный фикс для слайдеров, чтобы карточки не уходили за край */
-body,
-.shop-container,
-.container-main,
-.plays-section,
-.team-section,
-.shop-section,
-.scroll-container {
-    overflow: visible !important;
-}
 
-.scroll-wrapper,
-#upcomingPerformancesScroll,
-#playsScroll,
-#merchScroll {
-    display: flex !important;
-    gap: 24px !important;
-    overflow-x: auto !important;
-    overflow-y: visible !important;
-    scroll-behavior: smooth !important;
-    scrollbar-width: none !important;
-    padding: 20px 60px 30px 60px !important;
-    margin: 0 -60px !important;
-    width: auto !important;
-    -webkit-overflow-scrolling: touch;
 }
-
-.scroll-wrapper::-webkit-scrollbar,
-#upcomingPerformancesScroll::-webkit-scrollbar,
-#playsScroll::-webkit-scrollbar,
-#merchScroll::-webkit-scrollbar {
-    display: none !important;
-}
-
-#upcomingPerformancesScroll .performance-card {
-    flex: 0 0 380px !important;
-}
-#playsScroll .play-card {
-    flex: 0 0 380px !important;
-}
-#merchScroll .merch-card {
-    flex: 0 0 280px !important;
-}
-
-.team-section .team-scroll-wrapper {
-    display: grid !important;
-    grid-template-columns: repeat(4, 1fr) !important;
-    gap: 24px !important;
-    overflow: visible !important;
-    padding: 10px 0 20px 0 !important;
-    margin: 0 !important;
-}
-.team-section .team-card {
-    flex: unset !important;
-    width: 100% !important;
-}
-.team-section .scroll-btn {
-    display: none !important;
-}
-
-@media (max-width: 1100px) {
-    .team-section .team-scroll-wrapper {
-        grid-template-columns: repeat(2, 1fr) !important;
-    }
-    #upcomingPerformancesScroll,
-    #playsScroll,
-    #merchScroll {
-        padding: 20px 40px 30px 40px !important;
-        margin: 0 -40px !important;
-    }
-}
-@media (max-width: 860px) {
-    .team-section .team-scroll-wrapper {
-        grid-template-columns: 1fr !important;
-    }
-}
-@media (max-width: 600px) {
-    #upcomingPerformancesScroll,
-    #playsScroll,
-    #merchScroll {
-        padding: 20px 20px 30px 20px !important;
-        margin: 0 -20px !important;
-    }
-    .scroll-btn {
-        width: 44px !important;
-        height: 44px !important;
-    }
-    .scroll-btn.left {
-        left: 0 !important;
-    }
-    .scroll-btn.right {
-        right: 0 !important;
-    }
-}
-
 
 
 
@@ -8334,258 +8240,168 @@ html, body {
     width: 100%;
 }
 
+
+/* ============================================
+   🔥 МОБИЛЬНЫЕ СТИЛИ ДЛЯ ГОРИЗОНТАЛЬНОГО СКРОЛЛА
+   Экраны меньше 860px
+============================================ */
+
 @media (max-width: 860px) {
-    .scroll-wrapper {
+    /* Убираем глобальный горизонтальный скролл */
+    html, body {
+        overflow-x: hidden !important;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    /* Контейнеры скролла — правильные отступы */
+    .scroll-container {
+        overflow: visible !important;
+        width: 100% !important;
+    }
+
+    .scroll-wrapper,
+    #upcomingPerformancesScroll,
+    #playsScroll,
+    #merchScroll {
+        display: flex !important;
+        flex-direction: row !important;
+        gap: 16px !important;
+        overflow-x: auto !important;
+        overflow-y: visible !important;
+        scroll-behavior: smooth !important;
+        scrollbar-width: none !important;
+        -webkit-overflow-scrolling: touch !important;
+        scroll-snap-type: x mandatory !important;
+        
+        /* Ключевые отступы — без отрицательных значений */
         padding: 16px !important;
         margin: 0 !important;
+        width: 100% !important;
+    }
+
+    /* Скрываем скроллбар */
+    .scroll-wrapper::-webkit-scrollbar,
+    #upcomingPerformancesScroll::-webkit-scrollbar,
+    #playsScroll::-webkit-scrollbar,
+    #merchScroll::-webkit-scrollbar {
+        display: none !important;
+    }
+
+    /* Карточки — точная ширина с отступами */
+    .performance-card,
+    .play-card,
+    .merch-card {
+        flex: 0 0 calc(100vw - 48px) !important;
+        max-width: calc(100vw - 48px) !important;
+        min-width: calc(100vw - 48px) !important;
+        scroll-snap-align: start !important;
+        margin: 0 !important;
+        
+        /* Убираем outline, используем border */
+        outline: none !important;
+        border: 1px solid #E5E3E1 !important;
+        border-radius: 12px !important;
+        background: white !important;
+        
+        /* Гарантируем, что карточка не вылезает */
+        box-sizing: border-box !important;
+    }
+
+    /* Картинки внутри карточек */
+    .performance-img,
+    .play-img,
+    .merch-img {
+        width: 100% !important;
+        height: 160px !important;
+        object-fit: cover !important;
+        display: block !important;
+    }
+
+    /* Контент внутри карточек */
+    .performance-content,
+    .play-content,
+    .merch-content {
+        padding: 14px !important;
+    }
+
+    /* Названия */
+    .performance-name,
+    .play-name,
+    .merch-name {
+        font-size: 16px !important;
+        line-height: 1.3 !important;
+        margin-bottom: 6px !important;
+    }
+
+    /* Описание — обрезаем до 2 строк */
+    .performance-desc,
+    .play-desc {
+        font-size: 13px !important;
+        line-height: 1.4 !important;
+        display: -webkit-box !important;
+        -webkit-line-clamp: 2 !important;
+        -webkit-box-orient: vertical !important;
+        overflow: hidden !important;
+    }
+
+    /* Кнопки */
+    .performance-btns,
+    .play-content .btn-details,
+    .play-content .btn-buy {
+        flex-direction: column !important;
+        gap: 8px !important;
+        margin-top: 10px !important;
+    }
+
+    .performance-btns button,
+    .play-content button,
+    .merch-btn {
+        width: 100% !important;
+        padding: 10px !important;
+        font-size: 13px !important;
+        border-radius: 8px !important;
+    }
+
+    /* Цена в магазине */
+    .merch-price {
+        font-size: 18px !important;
+        margin: 6px 0 12px !important;
+    }
+
+    /* Скрываем стрелки скролла на мобильных */
+    .scroll-btn {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+    }
+}
+
+/* ============================================
+   🔥 ОЧЕНЬ МАЛЕНЬКИЕ ЭКРАНЫ (до 400px)
+============================================ */
+
+@media (max-width: 400px) {
+    .scroll-wrapper,
+    #upcomingPerformancesScroll,
+    #playsScroll,
+    #merchScroll {
+        padding: 12px !important;
         gap: 12px !important;
     }
 
     .performance-card,
     .play-card,
     .merch-card {
-        flex: 0 0 calc(100vw - 32px) !important;
-        scroll-snap-align: start !important;
-        margin: 0 !important;
-        border-radius: 12px !important;
-    }
-}
-
-
-/* ============================================
-   МОБИЛЬНЫЕ СТИЛИ (до 860px) — ВЫРАВНИВАНИЕ ЗАГОЛОВКОВ
-============================================ */
-@media (max-width: 860px) {
-    /* Убираем левый отступ у всех заголовков и скрываем красную полоску */
-    .section-title,
-    .section-title-team,
-    .section-title-custom,
-    .page-title,
-    .page-title-contacts,
-    .page-title-team,
-    .page-title-about,
-    .page-title-customers,
-    .hero-title-afisha,
-    .performance-title,
-    .schedule-title,
-    .cast-title,
-    .similar-title,
-    .hall-title,
-    .faq-title,
-    .work-title,
-    .director-name,
-    .about-text h3,
-    .clients-info h3,
-    .clients-form h3,
-    .form-info h3,
-    .form-container h3,
-    .contact-block h3,
-    .legal-info h2 {
-        padding-left: 0 !important;
-        margin-left: 0 !important;
+        flex: 0 0 calc(100vw - 24px) !important;
+        max-width: calc(100vw - 24px) !important;
+        min-width: calc(100vw - 24px) !important;
     }
 
-    /* Скрываем псевдоэлементы (красную полоску) */
-    .section-title::before,
-    .section-title-team::before,
-    .section-title-custom::before,
-    .page-title::before,
-    .page-title-contacts::before,
-    .page-title-team::before,
-    .page-title-about::before,
-    .page-title-customers::before,
-    .performance-title::before,
-    .schedule-title::before,
-    .cast-title::before,
-    .similar-title::before,
-    .hall-title::before,
-    .work-title::before,
-    .form-info h3::before,
-    .form-container h3::before,
-    .contact-block h3::before,
-    .legal-info h2::before {
-        display: none !important;
-    }
-
-    /* Дополнительно: заголовки в карточках тоже без отступа */
-    .performance-name,
-    .play-name,
-    .merch-name,
-    .team-name,
-    .cast-name,
-    .similar-name,
-    .actor-name {
-        padding-left: 0 !important;
-        text-align: left !important;
-    }
-
-    /* Родительские контейнеры — выравнивание по левому краю */
-    .section-header,
-    .section-header-team,
-    .section-header-custom {
-        align-items: flex-start !important;
-        justify-content: flex-start !important;
-        text-align: left !important;
-    }
-}
-
-/* ============================================
-   🔥 ПОЛНЫЙ ФИКС ДЛЯ МОБИЛЬНЫХ (все разрешения)
-   Заменяет все предыдущие мобильные правила
-============================================ */
-
-@media (max-width: 860px) {
-    /* 1. СБРОС ОТРИЦАТЕЛЬНЫХ МАРДЖИНОВ */
-    .scroll-wrapper,
-    #upcomingPerformancesScroll,
-    #playsScroll,
-    #merchScroll {
-        padding: 0 20px !important;
-        margin: 0 !important; /* ← КЛЮЧЕВОЕ ИЗМЕНЕНИЕ */
-        gap: 16px !important;
-        scroll-snap-type: x mandatory !important;
-        -webkit-overflow-scrolling: touch !important;
-    }
-
-    /* 2. ПЕРЕОПРЕДЕЛЕНИЕ ШИРИНЫ КАРТОЧЕК (перебиваем ID-селекторы) */
-    #upcomingPerformancesScroll .performance-card,
-    #playsScroll .play-card,
-    #merchScroll .merch-card,
-    .scroll-wrapper .performance-card,
-    .scroll-wrapper .play-card,
-    .scroll-wrapper .merch-card {
-        flex: 0 0 calc(100vw - 40px) !important; /* 20px padding × 2 */
-        min-width: 0 !important;
-        margin: 0 !important;
-        scroll-snap-align: start !important;
-    }
-
-    /* 3. СКРЫВАЕМ СТРЕЛКИ ПРОКРУТКИ */
-    .scroll-btn {
-        display: none !important;
-    }
-
-    /* 4. КОНТЕЙНЕРЫ — УМЕНЬШАЕМ ОТСТУПЫ */
-    .container-main {
-        padding: 0 20px !important;
-    }
-
-    /* 5. ЗАЩИТА ОТ ПЕРЕПОЛНЕНИЯ ТЕКСТА */
-    .performance-name,
-    .play-name,
-    .merch-name,
-    .performance-desc,
-    .play-desc,
-    .team-position,
-    .tag {
-        word-break: break-word !important;
-        overflow-wrap: break-word !important;
-        max-width: 100% !important;
-    }
-
-    /* 6. КНОПКИ — БЛОЧНЫЕ, НА ВСЮ ШИРИНУ */
-    .performance-btns,
-    .play-content .btn-details,
-    .play-content .btn-buy,
-    .merch-content .merch-btn {
-        display: flex !important;
-        flex-direction: column !important;
-        width: 100% !important;
-    }
-    
-    .btn-details,
-    .btn-buy,
-    .merch-btn {
-        width: 100% !important;
-        white-space: normal !important;
-        min-height: 44px !important;
-    }
-}
-
-/* 🔹 Ультра-маленькие экраны (365px и меньше) */
-@media (max-width: 365px) {
-    .scroll-wrapper,
-    #upcomingPerformancesScroll,
-    #playsScroll,
-    #merchScroll {
-        padding: 0 12px !important;
-    }
-
-    #upcomingPerformancesScroll .performance-card,
-    #playsScroll .play-card,
-    #merchScroll .merch-card,
-    .scroll-wrapper .performance-card,
-    .scroll-wrapper .play-card,
-    .scroll-wrapper .merch-card {
-        flex: 0 0 calc(100vw - 24px) !important; /* 12px padding × 2 */
-    }
-
-    /* Ещё сильнее уменьшаем внутренние отступы */
-    .performance-content,
-    .play-content,
-    .merch-content {
-        padding: 12px 10px !important;
-    }
-
-    .performance-name,
-    .play-name,
-    .merch-name {
-        font-size: 16px !important;
-        line-height: 1.2 !important;
-    }
-
-    .performance-desc,
-    .play-desc {
-        font-size: 12px !important;
-        -webkit-line-clamp: 2 !important;
-    }
-
-    .tag {
-        font-size: 10px !important;
-        padding: 2px 6px !important;
-    }
-
-    .btn-details, 
-    .btn-buy, 
-    .merch-btn {
-        padding: 8px 6px !important;
-        font-size: 12px !important;
-        min-height: 40px !important;
-    }
-
-    /* Заголовки секций */
-    .section-title {
-        font-size: 20px !important;
-        padding-left: 0 !important;
-    }
-    .section-title::before {
-        display: none !important;
-    }
-}
-
-/* 🔹 Супер-ультра-компактный (290-305px) */
-@media (max-width: 305px) {
-    .scroll-wrapper,
-    #upcomingPerformancesScroll,
-    #playsScroll,
-    #merchScroll {
-        padding: 0 8px !important;
-    }
-
-    #upcomingPerformancesScroll .performance-card,
-    #playsScroll .play-card,
-    #merchScroll .merch-card,
-    .scroll-wrapper .performance-card,
-    .scroll-wrapper .play-card,
-    .scroll-wrapper .merch-card {
-        flex: 0 0 calc(100vw - 16px) !important; /* 8px padding × 2 */
-    }
-
-    .performance-content,
-    .play-content,
-    .merch-content {
-        padding: 8px !important;
-        gap: 6px !important;
+    .performance-img,
+    .play-img,
+    .merch-img {
+        height: 140px !important;
     }
 
     .performance-name,
@@ -8594,17 +8410,24 @@ html, body {
         font-size: 14px !important;
     }
 
-    .btn-details, 
-    .btn-buy, 
-    .merch-btn {
-        padding: 6px 4px !important;
-        font-size: 11px !important;
-        min-height: 36px !important;
-    }
-
-    /* Скрываем второстепенные элементы для экономии места */
     .performance-desc,
     .play-desc {
-        display: none !important;
+        font-size: 12px !important;
+        -webkit-line-clamp: 2 !important;
     }
 }
+
+/* ============================================
+   🔥 ЭКРАНЫ ОТ 400px ДО 860px (промежуточные)
+============================================ */
+
+@media (min-width: 401px) and (max-width: 860px) {
+    .performance-card,
+    .play-card,
+    .merch-card {
+        flex: 0 0 calc(100vw - 48px) !important;
+        max-width: calc(100vw - 48px) !important;
+        min-width: calc(100vw - 48px) !important;
+    }
+}
+
