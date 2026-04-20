@@ -10,7 +10,38 @@
     <link rel="icon" type="image/svg+xml" href="SVG/logo-2.svg" sizes="any">
 </head>
     <style>
-        /* Мобильные стили прямо в HTML */
+        /* ============================================
+           ФИКС ДЛЯ ВЕБ-ВЕРСИИ - ОДИНАКОВЫЕ КАРТОЧКИ
+        ============================================ */
+        
+        /* В веб-версии (ширина экрана больше 860px) все карточки имеют фиксированную ширину 380px */
+        @media (min-width: 861px) {
+            .performance-card,
+            .play-card,
+            .merch-card {
+                flex: 0 0 380px !important;
+                width: 380px !important;
+                max-width: 380px !important;
+                min-width: 380px !important;
+            }
+            
+            /* Скрываем стрелки на веб-версии, показываем при наведении */
+            .scroll-btn {
+                opacity: 0 !important;
+                visibility: hidden !important;
+                transition: opacity 0.3s ease, visibility 0.3s ease !important;
+            }
+            
+            .scroll-container:hover .scroll-btn {
+                opacity: 1 !important;
+                visibility: visible !important;
+            }
+        }
+        
+        /* ============================================
+           МОБИЛЬНЫЕ СТИЛИ (до 860px)
+        ============================================ */
+        
         @media (max-width: 860px) {
             /* Уменьшаем отступы между секциями */
             .plays-section,
@@ -50,15 +81,18 @@
             #merchScroll {
                 padding: 12px !important;
                 gap: 12px !important;
+                scroll-snap-type: x mandatory !important;
             }
             
-            /* Карточки */
+            /* Карточки на мобильных - занимают почти всю ширину экрана */
             .performance-card,
             .play-card,
             .merch-card {
                 flex: 0 0 calc(100vw - 32px) !important;
+                width: calc(100vw - 32px) !important;
                 max-width: calc(100vw - 32px) !important;
                 min-width: calc(100vw - 32px) !important;
+                scroll-snap-align: start !important;
             }
             
             /* О театре - компактнее */
@@ -120,13 +154,16 @@
                 margin-top: 8px !important;
             }
             
-            /* Скрываем стрелки скролла */
+            /* Скрываем стрелки скролла на мобильных */
             .scroll-btn {
                 display: none !important;
             }
         }
         
-        /* Очень маленькие экраны */
+        /* ============================================
+           ОЧЕНЬ МАЛЕНЬКИЕ ЭКРАНЫ (до 400px)
+        ============================================ */
+        
         @media (max-width: 400px) {
             .plays-section,
             .about-section,
@@ -152,6 +189,7 @@
             .play-card,
             .merch-card {
                 flex: 0 0 calc(100vw - 24px) !important;
+                width: calc(100vw - 24px) !important;
                 max-width: calc(100vw - 24px) !important;
                 min-width: calc(100vw - 24px) !important;
             }
