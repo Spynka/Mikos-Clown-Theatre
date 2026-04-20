@@ -7,35 +7,98 @@
     <link rel="icon" type="image/svg+xml" href="SVG/logo-2.svg" sizes="any">
     <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-	<link rel="stylesheet" href="css/style.css">
-    <style>
-
-    </style>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <div class="shop-container" id="shopContainer">
+    
+    <!-- HEADER (загружается через components-loader.js) -->
     <div id="site-header"></div>
-    <div class="mobile-nav" id="mobileNav"><div class="close-mobile-menu" id="closeMobileMenu">✕</div><ul><li><a href="#">Главная</a></li><li><a href="#">Афиша</a></li><li><a href="#">Заказчикам</a></li><li><a href="#">Брендбук</a></li><li><a href="#">Спектакли</a></li><li><a href="#">Команда</a></li><li><a href="#">О театре</a></li><li><a href="#">Магазин</a></li><li><a href="#">Контакты</a></li></ul></div>
+    
+    <!-- Мобильное меню -->
+    <div class="mobile-nav" id="mobileNav">
+        <div class="close-mobile-menu" id="closeMobileMenu">✕</div>
+        <ul>
+            <li><a href="index.html">Главная</a></li>
+            <li><a href="affiche.html">Афиша</a></li>
+            <li><a href="for-customers.html">Заказчикам</a></li>
+            <li><a href="brandbook.html">Брендбук</a></li>
+            <li><a href="performances.html">Спектакли</a></li>
+            <li><a href="team.html">Команда</a></li>
+            <li><a href="history.html">О театре</a></li>
+            <li><a href="shop.html" class="active">Магазин</a></li>
+            <li><a href="contacts.html">Контакты</a></li>
+        </ul>
+    </div>
     <div class="overlay" id="overlay"></div>
 
+    <!-- Основной контент -->
     <div id="mainContent">
-        <div class="page-header"><div class="title-accent"><h1 class="page-title">Магазин</h1></div><p class="page-description">Сувениры, одежда и аксессуары с символикой театра.<br>Доставка по всей России.</p></div>
-        <div class="filters-section"><div class="filter-chips" id="filterChips"><div class="filter-chip active" data-filter="all">Все товары</div><div class="filter-chip" data-filter="clothes">Одежда</div><div class="filter-chip" data-filter="accessories">Аксессуары</div><div class="filter-chip" data-filter="tableware">Посуда</div><div class="filter-chip" data-filter="printed">Печатная продукция</div><div class="filter-chip" data-filter="souvenirs">Сувениры</div></div></div>
+        <div class="page-header">
+            <div class="title-accent"><h1 class="page-title">Магазин</h1></div>
+            <p class="page-description">Сувениры, одежда и аксессуары с символикой театра.<br>Доставка по всей России.</p>
+        </div>
+        
+        <!-- Фильтры -->
+        <div class="filters-section">
+            <div class="filter-chips" id="filterChips">
+                <div class="filter-chip active" data-filter="all">Все товары</div>
+                <div class="filter-chip" data-filter="clothes">Одежда</div>
+                <div class="filter-chip" data-filter="accessories">Аксессуары</div>
+                <div class="filter-chip" data-filter="tableware">Посуда</div>
+                <div class="filter-chip" data-filter="printed">Печатная продукция</div>
+                <div class="filter-chip" data-filter="souvenirs">Сувениры</div>
+            </div>
+        </div>
+        
+        <!-- Сетка товаров -->
         <div class="merch-grid" id="merchGrid"></div>
-        <div class="show-more-wrapper"><button class="show-more-btn" id="showMoreBtn">Показать еще</button></div>
+        
+        <!-- Кнопка "Показать ещё" -->
+        <div class="show-more-wrapper">
+            <button class="show-more-btn" id="showMoreBtn">Показать еще</button>
+        </div>
     </div>
 
-    <!-- FOOTER - обновленный с эффектами наведения -->
+    <!-- FOOTER (загружается через components-loader.js) -->
     <div id="site-footer"></div>
 </div>
 
 <!-- Модальные окна -->
-<div id="modalProduct" class="modal-overlay"><div class="modal-container"><span class="modal-close" id="closeModal1">&times;</span><div id="dynamicModalContent"></div><div class="modal-buttons" id="modalButtonsContainer"></div></div></div>
-<div id="modalContacts" class="modal-overlay"><div class="modal-container"><span class="modal-close" id="closeModal2">&times;</span><div class="modal-title" style="font-size:24px; font-family:'Unbounded',sans-serif; font-weight:700; margin-bottom:28px;">Оформление заказа</div><div id="orderSummaryFull" class="cart-summary"></div><div class="form-group"><label>Имя</label><input type="text" id="contactName" class="form-input" placeholder="Иван Иванов"></div><div class="form-group"><label>Телефон</label><input type="tel" id="contactPhone" class="form-input" placeholder="+7 (___) ___-__-__"></div><div class="form-group"><label>Email</label><input type="email" id="contactEmail" class="form-input" placeholder="mail@example.com"></div><div class="form-group"><label>Способ связи</label><input type="text" id="contactMethod" class="form-input" placeholder="Telegram / WhatsApp / звонок"></div><div class="modal-buttons"><button id="submitOrderBtn" class="modal-btn btn-primary-modal" style="width:100%;">Оформить заказ</button></div></div></div>
+<div id="modalProduct" class="modal-overlay">
+    <div class="modal-container">
+        <span class="modal-close" id="closeModal1">&times;</span>
+        <div id="dynamicModalContent"></div>
+        <div class="modal-buttons" id="modalButtonsContainer"></div>
+    </div>
+</div>
+
+<div id="modalContacts" class="modal-overlay">
+    <div class="modal-container">
+        <span class="modal-close" id="closeModal2">&times;</span>
+        <div class="modal-title" style="font-size:24px; font-family:'Unbounded',sans-serif; font-weight:700; margin-bottom:28px;">Оформление заказа</div>
+        <div id="orderSummaryFull" class="cart-summary"></div>
+        <div class="form-group"><label>Имя</label><input type="text" id="contactName" class="form-input" placeholder="Иван Иванов"></div>
+        <div class="form-group"><label>Телефон</label><input type="tel" id="contactPhone" class="form-input" placeholder="+7 (___) ___-__-__"></div>
+        <div class="form-group"><label>Email</label><input type="email" id="contactEmail" class="form-input" placeholder="mail@example.com"></div>
+        <div class="form-group"><label>Способ связи</label><input type="text" id="contactMethod" class="form-input" placeholder="Telegram / WhatsApp / звонок"></div>
+        <div class="modal-buttons">
+            <button id="submitOrderBtn" class="modal-btn btn-primary-modal" style="width:100%;">Оформить заказ</button>
+        </div>
+    </div>
+</div>
+
+<!-- СКРИПТЫ: правильный порядок загрузки -->
 <script src="js/components-loader.js"></script>
 <script src="js/header-scripts.js"></script>
-<script src="js/common.js"></script>
+<!-- ✅ УБРАЛИ дубликат common.js отсюда -->
+
+<!-- ✅ Основной скрипт магазина -->
 <script>
+(function() {
+    'use strict';
+    
+    // ===== ДАННЫЕ ТОВАРОВ =====
     const products = [
         { id: 1, name: 'Футболка "Театр"', desc: 'Хлопковая футболка с логотипом', price: 2500, isClothing: true, img: 'https://placehold.co/428x220/2A3D5E/white?text=Футболка', category: 'clothes' },
         { id: 2, name: 'Футболка "Микос"', desc: 'Принт с символикой клоунады', price: 2500, isClothing: true, img: 'https://placehold.co/428x220/4A6294/white?text=Микос', category: 'clothes' },
@@ -46,189 +109,490 @@
         { id: 7, name: 'Сумка шоппер', desc: 'Эко-сумка', price: 1800, isClothing: false, img: 'https://placehold.co/428x220/5A74A8/white?text=Сумка', category: 'accessories' },
         { id: 8, name: 'Программа спектакля', desc: 'Иллюстрированная', price: 350, isClothing: false, img: 'https://placehold.co/428x220/2A3D5E/white?text=Программа', category: 'printed' }
     ];
+
+    // ===== СОСТОЯНИЕ =====
     let cartItems = [], currentProduct = null, editingIndex = -1, returnToContacts = false;
     let activeFilter = 'all', currentIndex = 8;
 
+    // ===== ОТРИСОВКА ТОВАРОВ =====
     function renderProducts() {
+        const grid = document.getElementById('merchGrid');
+        const showMoreBtn = document.getElementById('showMoreBtn');
+        
+        // ✅ Защита: если сетка ещё не в DOM — ждём
+        if (!grid) {
+            console.warn('merchGrid не найден, повторная попытка через 100мс');
+            setTimeout(renderProducts, 100);
+            return;
+        }
+        
         const filtered = activeFilter === 'all' ? products : products.filter(p => p.category === activeFilter);
         const display = filtered.slice(0, currentIndex);
-        const grid = document.getElementById('merchGrid');
+        
         grid.innerHTML = '';
+        
+        if (display.length === 0) {
+            grid.innerHTML = '<p style="text-align:center; color:#5A5A5A; grid-column:1/-1; padding:40px;">Товары не найдены</p>';
+            if (showMoreBtn) showMoreBtn.style.display = 'none';
+            return;
+        }
+        
         display.forEach(p => {
-            const card = document.createElement('div'); card.className = 'product-card';
-            card.innerHTML = `<div class="product-img"><img src="${p.img}" alt="${p.name}"></div><div class="product-info"><div class="product-name">${p.name}</div><div class="product-desc">${p.desc}</div><div class="product-price">${p.price.toLocaleString()} ₽</div><button class="buy-now-btn" data-id="${p.id}">Купить</button></div>`;
+            const card = document.createElement('div');
+            card.className = 'product-card';
+            card.innerHTML = `
+                <div class="product-img">
+                    <img src="${p.img}" alt="${p.name}" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <div class="product-name">${p.name}</div>
+                    <div class="product-desc">${p.desc}</div>
+                    <div class="product-price">${p.price.toLocaleString()} ₽</div>
+                    <button class="buy-now-btn" data-id="${p.id}">Купить</button>
+                </div>
+            `;
             grid.appendChild(card);
         });
-        document.querySelectorAll('.buy-now-btn').forEach(btn => btn.addEventListener('click', (e) => { const id = parseInt(btn.dataset.id); const prod = products.find(p => p.id === id); if(prod) openAddModal(prod); }));
-        document.getElementById('showMoreBtn').style.display = filtered.length <= currentIndex ? 'none' : 'block';
+
+        // Обработчики кнопок "Купить"
+        document.querySelectorAll('.buy-now-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const id = parseInt(btn.dataset.id);
+                const prod = products.find(p => p.id === id);
+                if (prod) openAddModal(prod);
+            });
+        });
+
+        // Кнопка "Показать ещё"
+        if (showMoreBtn) {
+            showMoreBtn.style.display = filtered.length <= currentIndex ? 'none' : 'block';
+        }
     }
     
+    // ===== МОДАЛКА: контент корзины =====
     function renderModalContent() {
         const container = document.getElementById('dynamicModalContent');
-        if(!container) return;
+        if (!container) return;
+        
         let html = '';
-        if(cartItems.length > 0 && editingIndex === -1) {
+        
+        // История заказа (если есть товары и не редактируем)
+        if (cartItems.length > 0 && editingIndex === -1) {
             html += `<div class="modal-title" style="font-size:24px; font-family:'Unbounded',sans-serif; font-weight:700; margin-bottom:20px;">История заказа</div>`;
             let total = 0;
             cartItems.forEach(item => { total += item.price * item.quantity; });
+            
             html += `<div class="cart-summary">`;
             cartItems.forEach((item, idx) => {
                 const itemTotal = item.price * item.quantity;
                 const sizeText = item.size ? ` (${item.size})` : '';
-                html += `<div class="cart-item">
-                            <div class="cart-item-info">
-                                <span class="cart-item-name">${item.name}${sizeText}</span>
-                                <span class="cart-item-details">${item.quantity} шт. × ${item.price.toLocaleString()} ₽</span>
-                            </div>
-                            <div class="cart-item-actions">
-                                <button class="edit-item" data-index="${idx}"><i class="fas fa-pencil-alt"></i></button>
-                                <button class="delete-item" data-index="${idx}"><i class="fas fa-trash-alt"></i></button>
-                            </div>
-                            <div class="cart-item-price">${itemTotal.toLocaleString()} ₽</div>
-                        </div>`;
-            });
-            html += `<div class="total-row"><span>Итого</span><span>${total.toLocaleString()} ₽</span></div></div>`;
-        }
-        html += `<div class="modal-title" style="font-size:24px; font-family:'Unbounded',sans-serif; font-weight:700; margin-top:${cartItems.length > 0 && editingIndex === -1 ? '24px' : '0'}; margin-bottom:20px;">${currentProduct ? currentProduct.name : 'Выбрать параметры'}</div>`;
-        html += `<div class="form-group"><label>Количество</label><input type="number" id="productQuantity" min="1" value="1" class="form-input"></div>`;
-        if(currentProduct && currentProduct.isClothing) {
-            html += `<div class="form-group"><label>Размер</label><select id="productSize" class="form-select"><option value="S">S</option><option value="M">M</option><option value="L">L</option><option value="XL">XL</option></select></div>`;
-        }
-        container.innerHTML = html;
-        
-        if(cartItems.length > 0 && editingIndex === -1) {
-            document.querySelectorAll('.delete-item').forEach(btn => {
-                btn.addEventListener('click', (e) => { const idx = parseInt(btn.dataset.index); cartItems.splice(idx,1); if(cartItems.length === 0 && returnToContacts) returnToContacts = false; renderModalContent(); updateFullOrder(); if(editingIndex === idx) editingIndex = -1; else if(editingIndex > idx) editingIndex--; });
-            });
-            document.querySelectorAll('.edit-item').forEach(btn => {
-                btn.addEventListener('click', (e) => { const idx = parseInt(btn.dataset.index); openEditModal(idx); });
-            });
-        }
-        if(currentProduct && currentProduct.isClothing && document.getElementById('productSize')) document.getElementById('productSize').value = 'M';
-    }
-    
-    function updateFullOrder() {
-        const container = document.getElementById('orderSummaryFull');
-        if(!container) return;
-        if(cartItems.length === 0) { container.innerHTML = '<div class="empty-cart" style="text-align:center; padding:16px; color:#2A3D5E;">Корзина пуста</div>'; return; }
-        let html = '', total = 0;
-        cartItems.forEach((item, idx) => {
-            const itemTotal = item.price * item.quantity;
-            total += itemTotal;
-            const sizeText = item.size ? ` (${item.size})` : '';
-            html += `<div class="cart-item">
+                html += `
+                    <div class="cart-item">
                         <div class="cart-item-info">
                             <span class="cart-item-name">${item.name}${sizeText}</span>
                             <span class="cart-item-details">${item.quantity} шт. × ${item.price.toLocaleString()} ₽</span>
                         </div>
                         <div class="cart-item-actions">
-                            <button class="edit-item-full" data-index="${idx}"><i class="fas fa-pencil-alt"></i></button>
-                            <button class="delete-item-full" data-index="${idx}"><i class="fas fa-trash-alt"></i></button>
+                            <button class="edit-item" data-index="${idx}"><i class="fas fa-pencil-alt"></i></button>
+                            <button class="delete-item" data-index="${idx}"><i class="fas fa-trash-alt"></i></button>
                         </div>
                         <div class="cart-item-price">${itemTotal.toLocaleString()} ₽</div>
                     </div>`;
+            });
+            html += `<div class="total-row"><span>Итого</span><span>${total.toLocaleString()} ₽</span></div></div>`;
+        }
+        
+        // Форма выбора параметров текущего товара
+        html += `<div class="modal-title" style="font-size:24px; font-family:'Unbounded',sans-serif; font-weight:700; margin-top:${cartItems.length > 0 && editingIndex === -1 ? '24px' : '0'}; margin-bottom:20px;">${currentProduct ? currentProduct.name : 'Выбрать параметры'}</div>`;
+        html += `<div class="form-group"><label>Количество</label><input type="number" id="productQuantity" min="1" value="1" class="form-input"></div>`;
+        
+        if (currentProduct && currentProduct.isClothing) {
+            html += `<div class="form-group"><label>Размер</label>
+                <select id="productSize" class="form-select">
+                    <option value="S">S</option>
+                    <option value="M" selected>M</option>
+                    <option value="L">L</option>
+                    <option value="XL">XL</option>
+                </select>
+            </div>`;
+        }
+        
+        container.innerHTML = html;
+        
+        // Обработчики удаления/редактирования в истории
+        if (cartItems.length > 0 && editingIndex === -1) {
+            document.querySelectorAll('.delete-item').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const idx = parseInt(btn.dataset.index);
+                    cartItems.splice(idx, 1);
+                    if (cartItems.length === 0 && returnToContacts) returnToContacts = false;
+                    renderModalContent();
+                    updateFullOrder();
+                    if (editingIndex === idx) editingIndex = -1;
+                    else if (editingIndex > idx) editingIndex--;
+                });
+            });
+            document.querySelectorAll('.edit-item').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const idx = parseInt(btn.dataset.index);
+                    openEditModal(idx);
+                });
+            });
+        }
+    }
+    
+    // ===== ОБНОВЛЕНИЕ ПОЛНОГО ЗАКАЗА (в модальном окне контактов) =====
+    function updateFullOrder() {
+        const container = document.getElementById('orderSummaryFull');
+        if (!container) return;
+        
+        if (cartItems.length === 0) {
+            container.innerHTML = '<div class="empty-cart" style="text-align:center; padding:16px; color:#2A3D5E;">Корзина пуста</div>';
+            return;
+        }
+        
+        let html = '', total = 0;
+        cartItems.forEach((item, idx) => {
+            const itemTotal = item.price * item.quantity;
+            total += itemTotal;
+            const sizeText = item.size ? ` (${item.size})` : '';
+            html += `
+                <div class="cart-item">
+                    <div class="cart-item-info">
+                        <span class="cart-item-name">${item.name}${sizeText}</span>
+                        <span class="cart-item-details">${item.quantity} шт. × ${item.price.toLocaleString()} ₽</span>
+                    </div>
+                    <div class="cart-item-actions">
+                        <button class="edit-item-full" data-index="${idx}"><i class="fas fa-pencil-alt"></i></button>
+                        <button class="delete-item-full" data-index="${idx}"><i class="fas fa-trash-alt"></i></button>
+                    </div>
+                    <div class="cart-item-price">${itemTotal.toLocaleString()} ₽</div>
+                </div>`;
         });
         html += `<div class="total-row"><span>Итого</span><span>${total.toLocaleString()} ₽</span></div>`;
         container.innerHTML = html;
-        document.querySelectorAll('.delete-item-full').forEach(btn => btn.addEventListener('click', (e) => { const idx = parseInt(btn.dataset.index); cartItems.splice(idx,1); updateFullOrder(); if(cartItems.length === 0 && returnToContacts) returnToContacts = false; renderModalContent(); }));
-        document.querySelectorAll('.edit-item-full').forEach(btn => btn.addEventListener('click', (e) => { const idx = parseInt(btn.dataset.index); returnToContacts = true; document.getElementById('modalContacts').classList.remove('active'); openEditModal(idx); }));
+        
+        // Обработчики в полном заказе
+        document.querySelectorAll('.delete-item-full').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const idx = parseInt(btn.dataset.index);
+                cartItems.splice(idx, 1);
+                updateFullOrder();
+                if (cartItems.length === 0 && returnToContacts) returnToContacts = false;
+                renderModalContent();
+            });
+        });
+        document.querySelectorAll('.edit-item-full').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const idx = parseInt(btn.dataset.index);
+                returnToContacts = true;
+                document.getElementById('modalContacts').classList.remove('active');
+                openEditModal(idx);
+            });
+        });
     }
     
+    // ===== ОТКРЫТЬ МОДАЛКУ ДОБАВЛЕНИЯ =====
     function openAddModal(product) {
         currentProduct = product;
         editingIndex = -1;
         renderModalContent();
+        
         const btnsContainer = document.getElementById('modalButtonsContainer');
-        btnsContainer.innerHTML = `<button id="moreItemsBtn" class="modal-btn btn-outline-modal">Хочу выбрать что-то еще</button><button id="buyNowBtn" class="modal-btn btn-primary-modal">Купить</button>`;
+        btnsContainer.innerHTML = `
+            <button id="moreItemsBtn" class="modal-btn btn-outline-modal">Хочу выбрать что-то еще</button>
+            <button id="buyNowBtn" class="modal-btn btn-primary-modal">Купить</button>
+        `;
         returnToContacts = false;
+        
         document.getElementById('modalProduct').classList.add('active');
-        document.getElementById('moreItemsBtn').addEventListener('click', () => { if(addCurrentToCart()) closeModals(); });
-        document.getElementById('buyNowBtn').addEventListener('click', () => { if(addCurrentToCart()) { closeModals(); openContacts(); } });
+        
+        document.getElementById('moreItemsBtn').addEventListener('click', () => {
+            if (addCurrentToCart()) closeModals();
+        });
+        document.getElementById('buyNowBtn').addEventListener('click', () => {
+            if (addCurrentToCart()) {
+                closeModals();
+                openContacts();
+            }
+        });
     }
     
+    // ===== ОТКРЫТЬ МОДАЛКУ РЕДАКТИРОВАНИЯ =====
     function openEditModal(index) {
         const item = cartItems[index];
-        if(!item) return;
-        currentProduct = { id: item.id, name: item.name, price: item.price, isClothing: item.isClothing };
+        if (!item) return;
+        
+        currentProduct = { 
+            id: item.id, 
+            name: item.name, 
+            price: item.price, 
+            isClothing: item.isClothing 
+        };
         editingIndex = index;
         renderModalContent();
+        
+        // Заполняем форму текущими значениями
         document.getElementById('productQuantity').value = item.quantity;
-        if(item.isClothing && document.getElementById('productSize')) document.getElementById('productSize').value = item.size || 'M';
+        if (item.isClothing && document.getElementById('productSize')) {
+            document.getElementById('productSize').value = item.size || 'M';
+        }
+        
         const btnsContainer = document.getElementById('modalButtonsContainer');
-        btnsContainer.innerHTML = `<button id="cancelEditBtn" class="modal-btn btn-outline-modal">Отмена</button><button id="saveEditBtn" class="modal-btn btn-primary-modal">Сохранить изменения</button>`;
+        btnsContainer.innerHTML = `
+            <button id="cancelEditBtn" class="modal-btn btn-outline-modal">Отмена</button>
+            <button id="saveEditBtn" class="modal-btn btn-primary-modal">Сохранить изменения</button>
+        `;
+        
         document.getElementById('modalProduct').classList.add('active');
-        document.getElementById('cancelEditBtn').addEventListener('click', () => { closeModals(); });
-        document.getElementById('saveEditBtn').addEventListener('click', () => { if(saveEditItem()) closeModals(); });
+        
+        document.getElementById('cancelEditBtn').addEventListener('click', () => closeModals());
+        document.getElementById('saveEditBtn').addEventListener('click', () => {
+            if (saveEditItem()) closeModals();
+        });
     }
     
+    // ===== ДОБАВИТЬ ТЕКУЩИЙ ТОВАР В КОРЗИНУ =====
     function addCurrentToCart() {
-        const qty = parseInt(document.getElementById('productQuantity').value);
-        if(qty<1) return false;
+        const qtyInput = document.getElementById('productQuantity');
+        if (!qtyInput) return false;
+        
+        const qty = parseInt(qtyInput.value);
+        if (qty < 1) {
+            alert('Введите количество от 1');
+            return false;
+        }
+        
         let size = null;
-        if(currentProduct.isClothing && document.getElementById('productSize')) size = document.getElementById('productSize').value;
-        cartItems.push({ id: currentProduct.id, name: currentProduct.name, price: currentProduct.price, quantity: qty, size: size, isClothing: currentProduct.isClothing });
+        if (currentProduct.isClothing) {
+            const sizeSelect = document.getElementById('productSize');
+            if (sizeSelect) size = sizeSelect.value;
+        }
+        
+        cartItems.push({
+            id: currentProduct.id,
+            name: currentProduct.name,
+            price: currentProduct.price,
+            quantity: qty,
+            size: size,
+            isClothing: currentProduct.isClothing
+        });
+        
         renderModalContent();
         updateFullOrder();
         return true;
     }
     
+    // ===== СОХРАНИТЬ ИЗМЕНЕНИЯ ТОВАРА =====
     function saveEditItem() {
-        if(editingIndex === -1) return false;
-        const qty = parseInt(document.getElementById('productQuantity').value);
-        if(qty<1) return false;
+        if (editingIndex === -1) return false;
+        
+        const qtyInput = document.getElementById('productQuantity');
+        if (!qtyInput) return false;
+        
+        const qty = parseInt(qtyInput.value);
+        if (qty < 1) {
+            alert('Введите количество от 1');
+            return false;
+        }
+        
         let size = null;
-        if(currentProduct.isClothing && document.getElementById('productSize')) size = document.getElementById('productSize').value;
-        cartItems[editingIndex] = { ...cartItems[editingIndex], quantity: qty, size: size };
+        if (currentProduct.isClothing) {
+            const sizeSelect = document.getElementById('productSize');
+            if (sizeSelect) size = sizeSelect.value;
+        }
+        
+        cartItems[editingIndex] = {
+            ...cartItems[editingIndex],
+            quantity: qty,
+            size: size
+        };
+        
         renderModalContent();
         updateFullOrder();
         return true;
     }
     
+    // ===== ЗАКРЫТЬ ВСЕ МОДАЛКИ =====
     function closeModals() {
-        document.getElementById('modalProduct').classList.remove('active');
-        document.getElementById('modalContacts').classList.remove('active');
+        document.getElementById('modalProduct')?.classList.remove('active');
+        document.getElementById('modalContacts')?.classList.remove('active');
         editingIndex = -1;
-        if(returnToContacts && cartItems.length>0) { document.getElementById('modalContacts').classList.add('active'); returnToContacts = false; }
+        
+        // Если нужно вернуться в контакты после закрытия
+        if (returnToContacts && cartItems.length > 0) {
+            document.getElementById('modalContacts')?.classList.add('active');
+            returnToContacts = false;
+        }
     }
     
+    // ===== ОТКРЫТЬ МОДАЛКУ КОНТАКТОВ =====
     function openContacts() {
-        if(cartItems.length === 0) { alert("Корзина пуста"); return; }
+        if (cartItems.length === 0) {
+            alert("Корзина пуста");
+            return;
+        }
         updateFullOrder();
+        
+        // Очистка полей
         document.getElementById('contactName').value = '';
         document.getElementById('contactPhone').value = '';
         document.getElementById('contactEmail').value = '';
         document.getElementById('contactMethod').value = '';
+        
         document.getElementById('modalContacts').classList.add('active');
     }
     
+    // ===== ПОКАЗАТЬ УСПЕШНЫЙ ЗАКАЗ =====
     function showSuccess(name) {
         const mainContent = document.getElementById('mainContent');
-        const footer = document.querySelector('.main-footer');
-        if(mainContent) mainContent.style.display = 'none';
+        const footer = document.querySelector('.main-footer') || document.getElementById('site-footer');
+        
+        if (mainContent) mainContent.style.display = 'none';
+        
         const successDiv = document.createElement('div');
         successDiv.className = 'success-content';
-        successDiv.innerHTML = `<i class="fas fa-check-circle"></i><h2>Заказ оформлен!</h2><p>Спасибо, <strong>${name}</strong>! Ваш заказ принят.</p><p><strong>Самовывоз:</strong> Москва, ул. Театральная, 1 (касса театра).<br>Для доставки свяжитесь с нами: +7 (495) 123-45-67</p><button class="btn-return" id="resetBtn">Вернуться в магазин</button>`;
-        const container = document.getElementById('shopContainer');
-        container.insertBefore(successDiv, footer);
+        successDiv.innerHTML = `
+            <i class="fas fa-check-circle" style="font-size:48px; color:#4CAF50; margin-bottom:16px;"></i>
+            <h2 style="font-family:'Unbounded',sans-serif; font-weight:700; margin-bottom:12px;">Заказ оформлен!</h2>
+            <p>Спасибо, <strong>${name}</strong>! Ваш заказ принят.</p>
+            <p style="margin-top:20px;">
+                <strong>Самовывоз:</strong> Москва, ул. Театральная, 1 (касса театра).<br>
+                Для доставки свяжитесь с нами: +7 (495) 123-45-67
+            </p>
+            <button class="btn-return" id="resetBtn" style="margin-top:24px; padding:12px 24px; background:#2A3D5E; color:#fff; border:none; border-radius:8px; cursor:pointer; font-family:'Unbounded',sans-serif;">
+                Вернуться в магазин
+            </button>
+        `;
+        
+        if (footer) {
+            footer.parentNode.insertBefore(successDiv, footer);
+        } else {
+            document.getElementById('shopContainer').appendChild(successDiv);
+        }
+        
         document.getElementById('resetBtn').addEventListener('click', () => location.reload());
     }
 
-    document.querySelectorAll('.filter-chip').forEach(chip => chip.addEventListener('click', function() { document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active')); this.classList.add('active'); activeFilter = this.dataset.filter; currentIndex = 8; renderProducts(); }));
-    document.getElementById('showMoreBtn').addEventListener('click', () => { const filtered = activeFilter === 'all' ? products : products.filter(p => p.category === activeFilter); if(currentIndex < filtered.length) { currentIndex = Math.min(currentIndex+4, filtered.length); renderProducts(); } });
-    document.getElementById('dotsIcon').addEventListener('click', () => { document.getElementById('extraMenuRow').classList.add('open'); document.getElementById('dotsIcon').style.display = 'none'; document.getElementById('closeIcon').style.display = 'inline-flex'; });
-    document.getElementById('closeIcon').addEventListener('click', () => { document.getElementById('extraMenuRow').classList.remove('open'); document.getElementById('dotsIcon').style.display = 'inline-flex'; document.getElementById('closeIcon').style.display = 'none'; });
-    document.getElementById('burgerIcon').addEventListener('click', () => { document.getElementById('mobileNav').classList.add('open'); document.getElementById('overlay').classList.add('active'); document.body.style.overflow = 'hidden'; });
-    document.getElementById('closeMobileMenu').addEventListener('click', () => { document.getElementById('mobileNav').classList.remove('open'); document.getElementById('overlay').classList.remove('active'); document.body.style.overflow = ''; });
-    document.getElementById('overlay').addEventListener('click', () => { document.getElementById('mobileNav').classList.remove('open'); document.getElementById('overlay').classList.remove('active'); document.body.style.overflow = ''; });
-    document.getElementById('closeModal1').addEventListener('click', closeModals); document.getElementById('closeModal2').addEventListener('click', closeModals);
-    window.addEventListener('click', (e) => { if(e.target === document.getElementById('modalProduct')) closeModals(); if(e.target === document.getElementById('modalContacts')) closeModals(); });
-    document.getElementById('submitOrderBtn').addEventListener('click', () => { const name = document.getElementById('contactName').value.trim(); const phone = document.getElementById('contactPhone').value.trim(); const email = document.getElementById('contactEmail').value.trim(); const method = document.getElementById('contactMethod').value.trim(); if(!name || !phone || !email || !method) { alert("Заполните все поля"); return; } document.getElementById('modalContacts').classList.remove('active'); showSuccess(name); });
-    document.getElementById('subscribeBtn').addEventListener('click', () => { const chk = document.getElementById('consentCheckbox'); const err = document.getElementById('consentError'); if(!chk.checked) { err.style.display = 'block'; setTimeout(() => err.style.display = 'none', 2500); } else { alert('Спасибо за подписку!'); document.getElementById('subscribeEmail').value = ''; chk.checked = false; } });
-    document.querySelectorAll('.footer-btn-primary, .buy-ticket-btn').forEach(btn => btn.addEventListener('click', () => alert('Билеты скоро в продаже')));
-    document.querySelector('.footer-btn-secondary').addEventListener('click', () => alert('Заказ шоу: свяжитесь с нами по телефону'));
-
-    renderProducts();
+    // ===== ИНИЦИАЛИЗАЦИЯ ПОСЛЕ ЗАГРУЗКИ DOM =====
+    function initShop() {
+        // ✅ Гарантируем, что элементы существуют
+        const grid = document.getElementById('merchGrid');
+        const filterChips = document.querySelectorAll('.filter-chip');
+        const showMoreBtn = document.getElementById('showMoreBtn');
+        
+        if (!grid) {
+            console.error('merchGrid не найден!');
+            return;
+        }
+        
+        // ✅ Устанавливаем активный фильтр визуально
+        filterChips.forEach(chip => {
+            if (chip.dataset.filter === 'all') {
+                chip.classList.add('active');
+            }
+        });
+        
+        // ✅ Обработчики фильтров
+        filterChips.forEach(chip => {
+            chip.addEventListener('click', function() {
+                filterChips.forEach(c => c.classList.remove('active'));
+                this.classList.add('active');
+                activeFilter = this.dataset.filter;
+                currentIndex = 8;
+                renderProducts();
+            });
+        });
+        
+        // ✅ Кнопка "Показать ещё"
+        if (showMoreBtn) {
+            showMoreBtn.addEventListener('click', () => {
+                const filtered = activeFilter === 'all' ? products : products.filter(p => p.category === activeFilter);
+                if (currentIndex < filtered.length) {
+                    currentIndex = Math.min(currentIndex + 4, filtered.length);
+                    renderProducts();
+                }
+            });
+        }
+        
+        // ✅ Модальные окна
+        const closeModal1 = document.getElementById('closeModal1');
+        const closeModal2 = document.getElementById('closeModal2');
+        const modalProduct = document.getElementById('modalProduct');
+        const modalContacts = document.getElementById('modalContacts');
+        
+        if (closeModal1) closeModal1.addEventListener('click', closeModals);
+        if (closeModal2) closeModal2.addEventListener('click', closeModals);
+        
+        window.addEventListener('click', (e) => {
+            if (e.target === modalProduct) closeModals();
+            if (e.target === modalContacts) closeModals();
+        });
+        
+        // ✅ Оформление заказа
+        const submitOrderBtn = document.getElementById('submitOrderBtn');
+        if (submitOrderBtn) {
+            submitOrderBtn.addEventListener('click', () => {
+                const name = document.getElementById('contactName')?.value.trim();
+                const phone = document.getElementById('contactPhone')?.value.trim();
+                const email = document.getElementById('contactEmail')?.value.trim();
+                const method = document.getElementById('contactMethod')?.value.trim();
+                
+                if (!name || !phone || !email || !method) {
+                    alert("Заполните все поля");
+                    return;
+                }
+                
+                document.getElementById('modalContacts')?.classList.remove('active');
+                showSuccess(name);
+            });
+        }
+        
+        // ✅ Подписка (если есть)
+        const subscribeBtn = document.getElementById('subscribeBtn');
+        if (subscribeBtn) {
+            subscribeBtn.addEventListener('click', () => {
+                const chk = document.getElementById('consentCheckbox');
+                const err = document.getElementById('consentError');
+                if (chk && !chk.checked) {
+                    if (err) {
+                        err.style.display = 'block';
+                        setTimeout(() => err.style.display = 'none', 2500);
+                    }
+                } else {
+                    alert('Спасибо за подписку!');
+                    const emailInput = document.getElementById('subscribeEmail');
+                    if (emailInput) emailInput.value = '';
+                    if (chk) chk.checked = false;
+                }
+            });
+        }
+        
+        // ✅ Кнопки футера
+        document.querySelectorAll('.footer-btn-primary, .buy-ticket-btn').forEach(btn => {
+            btn.addEventListener('click', () => alert('Билеты скоро в продаже'));
+        });
+        document.querySelector('.footer-btn-secondary')?.addEventListener('click', () => {
+            alert('Заказ шоу: свяжитесь с нами по телефону');
+        });
+        
+        // ✅ ПЕРВЫЙ ВЫЗОВ ОТРИСОВКИ
+        renderProducts();
+    }
+    
+    // ✅ Запускаем после полной загрузки страницы
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initShop);
+    } else {
+        // Если DOM уже готов — запускаем сразу
+        initShop();
+    }
+    
+})();
 </script>
+
+<!-- ✅ common.js подключаем ТОЛЬКО ОДИН РАЗ и ПОСЛЕ нашего скрипта -->
 <script src="js/common.js"></script>
+
 </body>
 </html>
