@@ -7710,7 +7710,6 @@ html, body {
     -webkit-tap-highlight-color: transparent;
   }
   [class*="card"],
-  [class*="section"],
   .performance-card,
   .play-card,
   .merch-card,
