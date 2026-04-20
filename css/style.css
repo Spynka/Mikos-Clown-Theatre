@@ -1111,7 +1111,7 @@ html, body { overflow-x: hidden !important; width: 100% !important; max-width: 1
     .header-inner .logo-group, .header-inner .nav-menu, .header-inner .buy-ticket-btn, .extra-menu-row { display: none !important; }
     .performance-card, .play-card, .merch-card, .service-card { outline: none !important; border: 1px solid #E5E3E1 !important; }
     * { -webkit-tap-highlight-color: transparent; }
-    [class*="card"], .performance-card, .play-card, .merch-card, .service-card, .team-card, .cast-card, .similar-card { outline: none !important; box-shadow: none !important; border: 1px solid #E5E3E1 !important; border-radius: 8px !important; }
+    [class*="card"], .performance-card, .play-card, .merch-card, .service-card, .cast-card, .similar-card { outline: none !important; box-shadow: none !important; border: 1px solid #E5E3E1 !important; border-radius: 8px !important; }
     .hero-slider-afisha { height: 460px; }
     .hero-content-afisha { padding-bottom: 40px; padding-left: 20px; }
     .hero-title-afisha { font-size: 26px; }
