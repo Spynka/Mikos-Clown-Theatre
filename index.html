@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/svg+xml" href="SVG/logo-2.svg" sizes="any">
 </head>
 <body>
 <div class="shop-container">
@@ -25,73 +26,7 @@
     </div>
 
     <!-- Hero слайдер -->
-    <div class="hero-slider-afisha" id="heroSliderAfisha">
-        <button class="slider-arrow slider-arrow-left" id="sliderArrowLeft"><i class="fas fa-chevron-left"></i></button>
-        <button class="slider-arrow slider-arrow-right" id="sliderArrowRight"><i class="fas fa-chevron-right"></i></button>
-        
-        <div class="hero-slide-afisha active">
-            <img class="hero-bg-afisha" src="https://placehold.co/1440x630/2a3f5e/white?text=Лишь+бы+не+было+детей" alt="Лишь бы не было детей">
-            <div class="hero-content-afisha">
-                <div class="hero-title-afisha">Лишь бы не было детей</div>
-                <div class="hero-subtitle-afisha">История сосуществования очень разных людей. Клоунада о выживании.</div>
-                <div class="hero-buttons-afisha">
-                    <button class="hero-btn-dark" data-id="1">Купить билет</button>
-                    <button class="hero-btn-light" data-id="1">О спектакле</button>
-                </div>
-            </div>
-        </div>
-        <div class="hero-slide-afisha">
-            <img class="hero-bg-afisha" src="https://placehold.co/1440x630/4a6294/white?text=Богатыри" alt="Богатыри">
-            <div class="hero-content-afisha">
-                <div class="hero-title-afisha">Богатыри</div>
-                <div class="hero-subtitle-afisha">Былины в современном прочтении. Эпическая комедия для всей семьи.</div>
-                <div class="hero-buttons-afisha">
-                    <button class="hero-btn-dark" data-id="2">Купить билет</button>
-                    <button class="hero-btn-light" data-id="2">О спектакле</button>
-                </div>
-            </div>
-        </div>
-        <div class="hero-slide-afisha">
-            <img class="hero-bg-afisha" src="https://placehold.co/1440x630/3a5078/white?text=Ожидание" alt="Ожидание">
-            <div class="hero-content-afisha">
-                <div class="hero-title-afisha">Ожидание</div>
-                <div class="hero-subtitle-afisha">Трогательная история о времени, надежде и встречах.</div>
-                <div class="hero-buttons-afisha">
-                    <button class="hero-btn-dark" data-id="3">Купить билет</button>
-                    <button class="hero-btn-light" data-id="3">О спектакле</button>
-                </div>
-            </div>
-        </div>
-        <div class="hero-slide-afisha">
-            <img class="hero-bg-afisha" src="https://placehold.co/1440x630/2e4c7a/white?text=Кабаре-Шапито" alt="Кабаре-Шапито">
-            <div class="hero-content-afisha">
-                <div class="hero-title-afisha">Кабаре-Шапито</div>
-                <div class="hero-subtitle-afisha">Феерия клоунады и музыки. Кабаре с цирковыми номерами.</div>
-                <div class="hero-buttons-afisha">
-                    <button class="hero-btn-dark" data-id="4">Купить билет</button>
-                    <button class="hero-btn-light" data-id="4">О спектакле</button>
-                </div>
-            </div>
-        </div>
-        <div class="hero-slide-afisha">
-            <img class="hero-bg-afisha" src="https://placehold.co/1440x630/1f3a5f/white?text=Авиаторы" alt="Авиаторы">
-            <div class="hero-content-afisha">
-                <div class="hero-title-afisha">Авиаторы</div>
-                <div class="hero-subtitle-afisha">О мечтах, полетах и свободе. Вдохновляющая драма.</div>
-                <div class="hero-buttons-afisha">
-                    <button class="hero-btn-dark" data-id="5">Купить билет</button>
-                    <button class="hero-btn-light" data-id="5">О спектакле</button>
-                </div>
-            </div>
-        </div>
-        <div class="slider-dots">
-            <div class="slider-dot active"></div>
-            <div class="slider-dot"></div>
-            <div class="slider-dot"></div>
-            <div class="slider-dot"></div>
-            <div class="slider-dot"></div>
-        </div>
-    </div>
+    <div id="site-hero-slider"></div>
 
     <!-- Ближайшие спектакли -->
     <div class="container-main" style="margin-top: 80px;">
@@ -231,6 +166,7 @@
 <!-- 2. Логика хедера/футера -->
 <script src="js/header-scripts.js"></script>
 <script src="js/common.js"></script>
+<script src="js/slider-scripts.js"></script>
 
 <!-- 3. Основной скрипт страницы -->
 <script>
@@ -369,28 +305,7 @@
     function scrollPlays(amount) { document.getElementById('playsScroll')?.scrollBy({ left: amount, behavior: 'smooth' }); }
     function scrollMerch(amount) { document.getElementById('merchScroll')?.scrollBy({ left: amount, behavior: 'smooth' }); }
 
-    // Hero слайдер
-    let currentSlide = 0;
-    const slides = document.querySelectorAll('.hero-slide-afisha');
-    const dots = document.querySelectorAll('.slider-dot');
-    const leftArrow = document.getElementById('sliderArrowLeft');
-    const rightArrow = document.getElementById('sliderArrowRight');
-    let autoInterval;
-
-    function showSlide(index) {
-        if (index < 0) index = slides.length - 1;
-        if (index >= slides.length) index = 0;
-        slides.forEach((slide, i) => slide.classList.toggle('active', i === index));
-        dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
-        currentSlide = index;
-        resetAutoSlide();
-    }
-    function nextSlide() { showSlide(currentSlide + 1); }
-    function prevSlide() { showSlide(currentSlide - 1); }
-    function resetAutoSlide() { if (autoInterval) clearInterval(autoInterval); autoInterval = setInterval(nextSlide, 6000); }
-    if (leftArrow && rightArrow) { leftArrow.addEventListener('click', prevSlide); rightArrow.addEventListener('click', nextSlide); }
-    dots.forEach((dot, i) => dot.addEventListener('click', () => showSlide(i)));
-    resetAutoSlide();
+   
 
     // Инициализация после загрузки компонентов
     document.addEventListener('DOMContentLoaded', () => {
