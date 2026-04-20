@@ -6625,8 +6625,807 @@ html, body {
         min-width: 140px;
     }
 }
+/* ============================================
+   CUSTOMERS PAGE - COMPLETE FIX (FINAL)
+   Вставить в КОНЕЦ style.css, удалить старые блоки
+============================================ */
+
+/* 🔹 Базовые отступы страницы */
+.customers-page {
+    max-width: 1360px !important;
+    margin: 0 auto !important;
+    padding: 60px 20px 0 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+/* 🔹 Отступы между секциями — ЕДИНЫЙ СТАНДАРТ 60px */
+.customers-page > section {
+    margin-bottom: 60px !important;
+}
+.customers-page > section:last-child {
+    margin-bottom: 0 !important;
+}
+
+.page-title-customers {
+    margin-bottom: 20px !important;
+    padding-left: 20px !important;
+}
+.page-subtitle-customers {
+    margin-bottom: 60px !important;
+    padding: 0 20px !important;
+}
+.section-header-custom {
+    margin-bottom: 40px !important;
+    padding: 0 20px !important;
+}
+
+/* 🔹 Сетка услуг */
+.services-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 24px !important;
+    padding: 0 20px !important;
+    margin-bottom: 60px !important;
+}
+.service-card {
+    background: white !important;
+    border-radius: 12px !important;
+    outline: 1px solid #E5E3E1 !important;
+    padding: 32px !important;
+    transition: box-shadow 0.2s !important;
+}
+.service-card:hover {
+    box-shadow: 0 12px 24px rgba(0,0,0,0.08) !important;
+}
+.service-link {
+    color: #4A6294 !important;
+    transition: color 0.2s !important;
+}
+.service-link:hover {
+    color: #E8454D !important; /* 🔥 Красный при наведении */
+}
+
+/* 🔹 Конструктор запроса */
+.request-builder {
+    background: #F8F7F6 !important;
+    border-radius: 12px !important;
+    outline: 1px solid #E5E3E1 !important;
+    padding: 48px 40px !important;
+    margin: 0 20px 60px !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 40px !important;
+}
+.builder-form,
+.builder-preview {
+    flex: 1 !important;
+    min-width: 300px !important;
+}
+
+/* 🔹 Поля формы — стилизация под сайт */
+.form-group-custom {
+    margin-bottom: 20px !important;
+}
+.form-group-custom label {
+    display: block !important;
+    font-family: 'Unbounded', sans-serif !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    color: #2A2627 !important;
+    margin-bottom: 8px !important;
+}
+
+/* 🔹 Select/Input — единый стиль со стрелкой */
+#eventType,
+#audienceCount,
+#eventFormat,
+.contact-form-right select,
+.contact-form-right input,
+.contact-form-right textarea {
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
+    width: 100% !important;
+    padding: 12px 40px 12px 16px !important;
+    background: white !important;
+    border: 1px solid #E5E3E1 !important;
+    border-radius: 8px !important;
+    font-family: 'Nunito Sans', sans-serif !important;
+    font-size: 15px !important;
+    color: #1A1718 !important;
+    transition: border-color 0.2s, box-shadow 0.2s !important;
+    box-sizing: border-box !important;
+    /* Стрелка */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%234A6294' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 16px center !important;
+    background-size: 16px !important;
+}
+#eventType:focus,
+#audienceCount:focus,
+#eventFormat:focus,
+.contact-form-right select:focus,
+.contact-form-right input:focus,
+.contact-form-right textarea:focus {
+    outline: none !important;
+    border-color: #4A6294 !important;
+    box-shadow: 0 0 0 3px rgba(74, 98, 148, 0.15) !important;
+}
+/* Опции в выпадающем списке */
+#eventType option,
+#audienceCount option,
+#eventFormat option,
+.contact-form-right select option {
+    font-family: 'Nunito Sans', sans-serif !important;
+    font-size: 15px !important;
+    color: #1A1718 !important;
+    padding: 8px !important;
+    background: white !important;
+}
+/* Убираем стрелку у textarea */
+#extraWishes,
+.contact-form-right textarea {
+    background-image: none !important;
+    min-height: 100px !important;
+    resize: vertical !important;
+    line-height: 1.5 !important;
+}
+
+/* 🔹 Кнопки конструктора — В РЯД, выровнены */
+#requestForm > div:last-child,
+.builder-form > div[style*="display: flex"] {
+    display: flex !important;
+    flex-direction: row !important; /* 🔥 В ряд, не вертикально */
+    align-items: stretch !important;
+    gap: 12px !important;
+    margin-top: 28px !important;
+    flex-wrap: wrap !important;
+}
+#requestForm > div:last-child .submit-request-btn,
+.builder-form > div[style*="display: flex"] .submit-request-btn {
+    flex: 1 !important;
+    min-width: 140px !important;
+    margin-top: 0 !important;
+}
+
+/* 🔹 Кнопка "Сбросить" — прозрачная с серой обводкой */
+#resetBtn,
+.submit-request-btn.secondary {
+    background: transparent !important;
+    color: #1A1718 !important;
+    border: 1px solid #E5E3E1 !important;
+    transition: background 0.2s, border-color 0.2s !important;
+}
+#resetBtn:hover,
+.submit-request-btn.secondary:hover {
+    background: #F8F7F6 !important;
+    border-color: #D5D3D1 !important;
+}
+
+/* 🔹 Предпросмотр */
+.builder-preview {
+    background: white !important;
+    border-radius: 12px !important;
+    outline: 1px solid #E5E3E1 !important;
+    padding: 28px !important;
+}
+.preview-header {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding-bottom: 16px !important;
+    border-bottom: 1px solid #E5E3E1 !important;
+    margin-bottom: 20px !important;
+}
+.preview-item {
+    display: flex !important;
+    padding: 12px 0 !important;
+    border-bottom: 1px solid #E5E3E1 !important;
+    gap: 16px !important;
+}
+.preview-label {
+    width: 100px !important;
+    font-size: 14px !important;
+    color: #5A5556 !important;
+}
+.preview-value {
+    flex: 1 !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: #1A1718 !important;
+}
+
+/* 🔹 Технический райдер */
+.rider-section {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 40px !important;
+    margin: 0 20px 60px !important;
+    padding: 0 !important;
+}
+.rider-info,
+.rider-card {
+    flex: 1 !important;
+    min-width: 300px !important;
+}
+
+/* 🔹 Условия сотрудничества — карточки одинаковой высоты */
+.terms-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 24px !important;
+    padding: 0 20px !important;
+    margin-bottom: 60px !important;
+}
+.terms-card {
+    background: #F8F7F6 !important;
+    border-radius: 12px !important;
+    outline: 1px solid #E5E3E1 !important;
+    padding: 32px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    height: 100% !important;
+}
+.terms-card h4 {
+    margin-bottom: 20px !important;
+    flex-shrink: 0 !important;
+}
+.terms-list {
+    flex: 1 !important;
+    margin-bottom: 0 !important;
+}
+
+/* 🔹 Контакты: ДВЕ КОЛОНКИ, форма справа */
+.contact-form-section {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important; /* 🔥 Две колонки */
+    gap: 48px !important;
+    background: #F8F7F6 !important;
+    border-radius: 12px !important;
+    outline: 1px solid #E5E3E1 !important;
+    padding: 48px !important;
+    margin: 0 20px 80px !important;
+    align-items: start !important;
+}
+
+.contact-info {
+    padding-right: 20px !important;
+}
+.contact-info h3 {
+    font-size: 24px !important;
+    margin-bottom: 16px !important;
+}
+.contact-info p {
+    font-size: 14px !important;
+    margin-bottom: 24px !important;
+}
+.contact-details {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 20px !important;
+}
+.contact-item {
+    padding-bottom: 16px !important;
+    border-bottom: 1px solid #E5E3E1 !important;
+}
+.contact-item:last-child {
+    border-bottom: none !important;
+    padding-bottom: 0 !important;
+}
+.contact-label {
+    font-size: 12px !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    color: #5A5556 !important;
+    margin-bottom: 4px !important;
+    display: block !important;
+}
+.contact-value {
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    color: #1A1718 !important;
+}
+/* 🔥 Ссылки контактов: чёрные, при наведении — красные */
+.contact-value a {
+    color: #1A1718 !important;
+    text-decoration: none !important;
+    transition: color 0.2s !important;
+}
+.contact-value a:hover {
+    color: #E8454D !important;
+}
+
+/* 🔹 Форма контактов справа */
+.contact-form-right {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+}
+.contact-form-right .form-group-custom {
+    margin-bottom: 0 !important;
+}
+.contact-form-right label {
+    display: block !important;
+    font-family: 'Unbounded', sans-serif !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    color: #2A2627 !important;
+    margin-bottom: 8px !important;
+}
+.contact-form-right input,
+.contact-form-right select,
+.contact-form-right textarea {
+    width: 100% !important;
+    padding: 12px 16px !important;
+    background: white !important;
+    border: 1px solid #E5E3E1 !important;
+    border-radius: 8px !important;
+    font-family: 'Nunito Sans', sans-serif !important;
+    font-size: 15px !important;
+    color: #1A1718 !important;
+    transition: border-color 0.2s, box-shadow 0.2s !important;
+    box-sizing: border-box !important;
+}
+.contact-form-right input:focus,
+.contact-form-right select:focus,
+.contact-form-right textarea:focus {
+    outline: none !important;
+    border-color: #4A6294 !important;
+    box-shadow: 0 0 0 3px rgba(74, 98, 148, 0.15) !important;
+}
+.contact-form-right textarea {
+    min-height: 100px !important;
+    resize: vertical !important;
+}
+
+/* 🔹 Кнопка отправки формы контактов */
+#sendContactBtn {
+    width: 100% !important;
+    background: #E8454D !important;
+    border: none !important;
+    border-radius: 8px !important;
+    padding: 12px 28px !important;
+    color: white !important;
+    font-family: 'Unbounded', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 14px !important;
+    cursor: pointer !important;
+    transition: background 0.2s !important;
+    margin-top: 8px !important;
+}
+#sendContactBtn:hover {
+    background: #D62830 !important;
+}
+
+/* 🔹 Ссылки "Все услуги", "Все контакты" — красные при наведении */
+.section-link-custom,
+.service-link,
+.section-link {
+    color: #4A6294 !important;
+    transition: color 0.2s !important;
+}
+.section-link-custom:hover,
+.service-link:hover,
+.section-link:hover {
+    color: #E8454D !important;
+    opacity: 1 !important;
+}
+
+/* 🔹 Адаптив: планшеты (до 1100px) */
+@media (max-width: 1100px) {
+    .customers-page {
+        padding: 0 24px !important;
+    }
+    .services-grid,
+    .terms-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 20px !important;
+    }
+    .request-builder,
+    .rider-section,
+    .contact-form-section {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        padding: 40px 32px !important;
+    }
+    /* Контакты: одна колонка на планшете */
+    .contact-form-section {
+        grid-template-columns: 1fr !important;
+        gap: 32px !important;
+    }
+    .contact-info {
+        padding-right: 0 !important;
+        text-align: center !important;
+    }
+    .contact-details {
+        align-items: center !important;
+    }
+}
+
+/* 🔹 Адаптив: мобильные (до 768px) */
+@media (max-width: 768px) {
+    .customers-page {
+        padding: 0 20px !important;
+    }
+    .page-title-customers {
+        font-size: 36px !important;
+        padding-left: 16px !important;
+    }
+    .page-subtitle-customers,
+    .section-header-custom {
+        padding: 0 16px !important;
+    }
+    .services-grid,
+    .terms-grid {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+        padding: 0 !important;
+    }
+    .request-builder,
+    .rider-section,
+    .contact-form-section {
+        margin: 0 0 40px !important;
+        padding: 32px 24px !important;
+        border-radius: 12px !important;
+    }
+    /* Кнопки конструктора — вертикально на мобильном */
+    #requestForm > div:last-child,
+    .builder-form > div[style*="display: flex"] {
+        flex-direction: column !important;
+        gap: 10px !important;
+    }
+    /* Контакты — одна колонка */
+    .contact-form-section {
+        grid-template-columns: 1fr !important;
+        padding: 32px 24px !important;
+        margin: 0 0 40px !important;
+    }
+    .contact-info {
+        text-align: center !important;
+    }
+    .contact-details {
+        align-items: center !important;
+    }
+}
+
+/* 🔹 Очень маленькие экраны (до 400px) */
+@media (max-width: 400px) {
+    .page-title-customers {
+        font-size: 28px !important;
+    }
+    .section-title-custom {
+        font-size: 24px !important;
+    }
+    #eventType,
+    #audienceCount,
+    #eventFormat {
+        padding: 10px 32px 10px 12px !important;
+        font-size: 13px !important;
+    }
+    .submit-request-btn {
+        padding: 10px !important;
+        font-size: 13px !important;
+    }
+}
+
+/* 🔹 iOS: безопасные отступы */
+@supports (padding: max(0px)) {
+    .customers-page {
+        padding-left: max(20px, env(safe-area-inset-left)) !important;
+        padding-right: max(20px, env(safe-area-inset-right)) !important;
+    }
+}
 
 
 
 
 
+
+/* ============================================
+   CUSTOM SELECT — СТИЛИ ПОД ДИЗАЙН САЙТА
+============================================ */
+
+/* Скрываем нативный select, но оставляем для доступности */
+.custom-select-wrapper {
+    position: relative;
+    width: 100%;
+    display: block;
+}
+.custom-select-wrapper select {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+    opacity: 0 !important;
+}
+
+/* Кнопка кастомного select */
+.custom-select-btn {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    padding: 12px 40px 12px 16px !important;
+    background: white !important;
+    border: 1px solid #E5E3E1 !important;
+    border-radius: 8px !important;
+    font-family: 'Nunito Sans', sans-serif !important;
+    font-size: 15px !important;
+    color: #1A1718 !important;
+    cursor: pointer !important;
+    transition: border-color 0.2s, box-shadow 0.2s !important;
+    box-sizing: border-box !important;
+    /* Стрелка */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%234A6294' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 16px center !important;
+    background-size: 16px !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
+    text-align: left !important;
+}
+.custom-select-btn:hover,
+.custom-select-btn.active {
+    border-color: #4A6294 !important;
+    box-shadow: 0 0 0 3px rgba(74, 98, 148, 0.15) !important;
+}
+.custom-select-btn.active {
+    border-radius: 8px 8px 0 0 !important;
+}
+
+/* Выпадающий список */
+.custom-select-dropdown {
+    position: absolute !important;
+    top: 100% !important;
+    left: 0 !important;
+    right: 0 !important;
+    background: white !important;
+    border: 1px solid #4A6294 !important;
+    border-top: none !important;
+    border-radius: 0 0 8px 8px !important;
+    max-height: 250px !important;
+    overflow-y: auto !important;
+    z-index: 100 !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+    display: none !important;
+}
+.custom-select-dropdown.show {
+    display: block !important;
+}
+
+/* Опции в списке */
+.custom-select-option {
+    padding: 12px 16px !important;
+    font-family: 'Nunito Sans', sans-serif !important;
+    font-size: 15px !important;
+    color: #1A1718 !important;
+    cursor: pointer !important;
+    transition: background 0.15s !important;
+    border-bottom: 1px solid #F5F5F5 !important;
+}
+.custom-select-option:last-child {
+    border-bottom: none !important;
+}
+.custom-select-option:hover {
+    background: #F8F7F6 !important;
+}
+.custom-select-option.selected {
+    background: #E8EEF7 !important;
+    color: #2A3D5E !important;
+    font-weight: 600 !important;
+}
+
+/* Скроллбар для списка */
+.custom-select-dropdown::-webkit-scrollbar {
+    width: 6px !important;
+}
+.custom-select-dropdown::-webkit-scrollbar-track {
+    background: #F5F5F5 !important;
+    border-radius: 3px !important;
+}
+.custom-select-dropdown::-webkit-scrollbar-thumb {
+    background: #4A6294 !important;
+    border-radius: 3px !important;
+}
+
+/* 🔹 Адаптив: на мобильных можно вернуть нативный select для удобства */
+@media (max-width: 768px) {
+
+    .custom-select-wrapper select {
+        position: static !important;
+        width: 100% !important;
+        height: auto !important;
+        padding: 12px 40px 12px 16px !important;
+        clip: auto !important;
+        opacity: 1 !important;
+        -webkit-appearance: none !important;
+        appearance: none !important;
+        background: white !important;
+        border: 1px solid #E5E3E1 !important;
+        border-radius: 8px !important;
+        font-family: 'Nunito Sans', sans-serif !important;
+        font-size: 15px !important;
+        color: #1A1718 !important;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%234A6294' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") !important;
+        background-repeat: no-repeat !important;
+        background-position: right 16px center !important;
+        background-size: 16px !important;
+    }
+    .custom-select-btn,
+    .custom-select-dropdown {
+        display: none !important;
+    }
+    
+}
+
+
+
+
+
+
+* ============================================
+   CUSTOMERS PAGE - NATIVE SELECT FIX
+============================================ */
+
+/* 🔹 Нативные select/input в стиле сайта */
+.form-select-customers,
+.form-input-customers,
+.contact-form-right select,
+.contact-form-right input,
+.contact-form-right textarea {
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
+    width: 100% !important;
+    padding: 12px 40px 12px 16px !important;
+    background: white !important;
+    border: 1px solid #E5E3E1 !important;
+    border-radius: 8px !important;
+    font-family: 'Nunito Sans', sans-serif !important;
+    font-size: 15px !important;
+    color: #1A1718 !important;
+    cursor: pointer !important;
+    transition: border-color 0.2s, box-shadow 0.2s !important;
+    box-sizing: border-box !important;
+    /* Стрелка для select */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%234A6294' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 16px center !important;
+    background-size: 16px !important;
+}
+
+/* Убираем стрелку у input/textarea */
+.form-input-customers,
+.contact-form-right input,
+.contact-form-right textarea {
+    background-image: none !important;
+}
+
+.form-select-customers:focus,
+.form-input-customers:focus,
+.contact-form-right select:focus,
+.contact-form-right input:focus,
+.contact-form-right textarea:focus {
+    outline: none !important;
+    border-color: #4A6294 !important;
+    box-shadow: 0 0 0 3px rgba(74, 98, 148, 0.15) !important;
+}
+
+/* Опции в выпадающем списке (стилизуются браузером, но задаём шрифт) */
+.form-select-customers option,
+.contact-form-right select option {
+    font-family: 'Nunito Sans', sans-serif !important;
+    font-size: 15px !important;
+    color: #1A1718 !important;
+    padding: 8px !important;
+    background: white !important;
+}
+
+/* 🔹 Форма контактов — ДВЕ КОЛОНКИ (инфо слева, форма справа) */
+.contact-form-section {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 48px !important;
+    background: #F8F7F6 !important;
+    border-radius: 12px !important;
+    outline: 1px solid #E5E3E1 !important;
+    padding: 48px !important;
+    margin: 0 20px 80px !important;
+    align-items: start !important;
+}
+
+.contact-info {
+    padding-right: 20px !important;
+}
+
+/* 🔹 Ссылки контактов: чёрные, при наведении — красные */
+.contact-value a {
+    color: #1A1718 !important;
+    text-decoration: none !important;
+    transition: color 0.2s !important;
+}
+.contact-value a:hover {
+    color: #E8454D !important;
+}
+
+/* 🔹 Кнопки "Сформировать" / "Сбросить" — в ряд, отступ 10px */
+#requestForm > div:last-child {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 10px !important;
+    margin-top: 28px !important;
+    flex-wrap: wrap !important;
+}
+#requestForm > div:last-child .submit-request-btn {
+    flex: 1 !important;
+    min-width: 140px !important;
+    margin-top: 0 !important;
+}
+
+/* 🔹 Кнопка "Сбросить" — прозрачная с серой обводкой */
+#resetBtn,
+.submit-request-btn.secondary {
+    background: transparent !important;
+    color: #1A1718 !important;
+    border: 1px solid #E5E3E1 !important;
+    transition: background 0.2s, border-color 0.2s !important;
+}
+#resetBtn:hover,
+.submit-request-btn.secondary:hover {
+    background: #F8F7F6 !important;
+    border-color: #D5D3D1 !important;
+}
+
+/* 🔹 Отступы между секциями — 60px */
+.customers-page > section {
+    margin-bottom: 60px !important;
+}
+.customers-page > section:last-child {
+    margin-bottom: 0 !important;
+}
+
+/* 🔹 Карточки "Договор" / "Порядок работы" — одинаковой высоты */
+.terms-card {
+    display: flex !important;
+    flex-direction: column !important;
+    height: 100% !important;
+}
+.terms-list {
+    flex: 1 !important;
+}
+
+/* 🔹 Адаптив: на мобильных — одна колонка */
+@media (max-width: 1100px) {
+    .contact-form-section {
+        grid-template-columns: 1fr !important;
+        gap: 32px !important;
+    }
+    .contact-info {
+        text-align: center !important;
+        padding-right: 0 !important;
+    }
+    .contact-details {
+        align-items: center !important;
+    }
+}
+
+/* 🔹 Исправление: textarea в форме "Заказчикам" — такой же фокус, как у input/select */
+.form-group-custom textarea:focus {
+    outline: none !important;
+    border-color: #4A6294 !important;  /* 🔥 Голубая обводка как у остальных полей */
+    box-shadow: 0 0 0 3px rgba(74, 98, 148, 0.15) !important;
+}
+
+/* 🔹 Для формы контактов справа — тоже исправляем */
+.contact-form-right textarea:focus {
+    outline: none !important;
+    border-color: #4A6294 !important;
+    box-shadow: 0 0 0 3px rgba(74, 98, 148, 0.15) !important;
+}
