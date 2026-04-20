@@ -1152,3 +1152,195 @@ html, body { overflow-x: hidden !important; width: 100% !important; max-width: 1
 @supports (-webkit-touch-callout: none) {
     .mobile-nav { height: -webkit-fill-available !important; }
 }
+
+/* ============================================
+   GLOBAL CONTAINERS — РАСТЯГИВАЕМ НА ВСЮ ШИРИНУ
+============================================ */
+.shop-container, 
+.brandbook-container { 
+    max-width: 100%; /* ← Было 1440px */
+    margin: 0 auto; 
+    background: var(--white); 
+    position: relative; 
+}
+
+.container-main { 
+    max-width: 100%; /* ← Было 1360px */
+    margin: 0 auto; 
+    padding: 0 60px; /* ← Добавляем боковые отступы вместо max-width */
+}
+
+/* ============================================
+   HEADER & NAVIGATION — РАСТЯГИВАЕМ
+============================================ */
+.header-inner { 
+    height: 90px; 
+    max-width: 100%; /* ← Было 1320px */
+    margin: 0 auto; 
+    padding: 0 60px; /* ← Добавляем боковые отступы */
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+    gap: 30px; 
+    flex-wrap: wrap; 
+}
+
+/* ============================================
+   FOOTER — РАСТЯГИВАЕМ
+============================================ */
+.footer-container { 
+    max-width: 100%; /* ← Было 1320px */
+    margin: 0 auto; 
+    padding: 0 60px; /* ← Добавляем боковые отступы */
+}
+
+.main-footer {
+    background: var(--blue-900);
+    width: 100%;
+    padding: 70px 60px 50px; /* ← Оставляем как есть, но синхронизируем с container */
+    margin-top: 40px;
+}
+
+/* ============================================
+   TEAM PAGE — РАСТЯГИВАЕМ
+============================================ */
+.team-page { 
+    max-width: 100%; /* ← Было 1320px */
+    margin: 0 auto; 
+    padding: 0 60px; /* ← Добавляем боковые отступы */
+}
+
+/* ============================================
+   ABOUT PAGE — РАСТЯГИВАЕМ
+============================================ */
+.about-page { 
+    max-width: 100%; /* ← Было 1360px */
+    margin: 0 auto; 
+    padding: 0 60px; /* ← Добавляем боковые отступы */
+}
+
+/* ============================================
+   CONTACTS PAGE — РАСТЯГИВАЕМ
+============================================ */
+.contacts-page { 
+    max-width: 100%; /* ← Было 1360px */
+    margin: 0 auto; 
+    padding: 0 60px; /* ← Добавляем боковые отступы */
+}
+
+/* ============================================
+   CUSTOMERS PAGE — РАСТЯГИВАЕМ
+============================================ */
+.customers-page { 
+    max-width: 100% !important; /* ← Было 1360px */
+    margin: 0 auto !important; 
+    padding: 60px 60px 0 !important; /* ← Добавляем боковые отступы */
+    width: 100% !important; 
+    box-sizing: border-box !important; 
+}
+
+/* ============================================
+   PERFORMANCE DETAIL PAGE — РАСТЯГИВАЕМ
+============================================ */
+.performance-page { 
+    max-width: 100%; /* ← Было 1360px */
+    margin: 0 auto; 
+    padding: 0 60px 60px; /* ← Добавляем боковые отступы */
+    width: 100%; 
+}
+
+/* ============================================
+   AFISHA PAGE — РАСТЯГИВАЕМ
+============================================ */
+.afisha-page { 
+    max-width: 100%; /* ← Было 1360px */
+    margin: 0 auto; 
+    padding: 0 60px; /* ← Добавляем боковые отступы */
+    width: 100%; 
+}
+
+.hero-content-afisha { 
+    position: relative; 
+    z-index: 2; 
+    max-width: 100%; /* ← Было 1360px */
+    width: 100%; 
+    margin: 0 auto; 
+    padding: 0 60px; /* ← Синхронизируем с afisha-page */
+    padding-bottom: 100px !important; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: flex-start; 
+}
+
+/* ============================================
+   SEATS PAGE — РАСТЯГИВАЕМ
+============================================ */
+.seats-page { 
+    max-width: 100%; /* ← Было 1320px */
+    margin: 0 auto; 
+    padding: 0 60px; /* ← Добавляем боковые отступы */
+}
+
+/* ============================================
+   MERCH SHOP PAGE — РАСТЯГИВАЕМ
+============================================ */
+.page-header { 
+    max-width: 100%; /* ← Было 1320px */
+    margin: 60px auto 0; 
+    padding: 0 60px; /* ← Добавляем боковые отступы */
+}
+
+.filters-section { 
+    max-width: 100%; /* ← Было 1320px */
+    margin: 30px auto 0; 
+    padding: 0 60px; /* ← Добавляем боковые отступы */
+}
+
+.merch-grid { 
+    max-width: 100%; /* ← Было 1320px */
+    margin: 48px auto 0; 
+    padding: 0 60px; /* ← Добавляем боковые отступы */
+    display: grid; 
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 24px; 
+}
+
+/* ============================================
+   BRANDBOOK STYLES — РАСТЯГИВАЕМ
+============================================ */
+.hero-brand-content { 
+    max-width: 100%; /* ← Было 1320px */
+    margin: 0 auto; 
+    padding: 0 60px; /* ← Добавляем боковые отступы */
+}
+
+.content-wrapper { 
+    max-width: 100%; /* ← Было 1320px */
+    margin: 0 auto; 
+    padding: 0 60px 80px; /* ← Добавляем боковые отступы */
+}
+
+/* ============================================
+   АДАПТИВ: УМЕНЬШАЕМ ОТСТУПЫ НА ПЛАНШЕТАХ
+============================================ */
+@media (max-width: 1100px) {
+    .container-main,
+    .header-inner,
+    .footer-container,
+    .team-page,
+    .about-page,
+    .contacts-page,
+    .customers-page,
+    .performance-page,
+    .afisha-page,
+    .seats-page,
+    .page-header,
+    .filters-section,
+    .merch-grid,
+    .hero-brand-content,
+    .content-wrapper,
+    .hero-content-afisha {
+        padding-left: 40px !important;
+        padding-right: 40px !important;
+    }
+}
