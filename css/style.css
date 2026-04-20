@@ -8242,90 +8242,58 @@ html, body {
 }
 
 
-
 /* ============================================
-   TICKER
+   TICKER (БЕГУЩАЯ СТРОКА) — ЧИСТЫЙ КОД
 ============================================ */
 .ticker {
+    width: 100%;
+    overflow: hidden;
     background: #2A3D5E;
     padding: 10px 0;
-    overflow: hidden;
-    white-space: nowrap;
+    position: relative;
 }
 
 .ticker-content {
-    display: inline-block;
-    animation: ticker 25s linear infinite;
+    display: inline-flex; /* Надежнее чем inline-block для строк */
+    white-space: nowrap;
+    animation: ticker-scroll 30s linear infinite;
+    will-change: transform; /* Аппаратное ускорение */
+}
+
+.ticker-content span {
+    display: inline-flex;
+    align-items: center;
     font-family: 'Unbounded', sans-serif;
     font-size: 13px;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     color: white;
-}
-
-.ticker-content span {
-    margin: 0 30px;
+    padding: 0 30px; /* Отступы между фразами */
 }
 
 .ticker-content span.red-dot {
     color: #E8454D;
+    padding: 0 10px 0 0;
 }
 
-@keyframes ticker {
+@keyframes ticker-scroll {
     0% { transform: translateX(0); }
     100% { transform: translateX(-50%); }
 }
 
-/* ============================================
-🔥 FIX: БЕГУЩАЯ СТРОКА — УБИРАЕМ БЕЛУЮ ПОЛОСУ НА МОБИЛЬНЫХ
-============================================ */
-@media (max-width: 1100px) {
-  .ticker {
-    overflow: hidden !important;
-    position: relative !important;
-    background: #2A3D5E !important;
-    /* Убираем возможные отступы, создающие зазоры */
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-    width: 100% !important;
-    box-sizing: border-box !important;
-  }
-  
-  .ticker-content {
-    /* Включаем аппаратное ускорение для плавности и устранения артефактов */
-    will-change: transform !important;
-    transform: translateZ(0) !important;
-    backface-visibility: hidden !important;
-    /* Гарантируем, что контент достаточно широкий */
-    padding-right: 50% !important;
-  }
-  
-  /* Псевдоэлемент-«заплатка» на фон, если анимация оставит зазор */
-  .ticker::after {
-    content: '' !important;
-    position: absolute !important;
-    top: 0 !important;
-    right: 0 !important;
-    width: 100px !important;
-    height: 100% !important;
-    background: #2A3D5E !important;
-    z-index: 1 !important;
-    pointer-events: none !important;
-  }
+/* На мобильных замедляем для плавности */
+@media (max-width: 768px) {
+    .ticker-content {
+        animation-duration: 40s !important;
+    }
 }
 
-/* Для очень маленьких экранов — можно упростить или отключить анимацию */
-@media (max-width: 480px) {
-  .ticker-content {
-    /* Опционально: отключаем анимацию на самых узких экранах для надёжности */
-    /* animation: none !important; */
-    /* Или оставляем, но с более плавными параметрами */
-    animation-duration: 35s !important;
-  }
-}
 
-/* 🔥 ФИНАЛЬНЫЙ ФИКС ДЛЯ TICKER НА МОБИЛЬНЫХ */
+
+
+
+
 @media (max-width: 860px) {
   /* Сброс глобальных отступов */
   html, body {
@@ -8348,31 +8316,9 @@ html, body {
     right: 0 !important;
   }
   
-  /* Анимированный контент */
-  .ticker-content {
-    display: inline-block !important;
-    white-space: nowrap !important;
-    min-width: 200% !important; /* 🔑 Обязательно для анимации */
-    padding-right: 100% !important; /* 🔑 Запас для плавного цикла */
-    animation: ticker 25s linear infinite !important;
-    will-change: transform !important;
-    transform: translateZ(0) !important;
-    backface-visibility: hidden !important;
-    -webkit-font-smoothing: antialiased !important;
-  }
+
   
-  /* Заплатка на правый край (если анимация оставит зазор) */
-  .ticker::after {
-    content: '' !important;
-    position: absolute !important;
-    top: 0 !important;
-    right: 0 !important;
-    width: 50% !important;
-    height: 100% !important;
-    background: #2A3D5E !important;
-    z-index: 1 !important;
-    pointer-events: none !important;
-  }
+
   
   /* Исправление для очень узких экранов */
   @media (max-width: 400px) {
@@ -8380,65 +8326,4 @@ html, body {
       animation-duration: 35s !important; /* Медленнее = плавнее */
     }
   }
-}
-
-
-/* ============================================
-🔥 FIX: Бегущая строка (ticker) — восстановление анимации
-============================================ */
-.ticker {
-overflow: hidden !important; /* 🔑 Обязательно для обрезки анимации */
-position: relative !important;
-z-index: 50 !important; /* Поверх других элементов */
-}
-
-.ticker-content {
-animation: ticker 25s linear infinite !important; /* 🔑 Принудительно включаем анимацию */
-display: inline-block !important;
-white-space: nowrap !important;
-will-change: transform !important; /* Оптимизация производительности */
-}
-
-/* Ключевые кадры анимации — дублируем с !important для надёжности */
-@keyframes ticker {
-0% { transform: translateX(0); }
-100% { transform: translateX(-50%); }
-}
-
-/* 🔹 На мобильных — уменьшаем скорость для плавности */
-@media (max-width: 860px) {
-.ticker-content {
-animation-duration: 35s !important; /* Медленнее на маленьких экранах */
-}
-}
-
-/* 🔹 Если анимация всё ещё не работает — проверяем, что контент удвоен */
-/* Для работы translateX(-50%) содержимое .ticker-content должно быть продублировано в HTML */
-
-/* 🔥 ФИКС ДЛЯ TICKER-АНИМАЦИИ */
-.ticker-content {
-    display: inline-block !important;
-    white-space: nowrap !important; /* 🔑 Ключевое свойство */
-    animation: ticker 25s linear infinite !important;
-    animation-play-state: running !important;
-}
-
-/* Убедитесь, что ключевые кадры определены */
-@keyframes ticker {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-}
-
-/* 🔥 На мобильных — можно уменьшить скорость или отключить */
-@media (max-width: 768px) {
-    .ticker-content {
-        animation-duration: 35s !important; /* Медленнее на мобильных */
-    }
-}
-
-/* 🔥 Уважение prefers-reduced-motion (для доступности) */
-@media (prefers-reduced-motion: reduce) {
-    .ticker-content {
-        animation: none !important;
-    }
 }
