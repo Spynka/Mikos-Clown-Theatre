@@ -1154,193 +1154,560 @@ html, body { overflow-x: hidden !important; width: 100% !important; max-width: 1
 }
 
 /* ============================================
-   GLOBAL CONTAINERS — РАСТЯГИВАЕМ НА ВСЮ ШИРИНУ
+   ГЛОБАЛЬНЫЕ КОНТЕЙНЕРЫ — РАСТЯГИВАЕМ
 ============================================ */
-.shop-container, 
-.brandbook-container { 
-    max-width: 100%; /* ← Было 1440px */
-    margin: 0 auto; 
-    background: var(--white); 
-    position: relative; 
-}
-
-.container-main { 
-    max-width: 100%; /* ← Было 1360px */
-    margin: 0 auto; 
-    padding: 0 60px; /* ← Добавляем боковые отступы вместо max-width */
-}
+.shop-container, .brandbook-container { max-width: 100%; margin: 0 auto; background: var(--white); position: relative; }
+.container-main { max-width: 100%; margin: 0 auto; padding: 0 clamp(16px, 5vw, 80px); }
 
 /* ============================================
-   HEADER & NAVIGATION — РАСТЯГИВАЕМ
+   HEADER & NAVIGATION — АДАПТИВ
 ============================================ */
 .header-inner { 
-    height: 90px; 
-    max-width: 100%; /* ← Было 1320px */
+    height: clamp(60px, 8vw, 90px); 
+    max-width: 100%; 
     margin: 0 auto; 
-    padding: 0 60px; /* ← Добавляем боковые отступы */
+    padding: 0 clamp(16px, 5vw, 80px); 
     display: flex; 
     align-items: center; 
     justify-content: space-between; 
-    gap: 30px; 
+    gap: clamp(16px, 3vw, 40px); 
     flex-wrap: wrap; 
 }
-
-/* ============================================
-   FOOTER — РАСТЯГИВАЕМ
-============================================ */
-.footer-container { 
-    max-width: 100%; /* ← Было 1320px */
-    margin: 0 auto; 
-    padding: 0 60px; /* ← Добавляем боковые отступы */
-}
-
-.main-footer {
-    background: var(--blue-900);
-    width: 100%;
-    padding: 70px 60px 50px; /* ← Оставляем как есть, но синхронизируем с container */
-    margin-top: 40px;
+.logo-img { height: clamp(40px, 5vw, 60px); width: auto; object-fit: contain; border-radius: 4px; }
+.nav-menu { gap: clamp(20px, 4vw, 48px); }
+.nav-menu li a { font-size: clamp(13px, 1.2vw, 16px); }
+.buy-ticket-btn { 
+    padding: clamp(10px, 1.5vw, 14px) clamp(20px, 3vw, 32px); 
+    font-size: clamp(12px, 1.2vw, 15px); 
 }
 
 /* ============================================
-   TEAM PAGE — РАСТЯГИВАЕМ
+   TICKER — АДАПТИВ
 ============================================ */
-.team-page { 
-    max-width: 100%; /* ← Было 1320px */
-    margin: 0 auto; 
-    padding: 0 60px; /* ← Добавляем боковые отступы */
+.ticker { padding: clamp(6px, 1vw, 12px) 0; }
+.ticker-content span { 
+    font-size: clamp(11px, 1.1vw, 14px); 
+    padding: 0 clamp(15px, 3vw, 40px); 
 }
 
 /* ============================================
-   ABOUT PAGE — РАСТЯГИВАЕМ
+   SECTION HEADERS — АДАПТИВ
 ============================================ */
-.about-page { 
-    max-width: 100%; /* ← Было 1360px */
-    margin: 0 auto; 
-    padding: 0 60px; /* ← Добавляем боковые отступы */
+.section-header { 
+    margin-bottom: clamp(30px, 5vw, 60px); 
+    padding-bottom: clamp(10px, 2vw, 20px); 
 }
+.section-title { 
+    font-size: clamp(28px, 4vw, 48px); 
+    padding-left: clamp(12px, 2vw, 24px); 
+}
+.section-title::before { width: clamp(3px, 0.4vw, 5px); }
+.section-link { font-size: clamp(12px, 1.3vw, 15px); }
 
 /* ============================================
-   CONTACTS PAGE — РАСТЯГИВАЕМ
+   PERFORMANCE CARDS — АДАПТИВ
 ============================================ */
-.contacts-page { 
-    max-width: 100%; /* ← Было 1360px */
-    margin: 0 auto; 
-    padding: 0 60px; /* ← Добавляем боковые отступы */
-}
-
-/* ============================================
-   CUSTOMERS PAGE — РАСТЯГИВАЕМ
-============================================ */
-.customers-page { 
-    max-width: 100% !important; /* ← Было 1360px */
-    margin: 0 auto !important; 
-    padding: 60px 60px 0 !important; /* ← Добавляем боковые отступы */
-    width: 100% !important; 
-    box-sizing: border-box !important; 
-}
-
-/* ============================================
-   PERFORMANCE DETAIL PAGE — РАСТЯГИВАЕМ
-============================================ */
-.performance-page { 
-    max-width: 100%; /* ← Было 1360px */
-    margin: 0 auto; 
-    padding: 0 60px 60px; /* ← Добавляем боковые отступы */
-    width: 100%; 
-}
-
-/* ============================================
-   AFISHA PAGE — РАСТЯГИВАЕМ
-============================================ */
-.afisha-page { 
-    max-width: 100%; /* ← Было 1360px */
-    margin: 0 auto; 
-    padding: 0 60px; /* ← Добавляем боковые отступы */
-    width: 100%; 
-}
-
-.hero-content-afisha { 
-    position: relative; 
-    z-index: 2; 
-    max-width: 100%; /* ← Было 1360px */
-    width: 100%; 
-    margin: 0 auto; 
-    padding: 0 60px; /* ← Синхронизируем с afisha-page */
-    padding-bottom: 100px !important; 
-    display: flex; 
-    flex-direction: column; 
-    align-items: flex-start; 
-}
-
-/* ============================================
-   SEATS PAGE — РАСТЯГИВАЕМ
-============================================ */
-.seats-page { 
-    max-width: 100%; /* ← Было 1320px */
-    margin: 0 auto; 
-    padding: 0 60px; /* ← Добавляем боковые отступы */
-}
-
-/* ============================================
-   MERCH SHOP PAGE — РАСТЯГИВАЕМ
-============================================ */
-.page-header { 
-    max-width: 100%; /* ← Было 1320px */
-    margin: 60px auto 0; 
-    padding: 0 60px; /* ← Добавляем боковые отступы */
-}
-
-.filters-section { 
-    max-width: 100%; /* ← Было 1320px */
-    margin: 30px auto 0; 
-    padding: 0 60px; /* ← Добавляем боковые отступы */
-}
-
-.merch-grid { 
-    max-width: 100%; /* ← Было 1320px */
-    margin: 48px auto 0; 
-    padding: 0 60px; /* ← Добавляем боковые отступы */
+.performances-grid { 
     display: grid; 
-    grid-template-columns: repeat(4, 1fr); 
-    gap: 24px; 
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 350px), 1fr)); 
+    gap: clamp(16px, 2.5vw, 32px); 
+}
+.performance-card { 
+    border-radius: clamp(8px, 1.5vw, 16px); 
+    transition: box-shadow 0.2s, transform 0.2s; 
+}
+.performance-img { height: clamp(160px, 22vw, 260px); }
+.performance-content { padding: clamp(14px, 2vw, 24px); gap: clamp(8px, 1.5vw, 16px); }
+.performance-name { font-size: clamp(18px, 2.2vw, 28px); line-height: 1.3; }
+.performance-desc { font-size: clamp(13px, 1.4vw, 16px); line-height: 1.5; }
+.tag { font-size: clamp(10px, 1vw, 13px); padding: clamp(3px, 0.6vw, 5px) clamp(8px, 1.2vw, 14px); }
+.btn-details, .btn-buy { 
+    font-size: clamp(12px, 1.2vw, 15px); 
+    padding: clamp(8px, 1.2vw, 12px) clamp(14px, 2vw, 22px); 
 }
 
 /* ============================================
-   BRANDBOOK STYLES — РАСТЯГИВАЕМ
+   PLAYS SECTION (ГОРИЗОНТАЛЬНЫЙ СКРОЛЛ) — АДАПТИВ
 ============================================ */
-.hero-brand-content { 
-    max-width: 100%; /* ← Было 1320px */
-    margin: 0 auto; 
-    padding: 0 60px; /* ← Добавляем боковые отступы */
+.plays-section { padding: clamp(40px, 8vw, 100px) 0; }
+.scroll-wrapper { gap: clamp(12px, 2.5vw, 32px); }
+.play-card { 
+    flex: 0 0 clamp(280px, 35vw, 420px); 
+    border-radius: clamp(8px, 1.5vw, 12px); 
 }
-
-.content-wrapper { 
-    max-width: 100%; /* ← Было 1320px */
-    margin: 0 auto; 
-    padding: 0 60px 80px; /* ← Добавляем боковые отступы */
+.play-img { height: clamp(140px, 18vw, 220px); }
+.play-content { padding: clamp(12px, 2vw, 20px); gap: clamp(8px, 1.2vw, 14px); }
+.play-name { font-size: clamp(16px, 1.8vw, 22px); }
+.play-desc { font-size: clamp(12px, 1.3vw, 15px); }
+.scroll-btn { 
+    width: clamp(40px, 5vw, 56px); 
+    height: clamp(40px, 5vw, 56px); 
 }
 
 /* ============================================
-   АДАПТИВ: УМЕНЬШАЕМ ОТСТУПЫ НА ПЛАНШЕТАХ
+   TEAM SECTION — АДАПТИВ
 ============================================ */
-@media (max-width: 1100px) {
-    .container-main,
-    .header-inner,
-    .footer-container,
-    .team-page,
-    .about-page,
-    .contacts-page,
-    .customers-page,
-    .performance-page,
-    .afisha-page,
-    .seats-page,
-    .page-header,
-    .filters-section,
-    .merch-grid,
-    .hero-brand-content,
-    .content-wrapper,
-    .hero-content-afisha {
-        padding-left: 40px !important;
-        padding-right: 40px !important;
-    }
+.team-section { padding: clamp(40px, 8vw, 100px) 0; }
+.team-scroll-wrapper { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); 
+    gap: clamp(16px, 2.5vw, 32px); 
+}
+.team-img { height: clamp(180px, 25vw, 320px); }
+.team-name { font-size: clamp(14px, 1.6vw, 20px); margin-top: clamp(10px, 1.5vw, 18px); }
+.team-position { font-size: clamp(11px, 1.2vw, 15px); }
+
+/* ============================================
+   SHOP SECTION — АДАПТИВ
+============================================ */
+.shop-section { padding: clamp(40px, 8vw, 100px) 0; }
+.merch-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); 
+    gap: clamp(16px, 2.5vw, 32px); 
+}
+.merch-card { 
+    flex: 0 0 auto; 
+    border-radius: clamp(8px, 1.5vw, 12px); 
+}
+.merch-img { height: clamp(160px, 22vw, 260px); }
+.merch-content { padding: clamp(14px, 2vw, 24px); }
+.merch-name { font-size: clamp(14px, 1.6vw, 20px); }
+.merch-price { font-size: clamp(16px, 2vw, 26px); }
+.merch-btn { 
+    font-size: clamp(12px, 1.2vw, 15px); 
+    padding: clamp(8px, 1.2vw, 12px); 
+}
+
+/* ============================================
+   FOOTER — АДАПТИВ
+============================================ */
+.main-footer { 
+    padding: clamp(40px, 6vw, 80px) clamp(20px, 5vw, 80px) clamp(30px, 4vw, 60px); 
+    margin-top: clamp(20px, 4vw, 50px); 
+}
+.footer-container { max-width: 100%; margin: 0 auto; padding: 0; }
+.footer-top { gap: clamp(30px, 6vw, 100px); margin-bottom: clamp(40px, 5vw, 80px); }
+.footer-brand { max-width: clamp(400px, 50vw, 700px); }
+.footer-logo-img { width: clamp(40px, 5vw, 70px); height: clamp(40px, 5vw, 70px); }
+.footer-theater-title { font-size: clamp(16px, 1.8vw, 24px); }
+.footer-description { font-size: clamp(13px, 1.4vw, 17px); }
+.newsletter-title { font-size: clamp(16px, 1.8vw, 22px); margin: clamp(20px, 3vw, 40px) 0 clamp(10px, 1.5vw, 16px); }
+.subscribe-form { height: clamp(42px, 5vw, 52px); max-width: clamp(300px, 50vw, 700px); }
+.subscribe-input, .subscribe-btn { font-size: clamp(12px, 1.3vw, 15px); }
+.footer-nav h4 { font-size: clamp(14px, 1.5vw, 18px); margin-bottom: clamp(16px, 2vw, 28px); }
+.footer-nav ul li a { font-size: clamp(13px, 1.3vw, 16px); }
+.footer-btn-primary, .footer-btn-secondary { 
+    padding: clamp(10px, 1.5vw, 14px) clamp(20px, 3vw, 32px); 
+    font-size: clamp(12px, 1.3vw, 15px); 
+}
+.copyright { font-size: clamp(11px, 1.2vw, 15px); }
+.social-circle { 
+    width: clamp(32px, 4vw, 44px); 
+    height: clamp(32px, 4vw, 44px); 
+    font-size: clamp(14px, 1.8vw, 20px); 
+}
+
+/* ============================================
+   HERO SLIDER — АДАПТИВ
+============================================ */
+.hero-slider-afisha { 
+    height: clamp(400px, 60vw, 800px); 
+    margin-bottom: clamp(30px, 5vw, 70px); 
+}
+.hero-content-afisha { 
+    padding: 0 clamp(16px, 5vw, 80px); 
+    padding-bottom: clamp(40px, 8vw, 120px); 
+}
+.hero-title-afisha { 
+    font-size: clamp(26px, 5vw, 64px); 
+    max-width: clamp(300px, 60vw, 800px); 
+    margin-bottom: clamp(10px, 2vw, 24px); 
+}
+.hero-subtitle-afisha { 
+    font-size: clamp(13px, 1.8vw, 22px); 
+    max-width: clamp(280px, 55vw, 650px); 
+    margin-bottom: clamp(16px, 3vw, 36px); 
+}
+.hero-buttons-afisha { gap: clamp(8px, 1.5vw, 20px); }
+.hero-btn-dark, .hero-btn-light { 
+    padding: clamp(10px, 1.5vw, 14px) clamp(20px, 3vw, 36px); 
+    font-size: clamp(12px, 1.3vw, 16px); 
+}
+.slider-dots { bottom: clamp(16px, 3vw, 50px); gap: clamp(6px, 1.2vw, 14px); }
+.slider-dot { 
+    width: clamp(12px, 1.8vw, 24px); 
+    height: clamp(4px, 0.6vw, 8px); 
+}
+.slider-dot.active { width: clamp(18px, 2.5vw, 36px); }
+.slider-arrow { 
+    width: clamp(36px, 4.5vw, 56px); 
+    height: clamp(36px, 4.5vw, 56px); 
+    font-size: clamp(16px, 2vw, 24px); 
+}
+
+/* ============================================
+   PAGE TITLES — АДАПТИВ
+============================================ */
+.page-title, .page-title-contacts, .page-title-team, .page-title-about, .page-title-customers { 
+    font-size: clamp(28px, 5vw, 64px); 
+    line-height: 1.2; 
+    padding-left: clamp(12px, 2vw, 24px); 
+    margin-bottom: clamp(10px, 2vw, 24px); 
+}
+.page-title::before, .page-title-contacts::before, .page-title-team::before, 
+.page-title-about::before, .page-title-customers::before { 
+    width: clamp(3px, 0.4vw, 5px); 
+}
+.page-subtitle, .page-subtitle-team, .page-subtitle-about, .page-subtitle-customers { 
+    font-size: clamp(14px, 1.8vw, 22px); 
+    line-height: 1.5; 
+    max-width: clamp(300px, 70vw, 900px); 
+}
+
+/* ============================================
+   ABOUT SECTION — АДАПТИВ
+============================================ */
+.about-section { padding: clamp(40px, 8vw, 100px) 0; }
+.about-content { gap: clamp(30px, 6vw, 80px); }
+.about-text h3 { font-size: clamp(24px, 3.5vw, 40px); margin-bottom: clamp(16px, 2.5vw, 30px); }
+.about-text p { font-size: clamp(14px, 1.5vw, 18px); line-height: 1.6; }
+
+/* ============================================
+   CLIENTS SECTION — АДАПТИВ
+============================================ */
+.clients-section { padding: clamp(40px, 8vw, 100px) 0; }
+.clients-grid { gap: clamp(30px, 6vw, 80px); }
+.clients-info h3 { font-size: clamp(24px, 3.5vw, 40px); }
+.clients-info p { font-size: clamp(14px, 1.5vw, 18px); }
+.feature-item { 
+    padding: clamp(12px, 2vw, 18px) clamp(16px, 2.5vw, 24px) clamp(12px, 2vw, 18px) clamp(40px, 5vw, 60px); 
+}
+.feature-item i { 
+    left: clamp(12px, 2vw, 24px); 
+    top: clamp(14px, 2vw, 20px); 
+    font-size: clamp(14px, 1.8vw, 20px); 
+}
+.feature-item strong { font-size: clamp(14px, 1.6vw, 18px); }
+.feature-item span { font-size: clamp(12px, 1.3vw, 15px); }
+.clients-form { padding: clamp(20px, 3vw, 36px); }
+.clients-form h3 { font-size: clamp(22px, 3vw, 36px); margin-bottom: clamp(16px, 2.5vw, 28px); }
+.clients-form .form-group label { font-size: clamp(11px, 1.2vw, 14px); }
+.clients-form .form-group input, 
+.clients-form .form-group textarea { 
+    padding: clamp(10px, 1.5vw, 14px) clamp(12px, 1.8vw, 18px); 
+    font-size: clamp(13px, 1.4vw, 16px); 
+}
+
+/* ============================================
+   CONTACTS PAGE — АДАПТИВ
+============================================ */
+.map-container { 
+    height: clamp(300px, 45vw, 550px); 
+    margin-bottom: clamp(40px, 6vw, 90px); 
+}
+.map-address-card { 
+    width: clamp(260px, 30vw, 360px); 
+    padding: clamp(14px, 2vw, 24px); 
+    bottom: clamp(16px, 2.5vw, 30px); 
+    left: clamp(16px, 2.5vw, 30px); 
+}
+.map-address-card h4 { font-size: clamp(14px, 1.8vw, 20px); }
+.map-address-card p { font-size: clamp(12px, 1.3vw, 15px); }
+.form-section { padding: clamp(40px, 8vw, 100px) 0; }
+.form-grid { gap: clamp(30px, 6vw, 80px); }
+.form-info h3 { font-size: clamp(22px, 3.5vw, 38px); }
+.form-info p { font-size: clamp(13px, 1.5vw, 17px); }
+.form-container { padding: clamp(24px, 3.5vw, 48px); }
+.form-container h3 { font-size: clamp(16px, 2vw, 24px); }
+.submit-btn { 
+    padding: clamp(10px, 1.8vw, 16px); 
+    font-size: clamp(12px, 1.4vw, 16px); 
+}
+.faq-section { padding: clamp(60px, 10vw, 140px) 0 clamp(40px, 6vw, 90px); }
+.faq-title { font-size: clamp(24px, 4vw, 48px); margin-bottom: clamp(30px, 5vw, 70px); }
+.faq-question { font-size: clamp(14px, 1.8vw, 20px); }
+.faq-answer { font-size: clamp(13px, 1.5vw, 17px); }
+.legal-info { padding: clamp(20px, 3vw, 36px); }
+.legal-info h2 { font-size: clamp(22px, 3.5vw, 38px); }
+.legal-label { font-size: clamp(10px, 1.1vw, 13px); }
+.legal-value { font-size: clamp(13px, 1.5vw, 17px); }
+
+/* ============================================
+   TEAM PAGE — АДАПТИВ
+============================================ */
+.director-highlight { 
+    padding: clamp(30px, 5vw, 70px); 
+    gap: clamp(24px, 4vw, 56px); 
+    margin: clamp(40px, 6vw, 80px) 0; 
+}
+.director-tag { 
+    font-size: clamp(11px, 1.3vw, 15px); 
+    padding: clamp(4px, 0.8vw, 7px) clamp(12px, 2vw, 20px); 
+}
+.director-name { font-size: clamp(24px, 3.5vw, 40px); }
+.director-bio { font-size: clamp(13px, 1.5vw, 17px); }
+.director-btn { 
+    padding: clamp(10px, 2vw, 16px) clamp(30px, 5vw, 64px); 
+    font-size: clamp(13px, 1.5vw, 17px); 
+}
+.stat-item { padding: clamp(16px, 2.5vw, 28px) clamp(16px, 2vw, 24px); }
+.stat-number { font-size: clamp(32px, 5vw, 56px); }
+.stat-label { font-size: clamp(12px, 1.5vw, 18px); }
+.actor-name { font-size: clamp(22px, 3.5vw, 38px); margin-bottom: clamp(20px, 3vw, 40px); }
+.actor-photos-grid { gap: clamp(12px, 2.5vw, 28px); }
+.work-with-us { 
+    padding: clamp(30px, 5vw, 70px); 
+    gap: clamp(24px, 5vw, 70px); 
+    margin: clamp(40px, 8vw, 100px) 0; 
+}
+.work-title { font-size: clamp(22px, 3.5vw, 38px); }
+.work-text { font-size: clamp(13px, 1.5vw, 17px); }
+.work-btn { 
+    padding: clamp(10px, 1.8vw, 16px) clamp(20px, 3.5vw, 36px); 
+    font-size: clamp(13px, 1.5vw, 17px); 
+}
+.show-more-btn { 
+    padding: clamp(10px, 1.8vw, 16px) clamp(30px, 5vw, 64px); 
+    font-size: clamp(12px, 1.4vw, 15px); 
+}
+
+/* ============================================
+   CUSTOMERS PAGE — АДАПТИВ
+============================================ */
+.services-grid { gap: clamp(16px, 2.5vw, 28px); }
+.service-card { padding: clamp(20px, 3vw, 36px); }
+.service-number { font-size: clamp(32px, 5vw, 56px); margin-bottom: clamp(20px, 3vw, 36px); }
+.service-title { font-size: clamp(16px, 2vw, 24px); }
+.service-desc { font-size: clamp(12px, 1.4vw, 16px); }
+.service-link { font-size: clamp(11px, 1.3vw, 15px); }
+.request-builder { 
+    padding: clamp(30px, 4.5vw, 56px) clamp(24px, 4vw, 48px); 
+    gap: clamp(24px, 4vw, 48px); 
+}
+.builder-preview { padding: clamp(16px, 2.5vw, 32px); }
+.preview-title { font-size: clamp(14px, 1.8vw, 20px); }
+.preview-label { width: clamp(70px, 10vw, 110px); font-size: clamp(11px, 1.3vw, 15px); }
+.preview-value { font-size: clamp(12px, 1.4vw, 15px); }
+.rider-section { gap: clamp(24px, 4vw, 48px); }
+.rider-info h3 { font-size: clamp(22px, 3.5vw, 38px); }
+.rider-info p { font-size: clamp(13px, 1.6vw, 18px); }
+.rider-card { padding: clamp(20px, 3vw, 36px); }
+.rider-card h4 { font-size: clamp(16px, 2vw, 22px); }
+.terms-grid { gap: clamp(16px, 2.5vw, 28px); }
+.terms-card { padding: clamp(20px, 3vw, 36px); }
+.terms-card h4 { font-size: clamp(16px, 2vw, 24px); }
+.terms-list li { font-size: clamp(12px, 1.4vw, 15px); }
+.contact-form-section { 
+    padding: clamp(30px, 4.5vw, 56px); 
+    gap: clamp(30px, 4vw, 56px); 
+}
+.contact-info h3 { font-size: clamp(20px, 3vw, 30px); }
+.contact-info p { font-size: clamp(12px, 1.4vw, 15px); }
+.contact-value { font-size: clamp(13px, 1.5vw, 18px); }
+#sendContactBtn { 
+    padding: clamp(10px, 1.5vw, 14px) clamp(20px, 3vw, 32px); 
+    font-size: clamp(12px, 1.4vw, 15px); 
+}
+
+/* ============================================
+   PERFORMANCE DETAIL PAGE — АДАПТИВ
+============================================ */
+.breadcrumbs { 
+    padding: clamp(16px, 2.5vw, 28px) 0 clamp(16px, 2.5vw, 28px); 
+    font-size: clamp(11px, 1.3vw, 15px); 
+}
+.performance-hero { gap: clamp(24px, 4vw, 50px); margin-bottom: clamp(30px, 5vw, 70px); }
+.performance-title { font-size: clamp(28px, 5vw, 56px); margin-bottom: clamp(20px, 3vw, 36px); }
+.performance-meta { gap: clamp(16px, 3vw, 40px); }
+.meta-label { font-size: clamp(10px, 1.1vw, 13px); }
+.meta-value { font-size: clamp(14px, 1.8vw, 20px); }
+.performance-description h3 { font-size: clamp(14px, 1.8vw, 20px); }
+.performance-description p { font-size: clamp(13px, 1.5vw, 17px); }
+.review-block { padding: clamp(16px, 2.5vw, 28px) clamp(20px, 3vw, 36px); }
+.review-text { font-size: clamp(13px, 1.5vw, 17px); }
+.performance-price { font-size: clamp(24px, 3.5vw, 40px); }
+.schedule-title, .cast-title, .similar-title { font-size: clamp(20px, 3vw, 32px); }
+.schedule-item { padding: clamp(14px, 2vw, 24px) clamp(16px, 2.5vw, 32px); }
+.schedule-date { font-size: clamp(14px, 1.8vw, 20px); }
+.cast-grid { gap: clamp(12px, 2vw, 28px); }
+.cast-card { padding: clamp(12px, 2vw, 24px); gap: clamp(12px, 2vw, 24px); }
+.cast-avatar { 
+    width: clamp(50px, 7vw, 80px); 
+    height: clamp(50px, 7vw, 80px); 
+    font-size: clamp(14px, 2vw, 24px); 
+}
+.cast-name { font-size: clamp(14px, 1.8vw, 20px); }
+.cast-role { font-size: clamp(11px, 1.3vw, 15px); }
+.technical-section { padding: clamp(20px, 3vw, 36px); }
+.technical-title { font-size: clamp(18px, 2.5vw, 28px); }
+.technical-label, .technical-value { font-size: clamp(12px, 1.4vw, 16px); }
+.similar-grid { gap: clamp(16px, 2.5vw, 28px); }
+.similar-img { height: clamp(160px, 22vw, 260px); }
+.similar-content { padding: clamp(14px, 2.5vw, 28px); }
+.similar-name { font-size: clamp(16px, 2vw, 24px); }
+.similar-desc { font-size: clamp(11px, 1.3vw, 15px); }
+.similar-price { font-size: clamp(14px, 1.8vw, 20px); }
+
+/* ============================================
+   SEATS PAGE — АДАПТИВ
+============================================ */
+.step-number { 
+    width: clamp(30px, 4vw, 44px); 
+    height: clamp(30px, 4vw, 44px); 
+    font-size: clamp(12px, 1.6vw, 18px); 
+}
+.step-label { font-size: clamp(10px, 1.3vw, 14px); }
+.hall-scheme { padding: clamp(16px, 3vw, 36px); }
+.hall-title { font-size: clamp(18px, 2.5vw, 28px); }
+.legend-item { font-size: clamp(11px, 1.3vw, 14px); }
+.legend-color { 
+    width: clamp(14px, 2vw, 24px); 
+    height: clamp(14px, 2vw, 24px); 
+}
+.stage { padding: clamp(12px, 2vw, 24px); }
+.stage span { font-size: clamp(11px, 1.4vw, 16px); }
+.seat { 
+    width: clamp(32px, 4.5vw, 50px); 
+    height: clamp(32px, 4.5vw, 50px); 
+    font-size: clamp(10px, 1.3vw, 14px); 
+}
+.row-label { 
+    width: clamp(40px, 6vw, 70px); 
+    font-size: clamp(11px, 1.4vw, 16px); 
+}
+.order-summary { padding: clamp(20px, 3vw, 36px); }
+.summary-header h3 { font-size: clamp(16px, 2vw, 22px); }
+.summary-title { font-size: clamp(13px, 1.6vw, 18px); }
+.total-label, .total-price { font-size: clamp(16px, 2vw, 24px); }
+.btn-back, .btn-next { 
+    padding: clamp(10px, 1.5vw, 14px); 
+    font-size: clamp(12px, 1.4vw, 15px); 
+}
+
+/* ============================================
+   MERCH SHOP PAGE — АДАПТИВ
+============================================ */
+.filter-chip { 
+    padding: clamp(6px, 1vw, 10px) clamp(16px, 2.5vw, 28px); 
+    font-size: clamp(11px, 1.3vw, 15px); 
+}
+.product-card { border-radius: clamp(6px, 1vw, 10px); }
+.product-img { height: clamp(160px, 22vw, 260px); }
+.product-info { padding: clamp(14px, 2vw, 24px) clamp(14px, 2vw, 24px) clamp(16px, 2.5vw, 28px); }
+.product-name { font-size: clamp(14px, 1.8vw, 20px); }
+.product-desc { font-size: clamp(10px, 1.2vw, 14px); }
+.product-price { font-size: clamp(16px, 2.2vw, 26px); }
+.buy-now-btn { 
+    height: clamp(38px, 5vw, 52px); 
+    font-size: clamp(12px, 1.4vw, 15px); 
+}
+.load-more-btn { 
+    width: clamp(200px, 30vw, 300px); 
+    padding: clamp(10px, 1.8vw, 16px) clamp(30px, 5vw, 64px); 
+    font-size: clamp(12px, 1.4vw, 15px); 
+}
+
+/* ============================================
+   BRANDBOOK — АДАПТИВ
+============================================ */
+.hero-brand { padding: clamp(40px, 8vw, 100px) clamp(20px, 4vw, 50px) clamp(40px, 6vw, 80px); }
+.hero-brand h1 { font-size: clamp(28px, 6vw, 72px); }
+.hero-brand p { font-size: clamp(13px, 1.8vw, 20px); }
+.grid-2col, .grid-3col { gap: clamp(16px, 3vw, 40px); }
+.brand-card { padding: clamp(20px, 3vw, 36px); }
+.brand-card h3 { font-size: clamp(16px, 2vw, 24px); }
+.brand-card p { font-size: clamp(12px, 1.4vw, 16px); }
+.photo-large { height: clamp(200px, 35vw, 450px); }
+.swatch { min-width: clamp(120px, 16vw, 200px); }
+.swatch-color { height: clamp(100px, 14vw, 160px); }
+.swatch-name { font-size: clamp(13px, 1.5vw, 18px); }
+
+/* ============================================
+   TOUR MAP SECTION — АДАПТИВ
+============================================ */
+.tour-map-section { 
+    padding: clamp(24px, 4vw, 48px); 
+    margin: clamp(30px, 6vw, 80px) 0; 
+}
+.tour-title { font-size: clamp(22px, 3.5vw, 40px); }
+.tour-all-link { font-size: clamp(11px, 1.4vw, 15px); }
+.tour-map-container { gap: clamp(20px, 4vw, 48px); }
+.tour-map-container .map-placeholder { height: clamp(200px, 30vw, 400px); }
+.tour-city { 
+    font-size: clamp(12px, 1.4vw, 16px); 
+    width: clamp(100px, 14vw, 160px); 
+}
+.tour-dates span, .tour-venue { font-size: clamp(11px, 1.3vw, 15px); }
+.tour-status { 
+    padding: clamp(3px, 0.6vw, 5px) clamp(10px, 1.5vw, 16px); 
+    font-size: clamp(9px, 1.1vw, 13px); 
+    min-width: clamp(70px, 9vw, 100px); 
+}
+
+/* ============================================
+   MODAL — АДАПТИВ
+============================================ */
+.modal-container { 
+    padding: clamp(20px, 3vw, 36px); 
+    border-radius: clamp(8px, 1.5vw, 16px); 
+}
+.modal-close { 
+    top: clamp(10px, 1.5vw, 20px); 
+    right: clamp(14px, 2vw, 24px); 
+    font-size: clamp(22px, 3vw, 32px); 
+}
+.modal-btn { 
+    width: clamp(180px, 25vw, 280px); 
+    height: clamp(40px, 5vw, 56px); 
+    font-size: clamp(12px, 1.4vw, 15px); 
+}
+.success-content { 
+    padding: clamp(30px, 4vw, 56px) clamp(20px, 3vw, 40px); 
+    margin: clamp(30px, 5vw, 70px) auto; 
+}
+.success-content i { font-size: clamp(40px, 7vw, 80px); }
+.success-content h2 { font-size: clamp(22px, 3.5vw, 40px); }
+.success-content p { font-size: clamp(13px, 1.5vw, 17px); }
+.btn-return { 
+    padding: clamp(10px, 1.8vw, 16px) clamp(24px, 3.5vw, 40px); 
+    font-size: clamp(12px, 1.4vw, 15px); 
+}
+
+/* ============================================
+   АДАПТИВНЫЕ СЕТКИ — ЗАМЕНА ФИКСИРОВАННЫХ GRID
+============================================ */
+/* Вместо grid-template-columns: repeat(3, 1fr) используем: */
+.events-grid,
+.awards-grid,
+.similar-grid,
+.services-grid,
+.actor-photos-grid,
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    gap: clamp(16px, 2.5vw, 32px);
+}
+
+.cast-grid,
+.technical-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+    gap: clamp(12px, 2vw, 28px);
+}
+
+/* Для сеток, где нужно строго 2 колонки на десктопе */
+.terms-grid,
+.contact-form-section,
+.grid-2col {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(20px, 3vw, 40px);
+}
+
+/* Для сеток, где нужно строго 3 колонки на десктопе */
+.grid-3col {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(20px, 3vw, 40px);
 }
