@@ -3,249 +3,834 @@
 <head>
     <meta charset="UTF-8">
     <title>Театр клоунады «Микос» | Брендбук</title>
-    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-	<link rel="stylesheet" href="css/style.css">
-    <link rel="icon" type="image/svg+xml" href="SVG/logo-2.svg" sizes="any">
+    <meta name="description" content="Кодекс визуальной и смысловой идентичности театра клоунады «Микос»">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    
+    <!-- Шрифты -->
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;800&family=Nunito+Sans:opsz,wght@6..12,300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="SVG/logo-2.svg">
+    
+    <!-- Основные стили (встроенные для автономности) -->
     <style>
+        /* ===== DESIGN TOKENS ===== */
+        :root {
+            --color-bg-light: #F2F1F0; --color-bg-dark: #231F20;
+            --color-accent-red: #F43139; --color-deep-blue: #2C4068; --color-gold: #D4BF95;
+            --color-text-primary: var(--color-bg-dark); --color-text-secondary: #5A5A5A;
+            --color-text-inverse: var(--color-bg-light);
+            --color-border: rgba(35, 31, 32, 0.12); --color-shadow: rgba(35, 31, 32, 0.08);
+            --font-display: 'Unbounded', system-ui, sans-serif;
+            --font-body: 'Nunito Sans', system-ui, sans-serif;
+            --text-xs: 0.75rem; --text-sm: 0.875rem; --text-base: 1rem;
+            --text-lg: 1.125rem; --text-xl: 1.25rem; --text-2xl: 1.5rem;
+            --text-3xl: 1.875rem; --text-4xl: 2.25rem; --text-5xl: 3rem; --text-6xl: 3.75rem;
+            --space-1: 0.25rem; --space-2: 0.5rem; --space-3: 0.75rem; --space-4: 1rem;
+            --space-5: 1.25rem; --space-6: 1.5rem; --space-8: 2rem; --space-10: 2.5rem;
+            --space-12: 3rem; --space-16: 4rem;
+            --container-max: 1440px; --container-padding: var(--space-6);
+            --border-radius: 12px; --border-radius-lg: 20px;
+            --transition: 0.2s ease; --transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* ===== БАЗОВЫЕ СТИЛИ ===== */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; font-size: 16px; }
+        body {
+            font-family: var(--font-body); font-size: var(--text-base); line-height: 1.6;
+            color: var(--color-text-primary); background: var(--color-bg-light);
+            -webkit-font-smoothing: antialiased; overflow-x: hidden;
+        }
+        img { max-width: 100%; height: auto; display: block; }
+        a { color: inherit; text-decoration: none; }
+        button { font: inherit; cursor: pointer; border: none; background: none; }
+
+        .brandbook-container { min-height: 100vh; display: flex; flex-direction: column; }
+        .content-wrapper {
+            max-width: var(--container-max); margin: 0 auto;
+            padding: var(--space-12) var(--container-padding); width: 100%;
+        }
+
+        /* ===== HEADER ===== */
+        .main-header {
+            position: sticky; top: 0; z-index: 100;
+            background: rgba(242, 241, 240, 0.95); backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--color-border); transition: var(--transition);
+        }
+        .main-header.scrolled { box-shadow: 0 4px 20px var(--color-shadow); }
+        .header-inner {
+            max-width: var(--container-max); margin: 0 auto;
+            padding: var(--space-4) var(--container-padding);
+            display: flex; align-items: center; justify-content: space-between; gap: var(--space-4);
+        }
+        .header-left { display: flex; align-items: center; gap: var(--space-6); flex: 1; }
+        .logo-group { display: flex; align-items: center; gap: var(--space-3); }
+        .logo-img { height: 32px; width: auto; object-fit: contain; }
+        .brandbook-label {
+            font-family: var(--font-display); font-weight: 700; font-size: var(--text-xl);
+            color: var(--color-accent-red); letter-spacing: -0.02em;
+            padding-left: var(--space-4); border-left: 2px solid var(--color-border);
+        }
+        .nav-menu {
+            display: flex; align-items: center; gap: var(--space-2);
+            list-style: none; margin-left: auto;
+        }
+        .nav-btn {
+            padding: var(--space-2) var(--space-4); font-family: var(--font-display);
+            font-weight: 600; font-size: var(--text-sm); color: var(--color-text-secondary);
+            border-radius: 8px; transition: var(--transition); position: relative;
+        }
+        .nav-btn:hover, .nav-btn.active {
+            color: var(--color-bg-dark); background: rgba(244, 49, 57, 0.08);
+        }
+        .nav-btn.active::after {
+            content: ''; position: absolute; bottom: -2px; left: 50%;
+            transform: translateX(-50%); width: 20px; height: 3px;
+            background: var(--color-accent-red); border-radius: 2px;
+        }
+        .burger-icon {
+            display: none; font-size: var(--text-2xl); color: var(--color-bg-dark);
+            padding: var(--space-2); border-radius: 8px; transition: var(--transition);
+            order: 99; margin-left: auto;
+        }
+        .burger-icon:hover { background: rgba(35, 31, 32, 0.08); }
+
+        /* ===== МОБИЛЬНОЕ МЕНЮ (совместимо с вашим CSS) ===== */
+        .mobile-nav {
+            position: fixed; top: 0; right: -100%; width: 75%; max-width: 320px;
+            min-width: 240px; height: 100vh; height: -webkit-fill-available;
+            background: var(--color-bg-dark); z-index: 10000;
+            transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 70px 20px 30px 20px; overflow-y: auto; overflow-x: hidden;
+            display: flex; flex-direction: column; box-sizing: border-box;
+            border-radius: 0; box-shadow: -4px 0 16px rgba(0, 0, 0, 0.25);
+        }
+        .mobile-nav.open { right: 0; }
+        
+        /* Логотипы в мобильном меню — сначала! */
+        .mobile-logo-group {
+            display: flex; flex-direction: column; align-items: center;
+            gap: 12px; margin-bottom: 16px; padding-bottom: 16px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+        .mobile-logo-group .logo-img { height: 40px; }
+        
+        .close-mobile-menu {
+            position: absolute; top: 16px; right: 16px;
+            width: 38px; height: 38px; display: flex; align-items: center;
+            justify-content: center; background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%; color: #fff; font-size: 20px; cursor: pointer;
+            z-index: 10001; border: none; transition: background 0.2s;
+        }
+        .close-mobile-menu:hover { background: rgba(255, 255, 255, 0.2); }
+        
+        .mobile-nav ul {
+            list-style: none; display: flex; flex-direction: column;
+            gap: 12px; margin: 0; padding: 0;
+        }
+        .mobile-nav ul li a {
+            color: var(--color-bg-light); font-family: var(--font-display);
+            font-size: 15px; text-decoration: none; display: block;
+            padding: 6px 0; line-height: 1.2; transition: color 0.2s;
+        }
+        .mobile-nav ul li a:hover, .mobile-nav ul li a.active {
+            color: var(--color-accent-red);
+        }
+        
+        .overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5); z-index: 9999;
+            display: none; opacity: 0; transition: opacity 0.3s ease;
+        }
+        .overlay.active { display: block; opacity: 1; }
+
+        /* ===== HERO ===== */
+        .hero-brand {
+            padding: var(--space-16) var(--container-padding);
+            text-align: center; color: var(--color-text-inverse);
+            position: relative; overflow: hidden;
+        }
+        .hero-brand::before {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(135deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.4) 100%); z-index: 1;
+        }
+        .hero-brand-content { position: relative; z-index: 2; max-width: 800px; margin: 0 auto; }
+        .hero-brand h1 {
+            font-family: var(--font-display); font-weight: 800;
+            font-size: clamp(var(--text-4xl), 8vw, var(--text-6xl));
+            line-height: 1.1; letter-spacing: -0.03em;
+            margin-bottom: var(--space-4); text-transform: uppercase;
+        }
+        .hero-brand p {
+            font-size: var(--text-xl); font-weight: 400; opacity: 0.95;
+            max-width: 600px; margin: 0 auto;
+        }
+        .hero-brand[data-color="dark"] { background: var(--color-bg-dark); }
+        .hero-brand[data-color="blue"] { background: var(--color-deep-blue); }
+        .hero-brand[data-color="red"] { background: var(--color-accent-red); }
+        .hero-brand[data-color="gold"] { background: var(--color-gold); color: var(--color-bg-dark); }
+
+        /* ===== СЕТКА И КАРТОЧКИ ===== */
+        .grid-2col {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-6); margin-bottom: var(--space-10);
+        }
+        .grid-3col {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: var(--space-5); margin-bottom: var(--space-10);
+        }
+        .brand-card {
+            background: #fff; border-radius: var(--border-radius-lg);
+            padding: var(--space-6); box-shadow: 0 4px 20px var(--color-shadow);
+            transition: var(--transition-smooth); border: 1px solid var(--color-border);
+        }
+        .brand-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px var(--color-shadow); }
+        .brand-card h3 {
+            font-family: var(--font-display); font-weight: 700; font-size: var(--text-xl);
+            color: var(--color-bg-dark); margin-bottom: var(--space-3); line-height: 1.3;
+        }
+        .brand-card p { color: var(--color-text-secondary); font-size: var(--text-base); line-height: 1.7; }
+
+        /* ===== ЛОГОТИПЫ И ПАЛИТРА ===== */
+        .logo-demo-box {
+            display: flex; flex-wrap: wrap; gap: var(--space-6);
+            justify-content: center; padding: var(--space-8) 0; margin-bottom: var(--space-10);
+        }
+        .logo-version {
+            text-align: center; padding: var(--space-5); background: #fff;
+            border-radius: var(--border-radius); border: 1px solid var(--color-border); min-width: 180px;
+        }
+        .logo-version img { margin: 0 auto var(--space-3); border-radius: 6px; }
+        .logo-version p { font-size: var(--text-sm); color: var(--color-text-secondary); font-weight: 500; }
+        .color-palette {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: var(--space-4); margin-bottom: var(--space-10);
+        }
+        .swatch {
+            background: #fff; border-radius: var(--border-radius); overflow: hidden;
+            box-shadow: 0 4px 16px var(--color-shadow); border: 1px solid var(--color-border);
+        }
+        .swatch-color { height: 80px; width: 100%; }
+        .swatch-info { padding: var(--space-3); text-align: center; }
+        .swatch-name {
+            font-family: var(--font-display); font-weight: 600; font-size: var(--text-sm);
+            display: block; margin-bottom: var(--space-1);
+        }
+        .swatch-info code {
+            font-family: monospace; font-size: var(--text-xs); color: var(--color-text-secondary);
+            background: rgba(0,0,0,0.04); padding: 2px 6px; border-radius: 4px;
+        }
+        .mistake-badge {
+            margin-top: var(--space-4); padding: var(--space-3) var(--space-4);
+            background: rgba(244, 49, 57, 0.08); border-left: 3px solid var(--color-accent-red);
+            border-radius: 0 8px 8px 0; font-size: var(--text-sm); color: var(--color-text-primary);
+        }
+
+        /* ===== ФОТО-БЛОКИ ===== */
+        .photo-large, .photo-medium {
+            border-radius: var(--border-radius-lg); overflow: hidden;
+            box-shadow: 0 8px 32px var(--color-shadow); margin: var(--space-6) 0;
+        }
+        .photo-large img {
+            width: 100%; height: auto; aspect-ratio: 16/6; object-fit: cover;
+            transition: var(--transition-smooth);
+        }
+        .photo-large:hover img { transform: scale(1.02); }
+        .photo-medium { border-radius: var(--border-radius); }
+        .photo-medium img { width: 100%; height: auto; aspect-ratio: 4/3; object-fit: cover; }
+
+        /* ===== КНОПКИ ===== */
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center;
+            gap: var(--space-2); padding: var(--space-3) var(--space-6);
+            font-family: var(--font-display); font-weight: 600; font-size: var(--text-sm);
+            border-radius: 10px; transition: var(--transition);
+            text-transform: uppercase; letter-spacing: 0.02em;
+        }
+        .btn-primary { background: var(--color-accent-red); color: #fff; }
+        .btn-primary:hover {
+            background: #d62a31; transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(244, 49, 57, 0.3);
+        }
+        .btn-secondary {
+            background: transparent; color: var(--color-bg-dark);
+            border: 2px solid var(--color-border);
+        }
+        .btn-secondary:hover {
+            border-color: var(--color-bg-dark); background: rgba(35, 31, 32, 0.04);
+        }
+
+        /* ===== СТРАНИЦЫ ===== */
+        .page-section { display: none; animation: fadeIn 0.4s ease; }
+        .page-section.active { display: block; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ===== КАРУСЕЛЬ НОСИТЕЛЕЙ ===== */
+        .media-carousel-wrapper {
+            position: relative; margin: var(--space-8) 0; padding: 0 var(--space-4);
+        }
+        .media-carousel {
+            display: flex; gap: var(--space-5); overflow-x: auto;
+            scroll-snap-type: x mandatory; scroll-behavior: smooth;
+            padding: var(--space-2) 0; scrollbar-width: none;
+        }
+        .media-carousel::-webkit-scrollbar { display: none; }
+        .media-card {
+            flex: 0 0 280px; scroll-snap-align: start;
+            background: #fff; border-radius: var(--border-radius-lg);
+            overflow: hidden; box-shadow: 0 4px 20px var(--color-shadow);
+            border: 1px solid var(--color-border);
+            transition: var(--transition-smooth); cursor: pointer;
+        }
+        .media-card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px var(--color-shadow); }
+        .media-card-image { position: relative; height: 180px; overflow: hidden; }
+        .media-card-image img {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+        .media-card:hover .media-card-image img { transform: scale(1.05); }
+        .media-card-tag {
+            position: absolute; top: var(--space-3); left: var(--space-3);
+            background: var(--color-accent-red); color: #fff;
+            font-size: var(--text-xs); font-weight: 600;
+            padding: 4px 10px; border-radius: 20px;
+            text-transform: uppercase; letter-spacing: 0.03em;
+        }
+        .media-card-content { padding: var(--space-5); }
+        .media-card-content h3 {
+            font-family: var(--font-display); font-weight: 700;
+            font-size: var(--text-xl); margin-bottom: var(--space-2); color: var(--color-bg-dark);
+        }
+        .media-card-content p {
+            color: var(--color-text-secondary); font-size: var(--text-sm);
+            margin-bottom: var(--space-4); line-height: 1.5;
+        }
+        .media-card-meta {
+            display: flex; gap: var(--space-3); font-size: var(--text-xs);
+            color: var(--color-text-secondary); margin-bottom: var(--space-4);
+        }
+        .media-card-meta i { color: var(--color-accent-red); margin-right: 4px; }
+        .carousel-btn {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            width: 44px; height: 44px; border-radius: 50%;
+            background: #fff; border: 1px solid var(--color-border);
+            color: var(--color-bg-dark); font-size: var(--text-lg);
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 4px 12px var(--color-shadow); transition: var(--transition); z-index: 10;
+        }
+        .carousel-btn:hover { background: var(--color-accent-red); color: #fff; border-color: var(--color-accent-red); }
+        .carousel-btn.prev { left: -10px; }
+        .carousel-btn.next { right: -10px; }
+        .carousel-dots { display: flex; justify-content: center; gap: 8px; margin-top: var(--space-4); }
+        .carousel-dot {
+            width: 10px; height: 10px; border-radius: 50%;
+            background: var(--color-border); cursor: pointer; transition: var(--transition);
+        }
+        .carousel-dot.active { background: var(--color-accent-red); transform: scale(1.2); }
+
+        /* ===== ДЕТАЛЬНАЯ СТРАНИЦА НОСИТЕЛЯ ===== */
+        .media-detail-page { display: none; animation: slideIn 0.3s ease; }
+        .media-detail-page.active { display: block; }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        .media-detail-header {
+            background: var(--color-bg-dark); color: var(--color-text-inverse);
+            padding: var(--space-8) var(--container-padding); text-align: center; position: relative;
+        }
+        .media-detail-header .btn-secondary {
+            position: absolute; left: var(--container-padding); top: var(--space-4);
+            background: rgba(255,255,255,0.15); color: #fff;
+            border-color: rgba(255,255,255,0.3);
+        }
+        .media-detail-header .btn-secondary:hover { background: rgba(255,255,255,0.25); }
+        .media-detail-tag {
+            display: inline-block; background: var(--color-accent-red); color: #fff;
+            font-size: var(--text-xs); font-weight: 600; padding: 4px 12px;
+            border-radius: 20px; margin-bottom: var(--space-3);
+            text-transform: uppercase; letter-spacing: 0.05em;
+        }
+        .media-detail-title h1 {
+            font-family: var(--font-display); font-weight: 800;
+            font-size: clamp(var(--text-3xl), 6vw, var(--text-5xl));
+            margin-bottom: var(--space-2); line-height: 1.1;
+        }
+        .media-detail-title p { font-size: var(--text-lg); opacity: 0.9; max-width: 600px; margin: 0 auto; }
+        .media-detail-content {
+            max-width: var(--container-max); margin: 0 auto;
+            padding: var(--space-10) var(--container-padding);
+        }
+        .media-gallery { margin-bottom: var(--space-8); }
+        .gallery-main {
+            position: relative; border-radius: var(--border-radius-lg);
+            overflow: hidden; box-shadow: 0 12px 40px var(--color-shadow);
+            margin-bottom: var(--space-4);
+        }
+        .gallery-main img {
+            width: 100%; height: auto; aspect-ratio: 16/10;
+            object-fit: cover; display: block;
+        }
+        .gallery-nav {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            width: 48px; height: 48px; border-radius: 50%;
+            background: rgba(35, 31, 32, 0.7); color: #fff; border: none;
+            font-size: var(--text-xl); display: flex; align-items: center;
+            justify-content: center; cursor: pointer; transition: var(--transition); z-index: 5;
+        }
+        .gallery-nav:hover { background: var(--color-accent-red); }
+        .gallery-nav.prev { left: var(--space-4); }
+        .gallery-nav.next { right: var(--space-4); }
+        .gallery-thumbs {
+            display: flex; gap: var(--space-3); overflow-x: auto;
+            padding: var(--space-2) 0; scrollbar-width: thin;
+        }
+        .gallery-thumbs::-webkit-scrollbar { height: 6px; }
+        .gallery-thumbs::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 3px; }
+        .thumb {
+            flex: 0 0 100px; height: 66px; border-radius: 8px;
+            object-fit: cover; cursor: pointer; opacity: 0.7;
+            transition: var(--transition); border: 2px solid transparent;
+        }
+        .thumb:hover, .thumb.active {
+            opacity: 1; border-color: var(--color-accent-red); transform: scale(1.03);
+        }
+        .media-specs-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-6); margin-bottom: var(--space-8);
+        }
+        .specs-table { width: 100%; border-collapse: collapse; font-size: var(--text-sm); }
+        .specs-table th, .specs-table td {
+            padding: var(--space-3) var(--space-4); text-align: left;
+            border-bottom: 1px solid var(--color-border);
+        }
+        .specs-table th { font-weight: 600; color: var(--color-text-primary); width: 45%; }
+        .specs-table td { color: var(--color-text-secondary); }
+        .downloads-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: var(--space-4);
+        }
+        .download-item {
+            display: flex; align-items: flex-start; gap: var(--space-3);
+            padding: var(--space-4); background: rgba(244, 49, 57, 0.06);
+            border-radius: var(--border-radius); border: 1px solid var(--color-border);
+            transition: var(--transition);
+        }
+        .download-item:hover { background: rgba(244, 49, 57, 0.12); transform: translateY(-2px); }
+        .download-item i { font-size: var(--text-2xl); color: var(--color-accent-red); margin-top: 2px; }
+        .download-item strong { display: block; font-size: var(--text-base); margin-bottom: 2px; }
+        .download-item small { color: var(--color-text-secondary); font-size: var(--text-xs); }
+
+        /* ===== АДАПТИВ ДЛЯ БОЛЬШИХ ЭКРАНОВ ===== */
+        @media (min-width: 1600px) {
+            :root { --container-padding: var(--space-10); }
+            .hero-brand h1 { font-size: clamp(var(--text-5xl), 5vw, var(--text-6xl)); }
+            .content-wrapper { padding: var(--space-16) var(--container-padding); }
+            .brand-card { padding: var(--space-8); }
+        }
+
+        /* ===== АДАПТИВ ДЛЯ ПЛАНШЕТОВ И МОБИЛЬНЫХ ===== */
+        @media (max-width: 1024px) {
+            .nav-menu { display: none; }
+            .burger-icon { display: flex; align-items: center; }
+            .header-left { gap: var(--space-4); }
+            .brandbook-label { font-size: var(--text-lg); padding-left: var(--space-3); }
+        }
+
+        @media (max-width: 768px) {
+            .media-card { flex: 0 0 240px; }
+            .carousel-btn { display: none; }
+            .gallery-nav { width: 40px; height: 40px; font-size: var(--text-lg); }
+            .thumb { flex: 0 0 80px; height: 53px; }
+            .media-detail-header .btn-secondary { position: static; margin-bottom: var(--space-4); }
+            .grid-2col, .grid-3col { grid-template-columns: 1fr; }
+            .hero-brand { padding: var(--space-12) var(--container-padding); }
+        }
+
+        @media (max-width: 640px) {
+            :root { --container-padding: var(--space-4); --space-12: 2.5rem; --space-16: 3rem; }
+            .header-inner { padding: var(--space-3) var(--container-padding); }
+            .logo-img { height: 28px; }
+            .hero-brand { padding: var(--space-10) var(--container-padding); }
+            .hero-brand h1 { font-size: clamp(var(--text-3xl), 10vw, var(--text-5xl)); }
+            .content-wrapper { padding: var(--space-8) var(--container-padding); }
+            .brand-card { padding: var(--space-5); }
+            .photo-large img { aspect-ratio: 4/3; }
+        }
+
+        /* ===== ГАРАНТИЯ СКРЫТИЯ ДЕТАЛЬНЫХ СТРАНИЦ ===== */
+        .media-detail-page {
+            display: none !important; position: absolute; left: -9999px;
+            top: 0; width: 100%; pointer-events: none;
+        }
+        .media-detail-page.active {
+            display: block !important; position: static; left: auto;
+            pointer-events: auto; animation: slideIn 0.3s ease;
+        }
+
+        /* ===== УТИЛИТЫ ===== */
+        .text-center { text-align: center; }
+        .mt-4 { margin-top: var(--space-4); }
+        .mt-6 { margin-top: var(--space-6); }
+        .mt-8 { margin-top: var(--space-8); }
+        .mb-4 { margin-bottom: var(--space-4); }
+        .mb-6 { margin-bottom: var(--space-6); }
+        .hidden { display: none !important; }
+
+        /* iOS Safari height fix */
+        @supports (-webkit-touch-callout: none) {
+            .mobile-nav { height: -webkit-fill-available !important; }
+        }
     </style>
 </head>
 <body>
 <div class="brandbook-container">
-    <!-- HEADER: два логотипа, надпись Брендбук увеличенная, меню без красных линий -->
-    <header class="main-header">
+    
+    <!-- HEADER -->
+    <header class="main-header" id="mainHeader">
         <div class="header-inner">
             <div class="header-left">
-                <div class="logo-group">
-                    <img class="logo-img" src="SVG/logo-2.svg" alt="Логотип-знак">
-                    <img class="logo-img" src="SVG/logo.svg" alt="Логотип текст">
-                </div>
-                <span class="brandbook-label">Брендбук</span>
-                <ul class="nav-menu" id="brandNav">
-                    <li><button class="nav-btn active" data-page="about">О бренде</button></li>
-                    <li><button class="nav-btn" data-page="logo">Логотип</button></li>
-                    <li><button class="nav-btn" data-page="colors">Цвета</button></li>
-                    <li><button class="nav-btn" data-page="typo">Типографика</button></li>
-                    <li><button class="nav-btn" data-page="graphics">Графика</button></li>
-                    <li><button class="nav-btn" data-page="photo">Фотостиль</button></li>
-                    <li><button class="nav-btn" data-page="media">Носители</button></li>
-                </ul>
-                <div class="burger-icon" id="burgerIcon"><i class="fas fa-bars"></i></div>
-            </div>
-            <!-- КРАСНАЯ КНОПКА УДАЛЕНА -->
+				<a href="index.html" class="logo-link" aria-label="На главную">
+					<div class="logo-group">
+						<img class="logo-img" src="SVG/logo-2.svg" alt="Знак" loading="lazy">
+						<img class="logo-img" src="SVG/logo.svg" alt="Логотип" loading="lazy">
+					</div>
+				</a>
+				<span class="brandbook-label">Брендбук</span>
+			</div>
+            <nav class="nav-menu" id="brandNav" aria-label="Основная навигация">
+                <li><button class="nav-btn active" data-page="about">О бренде</button></li>
+                <li><button class="nav-btn" data-page="logo">Логотип</button></li>
+                <li><button class="nav-btn" data-page="colors">Цвета</button></li>
+                <li><button class="nav-btn" data-page="typo">Типографика</button></li>
+                <li><button class="nav-btn" data-page="graphics">Графика</button></li>
+                <li><button class="nav-btn" data-page="photo">Фотостиль</button></li>
+                <li><button class="nav-btn" data-page="media">Носители</button></li>
+            </nav>
+            <button class="burger-icon" id="burgerIcon" aria-label="Открыть меню" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
     </header>
-    <div class="mobile-nav" id="mobileNav">
-        <div class="close-mobile-menu" id="closeMobileMenu">✕</div>
-        <ul>
-            <li><a href="#" data-mobile-page="about">О бренде</a></li>
-            <li><a href="#" data-mobile-page="logo">Логотип</a></li>
-            <li><a href="#" data-mobile-page="colors">Цвета</a></li>
-            <li><a href="#" data-mobile-page="typo">Типографика</a></li>
-            <li><a href="#" data-mobile-page="graphics">Графика</a></li>
-            <li><a href="#" data-mobile-page="photo">Фотостиль</a></li>
-            <li><a href="#" data-mobile-page="media">Носители</a></li>
-        </ul>
-    </div>
-    <div class="overlay" id="overlay"></div>
 
-    <!-- СТРАНИЦА 1: О БРЕНДЕ -->
+    <!-- В МОБИЛЬНОМ МЕНЮ (тоже оберните) -->
+	<aside class="mobile-nav" id="mobileNav" aria-hidden="true">
+		<button class="close-mobile-menu" id="closeMobileMenu" aria-label="Закрыть меню">
+			<i class="fas fa-times"></i>
+		</button>
+		
+		<!-- Логотипы в мобильном меню -- кликабельные -->
+		<a href="index.html" class="logo-link mobile-logo-link" aria-label="На главную">
+			<div class="mobile-logo-group">
+				<img class="logo-img" src="SVG/logo-2.svg" alt="Знак">
+				<img class="logo-img" src="SVG/logo.svg" alt="Логотип">
+			</div>
+		</a>
+        
+        <!-- ПУНКТЫ МЕНЮ ПОТОМ -->
+        <nav aria-label="Мобильная навигация">
+            <ul>
+                <li><a href="#" data-mobile-page="about">О бренде</a></li>
+                <li><a href="#" data-mobile-page="logo">Логотип</a></li>
+                <li><a href="#" data-mobile-page="colors">Цвета</a></li>
+                <li><a href="#" data-mobile-page="typo">Типографика</a></li>
+                <li><a href="#" data-mobile-page="graphics">Графика</a></li>
+                <li><a href="#" data-mobile-page="photo">Фотостиль</a></li>
+                <li><a href="#" data-mobile-page="media">Носители</a></li>
+            </ul>
+        </nav>
+    </aside>
+    
+    <div class="overlay" id="overlay" aria-hidden="true"></div>
+
+    <!-- СТРАНИЦА: О БРЕНДЕ -->
     <section class="page-section active" id="page-about">
-        <div class="hero-brand">
-            <div class="hero-brand-content">
-                <h1>О бренде</h1>
-                <p>Кодекс визуальной и смысловой идентичности театра клоунады «Микос»</p>
-            </div>
+        <div class="hero-brand" data-color="blue">
+            <div class="hero-brand-content"><h1>О бренде</h1><p>Кодекс визуальной и смысловой идентичности театра клоунады «Микос»</p></div>
         </div>
         <div class="content-wrapper">
             <div class="grid-3col">
-                <div class="brand-card"><h3>Кратко о бренде</h3><p>Экспериментальный театр, где клоунада становится языком глубокого диалога между сценой и зрителем.</p></div>
-                <div class="brand-card"><h3>Кратко о целях бренда</h3><p>Создать узнаваемый культурный бренд с сильным визуальным кодом, привлечь новую интеллектуальную аудиторию.</p></div>
-                <div class="brand-card"><h3>Цели брендбука</h3><p>Единая система коммуникации: от афиш до соцсетей, сохранение характера «структурированного спектакля».</p></div>
+                <article class="brand-card"><h3>Кратко о бренде</h3><p>Экспериментальный театр, где клоунада становится языком глубокого диалога между сценой и зрителем.</p></article>
+                <article class="brand-card"><h3>Цели бренда</h3><p>Создать узнаваемый культурный бренд с сильным визуальным кодом, привлечь новую интеллектуальную аудиторию.</p></article>
+                <article class="brand-card"><h3>Задачи брендбука</h3><p>Единая система коммуникации: от афиш до соцсетей, сохранение характера «структурированного спектакля».</p></article>
             </div>
-            <div class="photo-large"><img src="https://placehold.co/1400x420/2C4068/F2F1F0?text=МИССИЯ+ТЕАТРА+КЛОУНАДЫ" alt="миссия"></div>
+            <figure class="photo-large"><img src="https://placehold.co/1400x420/2C4068/F2F1F0?text=МИССИЯ+ТЕАТРА+КЛОУНАДЫ" alt="Миссия" loading="lazy"></figure>
             <div class="grid-2col">
-                <div class="brand-card"><h3>Миссия</h3><p>Дарить зрителю опыт живого сопереживания через синтез клоунады, драмы и пластики. Смех, который остаётся в сердце.</p><h3 style="margin-top:28px;">Ключевое сообщение</h3><p>«Искусство улыбаться всерьёз».</p></div>
-                <div class="brand-card"><h3>Позиционирование / ЦА</h3><p>Новаторский театр для думающей аудитории 20–45 лет, семьи, корпоративные клиенты.</p><h3 style="margin-top:20px;">Задачи рекламной деятельности</h3><p>Рост узнаваемости на 40%, увеличение продаж билетов, формирование комьюнити вокруг бренда.</p></div>
+                <article class="brand-card"><h3>Миссия</h3><p>Дарить зрителю опыт живого сопереживания через синтез клоунады, драмы и пластики. Смех, который остаётся в сердце.</p><h3 class="mt-6">Ключевое сообщение</h3><p><strong>«Искусство улыбаться всерьёз»</strong></p></article>
+                <article class="brand-card"><h3>Позиционирование</h3><p>Новаторский театр для думающей аудитории 20–45 лет, семьи, корпоративные клиенты.</p><h3 class="mt-4">Задачи</h3><p>Рост узнаваемости на 40%, увеличение продаж билетов, формирование комьюнити вокруг бренда.</p></article>
             </div>
-            <div class="grid-3col" style="margin-top:28px;">
-                <div class="brand-card"><h3>Название / Слоган</h3><p>Театр клоунады «Микос» · «Игра, которая остаётся в сердце»</p></div>
-                <div class="brand-card"><h3>Креативная концепция</h3><p>Контраст строгой геометрической типографики и живой клоунады. Красный акцент как «свет рампы».</p></div>
-                <div class="brand-card"><h3>Визуальная стратегия</h3><p>Крупные эмоциональные портреты, высокий контраст, глубокий синий фон, золотые детали.</p></div>
+            <div class="grid-3col">
+                <article class="brand-card"><h3>Название / Слоган</h3><p>Театр клоунады «Микос» · <em>«Игра, которая остаётся в сердце»</em></p></article>
+                <article class="brand-card"><h3>Креативная концепция</h3><p>Контраст строгой геометрической типографики и живой клоунады. Красный акцент как «свет рампы».</p></article>
+                <article class="brand-card"><h3>Визуальная стратегия</h3><p>Крупные эмоциональные портреты, высокий контраст, глубокий синий фон, золотые детали.</p></article>
             </div>
         </div>
     </section>
 
-    <!-- СТРАНИЦА 2: ЛОГОТИП -->
+    <!-- СТРАНИЦА: ЛОГОТИП -->
     <section class="page-section" id="page-logo">
-        <div class="hero-brand" style="background: #231F20;"><div class="hero-brand-content"><h1>Логотип</h1><p>Структура, модификации, охранное поле</p></div></div>
+        <div class="hero-brand" data-color="dark"><div class="hero-brand-content"><h1>Логотип</h1><p>Структура, модификации, охранное поле</p></div></div>
         <div class="content-wrapper">
             <div class="logo-demo-box">
-                <div class="logo-version"><img src="https://placehold.co/200x100/231F20/F2F1F0?text=МИКОС" alt="основной"><p>Основной (тёмный)</p></div>
-                <div class="logo-version"><img src="https://placehold.co/200x100/F2F1F0/231F20?text=МИКОС" alt="светлый"><p>Светлый вариант</p></div>
-                <div class="logo-version"><img src="https://placehold.co/200x100/F43139/F2F1F0?text=МИКОС" alt="акцент"><p>Красный акцент</p></div>
+                <div class="logo-version"><img src="https://placehold.co/200x100/231F20/F2F1F0?text=МИКОС" alt="Основной" loading="lazy"><p>Основной<br><small>(тёмный)</small></p></div>
+                <div class="logo-version"><img src="https://placehold.co/200x100/F2F1F0/231F20?text=МИКОС" alt="Светлый" loading="lazy"><p>Светлый вариант</p></div>
+                <div class="logo-version"><img src="https://placehold.co/200x100/F43139/F2F1F0?text=МИКОС" alt="Акцент" loading="lazy"><p>Красный акцент</p></div>
             </div>
             <div class="grid-2col">
-                <div class="brand-card"><h3>Структура и спецификация</h3><p>Логотип состоит из знака (стилизованная маска) и текстовой части шрифтом Unbounded. Минимальный размер в печати — 25 мм.</p><h3 style="margin-top:24px;">Охранное поле</h3><p>Равно высоте буквы «М» в слове «Микос». Запрещено размещать другие элементы ближе.</p></div>
-                <div class="brand-card"><h3>Допустимые цветовые модификации</h3><p>Основной #231F20 на светлом фоне, светлый #F2F1F0 на тёмном, красный #F43139 — для специальных проектов.</p><div class="mistake-badge"><i class="fas fa-exclamation-triangle" style="color:#F43139;"></i> <strong>Ошибки:</strong> искажение пропорций, добавление теней, замена шрифта, цвет вне палитры.</div></div>
+                <article class="brand-card"><h3>Структура</h3><p>Логотип состоит из знака (стилизованная маска) и текстовой части шрифтом Unbounded. Минимальный размер в печати — 25 мм.</p><h3 class="mt-4">Охранное поле</h3><p>Равно высоте буквы «М» в слове «Микос». Запрещено размещать другие элементы ближе.</p></article>
+                <article class="brand-card"><h3>Цветовые модификации</h3><p>Основной <code>#231F20</code> на светлом фоне, светлый <code>#F2F1F0</code> на тёмном, красный <code>#F43139</code> — для специальных проектов.</p><div class="mistake-badge"><i class="fas fa-exclamation-triangle"></i> <strong>Ошибки:</strong> искажение пропорций, добавление теней, замена шрифта, цвет вне палитры.</div></article>
             </div>
         </div>
     </section>
 
-    <!-- СТРАНИЦА 3: ЦВЕТА -->
+    <!-- СТРАНИЦА: ЦВЕТА -->
     <section class="page-section" id="page-colors">
-        <div class="hero-brand" style="background: #D4BF95;"><div class="hero-brand-content"><h1>Фирменные цвета</h1><p>Палитра контрастов и театрального света</p></div></div>
+        <div class="hero-brand" data-color="gold"><div class="hero-brand-content"><h1>Фирменные цвета</h1><p>Палитра контрастов и театрального света</p></div></div>
         <div class="content-wrapper">
             <div class="color-palette">
-                <div class="swatch"><div class="swatch-color" style="background:#F2F1F0; border:1px solid #ddd;"></div><div class="swatch-info"><span class="swatch-name">Светлый фон</span><br>#F2F1F0</div></div>
-                <div class="swatch"><div class="swatch-color" style="background:#231F20;"></div><div class="swatch-info"><span class="swatch-name">Тёмный</span><br>#231F20</div></div>
-                <div class="swatch"><div class="swatch-color" style="background:#F43139;"></div><div class="swatch-info"><span class="swatch-name">Красный акцент</span><br>#F43139</div></div>
-                <div class="swatch"><div class="swatch-color" style="background:#2C4068;"></div><div class="swatch-info"><span class="swatch-name">Глубокий синий</span><br>#2C4068</div></div>
-                <div class="swatch"><div class="swatch-color" style="background:#D4BF95;"></div><div class="swatch-info"><span class="swatch-name">Золотой</span><br>#D4BF95</div></div>
+                <div class="swatch"><div class="swatch-color" style="background:#F2F1F0;"></div><div class="swatch-info"><span class="swatch-name">Светлый фон</span><code>#F2F1F0</code></div></div>
+                <div class="swatch"><div class="swatch-color" style="background:#231F20;"></div><div class="swatch-info"><span class="swatch-name">Тёмный</span><code>#231F20</code></div></div>
+                <div class="swatch"><div class="swatch-color" style="background:#F43139;"></div><div class="swatch-info"><span class="swatch-name">Красный акцент</span><code>#F43139</code></div></div>
+                <div class="swatch"><div class="swatch-color" style="background:#2C4068;"></div><div class="swatch-info"><span class="swatch-name">Глубокий синий</span><code>#2C4068</code></div></div>
+                <div class="swatch"><div class="swatch-color" style="background:#D4BF95;"></div><div class="swatch-info"><span class="swatch-name">Золотой</span><code>#D4BF95</code></div></div>
             </div>
             <div class="grid-2col">
-                <div class="brand-card"><h3>Палитра</h3><p>Основная: #F2F1F0 + #231F20. Акцентные: #F43139 (драйв), #2C4068 (интеллект), #D4BF95 (теплота сцены).</p></div>
-                <div class="brand-card"><h3>Допустимые сочетания</h3><p>Тёмный текст на светлом, красный для кнопок/заголовков, синий для фоновых блоков. Запрещены сторонние оттенки.</p></div>
+                <article class="brand-card"><h3>Палитра</h3><p><strong>Основная:</strong> <code>#F2F1F0</code> + <code>#231F20</code><br><strong>Акцентные:</strong> <code>#F43139</code> (драйв), <code>#2C4068</code> (интеллект), <code>#D4BF95</code> (теплота сцены).</p></article>
+                <article class="brand-card"><h3>Сочетания</h3><p>Тёмный текст на светлом, красный для кнопок/заголовков, синий для фоновых блоков. Запрещены сторонние оттенки.</p></article>
             </div>
         </div>
     </section>
 
-    <!-- ТИПОГРАФИКА -->
+    <!-- СТРАНИЦА: ТИПОГРАФИКА -->
     <section class="page-section" id="page-typo">
-        <div class="hero-brand" style="background: #2C4068;"><div class="hero-brand-content"><h1>Типографика</h1></div></div>
+        <div class="hero-brand" data-color="blue"><div class="hero-brand-content"><h1>Типографика</h1></div></div>
         <div class="content-wrapper">
             <div class="grid-2col">
-                <div class="brand-card"><h3>Unbounded (заголовки)</h3><p style="font-family:'Unbounded';font-size:38px; font-weight:800;">Аа Бб Вв</p><p>Для H1–H3, навигации, акцентных слов. Начертания Bold, Black.</p></div>
-                <div class="brand-card"><h3>Nunito Sans (текст)</h3><p style="font-family:'Nunito Sans';font-size:22px;">Аа Бб Вв</p><p>Основной текст, описания, цитаты. Высокая читаемость, Regular и SemiBold.</p></div>
+                <article class="brand-card"><h3>Unbounded <small>(заголовки)</small></h3><p style="font-family:'Unbounded'; font-size: 2.5rem; font-weight: 800; line-height: 1.1; margin: var(--space-4) 0;">Аа Бб Вв</p><p>Для H1–H3, навигации, акцентных слов. Начертания: <strong>600, 700, 800</strong>.</p></article>
+                <article class="brand-card"><h3>Nunito Sans <small>(текст)</small></h3><p style="font-family:'Nunito Sans'; font-size: 1.375rem; margin: var(--space-4) 0;">Аа Бб Вв</p><p>Основной текст, описания, цитаты. Высокая читаемость. Начертания: <strong>400, 600, 700</strong>.</p></article>
             </div>
-            <div class="brand-card" style="margin-top:24px;"><h3>Правила использования</h3><p>Заголовки от 24px, межстрочный интервал 1.2. Основной текст 16–18px, интерлиньяж 1.5. Не более двух гарнитур в макете.</p></div>
+            <article class="brand-card mt-6"><h3>Правила использования</h3><ul style="list-style: none; padding-left: 0;"><li>• Заголовки от 24px, межстрочный интервал 1.2</li><li>• Основной текст 16–18px, интерлиньяж 1.5</li><li>• Не более двух гарнитур в макете</li><li>• Избегать выравнивания по центру для длинных текстов</li></ul></article>
         </div>
     </section>
 
-    <!-- ГРАФИЧЕСКИЕ ЭЛЕМЕНТЫ -->
+    <!-- СТРАНИЦА: ГРАФИКА -->
     <section class="page-section" id="page-graphics">
-        <div class="hero-brand" style="background: #231F20;"><div class="hero-brand-content"><h1>Графические элементы</h1></div></div>
+        <div class="hero-brand" data-color="dark"><div class="hero-brand-content"><h1>Графические элементы</h1></div></div>
         <div class="content-wrapper">
             <div class="grid-3col">
-                <div class="brand-card"><h3>Маска / знак театра</h3><p>Стилизованная клоунская маска — самостоятельный паттерн, используется на мерче и постерах.</p></div>
-                <div class="brand-card"><h3>Линии кулис</h3><p>Вертикальные и горизонтальные полосы, напоминающие театральные кулисы — для динамики.</p></div>
-                <div class="brand-card"><h3>Условия использования</h3><p>Только фирменные цвета. Не перекрывать логотип, соблюдать охранное поле.</p></div>
+                <article class="brand-card"><h3>Маска / знак</h3><p>Стилизованная клоунская маска — самостоятельный паттерн, используется на мерче и постерах.</p></article>
+                <article class="brand-card"><h3>Линии кулис</h3><p>Вертикальные и горизонтальные полосы, напоминающие театральные кулисы — для динамики.</p></article>
+                <article class="brand-card"><h3>Условия</h3><p>Только фирменные цвета. Не перекрывать логотип, соблюдать охранное поле.</p></article>
             </div>
-            <div class="photo-medium" style="margin-top:32px;"><img src="https://placehold.co/900x450/2C4068/F2F1F0?text=ГРАФИЧЕСКИЙ+ЭЛЕМЕНТ+МИКОС" alt="графика"></div>
+            <figure class="photo-medium mt-8" style="max-width: 900px; margin: 0 auto;"><img src="https://placehold.co/900x450/2C4068/F2F1F0?text=ГРАФИЧЕСКИЙ+ЭЛЕМЕНТ+МИКОС" alt="Графика" loading="lazy"></figure>
         </div>
     </section>
 
-    <!-- ФОТОСТИЛЬ -->
+    <!-- СТРАНИЦА: ФОТОСТИЛЬ -->
     <section class="page-section" id="page-photo">
-        <div class="hero-brand" style="background: #F43139;"><div class="hero-brand-content"><h1>Фотостиль</h1><p>Эмоция, свет, театральный контраст</p></div></div>
+        <div class="hero-brand" data-color="red"><div class="hero-brand-content"><h1>Фотостиль</h1><p>Эмоция, свет, театральный контраст</p></div></div>
         <div class="content-wrapper">
-            <div class="photo-large"><img src="https://placehold.co/1400x450/231F20/F2F1F0?text=КРУПНЫЙ+ПЛАН+ЭМОЦИИ" alt="фото эмоция"></div>
+            <figure class="photo-large"><img src="https://placehold.co/1400x450/231F20/F2F1F0?text=КРУПНЫЙ+ПЛАН+ЭМОЦИИ" alt="Эмоция" loading="lazy"></figure>
             <div class="grid-3col">
-                <div class="photo-medium"><img src="https://placehold.co/500x350/2C4068/white?text=ДВИЖЕНИЕ"></div>
-                <div class="photo-medium"><img src="https://placehold.co/500x350/D4BF95/231F20?text=ЗАКУЛИСЬЕ"></div>
-                <div class="photo-medium"><img src="https://placehold.co/500x350/F43139/white?text=РЕПЕТИЦИЯ"></div>
+                <figure class="photo-medium"><img src="https://placehold.co/500x350/2C4068/white?text=ДВИЖЕНИЕ" alt="Движение" loading="lazy"></figure>
+                <figure class="photo-medium"><img src="https://placehold.co/500x350/D4BF95/231F20?text=ЗАКУЛИСЬЕ" alt="Закулисье" loading="lazy"></figure>
+                <figure class="photo-medium"><img src="https://placehold.co/500x350/F43139/white?text=РЕПЕТИЦИЯ" alt="Репетиция" loading="lazy"></figure>
             </div>
-            <div class="brand-card" style="margin-top:32px;"><h3>Принципы фотостиля</h3><p>Естественное освещение, крупные портреты, высокий контраст (chiaroscuro), эмоциональная выразительность. Красный — единственный яркий акцент.</p></div>
+            <article class="brand-card mt-8"><h3>Принципы фотостиля</h3><p>Естественное освещение, крупные портреты, высокий контраст (chiaroscuro), эмоциональная выразительность. Красный — единственный яркий акцент.</p></article>
         </div>
     </section>
 
-    <!-- НОСИТЕЛИ -->
+    <!-- СТРАНИЦА: НОСИТЕЛИ (карусель + детали) -->
     <section class="page-section" id="page-media">
-        <div class="hero-brand" style="background: #2C4068;"><div class="hero-brand-content"><h1>Носители</h1><p>Применение бренда</p></div></div>
+        <div class="hero-brand" data-color="blue"><div class="hero-brand-content"><h1>Носители</h1><p>Применение бренда в разных контекстах</p></div></div>
         <div class="content-wrapper">
-            <div class="grid-2col">
-                <div class="brand-card"><h3>Внутренние носители</h3><p>Визитки, бланки, бейджи — логотип слева, охранное поле, использование шрифта Nunito Sans. Фирменные конверты с золотым акцентом.</p></div>
-                <div class="brand-card"><h3>Внешние носители</h3><p>Афиши, билборды, соцсети — крупное фото, логотип вверху или снизу, красный акцент на датах. Мерч: минималистичный знак маски.</p></div>
+            <article class="brand-card mb-6"><h3>Как использовать носители</h3><p>Все макеты подготовлены в соответствии с брендбуком. Перед печатью проверяйте цветовую модель (CMYK для полиграфии, RGB для digital) и наличие охранного поля вокруг логотипа.</p></article>
+            <div class="media-carousel-wrapper">
+                <button class="carousel-btn prev" id="mediaPrev" aria-label="Назад"><i class="fas fa-chevron-left"></i></button>
+                <div class="media-carousel" id="mediaCarousel" tabindex="0">
+                    <!-- Визитка -->
+                    <article class="media-card" data-media-id="business-card">
+                        <div class="media-card-image"><img src="https://placehold.co/600x400/231F20/D4BF95?text=ВИЗИТКА+МИКОС" alt="Визитка" loading="lazy"><span class="media-card-tag">Полиграфия</span></div>
+                        <div class="media-card-content"><h3>Визитная карточка</h3><p>Двусторонняя визитка с тиснением и золотым акцентом</p><div class="media-card-meta"><span><i class="fas fa-ruler-combined"></i> 90 × 50 мм</span><span><i class="fas fa-file-pdf"></i> PDF + INDD</span></div><button class="btn btn-primary media-open-btn" data-target="business-card">Подробнее <i class="fas fa-arrow-right"></i></button></div>
+                    </article>
+                    <!-- Афиша -->
+                    <article class="media-card" data-media-id="poster">
+                        <div class="media-card-image"><img src="https://placehold.co/600x400/2C4068/F2F1F0?text=АФИША+ПРЕМЬЕРА" alt="Афиша" loading="lazy"><span class="media-card-tag">Наружная реклама</span></div>
+                        <div class="media-card-content"><h3>Афиша спектакля</h3><p>Формат А2 и А1 для размещения в городе и соцсетях</p><div class="media-card-meta"><span><i class="fas fa-ruler-combined"></i> 420 × 594 мм</span><span><i class="fas fa-layer-group"></i> 3 варианта</span></div><button class="btn btn-primary media-open-btn" data-target="poster">Подробнее <i class="fas fa-arrow-right"></i></button></div>
+                    </article>
+                    <!-- Соцсети -->
+                    <article class="media-card" data-media-id="social">
+                        <div class="media-card-image"><img src="https://placehold.co/600x400/F43139/white?text=СОЦСЕТИ+ШАБЛОН" alt="Соцсети" loading="lazy"><span class="media-card-tag">Digital</span></div>
+                        <div class="media-card-content"><h3>Шаблоны для соцсетей</h3><p>Stories, посты, обложки в едином визуальном стиле</p><div class="media-card-meta"><span><i class="fas fa-mobile-alt"></i> 1080 × 1920 px</span><span><i class="fas fa-palette"></i> Figma + PNG</span></div><button class="btn btn-primary media-open-btn" data-target="social">Подробнее <i class="fas fa-arrow-right"></i></button></div>
+                    </article>
+                    <!-- Мерч -->
+                    <article class="media-card" data-media-id="merch">
+                        <div class="media-card-image"><img src="https://placehold.co/600x400/D4BF95/231F20?text=МЕРЧ+МИКОС" alt="Мерч" loading="lazy"><span class="media-card-tag">Сувениры</span></div>
+                        <div class="media-card-content"><h3>Фирменный мерч</h3><p>Футболки, шоперы, значки с минималистичным знаком театра</p><div class="media-card-meta"><span><i class="fas fa-tshirt"></i> 5 товаров</span><span><i class="fas fa-print"></i> Вектор + мокапы</span></div><button class="btn btn-primary media-open-btn" data-target="merch">Подробнее <i class="fas fa-arrow-right"></i></button></div>
+                    </article>
+                    <!-- Билет -->
+                    <article class="media-card" data-media-id="ticket">
+                        <div class="media-card-image"><img src="https://placehold.co/600x400/231F20/F43139?text=БИЛЕТ+ЭЛЕКТРОННЫЙ" alt="Билет" loading="lazy"><span class="media-card-tag">Digital</span></div>
+                        <div class="media-card-content"><h3>Электронный билет</h3><p>QR-код, информация о спектакле, фирменные цвета</p><div class="media-card-meta"><span><i class="fas fa-ticket-alt"></i> 210 × 70 мм</span><span><i class="fas fa-qrcode"></i> PDF + HTML</span></div><button class="btn btn-primary media-open-btn" data-target="ticket">Подробнее <i class="fas fa-arrow-right"></i></button></div>
+                    </article>
+                </div>
+                <button class="carousel-btn next" id="mediaNext" aria-label="Вперёд"><i class="fas fa-chevron-right"></i></button>
+                <div class="carousel-dots" id="mediaDots"></div>
             </div>
-            <div class="brand-card"><h3>Правила оформления</h3><p>Соблюдать охранное поле, использовать только палитру #F2F1F0, #231F20, #F43139, #2C4068, #D4BF95. Не нарушать читаемость.</p></div>
+            <article class="brand-card mt-8"><h3>Общие правила оформления</h3><ul style="list-style: none; padding-left: 0; display: grid; gap: var(--space-2);"><li>• <strong>Охранное поле:</strong> не менее высоты буквы «М» вокруг логотипа</li><li>• <strong>Цвета:</strong> только палитра брендбука, без градиентов и теней</li><li>• <strong>Шрифты:</strong> Unbounded для заголовков, Nunito Sans для текста</li><li>• <strong>Фото:</strong> высокий контраст, эмоциональные крупные планы</li><li>• <strong>Экспорт:</strong> PDF/X-4 для печати, PNG@2x для digital</li></ul></article>
+        </div>
+    </section>
+
+    <!-- ДЕТАЛЬНЫЕ СТРАНИЦЫ НОСИТЕЛЕЙ (примеры) -->
+    <section class="media-detail-page" id="media-business-card" hidden>
+        <div class="media-detail-header">
+            <button class="btn btn-secondary media-close-btn" aria-label="Назад"><i class="fas fa-arrow-left"></i> Назад к носителям</button>
+            <div class="media-detail-title"><span class="media-detail-tag">Полиграфия</span><h1>Визитная карточка</h1><p>Двусторонняя визитка с тиснением и золотым акцентом</p></div>
+        </div>
+        <div class="media-detail-content">
+            <div class="media-gallery">
+                <div class="gallery-main"><img id="galleryMainImg" src="https://placehold.co/800x500/231F20/D4BF95?text=ВИЗИТКА+ЛИЦЕВАЯ" alt="Визитка"><button class="gallery-nav prev" id="galleryPrev"><i class="fas fa-chevron-left"></i></button><button class="gallery-nav next" id="galleryNext"><i class="fas fa-chevron-right"></i></button></div>
+                <div class="gallery-thumbs" id="galleryThumbs">
+                    <img src="https://placehold.co/120x80/231F20/D4BF95?text=ЛИЦЕВАЯ" alt="Лицевая" class="thumb active" data-src="https://placehold.co/800x500/231F20/D4BF95?text=ВИЗИТКА+ЛИЦЕВАЯ">
+                    <img src="https://placehold.co/120x80/D4BF95/231F20?text=ОБОРОТ" alt="Оборот" class="thumb" data-src="https://placehold.co/800x500/D4BF95/231F20?text=ВИЗИТКА+ОБОРОТ">
+                    <img src="https://placehold.co/120x80/2C4068/F2F1F0?text=В+КОНТЕКСТЕ" alt="В контексте" class="thumb" data-src="https://placehold.co/800x500/2C4068/F2F1F0?text=ВИЗИТКА+В+КОНТЕКСТЕ">
+                </div>
+            </div>
+            <div class="media-specs-grid">
+                <article class="brand-card"><h3>Описание</h3><p>Визитная карточка театра выполнена в минималистичном стиле. Лицевая сторона содержит логотип и имя сотрудника, оборотная — контактные данные и слоган. Золотой акцент (#D4BF95) нанесён методом фольгирования.</p><h4 class="mt-4">Особенности:</h4><ul style="list-style: none; padding-left: 0;"><li>• Бумага: дизайнерская, 300 г/м², тактильная</li><li>• Печать: офсет + фольгирование золотом</li><li>• Постпечатка: биговка, скругление углов 3 мм</li></ul></article>
+                <article class="brand-card"><h3>Технические параметры</h3><table class="specs-table"><tr><th>Формат готового изделия</th><td>90 × 50 мм</td></tr><tr><th>Вылеты под обрез</th><td>по 2 мм с каждой стороны</td></tr><tr><th>Цветовая модель</th><td>CMYK (для печати), RGB (для экрана)</td></tr><tr><th>Разрешение</th><td>300 dpi</td></tr><tr><th>Шрифты</th><td>Unbounded Bold, Nunito Sans Regular</td></tr><tr><th>Охранное поле</th><td>5 мм от края</td></tr></table></article>
+            </div>
+            <article class="brand-card mt-6"><h3><i class="fas fa-download"></i> Скачать макеты</h3><div class="downloads-grid"><a href="#" class="download-item" download><i class="fas fa-file-pdf"></i><div><strong>Визитка_готовый_макет.pdf</strong><small>PDF/X-4, 2.4 МБ, для типографии</small></div></a><a href="#" class="download-item" download><i class="fas fa-file-alt"></i><div><strong>Визитка_исходник.indd</strong><small>InDesign CC 2023, 18.7 МБ, для редактирования</small></div></a><a href="#" class="download-item" download><i class="fas fa-image"></i><div><strong>Визитка_превью.png</strong><small>PNG@2x, 1.2 МБ, для презентаций</small></div></a><a href="#" class="download-item" download><i class="fas fa-book"></i><div><strong>Инструкция_печати.pdf</strong><small>PDF, 450 КБ, требования к печати</small></div></a></div></article>
+        </div>
+    </section>
+
+    <!-- Афиша (сокращённо) -->
+    <section class="media-detail-page" id="media-poster" hidden>
+        <div class="media-detail-header"><button class="btn btn-secondary media-close-btn"><i class="fas fa-arrow-left"></i> Назад</button><div class="media-detail-title"><span class="media-detail-tag">Наружная реклама</span><h1>Афиша спектакля</h1><p>Формат А2 и А1 для размещения в городе и соцсетях</p></div></div>
+        <div class="media-detail-content">
+            <div class="media-gallery"><div class="gallery-main"><img id="galleryMainImg" src="https://placehold.co/800x500/2C4068/F2F1F0?text=АФИША+А1" alt="Афиша"><button class="gallery-nav prev" id="galleryPrev"><i class="fas fa-chevron-left"></i></button><button class="gallery-nav next" id="galleryNext"><i class="fas fa-chevron-right"></i></button></div><div class="gallery-thumbs" id="galleryThumbs"><img src="https://placehold.co/120x80/2C4068/F2F1F0?text=А1" class="thumb active" data-src="https://placehold.co/800x500/2C4068/F2F1F0?text=АФИША+А1"><img src="https://placehold.co/120x80/2C4068/F2F1F0?text=А2" class="thumb" data-src="https://placehold.co/800x500/2C4068/F2F1F0?text=АФИША+А2"><img src="https://placehold.co/120x80/F43139/white?text=СОЦСЕТЬ" class="thumb" data-src="https://placehold.co/800x500/F43139/white?text=АФИША+ДЛЯ+СОЦСЕТЕЙ"></div></div>
+            <div class="media-specs-grid"><article class="brand-card"><h3>Описание</h3><p>Афиша строится на контрасте крупного эмоционального фото и строгой типографики. Красный акцент (#F43139) выделяет дату премьеры.</p></article><article class="brand-card"><h3>Параметры</h3><table class="specs-table"><tr><th>Форматы</th><td>А1 (594×841 мм), А2 (420×594 мм), квадрат (1080×1080 px)</td></tr><tr><th>Вылеты</th><td>5 мм под обрез</td></tr><tr><th>Цветовая модель</th><td>CMYK / RGB</td></tr></table></article></div>
+            <article class="brand-card mt-6"><h3><i class="fas fa-download"></i> Скачать</h3><div class="downloads-grid"><a href="#" class="download-item" download><i class="fas fa-file-pdf"></i><div><strong>Афиша_А1_А2.pdf</strong><small>PDF/X-4, 8.2 МБ</small></div></a><a href="#" class="download-item" download><i class="fas fa-file-alt"></i><div><strong>Афиша_исходник.indd</strong><small>InDesign, 24.1 МБ</small></div></a></div></article>
         </div>
     </section>
 
     <!-- FOOTER -->
-    <div id="site-footer"></div>
+    <footer id="site-footer" style="margin-top: auto; padding: var(--space-8) var(--container-padding); background: var(--color-bg-dark); color: var(--color-text-inverse); text-align: center;">
+        <p style="font-size: var(--text-sm); opacity: 0.9;">© Театр клоунады «Микос», 2026</p>
+        <p style="font-size: var(--text-xs); opacity: 0.7; margin-top: var(--space-2);">Брендбук · Версия 1.0</p>
+    </footer>
 </div>
-<script src="js/components-loader.js"></script>
-<!-- 2. Логика хедера/футера -->
-<script src="js/header-scripts.js"></script>
-<script src="js/common.js"></script>
+
+<!-- СКРИПТЫ -->
 <script>
-    // Переключение страниц брендбука (основное меню)
-    const navBtns = document.querySelectorAll('.nav-btn');
+    // ===== ОБЪЕКТ СТРАНИЦ =====
     const pages = {
-        about: document.getElementById('page-about'),
-        logo: document.getElementById('page-logo'),
-        colors: document.getElementById('page-colors'),
-        typo: document.getElementById('page-typo'),
-        graphics: document.getElementById('page-graphics'),
-        photo: document.getElementById('page-photo'),
+        about: document.getElementById('page-about'), logo: document.getElementById('page-logo'),
+        colors: document.getElementById('page-colors'), typo: document.getElementById('page-typo'),
+        graphics: document.getElementById('page-graphics'), photo: document.getElementById('page-photo'),
         media: document.getElementById('page-media')
     };
-    
+
+    // ===== ПЕРЕКЛЮЧЕНИЕ СТРАНИЦ =====
     function switchPage(id) {
-        Object.values(pages).forEach(p => p.classList.remove('active'));
-        if(pages[id]) pages[id].classList.add('active');
-        navBtns.forEach(btn => { 
-            btn.classList.remove('active'); 
-            if(btn.dataset.page === id) btn.classList.add('active'); 
-        });
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        closeMediaDetail();
+        Object.values(pages).forEach(p => { if (p) { p.classList.remove('active'); p.style.display = 'none'; } });
+        if (pages[id]) { pages[id].classList.add('active'); pages[id].style.display = 'block'; window.scrollTo({ top: 0, behavior: 'smooth' }); }
+        document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.page === id));
     }
-    
-    navBtns.forEach(btn => btn.addEventListener('click', () => { 
-        if(btn.dataset.page) switchPage(btn.dataset.page); 
-    }));
-    
-    // Мобильное меню
-    const mobileLinks = document.querySelectorAll('[data-mobile-page]');
-    mobileLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            const pageId = link.dataset.mobilePage;
-            if(pageId) {
-                switchPage(pageId);
-                closeMobileMenu();
-            }
-        });
+
+    function closeMediaDetail() {
+        document.querySelectorAll('.media-detail-page').forEach(p => { p.hidden = true; p.classList.remove('active'); p.style.display = 'none'; });
+    }
+
+    function openMediaDetail(mediaId) {
+        Object.values(pages).forEach(p => { if (p) { p.classList.remove('active'); p.style.display = 'none'; } });
+        closeMediaDetail();
+        const mediaMain = document.getElementById('page-media'); if (mediaMain) mediaMain.style.display = 'none';
+        const detail = document.getElementById(`media-${mediaId}`);
+        if (detail) { detail.hidden = false; detail.classList.add('active'); detail.style.display = 'block'; window.scrollTo({ top: 0, behavior: 'smooth' }); setTimeout(initGallery, 100); }
+        document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.page === 'media'));
+    }
+
+    // ===== МОБИЛЬНОЕ МЕНЮ =====
+    const mobileNav = document.getElementById('mobileNav'), overlay = document.getElementById('overlay'),
+          burgerIcon = document.getElementById('burgerIcon'), closeMobileBtn = document.getElementById('closeMobileMenu');
+
+    function openMobileMenu() {
+        if (!mobileNav || !overlay) return;
+        mobileNav.classList.add('open'); overlay.classList.add('active');
+        mobileNav.setAttribute('aria-hidden', 'false'); overlay.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        if (burgerIcon) burgerIcon.setAttribute('aria-expanded', 'true');
+    }
+    function closeMobileMenu() {
+        if (!mobileNav || !overlay) return;
+        mobileNav.classList.remove('open'); overlay.classList.remove('active');
+        mobileNav.setAttribute('aria-hidden', 'true'); overlay.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        if (burgerIcon) burgerIcon.setAttribute('aria-expanded', 'false');
+    }
+
+    // ===== КАРУСЕЛЬ =====
+    function initCarouselDots() {
+        const carousel = document.getElementById('mediaCarousel'), dotsContainer = document.getElementById('mediaDots');
+        if (!carousel || !dotsContainer) return;
+        const cards = carousel.querySelectorAll('.media-card'); dotsContainer.innerHTML = '';
+        cards.forEach((_, i) => { const dot = document.createElement('span'); dot.className = `carousel-dot ${i === 0 ? 'active' : ''}`; dot.addEventListener('click', () => scrollToCard(i)); dotsContainer.appendChild(dot); });
+    }
+    function scrollToCard(index) {
+        const carousel = document.getElementById('mediaCarousel'), cards = carousel?.querySelectorAll('.media-card');
+        if (!cards || !cards[index]) return;
+        const cardWidth = cards[index].offsetWidth + 20; carousel.scrollTo({ left: index * cardWidth, behavior: 'smooth' });
+        document.querySelectorAll('.carousel-dot').forEach((d, i) => d.classList.toggle('active', i === index));
+    }
+
+    // ===== ГАЛЕРЕЯ =====
+    function initGallery() {
+        const mainImg = document.getElementById('galleryMainImg'), thumbs = document.querySelectorAll('.thumb'),
+              prevBtn = document.getElementById('galleryPrev'), nextBtn = document.getElementById('galleryNext');
+        if (!mainImg || thumbs.length === 0) return;
+        thumbs.forEach(thumb => thumb.addEventListener('click', () => {
+            mainImg.src = thumb.dataset.src; mainImg.alt = thumb.alt;
+            thumbs.forEach(t => t.classList.remove('active')); thumb.classList.add('active');
+        }));
+        let idx = 0;
+        function update(i) { if (thumbs[i]) { thumbs[i].click(); idx = i; } }
+        prevBtn?.addEventListener('click', () => update(idx > 0 ? idx - 1 : thumbs.length - 1));
+        nextBtn?.addEventListener('click', () => update(idx < thumbs.length - 1 ? idx + 1 : 0));
+        let swipeX = 0;
+        mainImg.parentElement?.addEventListener('touchstart', e => swipeX = e.touches[0].clientX, { passive: true });
+        mainImg.parentElement?.addEventListener('touchend', e => { const d = swipeX - e.changedTouches[0].clientX; if (d > 50) nextBtn?.click(); else if (d < -50) prevBtn?.click(); }, { passive: true });
+    }
+
+    // ===== ИНИЦИАЛИЗАЦИЯ =====
+    document.addEventListener('DOMContentLoaded', () => {
+        closeMediaDetail(); initCarouselDots(); initGallery();
+        
+        document.querySelectorAll('.nav-btn').forEach(btn => btn.addEventListener('click', e => { e.preventDefault(); if (btn.dataset.page) switchPage(btn.dataset.page); }));
+        burgerIcon?.addEventListener('click', openMobileMenu); closeMobileBtn?.addEventListener('click', closeMobileMenu); overlay?.addEventListener('click', closeMobileMenu);
+        document.querySelectorAll('[data-mobile-page]').forEach(link => link.addEventListener('click', e => { e.preventDefault(); const id = link.dataset.mobilePage; if (id) { switchPage(id); closeMobileMenu(); } }));
+        document.querySelectorAll('.media-open-btn').forEach(btn => btn.addEventListener('click', e => { e.stopPropagation(); const target = btn.dataset.target; if (target) openMediaDetail(target); }));
+        document.querySelectorAll('.media-card').forEach(card => card.addEventListener('click', () => { const target = card.dataset.mediaId; if (target) openMediaDetail(target); }));
+        document.querySelectorAll('.media-close-btn').forEach(btn => btn.addEventListener('click', () => { closeMediaDetail(); switchPage('media'); }));
+        
+        const header = document.getElementById('mainHeader');
+        window.addEventListener('scroll', () => { if (header) header.classList.toggle('scrolled', window.scrollY > 10); }, { passive: true });
+        document.addEventListener('keydown', e => { if (e.key === 'Escape' && mobileNav?.classList.contains('open')) closeMobileMenu(); });
+        
+        const carousel = document.getElementById('mediaCarousel'), prevBtn = document.getElementById('mediaPrev'), nextBtn = document.getElementById('mediaNext');
+        let startX = 0, isDragging = false;
+        carousel?.addEventListener('touchstart', e => { startX = e.touches[0].clientX; isDragging = true; }, { passive: true });
+        carousel?.addEventListener('touchmove', e => { if (!isDragging || !carousel) return; const diff = startX - e.touches[0].clientX; if (Math.abs(diff) > 50) { carousel.scrollBy({ left: diff > 0 ? 300 : -300, behavior: 'smooth' }); isDragging = false; } }, { passive: true });
+        carousel?.addEventListener('touchend', () => { isDragging = false; });
+        prevBtn?.addEventListener('click', () => carousel?.scrollBy({ left: -300, behavior: 'smooth' }));
+        nextBtn?.addEventListener('click', () => carousel?.scrollBy({ left: 300, behavior: 'smooth' }));
     });
-    
-    // Бургер-меню
-    const burgerIcon = document.getElementById('burgerIcon');
-    const mobileNav = document.getElementById('mobileNav');
-    const overlay = document.getElementById('overlay');
-    const closeMobileBtn = document.getElementById('closeMobileMenu');
-    
-    function openMobileMenu() { 
-        mobileNav.classList.add('open'); 
-        overlay.classList.add('active'); 
-        document.body.style.overflow = 'hidden'; 
-    }
-    function closeMobileMenu() { 
-        mobileNav.classList.remove('open'); 
-        overlay.classList.remove('active'); 
-        document.body.style.overflow = ''; 
-    }
-    
-    if (burgerIcon) burgerIcon.addEventListener('click', openMobileMenu);
-    if (closeMobileBtn) closeMobileBtn.addEventListener('click', closeMobileMenu);
-    if (overlay) overlay.addEventListener('click', closeMobileMenu);
-    
-    // Подписка
-    document.getElementById('subscribeBtn')?.addEventListener('click', () => { 
-        const chk = document.getElementById('consentCheckbox'); 
-        const err = document.getElementById('consentError'); 
-        if (!chk.checked) { 
-            err.style.display = 'block'; 
-            setTimeout(() => err.style.display = 'none', 2500); 
-        } else { 
-            alert('Спасибо за подписку!'); 
-            document.getElementById('subscribeEmail').value = ''; 
-            chk.checked = false; 
-        } 
-    });
-    
-    document.querySelectorAll('.footer-btn-primary').forEach(btn => btn.addEventListener('click', () => alert('Билеты скоро в продаже')));
-    document.querySelector('.footer-btn-secondary')?.addEventListener('click', () => alert('Заказ шоу: свяжитесь с нами по телефону'));
 </script>
 </body>
 </html>

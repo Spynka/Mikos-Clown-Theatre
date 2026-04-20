@@ -1,0 +1,1281 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Театр клоунады «Микос» | Брендбук</title>
+    <meta name="description" content="Кодекс визуальной и смысловой идентичности театра клоунады «Микос»">
+    
+    <!-- Шрифты -->
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;800&family=Nunito+Sans:opsz,wght@6..12,300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="SVG/logo-2.svg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <style>
+        /* ===== DESIGN TOKENS (в стиле tavrida.art) ===== */
+        :root {
+            /* Цветовая палитра бренда Микос */
+            --color-bg-light: #F2F1F0;
+            --color-bg-dark: #231F20;
+            --color-accent-red: #F43139;
+            --color-deep-blue: #2C4068;
+            --color-gold: #D4BF95;
+            
+            /* Системные цвета (как у tavrida.art) */
+            --color-text-primary: var(--color-bg-dark);
+            --color-text-secondary: #5A5A5A;
+            --color-text-inverse: var(--color-bg-light);
+            --color-border: rgba(35, 31, 32, 0.12);
+            --color-shadow: rgba(35, 31, 32, 0.08);
+            
+            /* Типографика */
+            --font-display: 'Unbounded', system-ui, sans-serif;
+            --font-body: 'Nunito Sans', system-ui, sans-serif;
+            
+            --text-xs: 0.75rem;    /* 12px */
+            --text-sm: 0.875rem;   /* 14px */
+            --text-base: 1rem;     /* 16px */
+            --text-lg: 1.125rem;   /* 18px */
+            --text-xl: 1.25rem;    /* 20px */
+            --text-2xl: 1.5rem;    /* 24px */
+            --text-3xl: 1.875rem;  /* 30px */
+            --text-4xl: 2.25rem;   /* 36px */
+            --text-5xl: 3rem;      /* 48px */
+            --text-6xl: 3.75rem;   /* 60px */
+            
+            /* Отступы и сетка */
+            --space-1: 0.25rem;    /* 4px */
+            --space-2: 0.5rem;     /* 8px */
+            --space-3: 0.75rem;    /* 12px */
+            --space-4: 1rem;       /* 16px */
+            --space-5: 1.25rem;    /* 20px */
+            --space-6: 1.5rem;     /* 24px */
+            --space-8: 2rem;       /* 32px */
+            --space-10: 2.5rem;    /* 40px */
+            --space-12: 3rem;      /* 48px */
+            --space-16: 4rem;      /* 64px */
+            
+            --container-max: 1440px;
+            --container-padding: var(--space-6);
+            --border-radius: 12px;
+            --border-radius-lg: 20px;
+            
+            /* Анимации */
+            --transition: 0.2s ease;
+            --transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* ===== БАЗОВЫЕ СТИЛИ ===== */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: var(--font-body);
+            font-size: var(--text-base);
+            line-height: 1.6;
+            color: var(--color-text-primary);
+            background: var(--color-bg-light);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button {
+            font: inherit;
+            cursor: pointer;
+            border: none;
+            background: none;
+        }
+
+        /* ===== КОНТЕЙНЕР ===== */
+        .brandbook-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .content-wrapper {
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: var(--space-12) var(--container-padding);
+            width: 100%;
+        }
+
+        /* ===== HEADER (в стиле tavrida.art) ===== */
+        .main-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(242, 241, 240, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--color-border);
+            transition: var(--transition);
+        }
+
+        .main-header.scrolled {
+            box-shadow: 0 4px 20px var(--color-shadow);
+        }
+
+        .header-inner {
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: var(--space-4) var(--container-padding);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--space-4);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: var(--space-6);
+            flex: 1;
+        }
+
+        .logo-group {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+        }
+
+        .logo-img {
+            height: 32px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .brandbook-label {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: var(--text-xl);
+            color: var(--color-accent-red);
+            letter-spacing: -0.02em;
+            padding-left: var(--space-4);
+            border-left: 2px solid var(--color-border);
+        }
+
+        /* Навигация — горизонтальная, без подчёркиваний */
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            list-style: none;
+            margin-left: auto;
+        }
+
+        .nav-btn {
+            padding: var(--space-2) var(--space-4);
+            font-family: var(--font-display);
+            font-weight: 600;
+            font-size: var(--text-sm);
+            color: var(--color-text-secondary);
+            border-radius: 8px;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-btn:hover,
+        .nav-btn.active {
+            color: var(--color-bg-dark);
+            background: rgba(244, 49, 57, 0.08);
+        }
+
+        .nav-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 3px;
+            background: var(--color-accent-red);
+            border-radius: 2px;
+        }
+
+        /* Бургер-меню */
+        .burger-icon {
+            display: none;
+            font-size: var(--text-2xl);
+            color: var(--color-bg-dark);
+            padding: var(--space-2);
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .burger-icon:hover {
+            background: rgba(35, 31, 32, 0.08);
+        }
+
+        /* ===== МОБИЛЬНОЕ МЕНЮ ===== */
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 85%;
+            max-width: 320px;
+            height: 100vh;
+            background: var(--color-bg-light);
+            padding: var(--space-8) var(--space-6);
+            box-shadow: -4px 0 24px var(--color-shadow);
+            transition: var(--transition-smooth);
+            z-index: 200;
+            overflow-y: auto;
+        }
+
+        .mobile-nav.open {
+            right: 0;
+        }
+
+        .close-mobile-menu {
+            position: absolute;
+            top: var(--space-4);
+            right: var(--space-4);
+            font-size: var(--text-2xl);
+            color: var(--color-bg-dark);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .close-mobile-menu:hover {
+            background: rgba(35, 31, 32, 0.08);
+        }
+
+        .mobile-nav ul {
+            list-style: none;
+            margin-top: var(--space-12);
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-2);
+        }
+
+        .mobile-nav a {
+            display: block;
+            padding: var(--space-3) var(--space-4);
+            font-family: var(--font-display);
+            font-weight: 600;
+            font-size: var(--text-lg);
+            color: var(--color-text-primary);
+            border-radius: 10px;
+            transition: var(--transition);
+        }
+
+        .mobile-nav a:hover,
+        .mobile-nav a.active {
+            background: rgba(244, 49, 57, 0.1);
+            color: var(--color-accent-red);
+        }
+
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(35, 31, 32, 0.4);
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 150;
+        }
+
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* ===== HERO-СЕКЦИИ (как у tavrida.art) ===== */
+        .hero-brand {
+            padding: var(--space-16) var(--container-padding);
+            text-align: center;
+            color: var(--color-text-inverse);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-brand::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.4) 100%);
+            z-index: 1;
+        }
+
+        .hero-brand-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-brand h1 {
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: clamp(var(--text-4xl), 8vw, var(--text-6xl));
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+            margin-bottom: var(--space-4);
+            text-transform: uppercase;
+        }
+
+        .hero-brand p {
+            font-size: var(--text-xl);
+            font-weight: 400;
+            opacity: 0.95;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Цветовые вариации hero */
+        .hero-brand[data-color="dark"] { background: var(--color-bg-dark); }
+        .hero-brand[data-color="blue"] { background: var(--color-deep-blue); }
+        .hero-brand[data-color="red"] { background: var(--color-accent-red); }
+        .hero-brand[data-color="gold"] { background: var(--color-gold); color: var(--color-bg-dark); }
+
+        /* ===== СЕТКА И КАРТОЧКИ ===== */
+        .grid-2col {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-6);
+            margin-bottom: var(--space-10);
+        }
+
+        .grid-3col {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: var(--space-5);
+            margin-bottom: var(--space-10);
+        }
+
+        .brand-card {
+            background: #fff;
+            border-radius: var(--border-radius-lg);
+            padding: var(--space-6);
+            box-shadow: 0 4px 20px var(--color-shadow);
+            transition: var(--transition-smooth);
+            border: 1px solid var(--color-border);
+        }
+
+        .brand-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px var(--color-shadow);
+        }
+
+        .brand-card h3 {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: var(--text-xl);
+            color: var(--color-bg-dark);
+            margin-bottom: var(--space-3);
+            line-height: 1.3;
+        }
+
+        .brand-card p {
+            color: var(--color-text-secondary);
+            font-size: var(--text-base);
+            line-height: 1.7;
+        }
+
+        /* ===== ЛОГОТИПЫ И ПАЛИТРА ===== */
+        .logo-demo-box {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-6);
+            justify-content: center;
+            padding: var(--space-8) 0;
+            margin-bottom: var(--space-10);
+        }
+
+        .logo-version {
+            text-align: center;
+            padding: var(--space-5);
+            background: #fff;
+            border-radius: var(--border-radius);
+            border: 1px solid var(--color-border);
+            min-width: 180px;
+        }
+
+        .logo-version img {
+            margin: 0 auto var(--space-3);
+            border-radius: 6px;
+        }
+
+        .logo-version p {
+            font-size: var(--text-sm);
+            color: var(--color-text-secondary);
+            font-weight: 500;
+        }
+
+        .color-palette {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: var(--space-4);
+            margin-bottom: var(--space-10);
+        }
+
+        .swatch {
+            background: #fff;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 4px 16px var(--color-shadow);
+            border: 1px solid var(--color-border);
+        }
+
+        .swatch-color {
+            height: 80px;
+            width: 100%;
+        }
+
+        .swatch-info {
+            padding: var(--space-3);
+            text-align: center;
+        }
+
+        .swatch-name {
+            font-family: var(--font-display);
+            font-weight: 600;
+            font-size: var(--text-sm);
+            display: block;
+            margin-bottom: var(--space-1);
+        }
+
+        .swatch-info code {
+            font-family: monospace;
+            font-size: var(--text-xs);
+            color: var(--color-text-secondary);
+            background: rgba(0,0,0,0.04);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        .mistake-badge {
+            margin-top: var(--space-4);
+            padding: var(--space-3) var(--space-4);
+            background: rgba(244, 49, 57, 0.08);
+            border-left: 3px solid var(--color-accent-red);
+            border-radius: 0 8px 8px 0;
+            font-size: var(--text-sm);
+            color: var(--color-text-primary);
+        }
+
+        /* ===== ФОТО-БЛОКИ ===== */
+        .photo-large,
+        .photo-medium {
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            box-shadow: 0 8px 32px var(--color-shadow);
+            margin: var(--space-6) 0;
+        }
+
+        .photo-large img {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16/6;
+            object-fit: cover;
+            transition: var(--transition-smooth);
+        }
+
+        .photo-large:hover img {
+            transform: scale(1.02);
+        }
+
+        .photo-medium {
+            border-radius: var(--border-radius);
+        }
+
+        .photo-medium img {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 4/3;
+            object-fit: cover;
+        }
+
+        /* ===== КНОПКИ (стиль tavrida.art) ===== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-2);
+            padding: var(--space-3) var(--space-6);
+            font-family: var(--font-display);
+            font-weight: 600;
+            font-size: var(--text-sm);
+            border-radius: 10px;
+            transition: var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+        }
+
+        .btn-primary {
+            background: var(--color-accent-red);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background: #d62a31;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(244, 49, 57, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--color-bg-dark);
+            border: 2px solid var(--color-border);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--color-bg-dark);
+            background: rgba(35, 31, 32, 0.04);
+        }
+
+        /* ===== СТРАНИЦЫ И АНИМАЦИИ ===== */
+        .page-section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .page-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ===== АДАПТИВ ===== */
+        @media (max-width: 1024px) {
+            .nav-menu {
+                display: none;
+            }
+            
+            .burger-icon {
+                display: flex;
+                align-items: center;
+            }
+            
+            .header-left {
+                gap: var(--space-4);
+            }
+            
+            .brandbook-label {
+                font-size: var(--text-lg);
+                padding-left: var(--space-3);
+            }
+        }
+
+        @media (max-width: 640px) {
+            :root {
+                --container-padding: var(--space-4);
+                --space-12: 2.5rem;
+                --space-16: 3rem;
+            }
+            
+            .header-inner {
+                padding: var(--space-3) var(--container-padding);
+            }
+            
+            .logo-img {
+                height: 28px;
+            }
+            
+            .hero-brand {
+                padding: var(--space-10) var(--container-padding);
+            }
+            
+            .hero-brand h1 {
+                font-size: clamp(var(--text-3xl), 10vw, var(--text-5xl));
+            }
+            
+            .content-wrapper {
+                padding: var(--space-8) var(--container-padding);
+            }
+            
+            .grid-2col,
+            .grid-3col {
+                grid-template-columns: 1fr;
+            }
+            
+            .brand-card {
+                padding: var(--space-5);
+            }
+        }
+
+        /* ===== УТИЛИТЫ ===== */
+        .text-center { text-align: center; }
+        .mt-4 { margin-top: var(--space-4); }
+        .mt-6 { margin-top: var(--space-6); }
+        .mt-8 { margin-top: var(--space-8); }
+        .mb-4 { margin-bottom: var(--space-4); }
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+<div class="brandbook-container">
+    
+    <!-- HEADER: минималистичный, как у tavrida.art -->
+    <header class="main-header" id="mainHeader">
+        <div class="header-inner">
+            <div class="header-left">
+                <div class="logo-group">
+                    <img class="logo-img" src="SVG/logo-2.svg" alt="Знак" loading="lazy">
+                    <img class="logo-img" src="SVG/logo.svg" alt="Логотип" loading="lazy">
+                </div>
+                <span class="brandbook-label">Брендбук</span>
+            </div>
+            
+            <nav class="nav-menu" id="brandNav" aria-label="Основная навигация">
+                <li><button class="nav-btn active" data-page="about">О бренде</button></li>
+                <li><button class="nav-btn" data-page="logo">Логотип</button></li>
+                <li><button class="nav-btn" data-page="colors">Цвета</button></li>
+                <li><button class="nav-btn" data-page="typo">Типографика</button></li>
+                <li><button class="nav-btn" data-page="graphics">Графика</button></li>
+                <li><button class="nav-btn" data-page="photo">Фотостиль</button></li>
+                <li><button class="nav-btn" data-page="media">Носители</button></li>
+            </nav>
+            
+            <button class="burger-icon" id="burgerIcon" aria-label="Открыть меню" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- МОБИЛЬНОЕ МЕНЮ -->
+    <aside class="mobile-nav" id="mobileNav" aria-hidden="true">
+        <button class="close-mobile-menu" id="closeMobileMenu" aria-label="Закрыть меню">
+            <i class="fas fa-times"></i>
+        </button>
+        <nav aria-label="Мобильная навигация">
+            <ul>
+                <li><a href="#" data-mobile-page="about">О бренде</a></li>
+                <li><a href="#" data-mobile-page="logo">Логотип</a></li>
+                <li><a href="#" data-mobile-page="colors">Цвета</a></li>
+                <li><a href="#" data-mobile-page="typo">Типографика</a></li>
+                <li><a href="#" data-mobile-page="graphics">Графика</a></li>
+                <li><a href="#" data-mobile-page="photo">Фотостиль</a></li>
+                <li><a href="#" data-mobile-page="media">Носители</a></li>
+            </ul>
+        </nav>
+    </aside>
+    
+    <div class="overlay" id="overlay" aria-hidden="true"></div>
+
+    <!-- СТРАНИЦА 1: О БРЕНДЕ -->
+    <section class="page-section active" id="page-about">
+        <div class="hero-brand" data-color="blue">
+            <div class="hero-brand-content">
+                <h1>О бренде</h1>
+                <p>Кодекс визуальной и смысловой идентичности театра клоунады «Микос»</p>
+            </div>
+        </div>
+        
+        <div class="content-wrapper">
+            <div class="grid-3col">
+                <article class="brand-card">
+                    <h3>Кратко о бренде</h3>
+                    <p>Экспериментальный театр, где клоунада становится языком глубокого диалога между сценой и зрителем.</p>
+                </article>
+                <article class="brand-card">
+                    <h3>Цели бренда</h3>
+                    <p>Создать узнаваемый культурный бренд с сильным визуальным кодом, привлечь новую интеллектуальную аудиторию.</p>
+                </article>
+                <article class="brand-card">
+                    <h3>Задачи брендбука</h3>
+                    <p>Единая система коммуникации: от афиш до соцсетей, сохранение характера «структурированного спектакля».</p>
+                </article>
+            </div>
+            
+            <figure class="photo-large">
+                <img src="https://placehold.co/1400x420/2C4068/F2F1F0?text=МИССИЯ+ТЕАТРА+КЛОУНАДЫ" 
+                     alt="Миссия театра" loading="lazy">
+            </figure>
+            
+            <div class="grid-2col">
+                <article class="brand-card">
+                    <h3>Миссия</h3>
+                    <p>Дарить зрителю опыт живого сопереживания через синтез клоунады, драмы и пластики. Смех, который остаётся в сердце.</p>
+                    <h3 class="mt-6">Ключевое сообщение</h3>
+                    <p><strong>«Искусство улыбаться всерьёз»</strong></p>
+                </article>
+                <article class="brand-card">
+                    <h3>Позиционирование</h3>
+                    <p>Новаторский театр для думающей аудитории 20–45 лет, семьи, корпоративные клиенты.</p>
+                    <h3 class="mt-4">Задачи</h3>
+                    <p>Рост узнаваемости на 40%, увеличение продаж билетов, формирование комьюнити вокруг бренда.</p>
+                </article>
+            </div>
+            
+            <div class="grid-3col">
+                <article class="brand-card">
+                    <h3>Название / Слоган</h3>
+                    <p>Театр клоунады «Микос» · <em>«Игра, которая остаётся в сердце»</em></p>
+                </article>
+                <article class="brand-card">
+                    <h3>Креативная концепция</h3>
+                    <p>Контраст строгой геометрической типографики и живой клоунады. Красный акцент как «свет рампы».</p>
+                </article>
+                <article class="brand-card">
+                    <h3>Визуальная стратегия</h3>
+                    <p>Крупные эмоциональные портреты, высокий контраст, глубокий синий фон, золотые детали.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- СТРАНИЦА 2: ЛОГОТИП -->
+    <section class="page-section" id="page-logo">
+        <div class="hero-brand" data-color="dark">
+            <div class="hero-brand-content">
+                <h1>Логотип</h1>
+                <p>Структура, модификации, охранное поле</p>
+            </div>
+        </div>
+        
+        <div class="content-wrapper">
+            <div class="logo-demo-box">
+                <div class="logo-version">
+                    <img src="https://placehold.co/200x100/231F20/F2F1F0?text=МИКОС" alt="Основной логотип" loading="lazy">
+                    <p>Основной<br><small>(тёмный)</small></p>
+                </div>
+                <div class="logo-version">
+                    <img src="https://placehold.co/200x100/F2F1F0/231F20?text=МИКОС" alt="Светлый логотип" loading="lazy">
+                    <p>Светлый вариант</p>
+                </div>
+                <div class="logo-version">
+                    <img src="https://placehold.co/200x100/F43139/F2F1F0?text=МИКОС" alt="Акцентный логотип" loading="lazy">
+                    <p>Красный акцент</p>
+                </div>
+            </div>
+            
+            <div class="grid-2col">
+                <article class="brand-card">
+                    <h3>Структура</h3>
+                    <p>Логотип состоит из знака (стилизованная маска) и текстовой части шрифтом Unbounded. Минимальный размер в печати — 25 мм.</p>
+                    <h3 class="mt-4">Охранное поле</h3>
+                    <p>Равно высоте буквы «М» в слове «Микос». Запрещено размещать другие элементы ближе.</p>
+                </article>
+                <article class="brand-card">
+                    <h3>Цветовые модификации</h3>
+                    <p>Основной <code>#231F20</code> на светлом фоне, светлый <code>#F2F1F0</code> на тёмном, красный <code>#F43139</code> — для специальных проектов.</p>
+                    <div class="mistake-badge">
+                        <i class="fas fa-exclamation-triangle"></i> 
+                        <strong>Ошибки:</strong> искажение пропорций, добавление теней, замена шрифта, цвет вне палитры.
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- СТРАНИЦА 3: ЦВЕТА -->
+    <section class="page-section" id="page-colors">
+        <div class="hero-brand" data-color="gold">
+            <div class="hero-brand-content">
+                <h1>Фирменные цвета</h1>
+                <p>Палитра контрастов и театрального света</p>
+            </div>
+        </div>
+        
+        <div class="content-wrapper">
+            <div class="color-palette">
+                <div class="swatch">
+                    <div class="swatch-color" style="background:#F2F1F0; border-bottom:1px solid #ddd;"></div>
+                    <div class="swatch-info">
+                        <span class="swatch-name">Светлый фон</span>
+                        <code>#F2F1F0</code>
+                    </div>
+                </div>
+                <div class="swatch">
+                    <div class="swatch-color" style="background:#231F20;"></div>
+                    <div class="swatch-info">
+                        <span class="swatch-name">Тёмный</span>
+                        <code>#231F20</code>
+                    </div>
+                </div>
+                <div class="swatch">
+                    <div class="swatch-color" style="background:#F43139;"></div>
+                    <div class="swatch-info">
+                        <span class="swatch-name">Красный акцент</span>
+                        <code>#F43139</code>
+                    </div>
+                </div>
+                <div class="swatch">
+                    <div class="swatch-color" style="background:#2C4068;"></div>
+                    <div class="swatch-info">
+                        <span class="swatch-name">Глубокий синий</span>
+                        <code>#2C4068</code>
+                    </div>
+                </div>
+                <div class="swatch">
+                    <div class="swatch-color" style="background:#D4BF95;"></div>
+                    <div class="swatch-info">
+                        <span class="swatch-name">Золотой</span>
+                        <code>#D4BF95</code>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid-2col">
+                <article class="brand-card">
+                    <h3>Палитра</h3>
+                    <p><strong>Основная:</strong> <code>#F2F1F0</code> + <code>#231F20</code><br>
+                    <strong>Акцентные:</strong> <code>#F43139</code> (драйв), <code>#2C4068</code> (интеллект), <code>#D4BF95</code> (теплота сцены).</p>
+                </article>
+                <article class="brand-card">
+                    <h3>Сочетания</h3>
+                    <p>Тёмный текст на светлом, красный для кнопок/заголовков, синий для фоновых блоков. Запрещены сторонние оттенки.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ТИПОГРАФИКА -->
+    <section class="page-section" id="page-typo">
+        <div class="hero-brand" data-color="blue">
+            <div class="hero-brand-content">
+                <h1>Типографика</h1>
+            </div>
+        </div>
+        
+        <div class="content-wrapper">
+            <div class="grid-2col">
+                <article class="brand-card">
+                    <h3>Unbounded <small>(заголовки)</small></h3>
+                    <p style="font-family:'Unbounded'; font-size: 2.5rem; font-weight: 800; line-height: 1.1; margin: var(--space-4) 0;">Аа Бб Вв</p>
+                    <p>Для H1–H3, навигации, акцентных слов. Начертания: <strong>600, 700, 800</strong>.</p>
+                </article>
+                <article class="brand-card">
+                    <h3>Nunito Sans <small>(текст)</small></h3>
+                    <p style="font-family:'Nunito Sans'; font-size: 1.375rem; margin: var(--space-4) 0;">Аа Бб Вв</p>
+                    <p>Основной текст, описания, цитаты. Высокая читаемость. Начертания: <strong>400, 600, 700</strong>.</p>
+                </article>
+            </div>
+            
+            <article class="brand-card mt-6">
+                <h3>Правила использования</h3>
+                <ul style="list-style: none; padding-left: 0;">
+                    <li>• Заголовки от 24px, межстрочный интервал 1.2</li>
+                    <li>• Основной текст 16–18px, интерлиньяж 1.5</li>
+                    <li>• Не более двух гарнитур в макете</li>
+                    <li>• Избегать выравнивания по центру для длинных текстов</li>
+                </ul>
+            </article>
+        </div>
+    </section>
+
+    <!-- ГРАФИЧЕСКИЕ ЭЛЕМЕНТЫ -->
+    <section class="page-section" id="page-graphics">
+        <div class="hero-brand" data-color="dark">
+            <div class="hero-brand-content">
+                <h1>Графические элементы</h1>
+            </div>
+        </div>
+        
+        <div class="content-wrapper">
+            <div class="grid-3col">
+                <article class="brand-card">
+                    <h3>Маска / знак</h3>
+                    <p>Стилизованная клоунская маска — самостоятельный паттерн, используется на мерче и постерах.</p>
+                </article>
+                <article class="brand-card">
+                    <h3>Линии кулис</h3>
+                    <p>Вертикальные и горизонтальные полосы, напоминающие театральные кулисы — для динамики.</p>
+                </article>
+                <article class="brand-card">
+                    <h3>Условия</h3>
+                    <p>Только фирменные цвета. Не перекрывать логотип, соблюдать охранное поле.</p>
+                </article>
+            </div>
+            
+            <figure class="photo-medium mt-8" style="max-width: 900px; margin-left: auto; margin-right: auto;">
+                <img src="https://placehold.co/900x450/2C4068/F2F1F0?text=ГРАФИЧЕСКИЙ+ЭЛЕМЕНТ+МИКОС" 
+                     alt="Графический элемент" loading="lazy">
+            </figure>
+        </div>
+    </section>
+
+    <!-- ФОТОСТИЛЬ -->
+    <section class="page-section" id="page-photo">
+        <div class="hero-brand" data-color="red">
+            <div class="hero-brand-content">
+                <h1>Фотостиль</h1>
+                <p>Эмоция, свет, театральный контраст</p>
+            </div>
+        </div>
+        
+        <div class="content-wrapper">
+            <figure class="photo-large">
+                <img src="https://placehold.co/1400x450/231F20/F2F1F0?text=КРУПНЫЙ+ПЛАН+ЭМОЦИИ" 
+                     alt="Фото: эмоция" loading="lazy">
+            </figure>
+            
+            <div class="grid-3col">
+                <figure class="photo-medium">
+                    <img src="https://placehold.co/500x350/2C4068/white?text=ДВИЖЕНИЕ" alt="Движение" loading="lazy">
+                </figure>
+                <figure class="photo-medium">
+                    <img src="https://placehold.co/500x350/D4BF95/231F20?text=ЗАКУЛИСЬЕ" alt="Закулисье" loading="lazy">
+                </figure>
+                <figure class="photo-medium">
+                    <img src="https://placehold.co/500x350/F43139/white?text=РЕПЕТИЦИЯ" alt="Репетиция" loading="lazy">
+                </figure>
+            </div>
+            
+            <article class="brand-card mt-8">
+                <h3>Принципы фотостиля</h3>
+                <p>Естественное освещение, крупные портреты, высокий контраст (chiaroscuro), эмоциональная выразительность. Красный — единственный яркий акцент.</p>
+            </article>
+        </div>
+    </section>
+
+    <!-- НОСИТЕЛИ -->
+    <section class="page-section" id="page-media">
+        <div class="hero-brand" data-color="blue">
+            <div class="hero-brand-content">
+                <h1>Носители</h1>
+                <p>Применение бренда</p>
+            </div>
+        </div>
+        
+        <div class="content-wrapper">
+            <div class="grid-2col">
+                <article class="brand-card">
+                    <h3>Внутренние носители</h3>
+                    <p>Визитки, бланки, бейджи — логотип слева, охранное поле, шрифт Nunito Sans. Фирменные конверты с золотым акцентом.</p>
+                </article>
+                <article class="brand-card">
+                    <h3>Внешние носители</h3>
+                    <p>Афиши, билборды, соцсети — крупное фото, логотип вверху/снизу, красный акцент на датах. Мерч: минималистичный знак маски.</p>
+                </article>
+            </div>
+            
+            <article class="brand-card mt-6">
+                <h3>Правила оформления</h3>
+                <p>Соблюдать охранное поле, использовать только палитру <code>#F2F1F0</code>, <code>#231F20</code>, <code>#F43139</code>, <code>#2C4068</code>, <code>#D4BF95</code>. Не нарушать читаемость.</p>
+            </article>
+        </div>
+    </section>
+
+    <!-- FOOTER (упрощённый, как у tavrida.art) -->
+    <footer id="site-footer" style="margin-top: auto; padding: var(--space-8) var(--container-padding); background: var(--color-bg-dark); color: var(--color-text-inverse); text-align: center;">
+        <p style="font-size: var(--text-sm); opacity: 0.9;">
+            © Театр клоунады «Микос», 2026
+        </p>
+        <p style="font-size: var(--text-xs); opacity: 0.7; margin-top: var(--space-2);">
+            Брендбук · Версия 1.0
+        </p>
+    </footer>
+</div>
+
+<!-- СКРИПТЫ -->
+<!-- СКРИПТЫ - ПОЛНАЯ РАБОЧАЯ ВЕРСИЯ -->
+<script>
+    // ===== ОБЪЕКТ СТРАНИЦ (глобальный) =====
+    const pages = {
+        about: document.getElementById('page-about'),
+        logo: document.getElementById('page-logo'),
+        colors: document.getElementById('page-colors'),
+        typo: document.getElementById('page-typo'),
+        graphics: document.getElementById('page-graphics'),
+        photo: document.getElementById('page-photo'),
+        media: document.getElementById('page-media')
+    };
+
+    // ===== ПЕРЕКЛЮЧЕНИЕ ОСНОВНЫХ СТРАНИЦ =====
+    function switchPage(id) {
+        // 1. Закрываем все детальные страницы носителей
+        closeMediaDetail();
+        
+        // 2. Скрываем все основные страницы
+        Object.values(pages).forEach(p => {
+            if (p) {
+                p.classList.remove('active');
+                p.style.display = 'none';
+            }
+        });
+        
+        // 3. Показываем целевую страницу
+        if (pages[id]) {
+            pages[id].classList.add('active');
+            pages[id].style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        // 4. Обновляем активные кнопки меню
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.page === id);
+        });
+    }
+
+    // ===== ЗАКРЫТИЕ ДЕТАЛЬНЫХ СТРАНИЦ НОСИТЕЛЕЙ =====
+    function closeMediaDetail() {
+        document.querySelectorAll('.media-detail-page').forEach(page => {
+            page.hidden = true;
+            page.classList.remove('active');
+            page.style.display = 'none';
+        });
+    }
+
+    // ===== ОТКРЫТИЕ ДЕТАЛЬНОЙ СТРАНИЦЫ НОСИТЕЛЯ =====
+    function openMediaDetail(mediaId) {
+        // Скрыть все основные страницы
+        Object.values(pages).forEach(p => {
+            if (p) { p.classList.remove('active'); p.style.display = 'none'; }
+        });
+        
+        // Скрыть главную страницу носителей и все детали
+        closeMediaDetail();
+        const mediaMain = document.getElementById('page-media');
+        if (mediaMain) mediaMain.style.display = 'none';
+        
+        // Показать нужную деталь
+        const detail = document.getElementById(`media-${mediaId}`);
+        if (detail) {
+            detail.hidden = false;
+            detail.classList.add('active');
+            detail.style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            setTimeout(initGallery, 100);
+        }
+        
+        // Подсветить кнопку "Носители"
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.page === 'media');
+        });
+    }
+
+    // ===== МОБИЛЬНОЕ МЕНЮ =====
+    const mobileNav = document.getElementById('mobileNav');
+    const overlay = document.getElementById('overlay');
+    const burgerIcon = document.getElementById('burgerIcon');
+    const closeMobileBtn = document.getElementById('closeMobileMenu');
+
+    function openMobileMenu() {
+        if (!mobileNav || !overlay) return;
+        mobileNav.classList.add('open');
+        overlay.classList.add('active');
+        mobileNav.setAttribute('aria-hidden', 'false');
+        overlay.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        if (burgerIcon) burgerIcon.setAttribute('aria-expanded', 'true');
+    }
+
+    function closeMobileMenu() {
+        if (!mobileNav || !overlay) return;
+        mobileNav.classList.remove('open');
+        overlay.classList.remove('active');
+        mobileNav.setAttribute('aria-hidden', 'true');
+        overlay.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        if (burgerIcon) burgerIcon.setAttribute('aria-expanded', 'false');
+    }
+
+    // ===== КАРУСЕЛЬ НОСИТЕЛЕЙ =====
+    function initCarouselDots() {
+        const carousel = document.getElementById('mediaCarousel');
+        const dotsContainer = document.getElementById('mediaDots');
+        if (!carousel || !dotsContainer) return;
+        
+        const cards = carousel.querySelectorAll('.media-card');
+        dotsContainer.innerHTML = '';
+        cards.forEach((_, i) => {
+            const dot = document.createElement('span');
+            dot.className = `carousel-dot ${i === 0 ? 'active' : ''}`;
+            dot.addEventListener('click', () => scrollToCard(i));
+            dotsContainer.appendChild(dot);
+        });
+    }
+
+    function scrollToCard(index) {
+        const carousel = document.getElementById('mediaCarousel');
+        const cards = carousel?.querySelectorAll('.media-card');
+        if (!cards || !cards[index]) return;
+        
+        const cardWidth = cards[index].offsetWidth + 20;
+        carousel.scrollTo({ left: index * cardWidth, behavior: 'smooth' });
+        
+        document.querySelectorAll('.carousel-dot').forEach((d, i) => {
+            d.classList.toggle('active', i === index);
+        });
+    }
+
+    // ===== ГАЛЕРЕЯ ИЗОБРАЖЕНИЙ =====
+    function initGallery() {
+        const mainImg = document.getElementById('galleryMainImg');
+        const thumbs = document.querySelectorAll('.thumb');
+        const prevBtn = document.getElementById('galleryPrev');
+        const nextBtn = document.getElementById('galleryNext');
+        
+        if (!mainImg || thumbs.length === 0) return;
+        
+        // Переключение по миниатюрам
+        thumbs.forEach(thumb => {
+            thumb.addEventListener('click', () => {
+                mainImg.src = thumb.dataset.src;
+                mainImg.alt = thumb.alt;
+                thumbs.forEach(t => t.classList.remove('active'));
+                thumb.classList.add('active');
+            });
+        });
+        
+        // Навигация кнопками
+        let currentIndex = 0;
+        function updateGallery(index) {
+            if (thumbs[index]) {
+                thumbs[index].click();
+                currentIndex = index;
+            }
+        }
+        
+        prevBtn?.addEventListener('click', () => {
+            const newIndex = currentIndex > 0 ? currentIndex - 1 : thumbs.length - 1;
+            updateGallery(newIndex);
+        });
+        
+        nextBtn?.addEventListener('click', () => {
+            const newIndex = currentIndex < thumbs.length - 1 ? currentIndex + 1 : 0;
+            updateGallery(newIndex);
+        });
+        
+        // Свайп по галерее
+        let swipeStartX = 0;
+        mainImg.parentElement?.addEventListener('touchstart', (e) => {
+            swipeStartX = e.touches[0].clientX;
+        }, { passive: true });
+        
+        mainImg.parentElement?.addEventListener('touchend', (e) => {
+            const diff = swipeStartX - e.changedTouches[0].clientX;
+            if (diff > 50) nextBtn?.click();
+            else if (diff < -50) prevBtn?.click();
+        }, { passive: true });
+    }
+
+    // ===== ИНИЦИАЛИЗАЦИЯ ПОСЛЕ ЗАГРУЗКИ =====
+    document.addEventListener('DOMContentLoaded', () => {
+        // Принудительно скрыть детали при старте
+        closeMediaDetail();
+        
+        // Инициализация компонентов
+        initCarouselDots();
+        initGallery();
+        
+        // Обработчики кнопок навигации
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const pageId = btn.dataset.page;
+                if (pageId) switchPage(pageId);
+            });
+        });
+        
+        // Мобильное меню: бургер и закрытие
+        burgerIcon?.addEventListener('click', openMobileMenu);
+        closeMobileBtn?.addEventListener('click', closeMobileMenu);
+        overlay?.addEventListener('click', closeMobileMenu);
+        
+        // Мобильные ссылки
+        document.querySelectorAll('[data-mobile-page]').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const pageId = link.dataset.mobilePage;
+                if (pageId) {
+                    switchPage(pageId);
+                    closeMobileMenu();
+                }
+            });
+        });
+        
+        // Кнопки "Подробнее" в карточках носителей
+        document.querySelectorAll('.media-open-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const target = btn.dataset.target;
+                if (target) openMediaDetail(target);
+            });
+        });
+        
+        // Клик по всей карточке носителя
+        document.querySelectorAll('.media-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const target = card.dataset.mediaId;
+                if (target) openMediaDetail(target);
+            });
+        });
+        
+        // Кнопки "Назад" в деталях носителей
+        document.querySelectorAll('.media-close-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                closeMediaDetail();
+                switchPage('media');
+            });
+        });
+        
+        // Скролл-эффект хедера
+        const header = document.getElementById('mainHeader');
+        window.addEventListener('scroll', () => {
+            if (header) {
+                header.classList.toggle('scrolled', window.scrollY > 10);
+            }
+        }, { passive: true });
+        
+        // Закрытие мобильного меню по Escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && mobileNav?.classList.contains('open')) {
+                closeMobileMenu();
+            }
+        });
+        
+        // Свайп карусели на тач-устройствах
+        const carousel = document.getElementById('mediaCarousel');
+        const prevBtn = document.getElementById('mediaPrev');
+        const nextBtn = document.getElementById('mediaNext');
+        
+        let startX = 0, isDragging = false;
+        carousel?.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            isDragging = true;
+        }, { passive: true });
+        
+        carousel?.addEventListener('touchmove', (e) => {
+            if (!isDragging || !carousel) return;
+            const diff = startX - e.touches[0].clientX;
+            if (Math.abs(diff) > 50) {
+                carousel.scrollBy({ left: diff > 0 ? 300 : -300, behavior: 'smooth' });
+                isDragging = false;
+            }
+        }, { passive: true });
+        
+        carousel?.addEventListener('touchend', () => { isDragging = false; });
+        
+        prevBtn?.addEventListener('click', () => {
+            carousel?.scrollBy({ left: -300, behavior: 'smooth' });
+        });
+        
+        nextBtn?.addEventListener('click', () => {
+            carousel?.scrollBy({ left: 300, behavior: 'smooth' });
+        });
+    });
+</script>
+</body>
+</html>

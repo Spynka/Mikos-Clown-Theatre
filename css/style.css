@@ -2939,7 +2939,7 @@ body {
     font-size: 20px;
     font-weight: 600;
     color: #1A1718;
-}
+} 
 
 /* ============================================
    СТРАНИЦА СПЕКТАКЛЯ (детальная)
@@ -7428,4 +7428,75 @@ html, body {
     outline: none !important;
     border-color: #4A6294 !important;
     box-shadow: 0 0 0 3px rgba(74, 98, 148, 0.15) !important;
+}
+
+
+/* ============================================
+   CUSTOMERS PAGE - SPACING FIX (60px между блоками)
+   Вставить в САМЫЙ КОНЕЦ файла
+============================================ */
+
+/* 🔹 Универсальные отступы для всех блоков на странице Заказчикам */
+.customers-page .services-grid,
+.customers-page .request-builder,
+.customers-page .rider-section,
+.customers-page .terms-grid,
+.customers-page .contact-form-section {
+    margin-bottom: 60px !important;
+}
+
+/* 🔹 Отступы для заголовков секций */
+.customers-page .section-header-custom {
+    margin-bottom: 40px !important;
+}
+
+/* 🔹 Последний блок — без нижнего отступа */
+.customers-page .contact-form-section:last-child {
+    margin-bottom: 80px !important; /* Финальный отступ до футера */
+}
+
+/* 🔹 Адаптив: на планшетах и мобильных уменьшаем отступы */
+@media (max-width: 1100px) {
+    .customers-page .services-grid,
+    .customers-page .request-builder,
+    .customers-page .rider-section,
+    .customers-page .terms-grid,
+    .customers-page .contact-form-section {
+        margin-bottom: 50px !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .customers-page .services-grid,
+    .customers-page .request-builder,
+    .customers-page .rider-section,
+    .customers-page .terms-grid,
+    .customers-page .contact-form-section {
+        margin-bottom: 40px !important;
+    }
+}
+
+
+
+/* ============================================
+   ФИКС ОТСТУПОВ ДЛЯ СТРАНИЦЫ ЗАКАЗЧИКАМ
+   (Вставить в САМЫЙ КОНЕЦ файла style.css)
+============================================ */
+
+/* 🔹 Увеличиваем отступ под блоком "Технический райдер" */
+.rider-section {
+    margin-bottom: 80px !important; /* Установил 80px для видимого разделения */
+}
+
+/* 🔹 Увеличиваем отступ под блоком "Условия сотрудничества" */
+.terms-grid {
+    margin-bottom: 80px !important;
+}
+
+/* 🔹 На мобильных устройствах делаем отступ чуть меньше, но всё еще большим */
+@media (max-width: 768px) {
+    .rider-section,
+    .terms-grid {
+        margin-bottom: 50px !important;
+    }
 }
