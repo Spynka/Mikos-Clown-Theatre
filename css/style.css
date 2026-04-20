@@ -273,166 +273,7 @@ body {
     100% { transform: translateX(-50%); }
 }
 
-/* ============================================
-   HERO SLIDER AFISHA
-============================================ */
-.hero-slider-afisha {
-    width: 100%;
-    height: 720px;
-    background: linear-gradient(153deg, #2A3D5E 3%, #3A5078 100%);
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    margin-bottom: 60px;
-}
 
-.hero-slide-afisha {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    opacity: 0;
-    transition: opacity 1s ease;
-}
-
-.hero-slide-afisha.active {
-    opacity: 1;
-}
-
-.hero-bg-afisha {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0.6;
-}
-
-.hero-content-afisha {
-    max-width: 1360px;
-    margin: 0 auto;
-    padding: 0 20px;
-    position: relative;
-    z-index: 2;
-    width: 100%;
-}
-
-.hero-title-afisha {
-    max-width: 700px;
-    font-family: 'Unbounded', sans-serif;
-    font-size: 48px;
-    font-weight: 600;
-    line-height: 1.1;
-    margin-bottom: 16px;
-    color: black;
-}
-
-.hero-subtitle-afisha {
-    max-width: 550px;
-    font-size: 18px;
-    line-height: 27px;
-    color: #404040;
-    margin-bottom: 28px;
-}
-
-.hero-buttons-afisha {
-    display: flex;
-    gap: 16px;
-    flex-wrap: wrap;
-}
-
-.hero-btn-dark {
-    background: #E8454D;
-    padding: 12px 28px;
-    border-radius: 8px;
-    color: white;
-    font-family: 'Unbounded', sans-serif;
-    font-weight: 600;
-    font-size: 14px;
-    border: none;
-    cursor: pointer;
-    transition: background 0.2s;
-}
-
-.hero-btn-dark:hover {
-    background: #D62830;
-}
-
-.hero-btn-light {
-    background: #F8F7F6;
-    padding: 12px 28px;
-    border-radius: 8px;
-    color: #1A1718;
-    font-family: 'Unbounded', sans-serif;
-    font-weight: 600;
-    font-size: 14px;
-    border: none;
-    cursor: pointer;
-    transition: background 0.2s;
-}
-
-.hero-btn-light:hover {
-    background: #E9E7E5;
-}
-
-.slider-dots {
-    position: absolute;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 12px;
-    z-index: 3;
-}
-
-.slider-dot {
-    width: 20px;
-    height: 6px;
-    border-radius: 3px;
-    background: #A3A3A3;
-    cursor: pointer;
-    transition: background 0.2s;
-}
-
-.slider-dot.active {
-    width: 20px;
-    background: black;
-}
-
-.slider-dot:hover {
-    background: #666;
-}
-
-.slider-arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 48px;
-    height: 48px;
-    background: rgba(255, 255, 255, 0.9);
-    border: none;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-    color: #2A3D5E;
-    cursor: pointer;
-    z-index: 10;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    transition: background 0.2s, transform 0.2s;
-}
-.slider-arrow:hover {
-    background: white;
-    transform: translateY(-50%) scale(1.05);
-}
-.slider-arrow-left { left: 20px; }
-.slider-arrow-right { right: 20px; }
 
 /* ============================================
    SECTION HEADERS
@@ -7270,7 +7111,7 @@ html, body {
 
 
 
-* ============================================
+/* ============================================
    CUSTOMERS PAGE - NATIVE SELECT FIX
 ============================================ */
 
@@ -7498,5 +7339,353 @@ html, body {
     .rider-section,
     .terms-grid {
         margin-bottom: 50px !important;
+    }
+}
+
+
+
+
+/* ============================================
+   HERO SLIDER AFISHA — FINAL PROFESSIONAL
+   ✅ Без оверлеев, белый текст с тенью, контент внизу, умные стрелки
+============================================ */
+
+/* 🔹 Контейнер слайдера */
+.hero-slider-afisha {
+    position: relative;
+    width: 100%;
+    height: 720px;
+    background: #1A1718; /* Фоллбэк, если изображение не загрузится */
+    overflow: hidden;
+    margin-bottom: 60px;
+}
+
+/* 🔹 Слайд */
+.hero-slide-afisha {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+    display: flex;
+    align-items: flex-end; /* 🔥 Контент прижат к низу */
+    justify-content: flex-start;
+}
+
+.hero-slide-afisha.active {
+    opacity: 1;
+    visibility: visible;
+    z-index: 1;
+}
+
+/* 🔹 Фоновое изображение — БЕЗ затемнения, БЕЗ градиентов */
+.hero-bg-afisha {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    /* 🔥 Никаких фильтров, оверлеев, масок — чистое изображение */
+}
+
+/* 🔹 Контейнер контента — опущен почти к низу */
+.hero-content-afisha {
+    position: relative;
+    z-index: 2;
+    max-width: 1360px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 40px;
+    padding-bottom: 60px; /* 🔥 Отступ от нижнего края слайдера */
+    padding-left: 60px;   /* 🔥 Отступ слева */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+/* 🔹 Заголовок — белый с тенью для читаемости */
+.hero-title-afisha {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 48px;
+    font-weight: 600;
+    line-height: 1.1;
+    color: white;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.7); /* 🔥 Глубокая тень */
+    margin-bottom: 16px;
+    max-width: 650px;
+    /* 🔥 Без фона, только тень */
+}
+
+/* 🔹 Подзаголовок — белый с тенью */
+.hero-subtitle-afisha {
+    font-size: 18px;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.98);
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6);
+    margin-bottom: 28px;
+    max-width: 550px;
+    /* 🔥 Без фона */
+}
+
+/* 🔹 Кнопки */
+.hero-buttons-afisha {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.hero-btn-dark {
+    background: #E8454D;
+    padding: 12px 28px;
+    border-radius: 8px;
+    color: white;
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    text-shadow: none;
+}
+.hero-btn-dark:hover {
+    background: #D62830;
+    transform: translateY(-1px);
+}
+
+.hero-btn-light {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 12px 28px;
+    border-radius: 8px;
+    color: #1A1718;
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    text-shadow: none;
+}
+.hero-btn-light:hover {
+    background: white;
+    transform: translateY(-1px);
+}
+
+/* 🔹 Точки навигации */
+.slider-dots {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 12px;
+    z-index: 3;
+}
+
+.slider-dot {
+    width: 20px;
+    height: 6px;
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: background 0.2s, width 0.2s;
+}
+.slider-dot.active {
+    width: 28px;
+    background: white;
+}
+.slider-dot:hover {
+    background: rgba(255, 255, 255, 0.8);
+}
+
+
+
+.slider-arrow-left { left: 20px; }
+.slider-arrow-right { right: 20px; }
+
+
+/* 🔹 Адаптив: планшеты (до 1100px) */
+@media (max-width: 1100px) {
+    .hero-slider-afisha {
+        height: 600px;
+    }
+    .hero-content-afisha {
+        padding-bottom: 50px;
+        padding-left: 40px;
+    }
+    .hero-title-afisha {
+        font-size: 40px;
+    }
+    .hero-subtitle-afisha {
+        font-size: 16px;
+    }
+}
+
+/* 🔹 Адаптив: мобильные (до 768px) */
+@media (max-width: 768px) {
+    .hero-slider-afisha {
+        height: 520px;
+        margin-bottom: 40px;
+    }
+    
+    .hero-content-afisha {
+        padding: 0 20px;
+        padding-bottom: 50px; /* 🔥 Контент всё ещё внизу, но ближе к краю */
+        padding-left: 24px;
+    }
+    
+    .hero-title-afisha {
+        font-size: 32px;
+        line-height: 1.2;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8); /* 🔥 Усиленная тень для мобильных */
+    }
+    
+    .hero-subtitle-afisha {
+        font-size: 15px;
+        line-height: 1.4;
+        text-shadow: 0 1px 6px rgba(0, 0, 0, 0.7);
+    }
+    
+    .hero-buttons-afisha {
+        gap: 12px;
+    }
+    
+    .hero-btn-dark,
+    .hero-btn-light {
+        padding: 10px 20px;
+        font-size: 13px;
+    }
+    
+    .slider-dots {
+        bottom: 24px;
+        gap: 10px;
+    }
+    
+    .slider-dot {
+        width: 16px;
+        height: 5px;
+    }
+    .slider-dot.active {
+        width: 24px;
+    }
+    
+    /* 🔥 На мобильных стрелки НЕ показываем НИКОГДА */
+    .slider-arrow {
+        display: none !important;
+    }
+}
+
+/* 🔹 Очень маленькие экраны (до 400px) */
+@media (max-width: 400px) {
+    .hero-slider-afisha {
+        height: 460px;
+    }
+    .hero-content-afisha {
+        padding-bottom: 40px;
+        padding-left: 20px;
+    }
+    .hero-title-afisha {
+        font-size: 26px;
+    }
+    .hero-subtitle-afisha {
+        font-size: 14px;
+    }
+}
+
+/* 🔥 HERO SLIDER AFISHA — FIX ALL ISSUES 🔥 */
+
+/* Убираем синий фон контейнера */
+.hero-slider-afisha {
+    background: none !important;
+}
+
+/* Убираем прозрачность с изображения */
+.hero-bg-afisha {
+    opacity: 1 !important;
+}
+
+/* Текст — БЕЛЫЙ с тенью, читаемый на любом фоне */
+.hero-title-afisha {
+    color: white !important;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8) !important;
+}
+.hero-subtitle-afisha {
+    color: rgba(255, 255, 255, 0.95) !important;
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.7) !important;
+}
+
+/* ОПУСКАЕМ контент вниз */
+.hero-slide-afisha {
+    align-items: flex-end !important; /* Прижимаем к низу */
+}
+.hero-content-afisha {
+    padding-bottom: 100px !important; /* Отступ от нижнего края */
+    padding-left: 60px !important;   /* Отступ слева */
+}
+
+/* Стрелки — СКРЫТЫ по умолчанию */
+.slider-arrow {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    transition: opacity 0.2s ease !important;
+}
+
+/* На мобильных стрелки не показываем НИКОГДА */
+@media (max-width: 768px) {
+    .slider-arrow {
+        display: none !important;
+    }
+    .hero-content-afisha {
+        padding-bottom: 50px !important;
+        padding-left: 24px !important;
+    }
+    .hero-title-afisha {
+        font-size: 32px !important;
+    }
+}
+/* 🔹 Стрелки слайдера — базовые стили */
+.slider-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    background: rgba(255, 255, 255, 0.95);
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: #2A3D5E;
+    cursor: pointer;
+    z-index: 10;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    transition: opacity 0.2s ease, transform 0.2s ease !important;
+    
+    /* 🔥 Скрыты по умолчанию — управляем через JS */
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
+.slider-arrow-left { left: 20px; }
+.slider-arrow-right { right: 20px; }
+
+/* 🔥 При наведении — увеличение */
+.slider-arrow:hover {
+    transform: translateY(-50%) scale(1.08) !important;
+    background: white !important;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* 🔹 На мобильных стрелки не показываем НИКОГДА */
+@media (max-width: 768px) {
+    .slider-arrow {
+        display: none !important;
     }
 }
