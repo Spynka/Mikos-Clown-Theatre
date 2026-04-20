@@ -239,39 +239,7 @@ body {
 
 
 
-/* ============================================
-   TICKER
-============================================ */
-.ticker {
-    background: #2A3D5E;
-    padding: 10px 0;
-    overflow: hidden;
-    white-space: nowrap;
-}
 
-.ticker-content {
-    display: inline-block;
-    animation: ticker 25s linear infinite;
-    font-family: 'Unbounded', sans-serif;
-    font-size: 13px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: white;
-}
-
-.ticker-content span {
-    margin: 0 30px;
-}
-
-.ticker-content span.red-dot {
-    color: #E8454D;
-}
-
-@keyframes ticker {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-}
 
 
 
@@ -8275,7 +8243,39 @@ html, body {
 
 
 
+/* ============================================
+   TICKER
+============================================ */
+.ticker {
+    background: #2A3D5E;
+    padding: 10px 0;
+    overflow: hidden;
+    white-space: nowrap;
+}
 
+.ticker-content {
+    display: inline-block;
+    animation: ticker 25s linear infinite;
+    font-family: 'Unbounded', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: white;
+}
+
+.ticker-content span {
+    margin: 0 30px;
+}
+
+.ticker-content span.red-dot {
+    color: #E8454D;
+}
+
+@keyframes ticker {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
 
 /* ============================================
 🔥 FIX: БЕГУЩАЯ СТРОКА — УБИРАЕМ БЕЛУЮ ПОЛОСУ НА МОБИЛЬНЫХ
@@ -8380,4 +8380,65 @@ html, body {
       animation-duration: 35s !important; /* Медленнее = плавнее */
     }
   }
+}
+
+
+/* ============================================
+🔥 FIX: Бегущая строка (ticker) — восстановление анимации
+============================================ */
+.ticker {
+overflow: hidden !important; /* 🔑 Обязательно для обрезки анимации */
+position: relative !important;
+z-index: 50 !important; /* Поверх других элементов */
+}
+
+.ticker-content {
+animation: ticker 25s linear infinite !important; /* 🔑 Принудительно включаем анимацию */
+display: inline-block !important;
+white-space: nowrap !important;
+will-change: transform !important; /* Оптимизация производительности */
+}
+
+/* Ключевые кадры анимации — дублируем с !important для надёжности */
+@keyframes ticker {
+0% { transform: translateX(0); }
+100% { transform: translateX(-50%); }
+}
+
+/* 🔹 На мобильных — уменьшаем скорость для плавности */
+@media (max-width: 860px) {
+.ticker-content {
+animation-duration: 35s !important; /* Медленнее на маленьких экранах */
+}
+}
+
+/* 🔹 Если анимация всё ещё не работает — проверяем, что контент удвоен */
+/* Для работы translateX(-50%) содержимое .ticker-content должно быть продублировано в HTML */
+
+/* 🔥 ФИКС ДЛЯ TICKER-АНИМАЦИИ */
+.ticker-content {
+    display: inline-block !important;
+    white-space: nowrap !important; /* 🔑 Ключевое свойство */
+    animation: ticker 25s linear infinite !important;
+    animation-play-state: running !important;
+}
+
+/* Убедитесь, что ключевые кадры определены */
+@keyframes ticker {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+/* 🔥 На мобильных — можно уменьшить скорость или отключить */
+@media (max-width: 768px) {
+    .ticker-content {
+        animation-duration: 35s !important; /* Медленнее на мобильных */
+    }
+}
+
+/* 🔥 Уважение prefers-reduced-motion (для доступности) */
+@media (prefers-reduced-motion: reduce) {
+    .ticker-content {
+        animation: none !important;
+    }
 }
