@@ -8327,3 +8327,34 @@ html, body {
     }
   }
 }
+
+@media (max-width: 400px) {
+    [class*="card"],
+    .performance-card,
+    .play-card,
+    .merch-card,
+    .service-card,
+    .team-card,
+    .cast-card,
+    .similar-card {
+        outline: none !important;
+        box-shadow: none !important;
+        border: 1px solid #E5E3E1 !important;
+        border-radius: 8px !important;
+    }
+}
+
+@media (max-width: 860px) {
+    /* ... другие стили ... */
+    .ticker-content {
+        display: inline-flex !important;   /* ← вместо flex */
+        animation: ticker-scroll 30s linear infinite !important;
+        white-space: nowrap !important;
+    }
+    /* ... остальное ... */
+}
+
+.ticker {
+    overflow: hidden;
+    width: 100%;
+}
