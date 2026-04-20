@@ -1711,3 +1711,131 @@ html, body { overflow-x: hidden !important; width: 100% !important; max-width: 1
     grid-template-columns: repeat(3, 1fr);
     gap: clamp(20px, 3vw, 40px);
 }
+
+/* ============================================
+   АДАПТИВ: ПЛАНШЕТЫ
+============================================ */
+@media (max-width: 1100px) {
+    .team-scroll-wrapper { grid-template-columns: repeat(2, 1fr) !important; }
+    .scroll-wrapper { padding: 20px 40px 30px 40px; margin: 0 -40px; }
+    .terms-grid,
+    .contact-form-section,
+    .grid-2col,
+    .grid-3col {
+        grid-template-columns: 1fr !important;
+    }
+    .hero-slider-afisha { height: clamp(350px, 55vw, 600px); }
+    .hero-content-afisha { padding-bottom: clamp(40px, 6vw, 70px); }
+}
+
+/* ============================================
+   АДАПТИВ: МОБИЛЬНЫЕ
+============================================ */
+@media (max-width: 860px) {
+    .events-grid,
+    .awards-grid,
+    .similar-grid,
+    .services-grid,
+    .actor-photos-grid,
+    .gallery-grid,
+    .cast-grid,
+    .technical-grid {
+        grid-template-columns: 1fr !important;
+    }
+    
+    /* Мобильные стили для хедера и бургера */
+    .main-header {
+        background: transparent !important;
+        backdrop-filter: none !important;
+        border-bottom: none !important;
+        box-shadow: none !important;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 100;
+    }
+    .header-inner {
+        justify-content: flex-end !important;
+        height: 0 !important;
+        padding: 0 20px !important;
+        background: transparent !important;
+    }
+    .header-inner .logo-group,
+    .header-inner .nav-menu,
+    .header-inner .buy-ticket-btn,
+    .header-inner .dots-icon,
+    .header-inner .close-icon,
+    .extra-menu-row {
+        display: none !important;
+    }
+    .burger-icon {
+        display: flex !important;
+        position: fixed !important;
+        top: 19px !important;
+        right: 20px !important;
+        z-index: 101 !important;
+        margin: 0 !important;
+        order: 99 !important;
+        width: 52px;
+        height: 52px;
+        background: white;
+        border-radius: 50%;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+        color: #231F20;
+        font-size: 26px;
+    }
+    .scroll-btn { display: none !important; visibility: hidden !important; opacity: 0 !important; }
+    .scroll-wrapper { 
+        padding: 16px !important; 
+        margin: 0 !important; 
+        gap: 16px !important; 
+    }
+    .play-card { flex: 0 0 calc(100vw - 48px) !important; }
+    .performance-card, .merch-card { flex: 0 0 calc(100vw - 48px) !important; }
+    
+    /* Убираем обводки у карточек команды */
+    .team-card, .team-img {
+        border: none !important;
+        outline: none !important;
+        box-shadow: none !important;
+    }
+}
+
+/* ============================================
+   АДАПТИВ: МАЛЕНЬКИЕ МОБИЛЬНЫЕ
+============================================ */
+@media (max-width: 400px) {
+    .burger-icon {
+        top: 8px !important;
+        right: 12px !important;
+        width: 44px !important;
+        height: 44px !important;
+        font-size: 22px !important;
+    }
+    .scroll-wrapper { padding: 12px !important; gap: 12px !important; }
+    .play-card, .performance-card, .merch-card { flex: 0 0 calc(100vw - 24px) !important; }
+}
+
+/* ============================================
+   SUPPORTS
+============================================ */
+@supports (padding: max(0px)) {
+    .container-main,
+    .header-inner,
+    .footer-container,
+    .team-page,
+    .about-page,
+    .contacts-page,
+    .customers-page {
+        padding-left: max(clamp(16px, 5vw, 80px), env(safe-area-inset-left)) !important;
+        padding-right: max(clamp(16px, 5vw, 80px), env(safe-area-inset-right)) !important;
+    }
+    .main-footer { 
+        padding-bottom: max(clamp(30px, 4vw, 60px), env(safe-area-inset-bottom)) !important; 
+    }
+}
+
+@supports (-webkit-touch-callout: none) {
+    .mobile-nav { height: -webkit-fill-available !important; }
+}
