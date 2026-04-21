@@ -257,7 +257,6 @@ body { background: #fff; font-family: 'Nunito Sans', sans-serif; overflow-x: hid
 
 /* ===== 10. TEAM PAGE ===== */
 .team-page { max-width: 1320px; margin: 0 auto; padding: 0 clamp(16px, 5vw, 40px); }
-.page-header-team { margin: clamp(40px, 6vw, 60px) 0 clamp(30px, 4vw, 50px); }
 .page-title-team { font-family: 'Unbounded', sans-serif; font-size: clamp(32px, 5vw, 48px); font-weight: 700; line-height: 1.2; color: #000; position: relative; padding-left: clamp(12px, 2vw, 20px); margin: 0 0 10px; }
 .page-title-team::before { content: ''; position: absolute; left: 0; top: 0; width: 4px; height: 100%; background: #E53E3E; }
 .page-subtitle-team { max-width: 800px; font-size: clamp(16px, 2vw, 20px); line-height: 1.5; color: #231F20; }
@@ -5942,5 +5941,643 @@ body {
     
     .custom-options {
         z-index: 10000 !important;
+    }
+}
+
+
+
+
+
+/* ============================================= */
+/* КОМАНДА — ПОЛНЫЙ АДАПТИВНЫЙ CSS              */
+/* ============================================= */
+
+/* ----- 1. ОСНОВНОЙ КОНТЕЙНЕР ----- */
+.team-page {
+    max-width: 1360px !important;
+    margin: 0 auto !important;
+    padding: 60px 40px 40px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    overflow-x: clip !important;
+}
+
+/* ----- 2. ЗАГОЛОВОК СТРАНИЦЫ ----- */
+.page-header-team {
+    margin-bottom: 40px !important;
+}
+
+.page-title-team {
+    font-family: 'Unbounded', sans-serif !important;
+    font-weight: 700 !important;
+    font-size: clamp(32px, 5vw, 56px) !important;
+    line-height: 1.2 !important;
+    color: #1A1718 !important;
+    position: relative !important;
+    padding-left: 20px !important;
+    margin: 0 0 16px !important;
+}
+
+.page-title-team::before {
+    content: '' !important;
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 4px !important;
+    height: 100% !important;
+    background: #E8454D !important;
+}
+
+.page-subtitle-team {
+    max-width: 800px !important;
+    font-size: clamp(16px, 2vw, 18px) !important;
+    line-height: 1.5 !important;
+    color: #3D393A !important;
+    margin: 0 !important;
+}
+
+/* ----- 3. БЛОК ХУДОЖЕСТВЕННОГО РУКОВОДИТЕЛЯ ----- */
+.director-highlight {
+    display: flex !important;
+    gap: 48px !important;
+    background: #1A2840 !important;
+    border-radius: 16px !important;
+    padding: 40px !important;
+    margin-bottom: 48px !important;
+    flex-wrap: wrap !important;
+}
+
+.director-photo {
+    flex: 0 0 320px !important;
+    max-width: 320px !important;
+}
+
+.director-photo img {
+    width: 100% !important;
+    height: auto !important;
+    border-radius: 12px !important;
+    display: block !important;
+    object-fit: cover !important;
+    aspect-ratio: 1 / 1 !important;
+}
+
+.director-info {
+    flex: 1 !important;
+    min-width: 300px !important;
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+.director-tag {
+    display: inline-block !important;
+    background: #E8454D !important;
+    padding: 6px 16px !important;
+    border-radius: 4px !important;
+    font-family: 'Unbounded', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 13px !important;
+    color: #fff !important;
+    margin-bottom: 20px !important;
+    align-self: flex-start !important;
+}
+
+.director-name {
+    font-family: 'Unbounded', sans-serif !important;
+    font-size: clamp(24px, 3.5vw, 36px) !important;
+    font-weight: 700 !important;
+    color: #fff !important;
+    margin-bottom: 12px !important;
+    line-height: 1.2 !important;
+}
+
+.director-name span {
+    color: #E8454D !important;
+}
+
+.director-position {
+    font-family: 'Nunito Sans', sans-serif !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    color: rgba(255, 255, 255, 0.8) !important;
+    margin-bottom: 20px !important;
+}
+
+.director-bio {
+    font-family: 'Nunito Sans', sans-serif !important;
+    font-size: 15px !important;
+    line-height: 1.6 !important;
+    color: rgba(255, 255, 255, 0.7) !important;
+    margin-bottom: 28px !important;
+}
+
+.director-btn {
+    align-self: flex-start !important;
+    padding: 12px 32px !important;
+    background: #fff !important;
+    border: none !important;
+    border-radius: 8px !important;
+    font-family: 'Unbounded', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 14px !important;
+    color: #1A1718 !important;
+    cursor: pointer !important;
+    transition: background 0.2s !important;
+    margin-top: auto !important;
+}
+
+.director-btn:hover {
+    background: #E9E7E5 !important;
+}
+
+/* ----- 4. СТАТИСТИКА ----- */
+.stats-row {
+    display: flex !important;
+    gap: 24px !important;
+    justify-content: center !important;
+    margin-bottom: 48px !important;
+    flex-wrap: wrap !important;
+}
+
+.stat-item {
+    flex: 1 !important;
+    min-width: 180px !important;
+    background: #F8F7F6 !important;
+    border-radius: 16px !important;
+    padding: 24px 20px !important;
+    text-align: center !important;
+}
+
+.stat-number {
+    font-family: 'Unbounded', sans-serif !important;
+    font-size: clamp(36px, 5vw, 48px) !important;
+    font-weight: 700 !important;
+    color: #E8454D !important;
+    line-height: 1.2 !important;
+    margin-bottom: 8px !important;
+}
+
+.stat-label {
+    font-family: 'Unbounded', sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: #2A3D5E !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+}
+
+/* ----- 5. БЛОК "ХОТИТЕ С НАМИ РАБОТАТЬ?" ----- */
+.work-with-us {
+    display: flex !important;
+    gap: 48px !important;
+    background: #F8F7F6 !important;
+    border-radius: 16px !important;
+    padding: 40px !important;
+    margin-bottom: 48px !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+}
+
+.work-image {
+    flex: 0 0 280px !important;
+    max-width: 280px !important;
+}
+
+.work-image img {
+    width: 100% !important;
+    height: auto !important;
+    display: block !important;
+}
+
+.work-content {
+    flex: 1 !important;
+    min-width: 280px !important;
+}
+
+.work-title {
+    font-family: 'Unbounded', sans-serif !important;
+    font-size: clamp(24px, 3vw, 32px) !important;
+    font-weight: 600 !important;
+    color: #1A1718 !important;
+    margin: 0 0 16px !important;
+    position: relative !important;
+    padding-left: 16px !important;
+}
+
+.work-title::before {
+    content: '' !important;
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 3px !important;
+    height: 100% !important;
+    background: #E8454D !important;
+    border-radius: 1.5px !important;
+}
+
+.work-text {
+    font-family: 'Nunito Sans', sans-serif !important;
+    font-size: 16px !important;
+    line-height: 1.6 !important;
+    color: #3D393A !important;
+    margin-bottom: 28px !important;
+}
+
+.work-btn {
+    padding: 14px 32px !important;
+    background: #E8454D !important;
+    border: none !important;
+    border-radius: 8px !important;
+    font-family: 'Unbounded', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 15px !important;
+    color: #fff !important;
+    cursor: pointer !important;
+    transition: background 0.2s !important;
+}
+
+.work-btn:hover {
+    background: #D62830 !important;
+}
+
+/* ----- 6. ЗАГОЛОВОК СЕКЦИИ АКТЕРОВ ----- */
+.section-header-team {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: baseline !important;
+    flex-wrap: wrap !important;
+    gap: 16px !important;
+    margin-bottom: 32px !important;
+}
+
+.section-title-team {
+    font-family: 'Unbounded', sans-serif !important;
+    font-size: clamp(28px, 4vw, 40px) !important;
+    font-weight: 600 !important;
+    color: #1A1718 !important;
+    position: relative !important;
+    padding-left: 20px !important;
+    margin: 0 !important;
+}
+
+.section-title-team::before {
+    content: '' !important;
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 4px !important;
+    height: 100% !important;
+    background: #E8454D !important;
+}
+
+.section-count {
+    font-family: 'Unbounded', sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: #4A6294 !important;
+}
+
+/* ----- 7. БЛОКИ АКТЕРОВ И ФОТОГРАФИИ ----- */
+.actor-block {
+    margin-bottom: 48px !important;
+}
+
+.actor-block:last-child {
+    margin-bottom: 0 !important;
+}
+
+.actor-name {
+    font-family: 'Unbounded', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: clamp(20px, 2.5vw, 24px) !important;
+    color: #1A1718 !important;
+    margin-bottom: 20px !important;
+    padding-left: 0 !important;
+}
+
+.actor-photos-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 24px !important;
+}
+
+.actor-photo-card {
+    background: #F5F5F5 !important;
+    border-radius: 12px !important;
+    overflow: hidden !important;
+    aspect-ratio: 1 / 1 !important;
+    outline: 1px solid #E5E3E1 !important;
+}
+
+.actor-photo-card img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    display: block !important;
+    transition: transform 0.3s !important;
+}
+
+.actor-photo-card img:hover {
+    transform: scale(1.02) !important;
+}
+
+/* ----- 8. КНОПКА "ПОКАЗАТЬ ЕЩЕ" ----- */
+.show-more-wrapper {
+    display: flex !important;
+    justify-content: center !important;
+    margin: 40px 0 0 !important;
+}
+
+.show-more-btn {
+    padding: 12px 40px !important;
+    background: #F8F7F6 !important;
+    border-radius: 8px !important;
+    border: none !important;
+    font-family: 'Unbounded', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 14px !important;
+    color: #1A1718 !important;
+    cursor: pointer !important;
+    transition: background 0.2s !important;
+}
+
+.show-more-btn:hover {
+    background: #E9E7E5 !important;
+}
+
+/* ----- 9. АДАПТИВ ДЛЯ ПЛАНШЕТОВ (1100px) ----- */
+@media (max-width: 1100px) {
+    .team-page {
+        padding: 50px 30px 40px !important;
+    }
+    
+    .director-highlight {
+        gap: 32px !important;
+        padding: 32px !important;
+    }
+    
+    .director-photo {
+        flex: 0 0 280px !important;
+        max-width: 280px !important;
+    }
+    
+    .work-with-us {
+        gap: 32px !important;
+        padding: 32px !important;
+    }
+    
+    .work-image {
+        flex: 0 0 240px !important;
+        max-width: 240px !important;
+    }
+    
+    .actor-photos-grid {
+        gap: 16px !important;
+    }
+}
+
+/* ----- 10. АДАПТИВ ДЛЯ МОБИЛЬНЫХ (860px) ----- */
+@media (max-width: 860px) {
+    .team-page {
+        padding: 70px 16px 32px !important;
+    }
+    
+    .page-header-team {
+        margin-bottom: 32px !important;
+    }
+    
+    .page-title-team {
+        font-size: 32px !important;
+        padding-left: 16px !important;
+    }
+    
+    .page-subtitle-team {
+        font-size: 15px !important;
+    }
+    
+    .director-highlight {
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+        padding: 24px !important;
+        margin-bottom: 32px !important;
+    }
+    
+    .director-photo {
+        flex: 0 0 auto !important;
+        max-width: 280px !important;
+        width: 100% !important;
+    }
+    
+    .director-info {
+        align-items: center !important;
+        text-align: center !important;
+    }
+    
+    .director-tag {
+        align-self: center !important;
+    }
+    
+    .director-btn {
+        align-self: center !important;
+    }
+    
+    .stats-row {
+        gap: 16px !important;
+        margin-bottom: 32px !important;
+    }
+    
+    .stat-item {
+        min-width: 140px !important;
+        padding: 20px 16px !important;
+    }
+    
+    .stat-number {
+        font-size: 32px !important;
+    }
+    
+    .stat-label {
+        font-size: 12px !important;
+    }
+    
+    .work-with-us {
+        flex-direction: column !important;
+        text-align: center !important;
+        padding: 24px !important;
+        margin-bottom: 32px !important;
+    }
+    
+    .work-image {
+        flex: 0 0 auto !important;
+        max-width: 200px !important;
+        margin: 0 auto !important;
+    }
+    
+    .work-title {
+        padding-left: 0 !important;
+    }
+    
+    .work-title::before {
+        display: none !important;
+    }
+    
+    .section-header-team {
+        margin-bottom: 24px !important;
+    }
+    
+    .section-title-team {
+        font-size: 28px !important;
+        padding-left: 16px !important;
+    }
+    
+    .actor-block {
+        margin-bottom: 32px !important;
+    }
+    
+    .actor-name {
+        font-size: 20px !important;
+        margin-bottom: 16px !important;
+    }
+    
+    .actor-photos-grid {
+        gap: 12px !important;
+    }
+    
+    .show-more-wrapper {
+        margin: 32px 0 0 !important;
+    }
+}
+
+/* ----- 11. АДАПТИВ ДЛЯ УЗКИХ ЭКРАНОВ (480px) ----- */
+@media (max-width: 480px) {
+    .team-page {
+        padding: 60px 12px 24px !important;
+    }
+    
+    .page-header-team {
+        margin-bottom: 24px !important;
+    }
+    
+    .page-title-team {
+        font-size: 28px !important;
+        padding-left: 12px !important;
+        margin-bottom: 12px !important;
+    }
+    
+    .director-highlight {
+        padding: 20px 16px !important;
+    }
+    
+    .director-photo {
+        max-width: 240px !important;
+    }
+    
+    .director-name {
+        font-size: 22px !important;
+    }
+    
+    .director-position {
+        font-size: 14px !important;
+    }
+    
+    .director-bio {
+        font-size: 14px !important;
+    }
+    
+    .director-btn {
+        padding: 10px 24px !important;
+        font-size: 13px !important;
+    }
+    
+    .stats-row {
+        flex-direction: column !important;
+        gap: 12px !important;
+    }
+    
+    .stat-item {
+        min-width: auto !important;
+        padding: 16px !important;
+    }
+    
+    .stat-number {
+        font-size: 28px !important;
+    }
+    
+    .stat-label {
+        font-size: 12px !important;
+    }
+    
+    .work-with-us {
+        padding: 20px 16px !important;
+    }
+    
+    .work-image {
+        max-width: 160px !important;
+    }
+    
+    .work-title {
+        font-size: 22px !important;
+    }
+    
+    .work-text {
+        font-size: 14px !important;
+        margin-bottom: 20px !important;
+    }
+    
+    .work-btn {
+        padding: 12px 24px !important;
+        font-size: 14px !important;
+        width: 100% !important;
+    }
+    
+    .section-header-team {
+        margin-bottom: 20px !important;
+    }
+    
+    .section-title-team {
+        font-size: 24px !important;
+        padding-left: 12px !important;
+    }
+    
+    .section-count {
+        font-size: 13px !important;
+    }
+    
+    .actor-block {
+        margin-bottom: 24px !important;
+    }
+    
+    .actor-name {
+        font-size: 18px !important;
+        margin-bottom: 12px !important;
+    }
+    
+    .actor-photos-grid {
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+    }
+    
+    .show-more-wrapper {
+        margin: 24px 0 0 !important;
+    }
+    
+    .show-more-btn {
+        padding: 10px 30px !important;
+        font-size: 13px !important;
+        width: 100% !important;
+    }
+}
+
+/* ----- 12. Z-INDEX ФИКСЫ ДЛЯ МОБИЛЬНОГО МЕНЮ ----- */
+@media (max-width: 860px) {
+    .mobile-nav {
+        z-index: 100000 !important;
+    }
+    
+    .overlay {
+        z-index: 99999 !important;
+    }
+    
+    .burger-icon {
+        z-index: 100001 !important;
     }
 }
