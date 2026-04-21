@@ -899,123 +899,147 @@ body { background: #fff; font-family: 'Nunito Sans', sans-serif; overflow-x: hid
 /* Главная */
 
 /* ============================================= */
-/* КОМПЛЕКСНОЕ ИСПРАВЛЕНИЕ ВЕРСТКИ (CSS)        */
+/* ИСПРАВЛЕНИЯ ПО ТОЧНЫМ ПРОПОРЦИЯМ ИЗ МАКЕТА    */
 /* ============================================= */
 
-/* ----- 1. ГЛОБАЛЬНЫЕ ИСПРАВЛЕНИЯ ПЕРЕПОЛНЕНИЯ (ПУНКТ 5) ----- */
-/* Убеждаемся, что на мобильных ничего не вылезает за экран */
-html, body {
-    overflow-x: hidden !important; /* Критично для мобильных */
-    width: 100%;
-    max-width: 100%;
-}
-
+/* ----- ГЛОБАЛЬНЫЕ НАСТРОЙКИ КОНТЕЙНЕРОВ ----- */
 .shop-container, .brandbook-container, .container-main {
-    overflow-x: clip; /* Лучше чем hidden, чтобы не резать тени, но скрывать скролл */
+    overflow-x: clip; /* Скрываем горизонтальный скролл, но не режем тени */
     width: 100%;
     box-sizing: border-box;
 }
 
-/* Убираем серую обводку у карточек актеров и прочих (ПУНКТ 4) */
-.team-card, .team-img, .cast-card, .similar-card {
-    border: none !important;
-    outline: none !important;
-    box-shadow: none !important;
+/* ----- 1. СЕКЦИЯ "БЛИЖАЙШИЕ СПЕКТАКЛИ" ----- */
+/* Контейнер слайдера: карточки уходят за правый край, слева отступ 40px */
+.plays-section .container-main {
+    max-width: 100%;
+    padding-left: 40px; /* Отступ слева для первого заголовка и карточки */
+    padding-right: 0;   /* Убираем отступ справа, чтобы слайдер касался края */
+    box-sizing: border-box;
 }
 
-/* ----- 2. КАРТОЧКИ СПЕКТАКЛЕЙ (ПУНКТЫ 1, 2, 3) ----- */
-/* Основной контейнер слайдера - на вебе карточки должны уходить за край */
-.scroll-container {
-    position: relative;
+/* Обертка слайдера */
+.plays-section .scroll-container {
     width: 100%;
+    overflow: visible;
 }
 
-/* Хак для компенсации внутренних отступов, чтобы слайдер касался краев на вебе */
-@media (min-width: 861px) {
-    .plays-section .container-main,
-    .shop-section .container-main {
-        /* Даем слайдеру выйти за пределы паддинга справа, но оставляем отступ слева */
-        padding-right: 0;
-    }
-    
-    /* Добавляем виртуальный отступ слева для первого элемента через псевдоэлемент */
-    .scroll-wrapper {
-        padding-left: clamp(16px, 5vw, 80px) !important;
-        margin-right: 0 !important;
-    }
-    
-    /* Стрелки скрыты по умолчанию, показываются только при наведении на scroll-container (ПУНКТ 3) */
-    .scroll-btn {
-        opacity: 0 !important;
-        visibility: hidden !important;
-        transition: opacity 0.3s ease, visibility 0.3s ease !important;
-    }
-    
-    .scroll-container:hover .scroll-btn {
-        opacity: 1 !important;
-        visibility: visible !important;
-    }
+/* Строка с карточками */
+.plays-section .scroll-wrapper {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    overflow-y: visible;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    padding: 4px 0 20px 0; /* Паддинг снизу для теней */
+    margin: 0;
+    width: 100%;
+    scroll-snap-type: x mandatory; /* Для мобильной версии */
 }
 
-/* Фиксированная структура карточки спектакля (ПУНКТ 1) */
+/* Скрываем стандартный скроллбар */
+.plays-section .scroll-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+/* Карточка спектакля: точные размеры 428x568 */
 .performance-card {
+    flex: 0 0 428px; /* Фиксированная ширина */
+    width: 428px;
+    min-width: 428px;
+    max-width: 428px;
+    height: 568px;
+    background: #fff;
+    border-radius: 12px;
+    outline: 1px solid #E5E3E1;
+    outline-offset: -1px;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
-    height: 100%;
-    width: 100%;
-    min-width: 280px; /* Базовая ширина */
-    max-width: 380px;  /* Максимальная ширина на больших экранах */
-    background: #fff;
-    border-radius: 16px;
-    outline: 1px solid #E5E3E1;
-    overflow: hidden;
     transition: box-shadow 0.2s, transform 0.2s;
+    scroll-snap-align: start;
     box-sizing: border-box;
 }
 
-/* На больших экранах карточки становятся шире и "квадратнее" (ПУНКТ 1) */
-@media (min-width: 1441px) {
-    .performance-card {
-        min-width: 360px;
-        max-width: 420px;
-    }
-    /* Изменяем соотношение сторон изображения в сторону квадрата */
-    .performance-img {
-        aspect-ratio: 3 / 2; /* Было 22vw/260px, стало ближе к квадрату */
-    }
+.performance-card:hover {
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
 }
 
-/* Изображение с фиксированным соотношением сторон */
+/* Изображение спектакля: 428x200 */
 .performance-img {
     width: 100%;
-    height: auto;
-    aspect-ratio: 16 / 10; /* Более широкий формат по умолчанию */
+    height: 200px;
+    flex-shrink: 0;
     object-fit: cover;
     background: #F5F5F5;
-    flex-shrink: 0;
+    display: block;
 }
 
-/* Контентная часть растягивается */
+/* Контент карточки: занимает оставшееся место */
 .performance-content {
-    padding: clamp(14px, 2vw, 24px);
+    padding: 20px;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    gap: 8px;
+    gap: 12px;
 }
 
-/* ----- ФИКСАЦИЯ ЗАГОЛОВКА В 2 СТРОКИ (ПУНКТ 1) ----- */
+/* Теги */
+.performance-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+}
+
+.tag {
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.tag-age {
+    background: #E8EEF7;
+    border: 1px solid #DCE4F0;
+    color: #3A5078;
+}
+
+.tag-time {
+    background: #F8F7F6;
+    border: 1px solid #DCE4F0;
+    color: #2A2627;
+}
+
+/* Тег "Есть билеты" (Пункт 2) */
+.tag-tickets {
+    background: #FDEBED;
+    border: 1px solid #F66A70;
+    color: #D62830;
+}
+
+.tag-soldout {
+    background: #F8F7F6;
+    border: 1px solid #E5E3E1;
+    color: #5A5556;
+}
+
+/* Заголовок спектакля: строго 2 строки */
 .performance-name {
     font-family: 'Unbounded', sans-serif;
     font-weight: 600;
-    font-size: clamp(18px, 2.2vw, 24px);
-    line-height: 1.3;
+    font-size: 24px;
+    line-height: 1.5; /* 36px */
     color: #1A1718;
     
-    /* Жесткая фиксация высоты в 2 строки */
-    min-height: calc(1.3em * 2); /* line-height * 2 */
-    max-height: calc(1.3em * 2);
-    
+    /* Фиксация 2 строк */
+    min-height: calc(1.5em * 2); /* 72px */
+    max-height: calc(1.5em * 2);
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
@@ -1023,87 +1047,177 @@ html, body {
     text-overflow: ellipsis;
     word-break: break-word;
     
-    margin-bottom: 4px;
+    margin: 0;
 }
 
-/* ----- ТЕГ НАЛИЧИЯ БИЛЕТОВ (ПУНКТ 2) ----- */
-/* Добавляем в карточку тег перед блоком с кнопками */
-.performance-tags {
-    position: relative;
-    margin-bottom: 4px;
-}
-
-/* Стили для тега наличия билетов */
-.ticket-status-badge {
-    display: inline-block;
-    padding: 4px 10px;
-    border-radius: 20px;
+/* Дата спектакля */
+.performance-date {
     font-family: 'Unbounded', sans-serif;
     font-weight: 600;
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-left: 8px;
-    vertical-align: middle;
+    font-size: 20px;
+    line-height: 1.5;
+    color: #000;
+    margin: 0;
 }
 
-.ticket-status-badge.available {
-    background: #E8F5E9;
-    color: #2E7D32;
-    border: 1px solid #A5D6A7;
-}
-
-.ticket-status-badge.sold-out {
-    background: #FFEBEE;
-    color: #C62828;
-    border: 1px solid #EF9A9A;
-}
-
-/* ----- 3. КАРТОЧКИ МЕРЧА (ПУНКТ 1) ----- */
-.merch-card {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    min-width: 240px;
-    max-width: 320px;
-    background: #fff;
-    border-radius: 12px;
-    outline: 1px solid #E5E3E1;
-    overflow: hidden;
-    transition: transform 0.2s, box-shadow 0.2s;
-    box-sizing: border-box;
-}
-
-@media (min-width: 1441px) {
-    .merch-card {
-        min-width: 300px;
-    }
-    .merch-img {
-        aspect-ratio: 1 / 1; /* Делаем изображение товара квадратным */
-    }
-}
-
-.merch-img {
-    width: 100%;
-    height: auto;
-    aspect-ratio: 4 / 3;
-    object-fit: cover;
-    background: #F5F5F5;
+/* Описание */
+.performance-desc {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #3D393A;
+    margin: 0;
     flex-shrink: 0;
 }
 
+/* Место проведения */
+.event-venue {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #404040;
+    font-size: 14px;
+    margin-top: 4px;
+}
+
+/* Кнопки */
+.performance-btns {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: auto; /* Прижимаем кнопки вниз */
+    padding-top: 8px;
+}
+
+.btn-details {
+    background: #F8F7F6;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 18px;
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    color: #1A1718;
+    cursor: pointer;
+    width: 100%;
+    transition: background 0.2s;
+}
+
+.btn-details:hover {
+    background: #E9E7E5;
+}
+
+.btn-buy {
+    background: #E8454D;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 18px;
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    color: #fff;
+    cursor: pointer;
+    width: 100%;
+    transition: background 0.2s;
+}
+
+.btn-buy:hover {
+    background: #D62830;
+}
+
+/* ----- 2. СЕКЦИЯ "СПЕКТАКЛИ" (ВСЕ) ----- */
+/* Используем те же стили, что и для ближайших */
+#allPlaysScroll .performance-card {
+    flex: 0 0 428px;
+    width: 428px;
+    min-width: 428px;
+    max-width: 428px;
+    height: 494px; /* Высота без даты и места */
+}
+
+/* Для всех спектаклей нет блока с датой и местом, поэтому кнопки прижимаются автоматически */
+#allPlaysScroll .performance-btns {
+    margin-top: auto;
+}
+
+/* ----- 3. СЕКЦИЯ "МАГАЗИН" (МЕРЧ) ----- */
+.shop-section .container-main {
+    max-width: 100%;
+    padding-left: 40px;
+    padding-right: 0;
+    box-sizing: border-box;
+}
+
+.shop-section .scroll-container {
+    width: 100%;
+    overflow: visible;
+}
+
+.shop-section .scroll-wrapper {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    overflow-y: visible;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    padding: 4px 0 20px 0;
+    margin: 0;
+    width: 100%;
+    scroll-snap-type: x mandatory;
+}
+
+.shop-section .scroll-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+/* Карточка мерча: точные размеры 318x427 */
+.merch-card {
+    flex: 0 0 318px;
+    width: 318px;
+    min-width: 318px;
+    max-width: 318px;
+    height: 427px;
+    background: #fff;
+    border-radius: 12px;
+    outline: 1px solid #E5E3E1;
+    outline-offset: -1px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s, box-shadow 0.2s;
+    scroll-snap-align: start;
+    box-sizing: border-box;
+}
+
+.merch-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+}
+
+/* Изображение мерча: 318x220 */
+.merch-img {
+    width: 100%;
+    height: 220px;
+    flex-shrink: 0;
+    object-fit: cover;
+    background: #F5F5F5;
+    display: block;
+    border-bottom: 1px solid #E9ECEF;
+}
+
+/* Контент мерча */
 .merch-content {
-    padding: clamp(14px, 2vw, 20px);
+    padding: 20px;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
 }
 
-/* Фиксируем название товара в 2 строки для стабильности */
+/* Название товара: 2 строки */
 .merch-name {
     font-family: 'Unbounded', sans-serif;
     font-weight: 600;
-    font-size: clamp(14px, 1.6vw, 18px);
+    font-size: 18px;
     line-height: 1.4;
     color: #1A1718;
     
@@ -1116,30 +1230,94 @@ html, body {
     margin-bottom: 8px;
 }
 
-.merch-price {
-    margin-top: auto; /* Прижимаем цену и кнопку вниз */
-    margin-bottom: 12px;
+/* Описание товара */
+.merch-desc {
+    font-size: 13px;
+    line-height: 1.4;
+    color: #3D393A;
+    margin-bottom: 8px;
 }
 
+/* Цена */
+.merch-price {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    color: #4A6294;
+    margin: 12px 0 16px;
+}
+
+/* Кнопка "Купить" */
 .merch-btn {
     width: 100%;
     background: #E8454D;
     border: none;
     border-radius: 6px;
-    padding: 10px;
+    padding: 8px 18px;
     color: #fff;
     font-family: 'Unbounded', sans-serif;
     font-weight: 600;
     font-size: 14px;
     cursor: pointer;
     transition: background 0.2s;
+    margin-top: auto;
 }
 
-/* ----- 4. КАРТОЧКИ АКТЕРОВ (ПУНКТ 4) ----- */
+.merch-btn:hover {
+    background: #D62830;
+}
+
+/* ----- 4. СТРЕЛКИ СЛАЙДЕРА (ПОЯВЛЯЮТСЯ ПРИ НАВЕДЕНИИ) ----- */
+.scroll-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 42px;
+    height: 40px;
+    background: #fff;
+    border-radius: 100px;
+    border: 1px solid #E5E3E1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 30;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    color: #2A2627;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease, background 0.2s, transform 0.2s;
+}
+
+.scroll-container:hover .scroll-btn {
+    opacity: 1;
+    visibility: visible;
+}
+
+.scroll-btn i {
+    font-size: 16px;
+}
+
+.scroll-btn:hover {
+    background: #4A6294;
+    color: #fff;
+    border-color: #4A6294;
+    transform: translateY(-50%) scale(1.05);
+}
+
+.scroll-btn.left {
+    left: -21px; /* Чтобы стрелка наполовину выходила за край карточки */
+}
+
+.scroll-btn.right {
+    right: -21px;
+}
+
+/* ----- 5. КАРТОЧКИ АКТЕРОВ (ИСПРАВЛЕНИЯ) ----- */
 .team-scroll-wrapper {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
-    gap: 24px;
+    grid-template-columns: repeat(4, 1fr); /* На вебе 4 карточки в ряд */
+    gap: 16px;
     overflow: visible;
     padding: 10px 0 20px;
     margin: 0;
@@ -1151,122 +1329,146 @@ html, body {
     width: 100%;
 }
 
-/* Делаем фото актеров более квадратными (3/4 вместо вытянутых) */
+/* Убираем серую обводку (Пункт 4) */
 .team-img {
     width: 100%;
     height: auto;
-    aspect-ratio: 3 / 4; /* Было 180/320, стало ближе к квадрату */
+    aspect-ratio: 1 / 1; /* Квадратные изображения */
     object-fit: cover;
-    border-radius: 12px;
+    border-radius: 8px;
     background: #E8EEF7;
     display: block;
+    border: none;
+    outline: none;
+    box-shadow: none;
 }
 
 .team-name {
     font-family: 'Unbounded', sans-serif;
     font-weight: 600;
-    font-size: clamp(14px, 1.6vw, 18px);
+    font-size: 18px;
     color: #1A1718;
     margin-top: 16px;
+    line-height: 1.2;
 }
 
 .team-position {
-    font-size: 13px;
-    font-weight: 500;
+    font-size: 14px;
+    font-weight: 600;
     color: #5A5556;
     margin-top: 4px;
+    line-height: 1.4;
 }
 
-/* ----- 5. МОБИЛЬНАЯ ВЕРСИЯ (ПУНКТ 5) ----- */
+/* ----- 6. МОБИЛЬНАЯ ВЕРСИЯ ----- */
 @media (max-width: 860px) {
-    /* Возвращаем паддинги контейнерам, чтобы контент не прилипал */
+    /* Контейнеры на мобильных */
     .plays-section .container-main,
     .shop-section .container-main {
-        padding: 0 16px !important;
+        padding-left: 16px !important;
+        padding-right: 16px !important;
     }
     
-    .scroll-wrapper {
-        padding-left: 0 !important;
-        padding-right: 0 !important;
-        margin: 0 !important;
-        gap: 16px;
-        scroll-snap-type: x mandatory;
-    }
-    
-    /* Карточки в слайдере занимают почти всю ширину, но с отступом */
-    .performance-card, .play-card, .merch-card {
+    /* Карточки спектаклей на мобильных: одна в видимой области */
+    .performance-card {
         flex: 0 0 calc(100vw - 32px) !important;
-        min-width: auto !important;
+        width: calc(100vw - 32px) !important;
+        min-width: calc(100vw - 32px) !important;
         max-width: calc(100vw - 32px) !important;
-        scroll-snap-align: start;
+        height: auto !important;
+        min-height: 500px;
     }
     
-    /* Карточки актеров строго в 1 колонку (ПУНКТ 4) */
+    .performance-img {
+        height: 200px;
+    }
+    
+    /* Карточки мерча на мобильных */
+    .merch-card {
+        flex: 0 0 calc(100vw - 32px) !important;
+        width: calc(100vw - 32px) !important;
+        min-width: calc(100vw - 32px) !important;
+        max-width: calc(100vw - 32px) !important;
+        height: auto !important;
+        min-height: 400px;
+    }
+    
+    /* Карточки актеров строго в 1 колонку */
     .team-scroll-wrapper {
-        grid-template-columns: 1fr !important; /* Перезаписываем auto-fit */
+        grid-template-columns: 1fr !important;
         gap: 20px;
         padding: 0;
     }
     
     .team-img {
-        aspect-ratio: 1 / 1; /* На мобильных можно сделать совсем квадратными */
         max-width: 280px;
         margin: 0 auto;
+        aspect-ratio: 1 / 1;
     }
     
-    /* Центрирование форм и блоков */
-    .clients-form, .form-container, .about-content, .clients-grid {
-        padding-left: 0 !important;
-        padding-right: 0 !important;
+    /* Стрелки скрываем на мобильных */
+    .scroll-btn {
+        display: none !important;
+    }
+    
+    /* Центрирование форм */
+    .clients-form, .form-container {
+        padding: 24px 16px !important;
         width: 100%;
         box-sizing: border-box;
     }
     
     .clients-form .form-group input,
-    .clients-form .form-group textarea,
-    .form-container input,
-    .form-container textarea {
+    .clients-form .form-group textarea {
         width: 100% !important;
         box-sizing: border-box;
     }
-    
-    /* Убираем стрелки на мобильных, так как используется свайп */
-    .scroll-btn {
-        display: none !important;
-    }
 }
 
-/* Исправление для очень маленьких экранов (ПУНКТ 5) */
 @media (max-width: 480px) {
-    .container-main {
-        padding: 0 12px !important;
-    }
-    
-    .performance-card, .merch-card {
+    .performance-card {
         flex: 0 0 calc(100vw - 24px) !important;
+        width: calc(100vw - 24px) !important;
+        min-width: calc(100vw - 24px) !important;
         max-width: calc(100vw - 24px) !important;
     }
     
+    .merch-card {
+        flex: 0 0 calc(100vw - 24px) !important;
+        width: calc(100vw - 24px) !important;
+        min-width: calc(100vw - 24px) !important;
+        max-width: calc(100vw - 24px) !important;
+    }
+    
+    .performance-name {
+        font-size: 20px;
+        min-height: calc(1.3em * 2);
+    }
+    
     .section-title {
-        font-size: 24px !important;
+        font-size: 28px !important;
     }
 }
 
-/* ----- 6. ФОН СЛАЙДЕРА (ПУНКТ 3) ----- */
-/* Убираем лишний отступ снизу у секций со слайдерами */
+/* ----- 7. ДОПОЛНИТЕЛЬНЫЕ ФИКСЫ ДЛЯ СЛАЙДЕРА ----- */
+/* Убираем лишние отступы у секций */
 .plays-section, .shop-section {
-    padding-bottom: 0; /* Убираем нижний паддинг секции, если он был */
-    margin-bottom: 40px; /* Оставляем только отступ до следующей секции */
-}
-
-/* Контейнер слайда не должен иметь фона, выходящего за пределы карточек */
-.scroll-wrapper {
-    padding-bottom: 10px; /* Небольшой отступ для теней карточек */
-    margin-bottom: 0;
-}
-
-/* Убеждаемся, что белый фон заканчивается ровно по слайдеру */
-.plays-section .container-main,
-.shop-section .container-main {
     padding-bottom: 0;
+    margin-bottom: 80px;
+}
+
+/* Стрелки позиционируем относительно контейнера */
+.scroll-container {
+    position: relative;
+}
+
+/* Для веб-версии: показываем 3 карточки спектаклей, 4-я уходит за край */
+@media (min-width: 1441px) {
+    .performance-card {
+        flex: 0 0 428px;
+    }
+    
+    .merch-card {
+        flex: 0 0 318px;
+    }
 }
