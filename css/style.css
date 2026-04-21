@@ -896,11 +896,11 @@ body { background: #fff; font-family: 'Nunito Sans', sans-serif; overflow-x: hid
   
 }
 
-/* Главная */
+/* ============================================= */
+/* Главная  */
+/* ============================================= */
 
-/* ============================================= */
-/* ИСПРАВЛЕНИЯ ПО ТОЧНЫМ ПРОПОРЦИЯМ ИЗ МАКЕТА    */
-/* ============================================= */
+
 
 /* ----- ГЛОБАЛЬНЫЕ НАСТРОЙКИ КОНТЕЙНЕРОВ ----- */
 .shop-container, .brandbook-container, .container-main {
@@ -2322,9 +2322,7 @@ body {
 }
 
 
-/* ============================================= */
-/* ФИНАЛЬНЫЙ ФИКС: 1 СТРОКА ЗАГОЛОВКА + ОТСТУПЫ  */
-/* ============================================= */
+
 
 /* ----- УБИРАЕМ ФИКСАЦИЮ 2 СТРОК — ТЕПЕРЬ ЗАГОЛОВОК В 1 СТРОКУ ----- */
 .performance-name {
@@ -2401,3 +2399,480 @@ body {
         margin-bottom: 12px !important;
     }
 }
+
+/* ============================================= */
+/* Конец главной  */
+/* ============================================= */
+
+
+
+/* ============================================= */
+/* ИСПРАВЛЕНИЯ ДЛЯ СТРАНИЦЫ АФИША (v2)           */
+/* ============================================= */
+
+/* ----- 1. ВЫРАВНИВАНИЕ ШИРИНЫ КОНТЕЙНЕРА КАК НА ГЛАВНОЙ ----- */
+.afisha-page {
+    max-width: 100% !important;
+    margin: 0 auto !important;
+    padding: 0 40px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    overflow-x: visible !important;
+}
+
+@media (max-width: 860px) {
+    .afisha-page {
+        padding: 0 16px !important;
+    }
+}
+
+/* ----- 2. БЛОК ФИЛЬТРОВ ----- */
+.filters-section-afisha {
+    padding: 32px 0 24px !important;
+    width: 100% !important;
+}
+
+.filter-chips-afisha {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    flex-wrap: wrap !important;
+}
+
+/* Кнопка "Все события" */
+.filter-chip-afisha {
+    padding: 10px 24px !important;
+    border-radius: 40px !important;
+    font-family: 'Unbounded', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 14px !important;
+    cursor: pointer !important;
+    background: #F8F7F6 !important;
+    color: #404040 !important;
+    transition: all 0.2s !important;
+    white-space: nowrap !important;
+    border: none !important;
+    line-height: 1.4 !important;
+}
+
+.filter-chip-afisha.active {
+    background: #2A3D5E !important;
+    color: #fff !important;
+}
+
+.filter-chip-afisha:hover:not(.active) {
+    background: #E9E7E5 !important;
+}
+
+/* ----- 3. ПОЛНАЯ СТИЛИЗАЦИЯ ВЫПАДАЮЩЕГО СПИСКА МЕСЯЦЕВ ----- */
+.filter-chip-date {
+    position: relative !important;
+    padding: 0 !important;
+    background: transparent !important;
+    display: inline-block !important;
+}
+
+/* Основной стиль select — теперь он выглядит как кнопка */
+.month-select {
+    /* Размеры и позиционирование */
+    padding: 10px 40px 10px 24px !important;
+    border-radius: 40px !important; /* Скруглённые края */
+    
+    /* Фон и границы */
+    background: #F8F7F6 !important;
+    border: 1px solid transparent !important;
+    
+    /* Шрифт — Unbounded, как на всём сайте */
+    font-family: 'Unbounded', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 14px !important;
+    line-height: 1.4 !important;
+    
+    /* Цвет текста */
+    color: #404040 !important;
+    
+    /* Убираем стандартную стрелку */
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    
+    /* Курсор */
+    cursor: pointer !important;
+    outline: none !important;
+    
+    /* Плавные переходы */
+    transition: all 0.2s !important;
+    
+    /* Ширина по содержимому */
+    width: auto !important;
+    min-width: 160px !important;
+}
+
+/* Активное состояние (когда выбран месяц) */
+.month-select.active-filter {
+    background: #2A3D5E !important;
+    color: #fff !important;
+}
+
+/* При наведении */
+.month-select:hover {
+    background: #E9E7E5 !important;
+}
+
+.month-select.active-filter:hover {
+    background: #1F2E4A !important;
+}
+
+/* Кастомная стрелка (иконка Font Awesome) */
+.filter-chip-date i {
+    position: absolute !important;
+    right: 16px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    pointer-events: none !important;
+    color: #4A6294 !important;
+    font-size: 12px !important;
+    transition: color 0.2s !important;
+}
+
+/* Цвет стрелки когда select активен */
+.month-select.active-filter + i {
+    color: #fff !important;
+}
+
+/* Стилизация выпадающих опций (option) */
+.month-select option {
+    background: #fff !important;
+    color: #1A1718 !important;
+    font-family: 'Nunito Sans', sans-serif !important;
+    font-size: 15px !important;
+    font-weight: 400 !important;
+    padding: 12px 16px !important;
+    border: none !important;
+}
+
+/* Стиль для option при наведении (работает не везде, но оставляем) */
+.month-select option:hover,
+.month-select option:checked {
+    background: #E8EEF7 !important;
+    color: #2A3D5E !important;
+}
+
+/* Для Firefox — дополнительная стилизация */
+.month-select:-moz-focusring {
+    color: transparent !important;
+    text-shadow: 0 0 0 #404040 !important;
+}
+
+.month-select.active-filter:-moz-focusring {
+    text-shadow: 0 0 0 #fff !important;
+}
+
+/* ----- 4. СЕТКА КАРТОЧЕК — С ПЕРЕНОСОМ НА СЛЕДУЮЩУЮ СТРОКУ ----- */
+.events-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important; /* 3 карточки в ряд */
+    gap: 16px !important;
+    margin: 40px 0 !important;
+    overflow: visible !important;
+}
+
+/* Карточка спектакля — как на Главной */
+.performance-card-afisha {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    height: auto !important;
+    aspect-ratio: 428 / 568 !important;
+    
+    background: #fff !important;
+    border-radius: 12px !important;
+    outline: 1px solid #E5E3E1 !important;
+    outline-offset: -1px !important;
+    overflow: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
+    transition: box-shadow 0.2s, transform 0.2s !important;
+    box-sizing: border-box !important;
+}
+
+.performance-card-afisha:hover {
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08) !important;
+    transform: translateY(-2px) !important;
+}
+
+/* Изображение */
+.performance-img-afisha {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 428 / 200 !important;
+    flex-shrink: 0 !important;
+    object-fit: cover !important;
+    background: #F5F5F5 !important;
+    display: block !important;
+}
+
+/* Контент */
+.performance-content-afisha {
+    padding: 20px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    flex: 1 !important;
+    gap: 12px !important;
+}
+
+/* ----- 5. ТЕГИ СТРОГО В ОДНУ СТРОКУ (С ГОРИЗОНТАЛЬНЫМ СКРОЛЛОМ ПРИ НЕОБХОДИМОСТИ) ----- */
+.performance-tags-afisha {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    gap: 8px !important;
+    align-items: center !important;
+    overflow-x: auto !important;
+    white-space: nowrap !important;
+    scrollbar-width: none !important;
+    padding-bottom: 2px !important;
+}
+
+.performance-tags-afisha::-webkit-scrollbar {
+    display: none !important;
+}
+
+.tag-afisha {
+    padding: 4px 12px !important;
+    border-radius: 4px !important;
+    font-family: 'Unbounded', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 12px !important;
+    line-height: 1.6 !important;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+}
+
+.tag-age {
+    background: #E8EEF7 !important;
+    border: 1px solid #DCE4F0 !important;
+    color: #3A5078 !important;
+}
+
+.tag-time {
+    background: #F8F7F6 !important;
+    border: 1px solid #DCE4F0 !important;
+    color: #2A2627 !important;
+}
+
+.tag-tickets {
+    background: #FDEBED !important;
+    border: 1px solid #F66A70 !important;
+    color: #D62830 !important;
+}
+
+/* Заголовок — 1 строка */
+.performance-name-afisha {
+    font-family: 'Unbounded', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: clamp(18px, 2vw, 24px) !important;
+    line-height: 1.3 !important;
+    color: #1A1718 !important;
+    
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    
+    margin: 0 !important;
+    margin-top: 8px !important;
+}
+
+/* Дата */
+.performance-date-afisha {
+    font-family: 'Unbounded', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: clamp(16px, 1.8vw, 20px) !important;
+    line-height: 1.4 !important;
+    color: #000 !important;
+    margin: 0 !important;
+}
+
+/* Описание */
+.performance-desc-afisha {
+    font-size: clamp(14px, 1.4vw, 16px) !important;
+    line-height: 1.5 !important;
+    color: #3D393A !important;
+    margin: 0 !important;
+}
+
+/* Место проведения */
+.event-venue-afisha {
+    display: flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    color: #404040 !important;
+    font-size: 14px !important;
+    margin-top: 4px !important;
+}
+
+/* Кнопки */
+.performance-btns-afisha {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+    margin-top: auto !important;
+    padding-top: 8px !important;
+}
+
+.btn-details-afisha {
+    background: #F8F7F6 !important;
+    border: none !important;
+    border-radius: 6px !important;
+    padding: 8px 18px !important;
+    font-family: 'Unbounded', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 14px !important;
+    color: #1A1718 !important;
+    cursor: pointer !important;
+    width: 100% !important;
+    transition: background 0.2s !important;
+}
+
+.btn-details-afisha:hover {
+    background: #E9E7E5 !important;
+}
+
+.btn-buy-afisha {
+    background: #E8454D !important;
+    border: none !important;
+    border-radius: 6px !important;
+    padding: 8px 18px !important;
+    font-family: 'Unbounded', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 14px !important;
+    color: #fff !important;
+    cursor: pointer !important;
+    width: 100% !important;
+    transition: background 0.2s !important;
+}
+
+.btn-buy-afisha:hover {
+    background: #D62830 !important;
+}
+
+/* ----- 6. АДАПТИВНАЯ СЕТКА ----- */
+@media (max-width: 1200px) {
+    .events-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+
+@media (max-width: 860px) {
+    .events-grid {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+    }
+    
+    .performance-card-afisha {
+        aspect-ratio: auto !important;
+        height: auto !important;
+    }
+    
+    .performance-img-afisha {
+        aspect-ratio: 16 / 9 !important;
+    }
+    
+    /* Фильтры в одну строку с горизонтальным скроллом */
+    .filter-chips-afisha {
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        scrollbar-width: none !important;
+        padding-bottom: 4px !important;
+    }
+    
+    .filter-chips-afisha::-webkit-scrollbar {
+        display: none !important;
+    }
+    
+    .filter-chip-afisha {
+        flex-shrink: 0 !important;
+    }
+    
+    .month-select {
+        flex-shrink: 0 !important;
+    }
+}
+
+/* ----- 7. ССЫЛКА "ВСЕ 12 ГОРОДОВ" ПРИЖАТА К ПРАВОМУ КРАЮ ----- */
+.tour-all-link-bottom {
+    text-align: right !important;
+    margin-top: 16px !important;
+    width: 100% !important;
+    display: flex !important;
+    justify-content: flex-end !important;
+}
+
+.tour-all-link {
+    font-family: 'Unbounded', sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: #4A6294 !important;
+    text-decoration: none !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    transition: color 0.2s !important;
+}
+
+.tour-all-link:hover {
+    color: #E8454D !important;
+}
+
+/* ----- 8. КНОПКА "ПОКАЗАТЬ ЕЩЕ" ----- */
+.load-more-wrapper {
+    display: flex !important;
+    justify-content: center !important;
+    margin: 32px 0 48px !important;
+}
+
+.load-more-btn {
+    width: 260px !important;
+    padding: 12px 40px !important;
+    background: #F8F7F6 !important;
+    border-radius: 8px !important;
+    border: none !important;
+    font-family: 'Unbounded', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 14px !important;
+    color: #1A1718 !important;
+    cursor: pointer !important;
+    transition: background 0.2s !important;
+}
+
+.load-more-btn:hover {
+    background: #E9E7E5 !important;
+}
+
+/* ----- 9. ТУР-БЛОК (КАРТА ГАСТРОЛЕЙ) ----- */
+.tour-map-section {
+    background: #fff !important;
+    border-radius: 28px !important;
+    outline: 1px solid #E5E5E5 !important;
+    padding: 40px !important;
+    margin: 64px 0 !important;
+}
+
+.tour-header {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: flex-end !important;
+    flex-wrap: wrap !important;
+    gap: 20px !important;
+    margin-bottom: 32px !important;
+}
+
+.tour-title {
+    font-family: 'Unbounded', sans-serif !important;
+    font-size: 32px !important;
+    font-weight: 700 !important;
+    color: #000 !important;
+    margin: 0 !important;
+}
+
+
