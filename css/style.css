@@ -2403,11 +2403,18 @@ body {
 /* ============================================= */
 /* Конец главной  */
 /* ============================================= */
+
+
+
+
 /* ============================================= */
 /* АФИША        */
 /* ============================================= */
+/* ============================================= */
+/* АФИША — ФИНАЛЬНЫЙ ЧИСТЫЙ CSS                  */
+/* ============================================= */
 
-/* ----- 1. ВЫРАВНИВАНИЕ ШИРИНЫ КОНТЕЙНЕРА ----- */
+/* ----- 1. КОНТЕЙНЕР ----- */
 .afisha-page {
     max-width: 100% !important;
     margin: 0 auto !important;
@@ -2486,17 +2493,13 @@ body {
     display: inline-block !important;
 }
 
-/* Скрываем оригинальный select */
-.filter-chip-date .month-select {
-    display: none !important;
-}
-
-/* Скрываем нативную стрелку */
+/* Скрываем оригинальный select и стрелку */
+.filter-chip-date .month-select,
 .filter-chip-date i.fa-chevron-down {
     display: none !important;
 }
 
-/* ----- 3. КАСТОМНЫЙ ВЫПАДАЮЩИЙ СПИСОК МЕСЯЦЕВ ----- */
+/* ----- 3. КАСТОМНЫЙ ВЫПАДАЮЩИЙ СПИСОК ----- */
 .custom-month-select {
     position: relative !important;
     display: inline-block !important;
@@ -2535,9 +2538,7 @@ body {
 
 .custom-month-trigger:hover,
 .custom-month-trigger:focus,
-.custom-month-trigger:active,
-.custom-month-trigger:focus-visible,
-.custom-month-trigger:focus-within {
+.custom-month-trigger:active {
     outline: none !important;
     box-shadow: none !important;
     border: none !important;
@@ -2629,20 +2630,20 @@ body {
     border-radius: 3px !important;
 }
 
-/* ----- 4. СЕТКА КАРТОЧЕК — КАК НА ГЛАВНОЙ ----- */
+/* ----- 4. СЕТКА КАРТОЧЕК ----- */
 .events-grid {
-    display: grid !important;
-    grid-template-columns: repeat(3, 1fr) !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: flex-start !important;
     gap: 24px !important;
     margin: 40px 0 !important;
-    overflow: visible !important;
 }
 
-/* Карточка спектакля — точные пропорции как на главной */
 .performance-card-afisha {
-    width: 100% !important;
-    max-width: 100% !important;
-    margin: 0 !important;
+    flex: 0 0 428px !important;
+    width: 428px !important;
+    min-width: 428px !important;
+    max-width: 428px !important;
     height: auto !important;
     aspect-ratio: 428 / 568 !important;
     background: #fff !important;
@@ -2654,6 +2655,7 @@ body {
     flex-direction: column !important;
     transition: box-shadow 0.2s, transform 0.2s !important;
     box-sizing: border-box !important;
+    margin: 0 !important;
 }
 
 .performance-card-afisha:hover {
@@ -2679,20 +2681,11 @@ body {
     gap: 12px !important;
 }
 
-/* Теги */
 .performance-tags-afisha {
     display: flex !important;
-    flex-wrap: nowrap !important;
+    flex-wrap: wrap !important;
     gap: 8px !important;
     align-items: center !important;
-    overflow-x: auto !important;
-    white-space: nowrap !important;
-    scrollbar-width: none !important;
-    padding-bottom: 2px !important;
-}
-
-.performance-tags-afisha::-webkit-scrollbar {
-    display: none !important;
 }
 
 .tag-afisha {
@@ -2703,32 +2696,16 @@ body {
     font-size: 12px !important;
     line-height: 1.6 !important;
     white-space: nowrap !important;
-    flex-shrink: 0 !important;
 }
 
-.tag-age {
-    background: #E8EEF7 !important;
-    border: 1px solid #DCE4F0 !important;
-    color: #3A5078 !important;
-}
+.tag-age { background: #E8EEF7 !important; border: 1px solid #DCE4F0 !important; color: #3A5078 !important; }
+.tag-time { background: #F8F7F6 !important; border: 1px solid #DCE4F0 !important; color: #2A2627 !important; }
+.tag-tickets { background: #FDEBED !important; border: 1px solid #F66A70 !important; color: #D62830 !important; }
 
-.tag-time {
-    background: #F8F7F6 !important;
-    border: 1px solid #DCE4F0 !important;
-    color: #2A2627 !important;
-}
-
-.tag-tickets {
-    background: #FDEBED !important;
-    border: 1px solid #F66A70 !important;
-    color: #D62830 !important;
-}
-
-/* Заголовок */
 .performance-name-afisha {
     font-family: 'Unbounded', sans-serif !important;
     font-weight: 600 !important;
-    font-size: clamp(18px, 2vw, 24px) !important;
+    font-size: 24px !important;
     line-height: 1.3 !important;
     color: #1A1718 !important;
     white-space: nowrap !important;
@@ -2738,25 +2715,22 @@ body {
     margin-top: 8px !important;
 }
 
-/* Дата */
 .performance-date-afisha {
     font-family: 'Unbounded', sans-serif !important;
     font-weight: 600 !important;
-    font-size: clamp(16px, 1.8vw, 20px) !important;
+    font-size: 20px !important;
     line-height: 1.4 !important;
     color: #000 !important;
     margin: 0 !important;
 }
 
-/* Описание */
 .performance-desc-afisha {
-    font-size: clamp(14px, 1.4vw, 16px) !important;
+    font-size: 16px !important;
     line-height: 1.5 !important;
     color: #3D393A !important;
     margin: 0 !important;
 }
 
-/* Место */
 .event-venue-afisha {
     display: flex !important;
     align-items: center !important;
@@ -2766,7 +2740,6 @@ body {
     margin-top: 4px !important;
 }
 
-/* Кнопки */
 .performance-btns-afisha {
     display: flex !important;
     flex-direction: column !important;
@@ -2788,54 +2761,29 @@ body {
     border: none !important;
 }
 
-.btn-details-afisha {
-    background: #F8F7F6 !important;
-    color: #1A1718 !important;
-}
-
-.btn-details-afisha:hover {
-    background: #E9E7E5 !important;
-}
-
-.btn-buy-afisha {
-    background: #E8454D !important;
-    color: #fff !important;
-}
-
-.btn-buy-afisha:hover {
-    background: #D62830 !important;
-}
+.btn-details-afisha { background: #F8F7F6 !important; color: #1A1718 !important; }
+.btn-details-afisha:hover { background: #E9E7E5 !important; }
+.btn-buy-afisha { background: #E8454D !important; color: #fff !important; }
+.btn-buy-afisha:hover { background: #D62830 !important; }
 
 /* ----- 5. АДАПТИВ ----- */
-@media (max-width: 1100px) {
-    .events-grid {
-        grid-template-columns: repeat(2, 1fr) !important;
-    }
-}
-
 @media (max-width: 860px) {
-    .afisha-page {
-        padding: 0 16px !important;
-    }
+    .afisha-page { padding: 0 16px !important; }
+    .filters-section-afisha { padding: 20px 0 16px !important; }
     
-    .filters-section-afisha {
-        padding: 20px 0 16px !important;
-    }
-    
-    .events-grid {
-        grid-template-columns: 1fr !important;
-        gap: 20px !important;
-        margin: 24px 0 !important;
-    }
+    .events-grid { justify-content: center !important; }
     
     .performance-card-afisha {
+        flex: 0 0 calc(100vw - 32px) !important;
+        width: calc(100vw - 32px) !important;
+        min-width: calc(100vw - 32px) !important;
+        max-width: calc(100vw - 32px) !important;
         aspect-ratio: auto !important;
-        max-width: 100% !important;
     }
     
-    .performance-img-afisha {
-        aspect-ratio: 16 / 9 !important;
-    }
+    .performance-img-afisha { aspect-ratio: 16 / 9 !important; }
+    .performance-name-afisha { font-size: 20px !important; }
+    .performance-date-afisha { font-size: 18px !important; }
     
     .filter-chips-afisha {
         flex-wrap: nowrap !important;
@@ -2846,56 +2794,82 @@ body {
         gap: 8px !important;
     }
     
-    .filter-chips-afisha::-webkit-scrollbar {
-        display: none !important;
-    }
-    
+    .filter-chips-afisha::-webkit-scrollbar { display: none !important; }
     .filter-chip-afisha,
-    .filter-chip-date {
-        flex-shrink: 0 !important;
-    }
+    .filter-chip-date { flex-shrink: 0 !important; }
     
     .filter-chip-afisha,
     .custom-month-trigger {
-        padding: 8px 16px !important;
-        font-size: 13px !important;
+        padding: 10px 18px !important;
+        font-size: 14px !important;
+        min-height: 44px !important;
     }
+    
+    .custom-month-trigger { min-width: 150px !important; }
     
     .custom-month-dropdown {
         position: fixed !important;
-        left: 16px !important;
-        right: 16px !important;
-        width: auto !important;
-        max-width: none !important;
-        z-index: 99999 !important;
+        top: 50% !important;
+        left: 50% !important;
+        transform: translate(-50%, -50%) !important;
+        width: calc(100vw - 32px) !important;
+        max-width: 320px !important;
+        z-index: 999999 !important;
+        margin: 0 !important;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3) !important;
     }
     
-    .performance-name-afisha {
-        font-size: 20px !important;
+    .custom-month-select.open::before {
+        content: '' !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        background: rgba(0, 0, 0, 0.5) !important;
+        z-index: 999998 !important;
     }
     
-    .performance-date-afisha {
-        font-size: 18px !important;
+    .custom-month-option {
+        padding: 14px 20px !important;
+        font-size: 16px !important;
+        min-height: 48px !important;
+        display: flex !important;
+        align-items: center !important;
+    }
+    
+    .custom-month-trigger .arrow-icon { font-size: 14px !important; margin-left: 8px !important; }
+    
+    .btn-details-afisha,
+    .btn-buy-afisha {
+        padding: 12px 18px !important;
+        font-size: 14px !important;
+        min-height: 44px !important;
     }
 }
 
 @media (max-width: 480px) {
+    .performance-card-afisha {
+        flex: 0 0 calc(100vw - 24px) !important;
+        width: calc(100vw - 24px) !important;
+        min-width: calc(100vw - 24px) !important;
+        max-width: calc(100vw - 24px) !important;
+    }
+    
     .filter-chip-afisha,
     .custom-month-trigger {
-        padding: 6px 12px !important;
-        font-size: 12px !important;
+        padding: 10px 16px !important;
+        font-size: 13px !important;
     }
     
-    .performance-name-afisha {
-        font-size: 18px !important;
-    }
+    .custom-month-trigger { min-width: 140px !important; }
+    .custom-month-option { padding: 14px 16px !important; font-size: 15px !important; }
     
-    .performance-date-afisha {
-        font-size: 16px !important;
-    }
+    .performance-name-afisha { font-size: 18px !important; }
+    .performance-date-afisha { font-size: 16px !important; }
 }
 
-/* ----- 6. ССЫЛКА "ВСЕ 12 ГОРОДОВ" ----- */
+/* ----- 6. ССЫЛКИ И КНОПКИ ----- */
 .tour-all-link-bottom {
     display: flex !important;
     justify-content: flex-end !important;
@@ -2914,11 +2888,8 @@ body {
     transition: color 0.2s !important;
 }
 
-.tour-all-link:hover {
-    color: #E8454D !important;
-}
+.tour-all-link:hover { color: #E8454D !important; }
 
-/* ----- 7. КНОПКА "ПОКАЗАТЬ ЕЩЕ" ----- */
 .load-more-wrapper {
     display: flex !important;
     justify-content: center !important;
@@ -2938,11 +2909,9 @@ body {
     transition: background 0.2s !important;
 }
 
-.load-more-btn:hover {
-    background: #E9E7E5 !important;
-}
+.load-more-btn:hover { background: #E9E7E5 !important; }
 
-/* ----- 8. ТУР-БЛОК ----- */
+/* ----- 7. ТУР-БЛОК ----- */
 .tour-map-section {
     background: #fff !important;
     border-radius: 28px !important;
@@ -2969,499 +2938,333 @@ body {
 }
 
 @media (max-width: 860px) {
-    .tour-map-section {
-        padding: 24px 16px !important;
-        margin: 40px 0 !important;
-    }
-    
-    .tour-title {
-        font-size: 28px !important;
-    }
+    .tour-map-section { padding: 24px 16px !important; margin: 40px 0 !important; }
+    .tour-title { font-size: 28px !important; }
 }
 
 @media (max-width: 480px) {
-    .tour-title {
-        font-size: 24px !important;
-    }
+    .tour-title { font-size: 24px !important; }
 }
 
-/* ============================================= */
-/* ИСПРАВЛЕНИЯ ДЛЯ МОБИЛЬНОЙ ВЕРСИИ АФИШИ        */
-/* ============================================= */
+/* ----- 8. Z-INDEX ДЛЯ БОКОВОГО МЕНЮ ----- */
+.mobile-nav { z-index: 100000 !important; }
+.overlay { z-index: 99999 !important; }
+.burger-icon { z-index: 100001 !important; }
 
 @media (max-width: 860px) {
-    /* Повышаем z-index для всего блока фильтров */
-    .filters-section-afisha {
-        position: relative !important;
-        z-index: 10000 !important;
+    .main-header { z-index: 99998 !important; }
+    .custom-month-select { z-index: 99999 !important; }
+    .custom-month-dropdown { z-index: 999999 !important; }
+}
+
+@media (min-width: 861px) {
+    .custom-month-select { z-index: 100 !important; }
+    .custom-month-dropdown { z-index: 9999 !important; }
+}
+
+
+
+
+
+/* ============================================= */
+/* АДАПТИВНОСТЬ ДЛЯ СТРАНИЦЫ ЗАКАЗЧИКАМ          */
+/* ============================================= */
+
+/* ----- 1. ОСНОВНЫЕ ОТСТУПЫ КАК НА ГЛАВНОЙ ----- */
+.customers-page {
+    max-width: 100% !important;
+    margin: 0 auto !important;
+    padding: 0 40px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    overflow-x: clip !important;
+}
+
+/* ----- 2. КОНСТРУКТОР ЗАПРОСА — ФОРМА СБОКУ НА ВЕБЕ ----- */
+.request-builder {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 40px !important;
+    align-items: stretch !important;
+}
+
+.builder-form {
+    flex: 1.2 !important;
+    min-width: 300px !important;
+}
+
+.builder-preview {
+    flex: 0.8 !important;
+    min-width: 280px !important;
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+/* Кнопка в превью прижимается к низу */
+.builder-preview .submit-request-btn {
+    margin-top: auto !important;
+}
+
+/* ----- 3. ФОРМА СВЯЗИ — ДВЕ КОЛОНКИ НА ВЕБЕ ----- */
+.contact-form-section {
+    display: grid !important;
+    grid-template-columns: 1fr 1.5fr !important;
+    gap: 48px !important;
+    align-items: start !important;
+}
+
+/* ----- 4. АДАПТИВ ДЛЯ ПЛАНШЕТОВ И МОБИЛЬНЫХ ----- */
+@media (max-width: 1100px) {
+    .contact-form-section {
+        grid-template-columns: 1fr !important;
+        gap: 32px !important;
     }
     
-    .filter-chips-afisha {
-        position: relative !important;
-        z-index: 10001 !important;
-    }
-    
-    /* Кастомный селект — максимальный z-index */
-    .custom-month-select {
-        position: relative !important;
-        z-index: 99999 !important;
-    }
-    
-    /* Выпадающее меню — поверх всего */
-    .custom-month-dropdown {
-        position: fixed !important;
-        top: auto !important;
-        bottom: auto !important;
-        left: 16px !important;
-        right: 16px !important;
-        width: auto !important;
-        max-width: none !important;
-        z-index: 999999 !important;
-        margin-top: 8px !important;
-        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2) !important;
-    }
-    
-    /* Кнопки пожирнее */
-    .filter-chip-afisha,
-    .custom-month-trigger {
-        padding: 10px 18px !important;
-        font-size: 14px !important;
-        font-weight: 600 !important;
-        min-height: 44px !important; /* Для удобства тапа */
-        display: inline-flex !important;
-        align-items: center !important;
-    }
-    
-    /* Увеличиваем область клика */
-    .custom-month-trigger {
-        min-width: 150px !important;
-    }
-    
-    /* Опции в выпадающем меню — крупнее */
-    .custom-month-option {
-        padding: 14px 20px !important;
-        font-size: 16px !important;
-        min-height: 48px !important;
-        display: flex !important;
-        align-items: center !important;
-    }
-    
-    /* Стрелка покрупнее */
-    .custom-month-trigger .arrow-icon {
-        font-size: 14px !important;
-        margin-left: 8px !important;
-    }
-    
-    /* Убираем возможные конфликты с overlay */
-    .overlay {
-        z-index: 9998 !important;
-    }
-    
-    /* Карточки — кнопки пожирнее */
-    .btn-details-afisha,
-    .btn-buy-afisha {
-        padding: 12px 18px !important;
-        font-size: 14px !important;
-        min-height: 44px !important;
+    .request-builder {
+        gap: 32px !important;
     }
 }
 
-@media (max-width: 480px) {
-    .filter-chip-afisha,
-    .custom-month-trigger {
-        padding: 10px 16px !important;
-        font-size: 13px !important;
-        min-height: 44px !important;
+@media (max-width: 860px) {
+    .customers-page {
+        padding: 0 16px !important;
     }
     
-    .custom-month-trigger {
-        min-width: 140px !important;
+    /* Заголовок страницы */
+    .page-title-customers {
+        font-size: 32px !important;
+        padding-left: 16px !important;
+        margin-bottom: 16px !important;
     }
     
-    .custom-month-option {
-        padding: 14px 16px !important;
+    .page-subtitle-customers {
+        font-size: 16px !important;
+        padding: 0 16px !important;
+        margin-bottom: 40px !important;
+    }
+    
+    /* Секции */
+    .customers-page > section {
+        margin-bottom: 48px !important;
+    }
+    
+    /* Заголовки секций */
+    .section-header-custom {
+        padding: 0 16px !important;
+        margin-bottom: 24px !important;
+    }
+    
+    .section-title-custom {
+        font-size: 28px !important;
+        padding-left: 12px !important;
+    }
+    
+    /* Конструктор запроса — колонки в столбик */
+    .request-builder {
+        flex-direction: column !important;
+        gap: 24px !important;
+    }
+    
+    .builder-form,
+    .builder-preview {
+        width: 100% !important;
+        min-width: auto !important;
+    }
+    
+    /* Сетка услуг */
+    .services-grid {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+        padding: 0 !important;
+    }
+    
+    /* Карточки услуг */
+    .service-card {
+        padding: 24px !important;
+    }
+    
+    /* Технический райдер */
+    .rider-section {
+        flex-direction: column !important;
+        gap: 24px !important;
+    }
+    
+    .rider-info,
+    .rider-card {
+        width: 100% !important;
+        min-width: auto !important;
+    }
+    
+    /* Сетка условий */
+    .terms-grid {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+        padding: 0 !important;
+    }
+    
+    /* Форма контактов */
+    .contact-form-section {
+        grid-template-columns: 1fr !important;
+        gap: 24px !important;
+        padding: 24px !important;
+    }
+    
+    .contact-info {
+        text-align: left !important;
+        padding-right: 0 !important;
+    }
+    
+    /* Формы ввода */
+    .form-group-custom input,
+    .form-group-custom select,
+    .form-group-custom textarea,
+    .contact-form-right input,
+    .contact-form-right textarea {
+        font-size: 16px !important; /* Чтобы не было зума на iOS */
+        padding: 12px 16px !important;
+    }
+    
+    /* Кнопки */
+    .submit-request-btn,
+    #sendContactBtn {
+        padding: 14px 24px !important;
         font-size: 15px !important;
         min-height: 48px !important;
     }
     
-    .btn-details-afisha,
-    .btn-buy-afisha {
-        padding: 12px 16px !important;
-        font-size: 14px !important;
-        min-height: 44px !important;
-    }
-}
-
-/* ============================================= */
-/* ИСПРАВЛЕНИЕ Z-INDEX ДЛЯ БОКОВОГО МЕНЮ         */
-/* ============================================= */
-
-/* Боковое меню должно быть выше всех фильтров */
-.mobile-nav {
-    z-index: 100000 !important;
-}
-
-/* Оверлей тоже должен быть выше фильтров, но ниже меню */
-.overlay {
-    z-index: 99999 !important;
-}
-
-/* Бургер-кнопка поверх всего */
-.burger-icon {
-    z-index: 100001 !important;
-}
-
-/* Хедер на мобильных */
-@media (max-width: 860px) {
-    .main-header {
-        z-index: 99998 !important;
-    }
-    
-    /* Опускаем z-index фильтров, чтобы они не перекрывали меню */
-    .filters-section-afisha {
-        z-index: 10 !important;
-    }
-    
-    .filter-chips-afisha {
-        z-index: 10 !important;
-    }
-    
-    /* Кастомный селект — ниже меню */
-    .custom-month-select {
-        z-index: 100 !important;
-    }
-    
-    /* Выпадающее меню — ниже оверлея, но выше карточек */
-    .custom-month-dropdown {
-        z-index: 1000 !important;
-    }
-    
-    /* Когда меню открыто, скрываем выпадающий список */
-    .mobile-nav.open ~ .shop-container .custom-month-select.open .custom-month-dropdown,
-    body:has(.mobile-nav.open) .custom-month-dropdown {
-        display: none !important;
-    }
-    
-    /* Убираем открытое состояние при открытом меню */
-    .mobile-nav.open ~ .shop-container .custom-month-select.open,
-    body:has(.mobile-nav.open) .custom-month-select.open {
-        z-index: 10 !important;
-    }
-}
-
-/* Для десктопа — порядок z-index */
-@media (min-width: 861px) {
-    .mobile-nav {
-        z-index: 100000 !important;
-    }
-    
-    .overlay {
-        z-index: 99999 !important;
-    }
-    
-    .burger-icon {
-        z-index: 100001 !important;
-    }
-    
-    .custom-month-select {
-        z-index: 100 !important;
-    }
-    
-    .custom-month-dropdown {
-        z-index: 9999 !important;
-    }
-}
-
-/* ============================================= */
-/* ИСПРАВЛЕНИЕ РАЗМЕРОВ КАРТОЧЕК НА АФИШЕ        */
-/* ============================================= */
-
-/* Переопределяем сетку карточек — фиксированная ширина как на главной */
-.events-grid {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    justify-content: flex-start !important;
-    gap: 24px !important;
-    margin: 40px 0 !important;
-}
-
-/* Карточка спектакля — ТОЧНО КАК НА ГЛАВНОЙ (фиксированная ширина) */
-.performance-card-afisha {
-    flex: 0 0 428px !important;
-    width: 428px !important;
-    min-width: 428px !important;
-    max-width: 428px !important;
-    height: auto !important;
-    aspect-ratio: 428 / 568 !important;
-    
-    background: #fff !important;
-    border-radius: 12px !important;
-    outline: 1px solid #E5E3E1 !important;
-    outline-offset: -1px !important;
-    overflow: hidden !important;
-    display: flex !important;
-    flex-direction: column !important;
-    transition: box-shadow 0.2s, transform 0.2s !important;
-    box-sizing: border-box !important;
-    margin: 0 !important;
-}
-
-.performance-card-afisha:hover {
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08) !important;
-    transform: translateY(-2px) !important;
-}
-
-.performance-img-afisha {
-    width: 100% !important;
-    height: auto !important;
-    aspect-ratio: 428 / 200 !important;
-    flex-shrink: 0 !important;
-    object-fit: cover !important;
-    background: #F5F5F5 !important;
-    display: block !important;
-}
-
-.performance-content-afisha {
-    padding: 20px !important;
-    display: flex !important;
-    flex-direction: column !important;
-    flex: 1 !important;
-    gap: 12px !important;
-}
-
-/* Теги */
-.performance-tags-afisha {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    gap: 8px !important;
-    align-items: center !important;
-}
-
-.tag-afisha {
-    padding: 4px 12px !important;
-    border-radius: 4px !important;
-    font-family: 'Unbounded', sans-serif !important;
-    font-weight: 600 !important;
-    font-size: 12px !important;
-    line-height: 1.6 !important;
-    white-space: nowrap !important;
-}
-
-.tag-age {
-    background: #E8EEF7 !important;
-    border: 1px solid #DCE4F0 !important;
-    color: #3A5078 !important;
-}
-
-.tag-time {
-    background: #F8F7F6 !important;
-    border: 1px solid #DCE4F0 !important;
-    color: #2A2627 !important;
-}
-
-.tag-tickets {
-    background: #FDEBED !important;
-    border: 1px solid #F66A70 !important;
-    color: #D62830 !important;
-}
-
-/* Заголовок */
-.performance-name-afisha {
-    font-family: 'Unbounded', sans-serif !important;
-    font-weight: 600 !important;
-    font-size: 24px !important;
-    line-height: 1.3 !important;
-    color: #1A1718 !important;
-    white-space: nowrap !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
-    margin: 0 !important;
-    margin-top: 8px !important;
-}
-
-/* Дата */
-.performance-date-afisha {
-    font-family: 'Unbounded', sans-serif !important;
-    font-weight: 600 !important;
-    font-size: 20px !important;
-    line-height: 1.4 !important;
-    color: #000 !important;
-    margin: 0 !important;
-}
-
-/* Описание */
-.performance-desc-afisha {
-    font-size: 16px !important;
-    line-height: 1.5 !important;
-    color: #3D393A !important;
-    margin: 0 !important;
-}
-
-/* Место */
-.event-venue-afisha {
-    display: flex !important;
-    align-items: center !important;
-    gap: 6px !important;
-    color: #404040 !important;
-    font-size: 14px !important;
-    margin-top: 4px !important;
-}
-
-/* Кнопки */
-.performance-btns-afisha {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 10px !important;
-    margin-top: auto !important;
-    padding-top: 8px !important;
-}
-
-.btn-details-afisha,
-.btn-buy-afisha {
-    width: 100% !important;
-    padding: 8px 18px !important;
-    border-radius: 6px !important;
-    font-family: 'Unbounded', sans-serif !important;
-    font-weight: 600 !important;
-    font-size: 14px !important;
-    cursor: pointer !important;
-    transition: background 0.2s !important;
-    border: none !important;
-}
-
-.btn-details-afisha {
-    background: #F8F7F6 !important;
-    color: #1A1718 !important;
-}
-
-.btn-details-afisha:hover {
-    background: #E9E7E5 !important;
-}
-
-.btn-buy-afisha {
-    background: #E8454D !important;
-    color: #fff !important;
-}
-
-.btn-buy-afisha:hover {
-    background: #D62830 !important;
-}
-
-/* Адаптив */
-@media (max-width: 860px) {
-    .events-grid {
-        justify-content: center !important;
-    }
-    
-    .performance-card-afisha {
-        flex: 0 0 calc(100vw - 32px) !important;
-        width: calc(100vw - 32px) !important;
-        min-width: calc(100vw - 32px) !important;
-        max-width: calc(100vw - 32px) !important;
-        aspect-ratio: auto !important;
-    }
-    
-    .performance-img-afisha {
-        aspect-ratio: 16 / 9 !important;
-    }
-    
-    .performance-name-afisha {
-        font-size: 20px !important;
-    }
-    
-    .performance-date-afisha {
-        font-size: 18px !important;
+    /* Ссылки в секциях */
+    .section-link-custom {
+        font-size: 13px !important;
     }
 }
 
 @media (max-width: 480px) {
-    .performance-card-afisha {
-        flex: 0 0 calc(100vw - 24px) !important;
-        width: calc(100vw - 24px) !important;
-        min-width: calc(100vw - 24px) !important;
-        max-width: calc(100vw - 24px) !important;
+    .customers-page {
+        padding: 0 12px !important;
     }
     
-    .performance-name-afisha {
+    .page-title-customers {
+        font-size: 28px !important;
+        padding-left: 12px !important;
+    }
+    
+    .page-subtitle-customers {
+        font-size: 14px !important;
+        padding: 0 12px !important;
+    }
+    
+    .section-header-custom {
+        padding: 0 12px !important;
+    }
+    
+    .section-title-custom {
+        font-size: 24px !important;
+    }
+    
+    /* Карточки услуг */
+    .service-card {
+        padding: 20px !important;
+    }
+    
+    .service-number {
+        font-size: 32px !important;
+    }
+    
+    .service-title {
         font-size: 18px !important;
     }
     
-    .performance-date-afisha {
-        font-size: 16px !important;
+    /* Форма */
+    .contact-form-section {
+        padding: 20px 16px !important;
+    }
+    
+    /* Кнопки в форме */
+    .builder-preview .submit-request-btn,
+    #sendContactBtn {
+        width: 100% !important;
+    }
+    
+    /* Превью */
+    .preview-item {
+        flex-wrap: wrap !important;
+    }
+    
+    .preview-label {
+        width: 100% !important;
+        margin-bottom: 4px !important;
     }
 }
 
-
-/* ============================================= */
-/* ИСПРАВЛЕНИЕ Z-INDEX ДЛЯ МОБИЛЬНОЙ ВЕРСИИ       */
-/* ============================================= */
-
-/* Боковое меню должно быть выше всего */
-.mobile-nav {
-    z-index: 100000 !important;
+/* ----- 5. КАСТОМНЫЙ SELECT ДЛЯ ФОРМ ----- */
+.custom-select-wrapper {
+    position: relative !important;
+    width: 100% !important;
 }
 
-/* Оверлей — ниже меню, но выше остального */
-.overlay {
-    z-index: 99999 !important;
+.custom-select-btn {
+    width: 100% !important;
+    padding: 12px 40px 12px 16px !important;
+    background: #fff !important;
+    border: 1px solid #E5E3E1 !important;
+    border-radius: 8px !important;
+    font-family: 'Nunito Sans', sans-serif !important;
+    font-size: 15px !important;
+    color: #1A1718 !important;
+    text-align: left !important;
+    cursor: pointer !important;
+    transition: border-color 0.2s !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%234A6294' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 16px center !important;
+    background-size: 16px !important;
 }
 
-/* Бургер-кнопка поверх всего */
-.burger-icon {
-    z-index: 100001 !important;
+.custom-select-btn:hover,
+.custom-select-btn.active {
+    border-color: #4A6294 !important;
 }
 
-/* Хедер на мобильных */
+.custom-select-dropdown {
+    position: absolute !important;
+    top: 100% !important;
+    left: 0 !important;
+    right: 0 !important;
+    background: #fff !important;
+    border: 1px solid #4A6294 !important;
+    border-top: none !important;
+    border-radius: 0 0 8px 8px !important;
+    max-height: 250px !important;
+    overflow-y: auto !important;
+    z-index: 1000 !important;
+    display: none !important;
+}
+
+.custom-select-dropdown.show {
+    display: block !important;
+}
+
+.custom-select-option {
+    padding: 12px 16px !important;
+    font-family: 'Nunito Sans', sans-serif !important;
+    font-size: 15px !important;
+    color: #1A1718 !important;
+    cursor: pointer !important;
+    transition: background 0.15s !important;
+}
+
+.custom-select-option:hover {
+    background: #F8F7F6 !important;
+}
+
+.custom-select-option.selected {
+    background: #E8EEF7 !important;
+    color: #2A3D5E !important;
+    font-weight: 600 !important;
+}
+
+/* ----- 6. ИСПРАВЛЕНИЕ Z-INDEX ДЛЯ МОБИЛЬНОГО МЕНЮ ----- */
 @media (max-width: 860px) {
-    .main-header {
-        z-index: 99998 !important;
-    }
-    
-    /* Блок фильтров — повышаем z-index */
-    .filters-section-afisha {
-        z-index: 99997 !important;
-        position: relative !important;
-    }
-    
-    .filter-chips-afisha {
-        z-index: 99997 !important;
-        position: relative !important;
-    }
-    
-    /* Кастомный селект — высокий z-index */
-    .custom-month-select {
-        z-index: 99999 !important;
-        position: relative !important;
-    }
-    
-    /* Выпадающее меню — МАКСИМАЛЬНЫЙ z-index, фиксированное позиционирование */
-    .custom-month-dropdown {
-        position: fixed !important;
-        top: 50% !important;
-        left: 50% !important;
-        transform: translate(-50%, -50%) !important;
-        width: calc(100vw - 32px) !important;
-        max-width: 320px !important;
-        z-index: 999999 !important;
-        margin: 0 !important;
-        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3) !important;
-    }
-    
-    /* Затемнение фона при открытом меню */
-    .custom-month-select.open::before {
-        content: '' !important;
-        position: fixed !important;
-        top: 0 !important;
-        left: 0 !important;
-        right: 0 !important;
-        bottom: 0 !important;
-        background: rgba(0, 0, 0, 0.5) !important;
-        z-index: 99998 !important;
-    }
-}
-
-/* Для десктопа — порядок z-index */
-@media (min-width: 861px) {
     .mobile-nav {
         z-index: 100000 !important;
     }
@@ -3474,11 +3277,592 @@ body {
         z-index: 100001 !important;
     }
     
-    .custom-month-select {
-        z-index: 100 !important;
+    .custom-select-dropdown {
+        z-index: 10000 !important;
+    }
+}
+
+
+/* ============================================= */
+/* ФИНАЛЬНЫЙ ФИКС СТРАНИЦЫ ЗАКАЗЧИКАМ            */
+/* ============================================= */
+
+/* ----- 1. ОТСТУПЫ МЕЖДУ БЛОКАМИ КАК НА ГЛАВНОЙ ----- */
+.customers-page > section {
+    margin-bottom: 80px !important;
+}
+
+@media (max-width: 860px) {
+    .customers-page > section {
+        margin-bottom: 48px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .customers-page > section {
+        margin-bottom: 40px !important;
+    }
+}
+
+/* ----- 2. ОТСТУП СВЕРХУ ДЛЯ ЗАГОЛОВКА ----- */
+.customers-page {
+    padding-top: 60px !important;
+}
+
+@media (max-width: 860px) {
+    .customers-page {
+        padding-top: 40px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .customers-page {
+        padding-top: 30px !important;
+    }
+}
+
+/* ----- 3. ВЫРАВНИВАНИЕ ПОЧТЫ, ТЕЛЕФОНА, ВРЕМЕНИ РАБОТЫ ПО ЛЕВОМУ КРАЮ ----- */
+.contact-details {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 24px !important;
+}
+
+.contact-details .contact-item {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    text-align: left !important;
+    padding: 0 !important;
+    border-bottom: none !important;
+}
+
+.contact-label {
+    font-family: 'Unbounded', sans-serif !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    color: #5A5556 !important;
+    margin-bottom: 6px !important;
+    display: block !important;
+    text-align: left !important;
+    width: 100% !important;
+}
+
+.contact-value {
+    font-family: 'Unbounded', sans-serif !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    color: #1A1718 !important;
+    text-align: left !important;
+    width: 100% !important;
+}
+
+.contact-value a {
+    color: #1A1718 !important;
+    text-decoration: none !important;
+    transition: color 0.2s !important;
+}
+
+.contact-value a:hover {
+    color: #E8454D !important;
+}
+
+/* Дополнительная подпись (доб. 122) */
+.contact-item .contact-label + .contact-label {
+    margin-top: 4px !important;
+    font-size: 11px !important;
+    font-weight: 400 !important;
+    text-transform: none !important;
+    letter-spacing: normal !important;
+}
+
+/* ----- 4. ПОЛЕ ДАТЫ — КАЛЕНДАРЬ ОТКРЫВАЕТСЯ ----- */
+#eventDate {
+    width: 100% !important;
+    padding: 12px 44px 12px 16px !important;
+    background: #fff !important;
+    border: 1px solid #E5E3E1 !important;
+    border-radius: 8px !important;
+    font-family: 'Nunito Sans', sans-serif !important;
+    font-size: 15px !important;
+    color: #1A1718 !important;
+    transition: border-color 0.2s, box-shadow 0.2s !important;
+    box-sizing: border-box !important;
+    outline: none !important;
+    cursor: pointer !important;
+    
+    /* Иконка календаря */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%234A6294' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='18' rx='2' ry='2'%3E%3C/rect%3E%3Cline x1='16' y1='2' x2='16' y2='6'%3E%3C/line%3E%3Cline x1='8' y1='2' x2='8' y2='6'%3E%3C/line%3E%3Cline x1='3' y1='10' x2='21' y2='10'%3E%3C/line%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 16px center !important;
+    background-size: 18px !important;
+}
+
+#eventDate:focus {
+    border-color: #4A6294 !important;
+    box-shadow: 0 0 0 3px rgba(74, 98, 148, 0.15) !important;
+}
+
+/* Скрываем стандартную иконку календаря, но оставляем её кликабельной */
+#eventDate::-webkit-calendar-picker-indicator {
+    position: absolute !important;
+    right: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    opacity: 0 !important;
+    cursor: pointer !important;
+}
+
+/* Оборачиваем input в относительный контейнер для корректной работы календаря */
+.form-group-custom:has(#eventDate) {
+    position: relative !important;
+}
+
+/* ----- 5. ПОЛЕ "ДОПОЛНИТЕЛЬНЫЕ ПОЖЕЛАНИЯ" ----- */
+.form-group-custom textarea,
+#extraWishes,
+.contact-form-right textarea,
+#contactMessage {
+    width: 100% !important;
+    padding: 12px 16px !important;
+    background: #fff !important;
+    border: 1px solid #E5E3E1 !important;
+    border-radius: 8px !important;
+    font-family: 'Nunito Sans', sans-serif !important;
+    font-size: 15px !important;
+    color: #1A1718 !important;
+    resize: vertical !important;
+    min-height: 100px !important;
+    transition: border-color 0.2s, box-shadow 0.2s !important;
+    box-sizing: border-box !important;
+    outline: none !important;
+}
+
+.form-group-custom textarea:focus,
+#extraWishes:focus,
+.contact-form-right textarea:focus,
+#contactMessage:focus {
+    border-color: #4A6294 !important;
+    box-shadow: 0 0 0 3px rgba(74, 98, 148, 0.15) !important;
+}
+
+/* ----- 6. КАСТОМНЫЙ SELECT — ПОЛНАЯ СТИЛИЗАЦИЯ ----- */
+.custom-select-wrapper {
+    position: relative !important;
+    width: 100% !important;
+}
+
+.custom-select-btn {
+    width: 100% !important;
+    padding: 12px 40px 12px 16px !important;
+    background: #fff !important;
+    border: 1px solid #E5E3E1 !important;
+    border-radius: 8px !important;
+    font-family: 'Nunito Sans', sans-serif !important;
+    font-size: 15px !important;
+    color: #1A1718 !important;
+    text-align: left !important;
+    cursor: pointer !important;
+    transition: border-color 0.2s, box-shadow 0.2s !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%234A6294' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 16px center !important;
+    background-size: 16px !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+
+.custom-select-btn:hover,
+.custom-select-btn.active {
+    border-color: #4A6294 !important;
+    box-shadow: 0 0 0 3px rgba(74, 98, 148, 0.15) !important;
+}
+
+.custom-select-btn.active {
+    border-radius: 8px 8px 0 0 !important;
+}
+
+.custom-select-dropdown {
+    position: absolute !important;
+    top: 100% !important;
+    left: 0 !important;
+    right: 0 !important;
+    background: #fff !important;
+    border: 1px solid #4A6294 !important;
+    border-top: none !important;
+    border-radius: 0 0 8px 8px !important;
+    max-height: 250px !important;
+    overflow-y: auto !important;
+    z-index: 10000 !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+    display: none !important;
+}
+
+.custom-select-dropdown.show {
+    display: block !important;
+}
+
+.custom-select-option {
+    padding: 12px 16px !important;
+    font-family: 'Nunito Sans', sans-serif !important;
+    font-size: 15px !important;
+    color: #1A1718 !important;
+    cursor: pointer !important;
+    transition: background 0.15s !important;
+    border-bottom: 1px solid #F5F5F5 !important;
+}
+
+.custom-select-option:last-child {
+    border-bottom: none !important;
+}
+
+.custom-select-option:hover {
+    background: #F8F7F6 !important;
+}
+
+.custom-select-option.selected {
+    background: #E8EEF7 !important;
+    color: #2A3D5E !important;
+    font-weight: 600 !important;
+}
+
+.custom-select-dropdown::-webkit-scrollbar {
+    width: 6px !important;
+}
+
+.custom-select-dropdown::-webkit-scrollbar-track {
+    background: #F5F5F5 !important;
+    border-radius: 3px !important;
+}
+
+.custom-select-dropdown::-webkit-scrollbar-thumb {
+    background: #4A6294 !important;
+    border-radius: 3px !important;
+}
+
+/* ----- 7. КНОПКА СКАЧИВАНИЯ РАЙДЕРА — В ОДНУ СТРОКУ ----- */
+.rider-file {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    background: #fff !important;
+    border-radius: 8px !important;
+    outline: 1px solid #E5E3E1 !important;
+    padding: 16px !important;
+    margin-top: 20px !important;
+    flex-wrap: nowrap !important;
+}
+
+.rider-file i.fa-file-pdf {
+    font-size: 28px !important;
+    color: #E8454D !important;
+    flex-shrink: 0 !important;
+}
+
+.rider-file-info {
+    flex: 1 !important;
+    min-width: 0 !important;
+}
+
+.rider-file-name {
+    font-weight: 600 !important;
+    font-size: 15px !important;
+    color: #1A1718 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+
+.rider-file-date {
+    font-size: 12px !important;
+    color: #5A5556 !important;
+    margin-top: 2px !important;
+}
+
+.rider-file a {
+    flex-shrink: 0 !important;
+    color: #4A6294 !important;
+    transition: color 0.2s !important;
+}
+
+.rider-file a:hover {
+    color: #E8454D !important;
+}
+
+.rider-file i.fa-download {
+    font-size: 24px !important;
+}
+
+/* ----- 8. МОБИЛЬНАЯ ВЕРСИЯ ----- */
+@media (max-width: 860px) {
+    .contact-form-section {
+        padding: 24px 20px !important;
     }
     
-    .custom-month-dropdown {
-        z-index: 9999 !important;
+    .contact-info {
+        text-align: left !important;
+    }
+    
+    .form-row {
+        flex-direction: column !important;
+        gap: 16px !important;
+    }
+    
+    .rider-file {
+        padding: 14px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-form-section {
+        padding: 20px 16px !important;
+    }
+    
+    .custom-select-btn {
+        font-size: 14px !important;
+        padding: 12px 36px 12px 14px !important;
+    }
+    
+    .custom-select-option {
+        padding: 14px 16px !important;
+        font-size: 15px !important;
+    }
+    
+    .rider-file {
+        flex-wrap: wrap !important;
+    }
+    
+    .rider-file-info {
+        width: calc(100% - 52px) !important;
+    }
+    
+    .rider-file a {
+        margin-left: 40px !important;
+    }
+}
+
+/* ----- 9. ДОПОЛНИТЕЛЬНЫЕ ОТСТУПЫ ДЛЯ БЛОКОВ ----- */
+.services-grid {
+    margin-bottom: 0 !important;
+}
+
+.request-builder {
+    margin-bottom: 0 !important;
+}
+
+.rider-section {
+    margin-bottom: 0 !important;
+}
+
+.terms-grid {
+    margin-bottom: 0 !important;
+}
+
+.contact-form-section {
+    margin-bottom: 0 !important;
+}
+
+/* Заголовки секций */
+.section-header-custom {
+    margin-bottom: 32px !important;
+}
+
+@media (max-width: 860px) {
+    .section-header-custom {
+        margin-bottom: 24px !important;
+    }
+}
+
+
+/* ============================================= */
+/* ФИНАЛЬНЫЙ ФИКС — ВСЕ 4 ПРОБЛЕМЫ               */
+/* ============================================= */
+
+/* ----- 1. ОПУСТИТЬ ЗАГОЛОВОК, ЧТОБЫ БУРГЕР НЕ ПЕРЕКРЫВАЛ ----- */
+@media (max-width: 860px) {
+    .customers-page {
+        padding-top: 70px !important; /* Было 40px, теперь больше */
+    }
+    
+    .page-title-customers {
+        margin-top: 0 !important;
+        padding-top: 10px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .customers-page {
+        padding-top: 60px !important;
+    }
+}
+
+/* ----- 2. КАЛЕНДАРЬ ОТКРЫВАЕТСЯ ПРИ КЛИКЕ НА ПОЛЕ ДАТЫ ----- */
+#eventDate {
+    position: relative !important;
+    cursor: pointer !important;
+    -webkit-appearance: none !important;
+    appearance: none !important;
+}
+
+/* Оборачиваем поле даты в относительный контейнер */
+.form-group-custom:has(#eventDate) {
+    position: relative !important;
+}
+
+/* Прозрачный, но кликабельный индикатор календаря */
+#eventDate::-webkit-calendar-picker-indicator {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    color: transparent !important;
+    background: transparent !important;
+    cursor: pointer !important;
+    opacity: 0 !important;
+    z-index: 1 !important;
+}
+
+/* Для Firefox */
+#eventDate {
+    -moz-appearance: none !important;
+}
+
+/* Стилизация поля даты */
+#eventDate {
+    width: 100% !important;
+    padding: 12px 44px 12px 16px !important;
+    background: #fff !important;
+    border: 1px solid #E5E3E1 !important;
+    border-radius: 8px !important;
+    font-family: 'Nunito Sans', sans-serif !important;
+    font-size: 15px !important;
+    color: #1A1718 !important;
+    transition: border-color 0.2s, box-shadow 0.2s !important;
+    box-sizing: border-box !important;
+    outline: none !important;
+    
+    /* Иконка календаря */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%234A6294' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='18' rx='2' ry='2'%3E%3C/rect%3E%3Cline x1='16' y1='2' x2='16' y2='6'%3E%3C/line%3E%3Cline x1='8' y1='2' x2='8' y2='6'%3E%3C/line%3E%3Cline x1='3' y1='10' x2='21' y2='10'%3E%3C/line%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 16px center !important;
+    background-size: 18px !important;
+}
+
+#eventDate:focus {
+    border-color: #4A6294 !important;
+    box-shadow: 0 0 0 3px rgba(74, 98, 148, 0.15) !important;
+}
+
+/* ----- 3. ВЫРАВНИВАНИЕ ПОЛЕЙ "ОСТАЛИСЬ ВОПРОСЫ" ПО ЛЕВОМУ КРАЮ ----- */
+@media (max-width: 860px) {
+    .contact-form-section .contact-details {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        justify-content: flex-start !important;
+        gap: 20px !important;
+        width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    
+    .contact-form-section .contact-details .contact-item {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        justify-content: flex-start !important;
+        text-align: left !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        border-bottom: none !important;
+        width: 100% !important;
+        gap: 6px !important;
+    }
+    
+    .contact-form-section .contact-label {
+        text-align: left !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        font-family: 'Unbounded', sans-serif !important;
+        font-size: 12px !important;
+        font-weight: 600 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.5px !important;
+        color: #5A5556 !important;
+    }
+    
+    .contact-form-section .contact-value {
+        text-align: left !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        font-family: 'Unbounded', sans-serif !important;
+        font-size: 16px !important;
+        font-weight: 600 !important;
+        color: #1A1718 !important;
+    }
+    
+    .contact-form-section .contact-value a {
+        color: #1A1718 !important;
+        text-decoration: none !important;
+        text-align: left !important;
+        display: inline-block !important;
+    }
+    
+    /* Скрываем иконки, если они есть */
+    .contact-form-section .contact-icon {
+        display: none !important;
+    }
+    
+    /* Дополнительная подпись (доб. 122) */
+    .contact-form-section .contact-item .contact-label + .contact-label {
+        margin-top: 4px !important;
+        font-size: 11px !important;
+        font-weight: 400 !important;
+        text-transform: none !important;
+        letter-spacing: normal !important;
+        color: #5A5556 !important;
+    }
+}
+
+/* ----- 4. ОПУСТИТЬ КНОПКУ "ОТПРАВИТЬ ЗАПРОС" В МОБИЛЬНОЙ ВЕРСИИ ----- */
+@media (max-width: 860px) {
+    .builder-preview {
+        display: flex !important;
+        flex-direction: column !important;
+    }
+    
+    .builder-preview .submit-request-btn,
+    #sendRequestBtn {
+        margin-top: 24px !important;
+        order: 10 !important; /* Отправляем вниз */
+    }
+    
+    /* Контент превью идёт перед кнопкой */
+    #previewContent {
+        order: 1 !important;
+    }
+    
+    .preview-header {
+        order: 0 !important;
+    }
+}
+
+/* Дополнительно: отступы для блока конструктора */
+@media (max-width: 860px) {
+    .request-builder {
+        gap: 20px !important;
+    }
+    
+    .builder-form {
+        margin-bottom: 0 !important;
     }
 }
