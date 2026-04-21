@@ -188,7 +188,6 @@ body { background: #fff; font-family: 'Nunito Sans', sans-serif; overflow-x: hid
 
 /* ===== 9. CONTACTS PAGE ===== */
 .contacts-page { max-width: 1360px; margin: 0 auto; padding: 0 clamp(16px, 5vw, 40px); }
-.page-header-contacts { margin: clamp(40px, 6vw, 60px) 0 clamp(30px, 4vw, 40px); }
 .page-title-contacts { font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: clamp(32px, 5vw, 56px); line-height: 1.2; color: #1A1718; position: relative; padding-left: clamp(12px, 2vw, 20px); margin-bottom: clamp(10px, 2vw, 20px); }
 .page-title-contacts::before { content: ''; position: absolute; left: 0; top: 0; width: 4px; height: 100%; background: var(--red-59); }
 .page-subtitle { max-width: 800px; margin-top: 16px; font-size: clamp(16px, 2vw, 20px); line-height: 1.5; color: #3D393A; }
@@ -199,7 +198,7 @@ body { background: #fff; font-family: 'Nunito Sans', sans-serif; overflow-x: hid
 .map-address-card { position: absolute; bottom: clamp(16px, 2.5vw, 25px); left: clamp(16px, 2.5vw, 25px); width: clamp(260px, 30vw, 320px); background: #fff; border-radius: 12px; padding: clamp(14px, 2vw, 20px); box-shadow: 0 8px 30px rgba(0,0,0,.1); outline: 1px solid #E5E3E1; }
 .map-address-card h4 { font-family: 'Unbounded', sans-serif; font-size: clamp(16px, 2vw, 18px); font-weight: 600; color: #1A1718; margin-bottom: 8px; }
 .map-address-card p { color: #3D393A; font-size: clamp(13px, 1.5vw, 14px); line-height: 1.5; }
-.form-section { background: #F8F7F6; padding: clamp(40px, 8vw, 80px) 0; margin-bottom: 0; }
+.form-section { padding: clamp(40px, 8vw, 80px) 0; margin-bottom: 0; }
 .form-grid { display: flex; gap: clamp(30px, 6vw, 60px); flex-wrap: wrap; }
 .form-info { flex: 1; min-width: 300px; }
 .form-info h3 { font-family: 'Unbounded', sans-serif; font-size: clamp(24px, 3.5vw, 32px); font-weight: 700; color: #1A1718; margin-bottom: 20px; position: relative; padding-left: 16px; }
@@ -5061,3 +5060,1366 @@ body {
         font-size: 18px !important;
     }
 }
+
+/* ============================================= */
+/* КОНТАКТЫ — ПОЛНЫЙ АДАПТИВНЫЙ CSS             */
+/* ============================================= */
+
+/* ----- 1. ОСНОВНОЙ КОНТЕЙНЕР ----- */
+.contacts-page {
+    max-width: 1360px !important;
+    margin: 0 auto !important;
+    padding: 60px 40px 80px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    overflow-x: clip !important;
+}
+
+/* ----- 2. ЗАГОЛОВОК СТРАНИЦЫ ----- */
+.page-header-contacts {
+    margin-bottom: 48px !important;
+}
+
+.page-title-contacts {
+    font-family: 'Unbounded', sans-serif !important;
+    font-weight: 700 !important;
+    font-size: clamp(32px, 5vw, 56px) !important;
+    line-height: 1.2 !important;
+    color: #1A1718 !important;
+    position: relative !important;
+    padding-left: 20px !important;
+    margin-bottom: 16px !important;
+}
+
+.page-title-contacts::before {
+    content: '' !important;
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 4px !important;
+    height: 100% !important;
+    background: #E8454D !important;
+}
+
+.page-subtitle {
+    max-width: 800px !important;
+    font-size: clamp(16px, 2vw, 18px) !important;
+    line-height: 1.5 !important;
+    color: #3D393A !important;
+    margin: 0 !important;
+}
+
+/* ----- 3. КАРТА ----- */
+.map-container {
+    position: relative !important;
+    width: 100% !important;
+    height: 450px !important;
+    min-height: 400px !important;
+    border-radius: 16px !important;
+    outline: 1px solid #E5E3E1 !important;
+    margin-bottom: 60px !important;
+    overflow: hidden !important;
+    background: transparent !important;
+}
+
+#ymap {
+    width: 100% !important;
+    height: 100% !important;
+    background: transparent !important;
+    border-radius: 16px !important;
+}
+
+/* Карточка адреса поверх карты */
+.map-address-card {
+    position: absolute !important;
+    bottom: 24px !important;
+    left: 24px !important;
+    width: 320px !important;
+    background: #fff !important;
+    border-radius: 12px !important;
+    padding: 20px !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12) !important;
+    outline: 1px solid #E5E3E1 !important;
+    z-index: 10 !important;
+}
+
+.map-address-card h4 {
+    font-family: 'Unbounded', sans-serif !important;
+    font-size: 18px !important;
+    font-weight: 600 !important;
+    color: #1A1718 !important;
+    margin: 0 0 8px !important;
+}
+
+.map-address-card p {
+    font-family: 'Nunito Sans', sans-serif !important;
+    font-size: 14px !important;
+    line-height: 1.5 !important;
+    color: #3D393A !important;
+    margin: 0 0 4px !important;
+}
+
+.map-address-card p:last-child {
+    margin-bottom: 0 !important;
+}
+
+/* ----- 4. ФОРМА ОБРАТНОЙ СВЯЗИ ----- */
+.form-section {
+    margin-bottom: 60px !important;
+}
+
+.form-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1.2fr !important;
+    gap: 48px !important;
+}
+
+/* Левая колонка с информацией */
+.form-info h3 {
+    font-family: 'Unbounded', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 28px !important;
+    color: #1A1718 !important;
+    margin: 0 0 20px !important;
+}
+
+.form-info p {
+    font-family: 'Nunito Sans', sans-serif !important;
+    font-size: 16px !important;
+    line-height: 1.6 !important;
+    color: #3D393A !important;
+    margin: 0 0 16px !important;
+}
+
+.form-features {
+    margin-top: 32px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+}
+
+.form-features .feature-item {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 4px !important;
+    padding: 0 0 0 36px !important;
+    position: relative !important;
+}
+
+.form-features .feature-item i {
+    position: absolute !important;
+    left: 0 !important;
+    top: 4px !important;
+    color: #4A6294 !important;
+    font-size: 20px !important;
+}
+
+.form-features .feature-item strong {
+    font-family: 'Unbounded', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 16px !important;
+    color: #1A1718 !important;
+}
+
+.form-features .feature-item span {
+    font-family: 'Nunito Sans', sans-serif !important;
+    font-size: 14px !important;
+    color: #5A5556 !important;
+}
+
+/* Правая колонка — форма */
+.form-container {
+    background: #fff !important;
+    border-radius: 16px !important;
+    outline: 1px solid #E5E3E1 !important;
+    padding: 32px !important;
+}
+
+.form-container h3 {
+    font-family: 'Unbounded', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 24px !important;
+    color: #1A1718 !important;
+    margin: 0 0 28px !important;
+}
+
+.form-group {
+    margin-bottom: 20px !important;
+}
+
+.form-group label {
+    display: block !important;
+    font-family: 'Unbounded', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 13px !important;
+    color: #2A2627 !important;
+    margin-bottom: 8px !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.3px !important;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100% !important;
+    padding: 12px 16px !important;
+    background: #fff !important;
+    border: 1px solid #E5E3E1 !important;
+    border-radius: 8px !important;
+    font-family: 'Nunito Sans', sans-serif !important;
+    font-size: 15px !important;
+    color: #1A1718 !important;
+    transition: border-color 0.2s, box-shadow 0.2s !important;
+    box-sizing: border-box !important;
+    outline: none !important;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #4A6294 !important;
+    box-shadow: 0 0 0 3px rgba(74, 98, 148, 0.15) !important;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #9A9697 !important;
+    opacity: 0.7 !important;
+}
+
+.form-group textarea {
+    min-height: 120px !important;
+    resize: vertical !important;
+}
+
+/* Кастомный селект */
+.custom-select-wrapper {
+    position: relative !important;
+    width: 100% !important;
+}
+
+.custom-select {
+    width: 100% !important;
+    padding: 12px 40px 12px 16px !important;
+    background: #fff !important;
+    border: 1px solid #E5E3E1 !important;
+    border-radius: 8px !important;
+    font-family: 'Nunito Sans', sans-serif !important;
+    font-size: 15px !important;
+    color: #1A1718 !important;
+    cursor: pointer !important;
+    transition: border-color 0.2s, box-shadow 0.2s !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+}
+
+.custom-select.active {
+    border-color: #4A6294 !important;
+    box-shadow: 0 0 0 3px rgba(74, 98, 148, 0.15) !important;
+    border-radius: 8px 8px 0 0 !important;
+}
+
+.custom-select i {
+    color: #4A6294 !important;
+    font-size: 14px !important;
+    transition: transform 0.2s !important;
+}
+
+.custom-select.active i {
+    transform: rotate(180deg) !important;
+}
+
+#selectedSubject {
+    color: #1A1718 !important;
+}
+
+.custom-options {
+    position: absolute !important;
+    top: 100% !important;
+    left: 0 !important;
+    right: 0 !important;
+    background: #fff !important;
+    border: 1px solid #4A6294 !important;
+    border-top: none !important;
+    border-radius: 0 0 8px 8px !important;
+    max-height: 250px !important;
+    overflow-y: auto !important;
+    z-index: 1000 !important;
+    display: none !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+}
+
+.custom-options.show {
+    display: block !important;
+}
+
+.custom-option {
+    padding: 12px 16px !important;
+    font-family: 'Nunito Sans', sans-serif !important;
+    font-size: 15px !important;
+    color: #1A1718 !important;
+    cursor: pointer !important;
+    transition: background 0.15s !important;
+    border-bottom: 1px solid #F5F5F5 !important;
+}
+
+.custom-option:last-child {
+    border-bottom: none !important;
+}
+
+.custom-option:hover {
+    background: #F8F7F6 !important;
+}
+
+.custom-option.selected {
+    background: #E8EEF7 !important;
+    color: #2A3D5E !important;
+    font-weight: 600 !important;
+}
+
+/* Кнопка отправки */
+.submit-btn {
+    width: 100% !important;
+    padding: 14px 24px !important;
+    background: #E8454D !important;
+    border: none !important;
+    border-radius: 8px !important;
+    color: #fff !important;
+    font-family: 'Unbounded', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 15px !important;
+    cursor: pointer !important;
+    transition: background 0.2s !important;
+    margin-top: 8px !important;
+}
+
+.submit-btn:hover {
+    background: #D62830 !important;
+}
+
+/* ----- 5. FAQ ----- */
+.faq-section {
+    margin-bottom: 60px !important;
+}
+
+.faq-title {
+    font-family: 'Unbounded', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 32px !important;
+    color: #1A1718 !important;
+    margin: 0 0 32px !important;
+}
+
+.faq-item {
+    border-bottom: 1px solid #E5E3E1 !important;
+}
+
+.faq-question {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 20px 0 !important;
+    font-family: 'Unbounded', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 18px !important;
+    color: #1A1718 !important;
+    cursor: pointer !important;
+    transition: color 0.2s !important;
+}
+
+.faq-question:hover {
+    color: #E8454D !important;
+}
+
+.faq-question i {
+    font-size: 16px !important;
+    color: #4A6294 !important;
+    transition: transform 0.3s !important;
+}
+
+.faq-item.open .faq-question i {
+    transform: rotate(45deg) !important;
+}
+
+.faq-answer {
+    max-height: 0 !important;
+    overflow: hidden !important;
+    transition: max-height 0.3s ease !important;
+    font-family: 'Nunito Sans', sans-serif !important;
+    font-size: 16px !important;
+    line-height: 1.6 !important;
+    color: #3D393A !important;
+    padding: 0 !important;
+}
+
+.faq-item.open .faq-answer {
+    max-height: 200px !important;
+    padding: 0 0 20px 0 !important;
+}
+
+/* ----- 6. КОНТАКТНАЯ И ЮРИДИЧЕСКАЯ ИНФОРМАЦИЯ ----- */
+.contacts-grid {
+    display: grid !important;
+    grid-template-columns: 1.2fr 1fr !important;
+    gap: 48px !important;
+}
+
+/* Левая колонка — юридическая информация */
+.legal-info h2 {
+    font-family: 'Unbounded', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 24px !important;
+    color: #1A1718 !important;
+    margin: 0 0 24px !important;
+}
+
+.legal-item {
+    display: flex !important;
+    padding: 12px 0 !important;
+    border-bottom: 1px solid #F0EEED !important;
+}
+
+.legal-item:last-child {
+    border-bottom: none !important;
+}
+
+.legal-label {
+    width: 200px !important;
+    flex-shrink: 0 !important;
+    font-family: 'Nunito Sans', sans-serif !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    color: #5A5556 !important;
+}
+
+.legal-value {
+    flex: 1 !important;
+    font-family: 'Nunito Sans', sans-serif !important;
+    font-size: 15px !important;
+    color: #1A1718 !important;
+}
+
+.download-btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    margin-top: 24px !important;
+    padding: 12px 24px !important;
+    background: #F8F7F6 !important;
+    border-radius: 8px !important;
+    font-family: 'Unbounded', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 14px !important;
+    color: #1A1718 !important;
+    cursor: pointer !important;
+    transition: background 0.2s !important;
+}
+
+.download-btn:hover {
+    background: #E9E7E5 !important;
+}
+
+.download-btn i {
+    color: #E8454D !important;
+}
+
+/* Правая колонка — контакты */
+.contact-info-block {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 32px !important;
+}
+
+.contact-block h3 {
+    font-family: 'Unbounded', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 20px !important;
+    color: #1A1718 !important;
+    margin: 0 0 20px !important;
+}
+
+.contact-item {
+    display: flex !important;
+    gap: 16px !important;
+    margin-bottom: 20px !important;
+}
+
+.contact-item:last-child {
+    margin-bottom: 0 !important;
+}
+
+.contact-icon {
+    width: 40px !important;
+    height: 40px !important;
+    background: #F8F7F6 !important;
+    border-radius: 8px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-shrink: 0 !important;
+}
+
+.contact-icon i {
+    color: #4A6294 !important;
+    font-size: 18px !important;
+}
+
+.contact-text h4 {
+    font-family: 'Unbounded', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 14px !important;
+    color: #5A5556 !important;
+    margin: 0 0 4px !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.3px !important;
+}
+
+.contact-text p {
+    font-family: 'Nunito Sans', sans-serif !important;
+    font-size: 15px !important;
+    line-height: 1.5 !important;
+    color: #1A1718 !important;
+    margin: 0 0 4px !important;
+}
+
+.contact-link {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    margin-top: 8px !important;
+    font-family: 'Unbounded', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 13px !important;
+    color: #4A6294 !important;
+    text-decoration: none !important;
+    transition: color 0.2s !important;
+}
+
+.contact-link:hover {
+    color: #E8454D !important;
+}
+
+.contact-link i {
+    font-size: 12px !important;
+}
+
+/* Социальные сети */
+.social-links-page {
+    display: flex !important;
+    gap: 12px !important;
+}
+
+.social-icon-page {
+    width: 48px !important;
+    height: 48px !important;
+    background: #F8F7F6 !important;
+    border-radius: 8px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    color: #4A6294 !important;
+    font-size: 22px !important;
+    text-decoration: none !important;
+    transition: all 0.2s !important;
+}
+
+.social-icon-page:hover {
+    background: #4A6294 !important;
+    color: #fff !important;
+}
+
+/* ----- 7. АДАПТИВ ДЛЯ ПЛАНШЕТОВ ----- */
+@media (max-width: 1100px) {
+    .contacts-page {
+        padding: 50px 30px 60px !important;
+    }
+    
+    .form-grid {
+        grid-template-columns: 1fr !important;
+        gap: 32px !important;
+    }
+    
+    .contacts-grid {
+        grid-template-columns: 1fr !important;
+        gap: 40px !important;
+    }
+}
+
+/* ----- 8. АДАПТИВ ДЛЯ МОБИЛЬНЫХ ----- */
+@media (max-width: 860px) {
+    .contacts-page {
+        padding: 70px 16px 48px !important;
+    }
+    
+    .page-header-contacts {
+        margin-bottom: 32px !important;
+    }
+    
+    .page-title-contacts {
+        font-size: 32px !important;
+        padding-left: 16px !important;
+    }
+    
+    .page-subtitle {
+        font-size: 15px !important;
+    }
+    
+    .map-container {
+        height: 400px !important;
+        min-height: 350px !important;
+        margin-bottom: 40px !important;
+    }
+    
+    .map-address-card {
+        position: static !important;
+        width: 100% !important;
+        margin-top: 0 !important;
+        border-radius: 0 0 16px 16px !important;
+        box-shadow: none !important;
+        border-top: 1px solid #E5E3E1 !important;
+    }
+    
+    .form-container {
+        padding: 24px 20px !important;
+    }
+    
+    .form-info h3 {
+        font-size: 24px !important;
+    }
+    
+    .faq-title {
+        font-size: 28px !important;
+    }
+    
+    .faq-question {
+        font-size: 16px !important;
+        padding: 16px 0 !important;
+    }
+    
+    .legal-item {
+        flex-direction: column !important;
+        gap: 4px !important;
+    }
+    
+    .legal-label {
+        width: 100% !important;
+    }
+    
+    .contact-item {
+        gap: 12px !important;
+    }
+}
+
+/* ----- 9. АДАПТИВ ДЛЯ УЗКИХ ЭКРАНОВ ----- */
+@media (max-width: 480px) {
+    .contacts-page {
+        padding: 60px 12px 40px !important;
+    }
+    
+    .page-title-contacts {
+        font-size: 28px !important;
+        padding-left: 12px !important;
+    }
+    
+    .map-container {
+        height: 350px !important;
+        min-height: 300px !important;
+    }
+    
+    .map-address-card {
+        padding: 16px !important;
+    }
+    
+    .map-address-card h4 {
+        font-size: 16px !important;
+    }
+    
+    .form-container {
+        padding: 20px 16px !important;
+    }
+    
+    .form-container h3 {
+        font-size: 20px !important;
+        margin-bottom: 20px !important;
+    }
+    
+    .form-group input,
+    .form-group textarea,
+    .custom-select {
+        font-size: 14px !important;
+        padding: 12px 14px !important;
+    }
+    
+    .submit-btn {
+        padding: 14px 20px !important;
+        font-size: 14px !important;
+    }
+    
+    .faq-title {
+        font-size: 24px !important;
+    }
+    
+    .faq-question {
+        font-size: 15px !important;
+    }
+    
+    .faq-answer {
+        font-size: 14px !important;
+    }
+    
+    .legal-info h2 {
+        font-size: 20px !important;
+    }
+    
+    .download-btn {
+        width: 100% !important;
+        justify-content: center !important;
+    }
+    
+    .contact-icon {
+        width: 36px !important;
+        height: 36px !important;
+    }
+    
+    .social-icon-page {
+        width: 44px !important;
+        height: 44px !important;
+        font-size: 20px !important;
+    }
+}
+
+/* ----- 10. Z-INDEX ФИКСЫ ----- */
+@media (max-width: 860px) {
+    .mobile-nav {
+        z-index: 100000 !important;
+    }
+    
+    .overlay {
+        z-index: 99999 !important;
+    }
+    
+    .burger-icon {
+        z-index: 100001 !important;
+    }
+    
+    .custom-options {
+        z-index: 10000 !important;
+    }
+}
+
+/* ----- 11. УБИРАЕМ СЕРЫЙ ФОН У КАРТЫ ----- */
+.map-placeholder {
+    background: transparent !important;
+}
+
+#ymap {
+    background: transparent !important;
+}
+
+/* Стили для элементов управления Яндекс.Карт */
+.ymaps-2-1-79-controls__toolbar,
+.ymaps-2-1-79-copyright {
+    opacity: 0.7 !important;
+}
+
+
+/* ============================================= */
+/* ИСПРАВЛЕНИЯ: КАРТА, ПРЕИМУЩЕСТВА, СЕЛЕКТ, ОТСТУПЫ */
+/* ============================================= */
+
+/* ----- 1. КАРТА В МОБИЛЬНОЙ ВЕРСИИ ----- */
+@media (max-width: 860px) {
+    .map-container {
+        display: flex !important;
+        flex-direction: column !important;
+        height: auto !important;
+        min-height: auto !important;
+        padding: 0 !important;
+        overflow: visible !important;
+    }
+    
+    #ymap {
+        width: 100% !important;
+        height: 300px !important;
+        min-height: 300px !important;
+        border-radius: 16px 16px 0 0 !important;
+    }
+    
+    .map-address-card {
+        position: relative !important;
+        bottom: auto !important;
+        left: auto !important;
+        width: 100% !important;
+        border-radius: 0 0 16px 16px !important;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+        border-top: 1px solid #E5E3E1 !important;
+        margin-top: -1px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    #ymap {
+        height: 250px !important;
+        min-height: 250px !important;
+    }
+}
+
+/* ----- 2. БЛОК ПРЕИМУЩЕСТВ (АДАПТИВ ДЛЯ МОБИЛЬНЫХ) ----- */
+.form-features {
+    margin-top: 24px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+}
+
+.form-features .feature-item {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 6px !important;
+    padding: 0 0 0 36px !important;
+    position: relative !important;
+}
+
+.form-features .feature-item i {
+    position: absolute !important;
+    left: 0 !important;
+    top: 4px !important;
+    color: #4A6294 !important;
+    font-size: 20px !important;
+}
+
+.form-features .feature-item strong {
+    font-family: 'Unbounded', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 16px !important;
+    line-height: 1.3 !important;
+    color: #1A1718 !important;
+}
+
+.form-features .feature-item span {
+    font-family: 'Nunito Sans', sans-serif !important;
+    font-size: 14px !important;
+    line-height: 1.5 !important;
+    color: #5A5556 !important;
+    word-break: break-word !important;
+}
+
+/* Адаптив для мобильных */
+@media (max-width: 860px) {
+    .form-features {
+        margin-top: 20px !important;
+        gap: 20px !important;
+    }
+    
+    .form-features .feature-item {
+        padding-left: 32px !important;
+        gap: 4px !important;
+    }
+    
+    .form-features .feature-item i {
+        font-size: 18px !important;
+        top: 3px !important;
+    }
+    
+    .form-features .feature-item strong {
+        font-size: 15px !important;
+    }
+    
+    .form-features .feature-item span {
+        font-size: 13px !important;
+        line-height: 1.4 !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-features {
+        margin-top: 16px !important;
+        gap: 16px !important;
+    }
+    
+    .form-features .feature-item {
+        padding-left: 28px !important;
+    }
+    
+    .form-features .feature-item i {
+        font-size: 16px !important;
+        top: 2px !important;
+    }
+    
+    .form-features .feature-item strong {
+        font-size: 14px !important;
+    }
+    
+    .form-features .feature-item span {
+        font-size: 12px !important;
+        line-height: 1.4 !important;
+    }
+}
+
+/* ----- 3. СТРЕЛКА В СЕЛЕКТЕ (ПОДВИНУТЬ ВПРАВО) ----- */
+.custom-select {
+    padding: 12px 48px 12px 16px !important; /* Увеличено с 40px до 48px */
+    background-position: right 20px center !important; /* Стрелка дальше от края */
+}
+
+.custom-select i {
+    margin-right: 4px !important; /* Дополнительный отступ для иконки */
+}
+
+/* Для селекта на странице заказчикам */
+.custom-select-btn {
+    padding: 12px 48px 12px 16px !important;
+    background-position: right 20px center !important;
+}
+
+/* ----- 4. УМЕНЬШИТЬ ОТСТУП ДО ФУТЕРА ----- */
+.contacts-page {
+    padding-bottom: 40px !important; /* Уменьшено с 80px */
+}
+
+.contacts-grid {
+    margin-bottom: 0 !important;
+}
+
+/* Адаптив */
+@media (max-width: 1100px) {
+    .contacts-page {
+        padding-bottom: 40px !important;
+    }
+}
+
+@media (max-width: 860px) {
+    .contacts-page {
+        padding-bottom: 32px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .contacts-page {
+        padding-bottom: 24px !important;
+    }
+}
+
+/* ----- 5. УМЕНЬШИТЬ ОТСТУПЫ МЕЖДУ БЛОКАМИ В ВЕБ-ВЕРСИИ ----- */
+.form-section {
+    margin-bottom: 48px !important; /* Уменьшено с 60px */
+}
+
+.faq-section {
+    margin-bottom: 48px !important; /* Уменьшено с 60px */
+}
+
+/* Уменьшаем отступы внутри формы */
+.form-container {
+    padding: 28px !important; /* Уменьшено с 32px */
+}
+
+.form-container h3 {
+    margin-bottom: 20px !important; /* Уменьшено с 28px */
+}
+
+.form-group {
+    margin-bottom: 16px !important; /* Уменьшено с 20px */
+}
+
+.submit-btn {
+    margin-top: 4px !important; /* Уменьшено с 8px */
+}
+
+/* Уменьшаем отступы в FAQ */
+.faq-title {
+    margin-bottom: 24px !important; /* Уменьшено с 32px */
+}
+
+.faq-question {
+    padding: 16px 0 !important; /* Уменьшено с 20px */
+}
+
+.faq-item.open .faq-answer {
+    padding-bottom: 16px !important; /* Уменьшено с 20px */
+}
+
+/* Уменьшаем отступы в контактной информации */
+.contacts-grid {
+    gap: 32px !important; /* Уменьшено с 48px */
+}
+
+.legal-info h2 {
+    margin-bottom: 20px !important; /* Уменьшено с 24px */
+}
+
+.legal-item {
+    padding: 8px 0 !important; /* Уменьшено с 12px */
+}
+
+.contact-block h3 {
+    margin-bottom: 16px !important; /* Уменьшено с 20px */
+}
+
+.contact-item {
+    margin-bottom: 16px !important; /* Уменьшено с 20px */
+}
+
+.contact-info-block {
+    gap: 24px !important; /* Уменьшено с 32px */
+}
+
+.download-btn {
+    margin-top: 20px !important; /* Уменьшено с 24px */
+}
+
+/* Адаптив для мобильных */
+@media (max-width: 860px) {
+    .form-section,
+    .faq-section {
+        margin-bottom: 32px !important;
+    }
+    
+    .form-container {
+        padding: 24px 20px !important;
+    }
+    
+    .form-container h3 {
+        margin-bottom: 18px !important;
+    }
+    
+    .form-group {
+        margin-bottom: 14px !important;
+    }
+    
+    .faq-title {
+        margin-bottom: 20px !important;
+    }
+    
+    .faq-question {
+        padding: 14px 0 !important;
+    }
+    
+    .contacts-grid {
+        gap: 24px !important;
+    }
+    
+    .legal-item {
+        padding: 6px 0 !important;
+    }
+    
+    .contact-item {
+        margin-bottom: 14px !important;
+    }
+    
+    .contact-info-block {
+        gap: 20px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-section,
+    .faq-section {
+        margin-bottom: 24px !important;
+    }
+    
+    .form-container {
+        padding: 20px 16px !important;
+    }
+    
+    .form-container h3 {
+        margin-bottom: 16px !important;
+    }
+    
+    .form-group {
+        margin-bottom: 12px !important;
+    }
+    
+    .faq-title {
+        margin-bottom: 16px !important;
+    }
+    
+    .faq-question {
+        padding: 12px 0 !important;
+    }
+    
+    .faq-item.open .faq-answer {
+        padding-bottom: 12px !important;
+    }
+    
+    .contacts-grid {
+        gap: 20px !important;
+    }
+    
+    .legal-info h2 {
+        margin-bottom: 16px !important;
+    }
+    
+    .contact-item {
+        margin-bottom: 12px !important;
+    }
+    
+    .contact-info-block {
+        gap: 16px !important;
+    }
+    
+    .download-btn {
+        margin-top: 16px !important;
+    }
+}
+
+/* ----- 6. ЗАГОЛОВОК СТРАНИЦЫ ----- */
+.page-header-contacts {
+    margin-bottom: 36px !important; /* Уменьшено с 48px */
+}
+
+@media (max-width: 860px) {
+    .page-header-contacts {
+        margin-bottom: 28px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .page-header-contacts {
+        margin-bottom: 20px !important;
+    }
+    
+    .page-title-contacts {
+        margin-bottom: 12px !important;
+    }
+}
+
+/* ============================================= */
+/* БЛОК ПРЕИМУЩЕСТВ — ТОЧНО КАК НА ГЛАВНОЙ       */
+/* ============================================= */
+
+/* ----- СТИЛИ КАК НА ГЛАВНОЙ (ИЗ СЕКЦИИ ЗАКАЗЧИКАМ) ----- */
+.form-features {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 20px !important;
+    margin-top: 20px !important;
+}
+
+.form-features .feature-item {
+    background: #F8F7F6 !important;
+    border-left: 3px solid #4A6294 !important;
+    border-radius: 8px !important;
+    padding: clamp(12px, 2vw, 18px) clamp(16px, 2.5vw, 24px) clamp(12px, 2vw, 18px) clamp(40px, 5vw, 60px) !important;
+    position: relative !important;
+}
+
+.form-features .feature-item i {
+    position: absolute !important;
+    left: clamp(12px, 2vw, 24px) !important;
+    top: clamp(14px, 2vw, 20px) !important;
+    color: #4A6294 !important;
+    font-size: clamp(14px, 1.8vw, 20px) !important;
+}
+
+.form-features .feature-item strong {
+    display: block !important;
+    font-family: 'Unbounded', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: clamp(14px, 1.6vw, 18px) !important;
+    color: #1A1718 !important;
+    margin-bottom: 4px !important;
+}
+
+.form-features .feature-item span {
+    display: block !important;
+    font-family: 'Nunito Sans', sans-serif !important;
+    font-size: clamp(12px, 1.3vw, 15px) !important;
+    color: #3D393A !important;
+    line-height: 1.4 !important;
+}
+
+/* ----- АДАПТИВ ДЛЯ МОБИЛЬНЫХ ----- */
+@media (max-width: 860px) {
+    .form-features {
+        gap: 16px !important;
+    }
+    
+    .form-features .feature-item {
+        padding: 14px 16px 14px 48px !important;
+    }
+    
+    .form-features .feature-item i {
+        left: 16px !important;
+        top: 16px !important;
+        font-size: 18px !important;
+    }
+    
+    .form-features .feature-item strong {
+        font-size: 15px !important;
+        margin-bottom: 4px !important;
+    }
+    
+    .form-features .feature-item span {
+        font-size: 13px !important;
+        line-height: 1.4 !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-features {
+        gap: 12px !important;
+    }
+    
+    .form-features .feature-item {
+        padding: 12px 14px 12px 42px !important;
+    }
+    
+    .form-features .feature-item i {
+        left: 14px !important;
+        top: 14px !important;
+        font-size: 16px !important;
+    }
+    
+    .form-features .feature-item strong {
+        font-size: 14px !important;
+    }
+    
+    .form-features .feature-item span {
+        font-size: 12px !important;
+    }
+}
+
+/* ============================================= */
+/* КАРТА В МОБИЛЬНОЙ ВЕРСИИ                      */
+/* ============================================= */
+
+@media (max-width: 860px) {
+    .map-container {
+        display: flex !important;
+        flex-direction: column !important;
+        height: auto !important;
+        min-height: auto !important;
+        padding: 0 !important;
+        overflow: visible !important;
+        margin-bottom: 40px !important;
+        background: transparent !important;
+    }
+    
+    #ymap {
+        width: 100% !important;
+        height: 300px !important;
+        min-height: 300px !important;
+        border-radius: 16px 16px 0 0 !important;
+    }
+    
+    .map-address-card {
+        position: relative !important;
+        bottom: auto !important;
+        left: auto !important;
+        width: 100% !important;
+        border-radius: 0 0 16px 16px !important;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+        border-top: 1px solid #E5E3E1 !important;
+        margin-top: 0 !important;
+        padding: 16px 20px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    #ymap {
+        height: 250px !important;
+        min-height: 250px !important;
+    }
+    
+    .map-address-card {
+        padding: 14px 16px !important;
+    }
+    
+    .map-address-card h4 {
+        font-size: 16px !important;
+        margin-bottom: 4px !important;
+    }
+    
+    .map-address-card p {
+        font-size: 13px !important;
+    }
+}
+
+/* ============================================= */
+/* СТРЕЛКА В СЕЛЕКТЕ ПОДВИНУТА ВПРАВО           */
+/* ============================================= */
+
+.custom-select {
+    padding: 12px 48px 12px 16px !important;
+    background-position: right 20px center !important;
+}
+
+.custom-select i {
+    margin-right: 4px !important;
+}
+
+/* Для селекта на странице заказчикам */
+.custom-select-btn {
+    padding: 12px 48px 12px 16px !important;
+    background-position: right 20px center !important;
+}
+
+/* ============================================= */
+/* УМЕНЬШИТЬ ОТСТУП ДО ФУТЕРА                    */
+/* ============================================= */
+
+.contacts-page {
+    padding-bottom: 40px !important;
+}
+
+.contacts-grid {
+    margin-bottom: 0 !important;
+}
+
+@media (max-width: 1100px) {
+    .contacts-page {
+        padding-bottom: 40px !important;
+    }
+}
+
+@media (max-width: 860px) {
+    .contacts-page {
+        padding-bottom: 32px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .contacts-page {
+        padding-bottom: 24px !important;
+    }
+}
+
+/* ============================================= */
+/* УМЕНЬШИТЬ ОТСТУПЫ МЕЖДУ БЛОКАМИ               */
+/* ============================================= */
+
+.form-section {
+    margin-bottom: 48px !important;
+}
+
+.faq-section {
+    margin-bottom: 48px !important;
+}
+
+.page-header-contacts {
+    margin-bottom: 36px !important;
+}
+
+@media (max-width: 860px) {
+    .form-section,
+    .faq-section {
+        margin-bottom: 32px !important;
+    }
+    
+    .page-header-contacts {
+        margin-bottom: 28px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-section,
+    .faq-section {
+        margin-bottom: 24px !important;
+    }
+    
+    .page-header-contacts {
+        margin-bottom: 20px !important;
+    }
+}
+

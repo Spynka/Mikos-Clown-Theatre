@@ -103,8 +103,11 @@
     // ===== СОСТОЯНИЕ =====
     let cartItems = [], currentProduct = null, editingIndex = -1, returnToContacts = false;
     let activeFilter = 'all', currentIndex = 8;
+    
+    // Константа для ширины экрана (большой экран = отображаем все сразу)
+    const LARGE_SCREEN_BREAKPOINT = 1600;
 
-    // ===== ОТРИСОВКА ТОВАРОВ =====
+    // ===== ОТРИСОВКА ТОВАРОВ С УЧЁТОМ ШИРИНЫ ЭКРАНА =====
     function renderProducts() {
         const grid = document.getElementById('merchGrid');
         const showMoreBtn = document.getElementById('showMoreBtn');
@@ -117,7 +120,11 @@
         }
         
         const filtered = activeFilter === 'all' ? products : products.filter(p => p.category === activeFilter);
-        const display = filtered.slice(0, currentIndex);
+        
+        // ✅ Определяем, сколько показывать: если экран широкий — все, иначе — порционно
+        const isLargeScreen = window.innerWidth >= LARGE_SCREEN_BREAKPOINT;
+        const displayCount = isLargeScreen ? filtered.length : Math.min(currentIndex, filtered.length);
+        const display = filtered.slice(0, displayCount);
         
         grid.innerHTML = '';
         
@@ -153,20 +160,23 @@
             });
         });
 
-        // Кнопка "Показать ещё"
+        // ✅ Управление кнопкой "Показать ещё" — на больших экранах скрываем
         if (showMoreBtn) {
-            showMoreBtn.style.display = filtered.length <= currentIndex ? 'none' : 'block';
+            if (isLargeScreen) {
+                showMoreBtn.style.display = 'none';
+            } else {
+                showMoreBtn.style.display = displayCount >= filtered.length ? 'none' : 'block';
+            }
         }
     }
     
-    // ===== МОДАЛКА: контент корзины =====
+    // ===== МОДАЛКА: контент корзины (без изменений) =====
     function renderModalContent() {
         const container = document.getElementById('dynamicModalContent');
         if (!container) return;
         
         let html = '';
         
-        // История заказа (если есть товары и не редактируем)
         if (cartItems.length > 0 && editingIndex === -1) {
             html += `<div class="modal-title" style="font-size:24px; font-family:'Unbounded',sans-serif; font-weight:700; margin-bottom:20px;">История заказа</div>`;
             let total = 0;
@@ -192,7 +202,6 @@
             html += `<div class="total-row"><span>Итого</span><span>${total.toLocaleString()} ₽</span></div></div>`;
         }
         
-        // Форма выбора параметров текущего товара
         html += `<div class="modal-title" style="font-size:24px; font-family:'Unbounded',sans-serif; font-weight:700; margin-top:${cartItems.length > 0 && editingIndex === -1 ? '24px' : '0'}; margin-bottom:20px;">${currentProduct ? currentProduct.name : 'Выбрать параметры'}</div>`;
         html += `<div class="form-group"><label>Количество</label><input type="number" id="productQuantity" min="1" value="1" class="form-input"></div>`;
         
@@ -209,7 +218,6 @@
         
         container.innerHTML = html;
         
-        // Обработчики удаления/редактирования в истории
         if (cartItems.length > 0 && editingIndex === -1) {
             document.querySelectorAll('.delete-item').forEach(btn => {
                 btn.addEventListener('click', (e) => {
@@ -231,7 +239,7 @@
         }
     }
     
-    // ===== ОБНОВЛЕНИЕ ПОЛНОГО ЗАКАЗА (в модальном окне контактов) =====
+    // ===== ОБНОВЛЕНИЕ ПОЛНОГО ЗАКАЗА (без изменений) =====
     function updateFullOrder() {
         const container = document.getElementById('orderSummaryFull');
         if (!container) return;
@@ -262,7 +270,6 @@
         html += `<div class="total-row"><span>Итого</span><span>${total.toLocaleString()} ₽</span></div>`;
         container.innerHTML = html;
         
-        // Обработчики в полном заказе
         document.querySelectorAll('.delete-item-full').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 const idx = parseInt(btn.dataset.index);
@@ -282,7 +289,7 @@
         });
     }
     
-    // ===== ОТКРЫТЬ МОДАЛКУ ДОБАВЛЕНИЯ =====
+    // ===== ОТКРЫТЬ МОДАЛКУ ДОБАВЛЕНИЯ (без изменений) =====
     function openAddModal(product) {
         currentProduct = product;
         editingIndex = -1;
@@ -308,7 +315,7 @@
         });
     }
     
-    // ===== ОТКРЫТЬ МОДАЛКУ РЕДАКТИРОВАНИЯ =====
+    // ===== ОТКРЫТЬ МОДАЛКУ РЕДАКТИРОВАНИЯ (без изменений) =====
     function openEditModal(index) {
         const item = cartItems[index];
         if (!item) return;
@@ -322,7 +329,6 @@
         editingIndex = index;
         renderModalContent();
         
-        // Заполняем форму текущими значениями
         document.getElementById('productQuantity').value = item.quantity;
         if (item.isClothing && document.getElementById('productSize')) {
             document.getElementById('productSize').value = item.size || 'M';
@@ -342,7 +348,7 @@
         });
     }
     
-    // ===== ДОБАВИТЬ ТЕКУЩИЙ ТОВАР В КОРЗИНУ =====
+    // ===== ДОБАВИТЬ ТЕКУЩИЙ ТОВАР В КОРЗИНУ (без изменений) =====
     function addCurrentToCart() {
         const qtyInput = document.getElementById('productQuantity');
         if (!qtyInput) return false;
@@ -373,7 +379,7 @@
         return true;
     }
     
-    // ===== СОХРАНИТЬ ИЗМЕНЕНИЯ ТОВАРА =====
+    // ===== СОХРАНИТЬ ИЗМЕНЕНИЯ ТОВАРА (без изменений) =====
     function saveEditItem() {
         if (editingIndex === -1) return false;
         
@@ -403,20 +409,19 @@
         return true;
     }
     
-    // ===== ЗАКРЫТЬ ВСЕ МОДАЛКИ =====
+    // ===== ЗАКРЫТЬ ВСЕ МОДАЛКИ (без изменений) =====
     function closeModals() {
         document.getElementById('modalProduct')?.classList.remove('active');
         document.getElementById('modalContacts')?.classList.remove('active');
         editingIndex = -1;
         
-        // Если нужно вернуться в контакты после закрытия
         if (returnToContacts && cartItems.length > 0) {
             document.getElementById('modalContacts')?.classList.add('active');
             returnToContacts = false;
         }
     }
     
-    // ===== ОТКРЫТЬ МОДАЛКУ КОНТАКТОВ =====
+    // ===== ОТКРЫТЬ МОДАЛКУ КОНТАКТОВ (без изменений) =====
     function openContacts() {
         if (cartItems.length === 0) {
             alert("Корзина пуста");
@@ -424,7 +429,6 @@
         }
         updateFullOrder();
         
-        // Очистка полей
         document.getElementById('contactName').value = '';
         document.getElementById('contactPhone').value = '';
         document.getElementById('contactEmail').value = '';
@@ -433,7 +437,7 @@
         document.getElementById('modalContacts').classList.add('active');
     }
     
-    // ===== ПОКАЗАТЬ УСПЕШНЫЙ ЗАКАЗ =====
+    // ===== ПОКАЗАТЬ УСПЕШНЫЙ ЗАКАЗ (без изменений) =====
     function showSuccess(name) {
         const mainContent = document.getElementById('mainContent');
         const footer = document.querySelector('.main-footer') || document.getElementById('site-footer');
@@ -466,7 +470,6 @@
 
     // ===== ИНИЦИАЛИЗАЦИЯ ПОСЛЕ ЗАГРУЗКИ DOM =====
     function initShop() {
-        // ✅ Гарантируем, что элементы существуют
         const grid = document.getElementById('merchGrid');
         const filterChips = document.querySelectorAll('.filter-chip');
         const showMoreBtn = document.getElementById('showMoreBtn');
@@ -476,25 +479,24 @@
             return;
         }
         
-        // ✅ Устанавливаем активный фильтр визуально
         filterChips.forEach(chip => {
             if (chip.dataset.filter === 'all') {
                 chip.classList.add('active');
             }
         });
         
-        // ✅ Обработчики фильтров
         filterChips.forEach(chip => {
             chip.addEventListener('click', function() {
                 filterChips.forEach(c => c.classList.remove('active'));
                 this.classList.add('active');
                 activeFilter = this.dataset.filter;
+                
+                // ✅ Сбрасываем индекс на базовое значение и перерисовываем
                 currentIndex = 8;
                 renderProducts();
             });
         });
         
-        // ✅ Кнопка "Показать ещё"
         if (showMoreBtn) {
             showMoreBtn.addEventListener('click', () => {
                 const filtered = activeFilter === 'all' ? products : products.filter(p => p.category === activeFilter);
@@ -505,7 +507,11 @@
             });
         }
         
-        // ✅ Модальные окна
+        // ✅ СЛУШАТЕЛЬ НА ИЗМЕНЕНИЕ РАЗМЕРА ЭКРАНА
+        window.addEventListener('resize', () => {
+            renderProducts();
+        });
+        
         const closeModal1 = document.getElementById('closeModal1');
         const closeModal2 = document.getElementById('closeModal2');
         const modalProduct = document.getElementById('modalProduct');
@@ -519,7 +525,6 @@
             if (e.target === modalContacts) closeModals();
         });
         
-        // ✅ Оформление заказа
         const submitOrderBtn = document.getElementById('submitOrderBtn');
         if (submitOrderBtn) {
             submitOrderBtn.addEventListener('click', () => {
@@ -538,7 +543,6 @@
             });
         }
         
-        // ✅ Подписка (если есть)
         const subscribeBtn = document.getElementById('subscribeBtn');
         if (subscribeBtn) {
             subscribeBtn.addEventListener('click', () => {
@@ -558,7 +562,6 @@
             });
         }
         
-        // ✅ Кнопки футера
         document.querySelectorAll('.footer-btn-primary, .buy-ticket-btn').forEach(btn => {
             btn.addEventListener('click', () => alert('Билеты скоро в продаже'));
         });
@@ -570,11 +573,9 @@
         renderProducts();
     }
     
-    // ✅ Запускаем после полной загрузки страницы
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', initShop);
     } else {
-        // Если DOM уже готов — запускаем сразу
         initShop();
     }
     
