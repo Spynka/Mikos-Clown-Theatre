@@ -255,14 +255,13 @@ function updateFilterVisuals() {
 }
 
 // =============================================
-// КАСТОМНЫЙ ВЫПАДАЮЩИЙ СПИСОК
+// КАСТОМНЫЙ ВЫПАДАЮЩИЙ СПИСОК (ФИНАЛЬНЫЙ ФИКС)
 // =============================================
 function initCustomMonthSelect() {
     const originalSelect = document.getElementById('monthSelect');
     if (!originalSelect) return;
     if (document.querySelector('.custom-month-select')) return;
     
-    // Скрываем оригинальный select
     originalSelect.style.display = 'none';
     
     const wrapper = document.createElement('div');
@@ -329,25 +328,32 @@ function initCustomMonthSelect() {
     const toggleHandler = (e) => {
         e.stopPropagation();
         e.preventDefault();
+        
+        document.querySelectorAll('.custom-month-select.open').forEach(el => {
+            if (el !== wrapper) el.classList.remove('open');
+        });
+        
         wrapper.classList.toggle('open');
     };
     
     trigger.addEventListener('click', toggleHandler);
     trigger.addEventListener('touchstart', toggleHandler, { passive: false });
     
-    // Закрытие по клику вне
     document.addEventListener('click', (e) => {
         if (!wrapper.contains(e.target)) wrapper.classList.remove('open');
     });
+    
     document.addEventListener('touchstart', (e) => {
         if (!wrapper.contains(e.target)) wrapper.classList.remove('open');
     }, { passive: true });
+    
+    dropdown.addEventListener('click', (e) => e.stopPropagation());
+    dropdown.addEventListener('touchstart', (e) => e.stopPropagation(), { passive: false });
     
     wrapper.appendChild(trigger);
     wrapper.appendChild(dropdown);
     originalSelect.parentNode.insertBefore(wrapper, originalSelect);
     
-    // Сброс при клике на "Все события"
     if (allChip) {
         const resetHandler = () => {
             originalSelect.selectedIndex = 0;
@@ -358,13 +364,13 @@ function initCustomMonthSelect() {
             dropdown.querySelectorAll('.custom-month-option').forEach(opt => {
                 opt.classList.toggle('selected', opt.dataset.value === originalSelect.value);
             });
+            wrapper.classList.remove('open');
         };
         
         allChip.addEventListener('click', resetHandler);
         allChip.addEventListener('touchstart', resetHandler, { passive: true });
     }
     
-    // Синхронизация при программном изменении
     const observer = new MutationObserver(() => {
         const newText = getSelectedText();
         trigger.innerHTML = `${newText} <span class="arrow-icon">▾</span>`;
@@ -378,12 +384,51 @@ function initCustomMonthSelect() {
     
     observer.observe(originalSelect, { attributes: true, attributeFilter: ['class', 'value'] });
     
-    // Закрытие по Escape
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && wrapper.classList.contains('open')) {
             wrapper.classList.remove('open');
         }
     });
+    // Дополнительный обработчик для мобильных — закрытие при тапе вне
+const closeOnOutsideTap = (e) => {
+    if (wrapper.classList.contains('open')) {
+        // Проверяем, что тап был НЕ по триггеру и НЕ по выпадающему меню
+        if (!trigger.contains(e.target) && !dropdown.contains(e.target)) {
+            wrapper.classList.remove('open');
+        }
+    }
+};
+
+// Используем делегирование — вешаем на document, но проверяем класс open
+document.addEventListener('touchstart', (e) => {
+    if (wrapper.classList.contains('open')) {
+        if (!wrapper.contains(e.target)) {
+            wrapper.classList.remove('open');
+        }
+    }
+}, { passive: true });
+
+// Закрытие при клике на затемнение (если оно есть)
+document.addEventListener('click', (e) => {
+    if (wrapper.classList.contains('open')) {
+        // Если клик был по псевдоэлементу или вне dropdown
+        if (!wrapper.contains(e.target)) {
+            wrapper.classList.remove('open');
+        }
+    }
+});
+
+// Закрытие по кнопке "Назад" на Android
+window.addEventListener('popstate', () => {
+    if (wrapper.classList.contains('open')) {
+        wrapper.classList.remove('open');
+    }
+});
+
+// Предотвращаем закрытие при скролле внутри dropdown
+dropdown.addEventListener('touchmove', (e) => {
+    e.stopPropagation();
+}, { passive: false });
 }
 
 // =============================================

@@ -2404,7 +2404,7 @@ body {
 /* Конец главной  */
 /* ============================================= */
 /* ============================================= */
-/* ФИНАЛЬНЫЙ ФИКС АФИШИ — КАК НА ГЛАВНОЙ         */
+/* АФИША        */
 /* ============================================= */
 
 /* ----- 1. ВЫРАВНИВАНИЕ ШИРИНЫ КОНТЕЙНЕРА ----- */
@@ -3388,5 +3388,97 @@ body {
     
     .performance-date-afisha {
         font-size: 16px !important;
+    }
+}
+
+
+/* ============================================= */
+/* ИСПРАВЛЕНИЕ Z-INDEX ДЛЯ МОБИЛЬНОЙ ВЕРСИИ       */
+/* ============================================= */
+
+/* Боковое меню должно быть выше всего */
+.mobile-nav {
+    z-index: 100000 !important;
+}
+
+/* Оверлей — ниже меню, но выше остального */
+.overlay {
+    z-index: 99999 !important;
+}
+
+/* Бургер-кнопка поверх всего */
+.burger-icon {
+    z-index: 100001 !important;
+}
+
+/* Хедер на мобильных */
+@media (max-width: 860px) {
+    .main-header {
+        z-index: 99998 !important;
+    }
+    
+    /* Блок фильтров — повышаем z-index */
+    .filters-section-afisha {
+        z-index: 99997 !important;
+        position: relative !important;
+    }
+    
+    .filter-chips-afisha {
+        z-index: 99997 !important;
+        position: relative !important;
+    }
+    
+    /* Кастомный селект — высокий z-index */
+    .custom-month-select {
+        z-index: 99999 !important;
+        position: relative !important;
+    }
+    
+    /* Выпадающее меню — МАКСИМАЛЬНЫЙ z-index, фиксированное позиционирование */
+    .custom-month-dropdown {
+        position: fixed !important;
+        top: 50% !important;
+        left: 50% !important;
+        transform: translate(-50%, -50%) !important;
+        width: calc(100vw - 32px) !important;
+        max-width: 320px !important;
+        z-index: 999999 !important;
+        margin: 0 !important;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3) !important;
+    }
+    
+    /* Затемнение фона при открытом меню */
+    .custom-month-select.open::before {
+        content: '' !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        background: rgba(0, 0, 0, 0.5) !important;
+        z-index: 99998 !important;
+    }
+}
+
+/* Для десктопа — порядок z-index */
+@media (min-width: 861px) {
+    .mobile-nav {
+        z-index: 100000 !important;
+    }
+    
+    .overlay {
+        z-index: 99999 !important;
+    }
+    
+    .burger-icon {
+        z-index: 100001 !important;
+    }
+    
+    .custom-month-select {
+        z-index: 100 !important;
+    }
+    
+    .custom-month-dropdown {
+        z-index: 9999 !important;
     }
 }
