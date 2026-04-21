@@ -2984,3 +2984,110 @@ body {
         font-size: 24px !important;
     }
 }
+
+/* ============================================= */
+/* ИСПРАВЛЕНИЯ ДЛЯ МОБИЛЬНОЙ ВЕРСИИ АФИШИ        */
+/* ============================================= */
+
+@media (max-width: 860px) {
+    /* Повышаем z-index для всего блока фильтров */
+    .filters-section-afisha {
+        position: relative !important;
+        z-index: 10000 !important;
+    }
+    
+    .filter-chips-afisha {
+        position: relative !important;
+        z-index: 10001 !important;
+    }
+    
+    /* Кастомный селект — максимальный z-index */
+    .custom-month-select {
+        position: relative !important;
+        z-index: 99999 !important;
+    }
+    
+    /* Выпадающее меню — поверх всего */
+    .custom-month-dropdown {
+        position: fixed !important;
+        top: auto !important;
+        bottom: auto !important;
+        left: 16px !important;
+        right: 16px !important;
+        width: auto !important;
+        max-width: none !important;
+        z-index: 999999 !important;
+        margin-top: 8px !important;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2) !important;
+    }
+    
+    /* Кнопки пожирнее */
+    .filter-chip-afisha,
+    .custom-month-trigger {
+        padding: 10px 18px !important;
+        font-size: 14px !important;
+        font-weight: 600 !important;
+        min-height: 44px !important; /* Для удобства тапа */
+        display: inline-flex !important;
+        align-items: center !important;
+    }
+    
+    /* Увеличиваем область клика */
+    .custom-month-trigger {
+        min-width: 150px !important;
+    }
+    
+    /* Опции в выпадающем меню — крупнее */
+    .custom-month-option {
+        padding: 14px 20px !important;
+        font-size: 16px !important;
+        min-height: 48px !important;
+        display: flex !important;
+        align-items: center !important;
+    }
+    
+    /* Стрелка покрупнее */
+    .custom-month-trigger .arrow-icon {
+        font-size: 14px !important;
+        margin-left: 8px !important;
+    }
+    
+    /* Убираем возможные конфликты с overlay */
+    .overlay {
+        z-index: 9998 !important;
+    }
+    
+    /* Карточки — кнопки пожирнее */
+    .btn-details-afisha,
+    .btn-buy-afisha {
+        padding: 12px 18px !important;
+        font-size: 14px !important;
+        min-height: 44px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .filter-chip-afisha,
+    .custom-month-trigger {
+        padding: 10px 16px !important;
+        font-size: 13px !important;
+        min-height: 44px !important;
+    }
+    
+    .custom-month-trigger {
+        min-width: 140px !important;
+    }
+    
+    .custom-month-option {
+        padding: 14px 16px !important;
+        font-size: 15px !important;
+        min-height: 48px !important;
+    }
+    
+    .btn-details-afisha,
+    .btn-buy-afisha {
+        padding: 12px 16px !important;
+        font-size: 14px !important;
+        min-height: 44px !important;
+    }
+}

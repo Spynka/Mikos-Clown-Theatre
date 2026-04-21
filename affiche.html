@@ -327,7 +327,7 @@ function initCustomMonthSelect() {
         return selected ? selected.text : 'Апрель 2026';
     };
     
-    trigger.innerHTML = `${getSelectedText()} <span style="margin-left: 8px; color: #4A6294; font-size: 12px;">⌵</span>`;
+    trigger.innerHTML = `${getSelectedText()} <span class="arrow-icon">▾</span>`;
     
     if (originalSelect.classList.contains('active-filter')) {
         trigger.classList.add('active');
@@ -351,7 +351,7 @@ function initCustomMonthSelect() {
                 e.stopPropagation();
                 
                 originalSelect.value = this.dataset.value;
-                trigger.innerHTML = `${this.textContent} <span style="margin-left: 8px; color: #4A6294; font-size: 12px;">⌵</span>`;
+                trigger.innerHTML = `${this.textContent} <span class="arrow-icon">▾</span>`;
                 
                 const isFirstOption = originalSelect.selectedIndex === 0;
                 if (!isFirstOption) {
@@ -371,6 +371,11 @@ function initCustomMonthSelect() {
                 originalSelect.dispatchEvent(new Event('change', { bubbles: true }));
             });
             
+            // Фикс для тач-устройств
+            optionEl.addEventListener('touchstart', function(e) {
+                e.stopPropagation();
+            }, { passive: true });
+            
             dropdown.appendChild(optionEl);
         });
     }
@@ -382,11 +387,75 @@ function initCustomMonthSelect() {
         wrapper.classList.toggle('open');
     });
     
+    // Фикс для тач-устройств
+    trigger.addEventListener('touchstart', function(e) {
+        e.stopPropagation();
+    }, { passive: true });
+    
     document.addEventListener('click', function(e) {
         if (!wrapper.contains(e.target)) {
             wrapper.classList.remove('open');
         }
     });
+    
+    document.addEventListener('touchstart', function(e) {
+        if (!wrapper.contains(e.target)) {
+            wrapper.classList.remove('open');
+        }
+    }, { passive: true });
+    
+    dropdown.addEventListener('click', function(e) {
+        e.stopPropagation();
+    });
+    
+    dropdown.addEventListener('touchstart', function(e) {
+        e.stopPropagation();
+    }, { passive: true });
+    
+    wrapper.appendChild(trigger);
+    wrapper.appendChild(dropdown);
+    
+    originalSelect.parentNode.insertBefore(wrapper, originalSelect);
+    
+    const allChip = document.querySelector('[data-filter="all"]');
+    if (allChip) {
+        allChip.addEventListener('click', function() {
+            originalSelect.selectedIndex = 0;
+            originalSelect.classList.remove('active-filter');
+            trigger.classList.remove('active');
+            trigger.innerHTML = `${originalSelect.options[0].text} <span class="arrow-icon">▾</span>`;
+            
+            dropdown.querySelectorAll('.custom-month-option').forEach(opt => {
+                opt.classList.toggle('selected', opt.dataset.value === originalSelect.value);
+            });
+        });
+    }
+    
+    const observer = new MutationObserver(function() {
+        const newText = getSelectedText();
+        trigger.innerHTML = `${newText} <span class="arrow-icon">▾</span>`;
+        
+        if (originalSelect.classList.contains('active-filter')) {
+            trigger.classList.add('active');
+        } else {
+            trigger.classList.remove('active');
+        }
+        
+        const selectedValue = originalSelect.value;
+        dropdown.querySelectorAll('.custom-month-option').forEach(opt => {
+            opt.classList.toggle('selected', opt.dataset.value === selectedValue);
+        });
+    });
+    
+    observer.observe(originalSelect, { attributes: true, attributeFilter: ['class', 'value'] });
+    
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && wrapper.classList.contains('open')) {
+            wrapper.classList.remove('open');
+        }
+    });
+}
+    
     
     dropdown.addEventListener('click', function(e) {
         e.stopPropagation();
@@ -434,7 +503,7 @@ function initCustomMonthSelect() {
             wrapper.classList.remove('open');
         }
     });
-}
+
 </script>
 
 
