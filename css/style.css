@@ -1472,3 +1472,932 @@ body { background: #fff; font-family: 'Nunito Sans', sans-serif; overflow-x: hid
         flex: 0 0 318px;
     }
 }
+
+
+
+
+
+/* Новые */
+
+/* ============================================= */
+/* ИСПРАВЛЕНИЯ СЛАЙДЕРА: КАРТОЧКИ НЕ ОБРЕЗАЮТСЯ  */
+/* ============================================= */
+
+/* ----- 1. ГЛОБАЛЬНЫЙ СБРОС ОГРАНИЧЕНИЙ ----- */
+/* Убираем overflow: hidden у всех контейнеров, которые могут обрезать слайдер */
+.shop-container,
+.container-main,
+.plays-section,
+.shop-section {
+    overflow: visible !important;
+}
+
+/* Основной контейнер страницы не должен обрезать контент */
+body {
+    overflow-x: hidden; /* Скрываем только горизонтальный скролл браузера */
+}
+
+/* ----- 2. СЕКЦИЯ "БЛИЖАЙШИЕ СПЕКТАКЛИ" И "СПЕКТАКЛИ" ----- */
+/* Контейнер с заголовком: отступ слева 40px, справа 0 */
+.plays-section .container-main {
+    max-width: 100%;
+    padding-left: 40px;
+    padding-right: 0;
+    box-sizing: border-box;
+    overflow: visible;
+}
+
+/* Обертка слайдера: растягивается на всю ширину, не обрезает */
+.plays-section .scroll-container {
+    width: 100%;
+    overflow: visible;
+}
+
+/* Строка с карточками: используем flex, разрешаем выход за границы */
+.plays-section .scroll-wrapper {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    overflow-y: visible;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    padding: 4px 0 20px 0;
+    margin: 0;
+    width: 100%;
+    scroll-snap-type: x mandatory;
+    /* Важно: разрешаем карточкам быть видными даже если выходят за контейнер */
+    mask-image: none;
+    -webkit-mask-image: none;
+}
+
+.plays-section .scroll-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+/* Карточка спектакля: гибкая ширина через фракции (fr) */
+/* На вебе показываем 3 карточки + часть 4-й */
+.performance-card {
+    flex: 0 0 calc((100vw - 40px - 32px) / 3); /* (ширина экрана - левый отступ - два gap) / 3 */
+    min-width: 280px;
+    max-width: 428px;
+    width: auto;
+    height: auto;
+    aspect-ratio: 428 / 568; /* Сохраняем пропорции 428:568 */
+    background: #fff;
+    border-radius: 12px;
+    outline: 1px solid #E5E3E1;
+    outline-offset: -1px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: box-shadow 0.2s, transform 0.2s;
+    scroll-snap-align: start;
+    box-sizing: border-box;
+}
+
+/* Для экранов шире 1440px показываем ровно 3 карточки + часть 4-й */
+@media (min-width: 1441px) {
+    .performance-card {
+        flex: 0 0 428px;
+        max-width: 428px;
+    }
+}
+
+/* Для экранов 1100px - 1440px: 3 карточки */
+@media (min-width: 1101px) and (max-width: 1440px) {
+    .performance-card {
+        flex: 0 0 calc((100vw - 40px - 32px) / 3);
+        max-width: 428px;
+    }
+}
+
+/* Изображение: сохраняет пропорции */
+.performance-img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 428 / 200;
+    flex-shrink: 0;
+    object-fit: cover;
+    background: #F5F5F5;
+    display: block;
+}
+
+/* Контент: растягивается на оставшееся место */
+.performance-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 8px;
+}
+
+/* Кнопки прижимаем вниз */
+.performance-btns {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: auto;
+    padding-top: 8px;
+}
+
+/* Заголовок: 2 строки */
+.performance-name {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 600;
+    font-size: clamp(18px, 2vw, 24px);
+    line-height: 1.4;
+    color: #1A1718;
+    
+    min-height: calc(1.4em * 2);
+    max-height: calc(1.4em * 2);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
+    margin: 0;
+}
+
+/* Теги */
+.performance-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+}
+
+.tag {
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.tag-age {
+    background: #E8EEF7;
+    border: 1px solid #DCE4F0;
+    color: #3A5078;
+}
+
+.tag-time {
+    background: #F8F7F6;
+    border: 1px solid #DCE4F0;
+    color: #2A2627;
+}
+
+.tag-tickets {
+    background: #FDEBED;
+    border: 1px solid #F66A70;
+    color: #D62830;
+}
+
+.tag-soldout {
+    background: #F8F7F6;
+    border: 1px solid #E5E3E1;
+    color: #5A5556;
+}
+
+/* Дата */
+.performance-date {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 600;
+    font-size: clamp(16px, 1.8vw, 20px);
+    line-height: 1.4;
+    color: #000;
+    margin: 0;
+}
+
+/* Описание */
+.performance-desc {
+    font-size: clamp(14px, 1.4vw, 16px);
+    line-height: 1.5;
+    color: #3D393A;
+    margin: 0;
+    flex-shrink: 0;
+}
+
+/* Место проведения */
+.event-venue {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #404040;
+    font-size: 14px;
+    margin-top: 4px;
+}
+
+/* Кнопки */
+.btn-details {
+    background: #F8F7F6;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 18px;
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    color: #1A1718;
+    cursor: pointer;
+    width: 100%;
+    transition: background 0.2s;
+}
+
+.btn-details:hover {
+    background: #E9E7E5;
+}
+
+.btn-buy {
+    background: #E8454D;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 18px;
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    color: #fff;
+    cursor: pointer;
+    width: 100%;
+    transition: background 0.2s;
+}
+
+.btn-buy:hover {
+    background: #D62830;
+}
+
+/* ----- 3. СЕКЦИЯ "ВСЕ СПЕКТАКЛИ" (без даты и места) ----- */
+#allPlaysScroll .performance-card {
+    aspect-ratio: 428 / 494;
+}
+
+#allPlaysScroll .performance-btns {
+    margin-top: auto;
+}
+
+/* ----- 4. СЕКЦИЯ "МАГАЗИН" (МЕРЧ) ----- */
+.shop-section .container-main {
+    max-width: 100%;
+    padding-left: 40px;
+    padding-right: 0;
+    box-sizing: border-box;
+    overflow: visible;
+}
+
+.shop-section .scroll-container {
+    width: 100%;
+    overflow: visible;
+}
+
+.shop-section .scroll-wrapper {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    overflow-y: visible;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    padding: 4px 0 20px 0;
+    margin: 0;
+    width: 100%;
+    scroll-snap-type: x mandatory;
+}
+
+.shop-section .scroll-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+/* Карточка мерча: 4 карточки + часть 5-й */
+.merch-card {
+    flex: 0 0 calc((100vw - 40px - 48px) / 4); /* (ширина - левый отступ - 3 gap) / 4 */
+    min-width: 240px;
+    max-width: 318px;
+    width: auto;
+    height: auto;
+    aspect-ratio: 318 / 427;
+    background: #fff;
+    border-radius: 12px;
+    outline: 1px solid #E5E3E1;
+    outline-offset: -1px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s, box-shadow 0.2s;
+    scroll-snap-align: start;
+    box-sizing: border-box;
+}
+
+@media (min-width: 1441px) {
+    .merch-card {
+        flex: 0 0 318px;
+        max-width: 318px;
+    }
+}
+
+@media (min-width: 1101px) and (max-width: 1440px) {
+    .merch-card {
+        flex: 0 0 calc((100vw - 40px - 48px) / 4);
+        max-width: 318px;
+    }
+}
+
+.merch-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+}
+
+.merch-img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 318 / 220;
+    flex-shrink: 0;
+    object-fit: cover;
+    background: #F5F5F5;
+    display: block;
+    border-bottom: 1px solid #E9ECEF;
+}
+
+.merch-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.merch-name {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 600;
+    font-size: clamp(16px, 1.8vw, 18px);
+    line-height: 1.4;
+    color: #1A1718;
+    
+    min-height: calc(1.4em * 2);
+    max-height: calc(1.4em * 2);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin-bottom: 8px;
+}
+
+.merch-price {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 700;
+    font-size: clamp(18px, 2vw, 22px);
+    color: #4A6294;
+    margin: 12px 0 16px;
+}
+
+.merch-btn {
+    width: 100%;
+    background: #E8454D;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 18px;
+    color: #fff;
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-top: auto;
+}
+
+.merch-btn:hover {
+    background: #D62830;
+}
+
+/* ----- 5. СТРЕЛКИ СЛАЙДЕРА ----- */
+.scroll-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 42px;
+    height: 40px;
+    background: #fff;
+    border-radius: 100px;
+    border: 1px solid #E5E3E1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 30;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    color: #2A2627;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease, background 0.2s, transform 0.2s;
+}
+
+.scroll-container:hover .scroll-btn {
+    opacity: 1;
+    visibility: visible;
+}
+
+.scroll-btn i {
+    font-size: 16px;
+}
+
+.scroll-btn:hover {
+    background: #4A6294;
+    color: #fff;
+    border-color: #4A6294;
+    transform: translateY(-50%) scale(1.05);
+}
+
+.scroll-btn.left {
+    left: 10px;
+}
+
+.scroll-btn.right {
+    right: 10px;
+}
+
+/* ----- 6. КАРТОЧКИ АКТЕРОВ ----- */
+.team-scroll-wrapper {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    overflow: visible;
+    padding: 10px 0 20px;
+    margin: 0;
+}
+
+.team-card {
+    text-align: center;
+    transition: transform 0.2s;
+    width: 100%;
+}
+
+.team-img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 8px;
+    background: #E8EEF7;
+    display: block;
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+
+.team-name {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    color: #1A1718;
+    margin-top: 16px;
+    line-height: 1.2;
+}
+
+.team-position {
+    font-size: 14px;
+    font-weight: 600;
+    color: #5A5556;
+    margin-top: 4px;
+    line-height: 1.4;
+}
+
+/* ----- 7. МОБИЛЬНАЯ ВЕРСИЯ ----- */
+@media (max-width: 860px) {
+    .plays-section .container-main,
+    .shop-section .container-main {
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+    }
+    
+    .performance-card {
+        flex: 0 0 calc(100vw - 32px) !important;
+        max-width: none;
+        aspect-ratio: auto;
+        height: auto;
+        min-height: auto;
+    }
+    
+    .performance-img {
+        aspect-ratio: 16 / 9;
+    }
+    
+    .merch-card {
+        flex: 0 0 calc(100vw - 32px) !important;
+        max-width: none;
+        aspect-ratio: auto;
+        height: auto;
+    }
+    
+    .merch-img {
+        aspect-ratio: 16 / 9;
+    }
+    
+    .team-scroll-wrapper {
+        grid-template-columns: 1fr !important;
+        gap: 20px;
+        padding: 0;
+    }
+    
+    .team-img {
+        max-width: 280px;
+        margin: 0 auto;
+    }
+    
+    .scroll-btn {
+        display: none !important;
+    }
+    
+    .clients-form, .form-container {
+        padding: 24px 16px !important;
+        width: 100%;
+        box-sizing: border-box;
+    }
+}
+
+@media (max-width: 480px) {
+    .performance-card {
+        flex: 0 0 calc(100vw - 24px) !important;
+    }
+    
+    .merch-card {
+        flex: 0 0 calc(100vw - 24px) !important;
+    }
+    
+    .performance-name {
+        font-size: 18px;
+    }
+    
+    .section-title {
+        font-size: 28px !important;
+    }
+}
+
+/* ----- 8. ФИКСЫ ДЛЯ ПРАВИЛЬНОГО ОТОБРАЖЕНИЯ ----- */
+.plays-section, .shop-section {
+    padding-bottom: 0;
+    margin-bottom: 80px;
+}
+
+.scroll-container {
+    position: relative;
+}
+
+/* Убираем обрезание теней и контента */
+.scroll-wrapper {
+    mask-image: none;
+    -webkit-mask-image: none;
+}
+
+/* Для всех карточек в слайдере */
+.performance-card, .merch-card {
+    transition: box-shadow 0.2s, transform 0.2s;
+}
+
+
+
+
+
+
+/* ============================================= */
+/* ФИНАЛЬНЫЙ ФИКС СЛАЙДЕРА — КАРТОЧКИ НЕ ОБРЕЗАЮТСЯ */
+/* ============================================= */
+
+/* ----- 1. СБРОС OVERFLOW ДЛЯ ВСЕХ РОДИТЕЛЕЙ ----- */
+/* Позволяем контенту выходить за границы контейнеров */
+.shop-container,
+.container-main,
+.plays-section,
+.shop-section,
+.scroll-container {
+    overflow: visible !important;
+}
+
+/* У body скрываем горизонтальный скролл, но не обрезаем контент */
+body {
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+}
+
+/* ----- 2. КОНТЕЙНЕР С ЗАГОЛОВКОМ: ОТСТУП СЛЕВА 40px, СПРАВА 0 ----- */
+.plays-section .container-main,
+.shop-section .container-main {
+    max-width: none !important;
+    width: 100% !important;
+    padding-left: 40px !important;
+    padding-right: 0 !important;
+    box-sizing: border-box !important;
+    overflow: visible !important;
+}
+
+/* ----- 3. ОБЕРТКА СЛАЙДЕРА ----- */
+.scroll-container {
+    width: 100% !important;
+    overflow: visible !important;
+    position: relative !important;
+}
+
+/* ----- 4. СТРОКА С КАРТОЧКАМИ ----- */
+.scroll-wrapper {
+    display: flex !important;
+    gap: 16px !important;
+    overflow-x: auto !important;
+    overflow-y: visible !important;
+    scroll-behavior: smooth !important;
+    scrollbar-width: none !important;
+    -webkit-overflow-scrolling: touch !important;
+    padding: 4px 0 20px 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    scroll-snap-type: x mandatory !important;
+}
+
+.scroll-wrapper::-webkit-scrollbar {
+    display: none !important;
+}
+
+/* ----- 5. КАРТОЧКИ СПЕКТАКЛЕЙ (ФИКСИРОВАННЫЕ РАЗМЕРЫ) ----- */
+/* Важно: переопределяем ВСЕ предыдущие стили */
+.performance-card {
+    /* Фиксированная ширина — не меняется при ресайзе */
+    flex: 0 0 428px !important;
+    width: 428px !important;
+    min-width: 428px !important;
+    max-width: 428px !important;
+    height: auto !important;
+    /* Пропорции как в макете: 428x568 */
+    aspect-ratio: 428 / 568 !important;
+    
+    background: #fff !important;
+    border-radius: 12px !important;
+    outline: 1px solid #E5E3E1 !important;
+    outline-offset: -1px !important;
+    overflow: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
+    transition: box-shadow 0.2s, transform 0.2s !important;
+    scroll-snap-align: start !important;
+    box-sizing: border-box !important;
+}
+
+/* Для всех спектаклей (без даты и места) — другая высота */
+#allPlaysScroll .performance-card {
+    aspect-ratio: 428 / 494 !important;
+}
+
+/* Изображение */
+.performance-img {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 428 / 200 !important;
+    flex-shrink: 0 !important;
+    object-fit: cover !important;
+    background: #F5F5F5 !important;
+    display: block !important;
+}
+
+/* Контент */
+.performance-content {
+    padding: 20px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    flex: 1 !important;
+    gap: 8px !important;
+}
+
+/* Кнопки вниз */
+.performance-btns {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+    margin-top: auto !important;
+    padding-top: 8px !important;
+}
+
+/* ----- 6. КАРТОЧКИ МЕРЧА (ФИКСИРОВАННЫЕ РАЗМЕРЫ) ----- */
+.merch-card {
+    flex: 0 0 318px !important;
+    width: 318px !important;
+    min-width: 318px !important;
+    max-width: 318px !important;
+    height: auto !important;
+    aspect-ratio: 318 / 427 !important;
+    
+    background: #fff !important;
+    border-radius: 12px !important;
+    outline: 1px solid #E5E3E1 !important;
+    outline-offset: -1px !important;
+    overflow: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
+    transition: transform 0.2s, box-shadow 0.2s !important;
+    scroll-snap-align: start !important;
+    box-sizing: border-box !important;
+}
+
+.merch-img {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 318 / 220 !important;
+    flex-shrink: 0 !important;
+    object-fit: cover !important;
+    background: #F5F5F5 !important;
+    display: block !important;
+    border-bottom: 1px solid #E9ECEF !important;
+}
+
+.merch-content {
+    padding: 20px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    flex: 1 !important;
+}
+
+.merch-btn {
+    margin-top: auto !important;
+}
+
+/* ----- 7. СТРЕЛКИ СЛАЙДЕРА ----- */
+.scroll-btn {
+    position: absolute !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    width: 42px !important;
+    height: 40px !important;
+    background: #fff !important;
+    border-radius: 100px !important;
+    border: 1px solid #E5E3E1 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+    z-index: 100 !important;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15) !important;
+    color: #2A2627 !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transition: opacity 0.3s, visibility 0.3s, background 0.2s !important;
+}
+
+.scroll-container:hover .scroll-btn {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.scroll-btn:hover {
+    background: #4A6294 !important;
+    color: #fff !important;
+    border-color: #4A6294 !important;
+}
+
+.scroll-btn.left {
+    left: 10px !important;
+}
+
+.scroll-btn.right {
+    right: 10px !important;
+}
+
+/* ----- 8. КАРТОЧКИ АКТЕРОВ ----- */
+.team-scroll-wrapper {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 16px !important;
+    overflow: visible !important;
+    padding: 10px 0 20px !important;
+    margin: 0 !important;
+}
+
+.team-img {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 1 / 1 !important;
+    object-fit: cover !important;
+    border-radius: 8px !important;
+    background: #E8EEF7 !important;
+    display: block !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* ----- 9. МОБИЛЬНАЯ ВЕРСИЯ ----- */
+@media (max-width: 860px) {
+    .plays-section .container-main,
+    .shop-section .container-main {
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+    }
+    
+    .performance-card {
+        flex: 0 0 calc(100vw - 32px) !important;
+        width: calc(100vw - 32px) !important;
+        min-width: calc(100vw - 32px) !important;
+        max-width: calc(100vw - 32px) !important;
+        aspect-ratio: auto !important;
+        height: auto !important;
+    }
+    
+    .merch-card {
+        flex: 0 0 calc(100vw - 32px) !important;
+        width: calc(100vw - 32px) !important;
+        min-width: calc(100vw - 32px) !important;
+        max-width: calc(100vw - 32px) !important;
+        aspect-ratio: auto !important;
+        height: auto !important;
+    }
+    
+    .team-scroll-wrapper {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .scroll-btn {
+        display: none !important;
+    }
+}
+
+/* ----- 10. УБИРАЕМ ЛИШНИЕ ОТСТУПЫ ----- */
+.plays-section,
+.shop-section {
+    padding-bottom: 0 !important;
+    margin-bottom: 80px !important;
+}
+
+
+/* ============================================= */
+/* ФИНАЛЬНЫЙ ФИКС: 1 СТРОКА ЗАГОЛОВКА + ОТСТУПЫ  */
+/* ============================================= */
+
+/* ----- УБИРАЕМ ФИКСАЦИЮ 2 СТРОК — ТЕПЕРЬ ЗАГОЛОВОК В 1 СТРОКУ ----- */
+.performance-name {
+    /* Переопределяем всё, что связано с высотой */
+    min-height: auto !important;
+    max-height: none !important;
+    
+    /* Убираем ограничение в 2 строки */
+    -webkit-line-clamp: unset !important;
+    display: block !important;
+    
+    /* Базовые стили заголовка */
+    font-family: 'Unbounded', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 24px !important;
+    line-height: 1.3 !important;
+    color: #1A1718 !important;
+    
+    /* Обрезаем длинный текст с многоточием в 1 строку */
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    
+    margin: 0 !important;
+}
+
+/* ----- УВЕЛИЧИВАЕМ ОТСТУП ОТ ТЕГОВ ДО ЗАГОЛОВКА ----- */
+.performance-tags {
+    margin-bottom: 12px !important; /* Было меньше, теперь больше */
+}
+
+
+
+/* ----- ДЛЯ МЕРЧА ТОЖЕ 1 СТРОКА И ОТСТУПЫ ----- */
+.merch-name {
+    min-height: auto !important;
+    max-height: none !important;
+    -webkit-line-clamp: unset !important;
+    display: block !important;
+    
+    font-family: 'Unbounded', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 18px !important;
+    line-height: 1.4 !important;
+    color: #1A1718 !important;
+    
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    
+    margin: 0 !important;
+    margin-bottom: 8px !important;
+}
+
+
+
+/* ----- МОБИЛЬНАЯ ВЕРСИЯ: АДАПТИРУЕМ РАЗМЕР ШРИФТА ----- */
+@media (max-width: 860px) {
+    .performance-name {
+        font-size: 20px !important;
+    }
+    
+    .merch-name {
+        font-size: 16px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .performance-name {
+        font-size: 18px !important;
+    }
+    
+    .performance-tags {
+        margin-bottom: 12px !important;
+    }
+}
