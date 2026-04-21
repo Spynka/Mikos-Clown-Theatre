@@ -3091,3 +3091,302 @@ body {
         min-height: 44px !important;
     }
 }
+
+/* ============================================= */
+/* ИСПРАВЛЕНИЕ Z-INDEX ДЛЯ БОКОВОГО МЕНЮ         */
+/* ============================================= */
+
+/* Боковое меню должно быть выше всех фильтров */
+.mobile-nav {
+    z-index: 100000 !important;
+}
+
+/* Оверлей тоже должен быть выше фильтров, но ниже меню */
+.overlay {
+    z-index: 99999 !important;
+}
+
+/* Бургер-кнопка поверх всего */
+.burger-icon {
+    z-index: 100001 !important;
+}
+
+/* Хедер на мобильных */
+@media (max-width: 860px) {
+    .main-header {
+        z-index: 99998 !important;
+    }
+    
+    /* Опускаем z-index фильтров, чтобы они не перекрывали меню */
+    .filters-section-afisha {
+        z-index: 10 !important;
+    }
+    
+    .filter-chips-afisha {
+        z-index: 10 !important;
+    }
+    
+    /* Кастомный селект — ниже меню */
+    .custom-month-select {
+        z-index: 100 !important;
+    }
+    
+    /* Выпадающее меню — ниже оверлея, но выше карточек */
+    .custom-month-dropdown {
+        z-index: 1000 !important;
+    }
+    
+    /* Когда меню открыто, скрываем выпадающий список */
+    .mobile-nav.open ~ .shop-container .custom-month-select.open .custom-month-dropdown,
+    body:has(.mobile-nav.open) .custom-month-dropdown {
+        display: none !important;
+    }
+    
+    /* Убираем открытое состояние при открытом меню */
+    .mobile-nav.open ~ .shop-container .custom-month-select.open,
+    body:has(.mobile-nav.open) .custom-month-select.open {
+        z-index: 10 !important;
+    }
+}
+
+/* Для десктопа — порядок z-index */
+@media (min-width: 861px) {
+    .mobile-nav {
+        z-index: 100000 !important;
+    }
+    
+    .overlay {
+        z-index: 99999 !important;
+    }
+    
+    .burger-icon {
+        z-index: 100001 !important;
+    }
+    
+    .custom-month-select {
+        z-index: 100 !important;
+    }
+    
+    .custom-month-dropdown {
+        z-index: 9999 !important;
+    }
+}
+
+/* ============================================= */
+/* ИСПРАВЛЕНИЕ РАЗМЕРОВ КАРТОЧЕК НА АФИШЕ        */
+/* ============================================= */
+
+/* Переопределяем сетку карточек — фиксированная ширина как на главной */
+.events-grid {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: flex-start !important;
+    gap: 24px !important;
+    margin: 40px 0 !important;
+}
+
+/* Карточка спектакля — ТОЧНО КАК НА ГЛАВНОЙ (фиксированная ширина) */
+.performance-card-afisha {
+    flex: 0 0 428px !important;
+    width: 428px !important;
+    min-width: 428px !important;
+    max-width: 428px !important;
+    height: auto !important;
+    aspect-ratio: 428 / 568 !important;
+    
+    background: #fff !important;
+    border-radius: 12px !important;
+    outline: 1px solid #E5E3E1 !important;
+    outline-offset: -1px !important;
+    overflow: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
+    transition: box-shadow 0.2s, transform 0.2s !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
+}
+
+.performance-card-afisha:hover {
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08) !important;
+    transform: translateY(-2px) !important;
+}
+
+.performance-img-afisha {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 428 / 200 !important;
+    flex-shrink: 0 !important;
+    object-fit: cover !important;
+    background: #F5F5F5 !important;
+    display: block !important;
+}
+
+.performance-content-afisha {
+    padding: 20px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    flex: 1 !important;
+    gap: 12px !important;
+}
+
+/* Теги */
+.performance-tags-afisha {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+    align-items: center !important;
+}
+
+.tag-afisha {
+    padding: 4px 12px !important;
+    border-radius: 4px !important;
+    font-family: 'Unbounded', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 12px !important;
+    line-height: 1.6 !important;
+    white-space: nowrap !important;
+}
+
+.tag-age {
+    background: #E8EEF7 !important;
+    border: 1px solid #DCE4F0 !important;
+    color: #3A5078 !important;
+}
+
+.tag-time {
+    background: #F8F7F6 !important;
+    border: 1px solid #DCE4F0 !important;
+    color: #2A2627 !important;
+}
+
+.tag-tickets {
+    background: #FDEBED !important;
+    border: 1px solid #F66A70 !important;
+    color: #D62830 !important;
+}
+
+/* Заголовок */
+.performance-name-afisha {
+    font-family: 'Unbounded', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 24px !important;
+    line-height: 1.3 !important;
+    color: #1A1718 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    margin: 0 !important;
+    margin-top: 8px !important;
+}
+
+/* Дата */
+.performance-date-afisha {
+    font-family: 'Unbounded', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 20px !important;
+    line-height: 1.4 !important;
+    color: #000 !important;
+    margin: 0 !important;
+}
+
+/* Описание */
+.performance-desc-afisha {
+    font-size: 16px !important;
+    line-height: 1.5 !important;
+    color: #3D393A !important;
+    margin: 0 !important;
+}
+
+/* Место */
+.event-venue-afisha {
+    display: flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    color: #404040 !important;
+    font-size: 14px !important;
+    margin-top: 4px !important;
+}
+
+/* Кнопки */
+.performance-btns-afisha {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+    margin-top: auto !important;
+    padding-top: 8px !important;
+}
+
+.btn-details-afisha,
+.btn-buy-afisha {
+    width: 100% !important;
+    padding: 8px 18px !important;
+    border-radius: 6px !important;
+    font-family: 'Unbounded', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 14px !important;
+    cursor: pointer !important;
+    transition: background 0.2s !important;
+    border: none !important;
+}
+
+.btn-details-afisha {
+    background: #F8F7F6 !important;
+    color: #1A1718 !important;
+}
+
+.btn-details-afisha:hover {
+    background: #E9E7E5 !important;
+}
+
+.btn-buy-afisha {
+    background: #E8454D !important;
+    color: #fff !important;
+}
+
+.btn-buy-afisha:hover {
+    background: #D62830 !important;
+}
+
+/* Адаптив */
+@media (max-width: 860px) {
+    .events-grid {
+        justify-content: center !important;
+    }
+    
+    .performance-card-afisha {
+        flex: 0 0 calc(100vw - 32px) !important;
+        width: calc(100vw - 32px) !important;
+        min-width: calc(100vw - 32px) !important;
+        max-width: calc(100vw - 32px) !important;
+        aspect-ratio: auto !important;
+    }
+    
+    .performance-img-afisha {
+        aspect-ratio: 16 / 9 !important;
+    }
+    
+    .performance-name-afisha {
+        font-size: 20px !important;
+    }
+    
+    .performance-date-afisha {
+        font-size: 18px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .performance-card-afisha {
+        flex: 0 0 calc(100vw - 24px) !important;
+        width: calc(100vw - 24px) !important;
+        min-width: calc(100vw - 24px) !important;
+        max-width: calc(100vw - 24px) !important;
+    }
+    
+    .performance-name-afisha {
+        font-size: 18px !important;
+    }
+    
+    .performance-date-afisha {
+        font-size: 16px !important;
+    }
+}
