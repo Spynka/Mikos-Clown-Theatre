@@ -384,12 +384,6 @@
             padding: 32px;
             margin-bottom: 60px;
         }
-        /* Убираем отступ снизу для блока на шаге 3, чтобы картинка прилегала */
-        .payment-page .order-summary {
-            margin-bottom: 0;
-            border-bottom-left-radius: 0;
-            border-bottom-right-radius: 0;
-        }
         .summary-header {
             padding-bottom: 16px;
             border-bottom: 1px solid #E5E3E1;
@@ -945,115 +939,6 @@
         }
         .email-hint i { color: #4A6294; }
 
-        /* Стили для свободной рассадки (восстановлены) */
-        .free-seating-block {
-            text-align: center;
-            padding: 20px 0 10px;
-        }
-        .free-seating-icon {
-            font-size: 64px;
-            color: #4A6294;
-            margin-bottom: 16px;
-        }
-        .free-seating-badge {
-            background: #F8F7F6;
-            border-radius: 30px;
-            padding: 12px 24px;
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 32px;
-            border: 1px solid #E5E3E1;
-        }
-        .free-seating-badge i { color: #4A6294; font-size: 18px; }
-        .quantity-selector-wrapper {
-            max-width: 380px;
-            margin: 0 auto;
-            background: #F8F7F6;
-            border-radius: 16px;
-            padding: 28px 24px;
-        }
-        .quantity-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 20px;
-        }
-        .quantity-label {
-            font-family: 'Unbounded', sans-serif;
-            font-weight: 600;
-            font-size: 16px;
-            color: #1A1718;
-        }
-        .stepper-inline {
-            display: flex;
-            align-items: center;
-            background: white;
-            border-radius: 40px;
-            border: 1px solid #E5E3E1;
-        }
-        .stepper-btn {
-            width: 44px;
-            height: 44px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            font-weight: 600;
-            color: #4A6294;
-            cursor: pointer;
-            user-select: none;
-            transition: background 0.2s;
-        }
-        .stepper-btn:hover { background: #E9ECEF; }
-        .quantity-input {
-            width: 60px;
-            border: none;
-            text-align: center;
-            font-size: 18px;
-            font-weight: 700;
-            color: #1A1718;
-            background: transparent;
-            outline: none;
-        }
-        .price-summary-block {
-            display: flex;
-            justify-content: space-between;
-            padding: 16px 0;
-            border-top: 1px solid #E5E3E1;
-            margin-bottom: 16px;
-        }
-        .price-label { color: #5A5556; }
-        .price-value { font-weight: 700; color: #4A6294; }
-        .arrival-hint {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            background: white;
-            border-radius: 12px;
-            padding: 12px 16px;
-            font-size: 13px;
-            color: #5A5556;
-        }
-        .arrival-hint i { color: #E8454D; }
-
-        /* Стиль для изображения под заказом (без зазоров) */
-        .payment-summary-illustration {
-            display: block;
-            width: 100%;
-            margin-top: 0;
-            border-bottom-left-radius: 12px;
-            border-bottom-right-radius: 12px;
-            overflow: hidden;
-            line-height: 0;
-        }
-        .payment-summary-illustration img {
-            width: 100%;
-            height: auto;
-            display: block;
-            object-fit: cover;
-        }
-
         @media (max-width: 1100px) {
             .checkout-grid { flex-direction: column; }
             .order-summary { width: 100%; }
@@ -1158,6 +1043,7 @@
                 <div class="progress-step"><div class="step-number">4</div><div class="step-label">Готово</div></div>
             </div>
 
+            <!-- Остальное содержимое шага 2 без изменений -->
             <div class="checkout-grid">
                 <div class="checkout-form">
                     <div class="form-section">
@@ -1218,7 +1104,7 @@
         </div>
     </div>
 
-    <!-- ШАГ 3: ОПЛАТА (ДОБАВЛЕНО ИЗОБРАЖЕНИЕ SVG/Visit.svg СРАЗУ ПОД БЛОКОМ) -->
+    <!-- ШАГ 3: ОПЛАТА (без изменений) -->
     <div class="step-section" id="step3">
         <div class="payment-page">
             <div class="breadcrumbs">
@@ -1278,27 +1164,20 @@
                         <button class="btn-pay" id="payBtn">Оплатить <span id="payAmount">0</span> ₽</button>
                     </div>
                 </div>
-                <!-- Колонка с заказом и иллюстрацией -->
-                <div style="flex: 1; min-width: 320px; display: flex; flex-direction: column;">
-                    <div class="order-summary" style="margin-bottom: 0; border-bottom-left-radius: 0; border-bottom-right-radius: 0;">
-                        <div class="summary-header"><h3>Ваш заказ</h3></div>
-                        <div class="summary-item">
-                            <div class="summary-img" id="orderPoster3">Афиша</div>
-                            <div class="summary-details">
-                                <div class="summary-title" id="orderTitle3">Название спектакля</div>
-                                <div class="summary-meta" id="orderDateTime3">Дата и время · Зал</div>
-                            </div>
+                <div class="order-summary">
+                    <div class="summary-header"><h3>Ваш заказ</h3></div>
+                    <div class="summary-item">
+                        <div class="summary-img" id="orderPoster3">Афиша</div>
+                        <div class="summary-details">
+                            <div class="summary-title" id="orderTitle3">Название спектакля</div>
+                            <div class="summary-meta" id="orderDateTime3">Дата и время · Зал</div>
                         </div>
-                        <div id="orderSeatsList3"></div>
-                        <div class="summary-row"><span>Сервисный сбор</span><span>0 ₽</span></div>
-                        <div class="summary-total"><span class="total-label">Итого</span><span class="total-price" id="totalPrice3">0 ₽</span></div>
-                        <div class="info-block"><i class="fas fa-envelope"></i><span>Билеты придут на email: <span id="orderEmail3">ivan@example.com</span></span></div>
-                        <div class="warning-block"><i class="fas fa-clock"></i><span>После оплаты билеты будут отправлены на почту.</span></div>
                     </div>
-                    <!-- ИЛЛЮСТРАЦИЯ СРАЗУ ПОД БЛОКОМ БЕЗ ЗАЗОРОВ -->
-                    <div class="payment-summary-illustration">
-                        <img src="SVG/Visit.svg" alt="Персонаж висит" style="display: block; width: 100%; height: auto;">
-                    </div>
+                    <div id="orderSeatsList3"></div>
+                    <div class="summary-row"><span>Сервисный сбор</span><span>0 ₽</span></div>
+                    <div class="summary-total"><span class="total-label">Итого</span><span class="total-price" id="totalPrice3">0 ₽</span></div>
+                    <div class="info-block"><i class="fas fa-envelope"></i><span>Билеты придут на email: <span id="orderEmail3">ivan@example.com</span></span></div>
+                    <div class="warning-block"><i class="fas fa-clock"></i><span>После оплаты билеты будут отправлены на почту.</span></div>
                 </div>
             </div>
         </div>
@@ -1399,6 +1278,7 @@
         if (stored) {
             try {
                 const raw = JSON.parse(stored);
+                // Поиск спектакля по названию в нашем справочнике
                 const found = Object.values(PERFORMANCES).find(p => p.title === raw.title);
                 if (found) {
                     performanceData = { 
@@ -1407,6 +1287,7 @@
                         hall: raw.hall || found.hall 
                     };
                 } else {
+                    // Если не нашли, берем первый как fallback
                     performanceData = { ...PERFORMANCES[1], dateTime: 'Сегодня, 19:00' };
                 }
             } catch(e) {
@@ -1416,6 +1297,7 @@
             performanceData = { ...PERFORMANCES[1], dateTime: 'Сегодня, 19:00' };
         }
 
+        // Заполняем хлебные крошки и заголовки
         const crumbs = document.querySelectorAll('[id^="crumbPerformance"]');
         crumbs.forEach(crumb => { 
             if (performanceData?.title) { 
@@ -1468,6 +1350,7 @@
         const qrAmountSpan = document.getElementById('qrAmount');
         if (qrAmountSpan) qrAmountSpan.textContent = totalFormatted;
         
+        // Обновляем email в сводках
         const emailInput = document.getElementById('email');
         const email = emailInput ? emailInput.value : 'ivan@example.com';
         ['orderEmail', 'orderEmail3', 'successEmail', 'successEmailHint'].forEach(id => { 
@@ -1508,9 +1391,11 @@
         }
         container.innerHTML = html;
         
+        // Дублируем для шагов 2 и 3
         document.getElementById('orderSeatsList').innerHTML = html;
         document.getElementById('orderSeatsList3').innerHTML = html;
         
+        // Навешиваем обработчики удаления для фиксированной рассадки
         if (!performanceData.freeSeating) {
             document.querySelectorAll('.remove-seat').forEach(btn => {
                 btn.onclick = (e) => {
@@ -1530,6 +1415,7 @@
         if (!performanceData) return;
         
         if (performanceData.freeSeating) {
+            // === СВОБОДНАЯ РАССАДКА (ВЕРСТКА ТОЧНО КАК В ИСХОДНОМ КОДЕ) ===
             container.innerHTML = `
                 <div class="hall-scheme">
                     <div class="hall-header">
@@ -1578,6 +1464,7 @@
             });
             
         } else {
+            // === ФИКСИРОВАННАЯ РАССАДКА ===
             let seatsHtml = '';
             rows.forEach(r => {
                 let rowSeats = '';
@@ -1609,6 +1496,7 @@
                 </div>
             `;
             
+            // Навешиваем обработчики на места
             container.querySelectorAll('.seat.free, .seat.selected').forEach(el => {
                 el.addEventListener('click', () => {
                     const row = parseInt(el.dataset.row);
@@ -1627,10 +1515,12 @@
         }
     }
 
+    // === НАВИГАЦИЯ МЕЖДУ ШАГАМИ (С ИСПРАВЛЕННЫМ ПРОГРЕСС-БАРОМ) ===
     function showStep(step) {
         document.querySelectorAll('.step-section').forEach(section => section.classList.remove('active'));
         document.getElementById(`step${step}`).classList.add('active');
         
+        // ИСПРАВЛЕНИЕ: корректное обновление прогресс-бара
         const progressBars = document.querySelectorAll('.progress-bar');
         progressBars.forEach(bar => {
             const steps = bar.querySelectorAll('.progress-step');
@@ -1656,6 +1546,7 @@
     }
 
     function initEventListeners() {
+        // Кнопки навигации
         document.getElementById('nextBtn1').addEventListener('click', () => {
             if (!performanceData.freeSeating && selectedSeats.length === 0) {
                 alert('Пожалуйста, выберите места');
@@ -1691,14 +1582,17 @@
         document.getElementById('backBtn3').addEventListener('click', () => showStep(2));
         
         document.getElementById('payBtn').addEventListener('click', () => {
+            // Генерация номера заказа
             const orderNum = 'МК-' + new Date().getFullYear() + (new Date().getMonth()+1).toString().padStart(2,'0') + '-' + Math.floor(Math.random()*9000+1000);
             document.getElementById('orderNumber').textContent = orderNum;
             
+            // Данные покупателя
             document.getElementById('successBuyer').textContent = document.getElementById('lastName').value + ' ' + document.getElementById('firstName').value;
             const email = document.getElementById('email').value;
             document.getElementById('successEmail').textContent = email;
             document.getElementById('successEmailHint').textContent = email;
             
+            // Генерация списка билетов на странице успеха
             const ticketsContainer = document.getElementById('successTickets');
             if (performanceData.freeSeating) {
                 ticketsContainer.innerHTML = `
@@ -1727,6 +1621,7 @@
             showStep(4);
         });
         
+        // Обработчики способов оплаты
         const paymentMethods = document.querySelectorAll('.payment-method');
         const cardDetails = document.getElementById('cardDetails');
         const sbpDetails = document.getElementById('sbpDetails');
@@ -1760,10 +1655,12 @@
             window.location.href = 'affiche.html';
         });
         
+        // Кнопка "Назад" на первом шаге
         document.getElementById('backBtn1')?.addEventListener('click', () => {
             window.history.back();
         });
         
+        // Подписка в футере
         document.getElementById('subscribeBtn')?.addEventListener('click', () => {
             const chk = document.getElementById('consentCheckbox');
             const err = document.getElementById('consentError');
@@ -1783,6 +1680,7 @@
             btn.addEventListener('click', () => alert('Билеты скоро в продаже'))
         );
         
+        // === HEADER DROPDOWN ===
         const dotsIcon = document.getElementById('dotsIcon');
         const closeIcon = document.getElementById('closeIcon');
         const extraRow = document.getElementById('extraMenuRow');
@@ -1802,6 +1700,7 @@
         if (dotsIcon) dotsIcon.addEventListener('click', openExtraMenu);
         if (closeIcon) closeIcon.addEventListener('click', closeExtraMenu);
         
+        // === БУРГЕР-МЕНЮ ===
         const burgerIcon = document.getElementById('burgerIcon');
         const mobileNav = document.getElementById('mobileNav');
         const overlay = document.getElementById('overlay');
