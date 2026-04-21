@@ -300,7 +300,6 @@ body { background: #fff; font-family: 'Nunito Sans', sans-serif; overflow-x: hid
 
 /* ===== 11. ABOUT PAGE ===== */
 .about-page { max-width: 1360px; margin: 0 auto; padding: 0 clamp(16px, 5vw, 40px); }
-.page-header-about { margin: clamp(40px, 6vw, 60px) 0 clamp(30px, 4vw, 40px); }
 .page-title-about { font-family: 'Unbounded', sans-serif; font-size: clamp(32px, 5vw, 48px); font-weight: 700; line-height: 1.2; color: #1A1A1A; position: relative; padding-left: clamp(12px, 2vw, 20px); margin-bottom: 20px; }
 .page-title-about::before { content: ''; position: absolute; left: 0; top: 0; width: 4px; height: 100%; background: #E8454D; }
 .page-subtitle-about { max-width: 700px; font-size: clamp(16px, 2vw, 20px); line-height: 1.5; color: #2A2627; }
@@ -6568,6 +6567,749 @@ body {
 }
 
 /* ----- 12. Z-INDEX ФИКСЫ ДЛЯ МОБИЛЬНОГО МЕНЮ ----- */
+@media (max-width: 860px) {
+    .mobile-nav {
+        z-index: 100000 !important;
+    }
+    
+    .overlay {
+        z-index: 99999 !important;
+    }
+    
+    .burger-icon {
+        z-index: 100001 !important;
+    }
+}
+
+
+/* ============================================= */
+/* О ТЕАТРЕ — ПОЛНЫЙ АДАПТИВНЫЙ CSS             */
+/* ============================================= */
+
+/* ----- 1. ОСНОВНОЙ КОНТЕЙНЕР ----- */
+.about-page {
+    max-width: 100% !important;
+    margin: 0 auto !important;
+    padding: 60px 40px 40px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    overflow-x: clip !important;
+}
+
+/* ----- 2. ЗАГОЛОВОК СТРАНИЦЫ ----- */
+.page-header-about {
+    margin-bottom: 40px !important;
+}
+
+.page-title-about {
+    font-family: 'Unbounded', sans-serif !important;
+    font-weight: 700 !important;
+    font-size: clamp(32px, 5vw, 56px) !important;
+    line-height: 1.2 !important;
+    color: #1A1718 !important;
+    position: relative !important;
+    padding-left: 20px !important;
+    margin: 0 0 16px !important;
+}
+
+.page-title-about::before {
+    content: '' !important;
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 4px !important;
+    height: 100% !important;
+    background: #E8454D !important;
+}
+
+.page-subtitle-about {
+    max-width: 800px !important;
+    font-size: clamp(16px, 2vw, 18px) !important;
+    line-height: 1.5 !important;
+    color: #3D393A !important;
+    margin: 0 !important;
+}
+
+/* ----- 3. ЗАГОЛОВКИ СЕКЦИЙ ----- */
+.section-title {
+    font-family: 'Unbounded', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: clamp(28px, 4vw, 40px) !important;
+    color: #1A1718 !important;
+    position: relative !important;
+    padding-left: 20px !important;
+    margin: 0 0 32px !important;
+}
+
+.section-title::before {
+    content: '' !important;
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 4px !important;
+    height: 100% !important;
+    background: #E8454D !important;
+}
+
+/* ----- 4. ТАЙМЛАЙН (ИСТОРИЯ) ----- */
+.timeline-section {
+    margin-bottom: 48px !important;
+}
+
+.timeline-container {
+    position: relative !important;
+    padding: 20px 0 !important;
+}
+
+.timeline-container::before {
+    content: '' !important;
+    position: absolute !important;
+    left: 50% !important;
+    top: 0 !important;
+    width: 2px !important;
+    height: 100% !important;
+    background: #E5E3E1 !important;
+    transform: translateX(-50%) !important;
+}
+
+.timeline-item {
+    position: relative !important;
+    margin-bottom: 48px !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    flex-wrap: wrap !important;
+}
+
+.timeline-item:last-child {
+    margin-bottom: 0 !important;
+}
+
+.timeline-item.left .timeline-content {
+    text-align: right !important;
+    padding-right: 80px !important;
+    margin-left: auto !important;
+}
+
+.timeline-item.right .timeline-content {
+    text-align: left !important;
+    padding-left: 80px !important;
+    margin-right: auto !important;
+}
+
+.timeline-content {
+    width: 45% !important;
+}
+
+.timeline-photo {
+    width: 80px !important;
+    height: 80px !important;
+    background: #F5F5F5 !important;
+    border-radius: 50% !important;
+    outline: 2px solid #E5E3E1 !important;
+    overflow: hidden !important;
+    margin-bottom: 16px !important;
+    display: inline-block !important;
+}
+
+.timeline-photo img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+}
+
+.timeline-year {
+    font-family: 'Unbounded', sans-serif !important;
+    font-size: 28px !important;
+    font-weight: 700 !important;
+    color: #4A6294 !important;
+    margin-bottom: 8px !important;
+}
+
+.timeline-title {
+    font-family: 'Unbounded', sans-serif !important;
+    font-size: 18px !important;
+    font-weight: 600 !important;
+    color: #1A1718 !important;
+    margin-bottom: 8px !important;
+}
+
+.timeline-desc {
+    font-family: 'Nunito Sans', sans-serif !important;
+    font-size: 15px !important;
+    line-height: 1.5 !important;
+    color: #3D393A !important;
+}
+
+.timeline-marker {
+    position: absolute !important;
+    left: 50% !important;
+    top: 40px !important;
+    transform: translateX(-50%) !important;
+    width: 16px !important;
+    height: 16px !important;
+    background: #E8454D !important;
+    border-radius: 50% !important;
+    box-shadow: 0 0 0 4px #fff, 0 0 0 6px #E5E3E1 !important;
+}
+
+/* ----- 5. МИССИЯ И ФИЛОСОФИЯ ----- */
+.mission-section {
+    background: #F8F7F6 !important;
+    border-radius: 16px !important;
+    padding: 40px !important;
+    margin-bottom: 48px !important;
+}
+
+.mission-block {
+    margin-bottom: 32px !important;
+}
+
+.mission-block:last-child {
+    margin-bottom: 0 !important;
+}
+
+.mission-block h2 {
+    font-family: 'Unbounded', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 28px !important;
+    color: #1A1718 !important;
+    margin: 0 0 20px !important;
+}
+
+.mission-block p {
+    font-family: 'Nunito Sans', sans-serif !important;
+    font-size: 16px !important;
+    line-height: 1.6 !important;
+    color: #3D393A !important;
+    margin-bottom: 16px !important;
+}
+
+.mission-block p:last-child {
+    margin-bottom: 0 !important;
+}
+
+.quote {
+    border-left: 3px solid #E8454D !important;
+    padding-left: 24px !important;
+    margin-top: 24px !important;
+}
+
+.quote p {
+    font-family: 'Unbounded', sans-serif !important;
+    font-size: 18px !important;
+    font-style: italic !important;
+    font-weight: 500 !important;
+    color: #4A6294 !important;
+    margin-bottom: 0 !important;
+}
+
+/* ----- 6. БЛОК ХУДОЖЕСТВЕННОГО РУКОВОДИТЕЛЯ ----- */
+.director-highlight {
+    display: flex !important;
+    gap: 48px !important;
+    background: #1A2840 !important;
+    border-radius: 16px !important;
+    padding: 40px !important;
+    margin-bottom: 48px !important;
+    flex-wrap: wrap !important;
+}
+
+.director-photo {
+    flex: 0 0 320px !important;
+    max-width: 320px !important;
+}
+
+.director-photo img {
+    width: 100% !important;
+    height: auto !important;
+    border-radius: 12px !important;
+    display: block !important;
+    object-fit: cover !important;
+    aspect-ratio: 1 / 1 !important;
+}
+
+.director-info {
+    flex: 1 !important;
+    min-width: 300px !important;
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+.director-tag {
+    display: inline-block !important;
+    background: #E8454D !important;
+    padding: 6px 16px !important;
+    border-radius: 4px !important;
+    font-family: 'Unbounded', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 13px !important;
+    color: #fff !important;
+    margin-bottom: 20px !important;
+    align-self: flex-start !important;
+}
+
+.director-name {
+    font-family: 'Unbounded', sans-serif !important;
+    font-size: clamp(24px, 3.5vw, 36px) !important;
+    font-weight: 700 !important;
+    color: #fff !important;
+    margin-bottom: 12px !important;
+    line-height: 1.2 !important;
+}
+
+.director-name span {
+    color: #E8454D !important;
+}
+
+.director-position {
+    font-family: 'Nunito Sans', sans-serif !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    color: rgba(255, 255, 255, 0.8) !important;
+    margin-bottom: 20px !important;
+}
+
+.director-bio {
+    font-family: 'Nunito Sans', sans-serif !important;
+    font-size: 15px !important;
+    line-height: 1.6 !important;
+    color: rgba(255, 255, 255, 0.7) !important;
+    margin-bottom: 28px !important;
+}
+
+.director-btn {
+    align-self: flex-start !important;
+    padding: 12px 32px !important;
+    background: #fff !important;
+    border: none !important;
+    border-radius: 8px !important;
+    font-family: 'Unbounded', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 14px !important;
+    color: #1A1718 !important;
+    cursor: pointer !important;
+    transition: background 0.2s !important;
+    margin-top: auto !important;
+}
+
+.director-btn:hover {
+    background: #E9E7E5 !important;
+}
+
+/* ----- 7. НАГРАДЫ ----- */
+.awards-section {
+    margin-bottom: 48px !important;
+}
+
+.awards-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 24px !important;
+}
+
+.award-card {
+    background: #fff !important;
+    border-radius: 12px !important;
+    outline: 1px solid #E5E3E1 !important;
+    padding: 24px !important;
+    transition: box-shadow 0.2s, transform 0.2s !important;
+}
+
+.award-card:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08) !important;
+    transform: translateY(-2px) !important;
+}
+
+.award-year {
+    font-family: 'Unbounded', sans-serif !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    color: #4A6294 !important;
+    margin-bottom: 12px !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+}
+
+.award-title {
+    font-family: 'Unbounded', sans-serif !important;
+    font-size: 20px !important;
+    font-weight: 600 !important;
+    color: #1A1718 !important;
+    margin-bottom: 12px !important;
+}
+
+.award-desc {
+    font-family: 'Nunito Sans', sans-serif !important;
+    font-size: 14px !important;
+    line-height: 1.5 !important;
+    color: #5A5556 !important;
+}
+
+/* ----- 8. ГАЛЕРЕЯ ----- */
+.gallery-section {
+    margin-bottom: 0 !important;
+}
+
+.gallery-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 24px !important;
+    margin-bottom: 40px !important;
+}
+
+.gallery-item {
+    background: #F5F5F5 !important;
+    border-radius: 12px !important;
+    overflow: hidden !important;
+    aspect-ratio: 16 / 9 !important;
+    outline: 1px solid #E5E3E1 !important;
+    transition: transform 0.2s !important;
+}
+
+.gallery-item:hover {
+    transform: scale(1.02) !important;
+}
+
+.gallery-item img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    display: block !important;
+}
+
+/* ----- 9. КНОПКА "ПОКАЗАТЬ ЕЩЕ" ----- */
+.show-more-wrapper {
+    display: flex !important;
+    justify-content: center !important;
+    margin: 0 !important;
+}
+
+.show-more-btn {
+    padding: 12px 40px !important;
+    background: #F8F7F6 !important;
+    border-radius: 8px !important;
+    border: none !important;
+    font-family: 'Unbounded', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 14px !important;
+    color: #1A1718 !important;
+    cursor: pointer !important;
+    transition: background 0.2s !important;
+}
+
+.show-more-btn:hover {
+    background: #E9E7E5 !important;
+}
+
+/* ----- 10. АДАПТИВ ДЛЯ ПЛАНШЕТОВ (1100px) ----- */
+@media (max-width: 1100px) {
+    .about-page {
+        padding: 50px 30px 40px !important;
+    }
+    
+    .director-highlight {
+        gap: 32px !important;
+        padding: 32px !important;
+    }
+    
+    .director-photo {
+        flex: 0 0 280px !important;
+        max-width: 280px !important;
+    }
+    
+    .awards-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 20px !important;
+    }
+    
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 20px !important;
+    }
+    
+    .timeline-container::before {
+        left: 40px !important;
+    }
+    
+    .timeline-item {
+        padding-left: 80px !important;
+    }
+    
+    .timeline-item.left .timeline-content,
+    .timeline-item.right .timeline-content {
+        width: 100% !important;
+        text-align: left !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    
+    .timeline-marker {
+        left: 40px !important;
+    }
+}
+
+/* ----- 11. АДАПТИВ ДЛЯ МОБИЛЬНЫХ (860px) ----- */
+@media (max-width: 860px) {
+    .about-page {
+        padding: 70px 16px 32px !important;
+    }
+    
+    .page-header-about {
+        margin-bottom: 32px !important;
+    }
+    
+    .page-title-about {
+        font-size: 32px !important;
+        padding-left: 16px !important;
+    }
+    
+    .page-subtitle-about {
+        font-size: 15px !important;
+    }
+    
+    .section-title {
+        font-size: 28px !important;
+        padding-left: 16px !important;
+        margin-bottom: 24px !important;
+    }
+    
+    .timeline-section {
+        margin-bottom: 32px !important;
+    }
+    
+    .timeline-container::before {
+        left: 30px !important;
+    }
+    
+    .timeline-item {
+        padding-left: 60px !important;
+        margin-bottom: 32px !important;
+    }
+    
+    .timeline-content {
+        width: 100% !important;
+    }
+    
+    .timeline-photo {
+        width: 60px !important;
+        height: 60px !important;
+    }
+    
+    .timeline-year {
+        font-size: 24px !important;
+    }
+    
+    .timeline-title {
+        font-size: 16px !important;
+    }
+    
+    .timeline-desc {
+        font-size: 14px !important;
+    }
+    
+    .timeline-marker {
+        left: 30px !important;
+        width: 14px !important;
+        height: 14px !important;
+        top: 30px !important;
+    }
+    
+    .mission-section {
+        padding: 24px !important;
+        margin-bottom: 32px !important;
+    }
+    
+    .mission-block h2 {
+        font-size: 24px !important;
+        margin-bottom: 16px !important;
+    }
+    
+    .mission-block p {
+        font-size: 15px !important;
+    }
+    
+    .quote p {
+        font-size: 16px !important;
+    }
+    
+    .director-highlight {
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+        padding: 24px !important;
+        margin-bottom: 32px !important;
+    }
+    
+    .director-photo {
+        flex: 0 0 auto !important;
+        max-width: 280px !important;
+        width: 100% !important;
+    }
+    
+    .director-info {
+        align-items: center !important;
+        text-align: center !important;
+    }
+    
+    .director-tag {
+        align-self: center !important;
+    }
+    
+    .director-btn {
+        align-self: center !important;
+    }
+    
+    .awards-section {
+        margin-bottom: 32px !important;
+    }
+    
+    .awards-grid {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+    }
+    
+    .award-card {
+        padding: 20px !important;
+    }
+    
+    .award-title {
+        font-size: 18px !important;
+    }
+    
+    .gallery-grid {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+        margin-bottom: 24px !important;
+    }
+    
+    .show-more-btn {
+        padding: 10px 30px !important;
+        font-size: 13px !important;
+    }
+}
+
+/* ----- 12. АДАПТИВ ДЛЯ УЗКИХ ЭКРАНОВ (480px) ----- */
+@media (max-width: 480px) {
+    .about-page {
+        padding: 60px 12px 24px !important;
+    }
+    
+    .page-header-about {
+        margin-bottom: 24px !important;
+    }
+    
+    .page-title-about {
+        font-size: 28px !important;
+        padding-left: 12px !important;
+        margin-bottom: 12px !important;
+    }
+    
+    .section-title {
+        font-size: 24px !important;
+        padding-left: 12px !important;
+        margin-bottom: 20px !important;
+    }
+    
+    .timeline-container::before {
+        left: 20px !important;
+    }
+    
+    .timeline-item {
+        padding-left: 50px !important;
+        margin-bottom: 24px !important;
+    }
+    
+    .timeline-photo {
+        width: 50px !important;
+        height: 50px !important;
+    }
+    
+    .timeline-year {
+        font-size: 22px !important;
+    }
+    
+    .timeline-marker {
+        left: 20px !important;
+        width: 12px !important;
+        height: 12px !important;
+        top: 25px !important;
+    }
+    
+    .mission-section {
+        padding: 20px 16px !important;
+    }
+    
+    .mission-block h2 {
+        font-size: 22px !important;
+    }
+    
+    .mission-block p {
+        font-size: 14px !important;
+    }
+    
+    .quote {
+        padding-left: 16px !important;
+    }
+    
+    .quote p {
+        font-size: 15px !important;
+    }
+    
+    .director-highlight {
+        padding: 20px 16px !important;
+    }
+    
+    .director-photo {
+        max-width: 240px !important;
+    }
+    
+    .director-name {
+        font-size: 22px !important;
+    }
+    
+    .director-position {
+        font-size: 14px !important;
+    }
+    
+    .director-bio {
+        font-size: 14px !important;
+    }
+    
+    .director-btn {
+        padding: 10px 24px !important;
+        font-size: 13px !important;
+        width: 100% !important;
+    }
+    
+    .award-card {
+        padding: 16px !important;
+    }
+    
+    .award-year {
+        font-size: 12px !important;
+    }
+    
+    .award-title {
+        font-size: 16px !important;
+    }
+    
+    .award-desc {
+        font-size: 13px !important;
+    }
+    
+    .gallery-grid {
+        gap: 12px !important;
+        margin-bottom: 20px !important;
+    }
+    
+    .show-more-btn {
+        padding: 10px 24px !important;
+        font-size: 13px !important;
+        width: 100% !important;
+    }
+}
+
+/* ----- 13. Z-INDEX ФИКСЫ ДЛЯ МОБИЛЬНОГО МЕНЮ ----- */
 @media (max-width: 860px) {
     .mobile-nav {
         z-index: 100000 !important;
