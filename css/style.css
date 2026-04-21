@@ -5954,7 +5954,7 @@ body {
 
 /* ----- 1. ОСНОВНОЙ КОНТЕЙНЕР ----- */
 .team-page {
-    max-width: 1360px !important;
+    max-width: 100% !important;
     margin: 0 auto !important;
     padding: 60px 40px 40px !important;
     width: 100% !important;
