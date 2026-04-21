@@ -565,7 +565,6 @@ body { background: #fff; font-family: 'Nunito Sans', sans-serif; overflow-x: hid
 .filter-chip { padding: clamp(6px, 1vw, 9px) clamp(16px, 2.5vw, 24px); border-radius: 8px; font-family: 'Unbounded', sans-serif; font-weight: 600; font-size: clamp(12px, 1.5vw, 14px); cursor: pointer; background: #F8F7F6; color: #1A1A1A; transition: all .2s; }
 .filter-chip:hover { background: #E9E7E5; }
 .filter-chip.active { background: #2A3D5E; color: #F8F7F6; }
-.merch-grid { max-width: 1320px; margin: 48px auto 0;  display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: clamp(16px, 2.5vw, 24px); }
 .product-card { background: #fff; border-radius: clamp(6px, 1vw, 8px); outline: 1px solid #E5E3E1; transition: box-shadow .2s, transform .2s; overflow: hidden; display: flex; flex-direction: column; }
 .product-card:hover { box-shadow: 0 12px 24px rgba(0,0,0,.08); transform: translateY(-2px); }
 .product-img { width: 100%; height: clamp(160px, 22vw, 220px); background: #F5F5F5; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid #E9ECEF; }
