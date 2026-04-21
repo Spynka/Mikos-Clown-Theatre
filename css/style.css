@@ -11,7 +11,7 @@ body { background: #fff; font-family: 'Nunito Sans', sans-serif; overflow-x: hid
 /* ===== 3. COMMON LAYOUT & UTILITIES ===== */
 .shop-container, .brandbook-container { max-width: 100%; margin: 0 auto; background: var(--white); position: relative; }
 .container-main { max-width: 100%; margin: 0 auto; padding: 0 clamp(16px, 5vw, 80px); }
-.page-header { max-width: 1320px; margin: clamp(40px, 6vw, 60px) auto 0; padding: 0 clamp(16px, 5vw, 40px); }
+.page-header { max-width: 1320px;  }
 .title-accent { position: relative; padding-left: clamp(12px, 2vw, 20px); }
 .title-accent::before { content: ''; position: absolute; left: 0; top: 0; width: 4px; height: 100%; background: var(--red-59); }
 .page-title { font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: clamp(32px, 5vw, 48px); line-height: 1.2; color: #1A1718; }
@@ -560,12 +560,12 @@ body { background: #fff; font-family: 'Nunito Sans', sans-serif; overflow-x: hid
 .btn-next:hover { background: #D62830; }
 
 /* ===== 15. SHOP & MERCH CATALOG PAGE ===== */
-.filters-section { max-width: 1320px; margin: 30px auto 0; padding: 0 clamp(16px, 5vw, 40px); }
+.filters-section { max-width: 1320px; margin: 30px auto 0;  }
 .filter-chips { display: flex; flex-wrap: wrap; gap: 12px; }
 .filter-chip { padding: clamp(6px, 1vw, 9px) clamp(16px, 2.5vw, 24px); border-radius: 8px; font-family: 'Unbounded', sans-serif; font-weight: 600; font-size: clamp(12px, 1.5vw, 14px); cursor: pointer; background: #F8F7F6; color: #1A1A1A; transition: all .2s; }
 .filter-chip:hover { background: #E9E7E5; }
 .filter-chip.active { background: #2A3D5E; color: #F8F7F6; }
-.merch-grid { max-width: 1320px; margin: 48px auto 0; padding: 0 clamp(16px, 5vw, 40px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: clamp(16px, 2.5vw, 24px); }
+.merch-grid { max-width: 1320px; margin: 48px auto 0;  display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: clamp(16px, 2.5vw, 24px); }
 .product-card { background: #fff; border-radius: clamp(6px, 1vw, 8px); outline: 1px solid #E5E3E1; transition: box-shadow .2s, transform .2s; overflow: hidden; display: flex; flex-direction: column; }
 .product-card:hover { box-shadow: 0 12px 24px rgba(0,0,0,.08); transform: translateY(-2px); }
 .product-img { width: 100%; height: clamp(160px, 22vw, 220px); background: #F5F5F5; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid #E9ECEF; }
@@ -4224,5 +4224,681 @@ body {
     
     .burger-icon {
         z-index: 100001 !important;
+    }
+}
+
+
+/* ============================================= */
+/* МАГАЗИН — ФИНАЛЬНЫЙ ЧИСТЫЙ CSS                */
+/* ============================================= */
+
+/* ----- 1. ОСНОВНОЙ КОНТЕЙНЕР (ОТСТУП КАК НА СПЕКТАКЛЯХ/ЗАКАЗЧИКАМ) ----- */
+#mainContent {
+    max-width: 100% !important;
+    margin: 0 auto !important;
+    padding: 60px 40px 80px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    overflow-x: clip !important;
+}
+
+/* ----- 2. ЗАГОЛОВОК СТРАНИЦЫ ----- */
+.page-header {
+    margin-bottom: 0 px !important;
+    padding-top: 0 !important;
+}
+
+.title-accent {
+    position: relative !important;
+    padding-left: 20px !important;
+}
+
+.title-accent::before {
+    content: '' !important;
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 4px !important;
+    height: 100% !important;
+    background: #E8454D !important;
+}
+
+.page-title {
+    font-family: 'Unbounded', sans-serif !important;
+    font-weight: 700 !important;
+    font-size: 48px !important;
+    line-height: 1.2 !important;
+    color: #1A1718 !important;
+    margin: 0 !important;
+}
+
+.page-description {
+    max-width: 600px !important;
+    margin-top: 16px !important;
+    font-size: 18px !important;
+    line-height: 1.5 !important;
+    color: #3D393A !important;
+}
+
+/* ----- 3. ФИЛЬТРЫ (ОВАЛЬНЫЕ, С ГОРИЗОНТАЛЬНОЙ ПРОКРУТКОЙ НА МОБИЛЬНЫХ) ----- */
+.filters-section {
+    margin: 32px 0 40px !important;
+}
+
+.filter-chips {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 12px !important;
+}
+
+.filter-chip {
+    padding: 10px 24px !important;
+    border-radius: 40px !important;
+    font-family: 'Unbounded', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 14px !important;
+    line-height: 1.4 !important;
+    cursor: pointer !important;
+    background: #F8F7F6 !important;
+    color: #404040 !important;
+    transition: background 0.2s, color 0.2s !important;
+    white-space: nowrap !important;
+    border: none !important;
+    outline: none !important;
+}
+
+.filter-chip:hover {
+    background: #E9E7E5 !important;
+}
+
+.filter-chip.active {
+    background: #2A3D5E !important;
+    color: #fff !important;
+}
+
+/* На мобильных фильтры скроллятся горизонтально */
+@media (max-width: 860px) {
+    #mainContent {
+        padding: 70px 16px 48px !important;
+    }
+    
+    .page-title {
+        font-size: 36px !important;
+    }
+    
+    .page-description {
+        font-size: 16px !important;
+    }
+    
+
+    
+    .filter-chips {
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        scrollbar-width: none !important;
+        -webkit-overflow-scrolling: touch !important;
+        padding-bottom: 4px !important;
+        gap: 8px !important;
+    }
+    
+    .filter-chips::-webkit-scrollbar {
+        display: none !important;
+    }
+    
+    .filter-chip {
+        flex-shrink: 0 !important;
+        padding: 8px 16px !important;
+        font-size: 13px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    #mainContent {
+        padding: 60px 12px 40px !important;
+    }
+    
+    .page-title {
+        font-size: 32px !important;
+    }
+    
+    .filter-chip {
+        padding: 6px 12px !important;
+        font-size: 12px !important;
+    }
+}
+
+/* ----- 4. СЕТКА ТОВАРОВ — 4 КАРТОЧКИ НА ВЕБЕ ----- */
+.merch-grid {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: flex-start !important;
+    gap: 24px !important;
+    margin: 0 !important;
+}
+
+.product-card {
+    flex: 0 0 calc(25% - 18px) !important;
+    width: calc(25% - 18px) !important;
+    min-width: 280px !important;
+    max-width: 318px !important;
+    height: auto !important;
+    aspect-ratio: 318 / 427 !important;
+    background: #fff !important;
+    border-radius: 12px !important;
+    outline: 1px solid #E5E3E1 !important;
+    outline-offset: -1px !important;
+    overflow: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
+    transition: box-shadow 0.2s, transform 0.2s !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
+}
+
+.product-card:hover {
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08) !important;
+    transform: translateY(-2px) !important;
+}
+
+.product-img {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 318 / 220 !important;
+    flex-shrink: 0 !important;
+    background: #F5F5F5 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-bottom: 1px solid #E9ECEF !important;
+}
+
+.product-img img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+}
+
+.product-info {
+    padding: 20px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    flex: 1 !important;
+}
+
+.product-name {
+    font-family: 'Unbounded', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 18px !important;
+    line-height: 1.4 !important;
+    color: #1A1718 !important;
+    margin-bottom: 8px !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+
+.product-desc {
+    font-size: 13px !important;
+    line-height: 1.4 !important;
+    color: #3D393A !important;
+    margin-bottom: 12px !important;
+}
+
+.product-price {
+    font-family: 'Unbounded', sans-serif !important;
+    font-weight: 700 !important;
+    font-size: 22px !important;
+    color: #4A6294 !important;
+    margin: 8px 0 16px !important;
+}
+
+.buy-now-btn {
+    width: 100% !important;
+    padding: 10px 18px !important;
+    background: #E8454D !important;
+    border: none !important;
+    border-radius: 6px !important;
+    color: #fff !important;
+    font-family: 'Unbounded', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 14px !important;
+    cursor: pointer !important;
+    transition: background 0.2s !important;
+    margin-top: auto !important;
+}
+
+.buy-now-btn:hover {
+    background: #D62830 !important;
+}
+
+/* Адаптив карточек */
+@media (max-width: 1300px) {
+    .product-card {
+        flex: 0 0 calc(33.333% - 16px) !important;
+        width: calc(33.333% - 16px) !important;
+    }
+}
+
+@media (max-width: 1000px) {
+    .product-card {
+        flex: 0 0 calc(50% - 12px) !important;
+        width: calc(50% - 12px) !important;
+    }
+}
+
+@media (max-width: 860px) {
+    .merch-grid {
+        justify-content: center !important;
+    }
+    
+    .product-card {
+        flex: 0 0 calc(100vw - 32px) !important;
+        width: calc(100vw - 32px) !important;
+        min-width: auto !important;
+        max-width: none !important;
+        aspect-ratio: auto !important;
+    }
+    
+    .product-img {
+        aspect-ratio: 16 / 9 !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .product-card {
+        flex: 0 0 calc(100vw - 24px) !important;
+        width: calc(100vw - 24px) !important;
+    }
+    
+    .product-info {
+        padding: 16px !important;
+    }
+    
+    .product-name {
+        font-size: 16px !important;
+    }
+    
+    .product-price {
+        font-size: 20px !important;
+    }
+}
+
+/* ----- 5. КНОПКА "ПОКАЗАТЬ ЕЩЁ" ----- */
+.show-more-wrapper {
+    display: flex !important;
+    justify-content: center !important;
+    margin: 48px 0 0 !important;
+}
+
+.show-more-btn {
+    padding: 12px 40px !important;
+    background: #F8F7F6 !important;
+    border-radius: 8px !important;
+    border: none !important;
+    font-family: 'Unbounded', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 14px !important;
+    color: #1A1718 !important;
+    cursor: pointer !important;
+    transition: background 0.2s !important;
+}
+
+.show-more-btn:hover {
+    background: #E9E7E5 !important;
+}
+
+/* ----- 6. МОДАЛЬНЫЕ ОКНА — КНОПКИ ----- */
+.modal-buttons {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center !important;
+    gap: 16px !important;
+    margin-top: 32px !important;
+    flex-wrap: nowrap !important;
+}
+
+.modal-btn {
+    flex: 0 1 auto !important;
+    padding: 12px 24px !important;
+    border-radius: 8px !important;
+    font-family: 'Unbounded', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 14px !important;
+    cursor: pointer !important;
+    border: none !important;
+    transition: background 0.2s !important;
+    white-space: nowrap !important;
+}
+
+#moreItemsBtn {
+    min-width: 220px !important;
+    padding: 12px 28px !important;
+}
+
+.btn-outline-modal {
+    background: #F8F7F6 !important;
+    color: #1A1718 !important;
+    border: 1px solid #E5E3E1 !important;
+}
+
+.btn-outline-modal:hover {
+    background: #E9E7E5 !important;
+}
+
+.btn-primary-modal {
+    background: #E8454D !important;
+    color: #fff !important;
+}
+
+.btn-primary-modal:hover {
+    background: #D62830 !important;
+}
+
+@media (max-width: 860px) {
+    .modal-buttons {
+        gap: 12px !important;
+    }
+    
+    .modal-btn {
+        padding: 12px 16px !important;
+        font-size: 13px !important;
+    }
+    
+    #moreItemsBtn {
+        min-width: 130px !important;
+        max-width: 160px !important;
+        padding: 10px 12px !important;
+        white-space: normal !important;
+        line-height: 1.3 !important;
+        word-break: break-word !important;
+    }
+    
+    #buyNowBtn {
+        min-width: 100px !important;
+    }
+}
+
+/* ----- 7. СОСТАВ ЗАКАЗА (МОБИЛЬНЫЕ: ЗНАЧКИ В ОДНОЙ СТРОКЕ) ----- */
+.cart-item {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    padding: 12px 0 !important;
+    border-bottom: 1px solid #E5E3E1 !important;
+}
+
+.cart-item-info {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    flex: 1 1 auto !important;
+    gap: 8px !important;
+}
+
+.cart-item-name {
+    font-family: 'Nunito Sans', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 15px !important;
+    color: #2A3D5E !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    max-width: 200px !important;
+}
+
+.cart-item-details {
+    font-family: 'Nunito Sans', sans-serif !important;
+    font-size: 14px !important;
+    color: #5A5556 !important;
+    white-space: nowrap !important;
+    flex-basis: 100% !important;
+    margin-top: 4px !important;
+}
+
+.cart-item-actions {
+    display: flex !important;
+    gap: 12px !important;
+    align-items: center !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    flex-shrink: 0 !important;
+}
+
+.cart-item-actions button {
+    background: none !important;
+    border: none !important;
+    cursor: pointer !important;
+    font-size: 16px !important;
+    color: #4A6294 !important;
+    transition: opacity 0.2s !important;
+    padding: 4px !important;
+}
+
+.cart-item-actions button:hover {
+    opacity: 0.7 !important;
+}
+
+.cart-item-price {
+    font-family: 'Nunito Sans', sans-serif !important;
+    font-weight: 700 !important;
+    font-size: 16px !important;
+    color: #2A3D5E !important;
+    white-space: nowrap !important;
+    margin-left: auto !important;
+}
+
+@media (max-width: 860px) {
+    .cart-item-name {
+        font-size: 14px !important;
+        max-width: 160px !important;
+    }
+    
+    .cart-item-details {
+        font-size: 13px !important;
+    }
+    
+    .cart-item-price {
+        font-size: 15px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .cart-item-name {
+        max-width: 130px !important;
+        font-size: 13px !important;
+    }
+    
+    .cart-item-actions {
+        gap: 8px !important;
+    }
+    
+    .cart-item-actions button {
+        font-size: 14px !important;
+    }
+    
+    .cart-item-details {
+        font-size: 12px !important;
+    }
+    
+    .cart-item-price {
+        font-size: 14px !important;
+    }
+}
+
+/* ----- 8. ИТОГОВАЯ СТРОКА ----- */
+.total-row {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding-top: 16px !important;
+    margin-top: 8px !important;
+    border-top: 1px solid #DCE4F0 !important;
+    font-family: 'Nunito Sans', sans-serif !important;
+    font-weight: 700 !important;
+    font-size: 16px !important;
+    color: #2A3D5E !important;
+}
+
+.total-row span:last-child {
+    font-size: 18px !important;
+    white-space: nowrap !important;
+}
+
+/* ----- 9. ВЫПАДАЮЩИЕ СПИСКИ ----- */
+.modal-container select,
+.modal-container .form-select,
+#productSize {
+    width: 100% !important;
+    padding: 12px 40px 12px 16px !important;
+    background: #fff !important;
+    border: 1px solid #E5E3E1 !important;
+    border-radius: 8px !important;
+    font-family: 'Nunito Sans', sans-serif !important;
+    font-size: 15px !important;
+    color: #1A1718 !important;
+    cursor: pointer !important;
+    transition: border-color 0.2s, box-shadow 0.2s !important;
+    box-sizing: border-box !important;
+    outline: none !important;
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%234A6294' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 16px center !important;
+    background-size: 16px !important;
+}
+
+.modal-container select:focus,
+.modal-container .form-select:focus,
+#productSize:focus {
+    border-color: #4A6294 !important;
+    box-shadow: 0 0 0 3px rgba(74, 98, 148, 0.15) !important;
+}
+
+/* ----- 10. ПОЛЯ ВВОДА ----- */
+.modal-container .form-group {
+    margin-bottom: 20px !important;
+}
+
+.modal-container .form-group label {
+    display: block !important;
+    font-family: 'Unbounded', sans-serif !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    color: #2A2627 !important;
+    margin-bottom: 8px !important;
+}
+
+.modal-container .form-input {
+    width: 100% !important;
+    padding: 12px 16px !important;
+    background: #fff !important;
+    border: 1px solid #E5E3E1 !important;
+    border-radius: 8px !important;
+    font-family: 'Nunito Sans', sans-serif !important;
+    font-size: 15px !important;
+    color: #1A1718 !important;
+    transition: border-color 0.2s, box-shadow 0.2s !important;
+    box-sizing: border-box !important;
+    outline: none !important;
+}
+
+.modal-container .form-input:focus {
+    border-color: #4A6294 !important;
+    box-shadow: 0 0 0 3px rgba(74, 98, 148, 0.15) !important;
+}
+
+/* ----- 11. КНОПКА ОФОРМЛЕНИЯ ЗАКАЗА ----- */
+#submitOrderBtn {
+    width: 100% !important;
+    padding: 14px 24px !important;
+    background: #E8454D !important;
+    border: none !important;
+    border-radius: 8px !important;
+    color: #fff !important;
+    font-family: 'Unbounded', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 15px !important;
+    cursor: pointer !important;
+    transition: background 0.2s !important;
+}
+
+#submitOrderBtn:hover {
+    background: #D62830 !important;
+}
+
+/* ----- 12. СТРАНИЦА УСПЕШНОГО ЗАКАЗА ----- */
+.success-content {
+    max-width: 500px !important;
+    margin: 60px auto !important;
+    padding: 48px 40px !important;
+    background: #fff !important;
+    border-radius: 16px !important;
+    outline: 1px solid #E5E3E1 !important;
+    text-align: center !important;
+}
+
+.success-content i {
+    font-size: 56px !important;
+    color: #4A6294 !important;
+    margin-bottom: 24px !important;
+}
+
+.success-content h2 {
+    font-family: 'Unbounded', sans-serif !important;
+    font-weight: 700 !important;
+    font-size: 28px !important;
+    margin-bottom: 16px !important;
+    color: #1A1718 !important;
+}
+
+.success-content p {
+    font-family: 'Nunito Sans', sans-serif !important;
+    font-size: 16px !important;
+    line-height: 1.5 !important;
+    color: #3D393A !important;
+    margin-bottom: 12px !important;
+}
+
+.success-content strong {
+    font-weight: 700 !important;
+    color: #1A1718 !important;
+}
+
+.btn-return {
+    margin-top: 32px !important;
+    padding: 14px 32px !important;
+    background: #2A3D5E !important;
+    border: none !important;
+    border-radius: 8px !important;
+    color: #fff !important;
+    font-family: 'Unbounded', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 15px !important;
+    cursor: pointer !important;
+    transition: background 0.2s !important;
+}
+
+.btn-return:hover {
+    background: #1A2840 !important;
+}
+
+@media (max-width: 480px) {
+    .success-content {
+        margin: 40px 16px !important;
+        padding: 32px 24px !important;
+    }
+    
+    .success-content i {
+        font-size: 48px !important;
+    }
+    
+    .success-content h2 {
+        font-size: 24px !important;
+    }
+    
+    .success-content p {
+        font-size: 15px !important;
     }
 }
