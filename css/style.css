@@ -4902,36 +4902,35 @@ body {
         font-size: 15px !important;
     }
 }
-
 /* ============================================= */
-/* МАГАЗИН — СЕТКА ТОВАРОВ (ФИНАЛЬНЫЙ ФИКС)      */
+/* МАГАЗИН — СЕТКА ТОВАРОВ (АВТОЗАПОЛНЕНИЕ)      */
 /* ============================================= */
 
-/* ----- 4. СЕТКА ТОВАРОВ — АДАПТИВНАЯ ----- */
+/* ----- СЕТКА ТОВАРОВ — АВТОМАТИЧЕСКОЕ ЗАПОЛНЕНИЕ ----- */
 .merch-grid {
     display: grid !important;
-    grid-template-columns: repeat(4, 1fr) !important;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)) !important;
     gap: 24px !important;
     margin: 40px 0 0 !important;
     width: 100% !important;
 }
 
-/* Планшеты: 3 карточки */
-@media (max-width: 1024px) {
+/* На очень широких экранах карточки не растягиваются бесконечно */
+@media (min-width: 1600px) {
     .merch-grid {
-        grid-template-columns: repeat(3, 1fr) !important;
+        grid-template-columns: repeat(auto-fill, minmax(318px, 1fr)) !important;
     }
 }
 
-/* Маленькие планшеты: 2 карточки */
+/* Маленькие планшеты: минимум 240px */
 @media (max-width: 768px) {
     .merch-grid {
-        grid-template-columns: repeat(2, 1fr) !important;
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)) !important;
         gap: 16px !important;
     }
 }
 
-/* Мобильные: 1 карточка */
+/* Мобильные: 1 карточка в ряд */
 @media (max-width: 480px) {
     .merch-grid {
         grid-template-columns: 1fr !important;
@@ -4949,9 +4948,7 @@ body {
     overflow: hidden !important;
     transition: box-shadow 0.2s, transform 0.2s !important;
     width: 100% !important;
-    min-width: 0 !important;
-    height: auto !important;
-    aspect-ratio: auto !important;
+    height: 100% !important;
 }
 
 .product-card:hover {
@@ -5036,7 +5033,7 @@ body {
     background: #D62830 !important;
 }
 
-/* Адаптация текста на мобильных */
+/* Адаптация на мобильных */
 @media (max-width: 860px) {
     .product-info {
         padding: 16px !important;
