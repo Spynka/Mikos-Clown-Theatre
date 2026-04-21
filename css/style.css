@@ -5062,14 +5062,14 @@ body {
 }
 
 /* ============================================= */
-/* КОНТАКТЫ — ПОЛНЫЙ АДАПТИВНЫЙ CSS             */
+/* КОНТАКТЫ — ФИНАЛЬНЫЙ ЧИСТЫЙ CSS              */
 /* ============================================= */
 
 /* ----- 1. ОСНОВНОЙ КОНТЕЙНЕР ----- */
 .contacts-page {
     max-width: 1360px !important;
     margin: 0 auto !important;
-    padding: 60px 40px 80px !important;
+    padding: 60px 40px 40px !important;
     width: 100% !important;
     box-sizing: border-box !important;
     overflow-x: clip !important;
@@ -5077,7 +5077,7 @@ body {
 
 /* ----- 2. ЗАГОЛОВОК СТРАНИЦЫ ----- */
 .page-header-contacts {
-    margin-bottom: 48px !important;
+    margin-bottom: 36px !important;
 }
 
 .page-title-contacts {
@@ -5117,7 +5117,7 @@ body {
     min-height: 400px !important;
     border-radius: 16px !important;
     outline: 1px solid #E5E3E1 !important;
-    margin-bottom: 60px !important;
+    margin-bottom: 48px !important;
     overflow: hidden !important;
     background: transparent !important;
 }
@@ -5129,7 +5129,6 @@ body {
     border-radius: 16px !important;
 }
 
-/* Карточка адреса поверх карты */
 .map-address-card {
     position: absolute !important;
     bottom: 24px !important;
@@ -5165,7 +5164,7 @@ body {
 
 /* ----- 4. ФОРМА ОБРАТНОЙ СВЯЗИ ----- */
 .form-section {
-    margin-bottom: 60px !important;
+    margin-bottom: 48px !important;
 }
 
 .form-grid {
@@ -5175,12 +5174,18 @@ body {
 }
 
 /* Левая колонка с информацией */
+.form-info {
+    background: transparent !important;
+    padding: 0 !important;
+}
+
 .form-info h3 {
     font-family: 'Unbounded', sans-serif !important;
     font-weight: 600 !important;
     font-size: 28px !important;
     color: #1A1718 !important;
     margin: 0 0 20px !important;
+    background: transparent !important;
 }
 
 .form-info p {
@@ -5189,42 +5194,48 @@ body {
     line-height: 1.6 !important;
     color: #3D393A !important;
     margin: 0 0 16px !important;
+    background: transparent !important;
 }
 
+/* Блок преимуществ — как на главной */
 .form-features {
-    margin-top: 32px !important;
     display: flex !important;
     flex-direction: column !important;
-    gap: 16px !important;
+    gap: 20px !important;
+    margin-top: 20px !important;
 }
 
 .form-features .feature-item {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 4px !important;
-    padding: 0 0 0 36px !important;
+    background: #F8F7F6 !important;
+    border-left: 3px solid #4A6294 !important;
+    border-radius: 8px !important;
+    padding: clamp(12px, 2vw, 18px) clamp(16px, 2.5vw, 24px) clamp(12px, 2vw, 18px) clamp(40px, 5vw, 60px) !important;
     position: relative !important;
 }
 
 .form-features .feature-item i {
     position: absolute !important;
-    left: 0 !important;
-    top: 4px !important;
+    left: clamp(12px, 2vw, 24px) !important;
+    top: clamp(14px, 2vw, 20px) !important;
     color: #4A6294 !important;
-    font-size: 20px !important;
+    font-size: clamp(14px, 1.8vw, 20px) !important;
 }
 
 .form-features .feature-item strong {
+    display: block !important;
     font-family: 'Unbounded', sans-serif !important;
     font-weight: 600 !important;
-    font-size: 16px !important;
+    font-size: clamp(14px, 1.6vw, 18px) !important;
     color: #1A1718 !important;
+    margin-bottom: 4px !important;
 }
 
 .form-features .feature-item span {
+    display: block !important;
     font-family: 'Nunito Sans', sans-serif !important;
-    font-size: 14px !important;
-    color: #5A5556 !important;
+    font-size: clamp(12px, 1.3vw, 15px) !important;
+    color: #3D393A !important;
+    line-height: 1.4 !important;
 }
 
 /* Правая колонка — форма */
@@ -5232,7 +5243,7 @@ body {
     background: #fff !important;
     border-radius: 16px !important;
     outline: 1px solid #E5E3E1 !important;
-    padding: 32px !important;
+    padding: 28px !important;
 }
 
 .form-container h3 {
@@ -5240,11 +5251,11 @@ body {
     font-weight: 600 !important;
     font-size: 24px !important;
     color: #1A1718 !important;
-    margin: 0 0 28px !important;
+    margin: 0 0 20px !important;
 }
 
 .form-group {
-    margin-bottom: 20px !important;
+    margin-bottom: 16px !important;
 }
 
 .form-group label {
@@ -5298,7 +5309,7 @@ body {
 
 .custom-select {
     width: 100% !important;
-    padding: 12px 40px 12px 16px !important;
+    padding: 12px 48px 12px 16px !important;
     background: #fff !important;
     border: 1px solid #E5E3E1 !important;
     border-radius: 8px !important;
@@ -5311,22 +5322,20 @@ body {
     display: flex !important;
     align-items: center !important;
     justify-content: space-between !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%234A6294' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 20px center !important;
+    background-size: 16px !important;
+}
+
+.custom-select i {
+    display: none !important;
 }
 
 .custom-select.active {
     border-color: #4A6294 !important;
     box-shadow: 0 0 0 3px rgba(74, 98, 148, 0.15) !important;
     border-radius: 8px 8px 0 0 !important;
-}
-
-.custom-select i {
-    color: #4A6294 !important;
-    font-size: 14px !important;
-    transition: transform 0.2s !important;
-}
-
-.custom-select.active i {
-    transform: rotate(180deg) !important;
 }
 
 #selectedSubject {
@@ -5390,7 +5399,7 @@ body {
     font-size: 15px !important;
     cursor: pointer !important;
     transition: background 0.2s !important;
-    margin-top: 8px !important;
+    margin-top: 4px !important;
 }
 
 .submit-btn:hover {
@@ -5399,7 +5408,7 @@ body {
 
 /* ----- 5. FAQ ----- */
 .faq-section {
-    margin-bottom: 60px !important;
+    margin-bottom: 48px !important;
 }
 
 .faq-title {
@@ -5407,7 +5416,7 @@ body {
     font-weight: 600 !important;
     font-size: 32px !important;
     color: #1A1718 !important;
-    margin: 0 0 32px !important;
+    margin: 0 0 24px !important;
 }
 
 .faq-item {
@@ -5418,7 +5427,7 @@ body {
     display: flex !important;
     align-items: center !important;
     justify-content: space-between !important;
-    padding: 20px 0 !important;
+    padding: 16px 0 !important;
     font-family: 'Unbounded', sans-serif !important;
     font-weight: 600 !important;
     font-size: 18px !important;
@@ -5454,14 +5463,15 @@ body {
 
 .faq-item.open .faq-answer {
     max-height: 200px !important;
-    padding: 0 0 20px 0 !important;
+    padding: 0 0 16px 0 !important;
 }
 
 /* ----- 6. КОНТАКТНАЯ И ЮРИДИЧЕСКАЯ ИНФОРМАЦИЯ ----- */
 .contacts-grid {
     display: grid !important;
     grid-template-columns: 1.2fr 1fr !important;
-    gap: 48px !important;
+    gap: 32px !important;
+    margin-bottom: 0 !important;
 }
 
 /* Левая колонка — юридическая информация */
@@ -5470,12 +5480,12 @@ body {
     font-weight: 600 !important;
     font-size: 24px !important;
     color: #1A1718 !important;
-    margin: 0 0 24px !important;
+    margin: 0 0 20px !important;
 }
 
 .legal-item {
     display: flex !important;
-    padding: 12px 0 !important;
+    padding: 8px 0 !important;
     border-bottom: 1px solid #F0EEED !important;
 }
 
@@ -5503,7 +5513,7 @@ body {
     display: inline-flex !important;
     align-items: center !important;
     gap: 8px !important;
-    margin-top: 24px !important;
+    margin-top: 20px !important;
     padding: 12px 24px !important;
     background: #F8F7F6 !important;
     border-radius: 8px !important;
@@ -5527,7 +5537,7 @@ body {
 .contact-info-block {
     display: flex !important;
     flex-direction: column !important;
-    gap: 32px !important;
+    gap: 24px !important;
 }
 
 .contact-block h3 {
@@ -5535,13 +5545,13 @@ body {
     font-weight: 600 !important;
     font-size: 20px !important;
     color: #1A1718 !important;
-    margin: 0 0 20px !important;
+    margin: 0 0 16px !important;
 }
 
 .contact-item {
     display: flex !important;
     gap: 16px !important;
-    margin-bottom: 20px !important;
+    margin-bottom: 16px !important;
 }
 
 .contact-item:last-child {
@@ -5628,10 +5638,10 @@ body {
     color: #fff !important;
 }
 
-/* ----- 7. АДАПТИВ ДЛЯ ПЛАНШЕТОВ ----- */
+/* ----- 7. АДАПТИВ ДЛЯ ПЛАНШЕТОВ (1100px) ----- */
 @media (max-width: 1100px) {
     .contacts-page {
-        padding: 50px 30px 60px !important;
+        padding: 50px 30px 40px !important;
     }
     
     .form-grid {
@@ -5645,14 +5655,14 @@ body {
     }
 }
 
-/* ----- 8. АДАПТИВ ДЛЯ МОБИЛЬНЫХ ----- */
+/* ----- 8. АДАПТИВ ДЛЯ МОБИЛЬНЫХ (860px) ----- */
 @media (max-width: 860px) {
     .contacts-page {
-        padding: 70px 16px 48px !important;
+        padding: 70px 16px 32px !important;
     }
     
     .page-header-contacts {
-        margin-bottom: 32px !important;
+        margin-bottom: 28px !important;
     }
     
     .page-title-contacts {
@@ -5664,41 +5674,98 @@ body {
         font-size: 15px !important;
     }
     
+    /* Карта в мобильной версии */
     .map-container {
-        height: 400px !important;
-        min-height: 350px !important;
-        margin-bottom: 40px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        height: auto !important;
+        min-height: auto !important;
+        padding: 0 !important;
+        overflow: visible !important;
+        margin-bottom: 32px !important;
+        background: transparent !important;
+    }
+    
+    #ymap {
+        width: 100% !important;
+        height: 300px !important;
+        min-height: 300px !important;
+        border-radius: 16px 16px 0 0 !important;
     }
     
     .map-address-card {
-        position: static !important;
+        position: relative !important;
+        bottom: auto !important;
+        left: auto !important;
         width: 100% !important;
-        margin-top: 0 !important;
         border-radius: 0 0 16px 16px !important;
-        box-shadow: none !important;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
         border-top: 1px solid #E5E3E1 !important;
+        margin-top: 0 !important;
+        padding: 16px 20px !important;
+    }
+    
+    .form-section,
+    .faq-section {
+        margin-bottom: 32px !important;
     }
     
     .form-container {
         padding: 24px 20px !important;
     }
     
+    .form-container h3 {
+        margin-bottom: 18px !important;
+    }
+    
+    .form-group {
+        margin-bottom: 14px !important;
+    }
+    
     .form-info h3 {
         font-size: 24px !important;
     }
     
+    .form-features {
+        gap: 16px !important;
+    }
+    
+    .form-features .feature-item {
+        padding: 14px 16px 14px 48px !important;
+    }
+    
+    .form-features .feature-item i {
+        left: 16px !important;
+        top: 16px !important;
+        font-size: 18px !important;
+    }
+    
+    .form-features .feature-item strong {
+        font-size: 15px !important;
+    }
+    
+    .form-features .feature-item span {
+        font-size: 13px !important;
+    }
+    
     .faq-title {
         font-size: 28px !important;
+        margin-bottom: 20px !important;
     }
     
     .faq-question {
         font-size: 16px !important;
-        padding: 16px 0 !important;
+        padding: 14px 0 !important;
+    }
+    
+    .contacts-grid {
+        gap: 24px !important;
     }
     
     .legal-item {
         flex-direction: column !important;
         gap: 4px !important;
+        padding: 6px 0 !important;
     }
     
     .legal-label {
@@ -5707,31 +5774,51 @@ body {
     
     .contact-item {
         gap: 12px !important;
+        margin-bottom: 14px !important;
+    }
+    
+    .contact-info-block {
+        gap: 20px !important;
     }
 }
 
-/* ----- 9. АДАПТИВ ДЛЯ УЗКИХ ЭКРАНОВ ----- */
+/* ----- 9. АДАПТИВ ДЛЯ УЗКИХ ЭКРАНОВ (480px) ----- */
 @media (max-width: 480px) {
     .contacts-page {
-        padding: 60px 12px 40px !important;
+        padding: 60px 12px 24px !important;
+    }
+    
+    .page-header-contacts {
+        margin-bottom: 20px !important;
     }
     
     .page-title-contacts {
         font-size: 28px !important;
         padding-left: 12px !important;
+        margin-bottom: 12px !important;
     }
     
-    .map-container {
-        height: 350px !important;
-        min-height: 300px !important;
+    #ymap {
+        height: 250px !important;
+        min-height: 250px !important;
     }
     
     .map-address-card {
-        padding: 16px !important;
+        padding: 14px 16px !important;
     }
     
     .map-address-card h4 {
         font-size: 16px !important;
+        margin-bottom: 4px !important;
+    }
+    
+    .map-address-card p {
+        font-size: 13px !important;
+    }
+    
+    .form-section,
+    .faq-section {
+        margin-bottom: 24px !important;
     }
     
     .form-container {
@@ -5740,7 +5827,11 @@ body {
     
     .form-container h3 {
         font-size: 20px !important;
-        margin-bottom: 20px !important;
+        margin-bottom: 16px !important;
+    }
+    
+    .form-group {
+        margin-bottom: 12px !important;
     }
     
     .form-group input,
@@ -5750,35 +5841,82 @@ body {
         padding: 12px 14px !important;
     }
     
+    .custom-select {
+        padding: 12px 44px 12px 14px !important;
+        background-position: right 16px center !important;
+    }
+    
     .submit-btn {
         padding: 14px 20px !important;
         font-size: 14px !important;
     }
     
+    .form-features {
+        gap: 12px !important;
+    }
+    
+    .form-features .feature-item {
+        padding: 12px 14px 12px 42px !important;
+    }
+    
+    .form-features .feature-item i {
+        left: 14px !important;
+        top: 14px !important;
+        font-size: 16px !important;
+    }
+    
+    .form-features .feature-item strong {
+        font-size: 14px !important;
+    }
+    
+    .form-features .feature-item span {
+        font-size: 12px !important;
+    }
+    
     .faq-title {
         font-size: 24px !important;
+        margin-bottom: 16px !important;
     }
     
     .faq-question {
         font-size: 15px !important;
+        padding: 12px 0 !important;
     }
     
     .faq-answer {
         font-size: 14px !important;
     }
     
+    .faq-item.open .faq-answer {
+        padding-bottom: 12px !important;
+    }
+    
+    .contacts-grid {
+        gap: 20px !important;
+    }
+    
     .legal-info h2 {
         font-size: 20px !important;
+        margin-bottom: 16px !important;
     }
     
     .download-btn {
         width: 100% !important;
         justify-content: center !important;
+        margin-top: 16px !important;
     }
     
     .contact-icon {
         width: 36px !important;
         height: 36px !important;
+    }
+    
+    .contact-item {
+        margin-bottom: 12px !important;
+    }
+    
+    .contact-info-block {
+        gap: 16px !important;
     }
     
     .social-icon-page {
@@ -5806,620 +5944,3 @@ body {
         z-index: 10000 !important;
     }
 }
-
-/* ----- 11. УБИРАЕМ СЕРЫЙ ФОН У КАРТЫ ----- */
-.map-placeholder {
-    background: transparent !important;
-}
-
-#ymap {
-    background: transparent !important;
-}
-
-/* Стили для элементов управления Яндекс.Карт */
-.ymaps-2-1-79-controls__toolbar,
-.ymaps-2-1-79-copyright {
-    opacity: 0.7 !important;
-}
-
-
-/* ============================================= */
-/* ИСПРАВЛЕНИЯ: КАРТА, ПРЕИМУЩЕСТВА, СЕЛЕКТ, ОТСТУПЫ */
-/* ============================================= */
-
-/* ----- 1. КАРТА В МОБИЛЬНОЙ ВЕРСИИ ----- */
-@media (max-width: 860px) {
-    .map-container {
-        display: flex !important;
-        flex-direction: column !important;
-        height: auto !important;
-        min-height: auto !important;
-        padding: 0 !important;
-        overflow: visible !important;
-    }
-    
-    #ymap {
-        width: 100% !important;
-        height: 300px !important;
-        min-height: 300px !important;
-        border-radius: 16px 16px 0 0 !important;
-    }
-    
-    .map-address-card {
-        position: relative !important;
-        bottom: auto !important;
-        left: auto !important;
-        width: 100% !important;
-        border-radius: 0 0 16px 16px !important;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
-        border-top: 1px solid #E5E3E1 !important;
-        margin-top: -1px !important;
-    }
-}
-
-@media (max-width: 480px) {
-    #ymap {
-        height: 250px !important;
-        min-height: 250px !important;
-    }
-}
-
-/* ----- 2. БЛОК ПРЕИМУЩЕСТВ (АДАПТИВ ДЛЯ МОБИЛЬНЫХ) ----- */
-.form-features {
-    margin-top: 24px !important;
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 16px !important;
-}
-
-.form-features .feature-item {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 6px !important;
-    padding: 0 0 0 36px !important;
-    position: relative !important;
-}
-
-.form-features .feature-item i {
-    position: absolute !important;
-    left: 0 !important;
-    top: 4px !important;
-    color: #4A6294 !important;
-    font-size: 20px !important;
-}
-
-.form-features .feature-item strong {
-    font-family: 'Unbounded', sans-serif !important;
-    font-weight: 600 !important;
-    font-size: 16px !important;
-    line-height: 1.3 !important;
-    color: #1A1718 !important;
-}
-
-.form-features .feature-item span {
-    font-family: 'Nunito Sans', sans-serif !important;
-    font-size: 14px !important;
-    line-height: 1.5 !important;
-    color: #5A5556 !important;
-    word-break: break-word !important;
-}
-
-/* Адаптив для мобильных */
-@media (max-width: 860px) {
-    .form-features {
-        margin-top: 20px !important;
-        gap: 20px !important;
-    }
-    
-    .form-features .feature-item {
-        padding-left: 32px !important;
-        gap: 4px !important;
-    }
-    
-    .form-features .feature-item i {
-        font-size: 18px !important;
-        top: 3px !important;
-    }
-    
-    .form-features .feature-item strong {
-        font-size: 15px !important;
-    }
-    
-    .form-features .feature-item span {
-        font-size: 13px !important;
-        line-height: 1.4 !important;
-    }
-}
-
-@media (max-width: 480px) {
-    .form-features {
-        margin-top: 16px !important;
-        gap: 16px !important;
-    }
-    
-    .form-features .feature-item {
-        padding-left: 28px !important;
-    }
-    
-    .form-features .feature-item i {
-        font-size: 16px !important;
-        top: 2px !important;
-    }
-    
-    .form-features .feature-item strong {
-        font-size: 14px !important;
-    }
-    
-    .form-features .feature-item span {
-        font-size: 12px !important;
-        line-height: 1.4 !important;
-    }
-}
-
-/* ----- 3. СТРЕЛКА В СЕЛЕКТЕ (ПОДВИНУТЬ ВПРАВО) ----- */
-.custom-select {
-    padding: 12px 48px 12px 16px !important; /* Увеличено с 40px до 48px */
-    background-position: right 20px center !important; /* Стрелка дальше от края */
-}
-
-.custom-select i {
-    margin-right: 4px !important; /* Дополнительный отступ для иконки */
-}
-
-/* Для селекта на странице заказчикам */
-.custom-select-btn {
-    padding: 12px 48px 12px 16px !important;
-    background-position: right 20px center !important;
-}
-
-/* ----- 4. УМЕНЬШИТЬ ОТСТУП ДО ФУТЕРА ----- */
-.contacts-page {
-    padding-bottom: 40px !important; /* Уменьшено с 80px */
-}
-
-.contacts-grid {
-    margin-bottom: 0 !important;
-}
-
-/* Адаптив */
-@media (max-width: 1100px) {
-    .contacts-page {
-        padding-bottom: 40px !important;
-    }
-}
-
-@media (max-width: 860px) {
-    .contacts-page {
-        padding-bottom: 32px !important;
-    }
-}
-
-@media (max-width: 480px) {
-    .contacts-page {
-        padding-bottom: 24px !important;
-    }
-}
-
-/* ----- 5. УМЕНЬШИТЬ ОТСТУПЫ МЕЖДУ БЛОКАМИ В ВЕБ-ВЕРСИИ ----- */
-.form-section {
-    margin-bottom: 48px !important; /* Уменьшено с 60px */
-}
-
-.faq-section {
-    margin-bottom: 48px !important; /* Уменьшено с 60px */
-}
-
-/* Уменьшаем отступы внутри формы */
-.form-container {
-    padding: 28px !important; /* Уменьшено с 32px */
-}
-
-.form-container h3 {
-    margin-bottom: 20px !important; /* Уменьшено с 28px */
-}
-
-.form-group {
-    margin-bottom: 16px !important; /* Уменьшено с 20px */
-}
-
-.submit-btn {
-    margin-top: 4px !important; /* Уменьшено с 8px */
-}
-
-/* Уменьшаем отступы в FAQ */
-.faq-title {
-    margin-bottom: 24px !important; /* Уменьшено с 32px */
-}
-
-.faq-question {
-    padding: 16px 0 !important; /* Уменьшено с 20px */
-}
-
-.faq-item.open .faq-answer {
-    padding-bottom: 16px !important; /* Уменьшено с 20px */
-}
-
-/* Уменьшаем отступы в контактной информации */
-.contacts-grid {
-    gap: 32px !important; /* Уменьшено с 48px */
-}
-
-.legal-info h2 {
-    margin-bottom: 20px !important; /* Уменьшено с 24px */
-}
-
-.legal-item {
-    padding: 8px 0 !important; /* Уменьшено с 12px */
-}
-
-.contact-block h3 {
-    margin-bottom: 16px !important; /* Уменьшено с 20px */
-}
-
-.contact-item {
-    margin-bottom: 16px !important; /* Уменьшено с 20px */
-}
-
-.contact-info-block {
-    gap: 24px !important; /* Уменьшено с 32px */
-}
-
-.download-btn {
-    margin-top: 20px !important; /* Уменьшено с 24px */
-}
-
-/* Адаптив для мобильных */
-@media (max-width: 860px) {
-    .form-section,
-    .faq-section {
-        margin-bottom: 32px !important;
-    }
-    
-    .form-container {
-        padding: 24px 20px !important;
-    }
-    
-    .form-container h3 {
-        margin-bottom: 18px !important;
-    }
-    
-    .form-group {
-        margin-bottom: 14px !important;
-    }
-    
-    .faq-title {
-        margin-bottom: 20px !important;
-    }
-    
-    .faq-question {
-        padding: 14px 0 !important;
-    }
-    
-    .contacts-grid {
-        gap: 24px !important;
-    }
-    
-    .legal-item {
-        padding: 6px 0 !important;
-    }
-    
-    .contact-item {
-        margin-bottom: 14px !important;
-    }
-    
-    .contact-info-block {
-        gap: 20px !important;
-    }
-}
-
-@media (max-width: 480px) {
-    .form-section,
-    .faq-section {
-        margin-bottom: 24px !important;
-    }
-    
-    .form-container {
-        padding: 20px 16px !important;
-    }
-    
-    .form-container h3 {
-        margin-bottom: 16px !important;
-    }
-    
-    .form-group {
-        margin-bottom: 12px !important;
-    }
-    
-    .faq-title {
-        margin-bottom: 16px !important;
-    }
-    
-    .faq-question {
-        padding: 12px 0 !important;
-    }
-    
-    .faq-item.open .faq-answer {
-        padding-bottom: 12px !important;
-    }
-    
-    .contacts-grid {
-        gap: 20px !important;
-    }
-    
-    .legal-info h2 {
-        margin-bottom: 16px !important;
-    }
-    
-    .contact-item {
-        margin-bottom: 12px !important;
-    }
-    
-    .contact-info-block {
-        gap: 16px !important;
-    }
-    
-    .download-btn {
-        margin-top: 16px !important;
-    }
-}
-
-/* ----- 6. ЗАГОЛОВОК СТРАНИЦЫ ----- */
-.page-header-contacts {
-    margin-bottom: 36px !important; /* Уменьшено с 48px */
-}
-
-@media (max-width: 860px) {
-    .page-header-contacts {
-        margin-bottom: 28px !important;
-    }
-}
-
-@media (max-width: 480px) {
-    .page-header-contacts {
-        margin-bottom: 20px !important;
-    }
-    
-    .page-title-contacts {
-        margin-bottom: 12px !important;
-    }
-}
-
-/* ============================================= */
-/* БЛОК ПРЕИМУЩЕСТВ — ТОЧНО КАК НА ГЛАВНОЙ       */
-/* ============================================= */
-
-/* ----- СТИЛИ КАК НА ГЛАВНОЙ (ИЗ СЕКЦИИ ЗАКАЗЧИКАМ) ----- */
-.form-features {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 20px !important;
-    margin-top: 20px !important;
-}
-
-.form-features .feature-item {
-    background: #F8F7F6 !important;
-    border-left: 3px solid #4A6294 !important;
-    border-radius: 8px !important;
-    padding: clamp(12px, 2vw, 18px) clamp(16px, 2.5vw, 24px) clamp(12px, 2vw, 18px) clamp(40px, 5vw, 60px) !important;
-    position: relative !important;
-}
-
-.form-features .feature-item i {
-    position: absolute !important;
-    left: clamp(12px, 2vw, 24px) !important;
-    top: clamp(14px, 2vw, 20px) !important;
-    color: #4A6294 !important;
-    font-size: clamp(14px, 1.8vw, 20px) !important;
-}
-
-.form-features .feature-item strong {
-    display: block !important;
-    font-family: 'Unbounded', sans-serif !important;
-    font-weight: 600 !important;
-    font-size: clamp(14px, 1.6vw, 18px) !important;
-    color: #1A1718 !important;
-    margin-bottom: 4px !important;
-}
-
-.form-features .feature-item span {
-    display: block !important;
-    font-family: 'Nunito Sans', sans-serif !important;
-    font-size: clamp(12px, 1.3vw, 15px) !important;
-    color: #3D393A !important;
-    line-height: 1.4 !important;
-}
-
-/* ----- АДАПТИВ ДЛЯ МОБИЛЬНЫХ ----- */
-@media (max-width: 860px) {
-    .form-features {
-        gap: 16px !important;
-    }
-    
-    .form-features .feature-item {
-        padding: 14px 16px 14px 48px !important;
-    }
-    
-    .form-features .feature-item i {
-        left: 16px !important;
-        top: 16px !important;
-        font-size: 18px !important;
-    }
-    
-    .form-features .feature-item strong {
-        font-size: 15px !important;
-        margin-bottom: 4px !important;
-    }
-    
-    .form-features .feature-item span {
-        font-size: 13px !important;
-        line-height: 1.4 !important;
-    }
-}
-
-@media (max-width: 480px) {
-    .form-features {
-        gap: 12px !important;
-    }
-    
-    .form-features .feature-item {
-        padding: 12px 14px 12px 42px !important;
-    }
-    
-    .form-features .feature-item i {
-        left: 14px !important;
-        top: 14px !important;
-        font-size: 16px !important;
-    }
-    
-    .form-features .feature-item strong {
-        font-size: 14px !important;
-    }
-    
-    .form-features .feature-item span {
-        font-size: 12px !important;
-    }
-}
-
-/* ============================================= */
-/* КАРТА В МОБИЛЬНОЙ ВЕРСИИ                      */
-/* ============================================= */
-
-@media (max-width: 860px) {
-    .map-container {
-        display: flex !important;
-        flex-direction: column !important;
-        height: auto !important;
-        min-height: auto !important;
-        padding: 0 !important;
-        overflow: visible !important;
-        margin-bottom: 40px !important;
-        background: transparent !important;
-    }
-    
-    #ymap {
-        width: 100% !important;
-        height: 300px !important;
-        min-height: 300px !important;
-        border-radius: 16px 16px 0 0 !important;
-    }
-    
-    .map-address-card {
-        position: relative !important;
-        bottom: auto !important;
-        left: auto !important;
-        width: 100% !important;
-        border-radius: 0 0 16px 16px !important;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
-        border-top: 1px solid #E5E3E1 !important;
-        margin-top: 0 !important;
-        padding: 16px 20px !important;
-    }
-}
-
-@media (max-width: 480px) {
-    #ymap {
-        height: 250px !important;
-        min-height: 250px !important;
-    }
-    
-    .map-address-card {
-        padding: 14px 16px !important;
-    }
-    
-    .map-address-card h4 {
-        font-size: 16px !important;
-        margin-bottom: 4px !important;
-    }
-    
-    .map-address-card p {
-        font-size: 13px !important;
-    }
-}
-
-/* ============================================= */
-/* СТРЕЛКА В СЕЛЕКТЕ ПОДВИНУТА ВПРАВО           */
-/* ============================================= */
-
-.custom-select {
-    padding: 12px 48px 12px 16px !important;
-    background-position: right 20px center !important;
-}
-
-.custom-select i {
-    margin-right: 4px !important;
-}
-
-/* Для селекта на странице заказчикам */
-.custom-select-btn {
-    padding: 12px 48px 12px 16px !important;
-    background-position: right 20px center !important;
-}
-
-/* ============================================= */
-/* УМЕНЬШИТЬ ОТСТУП ДО ФУТЕРА                    */
-/* ============================================= */
-
-.contacts-page {
-    padding-bottom: 40px !important;
-}
-
-.contacts-grid {
-    margin-bottom: 0 !important;
-}
-
-@media (max-width: 1100px) {
-    .contacts-page {
-        padding-bottom: 40px !important;
-    }
-}
-
-@media (max-width: 860px) {
-    .contacts-page {
-        padding-bottom: 32px !important;
-    }
-}
-
-@media (max-width: 480px) {
-    .contacts-page {
-        padding-bottom: 24px !important;
-    }
-}
-
-/* ============================================= */
-/* УМЕНЬШИТЬ ОТСТУПЫ МЕЖДУ БЛОКАМИ               */
-/* ============================================= */
-
-.form-section {
-    margin-bottom: 48px !important;
-}
-
-.faq-section {
-    margin-bottom: 48px !important;
-}
-
-.page-header-contacts {
-    margin-bottom: 36px !important;
-}
-
-@media (max-width: 860px) {
-    .form-section,
-    .faq-section {
-        margin-bottom: 32px !important;
-    }
-    
-    .page-header-contacts {
-        margin-bottom: 28px !important;
-    }
-}
-
-@media (max-width: 480px) {
-    .form-section,
-    .faq-section {
-        margin-bottom: 24px !important;
-    }
-    
-    .page-header-contacts {
-        margin-bottom: 20px !important;
-    }
-}
-
