@@ -9,6 +9,7 @@
     <!-- Шрифты -->
     <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;800&family=Nunito+Sans:opsz,wght@6..12,300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+	<link rel="stylesheet" href="css/header-footercss"> 
     
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="SVG/logo-2.svg">
@@ -101,7 +102,7 @@
         .mobile-nav {
             position: fixed; top: 0; right: -100%; width: 75%; max-width: 320px;
             min-width: 240px; height: 100vh; height: -webkit-fill-available;
-            background: var(--color-bg-dark); z-index: 10000;
+            background: #1A1A1A; z-index: 10000;
             transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
             padding: 70px 20px 30px 20px; overflow-y: auto; overflow-x: hidden;
             display: flex; flex-direction: column; box-sizing: border-box;
@@ -486,6 +487,31 @@
         @supports (-webkit-touch-callout: none) {
             .mobile-nav { height: -webkit-fill-available !important; }
         }
+        .mobile-logo-group { 
+    display: flex !important; 
+    flex-direction: column !important; 
+    align-items: center !important; 
+    gap: 12px !important; 
+    margin-bottom: 16px !important; 
+    padding-bottom: 16px !important; 
+    border-bottom: 1px solid rgba(255,255,255,.08) !important; 
+}
+.mobile-logo-group img { max-width: 110px !important; height: auto !important; }
+.close-mobile-menu:hover { background: rgba(255,255,255,.2) !important; }
+.mobile-nav ul li a { 
+    color: #F2F1F0 !important; 
+    font-family: 'Unbounded', sans-serif !important; 
+    font-size: 15px !important; 
+    text-decoration: none !important; 
+    display: block !important; 
+    padding: 6px 0 !important; 
+    line-height: 1.2 !important; 
+    transition: color .2s !important; 
+}
+.mobile-nav ul li a:hover, 
+.mobile-nav ul li a.active { color: #E8454D !important; }
+
+
     </style>
 </head>
 <body>
@@ -504,6 +530,7 @@
 				<span class="brandbook-label">Брендбук</span>
 			</div>
             <nav class="nav-menu" id="brandNav" aria-label="Основная навигация">
+				<li><button class="nav-btn" onclick="window.location.href='index.html'" data-page="about">Сайт театра</button></li>
                 <li><button class="nav-btn active" data-page="about">О бренде</button></li>
                 <li><button class="nav-btn" data-page="logo">Логотип</button></li>
                 <li><button class="nav-btn" data-page="colors">Цвета</button></li>
@@ -527,14 +554,15 @@
     <!-- Логотипы в мобильном меню -- кликабельные -->
     <a href="index.html" class="logo-link mobile-logo-link" aria-label="На главную">
         <div class="mobile-logo-group">
-            <img class="logo-img" src="SVG/logo-2.svg" alt="Знак">
-            <img class="logo-img" src="SVG/logo.svg" alt="Логотип">
+            <img class="logo-img" src="SVG/logo-black.svg" alt="Знак">
+            <img class="logo-img" src="SVG/logo-black-2.svg" alt="Логотип">
         </div>
     </a>
         
         <!-- ПУНКТЫ МЕНЮ ПОТОМ -->
         <nav aria-label="Мобильная навигация">
             <ul>
+				<li><a href="index.html" data-mobile-page="about">Сайт театра</a></li>
                 <li><a href="#" data-mobile-page="about">О бренде</a></li>
                 <li><a href="#" data-mobile-page="logo">Логотип</a></li>
                 <li><a href="#" data-mobile-page="colors">Цвета</a></li>
@@ -719,12 +747,8 @@
         </div>
     </section>
 
-    <!-- FOOTER -->
-    <footer id="site-footer" style="margin-top: auto; padding: var(--space-8) var(--container-padding); background: var(--color-bg-dark); color: var(--color-text-inverse); text-align: center;">
-        <p style="font-size: var(--text-sm); opacity: 0.9;">© Театр клоунады «Микос», 2026</p>
-        <p style="font-size: var(--text-xs); opacity: 0.7; margin-top: var(--space-2);">Брендбук · Версия 1.0</p>
-    </footer>
-</div>
+    <!-- Заглушка для подгрузки футера -->
+    <div id="site-footer"></div>
 
 <!-- СКРИПТЫ -->
 <script>
