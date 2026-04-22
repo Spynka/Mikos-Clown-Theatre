@@ -6,9 +6,11 @@
     <title>Театр клоунады «Микос» | Оформление заказа</title>
     <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/svg+xml" href="SVG/logo-2.svg" sizes="any">
+    /* <style>
         /* === ВСЯ ВЕРСТКА И СТИЛИ ИЗ ИСХОДНОГО ШАБЛОНА (НЕТРОНУТЫ) === */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+         /* * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             background: #ffffff;
             font-family: 'Nunito Sans', sans-serif;
@@ -1072,33 +1074,13 @@
             .order-info-label { width: 100%; margin-bottom: 4px; }
             .action-buttons { flex-direction: column; align-items: center; }
             .btn-download, .btn-cabinet { width: 100%; justify-content: center; }
-        }
-    </style>
+        } */
+    </style> 
 </head>
 <body>
 <div class="shop-container">
     <!-- HEADER (без изменений) -->
-    <header class="main-header">
-        <div class="header-inner">
-            <div class="header-left">
-                <div class="logo-group">
-                    <img class="logo-img" src="SVG/logo-2.svg" alt="Логотип">
-                    <img class="logo-img" src="SVG/logo.svg" alt="Логотип текст">
-                </div>
-                <ul class="nav-menu">
-                    <li><a href="index.html">Главная</a></li><li><a href="affiche.html">Афиша</a></li><li><a href="for-customers.html">Заказчикам</a></li><li><a href="brandbook.html">Брендбук</a></li>
-                    <li><span class="dots-icon" id="dotsIcon">⋯</span><span class="close-icon" id="closeIcon">✕</span></li>
-                </ul>
-                <div class="burger-icon" id="burgerIcon"><i class="fas fa-bars"></i></div>
-            </div>
-            <button class="buy-ticket-btn" onclick="window.location.href='performance.html'">Купить билет</button>
-        </div>
-        <div class="extra-menu-row" id="extraMenuRow">
-            <ul class="extra-nav-list"><li><a href="performances.html">Спектакли</a></li><li><a href="team.html">Команда</a></li><li><a href="history.html">О театре</a></li><li><a href="shop.html">Магазин</a></li><li><a href="contacts.html">Контакты</a></li></ul>
-        </div>
-    </header>
-    <div class="mobile-nav" id="mobileNav"><div class="close-mobile-menu" id="closeMobileMenu">✕</div><ul><li><a href="index.html">Главная</a></li><li><a href="affiche.html">Афиша</a></li><li><a href="for-customers.html">Заказчикам</a></li><li><a href="brandbook.html">Брендбук</a></li><li><a href="performances.html">Спектакли</a></li><li><a href="team.html">Команда</a></li><li><a href="history.html">О театре</a></li><li><a href="shop.html">Магазин</a></li><li><a href="contacts.html">Контакты</a></li></ul></div>
-    <div class="overlay" id="overlay"></div>
+    <div id="site-header"></div>
 
     <!-- ШАГ 1: ВЫБОР МЕСТ -->
     <div class="step-section active" id="step1">
@@ -1342,25 +1324,18 @@
     </div>
 
     <!-- FOOTER (без изменений) -->
-    <footer class="main-footer">
-        <div class="footer-container">
-            <div class="footer-top">
-                <div class="footer-brand">
-                    <div class="footer-logo"><img class="footer-logo-img" src="SVG/logo-black.svg" alt="Микос"><div class="footer-theater-title">Театр клоунады «Микос»</div></div>
-                    <div class="footer-description">Новаторские постановки, экспериментальные формы, классика в современном прочтении.<br>Откройте для себя театр заново.</div>
-                    <div class="newsletter-title">Подписаться на новости</div>
-                    <div class="subscribe-form"><input type="email" placeholder="Ваш email" class="subscribe-input" id="subscribeEmail"><button class="subscribe-btn" id="subscribeBtn">Подписаться</button></div>
-                    <label class="checkbox-custom" id="consentLabel"><input type="checkbox" id="consentCheckbox"><span class="checkmark"></span><span>Я согласен на обработку персональных данных</span></label>
-                    <div class="error-tooltip" id="consentError">Для подписки необходимо согласие на обработку данных</div>
-                    <div class="social-icons"><a href="#" class="social-circle"><i class="fab fa-vk"></i></a><a href="#" class="social-circle"><i class="fab fa-telegram-plane"></i></a></div>
-                </div>
-                <div class="footer-nav"><h4>Навигация</h4><ul><li><a href="index.html">Главная</a></li><li><a href="affiche.html">Афиша</a></li><li><a href="performances.html">Спектакли</a></li><li><a href="for-customers.html">Заказчикам</a></li><li><a href="history.html">О театре</a></li><li><a href="team.html">Команда</a></li><li><a href="shop.html">Магазин</a></li><li><a href="contacts.html">Контакты</a></li><li><a href="brandbook.html">Брендбук</a></li></ul></div>
-                <div class="footer-nav"><h4>Контакты</h4><ul><li><a href="#">Москва, ул. Театральная, 1</a></li><li><a href="tel:+74951234567">+7 (495) 123-45-67</a></li><li><a href="mailto:info@theatre.ru">info@theatre.ru</a></li><li><a href="#">Как добраться</a></li></ul></div>
-            </div>
-            <div class="footer-bottom"><div class="copyright">© 2026 Театр клоунады «Микос». Все права защищены.</div><div class="footer-buttons"><button class="footer-btn-primary">Купить билет</button><button class="footer-btn-secondary">Заказать шоу</button></div></div>
-        </div>
-    </footer>
+    <div id="site-footer"></div>
 </div>
+
+<!-- 1. Загрузчик компонентов (должен быть первым) -->
+<script src="js/components-loader.js"></script>
+
+<!-- 2. Логика хедера/футера -->
+<script src="js/header-scripts.js"></script>
+<script src="js/common.js"></script>
+
+<!-- 3. 🔥 Логика слайдера (ОБЯЗАТЕЛЬНО для работы стрелок/точек) -->
+<script src="js/slider-scripts.js"></script>
 
 <script>
     // === ДАННЫЕ О СПЕКТАКЛЯХ (синхронизированы с performance.html) ===
