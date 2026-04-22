@@ -72,144 +72,215 @@
 <script src="js/header-scripts.js"></script>
 <script src="js/common.js"></script>
 <script>
-    // Данные: у каждого актера теперь массив из трёх фотографий
-    const actorsData = [
-        {
-            name: 'Сергей Давыдов',
-            photos: [
-                'SVG/Давыдов-вбок.svg',
-                'images/content/actors/Давыдов-3.jpg',
-                'images/content/actors/Давыдов-2.jpg'
-            ]
-        },
-        {
-            name: 'Ксения Иванова',
-            photos: [
-                'SVG/Иванова-вбок.svg',
-                'images/content/actors/Иванова-3.jpg',
-                'images/content/actors/Иванова-2.jpg'
-            ]
-        },
-        {
-            name: 'Тотраз Циукаев',
-            photos: [
-                'SVG/Циукаев-вбок.svg',
-                'images/content/actors/Циукаев-3.jpg',
-                'images/content/actors/Циукаев-2.jpg'
-            ]
-        },
-        {
-            name: 'Максим Гамаюнов',
-            photos: [
-                'SVG/Гамаюнов-вбок.svg',
-                'https://placehold.co/428x428/E8EEF7/white?text=Максим+2',
-                'images/content/actors/Гамаюнов-2.jpg'
-            ]
-        },
+    (function() {
+        // ----- ДАННЫЕ АКТЕРОВ С АЛЬТЕРНАТИВНЫМИ SVG ДЛЯ МОБИЛЬНЫХ -----
+        const actorsData = [
+            {
+                name: 'Сергей Давыдов',
+                photos: [
+                    'SVG/Давыдов-вбок.svg',
+                    'images/content/actors/Давыдов-3.jpg',
+                    'images/content/actors/Давыдов-2.jpg'
+                ],
+                mobileSvg: 'SVG/Давыдов-прямо.svg'
+            },
+            {
+                name: 'Ксения Иванова',
+                photos: [
+                    'SVG/Иванова-вбок.svg',
+                    'images/content/actors/Иванова-3.jpg',
+                    'images/content/actors/Иванова-2.jpg'
+                ],
+                mobileSvg: 'SVG/Иванова-прямо.svg'
+            },
+            {
+                name: 'Тотраз Циукаев',
+                photos: [
+                    'SVG/Циукаев-вбок.svg',
+                    'images/content/actors/Циукаев-3.jpg',
+                    'images/content/actors/Циукаев-2.jpg'
+                ],
+                mobileSvg: 'SVG/Циукаев-прямо.svg'
+            },
+            {
+                name: 'Максим Гамаюнов',
+                photos: [
+                    'SVG/Гамаюнов-вбок.svg',
+                    'images/content/actors/Гамаюнов-3.jpg',
+                    'images/content/actors/Гамаюнов-2.jpg'
+                ],
+                mobileSvg: 'SVG/Гамаюнов-прямо.svg'
+            }
+        ];
 
-    ];
+        let visibleActors = 4;
+        let isMobile = window.innerWidth <= 860;
 
-    let visibleActors = 4; // изначально показываем всех (6)
+        // ----- ФУНКЦИЯ ПРОВЕРКИ МОБИЛЬНОГО УСТРОЙСТВА -----
+        function checkMobile() {
+            return window.innerWidth <= 860;
+        }
 
-    function renderActors() {
-        const container = document.getElementById('actorsContainer');
-        if (!container) return;
-        const displayActors = actorsData.slice(0, visibleActors);
-        container.innerHTML = '';
-        
-        displayActors.forEach(actor => {
-            // Блок для одного актера
-            const actorBlock = document.createElement('div');
-            actorBlock.className = 'actor-block';
+        // ----- ФУНКЦИЯ РЕНДЕРА КАРТОЧЕК АКТЕРОВ -----
+        function renderActors() {
+            const container = document.getElementById('actorsContainer');
+            if (!container) return;
             
-            // Имя актера
-            const nameDiv = document.createElement('div');
-            nameDiv.className = 'actor-name';
-            nameDiv.textContent = actor.name;
+            const displayActors = actorsData.slice(0, visibleActors);
+            const currentIsMobile = checkMobile();
             
-            // Сетка с тремя фото
-            const photosGrid = document.createElement('div');
-            photosGrid.className = 'actor-photos-grid';
+            container.innerHTML = '';
             
-            // Добавляем три карточки с фото
-            actor.photos.forEach(photoUrl => {
-                const photoCard = document.createElement('div');
-                photoCard.className = 'actor-photo-card';
-                const img = document.createElement('img');
-                img.src = photoUrl;
-                img.alt = actor.name;
-                photoCard.appendChild(img);
-                photosGrid.appendChild(photoCard);
+            displayActors.forEach(actor => {
+                const actorBlock = document.createElement('div');
+                actorBlock.className = 'actor-block';
+                
+                const nameDiv = document.createElement('div');
+                nameDiv.className = 'actor-name';
+                nameDiv.textContent = actor.name;
+                
+                const photosGrid = document.createElement('div');
+                photosGrid.className = 'actor-photos-grid';
+                
+                // Копируем массив фото
+                const photosToShow = [...actor.photos];
+                
+                // Если мобильное разрешение — заменяем первый SVG на альтернативный
+                if (currentIsMobile && actor.mobileSvg) {
+                    photosToShow[0] = actor.mobileSvg;
+                }
+                
+                photosToShow.forEach(photoUrl => {
+                    const photoCard = document.createElement('div');
+                    photoCard.className = 'actor-photo-card';
+                    const img = document.createElement('img');
+                    img.src = photoUrl;
+                    img.alt = actor.name;
+                    img.loading = 'lazy';
+                    photoCard.appendChild(img);
+                    photosGrid.appendChild(photoCard);
+                });
+                
+                actorBlock.appendChild(nameDiv);
+                actorBlock.appendChild(photosGrid);
+                container.appendChild(actorBlock);
             });
             
-            actorBlock.appendChild(nameDiv);
-            actorBlock.appendChild(photosGrid);
-            container.appendChild(actorBlock);
-        });
-        
-        const showMoreBtn = document.getElementById('showMoreActorsBtn');
-        if (showMoreBtn) {
-            showMoreBtn.style.display = visibleActors >= actorsData.length ? 'none' : 'block';
+            // Управление кнопкой "Показать еще"
+            const showMoreBtn = document.getElementById('showMoreActorsBtn');
+            if (showMoreBtn) {
+                showMoreBtn.style.display = visibleActors >= actorsData.length ? 'none' : 'block';
+            }
+            
+            isMobile = currentIsMobile;
         }
-    }
 
-    document.getElementById('showMoreActorsBtn')?.addEventListener('click', () => {
-        if (visibleActors < actorsData.length) {
-            visibleActors = Math.min(visibleActors + 3, actorsData.length);
-            renderActors();
-        }
-    });
-
-    // Обработчики кнопок (из старого кода)
-    document.querySelector('.director-btn')?.addEventListener('click', () => alert('Подробнее о художественном руководителе'));
-    document.querySelector('.work-btn')?.addEventListener('click', () => alert('Форма для заполнения анкеты будет доступна скоро'));
-
-    // Header dropdown (если элементы существуют)
-    const dotsIcon = document.getElementById('dotsIcon');
-    const closeIcon = document.getElementById('closeIcon');
-    const extraRow = document.getElementById('extraMenuRow');
-    if (dotsIcon && closeIcon && extraRow) {
-        function openExtraMenu() { extraRow.classList.add('open'); dotsIcon.style.display = 'none'; closeIcon.style.display = 'inline-flex'; }
-        function closeExtraMenu() { extraRow.classList.remove('open'); dotsIcon.style.display = 'inline-flex'; closeIcon.style.display = 'none'; }
-        dotsIcon.addEventListener('click', openExtraMenu);
-        closeIcon.addEventListener('click', closeExtraMenu);
-    }
-
-    // Бургер-меню
-    const burgerIcon = document.getElementById('burgerIcon');
-    const mobileNav = document.getElementById('mobileNav');
-    const overlay = document.getElementById('overlay');
-    const closeMobileBtn = document.getElementById('closeMobileMenu');
-    if (burgerIcon && mobileNav && overlay && closeMobileBtn) {
-        function openMobileMenu() { mobileNav.classList.add('open'); overlay.classList.add('active'); document.body.style.overflow = 'hidden'; }
-        function closeMobileMenu() { mobileNav.classList.remove('open'); overlay.classList.remove('active'); document.body.style.overflow = ''; }
-        burgerIcon.addEventListener('click', openMobileMenu);
-        closeMobileBtn.addEventListener('click', closeMobileMenu);
-        overlay.addEventListener('click', closeMobileMenu);
-    }
-
-    // Подписка (если есть элементы)
-    const subscribeBtn = document.getElementById('subscribeBtn');
-    if (subscribeBtn) {
-        subscribeBtn.addEventListener('click', () => {
-            const chk = document.getElementById('consentCheckbox');
-            const err = document.getElementById('consentError');
-            if (!chk.checked) {
-                err.style.display = 'block';
-                setTimeout(() => err.style.display = 'none', 2500);
-            } else {
-                alert('Спасибо за подписку!');
-                document.getElementById('subscribeEmail').value = '';
-                chk.checked = false;
+        // ----- ОБРАБОТЧИК КНОПКИ "ПОКАЗАТЬ ЕЩЕ" -----
+        document.getElementById('showMoreActorsBtn')?.addEventListener('click', () => {
+            if (visibleActors < actorsData.length) {
+                visibleActors = Math.min(visibleActors + 3, actorsData.length);
+                renderActors();
             }
         });
-    }
 
-    document.querySelectorAll('.footer-btn-primary, .buy-ticket-btn').forEach(btn => {
-        btn.addEventListener('click', () => alert('Билеты скоро в продаже'));
-    });
+        // ----- ОТСЛЕЖИВАНИЕ ИЗМЕНЕНИЯ РАЗМЕРА ОКНА -----
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                const newIsMobile = checkMobile();
+                // Перерендериваем только если состояние (мобильное/десктоп) изменилось
+                if (newIsMobile !== isMobile) {
+                    renderActors();
+                }
+            }, 150);
+        });
 
-    renderActors();
+        // ----- ОБРАБОТЧИКИ КНОПОК -----
+        document.querySelector('.director-btn')?.addEventListener('click', () => {
+            alert('Подробнее о художественном руководителе');
+        });
+        
+        document.querySelector('.work-btn')?.addEventListener('click', () => {
+            alert('Форма для заполнения анкеты будет доступна скоро');
+        });
+
+        // ----- HEADER DROPDOWN (ДОПОЛНИТЕЛЬНОЕ МЕНЮ) -----
+        const dotsIcon = document.getElementById('dotsIcon');
+        const closeIcon = document.getElementById('closeIcon');
+        const extraRow = document.getElementById('extraMenuRow');
+        
+        if (dotsIcon && closeIcon && extraRow) {
+            function openExtraMenu() {
+                extraRow.classList.add('open');
+                dotsIcon.style.display = 'none';
+                closeIcon.style.display = 'inline-flex';
+            }
+            function closeExtraMenu() {
+                extraRow.classList.remove('open');
+                dotsIcon.style.display = 'inline-flex';
+                closeIcon.style.display = 'none';
+            }
+            dotsIcon.addEventListener('click', openExtraMenu);
+            closeIcon.addEventListener('click', closeExtraMenu);
+        }
+
+        // ----- БУРГЕР-МЕНЮ ДЛЯ МОБИЛЬНЫХ -----
+        const burgerIcon = document.getElementById('burgerIcon');
+        const mobileNav = document.getElementById('mobileNav');
+        const overlay = document.getElementById('overlay');
+        const closeMobileBtn = document.getElementById('closeMobileMenu');
+        
+        if (burgerIcon && mobileNav && overlay && closeMobileBtn) {
+            function openMobileMenu() {
+                mobileNav.classList.add('open');
+                overlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+            function closeMobileMenu() {
+                mobileNav.classList.remove('open');
+                overlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+            burgerIcon.addEventListener('click', openMobileMenu);
+            closeMobileBtn.addEventListener('click', closeMobileMenu);
+            overlay.addEventListener('click', closeMobileMenu);
+        }
+
+        // ----- ПОДПИСКА В ФУТЕРЕ -----
+        const subscribeBtn = document.getElementById('subscribeBtn');
+        if (subscribeBtn) {
+            subscribeBtn.addEventListener('click', () => {
+                const chk = document.getElementById('consentCheckbox');
+                const err = document.getElementById('consentError');
+                const emailInput = document.getElementById('subscribeEmail');
+                
+                if (!chk.checked) {
+                    if (err) {
+                        err.style.display = 'block';
+                        setTimeout(() => err.style.display = 'none', 2500);
+                    }
+                } else {
+                    alert('Спасибо за подписку!');
+                    if (emailInput) emailInput.value = '';
+                    chk.checked = false;
+                }
+            });
+        }
+
+        // ----- КНОПКИ "КУПИТЬ БИЛЕТ" -----
+        document.querySelectorAll('.footer-btn-primary, .buy-ticket-btn').forEach(btn => {
+            btn.addEventListener('click', () => alert('Билеты скоро в продаже'));
+        });
+
+        // ----- КНОПКА "ЗАКАЗ ШОУ" -----
+        document.querySelector('.footer-btn-secondary')?.addEventListener('click', () => {
+            alert('Заказ шоу: +7 (495) 123-45-67');
+        });
+
+        // ----- ЗАПУСК РЕНДЕРА -----
+        renderActors();
+    })();
 </script>
 </body>
 </html>
