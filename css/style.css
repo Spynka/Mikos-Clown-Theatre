@@ -8998,3 +8998,259 @@ body {
 /* ВАЖНО: УБЕДИТЕСЬ, ЧТО ЭТИ СТИЛИ ИДУТ ПОСЛЕ     */
 /* ВСЕХ ОБЩИХ СТИЛЕЙ .performance-card           */
 /* ============================================= */
+
+
+
+
+
+
+
+
+
+
+
+/* Проверьте и добавьте если нужно */
+.team-card *,
+.team-card *::before,
+.team-card *::after {
+    outline: none !important;
+    border: none !important;
+}
+
+/* Убираем обводку у всех изображений в карточках команды */
+.team-section img,
+.team-scroll-wrapper img {
+    outline: none !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* Убираем стандартную обводку браузера при фокусе */
+.team-card:focus-visible,
+.team-img:focus-visible {
+    outline: none !important;
+}
+
+/* ============================================= */
+/* ЭКСТРЕННЫЙ ПАТЧ ДЛЯ 360px (f12)               */
+/* ============================================= */
+
+/* ----- 1. ФОРМА "ОТПРАВИТЬ ЗАЯВКУ" - ПРИНУДИТЕЛЬНО В ГРАНИЦЫ ----- */
+@media (max-width: 860px) {
+    /* Жестко фиксируем контейнер */
+    .clients-grid {
+        display: block !important;
+        width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        overflow: hidden !important;
+    }
+
+    .clients-form {
+        display: block !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 20px 16px !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+        border: none !important;
+        outline: none !important;
+        box-shadow: none !important;
+    }
+
+    /* Все внутренние элементы формы - никаких выступов */
+    .clients-form .form-group {
+        width: 100% !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        padding: 0 !important;
+    }
+
+    .clients-form .form-group input,
+    .clients-form .form-group textarea {
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 12px !important;
+        box-sizing: border-box !important;
+        border: 1px solid #E5E3E1 !important;
+        outline: none !important;
+        box-shadow: none !important;
+    }
+
+    .clients-form .form-group input:focus,
+    .clients-form .form-group textarea:focus {
+        outline: 2px solid #4A6294 !important;
+        outline-offset: -2px !important;
+        border-color: transparent !important;
+    }
+
+    .submit-client-btn {
+        width: 100% !important;
+        margin: 10px 0 0 0 !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Родительские контейнеры - убираем все лишнее */
+    .clients-section,
+    .clients-section .container-main {
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+        overflow-x: hidden !important;
+        overflow-y: visible !important;
+    }
+}
+
+/* Для ширины 360px - еще жестче */
+@media (max-width: 400px) {
+    .clients-section .container-main {
+        padding-left: 12px !important;
+        padding-right: 12px !important;
+    }
+
+    .clients-form {
+        padding: 16px 12px !important;
+    }
+
+    .clients-form .form-group input,
+    .clients-form .form-group textarea {
+        padding: 10px !important;
+        font-size: 14px !important;
+    }
+
+    .clients-form .form-group label {
+        font-size: 12px !important;
+        margin-bottom: 4px !important;
+    }
+}
+
+/* ----- 2. КАРТОЧКИ АКТЕРОВ - ПОЛНОЕ УНИЧТОЖЕНИЕ ОБВОДКИ ----- */
+/* Используем максимальную специфичность */
+body .shop-container .team-section .container-main .team-scroll-wrapper .team-card,
+body .shop-container .team-section .container-main .team-scroll-wrapper .team-card *,
+body .team-section .team-scroll-wrapper .team-card,
+body .team-section .team-scroll-wrapper .team-card *,
+.team-card,
+.team-card *,
+.team-img,
+.team-name,
+.team-position {
+    outline: none !important;
+    outline-offset: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+}
+
+/* Специально для изображения */
+.team-img,
+img.team-img,
+.team-card img {
+    outline: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+}
+
+/* Убираем обводку при фокусе/наведении/активе */
+.team-card:hover,
+.team-card:focus,
+.team-card:active,
+.team-card:focus-visible,
+.team-img:hover,
+.team-img:focus,
+.team-img:active,
+.team-img:focus-visible,
+.team-name:hover,
+.team-name:focus,
+.team-position:hover,
+.team-position:focus {
+    outline: none !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* Убираем возможные псевдоэлементы */
+.team-card::before,
+.team-card::after,
+.team-img::before,
+.team-img::after {
+    display: none !important;
+    content: none !important;
+}
+
+/* Для мобильной версии - дополнительный слой */
+@media (max-width: 860px) {
+    .team-card,
+    .team-img,
+    .team-name,
+    .team-position {
+        outline: none !important;
+        border: none !important;
+        box-shadow: none !important;
+        -webkit-tap-highlight-color: transparent !important;
+    }
+
+    /* Если обводка от браузера при тапе */
+    .team-card {
+        -webkit-touch-callout: none !important;
+        -webkit-user-select: none !important;
+        user-select: none !important;
+    }
+
+    /* Сбрасываем все возможные стили фокуса */
+    .team-card:focus-visible,
+    .team-img:focus-visible {
+        outline: none !important;
+        box-shadow: none !important;
+    }
+}
+
+/* ----- 3. ГЛОБАЛЬНЫЙ СБРОС OUTLINE ДЛЯ ВСЕХ КАРТОЧЕК НА МОБИЛЬНЫХ ----- */
+@media (max-width: 860px) {
+    /* Отключаем стандартный outline фокуса для всех элементов */
+    *:focus-visible {
+        outline: none !important;
+    }
+
+    /* Но оставляем кастомный outline для полей ввода */
+    input:focus-visible,
+    textarea:focus-visible,
+    select:focus-visible,
+    button:focus-visible {
+        outline: 2px solid #4A6294 !important;
+        outline-offset: -2px !important;
+    }
+
+    /* Для карточек - никаких outline никогда */
+    .performance-card:focus-visible,
+    .merch-card:focus-visible,
+    .team-card:focus-visible,
+    .product-card:focus-visible,
+    .service-card:focus-visible {
+        outline: none !important;
+    }
+}
+
+/* ----- 4. ФИНАЛЬНЫЙ ФИКС - ПЕРЕОПРЕДЕЛЯЕМ ВСЕ ВОЗМОЖНЫЕ СТИЛИ ----- */
+/* Если что-то осталось - это перебьет всё */
+@media (max-width: 860px) {
+    /* Форма */
+    .clients-form,
+    .clients-form * {
+        max-width: 100vw !important;
+        overflow-wrap: break-word !important;
+    }
+
+    /* Карточки актеров */
+    .team-card,
+    .team-card * {
+        border: 0 !important;
+        outline: 0 !important;
+        box-shadow: none !important;
+    }
+}
