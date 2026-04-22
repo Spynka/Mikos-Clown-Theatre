@@ -9285,3 +9285,23 @@ img.team-img,
         scroll-padding-top: 0 !important;
     }
 }
+
+
+/* ===== ФИКС: ОТСТУПЫ ДЛЯ ССЫЛОК В СЕКЦИЯХ СО СЛАЙДЕРАМИ ===== */
+@media (min-width: 861px) {
+    /* Добавляем визуальный отступ справа для ссылок, 
+       чтобы компенсировать padding-right: 0 у контейнера */
+    .plays-section .section-link,
+    .shop-section .section-link {
+        margin-right: clamp(16px, 5vw, 80px) !important;
+    }
+    
+    /* Альтернативный вариант: добавить отступ самому заголовку секции */
+    /*
+    .plays-section .section-header,
+    .shop-section .section-header {
+        padding-right: clamp(16px, 5vw, 80px) !important;
+        box-sizing: border-box;
+    }
+    */
+}
