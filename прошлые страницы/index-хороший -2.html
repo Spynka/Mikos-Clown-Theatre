@@ -9,133 +9,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" type="image/svg+xml" href="SVG/logo-2.svg" sizes="any">
     <style>
-        /* ===== СТИЛИ МОДАЛЬНОГО ОКНА КОМАНДЫ (как в team.html) ===== */
-        .team-modal-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(6px);
-            z-index: 10000;
-            display: flex; align-items: center; justify-content: center;
-            opacity: 0; visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-            padding: 20px; box-sizing: border-box;
-        }
-        .team-modal-overlay.active { opacity: 1; visibility: visible; }
-        
-        .team-modal-content {
-            background: #1A1A1A;
-            border-radius: 24px;
-            max-width: 900px; width: 100%;
-            max-height: 85vh; overflow-y: auto;
-            position: relative;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            transform: scale(0.95);
-            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-        .team-modal-overlay.active .team-modal-content { transform: scale(1); }
-        
-        .team-modal-close {
-            position: absolute; top: 20px; right: 20px;
-            width: 44px; height: 44px; border-radius: 50%;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 24px; display: flex; align-items: center; justify-content: center;
-            cursor: pointer; z-index: 10;
-            transition: all 0.2s ease;
-        }
-        .team-modal-close:hover {
-            background: #E8454D;
-            color: white;
-            border-color: #E8454D;
-            transform: rotate(90deg);
-        }
-        
-        .team-modal-body { display: flex; flex-direction: column; }
-        
-        .team-modal-photo {
-            width: 100%; height: 350px; overflow: hidden;
-            border-radius: 24px 24px 0 0; flex-shrink: 0;
-        }
-        .team-modal-photo img {
-            width: 100%; height: 100%; object-fit: cover; display: block;
-        }
-        
-        .team-modal-info { padding: 30px; }
-        
-        .team-modal-name {
-            font-family: 'Unbounded', sans-serif; font-size: 32px;
-            font-weight: 700; color: #FFFFFF; margin-bottom: 6px;
-            line-height: 1.2;
-        }
-        .team-modal-nickname {
-            color: #E8454D; font-weight: 700; font-size: 18px;
-            margin-bottom: 12px; font-family: 'Nunito Sans', sans-serif;
-        }
-        .team-modal-position {
-            font-size: 13px; font-weight: 700; color: #4A6294;
-            text-transform: uppercase; letter-spacing: 1.5px;
-            margin-bottom: 20px; padding-bottom: 16px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-        }
-        
-        .team-modal-section-title {
-            font-family: 'Unbounded', sans-serif; font-size: 18px;
-            font-weight: 700; color: #F8F7F6;
-            margin-top: 24px; margin-bottom: 14px;
-            border-left: 4px solid #E8454D; padding-left: 16px;
-        }
-        .team-modal-bio {
-            color: rgba(255, 255, 255, 0.85);
-            font-family: 'Nunito Sans', sans-serif;
-            line-height: 1.6; font-size: 15px;
-            margin-bottom: 8px;
-        }
-        
-        .team-performances-list {
-            display: flex; flex-direction: column;
-            margin-top: 8px; margin-bottom: 8px;
-        }
-        .team-performance-item {
-            display: flex; align-items: baseline;
-            padding: 12px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-            color: rgba(255, 255, 255, 0.9);
-            font-family: 'Nunito Sans', sans-serif; font-size: 15px;
-        }
-        .team-performance-item:last-child { border-bottom: none; }
-        .team-performance-bullet {
-            color: #4A6294; font-weight: 700; font-size: 20px;
-            margin-right: 16px; min-width: 16px;
-        }
-        .team-performance-text { line-height: 1.5; flex: 1; }
-
-        /* Адаптив модалки команды */
-        @media (min-width: 768px) {
-            .team-modal-body { flex-direction: row; }
-            .team-modal-photo {
-                width: 40%; height: auto;
-                border-radius: 24px 0 0 24px;
-            }
-            .team-modal-info { width: 60%; padding: 36px; }
-        }
-        @media (max-width: 480px) {
-            .team-modal-info { padding: 24px 20px; }
-            .team-modal-name { font-size: 28px; }
-            .team-modal-close { top: 16px; right: 16px; width: 40px; height: 40px; }
-        }
-
-        /* Кликабельность карточек команды */
-        .team-card {
-            cursor: pointer;
-            transition: transform 0.25s ease, filter 0.25s ease;
-        }
-        .team-card:hover {
-            transform: scale(1.02);
-            filter: brightness(1.1);
-        }
-
-        /* ===== ОСТАЛЬНЫЕ СТИЛИ МОДАЛОК (сессии, товары, контакты) ===== */
+        /* Дополнительные стили для модальных окон в стиле сайта */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -663,22 +537,22 @@
                 <a href="team.html" class="section-link">Вся команда <i class="fas fa-arrow-right"></i></a>
             </div>
             <div class="team-scroll-wrapper">
-                <div class="team-card" data-member="Сергей Давыдов">
+                <div class="team-card">
                     <img class="team-img" src="images/content/actors/Давыдов-2.jpg" alt="Сергей Давыдов">
                     <h3 class="team-name">Сергей Давыдов</h3>
                     <p class="team-position">Художественный руководитель</p>
                 </div>
-                <div class="team-card" data-member="Ксения Иванова">
+                <div class="team-card">
                     <img class="team-img" src="images/content/actors/Иванова-2.jpg" alt="Ксения Иванова">
                     <h3 class="team-name">Ксения Иванова</h3>
                     <p class="team-position">Актриса, директор, продюсер</p>
                 </div>
-                <div class="team-card" data-member="Максим Гамаюнов">
+                <div class="team-card">
                     <img class="team-img" src="images/content/actors/Гамаюнов-2.jpg" alt="Максим Гамаюнов">
                     <h3 class="team-name">Максим Гамаюнов</h3>
                     <p class="team-position">Актёр</p>
                 </div>
-                <div class="team-card" data-member="Тотраз Циукаев">
+                <div class="team-card">
                     <img class="team-img" src="images/content/actors/Циукаев-2.jpg" alt="Тотраз Циукаев">
                     <h3 class="team-name">Тотраз Циукаев</h3>
                     <p class="team-position">Актёр</p>
@@ -705,14 +579,6 @@
     <!-- Заглушка для подгрузки футера -->
     <div id="site-footer"></div>
     
-</div>
-
-<!-- МОДАЛЬНОЕ ОКНО КОМАНДЫ (в стиле team.html) -->
-<div class="team-modal-overlay" id="teamModal">
-    <div class="team-modal-content">
-        <button class="team-modal-close" id="teamModalClose">&times;</button>
-        <div class="team-modal-body" id="teamModalBody"></div>
-    </div>
 </div>
 
 <!-- МОДАЛЬНОЕ ОКНО ВЫБОРА ДАТЫ И ВРЕМЕНИ -->
@@ -784,6 +650,14 @@
 <script src="js/common.js"></script>
 <script src="js/slider-scripts.js"></script>
 
+<!-- ВСТАВЬТЕ ЭТОТ КОД ВМЕСТО СУЩЕСТВУЮЩЕГО <script> В КОНЦЕ index.html -->
+
+<!-- Скрипты -->
+<script src="js/components-loader.js"></script>
+<script src="js/header-scripts.js"></script>
+<script src="js/common.js"></script>
+<script src="js/slider-scripts.js"></script>
+
 <!-- Основной скрипт страницы -->
 <script>
     (function() {
@@ -826,64 +700,6 @@
             { id: 8, name: 'Программа спектакля', desc: 'Иллюстрированная', price: 350, isClothing: false, img: 'https://placehold.co/428x220/2A3D5E/white?text=Программа', category: 'printed' }
         ];
 
-        // ===== ДАННЫЕ КОМАНДЫ ДЛЯ МОДАЛКИ (как в team.html) =====
-        const teamMembersData = {
-            'Сергей Давыдов': {
-                name: 'Сергей Давыдов',
-                nickname: 'Паганель',
-                photo: 'images/content/actors/Давыдов-3.jpg',
-                position: 'Художественный руководитель / Актер',
-                bio: 'Выпускник ГИТИСа (мастерская П. Фоменко, 1995). Основатель театра «Микос». Разработал уникальную систему актерского тренинга. Лауреат трех премий «Золотая маска». Владеет пантомимой, жонглированием и акробатикой.',
-                performances: [
-                    '«Гамлет» — Гамлет',
-                    '«Вишневый сад» — Лопахин',
-                    '«Три сестры» — Вершинин',
-                    '«Ревизор» — Хлестаков',
-                    '«Мастер и Маргарита» — Мастер'
-                ]
-            },
-            'Ксения Иванова': {
-                name: 'Ксения Иванова',
-                nickname: 'Муза',
-                photo: 'images/content/actors/Иванова-3.jpg',
-                position: 'Актриса, директор, продюсер',
-                bio: 'Выпускница Школы-студии МХАТ (2008). В театре «Микос» с 2010 года. Обладательница уникального пластического дара. Лауреат «Золотой маски» за роль Нины Заречной (2015).',
-                performances: [
-                    '«Чайка» — Нина Заречная',
-                    '«Анна Каренина» — Анна',
-                    '«Три сестры» — Маша',
-                    '«Дядя Ваня» — Елена',
-                    '«Мастер и Маргарита» — Маргарита'
-                ]
-            },
-            'Максим Гамаюнов': {
-                name: 'Максим Гамаюнов',
-                nickname: 'Гам',
-                photo: 'images/content/actors/Гамаюнов-3.jpg',
-                position: 'Актёр, музыкант',
-                bio: 'Окончил РАМ им. Гнесиных по классу аккордеона. Играет на 7 инструментах. В спектаклях создает живое музыкальное сопровождение. С 2015 года в труппе театра.',
-                performances: [
-                    '«Пиковая дама» — Шарманщик',
-                    '«Снежная королева» — Сказочник',
-                    '«Дон Жуан» — Лепорелло',
-                    '«Ревизор» — Бобчинский'
-                ]
-            },
-            'Тотраз Циукаев': {
-                name: 'Тотраз Циукаев',
-                nickname: 'Тот',
-                photo: 'images/content/actors/Циукаев-3.jpg',
-                position: 'Актёр, каскадер',
-                bio: 'До прихода в театр работал в Цирке дю Солей. Владеет жонглированием, эквилибром, сценическим фехтованием. В театре с 2018 года. Мастер трюковых сцен.',
-                performances: [
-                    '«Ромео и Джульетта» — Меркуцио',
-                    '«Слуга двух господ» — Труффальдино',
-                    '«Мастер и Маргарита» — Кот Бегемот',
-                    '«Сон в летнюю ночь» — Пэк'
-                ]
-            }
-        };
-
         // ===== СОСТОЯНИЕ =====
         let currentPerformance = null;
         let selectedSession = null;
@@ -893,72 +709,6 @@
         let currentProduct = null;
         let editingIndex = -1;
         let returnToContacts = false;
-
-        // ===== МОДАЛКА КОМАНДЫ =====
-        const teamModal = document.getElementById('teamModal');
-        const teamModalBody = document.getElementById('teamModalBody');
-        const teamModalClose = document.getElementById('teamModalClose');
-
-        function closeTeamModal() {
-            if (teamModal) {
-                teamModal.classList.remove('active');
-                document.body.style.overflow = '';
-            }
-        }
-
-        function openTeamModal(memberName) {
-            const data = teamMembersData[memberName];
-            if (!data || !teamModal || !teamModalBody) return;
-            
-            const nicknameHtml = data.nickname ? `<div class="team-modal-nickname">«${data.nickname}»</div>` : '';
-            const performancesHtml = data.performances ? data.performances.map(p => `
-                <div class="team-performance-item">
-                    <span class="team-performance-bullet">•</span>
-                    <span class="team-performance-text">${p}</span>
-                </div>
-            `).join('') : '';
-
-            teamModalBody.innerHTML = `
-                <div class="team-modal-photo">
-                    <img src="${data.photo}" alt="${data.name}" loading="lazy">
-                </div>
-                <div class="team-modal-info">
-                    <div class="team-modal-name">${data.name}</div>
-                    ${nicknameHtml}
-                    <div class="team-modal-position">${data.position}</div>
-                    
-                    ${data.bio ? `
-                    <div class="team-modal-section-title">Творческий путь</div>
-                    <div class="team-modal-bio">${data.bio}</div>
-                    ` : ''}
-                    
-                    ${data.performances && data.performances.length ? `
-                    <div class="team-modal-section-title">Спектакли в репертуаре</div>
-                    <div class="team-performances-list">
-                        ${performancesHtml}
-                    </div>
-                    ` : ''}
-                </div>
-            `;
-            
-            teamModal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        // Обработчики закрытия модалки команды
-        if (teamModalClose) {
-            teamModalClose.addEventListener('click', closeTeamModal);
-        }
-        if (teamModal) {
-            teamModal.addEventListener('click', (e) => {
-                if (e.target === teamModal) closeTeamModal();
-            });
-        }
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && teamModal && teamModal.classList.contains('active')) {
-                closeTeamModal();
-            }
-        });
 
         // ===== РЕНДЕР СПЕКТАКЛЕЙ =====
         function renderUpcomingScroll() {
@@ -1452,7 +1202,6 @@
             document.getElementById('sessionModal')?.classList.remove('active');
             document.getElementById('productModal')?.classList.remove('active');
             document.getElementById('contactsModal')?.classList.remove('active');
-            closeTeamModal();
             document.body.style.overflow = '';
         }
 
@@ -1464,31 +1213,17 @@
             }
         };
 
-        // ===== ИНИЦИАЛИЗАЦИЯ КОМАНДЫ =====
-        function initTeamCards() {
-            const teamCards = document.querySelectorAll('.team-card');
-            teamCards.forEach(card => {
-                const memberName = card.dataset.member;
-                if (!memberName) return;
-                
-                card.addEventListener('click', (e) => {
-                    if (e.target.closest('a')) return;
-                    openTeamModal(memberName);
-                });
-            });
-        }
-
         // ===== ИНИЦИАЛИЗАЦИЯ =====
         document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 renderUpcomingScroll();
                 renderAllPlaysScroll();
                 renderMerchScroll();
-                initTeamCards();
             }, 100);
         });
         
     })();
+    
 </script>
 </body>
 </html>
