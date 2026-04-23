@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Театр клоунады «Микос» | Спектакли</title>
+    <link rel="icon" type="image/svg+xml" href="SVG/logo-2.svg" sizes="any">
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Добавляем отступ снизу для контейнера с карточками */
+        .performances-page {
+            margin-bottom: 0px;
+        }
+    </style>
+</head>
+<body>
+<div class="shop-container">
+    <!-- HEADER (сохранён) -->
+    <div id="site-header"></div>
+    <div class="mobile-nav" id="mobileNav"><div class="close-mobile-menu" id="closeMobileMenu">✕</div><ul><li><a href="#">Главная</a></li><li><a href="#">Афиша</a></li><li><a href="#">Заказчикам</a></li><li><a href="#">Брендбук</a></li><li><a href="#">Спектакли</a></li><li><a href="#">Команда</a></li><li><a href="#">О театре</a></li><li><a href="#">Магазин</a></li><li><a href="#">Контакты</a></li></ul></div>
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Основной контент: 5 карточек -->
+    <div class="performances-page">
+        <div class="section-header">
+            <h1 class="section-title">Спектакли</h1>
+            <a href="#" class="section-link">Вся афиша <i class="fas fa-arrow-right"></i></a>
+        </div>
+        
+        <div class="performances-grid" id="performancesGrid"></div>
+        <!-- Кнопка "показать еще" скрыта -->
+        <div class="show-more-wrapper">
+            <button class="show-more-btn" id="showMorePerformancesBtn" style="display: none;">Показать еще</button>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div id="site-footer"></div>
+</div>
+<script src="js/components-loader.js"></script>
+<script src="js/header-scripts.js"></script>
+<script src="js/common.js"></script>
+<script>
+    (function() {
+        // ----- СПИСОК ИЗ 5 СПЕКТАКЛЕЙ -----
+        const performances = [
+            { id: 1, name: 'Лишь бы не было детей', date: '15 апреля 19:00', monthKey: 'апрель', year: 2026, desc: 'История сосуществования очень разных людей. Клоунада о выживании.', age: '18+', time: '90 минут', tickets: true, venue: 'Основная сцена', img: 'images/content/performances/15.jpg' },
+            { id: 2, name: 'Богатыри', date: '22 апреля 18:00', monthKey: 'апрель', year: 2026, desc: 'Былины в современном прочтении. Эпическая комедия для всей семьи.', age: '12+', time: '100 минут', tickets: true, venue: 'Основная сцена', img: 'images/content/performances/3.jpg' },
+            { id: 3, name: 'Ожидание', date: '5 мая 20:00', monthKey: 'май', year: 2026, desc: 'Трогательная история о времени, надежде и встречах.', age: '16+', time: '80 минут', tickets: true, venue: 'Малая сцена', img: 'images/content/performances/9.jpg' },
+            { id: 4, name: 'Кабаре-Шапито', date: '12 мая 19:00', monthKey: 'май', year: 2026, desc: 'Феерия клоунады и музыки. Кабаре с цирковыми номерами.', age: '18+', time: '110 минут', tickets: true, venue: 'Основная сцена', img: 'images/content/performances/10.jpg' },
+            { id: 5, name: 'Авиаторы', date: '20 октября 19:00', monthKey: 'октябрь', year: 2026, desc: 'О мечтах, полетах и свободе. Вдохновляющая драма.', age: '16+', time: '95 минут', tickets: true, venue: 'Основная сцена', img: 'images/content/performances/6.jpg' }
+        ];
+
+        const grid = document.getElementById('performancesGrid');
+        function renderCards() {
+            let html = '';
+            performances.forEach(p => {
+                // Убрали тег с билетами, оставили только возраст и время
+                html += `
+                    <div class="performance-card">
+                        <img class="performance-img" src="${p.img}" alt="${p.name}">
+                        <div class="performance-content">
+                            <div class="performance-tags">
+                                <span class="tag tag-age">${p.age}</span>
+                                <span class="tag tag-time">${p.time}</span>
+                            </div>
+                            <h3 class="performance-name">${p.name}</h3>
+                            <p class="performance-desc">${p.desc}</p>
+                            <div class="performance-btns">
+                                <button class="btn-details" data-id="${p.id}">Подробнее</button>
+                                <button class="btn-buy-performance" data-id="${p.id}">Купить билет</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            grid.innerHTML = html;
+        }
+        renderCards();
+
+        // Обработчики кликов
+        grid.addEventListener('click', (e) => {
+            const btn = e.target.closest('button');
+            if (!btn) return;
+            const id = btn.getAttribute('data-id');
+            if (!id) return;
+            const perf = performances.find(p => p.id == id);
+            
+            if (btn.classList.contains('btn-details')) {
+                window.location.href = `performance.html?id=${perf.id}`;
+            } else if (btn.classList.contains('btn-buy-performance')) {
+                if (perf.tickets) {
+                    alert(`Билеты на спектакль "${perf.name}" доступны.`);
+                } else {
+                    alert(`Билетов на "${perf.name}" пока нет.`);
+                }
+            }
+        });
+
+        // Хедер, бургер, подписка
+        const dotsIcon = document.getElementById('dotsIcon');
+        const closeIcon = document.getElementById('closeIcon');
+        const extraRow = document.getElementById('extraMenuRow');
+        if (dotsIcon) dotsIcon.addEventListener('click', () => { extraRow.classList.add('open'); dotsIcon.style.display='none'; closeIcon.style.display='inline-flex'; });
+        if (closeIcon) closeIcon.addEventListener('click', () => { extraRow.classList.remove('open'); dotsIcon.style.display='inline-flex'; closeIcon.style.display='none'; });
+        
+        const burger = document.getElementById('burgerIcon'), mobileNav = document.getElementById('mobileNav'), overlay = document.getElementById('overlay'), closeMobile = document.getElementById('closeMobileMenu');
+        function openMob() { mobileNav.classList.add('open'); overlay.classList.add('active'); document.body.style.overflow='hidden'; }
+        function closeMob() { mobileNav.classList.remove('open'); overlay.classList.remove('active'); document.body.style.overflow=''; }
+        if(burger) burger.addEventListener('click', openMob);
+        if(closeMobile) closeMobile.addEventListener('click', closeMob);
+        if(overlay) overlay.addEventListener('click', closeMob);
+        
+        document.getElementById('subscribeBtn')?.addEventListener('click', ()=>{
+            const chk = document.getElementById('consentCheckbox');
+            const err = document.getElementById('consentError');
+            if(!chk.checked) { if(err) err.style.display='block'; setTimeout(()=> err && (err.style.display='none'),2000); }
+            else { alert('Спасибо за подписку!'); document.getElementById('subscribeEmail').value=''; chk.checked=false; }
+        });
+        document.querySelectorAll('.footer-btn-primary, .buy-ticket-btn').forEach(b=>b.addEventListener('click',()=>alert('Билеты скоро в продаже')));
+        document.querySelector('.footer-btn-secondary')?.addEventListener('click',()=>alert('Заказ шоу: +7 (495) 123-45-67'));
+    })();
+</script>
+<script src="js/common.js"></script>
+</body>
+</html>
