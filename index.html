@@ -502,6 +502,158 @@
             font-size: 16px;
         }
 
+        /* ===== СТИЛИ ГАЛЕРЕИ ИЗОБРАЖЕНИЙ ТОВАРА ===== */
+        .product-gallery-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 10001;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            cursor: pointer;
+        }
+        .product-gallery-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .product-gallery-container {
+            position: relative;
+            max-width: 90vw;
+            max-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: default;
+        }
+        .product-gallery-image {
+            max-width: 90vw;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            user-select: none;
+            -webkit-user-drag: none;
+        }
+        .gallery-nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            z-index: 10;
+            backdrop-filter: blur(4px);
+        }
+        .gallery-nav-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.4);
+            transform: translateY(-50%) scale(1.1);
+        }
+        .gallery-nav-btn.prev {
+            left: 20px;
+        }
+        .gallery-nav-btn.next {
+            right: 20px;
+        }
+        .gallery-close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            z-index: 10;
+            backdrop-filter: blur(4px);
+        }
+        .gallery-close-btn:hover {
+            background: #E8454D;
+            border-color: #E8454D;
+            transform: rotate(90deg);
+        }
+        .gallery-counter {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-family: 'Unbounded', sans-serif;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .gallery-thumbnails {
+            position: absolute;
+            bottom: 70px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+        }
+        .gallery-thumb {
+            width: 40px;
+            height: 40px;
+            border-radius: 6px;
+            overflow: hidden;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.2s ease;
+            opacity: 0.6;
+        }
+        .gallery-thumb.active {
+            border-color: #E8454D;
+            opacity: 1;
+        }
+        .gallery-thumb:hover {
+            opacity: 0.9;
+        }
+        .gallery-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Кликабельность карточек мерча */
+        .merch-card {
+            cursor: pointer;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+        .merch-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+        }
+        .merch-img {
+            pointer-events: none;
+        }
+
         /* Адаптивность */
         @media (max-width: 860px) {
             .modal-overlay {
@@ -509,6 +661,31 @@
             }
             .modal-container {
                 max-height: calc(90vh - 80px);
+            }
+            .gallery-nav-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
+            }
+            .gallery-nav-btn.prev {
+                left: 10px;
+            }
+            .gallery-nav-btn.next {
+                right: 10px;
+            }
+            .gallery-close-btn {
+                top: 10px;
+                right: 10px;
+                width: 40px;
+                height: 40px;
+            }
+            .gallery-thumbnails {
+                bottom: 60px;
+                gap: 6px;
+            }
+            .gallery-thumb {
+                width: 32px;
+                height: 32px;
             }
         }
 
@@ -545,7 +722,110 @@
             .modal-buttons {
                 flex-direction: column;
             }
+            .gallery-nav-btn {
+                width: 36px;
+                height: 36px;
+                font-size: 16px;
+            }
+            .gallery-nav-btn.prev {
+                left: 5px;
+            }
+            .gallery-nav-btn.next {
+                right: 5px;
+            }
+            .gallery-close-btn {
+                top: 5px;
+                right: 5px;
+                width: 36px;
+                height: 36px;
+                font-size: 20px;
+            }
+            .gallery-thumbnails {
+                bottom: 50px;
+                gap: 4px;
+            }
+            .gallery-thumb {
+                width: 28px;
+                height: 28px;
+            }
+            .gallery-counter {
+                bottom: 10px;
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+            
         }
+        /* Обновленные стили карточек мерча */
+.merch-card {
+    cursor: pointer;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    position: relative;
+    overflow: hidden;
+    background: #fff;
+    border-radius: 12px;
+}
+.merch-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Обертка для изображения */
+.merch-img-wrapper {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+}
+
+.merch-img {
+    width: 100%;
+    display: block;
+    pointer-events: none;
+    transition: transform 0.3s ease;
+}
+.merch-card:hover .merch-img {
+    transform: scale(1.05);
+}
+
+/* Счетчик фото */
+.merch-photo-count {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    color: white;
+    padding: 6px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    font-family: 'Nunito Sans', sans-serif;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    z-index: 2;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    pointer-events: none; /* Чтобы не мешал клику по карточке */
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+/* По умолчанию скрываем счетчик */
+.merch-photo-count {
+    opacity: 0;
+    transform: translateY(-5px);
+}
+
+/* Показываем счетчик при наведении на карточку */
+.merch-card:hover .merch-photo-count {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ВСЕГДА показываем счетчик, если он находится в зоне скролла (JS добавит класс) */
+.merch-card.force-visible .merch-photo-count {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
     </style>
 </head>
 <body>
@@ -707,6 +987,18 @@
     
 </div>
 
+<!-- ГАЛЕРЕЯ ИЗОБРАЖЕНИЙ ТОВАРА -->
+<div class="product-gallery-overlay" id="productGallery">
+    <button class="gallery-close-btn" id="galleryCloseBtn">&times;</button>
+    <div class="product-gallery-container" id="galleryContainer">
+        <img class="product-gallery-image" id="galleryMainImage" src="" alt="Товар">
+        <button class="gallery-nav-btn prev" id="galleryPrevBtn"><i class="fas fa-chevron-left"></i></button>
+        <button class="gallery-nav-btn next" id="galleryNextBtn"><i class="fas fa-chevron-right"></i></button>
+        <div class="gallery-thumbnails" id="galleryThumbnails"></div>
+        <div class="gallery-counter" id="galleryCounter"></div>
+    </div>
+</div>
+
 <!-- МОДАЛЬНОЕ ОКНО КОМАНДЫ (в стиле team.html) -->
 <div class="team-modal-overlay" id="teamModal">
     <div class="team-modal-content">
@@ -815,15 +1107,110 @@
             { performanceId: 5, date: '27 октября 19:00', venue: 'Основная сцена', month: 'октябрь' }
         ];
 
+        // 🔥 ОБНОВЛЁННЫЕ ДАННЫЕ ТОВАРОВ С МАССИВОМ ИЗОБРАЖЕНИЙ
         const products = [
-            { id: 1, name: 'Футболка', desc: 'Хлопковая футболка', price: 2500, isClothing: true, img: 'images/content/shop/1.png', category: 'clothes' },
-            { id: 2, name: 'Носки', desc: 'Принт с логотипом театра', price: 500, isClothing: false, img: 'images/content/shop/2.png', category: 'clothes' },
-			{ id: 3, name: 'Подвес на рюкзак "Микос Team"', desc: 'Современный аксессуар', price: 900, isClothing: false, img: 'images/content/shop/3.png', category: 'accessories' },
-			{ id: 4, name: 'Футболка', desc: 'Хлопковая футболка', price: 2500, isClothing: true, img: 'images/content/shop/5.png', category: 'clothes' },
-            { id: 5, name: 'Кружка театральная', desc: 'Фарфор', price: 1200, isClothing: false, img: 'https://placehold.co/428x220/2A3D5E/white?text=Кружка', category: 'tableware' },
-            { id: 6, name: 'Магнит символ', desc: 'Сувенирный магнит', price: 450, isClothing: false, img: 'https://placehold.co/428x220/4A6294/white?text=Магнит', category: 'souvenirs' },
-            { id: 7, name: 'Сумка шоппер', desc: 'Эко-сумка', price: 1800, isClothing: false, img: 'https://placehold.co/428x220/5A74A8/white?text=Сумка', category: 'accessories' },
-            { id: 8, name: 'Программа спектакля', desc: 'Иллюстрированная', price: 350, isClothing: false, img: 'https://placehold.co/428x220/2A3D5E/white?text=Программа', category: 'printed' }
+            { 
+                id: 1, 
+                name: 'Футболка', 
+                desc: 'Хлопковая футболка с логотипом театра', 
+                price: 2500, 
+                isClothing: true, 
+                images: [
+                    'images/content/shop/1.png',
+                    'images/content/shop/5.png',
+                    'https://placehold.co/428x220/2A3D5E/white?text=Футболка+вид+2',
+                    'https://placehold.co/428x220/4A6294/white?text=Футболка+вид+3'
+                ],
+                category: 'clothes' 
+            },
+            { 
+                id: 2, 
+                name: 'Носки', 
+                desc: 'Принт с логотипом театра', 
+                price: 500, 
+                isClothing: false, 
+                images: [
+                    'images/content/shop/2.png',
+                    'https://placehold.co/428x220/E8454D/white?text=Носки+вид+2'
+                ],
+                category: 'clothes' 
+            },
+            { 
+                id: 3, 
+                name: 'Подвес на рюкзак "Микос Team"', 
+                desc: 'Современный аксессуар', 
+                price: 900, 
+                isClothing: false, 
+                images: [
+                    'images/content/shop/3.png',
+                    'https://placehold.co/428x220/5A74A8/white?text=Подвес+вид+2',
+                    'https://placehold.co/428x220/2A3D5E/white?text=Подвес+вид+3'
+                ],
+                category: 'accessories' 
+            },
+            { 
+                id: 4, 
+                name: 'Футболка', 
+                desc: 'Хлопковая футболка', 
+                price: 2500, 
+                isClothing: true, 
+                images: [
+                    'images/content/shop/5.png',
+                    'images/content/shop/1.png'
+                ],
+                category: 'clothes' 
+            },
+            { 
+                id: 5, 
+                name: 'Кружка театральная', 
+                desc: 'Фарфор', 
+                price: 1200, 
+                isClothing: false, 
+                images: [
+                    'https://placehold.co/428x220/2A3D5E/white?text=Кружка',
+                    'https://placehold.co/428x220/4A6294/white?text=Кружка+вид+2',
+                    'https://placehold.co/428x220/E8454D/white?text=Кружка+вид+3'
+                ],
+                category: 'tableware' 
+            },
+            { 
+                id: 6, 
+                name: 'Магнит символ', 
+                desc: 'Сувенирный магнит', 
+                price: 450, 
+                isClothing: false, 
+                images: [
+                    'https://placehold.co/428x220/4A6294/white?text=Магнит',
+                    'https://placehold.co/428x220/2A3D5E/white?text=Магнит+вид+2'
+                ],
+                category: 'souvenirs' 
+            },
+            { 
+                id: 7, 
+                name: 'Сумка шоппер', 
+                desc: 'Эко-сумка', 
+                price: 1800, 
+                isClothing: false, 
+                images: [
+                    'https://placehold.co/428x220/5A74A8/white?text=Сумка',
+                    'https://placehold.co/428x220/2A3D5E/white?text=Сумка+вид+2'
+                ],
+                category: 'accessories' 
+            },
+            { 
+                id: 8, 
+                name: 'Программа спектакля', 
+                desc: 'Иллюстрированная', 
+                price: 350, 
+                isClothing: false, 
+                images: [
+                    'https://placehold.co/428x220/2A3D5E/white?text=Программа',
+                    'https://placehold.co/428x220/4A6294/white?text=Программа+вид+2',
+                    'https://placehold.co/428x220/E8454D/white?text=Программа+вид+3',
+                    'https://placehold.co/428x220/5A74A8/white?text=Программа+вид+4'
+                ],
+                category: 'printed' 
+            }
         ];
 
         // ===== ДАННЫЕ КОМАНДЫ ДЛЯ МОДАЛКИ (как в team.html) =====
@@ -894,6 +1281,186 @@
         let editingIndex = -1;
         let returnToContacts = false;
 
+        // 🔥 СОСТОЯНИЕ ГАЛЕРЕИ
+        let galleryImages = [];
+        let currentGalleryIndex = 0;
+
+        // ===== ГАЛЕРЕЯ ИЗОБРАЖЕНИЙ =====
+        const productGallery = document.getElementById('productGallery');
+        const galleryMainImage = document.getElementById('galleryMainImage');
+        const galleryPrevBtn = document.getElementById('galleryPrevBtn');
+        const galleryNextBtn = document.getElementById('galleryNextBtn');
+        const galleryCloseBtn = document.getElementById('galleryCloseBtn');
+        const galleryThumbnails = document.getElementById('galleryThumbnails');
+        const galleryCounter = document.getElementById('galleryCounter');
+        const galleryContainer = document.getElementById('galleryContainer');
+
+        function openGallery(images) {
+            if (!images || images.length === 0) return;
+            
+            galleryImages = images;
+            currentGalleryIndex = 0;
+            
+            updateGalleryImage();
+            renderThumbnails();
+            updateCounter();
+            updateNavButtons();
+            
+            productGallery.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeGallery() {
+            productGallery.classList.remove('active');
+            document.body.style.overflow = '';
+            galleryImages = [];
+            currentGalleryIndex = 0;
+        }
+
+        function updateGalleryImage() {
+            if (galleryImages.length > 0) {
+                galleryMainImage.src = galleryImages[currentGalleryIndex];
+                galleryMainImage.alt = `Фото ${currentGalleryIndex + 1}`;
+            }
+        }
+
+        function renderThumbnails() {
+            galleryThumbnails.innerHTML = '';
+            
+            if (galleryImages.length <= 1) {
+                galleryThumbnails.style.display = 'none';
+                return;
+            }
+            
+            galleryThumbnails.style.display = 'flex';
+            
+            galleryImages.forEach((img, index) => {
+                const thumb = document.createElement('div');
+                thumb.className = `gallery-thumb ${index === currentGalleryIndex ? 'active' : ''}`;
+                thumb.innerHTML = `<img src="${img}" alt="Миниатюра ${index + 1}">`;
+                thumb.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    goToImage(index);
+                });
+                galleryThumbnails.appendChild(thumb);
+            });
+        }
+
+        function updateCounter() {
+            if (galleryImages.length > 1) {
+                galleryCounter.textContent = `${currentGalleryIndex + 1} / ${galleryImages.length}`;
+                galleryCounter.style.display = 'block';
+            } else {
+                galleryCounter.style.display = 'none';
+            }
+        }
+
+        function updateNavButtons() {
+            if (galleryImages.length <= 1) {
+                galleryPrevBtn.style.display = 'none';
+                galleryNextBtn.style.display = 'none';
+            } else {
+                galleryPrevBtn.style.display = 'flex';
+                galleryNextBtn.style.display = 'flex';
+            }
+        }
+
+        function goToImage(index) {
+            if (index < 0 || index >= galleryImages.length) return;
+            currentGalleryIndex = index;
+            updateGalleryImage();
+            renderThumbnails();
+            updateCounter();
+        }
+
+        function nextImage() {
+            if (galleryImages.length === 0) return;
+            currentGalleryIndex = (currentGalleryIndex + 1) % galleryImages.length;
+            updateGalleryImage();
+            renderThumbnails();
+            updateCounter();
+        }
+
+        function prevImage() {
+            if (galleryImages.length === 0) return;
+            currentGalleryIndex = (currentGalleryIndex - 1 + galleryImages.length) % galleryImages.length;
+            updateGalleryImage();
+            renderThumbnails();
+            updateCounter();
+        }
+
+        // Обработчики галереи
+        if (galleryPrevBtn) {
+            galleryPrevBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                prevImage();
+            });
+        }
+        
+        if (galleryNextBtn) {
+            galleryNextBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                nextImage();
+            });
+        }
+        
+        if (galleryCloseBtn) {
+            galleryCloseBtn.addEventListener('click', closeGallery);
+        }
+        
+        if (productGallery) {
+            productGallery.addEventListener('click', (e) => {
+                if (e.target === productGallery) {
+                    closeGallery();
+                }
+            });
+        }
+
+        // Клавиатурная навигация
+        document.addEventListener('keydown', (e) => {
+            if (!productGallery || !productGallery.classList.contains('active')) return;
+            
+            switch(e.key) {
+                case 'Escape':
+                    closeGallery();
+                    break;
+                case 'ArrowLeft':
+                    prevImage();
+                    break;
+                case 'ArrowRight':
+                    nextImage();
+                    break;
+            }
+        });
+
+        // Свайпы для мобильных
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        if (galleryContainer) {
+            galleryContainer.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+            }, { passive: true });
+
+            galleryContainer.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            }, { passive: true });
+        }
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = touchStartX - touchEndX;
+            
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0) {
+                    nextImage();
+                } else {
+                    prevImage();
+                }
+            }
+        }
+
         // ===== МОДАЛКА КОМАНДЫ =====
         const teamModal = document.getElementById('teamModal');
         const teamModalBody = document.getElementById('teamModalBody');
@@ -954,11 +1521,6 @@
                 if (e.target === teamModal) closeTeamModal();
             });
         }
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && teamModal && teamModal.classList.contains('active')) {
-                closeTeamModal();
-            }
-        });
 
         // ===== РЕНДЕР СПЕКТАКЛЕЙ =====
         function renderUpcomingScroll() {
@@ -1034,33 +1596,54 @@
             });
         }
 
-        // ===== РЕНДЕР МАГАЗИНА =====
-        function renderMerchScroll() {
-            const wrapper = document.getElementById('merchScroll');
-            if (!wrapper) return;
-            wrapper.innerHTML = '';
-            products.forEach(item => {
-                const card = document.createElement('div');
-                card.className = 'merch-card';
-                card.innerHTML = `
-                    <img class="merch-img" src="${item.img}" alt="${item.name}">
-                    <div class="merch-content">
-                        <h3 class="merch-name">${item.name}</h3>
-                        <div class="merch-price">${item.price.toLocaleString('ru-RU')} ₽</div>
-                        <button class="merch-btn" data-id="${item.id}">Купить</button>
-                    </div>
-                `;
-                wrapper.appendChild(card);
-            });
+        // ===== РЕНДЕР МАГАЗИНА С КЛИКАБЕЛЬНЫМИ КАРТОЧКАМИ =====
+function renderMerchScroll() {
+    const wrapper = document.getElementById('merchScroll');
+    if (!wrapper) return;
+    wrapper.innerHTML = '';
+    
+    products.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'merch-card';
+        // Используем первое изображение как основное
+        const mainImage = item.images && item.images.length > 0 ? item.images[0] : 'https://placehold.co/428x220/cccccc/white?text=Нет+фото';
+        const hasMultipleImages = item.images && item.images.length > 1;
+        
+        card.innerHTML = `
+            <div class="merch-img-wrapper">
+                <img class="merch-img" src="${mainImage}" alt="${item.name}">
+                ${hasMultipleImages ? `<span class="merch-photo-count"><i class="fas fa-images"></i> ${item.images.length}</span>` : ''}
+            </div>
+            <div class="merch-content">
+                <h3 class="merch-name">${item.name}</h3>
+                <div class="merch-price">${item.price.toLocaleString('ru-RU')} ₽</div>
+                <button class="merch-btn" data-id="${item.id}">Купить</button>
+            </div>
+        `;
+        
+        // 🔥 КЛИК ПО КАРТОЧКЕ ОТКРЫВАЕТ ГАЛЕРЕЮ
+        card.addEventListener('click', (e) => {
+            // Не открываем галерею, если кликнули по кнопке "Купить"
+            if (e.target.classList.contains('merch-btn')) return;
             
-            document.querySelectorAll('.merch-btn').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    const id = parseInt(e.currentTarget.dataset.id);
-                    const product = products.find(p => p.id === id);
-                    if (product) openProductModal(product);
-                });
-            });
-        }
+            if (item.images && item.images.length > 0) {
+                openGallery(item.images);
+            }
+        });
+        
+        wrapper.appendChild(card);
+    });
+    
+    // Обработчики кнопок "Купить"
+    document.querySelectorAll('.merch-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation(); // Предотвращаем открытие галереи
+            const id = parseInt(e.currentTarget.dataset.id);
+            const product = products.find(p => p.id === id);
+            if (product) openProductModal(product);
+        });
+    });
+}
 
         // ===== МОДАЛКА СЕАНСОВ =====
         function openSessionModal(performance) {
@@ -1409,7 +1992,7 @@
             container.innerHTML = html;
         }
 
-        // 🔥 ИЗМЕНЁННЫЙ ОБРАБОТЧИК ОФОРМЛЕНИЯ ЗАКАЗА 🔥
+        // 🔥 ОБРАБОТЧИК ОФОРМЛЕНИЯ ЗАКАЗА
         document.getElementById('submitOrderBtn').addEventListener('click', () => {
             const name = document.getElementById('contactName')?.value.trim();
             const phone = document.getElementById('contactPhone')?.value.trim();
@@ -1453,6 +2036,7 @@
             document.getElementById('productModal')?.classList.remove('active');
             document.getElementById('contactsModal')?.classList.remove('active');
             closeTeamModal();
+            closeGallery();
             document.body.style.overflow = '';
         }
 
@@ -1477,6 +2061,24 @@
                 });
             });
         }
+
+        // ===== ГЛОБАЛЬНЫЙ ОБРАБОТЧИК ESCAPE =====
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                // Закрываем все модальные окна
+                if (productGallery && productGallery.classList.contains('active')) {
+                    closeGallery();
+                } else if (teamModal && teamModal.classList.contains('active')) {
+                    closeTeamModal();
+                } else if (document.getElementById('sessionModal')?.classList.contains('active')) {
+                    closeSessionModal();
+                } else if (document.getElementById('productModal')?.classList.contains('active')) {
+                    closeProductModal();
+                } else if (document.getElementById('contactsModal')?.classList.contains('active')) {
+                    closeContactsModal();
+                }
+            }
+        });
 
         // ===== ИНИЦИАЛИЗАЦИЯ =====
         document.addEventListener('DOMContentLoaded', () => {
