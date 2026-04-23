@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Театр клоунады «Микос» | Афиша</title>
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/svg+xml" href="SVG/logo-2.svg" sizes="any">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+</head>
+<style>
+</style>
+<body>
+<div class="shop-container">
+    <!-- HEADER (без изменений) -->
+    <div id="site-header"></div>
+
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Hero слайдер с 5 спектаклями + стрелки -->
+    <div id="site-hero-slider"></div>
+
+    <!-- Основной контент афиши -->
+    <div class="afisha-page">
+        <div class="filters-section-afisha">
+            <div class="filter-chips-afisha" id="filterChipsAfisha">
+                <div class="filter-chip-afisha active" data-filter="all">Все события</div>
+                <div class="filter-chip-date">
+                    <select id="monthSelect" class="month-select"></select>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="events-grid" id="eventsGrid"></div>
+
+        <div class="load-more-wrapper">
+            <button class="load-more-btn" id="showMoreEventsBtn">Показать еще</button>
+        </div>
+
+        <!-- Карта гастролей -->
+        <div class="tour-map-section">
+            <div class="tour-header">
+                <h2 class="tour-title">Карта гастролей</h2>
+                <a href="#" class="tour-all-link">Вся афиша <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="tour-map-container">
+                <div class="map-placeholder">
+                    <div class="map-dot" style="left: 25%; top: 30%;"></div>
+                    <div class="map-dot" style="left: 45%; top: 55%;"></div>
+                    <div class="map-dot" style="left: 65%; top: 40%;"></div>
+                    <div class="map-dot" style="left: 75%; top: 65%;"></div>
+                    <div class="map-dot" style="left: 70%; top: 20%;"></div>
+                    <div class="map-label" style="left: 40%; top: 45%;"><i class="fas fa-map-marker-alt"></i> 12 городов</div>
+                </div>
+                <div class="tour-list">
+                    <div class="tour-item"><div class="tour-city">Санкт-Петербург</div><div class="tour-dates"><span>15–18 ноября 2025</span><div class="tour-venue">БДТ им. Товстоногова</div></div><div class="tour-status">Билеты</div></div>
+                    <div class="tour-item"><div class="tour-city">Казань</div><div class="tour-dates"><span>22–24 ноября 2025</span><div class="tour-venue">Театр им. Камала</div></div><div class="tour-status soon">Скоро</div></div>
+                    <div class="tour-item"><div class="tour-city">Екатеринбург</div><div class="tour-dates"><span>5–7 декабря 2025</span><div class="tour-venue">Театр драмы</div></div><div class="tour-status soon">Скоро</div></div>
+                    <div class="tour-item"><div class="tour-city">Новосибирск</div><div class="tour-dates"><span>15–18 декабря 2025</span><div class="tour-venue">Театр «Глобус»</div></div><div class="tour-status sold">Все продано</div></div>
+                    <div class="tour-all-link-bottom">
+                        <a href="#" class="tour-all-link" id="openAllToursModal">Все 12 городов <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно "Все гастроли" (по макету) -->
+    <div class="modal-overlay" id="tourModalOverlay">
+        <div class="DivModalContent">
+            <button class="ButtonModalClose" id="closeTourModal">×</button>
+            <div class="DivModalHeader">
+                <div class="H2">
+                    <div>Все гастроли театра</div>
+                </div>
+                <div class="P">
+                    <div>12 городов, 28 показов. Выберите удобный город и дату.</div>
+                </div>
+            </div>
+            <div class="DivModalTourList" id="modalTourListContainer">
+                <!-- Список будет сгенерирован через JS -->
+            </div>
+            <div class="DivModalFooter">
+                <i class="fas fa-ticket-alt"></i>
+                <span>Билеты поступают в продажу за 30 дней до показа</span>
+            </div>
+            <img class="ModalBackgroundImage" src="https://placehold.co/453x594" alt="Decor" />
+        </div>
+    </div>
+
+    <!-- FOOTER (без изменений) -->
+    <div id="site-footer"></div>
+</div>
+
+<!-- 1. Загрузчик компонентов (должен быть первым) -->
+<script src="js/components-loader.js"></script>
+
+<!-- 2. Логика хедера/футера -->
+<script src="js/header-scripts.js"></script>
+<script src="js/common.js"></script>
+
+<!-- 3. 🔥 Логика слайдера (ОБЯЗАТЕЛЬНО для работы стрелок/точек) -->
+<script src="js/slider-scripts.js"></script>
+<script>
+// =============================================
+// ДАННЫЕ
+// =============================================
+const events = [
+    { id: 1, name: 'Лишь бы не было детей', date: '15 апреля 19:00', monthKey: 'апрель', year: 2026, desc: 'История сосуществования очень разных людей. Клоунада о выживании.', age: '18+', time: '90 минут', tickets: true, venue: 'Основная сцена', img: 'images/content/performances/15.jpg', price: '1 500 ₽' },
+    { id: 2, name: 'Богатыри', date: '22 апреля 18:00', monthKey: 'апрель', year: 2026, desc: 'Былины в современном прочтении. Эпическая комедия для всей семьи.', age: '12+', time: '100 минут', tickets: true, venue: 'Основная сцена', img: 'images/content/performances/3.jpg', price: '1 400 ₽' },
+    { id: 3, name: 'Ожидание', date: '5 мая 20:00', monthKey: 'май', year: 2026, desc: 'Трогательная история о времени, надежде и встречах.', age: '16+', time: '80 минут', tickets: true, venue: 'Малая сцена', img: 'images/content/performances/9.jpg', price: '1 200 ₽' },
+    { id: 4, name: 'Кабаре-Шапито', date: '12 мая 19:00', monthKey: 'май', year: 2026, desc: 'Феерия клоунады и музыки. Кабаре с цирковыми номерами.', age: '18+', time: '110 минут', tickets: true, venue: 'Основная сцена', img: 'images/content/performances/10.jpg', price: '1 800 ₽' },
+    { id: 5, name: 'Авиаторы', date: '20 октября 19:00', monthKey: 'октябрь', year: 2026, desc: 'О мечтах, полетах и свободе. Вдохновляющая драма.', age: '16+', time: '95 минут', tickets: true, venue: 'Основная сцена', img: 'images/content/performances/6.jpg', price: '1 600 ₽' }
+];
+
+const tourData = [
+    { city: 'Санкт-Петербург', dates: '15–18 ноября 2025', venue: 'БДТ им. Товстоногова, Основная сцена', status: 'Билеты', statusClass: '' },
+    { city: 'Казань', dates: '22–24 ноября 2025', venue: 'Театр им. Камала, Большой зал', status: 'Билеты', statusClass: '' },
+    { city: 'Екатеринбург', dates: '5–7 декабря 2025', venue: 'Театр драмы, Основная сцена', status: 'Билеты', statusClass: '' },
+    { city: 'Новосибирск', dates: '15–18 декабря 2025', venue: 'Театр «Глобус», Большой зал', status: 'Все продано', statusClass: 'sold' },
+    { city: 'Нижний Новгород', dates: '10–12 января 2026', venue: 'Театр драмы им. Горького', status: 'Билеты', statusClass: '' },
+    { city: 'Самара', dates: '18–20 января 2026', venue: 'Самарский театр драмы', status: 'Билеты', statusClass: '' },
+    { city: 'Тверь', dates: '25–27 января 2026', venue: 'Тверской театр драмы', status: 'Cкоро', statusClass: 'soon' },
+    { city: 'Краснодар', dates: '1–3 февраля 2026', venue: 'Краснодарский театр драмы', status: 'Cкоро', statusClass: 'soon' },
+    { city: 'Воронеж', dates: '8–10 февраля 2026', venue: 'Воронежский театр драмы', status: 'Билеты', statusClass: '' },
+    { city: 'Пермь', dates: '14–16 февраля 2026', venue: 'Театр-Театр', status: 'Cкоро', statusClass: 'soon' },
+    { city: 'Челябинск', dates: '21–23 февраля 2026', venue: 'Челябинский театр драмы', status: 'Cкоро', statusClass: 'soon' },
+    { city: 'Омск', dates: '1–3 марта 2026', venue: 'Омский театр драмы', status: 'Cкоро', statusClass: 'soon' }
+];
+
+// =============================================
+// DOM ЭЛЕМЕНТЫ И ПЕРЕМЕННЫЕ
+// =============================================
+const grid = document.getElementById('eventsGrid');
+const showMoreBtn = document.getElementById('showMoreEventsBtn');
+const monthSelect = document.getElementById('monthSelect');
+const allChip = document.querySelector('[data-filter="all"]');
+
+let visibleCount = 6;
+let currentFilter = 'all';
+
+// =============================================
+// ИНИЦИАЛИЗАЦИЯ СЕЛЕКТА МЕСЯЦЕВ
+// =============================================
+function populateMonthSelect() {
+    const months = ['январь', 'февраль', 'март', 'апрель', 'май', 'июнь', 'июль', 'август', 'сентябрь', 'октябрь', 'ноябрь', 'декабрь'];
+    const today = new Date();
+    const currentYear = today.getFullYear();
+    const currentMonthIndex = today.getMonth();
+    
+    let optionsHtml = '';
+    for (let i = 0; i < 12; i++) {
+        const monthIdx = (currentMonthIndex + i) % 12;
+        const year = currentYear + Math.floor((currentMonthIndex + i) / 12);
+        const monthName = months[monthIdx];
+        const displayText = monthName.charAt(0).toUpperCase() + monthName.slice(1) + ' ' + year;
+        const value = `${monthName}-${year}`;
+        const selected = (i === 0) ? 'selected' : '';
+        optionsHtml += `<option value="${value}" ${selected}>${displayText}</option>`;
+    }
+    monthSelect.innerHTML = optionsHtml;
+}
+
+// =============================================
+// ФИЛЬТРАЦИЯ СОБЫТИЙ
+// =============================================
+function getFilteredEvents() {
+    if (currentFilter === 'all') return events;
+    const [month, year] = currentFilter.split('-');
+    return events.filter(ev => ev.monthKey === month && ev.year === parseInt(year));
+}
+
+// =============================================
+// ОТРИСОВКА КАРТОЧЕК
+// =============================================
+function renderEvents() {
+    const filtered = getFilteredEvents();
+    const displayEvents = filtered.slice(0, visibleCount);
+    
+    grid.innerHTML = '';
+    
+    displayEvents.forEach(e => {
+        const card = document.createElement('div');
+        card.className = 'performance-card-afisha';
+        card.innerHTML = `
+            <img class="performance-img-afisha" src="${e.img}" alt="${e.name}">
+            <div class="performance-content-afisha">
+                <div class="performance-tags-afisha">
+                    <span class="tag-afisha tag-age">${e.age}</span>
+                    <span class="tag-afisha tag-time">${e.time}</span>
+                    <span class="tag-afisha tag-tickets">${e.tickets ? 'Есть билеты' : 'Билетов нет'}</span>
+                </div>
+                <h3 class="performance-name-afisha">${e.name}</h3>
+                <div class="performance-date-afisha">${e.date}</div>
+                <p class="performance-desc-afisha">${e.desc}</p>
+                <div class="event-venue-afisha"><i class="fas fa-map-marker-alt"></i><span>${e.venue}</span></div>
+                <div class="performance-btns-afisha">
+                    <button class="btn-details-afisha" data-id="${e.id}">Подробнее</button>
+                    <button class="btn-buy-afisha" data-id="${e.id}">Купить билет</button>
+                </div>
+            </div>
+        `;
+        grid.appendChild(card);
+    });
+
+    // Обработчики кнопок
+    document.querySelectorAll('.btn-details-afisha').forEach(btn => {
+        btn.addEventListener('click', () => window.location.href = `performance.html?id=${btn.dataset.id}`);
+    });
+    
+    document.querySelectorAll('.btn-buy-afisha').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const id = parseInt(btn.dataset.id);
+            const selectedEvent = events.find(e => e.id === id);
+            if (!selectedEvent) return;
+            
+            const orderInfo = {
+                title: selectedEvent.name,
+                dateTime: selectedEvent.date,
+                hall: selectedEvent.venue,
+                price: selectedEvent.price,
+                poster: selectedEvent.img
+            };
+            
+            localStorage.setItem('selectedPerformance', JSON.stringify(orderInfo));
+            window.location.href = 'checkout.html';
+        });
+    });
+
+    showMoreBtn.style.display = filtered.length > visibleCount ? 'block' : 'none';
+    updateFilterVisuals();
+}
+
+// =============================================
+// ОБНОВЛЕНИЕ ВИЗУАЛА ФИЛЬТРОВ
+// =============================================
+function updateFilterVisuals() {
+    allChip.classList.toggle('active', currentFilter === 'all');
+    monthSelect.classList.toggle('active-filter', currentFilter !== 'all');
+    
+    if (currentFilter !== 'all') {
+        monthSelect.value = currentFilter;
+    } else {
+        monthSelect.selectedIndex = 0;
+    }
+    
+    // Синхронизация с кастомным триггером
+    const customTrigger = document.querySelector('.custom-month-trigger');
+    if (customTrigger) {
+        customTrigger.classList.toggle('active', currentFilter !== 'all');
+    }
+}
+
+// =============================================
+// КАСТОМНЫЙ ВЫПАДАЮЩИЙ СПИСОК (ФИНАЛЬНЫЙ ФИКС)
+// =============================================
+function initCustomMonthSelect() {
+    const originalSelect = document.getElementById('monthSelect');
+    if (!originalSelect) return;
+    if (document.querySelector('.custom-month-select')) return;
+    
+    originalSelect.style.display = 'none';
+    
+    const wrapper = document.createElement('div');
+    wrapper.className = 'custom-month-select';
+    
+    const trigger = document.createElement('div');
+    trigger.className = 'custom-month-trigger';
+    
+    const getSelectedText = () => {
+        const selected = originalSelect.options[originalSelect.selectedIndex];
+        return selected ? selected.text : 'Апрель 2026';
+    };
+    
+    trigger.innerHTML = `${getSelectedText()} <span class="arrow-icon">▾</span>`;
+    
+    if (originalSelect.classList.contains('active-filter')) {
+        trigger.classList.add('active');
+    }
+    
+    const dropdown = document.createElement('div');
+    dropdown.className = 'custom-month-dropdown';
+    
+    function renderOptions() {
+        dropdown.innerHTML = '';
+        Array.from(originalSelect.options).forEach((option) => {
+            const optionEl = document.createElement('div');
+            optionEl.className = 'custom-month-option';
+            if (option.selected) optionEl.classList.add('selected');
+            optionEl.textContent = option.text;
+            optionEl.dataset.value = option.value;
+            
+            const selectHandler = (e) => {
+                e.stopPropagation();
+                e.preventDefault();
+                
+                originalSelect.value = optionEl.dataset.value;
+                trigger.innerHTML = `${optionEl.textContent} <span class="arrow-icon">▾</span>`;
+                
+                const isFirstOption = originalSelect.selectedIndex === 0;
+                if (!isFirstOption) {
+                    originalSelect.classList.add('active-filter');
+                    trigger.classList.add('active');
+                } else {
+                    originalSelect.classList.remove('active-filter');
+                    trigger.classList.remove('active');
+                }
+                
+                dropdown.querySelectorAll('.custom-month-option').forEach(opt => opt.classList.remove('selected'));
+                optionEl.classList.add('selected');
+                
+                wrapper.classList.remove('open');
+                originalSelect.dispatchEvent(new Event('change', { bubbles: true }));
+            };
+            
+            optionEl.addEventListener('click', selectHandler);
+            optionEl.addEventListener('touchstart', selectHandler, { passive: false });
+            
+            dropdown.appendChild(optionEl);
+        });
+    }
+    
+    renderOptions();
+    
+    const toggleHandler = (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+        
+        document.querySelectorAll('.custom-month-select.open').forEach(el => {
+            if (el !== wrapper) el.classList.remove('open');
+        });
+        
+        wrapper.classList.toggle('open');
+    };
+    
+    trigger.addEventListener('click', toggleHandler);
+    trigger.addEventListener('touchstart', toggleHandler, { passive: false });
+    
+    document.addEventListener('click', (e) => {
+        if (!wrapper.contains(e.target)) wrapper.classList.remove('open');
+    });
+    
+    document.addEventListener('touchstart', (e) => {
+        if (!wrapper.contains(e.target)) wrapper.classList.remove('open');
+    }, { passive: true });
+    
+    dropdown.addEventListener('click', (e) => e.stopPropagation());
+    dropdown.addEventListener('touchstart', (e) => e.stopPropagation(), { passive: false });
+    
+    wrapper.appendChild(trigger);
+    wrapper.appendChild(dropdown);
+    originalSelect.parentNode.insertBefore(wrapper, originalSelect);
+    
+    if (allChip) {
+        const resetHandler = () => {
+            originalSelect.selectedIndex = 0;
+            originalSelect.classList.remove('active-filter');
+            trigger.classList.remove('active');
+            trigger.innerHTML = `${originalSelect.options[0].text} <span class="arrow-icon">▾</span>`;
+            
+            dropdown.querySelectorAll('.custom-month-option').forEach(opt => {
+                opt.classList.toggle('selected', opt.dataset.value === originalSelect.value);
+            });
+            wrapper.classList.remove('open');
+        };
+        
+        allChip.addEventListener('click', resetHandler);
+        allChip.addEventListener('touchstart', resetHandler, { passive: true });
+    }
+    
+    const observer = new MutationObserver(() => {
+        const newText = getSelectedText();
+        trigger.innerHTML = `${newText} <span class="arrow-icon">▾</span>`;
+        trigger.classList.toggle('active', originalSelect.classList.contains('active-filter'));
+        
+        const selectedValue = originalSelect.value;
+        dropdown.querySelectorAll('.custom-month-option').forEach(opt => {
+            opt.classList.toggle('selected', opt.dataset.value === selectedValue);
+        });
+    });
+    
+    observer.observe(originalSelect, { attributes: true, attributeFilter: ['class', 'value'] });
+    
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && wrapper.classList.contains('open')) {
+            wrapper.classList.remove('open');
+        }
+    });
+    // Дополнительный обработчик для мобильных — закрытие при тапе вне
+const closeOnOutsideTap = (e) => {
+    if (wrapper.classList.contains('open')) {
+        // Проверяем, что тап был НЕ по триггеру и НЕ по выпадающему меню
+        if (!trigger.contains(e.target) && !dropdown.contains(e.target)) {
+            wrapper.classList.remove('open');
+        }
+    }
+};
+
+// Используем делегирование — вешаем на document, но проверяем класс open
+document.addEventListener('touchstart', (e) => {
+    if (wrapper.classList.contains('open')) {
+        if (!wrapper.contains(e.target)) {
+            wrapper.classList.remove('open');
+        }
+    }
+}, { passive: true });
+
+// Закрытие при клике на затемнение (если оно есть)
+document.addEventListener('click', (e) => {
+    if (wrapper.classList.contains('open')) {
+        // Если клик был по псевдоэлементу или вне dropdown
+        if (!wrapper.contains(e.target)) {
+            wrapper.classList.remove('open');
+        }
+    }
+});
+
+// Закрытие по кнопке "Назад" на Android
+window.addEventListener('popstate', () => {
+    if (wrapper.classList.contains('open')) {
+        wrapper.classList.remove('open');
+    }
+});
+
+// Предотвращаем закрытие при скролле внутри dropdown
+dropdown.addEventListener('touchmove', (e) => {
+    e.stopPropagation();
+}, { passive: false });
+}
+
+// =============================================
+// МОДАЛЬНОЕ ОКНО ГАСТРОЛЕЙ
+// =============================================
+function initTourModal() {
+    const modalOverlay = document.getElementById('tourModalOverlay');
+    const closeModalBtn = document.getElementById('closeTourModal');
+    const openModalLink = document.getElementById('openAllToursModal');
+    const modalListContainer = document.getElementById('modalTourListContainer');
+    
+    if (!modalOverlay) return;
+    
+    function renderTourModal() {
+        let html = '';
+        tourData.forEach(item => {
+            const statusClass = item.statusClass ? ` ${item.statusClass}` : '';
+            html += `
+                <div class="DivModalTourItem">
+                    <div class="SpanModalTourCity"><div>${item.city}</div></div>
+                    <div class="DivModalTourDates">
+                        <div class="Strong"><div>${item.dates}</div></div>
+                        <div class="SpanModalTourVenue">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>${item.venue}</span>
+                        </div>
+                    </div>
+                    <div class="SpanTourStatus${statusClass}">${item.status}</div>
+                </div>
+            `;
+        });
+        modalListContainer.innerHTML = html;
+    }
+    
+    renderTourModal();
+    
+    const openModal = (e) => { e?.preventDefault(); modalOverlay.classList.add('active'); document.body.style.overflow = 'hidden'; };
+    const closeModal = () => { modalOverlay.classList.remove('active'); document.body.style.overflow = ''; };
+    
+    openModalLink?.addEventListener('click', openModal);
+    openModalLink?.addEventListener('touchstart', openModal, { passive: false });
+    closeModalBtn?.addEventListener('click', closeModal);
+    modalOverlay.addEventListener('click', (e) => { if (e.target === modalOverlay) closeModal(); });
+}
+
+// =============================================
+// ХЕДЕР И БУРГЕР
+// =============================================
+function initHeader() {
+    const dotsIcon = document.getElementById('dotsIcon');
+    const closeIcon = document.getElementById('closeIcon');
+    const extraRow = document.getElementById('extraMenuRow');
+    
+    if (dotsIcon && closeIcon && extraRow) {
+        dotsIcon.addEventListener('click', () => {
+            extraRow.classList.add('open');
+            dotsIcon.style.display = 'none';
+            closeIcon.style.display = 'inline-flex';
+        });
+        
+        closeIcon.addEventListener('click', () => {
+            extraRow.classList.remove('open');
+            dotsIcon.style.display = 'inline-flex';
+            closeIcon.style.display = 'none';
+        });
+    }
+    
+    const burgerIcon = document.getElementById('burgerIcon');
+    const mobileNav = document.getElementById('mobileNav');
+    const overlay = document.getElementById('overlay');
+    const closeMobileBtn = document.getElementById('closeMobileMenu');
+    
+    if (burgerIcon && mobileNav && overlay) {
+        const openMobile = () => {
+            mobileNav.classList.add('open');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        };
+        
+        const closeMobile = () => {
+            mobileNav.classList.remove('open');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        };
+        
+        burgerIcon.addEventListener('click', openMobile);
+        closeMobileBtn?.addEventListener('click', closeMobile);
+        overlay.addEventListener('click', closeMobile);
+    }
+    
+    // Подписка
+    document.getElementById('subscribeBtn')?.addEventListener('click', () => {
+        const chk = document.getElementById('consentCheckbox');
+        const err = document.getElementById('consentError');
+        if (!chk?.checked) {
+            if (err) { err.style.display = 'block'; setTimeout(() => err.style.display = 'none', 2500); }
+        } else {
+            alert('Спасибо за подписку!');
+            document.getElementById('subscribeEmail').value = '';
+            chk.checked = false;
+        }
+    });
+    
+    document.querySelectorAll('.footer-btn-primary, .buy-ticket-btn').forEach(btn => {
+        btn.addEventListener('click', () => alert('Билеты скоро в продаже'));
+    });
+    
+    document.querySelector('.footer-btn-secondary')?.addEventListener('click', () => {
+        alert('Заказ шоу: свяжитесь с нами по телефону');
+    });
+}
+
+// =============================================
+// ОБРАБОТЧИКИ ФИЛЬТРОВ
+// =============================================
+function initFilters() {
+    allChip.addEventListener('click', () => {
+        currentFilter = 'all';
+        visibleCount = 6;
+        renderEvents();
+    });
+    
+    monthSelect.addEventListener('change', (e) => {
+        currentFilter = e.target.value;
+        visibleCount = 6;
+        renderEvents();
+    });
+    
+    showMoreBtn.addEventListener('click', () => {
+        const filtered = getFilteredEvents();
+        if (visibleCount < filtered.length) {
+            visibleCount = Math.min(visibleCount + 3, filtered.length);
+            renderEvents();
+        }
+    });
+}
+
+// =============================================
+// ЗАПУСК ВСЕГО
+// =============================================
+(function init() {
+    populateMonthSelect();
+    initFilters();
+    initTourModal();
+    initHeader();
+    renderEvents();
+    
+    setTimeout(initCustomMonthSelect, 50);
+})();
+</script>
+
+
+</body>
+</html>
