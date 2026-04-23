@@ -362,20 +362,22 @@
 }
 .error-tooltip { color: #ff6b6b; font-size: 12px; margin-top: 6px; display: none; }
 .social-icons { display: flex; gap: 12px; margin-top: 20px; }
-.social-circle { 
-    width: clamp(32px, 4vw, 44px); 
-    height: clamp(32px, 4vw, 44px); 
-    background: #2A3D5E; 
-    border-radius: 6px; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    border: 1px solid #3A5078; 
-    color: #DCE4F0; 
-    font-size: clamp(14px, 1.8vw, 20px); 
-    transition: .2s; 
-    text-decoration: none; 
-}
+    .social-circle { 
+        width: 60px !important; /* Было clamp(32px, 4vw, 44px) */
+        height: 60px !important; /* Было clamp(32px, 4vw, 44px) */
+        min-width: 52px !important;
+        min-height: 52px !important;
+        background: #2A3D5E; 
+        border-radius: 10px !important; /* Немного увеличиваем скругление */
+        display: flex; 
+        align-items: center; 
+        justify-content: center; 
+        border: 1px solid #3A5078; 
+        color: #DCE4F0; 
+        font-size: 28px !important; /* Было clamp(14px, 1.8vw, 20px) */
+        transition: .2s; 
+        text-decoration: none; 
+    }
 .social-circle:hover { background: #4A6294; color: #fff; }
 .footer-nav { min-width: 180px; }
 .footer-nav h4 { 

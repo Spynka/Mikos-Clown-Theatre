@@ -171,7 +171,22 @@ body { background: #fff; font-family: 'Nunito Sans', sans-serif; overflow-x: hid
 .checkbox-custom span:last-child { color: var(--blue-200); font-size: 13px; font-family: 'Nunito Sans', sans-serif; line-height: 1.4; }
 .error-tooltip { color: #ff6b6b; font-size: 12px; margin-top: 6px; display: none; }
 .social-icons { display: flex; gap: 12px; margin-top: 20px; }
-.social-circle { width: clamp(32px, 4vw, 44px); height: clamp(32px, 4vw, 44px); background: #2A3D5E; border-radius: 6px; display: flex; align-items: center; justify-content: center; border: 1px solid #3A5078; color: #DCE4F0; font-size: clamp(14px, 1.8vw, 20px); transition: .2s; text-decoration: none; }
+    .social-circle { 
+        width: 60px !important; /* Было clamp(32px, 4vw, 44px) */
+        height: 60px !important; /* Было clamp(32px, 4vw, 44px) */
+        min-width: 52px !important;
+        min-height: 52px !important;
+        background: #2A3D5E; 
+        border-radius: 10px !important; /* Немного увеличиваем скругление */
+        display: flex; 
+        align-items: center; 
+        justify-content: center; 
+        border: 1px solid #3A5078; 
+        color: #DCE4F0; 
+        font-size: 28px !important; /* Было clamp(14px, 1.8vw, 20px) */
+        transition: .2s; 
+        text-decoration: none; 
+    }
 .social-circle:hover { background: #4A6294; color: #fff; }
 .footer-nav { min-width: 180px; }
 .footer-nav h4 { color: #fff; font-family: 'Unbounded', sans-serif; font-weight: 600; margin-bottom: clamp(16px, 2vw, 28px); font-size: clamp(14px, 1.5vw, 18px); }
@@ -9341,5 +9356,77 @@ img.team-img,
 @media (max-width: 480px) {
     .about-img img {
         max-height: 250px !important;
+    }
+}
+
+
+
+
+
+
+/* ===== СТРЕЛКИ СЛАЙДЕРА (ИСПРАВЛЕНО - ЦВЕТ ИКОНОК) ===== */
+.slider-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid #E5E3E1;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.2s, background 0.2s, color 0.2s;
+    
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    
+    /* ЦВЕТ ИКОНКИ - ТЁМНЫЙ */
+    color: #2A3D5E !important;
+    font-size: 20px;
+}
+
+/* Явно указываем цвет для иконки внутри */
+.slider-arrow i {
+    color: #2A3D5E !important;
+    font-size: 20px;
+}
+
+/* При наведении на слайдер — стрелки появляются */
+.hero-slider-afisha:hover .slider-arrow {
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+}
+
+.slider-arrow-left {
+    left: 24px;
+}
+
+.slider-arrow-right {
+    right: 24px;
+}
+
+/* При наведении на саму стрелку - меняем фон на синий, иконку на белую */
+.slider-arrow:hover {
+    transform: translateY(-50%) scale(1.08);
+    background: #4A6294 !important;
+    border-color: #4A6294 !important;
+}
+
+.slider-arrow:hover,
+.slider-arrow:hover i {
+    color: #FFFFFF !important;
+}
+
+/* На мобильных устройствах стрелки скрываем */
+@media (max-width: 860px) {
+    .slider-arrow {
+        display: none !important;
     }
 }

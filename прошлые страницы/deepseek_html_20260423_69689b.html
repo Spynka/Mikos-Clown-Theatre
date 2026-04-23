@@ -9,10 +9,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
     <style>
-        /* ===== СТИЛИ МОДАЛЬНОГО ОКНА ===== */
+        /* Стили модального окна (фон #1A1A1A) */
         .modal-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(0, 0, 0, 0.85);
+            background-color: rgba(0, 0, 0, 0.8);
             backdrop-filter: blur(6px);
             z-index: 10000;
             display: flex; align-items: center; justify-content: center;
@@ -23,7 +23,7 @@
         .modal-overlay.active { opacity: 1; visibility: visible; }
         
         .modal-content {
-            background: #1A1A1A;
+            background: #1A1A1A; /* Гармоничный темный фон как в меню */
             border-radius: 24px;
             max-width: 900px; width: 100%;
             max-height: 85vh; overflow-y: auto;
@@ -44,6 +44,7 @@
             font-size: 24px; display: flex; align-items: center; justify-content: center;
             cursor: pointer; z-index: 10;
             transition: all 0.2s ease;
+            backdrop-filter: blur(4px);
         }
         .modal-close:hover {
             background: #E8454D;
@@ -57,6 +58,12 @@
         .modal-photo {
             width: 100%; height: 350px; overflow: hidden;
             border-radius: 24px 24px 0 0; flex-shrink: 0;
+            position: relative;
+        }
+        .modal-photo::after {
+            content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+            height: 40%; background: linear-gradient(to top, #1A1A1A, transparent);
+            pointer-events: none;
         }
         .modal-photo img {
             width: 100%; height: 100%; object-fit: cover; display: block;
@@ -67,7 +74,7 @@
         .modal-name {
             font-family: 'Unbounded', sans-serif; font-size: 32px;
             font-weight: 700; color: #FFFFFF; margin-bottom: 6px;
-            line-height: 1.2;
+            line-height: 1.2; letter-spacing: -0.01em;
         }
         .modal-nickname {
             color: #E8454D; font-weight: 700; font-size: 18px;
@@ -102,6 +109,11 @@
             padding: 12px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.06);
             color: rgba(255, 255, 255, 0.9);
             font-family: 'Nunito Sans', sans-serif; font-size: 15px;
+            transition: all 0.2s;
+        }
+        .performance-item:hover {
+            background: rgba(255, 255, 255, 0.02);
+            padding-left: 8px;
         }
         .performance-item:last-child { border-bottom: none; }
         .performance-bullet {
@@ -114,8 +126,12 @@
         @media (min-width: 768px) {
             .modal-body { flex-direction: row; }
             .modal-photo {
-                width: 40%; height: auto;
+                width: 40%; height: auto; min-height: 100%;
                 border-radius: 24px 0 0 24px;
+            }
+            .modal-photo::after {
+                left: 0; right: auto; width: 40%;
+                background: linear-gradient(to right, transparent, #1A1A1A);
             }
             .modal-info { width: 60%; padding: 36px; }
         }
@@ -125,7 +141,7 @@
             .modal-close { top: 16px; right: 16px; width: 40px; height: 40px; }
         }
 
-        /* Кликабельность карточек актеров */
+        /* Кликабельность */
         .actor-photo-card {
             cursor: pointer;
             transition: transform 0.25s ease, filter 0.25s ease;
@@ -140,26 +156,10 @@
 <body>
 <div class="shop-container">
     <div id="site-header"></div>
-    
-    <!-- Мобильное меню -->
-    <div class="mobile-nav" id="mobileNav">
-        <div class="close-mobile-menu" id="closeMobileMenu">✕</div>
-        <ul>
-            <li><a href="index.html">Главная</a></li>
-            <li><a href="affiche.html">Афиша</a></li>
-            <li><a href="for-customers.html">Заказчикам</a></li>
-            <li><a href="#">Брендбук</a></li>
-            <li><a href="performances.html">Спектакли</a></li>
-            <li><a href="team.html">Команда</a></li>
-            <li><a href="#">О театре</a></li>
-            <li><a href="shop.html">Магазин</a></li>
-            <li><a href="contacts.html">Контакты</a></li>
-        </ul>
-    </div>
-    
+    <div class="mobile-nav" id="mobileNav"><div class="close-mobile-menu" id="closeMobileMenu">✕</div><ul><li><a href="#">Главная</a></li><li><a href="#">Афиша</a></li><li><a href="#">Заказчикам</a></li><li><a href="#">Брендбук</a></li><li><a href="#">Спектакли</a></li><li><a href="#">Команда</a></li><li><a href="#">О театре</a></li><li><a href="#">Магазин</a></li><li><a href="#">Контакты</a></li></ul></div>
     <div class="overlay" id="overlay"></div>
 
-    <!-- Модальное окно актера -->
+    <!-- Модальное окно -->
     <div class="modal-overlay" id="infoModal">
         <div class="modal-content">
             <button class="modal-close" id="modalCloseBtn">&times;</button>
@@ -193,9 +193,7 @@
         </div>
 
         <div class="work-with-us">
-            <div class="work-image">
-                <img src="SVG/Zercalo.svg" alt="Присоединяйтесь">
-            </div>
+            <div class="work-image"><img src="SVG/Zercalo.svg" alt="Присоединяйтесь"></div>
             <div class="work-content">
                 <h3 class="work-title">Хотите с нами работать?</h3>
                 <p class="work-text">Заполните небольшую анкету, перейдя по кнопке ниже.<br>Мы вам обязательно напишем в течение одного дня.</p>
@@ -217,162 +215,92 @@
     <div id="site-footer"></div>
 </div>
 
-<!-- Скрипты компонентов -->
 <script src="js/components-loader.js"></script>
 <script src="js/header-scripts.js"></script>
 <script src="js/common.js"></script>
-
-<!-- Основной скрипт страницы -->
 <script>
     (function() {
-        'use strict';
-        
-        // ===== ДАННЫЕ ДЛЯ МОДАЛЬНОГО ОКНА =====
+        // ----- РАСШИРЕННЫЕ ДАННЫЕ -----
         const directorInfo = {
-            name: 'Сергей Давыдов',
-            nickname: 'Паганель',
+            name: 'Сергей Давыдов', nickname: 'Паганель',
             photo: 'images/content/actors/Давыдов-4.jpg',
             position: 'Основатель театра, режиссер, народный артист РФ',
             bio: 'Выпускник ГИТИСа (мастерская П. Фоменко, 1995). В 1998 году основал театр «Микос», который за 28 лет стал одним из ведущих театров клоунады в Европе. Поставил более 40 спектаклей. Лауреат трех премий «Золотая маска» (2007, 2012, 2018), премии «Триумф» и международного фестиваля в Авиньоне.',
-            performances: [
-                '«Король Лир» — Шут / Режиссер',
-                '«Ревизор» — Городничий / Постановка',
-                '«Сон в летнюю ночь» — Основа',
-                '«Клоуны на Луне» — Автор идеи',
-                '«Чайка» — Треплев (пластическая версия)',
-                '«Маленький принц» — Лис / Режиссер'
-            ]
+            performances: ['«Король Лир» — Шут / Режиссер', '«Ревизор» — Городничий / Постановка', '«Сон в летнюю ночь» — Основа', '«Клоуны на Луне» — Автор идеи', '«Чайка» — Треплев (пластическая версия)', '«Маленький принц» — Лис / Режиссер']
         };
 
-        // Данные актеров с полной информацией для модалки
-        const actorsFullData = [
+        const actorsData = [
             {
-                name: 'Сергей Давыдов',
-                nickname: 'Паганель',
-                photos: [
-                    'SVG/Давыдов-вбок.svg',
-                    'images/content/actors/Давыдов-3.jpg',
-                    'images/content/actors/Давыдов-2.jpg'
-                ],
-                mobileSvg: 'SVG/Давыдов-прямо.svg',
-                photoMain: 'images/content/actors/Давыдов-3.jpg',
+                name: 'Сергей Давыдов', nickname: 'Паганель',
+                photos: ['SVG/Давыдов-вбок.svg', 'images/content/actors/Давыдов-3.jpg', 'images/content/actors/Давыдов-2.jpg'],
+                mobileSvg: 'SVG/Давыдов-прямо.svg', photoMain: 'images/content/actors/Давыдов-4.jpg',
                 position: 'Художественный руководитель / Актер',
                 bio: 'Сергей — душа театра. Окончил ГИТИС в 1995 году. Разработал уникальную систему актерского тренинга. Его персонажи отличаются глубиной и искрометным юмором. Владеет искусством пантомимы, жонглирования и акробатики.',
-                performances: [
-                    '«Гамлет» — Гамлет',
-                    '«Вишневый сад» — Лопахин',
-                    '«Три сестры» — Вершинин',
-                    '«Ревизор» — Хлестаков',
-                    '«Мастер и Маргарита» — Мастер'
-                ]
+                performances: ['«Гамлет» — Гамлет', '«Вишневый сад» — Лопахин', '«Три сестры» — Вершинин', '«Ревизор» — Хлестаков', '«Мастер и Маргарита» — Мастер']
             },
             {
-                name: 'Ксения Иванова',
-                nickname: 'Муза',
-                photos: [
-                    'SVG/Иванова-вбок.svg',
-                    'images/content/actors/Иванова-3.jpg',
-                    'images/content/actors/Иванова-2.jpg'
-                ],
-                mobileSvg: 'SVG/Иванова-прямо.svg',
-                photoMain: 'images/content/actors/Иванова-3.jpg',
+                name: 'Ксения Иванова', nickname: 'Муза',
+                photos: ['SVG/Иванова-вбок.svg', 'images/content/actors/Иванова-3.jpg', 'images/content/actors/Иванова-2.jpg'],
+                mobileSvg: 'SVG/Иванова-прямо.svg', photoMain: 'images/content/actors/Иванова-3.jpg',
                 position: 'Ведущая актриса',
                 bio: 'Выпускница Школы-студии МХАТ (2008). В театре «Микос» с 2010 года. Обладательница уникального пластического дара. Лауреат «Золотой маски» за роль Нины Заречной (2015).',
-                performances: [
-                    '«Чайка» — Нина Заречная',
-                    '«Анна Каренина» — Анна',
-                    '«Три сестры» — Маша',
-                    '«Дядя Ваня» — Елена',
-                    '«Мастер и Маргарита» — Маргарита'
-                ]
+                performances: ['«Чайка» — Нина Заречная', '«Анна Каренина» — Анна', '«Три сестры» — Маша', '«Дядя Ваня» — Елена', '«Мастер и Маргарита» — Маргарита']
             },
             {
-                name: 'Тотраз Циукаев',
-                nickname: 'Тот',
-                photos: [
-                    'SVG/Циукаев-вбок.svg',
-                    'images/content/actors/Циукаев-3.jpg',
-                    'images/content/actors/Циукаев-2.jpg'
-                ],
-                mobileSvg: 'SVG/Циукаев-прямо.svg',
-                photoMain: 'images/content/actors/Циукаев-3.jpg',
+                name: 'Тотраз Циукаев', nickname: 'Тот',
+                photos: ['SVG/Циукаев-вбок.svg', 'images/content/actors/Циукаев-3.jpg', 'images/content/actors/Циукаев-2.jpg'],
+                mobileSvg: 'SVG/Циукаев-прямо.svg', photoMain: 'images/content/actors/Циукаев-3.jpg',
                 position: 'Актер, каскадер',
                 bio: 'До прихода в театр работал в Цирке дю Солей. Владеет жонглированием, эквилибром, сценическим фехтованием. В театре с 2018 года.',
-                performances: [
-                    '«Ромео и Джульетта» — Меркуцио',
-                    '«Слуга двух господ» — Труффальдино',
-                    '«Мастер и Маргарита» — Кот Бегемот',
-                    '«Сон в летнюю ночь» — Пэк'
-                ]
+                performances: ['«Ромео и Джульетта» — Меркуцио', '«Слуга двух господ» — Труффальдино', '«Мастер и Маргарита» — Кот Бегемот', '«Сон в летнюю ночь» — Пэк']
             },
             {
-                name: 'Максим Гамаюнов',
-                nickname: 'Гам',
-                photos: [
-                    'SVG/Гамаюнов-вбок.svg',
-                    'images/content/actors/Гамаюнов-3.jpg',
-                    'images/content/actors/Гамаюнов-2.jpg'
-                ],
-                mobileSvg: 'SVG/Гамаюнов-прямо.svg',
-                photoMain: 'images/content/actors/Гамаюнов-3.jpg',
+                name: 'Максим Гамаюнов', nickname: 'Гам',
+                photos: ['SVG/Гамаюнов-вбок.svg', 'images/content/actors/Гамаюнов-3.jpg', 'images/content/actors/Гамаюнов-2.jpg'],
+                mobileSvg: 'SVG/Гамаюнов-прямо.svg', photoMain: 'images/content/actors/Гамаюнов-3.jpg',
                 position: 'Актер, музыкант',
                 bio: 'Окончил РАМ им. Гнесиных по классу аккордеона. Играет на 7 инструментах. В спектаклях создает живое музыкальное сопровождение. С 2015 года в труппе.',
-                performances: [
-                    '«Пиковая дама» — Шарманщик',
-                    '«Снежная королева» — Сказочник',
-                    '«Дон Жуан» — Лепорелло',
-                    '«Ревизор» — Бобчинский'
-                ]
+                performances: ['«Пиковая дама» — Шарманщик', '«Снежная королева» — Сказочник', '«Дон Жуан» — Лепорелло', '«Ревизор» — Бобчинский']
             }
         ];
 
-        // ===== СОСТОЯНИЕ =====
         let visibleActors = 4;
         let isMobile = window.innerWidth <= 860;
         
-        // Элементы модального окна
         const modal = document.getElementById('infoModal');
         const modalBody = document.getElementById('modalBody');
         const modalClose = document.getElementById('modalCloseBtn');
 
-        // ===== ФУНКЦИИ МОДАЛЬНОГО ОКНА =====
         function closeModal() {
-            if (!modal) return;
             modal.classList.remove('active');
             document.body.style.overflow = '';
         }
 
         function openModal(data) {
-            if (!modal || !modalBody) return;
-            
             const nicknameHtml = data.nickname ? `<div class="modal-nickname">«${data.nickname}»</div>` : '';
-            const performancesHtml = data.performances ? data.performances.map(p => `
+            const performancesHtml = data.performances.map(p => `
                 <div class="performance-item">
                     <span class="performance-bullet">•</span>
                     <span class="performance-text">${p}</span>
                 </div>
-            `).join('') : '';
+            `).join('');
 
             modalBody.innerHTML = `
                 <div class="modal-photo">
-                    <img src="${data.photo}" alt="${data.name}" loading="lazy">
+                    <img src="${data.photo}" alt="${data.name}">
                 </div>
                 <div class="modal-info">
                     <div class="modal-name">${data.name}</div>
                     ${nicknameHtml}
                     <div class="modal-position">${data.position}</div>
                     
-                    ${data.bio ? `
                     <div class="modal-section-title">Творческий путь</div>
                     <div class="modal-bio">${data.bio}</div>
-                    ` : ''}
                     
-                    ${data.performances && data.performances.length ? `
                     <div class="modal-section-title">Спектакли в репертуаре</div>
                     <div class="performances-list">
                         ${performancesHtml}
                     </div>
-                    ` : ''}
                 </div>
             `;
             
@@ -380,34 +308,15 @@
             document.body.style.overflow = 'hidden';
         }
 
-        // Обработчики закрытия модалки
-        if (modalClose) {
-            modalClose.addEventListener('click', closeModal);
-        }
-        if (modal) {
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) closeModal();
-            });
-        }
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && modal && modal.classList.contains('active')) {
-                closeModal();
-            }
-        });
+        modalClose.addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
 
-        // ===== ПРОВЕРКА МОБИЛЬНОГО УСТРОЙСТВА =====
-        function checkMobile() {
-            return window.innerWidth <= 860;
-        }
-
-        // ===== РЕНДЕР КАРТОЧЕК АКТЕРОВ =====
         function renderActors() {
             const container = document.getElementById('actorsContainer');
             if (!container) return;
             
-            const displayActors = actorsFullData.slice(0, visibleActors);
-            const currentIsMobile = checkMobile();
-            
+            const displayActors = actorsData.slice(0, visibleActors);
+            const currentIsMobile = window.innerWidth <= 860;
             container.innerHTML = '';
             
             displayActors.forEach(actor => {
@@ -421,24 +330,16 @@
                 const photosGrid = document.createElement('div');
                 photosGrid.className = 'actor-photos-grid';
                 
-                // Копируем массив фото
                 const photosToShow = [...actor.photos];
+                if (currentIsMobile && actor.mobileSvg) photosToShow[0] = actor.mobileSvg;
                 
-                // Если мобильное разрешение — заменяем первый SVG на альтернативный
-                if (currentIsMobile && actor.mobileSvg) {
-                    photosToShow[0] = actor.mobileSvg;
-                }
-                
-                photosToShow.forEach(photoUrl => {
+                photosToShow.forEach((photoUrl) => {
                     const photoCard = document.createElement('div');
                     photoCard.className = 'actor-photo-card';
                     const img = document.createElement('img');
-                    img.src = photoUrl;
-                    img.alt = actor.name;
-                    img.loading = 'lazy';
+                    img.src = photoUrl; img.alt = actor.name; img.loading = 'lazy';
                     photoCard.appendChild(img);
                     
-                    // При клике открываем модалку с правильным фото
                     photoCard.addEventListener('click', () => {
                         openModal({
                             ...actor,
@@ -454,126 +355,67 @@
                 container.appendChild(actorBlock);
             });
             
-            // Управление кнопкой "Показать еще"
             const showMoreBtn = document.getElementById('showMoreActorsBtn');
-            if (showMoreBtn) {
-                showMoreBtn.style.display = visibleActors >= actorsFullData.length ? 'none' : 'block';
-            }
-            
+            if (showMoreBtn) showMoreBtn.style.display = visibleActors >= actorsData.length ? 'none' : 'block';
             isMobile = currentIsMobile;
         }
 
-        // ===== ОБРАБОТЧИК КНОПКИ "ПОКАЗАТЬ ЕЩЕ" =====
+        // ----- ВСЕ ОСТАЛЬНЫЕ СКРИПТЫ (ВОССТАНОВЛЕНЫ) -----
         document.getElementById('showMoreActorsBtn')?.addEventListener('click', () => {
-            if (visibleActors < actorsFullData.length) {
-                visibleActors = Math.min(visibleActors + 3, actorsFullData.length);
+            if (visibleActors < actorsData.length) {
+                visibleActors = Math.min(visibleActors + 3, actorsData.length);
                 renderActors();
             }
         });
 
-        // ===== ОТСЛЕЖИВАНИЕ ИЗМЕНЕНИЯ РАЗМЕРА ОКНА =====
         let resizeTimer;
         window.addEventListener('resize', () => {
             clearTimeout(resizeTimer);
             resizeTimer = setTimeout(() => {
-                const newIsMobile = checkMobile();
-                // Перерендериваем только если состояние (мобильное/десктоп) изменилось
-                if (newIsMobile !== isMobile) {
-                    renderActors();
-                }
+                const newIsMobile = window.innerWidth <= 860;
+                if (newIsMobile !== isMobile) renderActors();
             }, 150);
         });
 
-        // ===== ОБРАБОТЧИКИ КНОПОК =====
-        // Кнопка "Подробнее" у худрука
-        document.getElementById('directorModalBtn')?.addEventListener('click', () => {
-            openModal(directorInfo);
-        });
-        
-        // Кнопка "Хочу тут работать"
-        document.querySelector('.work-btn')?.addEventListener('click', () => {
-            alert('Форма для заполнения анкеты будет доступна скоро');
-        });
+        document.getElementById('directorModalBtn')?.addEventListener('click', () => openModal(directorInfo));
+        document.querySelector('.work-btn')?.addEventListener('click', () => alert('Форма для заполнения анкеты будет доступна скоро'));
 
-        // ===== HEADER DROPDOWN (ДОПОЛНИТЕЛЬНОЕ МЕНЮ) =====
-        const dotsIcon = document.getElementById('dotsIcon');
-        const closeIcon = document.getElementById('closeIcon');
-        const extraRow = document.getElementById('extraMenuRow');
-        
+        // Header dropdown
+        const dotsIcon = document.getElementById('dotsIcon'), closeIcon = document.getElementById('closeIcon'), extraRow = document.getElementById('extraMenuRow');
         if (dotsIcon && closeIcon && extraRow) {
-            function openExtraMenu() {
-                extraRow.classList.add('open');
-                dotsIcon.style.display = 'none';
-                closeIcon.style.display = 'inline-flex';
-            }
-            function closeExtraMenu() {
-                extraRow.classList.remove('open');
-                dotsIcon.style.display = 'inline-flex';
-                closeIcon.style.display = 'none';
-            }
-            dotsIcon.addEventListener('click', openExtraMenu);
-            closeIcon.addEventListener('click', closeExtraMenu);
+            dotsIcon.addEventListener('click', () => { extraRow.classList.add('open'); dotsIcon.style.display = 'none'; closeIcon.style.display = 'inline-flex'; });
+            closeIcon.addEventListener('click', () => { extraRow.classList.remove('open'); dotsIcon.style.display = 'inline-flex'; closeIcon.style.display = 'none'; });
         }
 
-        // ===== БУРГЕР-МЕНЮ ДЛЯ МОБИЛЬНЫХ =====
-        const burgerIcon = document.getElementById('burgerIcon');
-        const mobileNav = document.getElementById('mobileNav');
-        const overlay = document.getElementById('overlay');
-        const closeMobileBtn = document.getElementById('closeMobileMenu');
-        
+        // Burger menu
+        const burgerIcon = document.getElementById('burgerIcon'), mobileNav = document.getElementById('mobileNav'), overlay = document.getElementById('overlay'), closeMobileBtn = document.getElementById('closeMobileMenu');
         if (burgerIcon && mobileNav && overlay && closeMobileBtn) {
-            function openMobileMenu() {
-                mobileNav.classList.add('open');
-                overlay.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            }
-            function closeMobileMenu() {
-                mobileNav.classList.remove('open');
-                overlay.classList.remove('active');
-                document.body.style.overflow = '';
-            }
-            burgerIcon.addEventListener('click', openMobileMenu);
-            closeMobileBtn.addEventListener('click', closeMobileMenu);
-            overlay.addEventListener('click', closeMobileMenu);
+            burgerIcon.addEventListener('click', () => { mobileNav.classList.add('open'); overlay.classList.add('active'); document.body.style.overflow = 'hidden'; });
+            const closeFn = () => { mobileNav.classList.remove('open'); overlay.classList.remove('active'); document.body.style.overflow = ''; };
+            closeMobileBtn.addEventListener('click', closeFn); overlay.addEventListener('click', closeFn);
         }
 
-        // ===== ПОДПИСКА В ФУТЕРЕ =====
+        // Subscribe
         const subscribeBtn = document.getElementById('subscribeBtn');
         if (subscribeBtn) {
             subscribeBtn.addEventListener('click', () => {
-                const chk = document.getElementById('consentCheckbox');
-                const err = document.getElementById('consentError');
-                const emailInput = document.getElementById('subscribeEmail');
-                
-                if (!chk || !chk.checked) {
-                    if (err) {
-                        err.style.display = 'block';
-                        setTimeout(() => err.style.display = 'none', 2500);
-                    }
+                const chk = document.getElementById('consentCheckbox'), err = document.getElementById('consentError'), emailInput = document.getElementById('subscribeEmail');
+                if (!chk.checked) {
+                    if (err) { err.style.display = 'block'; setTimeout(() => err.style.display = 'none', 2500); }
                 } else {
                     alert('Спасибо за подписку!');
                     if (emailInput) emailInput.value = '';
-                    if (chk) chk.checked = false;
+                    chk.checked = false;
                 }
             });
         }
 
-        // ===== КНОПКИ "КУПИТЬ БИЛЕТ" =====
-        document.querySelectorAll('.footer-btn-primary, .buy-ticket-btn').forEach(btn => {
-            btn.addEventListener('click', () => alert('Билеты скоро в продаже'));
-        });
+        document.querySelectorAll('.footer-btn-primary, .buy-ticket-btn').forEach(btn => btn.addEventListener('click', () => alert('Билеты скоро в продаже')));
+        document.querySelector('.footer-btn-secondary')?.addEventListener('click', () => alert('Заказ шоу: +7 (495) 123-45-67'));
 
-        // ===== КНОПКА "ЗАКАЗ ШОУ" =====
-        document.querySelector('.footer-btn-secondary')?.addEventListener('click', () => {
-            alert('Заказ шоу: +7 (495) 123-45-67');
-        });
-
-        // ===== ЗАПУСК РЕНДЕРА ПОСЛЕ ЗАГРУЗКИ =====
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', renderActors);
-        } else {
-            renderActors();
-        }
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal.classList.contains('active')) closeModal(); });
+        
+        renderActors();
     })();
 </script>
 </body>
