@@ -9430,3 +9430,109 @@ img.team-img,
         display: none !important;
     }
 }
+
+
+/* ============================================= */
+/* ИЗМЕНЕНИЕ ЦВЕТА ТЕКСТА В ПОЛЯХ ВВОДА ФОРМ    */
+/* Цвет: #1A1718, исключение: .subscribe-input  */
+/* ============================================= */
+
+/* ----- 1. ОСНОВНЫЕ ПОЛЯ ВВОДА ВО ВСЕХ ФОРМАХ ----- */
+/* Формы на главной странице */
+.clients-form .form-group input,
+.clients-form .form-group textarea,
+.clients-form .form-group select,
+
+/* Форма контактов на странице контактов */
+.form-container .form-group input,
+.form-container .form-group textarea,
+
+/* Форма на странице Заказчикам */
+.form-group-custom input,
+.form-group-custom textarea,
+.form-group-custom select,
+.form-select-customers,
+#eventDate,
+#eventType,
+#audienceCount,
+#eventFormat,
+#extraWishes,
+
+/* Форма связи на странице Заказчикам */
+.contact-form-right input,
+.contact-form-right textarea,
+.contact-form-right select,
+
+/* Модальные окна (товар, контакты) */
+.modal-container .form-input,
+.modal-container .form-select,
+#contactName,
+#contactPhone,
+#contactEmail,
+#contactMethod,
+#contactMessage,
+#productQuantity,
+
+/* Кастомные select-кнопки */
+.custom-select-btn,
+#selectedSubject {
+    color: #1A1718 !important;
+}
+
+/* ----- 2. PLACEHOLDER ДЛЯ ВСЕХ ПОЛЕЙ (кроме футера) ----- */
+.clients-form .form-group input::placeholder,
+.clients-form .form-group textarea::placeholder,
+.form-container .form-group input::placeholder,
+.form-container .form-group textarea::placeholder,
+.form-group-custom input::placeholder,
+.form-group-custom textarea::placeholder,
+.contact-form-right input::placeholder,
+.contact-form-right textarea::placeholder,
+.modal-container .form-input::placeholder,
+.modal-container .form-select::placeholder,
+#eventDate::placeholder,
+#contactName::placeholder,
+#contactEmail::placeholder,
+#contactPhone::placeholder,
+#contactMessage::placeholder,
+#contactCompany::placeholder,
+#extraWishes::placeholder,
+#contactMethod::placeholder,
+#productQuantity::placeholder {
+    color: #9A9697 !important;
+    opacity: 0.7 !important;
+}
+
+/* ----- 3. ИСКЛЮЧЕНИЕ: EMAIL В ФУТЕРЕ ----- */
+/* Сохраняем оригинальный белый цвет для подписки */
+.subscribe-input,
+.subscribe-input::placeholder {
+    color: #fff !important; /* Оставляем белый для контраста на тёмном фоне */
+}
+.subscribe-input::placeholder {
+    opacity: 0.8 !important;
+    color: #DCE4F0 !important;
+}
+
+/* ----- 4. АДАПТИВ: МОБИЛЬНЫЕ УСТРОЙСТВА ----- */
+@media (max-width: 860px) {
+    .clients-form .form-group input,
+    .clients-form .form-group textarea,
+    .form-container .form-group input,
+    .form-container .form-group textarea,
+    .form-group-custom input,
+    .form-group-custom textarea,
+    .contact-form-right input,
+    .contact-form-right textarea,
+    .modal-container .form-input,
+    .modal-container .form-select {
+        color: #1A1718 !important;
+        font-size: 16px !important; /* Предотвращает зум на iOS */
+    }
+    
+    /* Footer email остаётся белым */
+    .subscribe-input {
+        color: #fff !important;
+        font-size: 14px !important;
+    }
+}
