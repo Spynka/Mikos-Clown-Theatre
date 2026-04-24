@@ -390,6 +390,237 @@
             pointer-events: none;
             z-index: 0;
         }
+
+        /* ===== СТИЛИ ДЛЯ АНИМАЦИИ ПРОМОКОДА ===== */
+        .promo-runner-section {
+            position: relative;
+            width: 100%;
+            height: 520px; /* Увеличена высота в 3 раза (было 120px) */
+            overflow: hidden; /* Скрываем всё, что выходит за пределы */
+            
+            border-radius: 16px;
+            margin: 0px 0;
+            display: flex;
+            align-items: center;
+            user-select: none;
+        }
+
+        .promo-runner-track {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            left: 100%; /* Старт строго от правой границы (за пределами контейнера) */
+            width: 800px; /* Увеличена ширина в ~3 раза (было 150px) */
+            height: 650px; /* Увеличена высота в 3 раза (было 100px) */
+            cursor: pointer;
+            z-index: 10;
+            transition: none;
+            /* Персонаж изначально невидим за правой границей */
+        }
+
+        /* Класс, запускающий анимацию бега справа налево */
+        .promo-runner-track.running {
+            animation: runAcross 4s linear infinite;
+        }
+
+        /* Ключевые кадры: персонаж бежит от правой границы к левой */
+        @keyframes runAcross {
+            0% {
+                left: 100%; /* Начинаем за правой границей контейнера */
+            }
+            100% {
+                left: -850px; /* Заканчиваем за левой границей (на ширину самого персонажа) */
+            }
+        }
+
+        .promo-runner-track img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            /* Лёгкий наклон для динамики бега */
+            transform: rotate(-5deg);
+            filter: drop-shadow(4px 8px 12px rgba(0,0,0,0.15)); /* Добавляем тень для объёма */
+        }
+
+        /* Подпись под анимацией */
+        .promo-caption {
+            position: absolute;
+            bottom: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Nunito Sans', sans-serif;
+            font-size: 18px; /* Немного увеличен шрифт подписи */
+            font-weight: 600;
+            color: #4A6294;
+            background: rgba(255,255,255,0.9);
+            padding: 8px 24px;
+            border-radius: 20px;
+            white-space: nowrap;
+            z-index: 5;
+            pointer-events: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        /* Модальное окно промокода */
+        .promo-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .promo-modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .promo-modal {
+            background: #fff;
+            border-radius: 24px;
+            padding: clamp(24px, 4vw, 40px);
+            max-width: 480px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            position: relative;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+        .promo-modal-overlay.active .promo-modal {
+            transform: translateY(0);
+        }
+
+        .promo-modal-close {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: #888;
+            line-height: 1;
+        }
+        .promo-modal-close:hover { color: #E8454D; }
+
+        .promo-modal-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+
+        .promo-modal-title {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #1A1718;
+            margin-bottom: 8px;
+        }
+
+        .promo-modal-subtitle {
+            font-family: 'Nunito Sans', sans-serif;
+            color: #5A5556;
+            margin-bottom: 24px;
+            font-size: 16px;
+        }
+
+        .promo-code-box {
+            background: #F8F7F6;
+            border: 2px dashed #4A6294;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .promo-code-text {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: #E8454D;
+            letter-spacing: 2px;
+        }
+
+        .promo-copy-btn {
+            background: #4A6294;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 20px;
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .promo-copy-btn:hover { background: #2A3D5E; }
+        .promo-copy-btn.copied { background: #2E7D32; }
+
+        .promo-goto-btn {
+            display: inline-block;
+            background: #E8454D;
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            padding: 14px 32px;
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+        .promo-goto-btn:hover { background: #C0392B; color: #fff; }
+
+        /* Адаптивность для мобильных */
+        @media (max-width: 860px) {
+            .promo-runner-section {
+                height: 240px; /* Уменьшаем, но остаётся крупнее оригинала */
+            }
+            .promo-runner-track {
+                width: 300px;
+                height: 200px;
+            }
+            @keyframes runAcross {
+                0% { left: 100%; }
+                100% { left: -300px; }
+            }
+            .promo-caption {
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .promo-runner-section {
+                height: 200px;
+            }
+            .promo-runner-track {
+                width: 240px;
+                height: 160px;
+            }
+            @keyframes runAcross {
+                0% { left: 100%; }
+                100% { left: -240px; }
+            }
+            .promo-caption {
+                font-size: 14px;
+                padding: 6px 16px;
+            }
+            .promo-code-box {
+                flex-direction: column;
+            }
+        }
     </style>
 </head>
 <body>
@@ -401,6 +632,36 @@
 
     <!-- Hero слайдер -->
     <div id="site-hero-slider"></div>
+
+    <!-- АНИМАЦИЯ ПРОМОКОДА: БЕГУЩИЙ ПЕРСОНАЖ (УВЕЛИЧЕНО В 3 РАЗА) -->
+        <div class="promo-runner-section" id="promoRunner">
+            <!-- Дорожка с персонажем (изначально без анимации, запустится при скролле) -->
+            <div class="promo-runner-track" id="promoRunnerTrack">
+                <!-- Используем SVG из папки SVG -->
+                <img src="SVG/Промокод.svg" alt="Поймай Ксюшу — получи промокод!">
+            </div>
+            <span class="promo-caption"> Поймайте Ксюшу — получите промокод!</span>
+        </div>
+
+        <!-- Модальное окно промокода -->
+        <div class="promo-modal-overlay" id="promoModalOverlay">
+            <div class="promo-modal">
+                <button class="promo-modal-close" id="closePromoModal">×</button>
+                <div class="promo-modal-icon">🎪</div>
+                <h2 class="promo-modal-title">Вы поймали Ксюшу!</h2>
+                <p class="promo-modal-subtitle">Ваш персональный промокод - 15% на спектакль:</p>
+                <div class="promo-code-box">
+                    <span class="promo-code-text" id="promoCode">KSUSHA10</span>
+                    <button class="promo-copy-btn" id="copyPromoBtn">
+                        <i class="far fa-copy"></i> Скопировать
+                    </button>
+                </div>
+                <a href="#afisha" class="promo-goto-btn" id="gotoAfishaBtn">
+                    Перейти к афише <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
 
     <!-- Основной контент афиши -->
     <div class="afisha-page">
@@ -441,7 +702,8 @@
                 <button class="show-more-btn" id="showMorePerformancesBtn" style="display: none;">Показать еще</button>
             </div>
         </div>
-    </div>
+
+        
 
     <!-- Модальное окно "Все гастроли" -->
     <div class="modal-overlay" id="tourModalOverlay">
@@ -1037,6 +1299,156 @@ function initHeader() {
 }
 
 // =============================================
+// АНИМАЦИЯ ПРОМОКОДА И МОДАЛЬНОЕ ОКНО
+// =============================================
+function initPromoRunner() {
+    const runnerTrack = document.getElementById('promoRunnerTrack');
+    const runnerSection = document.getElementById('promoRunner');
+    const modalOverlay = document.getElementById('promoModalOverlay');
+    const closeModalBtn = document.getElementById('closePromoModal');
+    const copyBtn = document.getElementById('copyPromoBtn');
+    const gotoAfishaBtn = document.getElementById('gotoAfishaBtn');
+    const promoCodeText = document.getElementById('promoCode');
+    
+    if (!runnerTrack || !runnerSection) return;
+    
+    let animationStarted = false;
+    
+    // Используем IntersectionObserver для запуска анимации при скролле
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !animationStarted) {
+                // Запускаем анимацию бега
+                runnerTrack.classList.add('running');
+                animationStarted = true;
+                console.log('🏃‍♀️ Ксюша побежала!');
+            } else if (!entry.isIntersecting && animationStarted) {
+                // Опционально: останавливаем анимацию, когда секция не видна
+                // runnerTrack.classList.remove('running');
+                // animationStarted = false;
+            }
+        });
+    }, {
+        threshold: 0.3 // Анимация запустится, когда 30% секции будет видно
+    });
+    
+    observer.observe(runnerSection);
+    
+    // Клик по персонажу открывает модальное окно
+    runnerTrack.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (modalOverlay) {
+            modalOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            // Сбрасываем текст кнопки копирования
+            if (copyBtn) {
+                copyBtn.innerHTML = '<i class="far fa-copy"></i> Скопировать';
+                copyBtn.classList.remove('copied');
+            }
+        }
+    });
+    
+    // Закрытие модального окна
+    if (closeModalBtn && modalOverlay) {
+        closeModalBtn.addEventListener('click', () => {
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+        
+        // Закрытие по клику на оверлей
+        modalOverlay.addEventListener('click', (e) => {
+            if (e.target === modalOverlay) {
+                modalOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+    }
+    
+    // Копирование промокода
+    if (copyBtn && promoCodeText) {
+        copyBtn.addEventListener('click', () => {
+            const code = promoCodeText.textContent.trim();
+            
+            // Используем современный Clipboard API
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(code).then(() => {
+                    copyBtn.innerHTML = '<i class="fas fa-check"></i> Скопировано!';
+                    copyBtn.classList.add('copied');
+                    
+                    setTimeout(() => {
+                        copyBtn.innerHTML = '<i class="far fa-copy"></i> Скопировать';
+                        copyBtn.classList.remove('copied');
+                    }, 2500);
+                }).catch(() => {
+                    // Fallback
+                    fallbackCopy(code);
+                });
+            } else {
+                fallbackCopy(code);
+            }
+        });
+    }
+    
+    // Fallback-метод копирования для старых браузеров
+    function fallbackCopy(text) {
+        const tempInput = document.createElement('textarea');
+        tempInput.value = text;
+        tempInput.style.position = 'fixed';
+        tempInput.style.opacity = '0';
+        tempInput.style.left = '-9999px';
+        document.body.appendChild(tempInput);
+        tempInput.select();
+        tempInput.setSelectionRange(0, 99999);
+        
+        try {
+            document.execCommand('copy');
+            copyBtn.innerHTML = '<i class="fas fa-check"></i> Скопировано!';
+            copyBtn.classList.add('copied');
+        } catch (err) {
+            alert('Не удалось скопировать. Промокод: ' + text);
+        }
+        
+        document.body.removeChild(tempInput);
+        
+        setTimeout(() => {
+            if (copyBtn) {
+                copyBtn.innerHTML = '<i class="far fa-copy"></i> Скопировать';
+                copyBtn.classList.remove('copied');
+            }
+        }, 2500);
+    }
+    
+    // Кнопка "Перейти к афише" — скроллит к фильтрам и закрывает модалку
+    if (gotoAfishaBtn) {
+        gotoAfishaBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+            
+            // Скроллим к секции фильтров
+            const filtersSection = document.querySelector('.filters-section-afisha');
+            if (filtersSection) {
+                filtersSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            } else {
+                // Fallback: скроллим к сетке событий
+                const eventsGrid = document.getElementById('eventsGrid');
+                if (eventsGrid) {
+                    eventsGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+        });
+    }
+    
+    // Закрытие модального окна по клавише Escape
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modalOverlay && modalOverlay.classList.contains('active')) {
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
+}
+
+// =============================================
 // ОБРАБОТЧИКИ ФИЛЬТРОВ
 // =============================================
 function initFilters() {
@@ -1098,6 +1510,9 @@ function initShowMoreTourBtn() {
     
     // Инициализация кнопки "Показать еще" для списка городов
     setTimeout(initShowMoreTourBtn, 150);
+    
+    // Инициализация анимации промокода
+    setTimeout(initPromoRunner, 200);
 })();
 </script>
 

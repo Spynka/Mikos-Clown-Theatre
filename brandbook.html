@@ -9,7 +9,7 @@
     <!-- Шрифты -->
     <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;800&family=Nunito+Sans:opsz,wght@6..12,300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-	<link rel="stylesheet" href="css/header-footercss"> 
+    <link rel="stylesheet" href="css/header-footercss"> 
     
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="SVG/logo-2.svg">
@@ -56,8 +56,8 @@
 
         /* ===== HEADER ===== */
         .main-header {
-            position: sticky; top: 0; z-index: 100;
-            background: rgba(242, 241, 240, 0.95); backdrop-filter: blur(12px);
+            position: sticky; top: 0; z-index: 200;
+            background: rgba(242, 241, 240, 0.98); backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--color-border); transition: var(--transition);
         }
         .main-header.scrolled { box-shadow: 0 4px 20px var(--color-shadow); }
@@ -76,12 +76,13 @@
         }
         .nav-menu {
             display: flex; align-items: center; gap: var(--space-2);
-            list-style: none; margin-left: auto;
+            list-style: none; margin-left: auto; flex-wrap: wrap;
         }
         .nav-btn {
             padding: var(--space-2) var(--space-4); font-family: var(--font-display);
             font-weight: 600; font-size: var(--text-sm); color: var(--color-text-secondary);
             border-radius: 8px; transition: var(--transition); position: relative;
+            white-space: nowrap;
         }
         .nav-btn:hover, .nav-btn.active {
             color: var(--color-bg-dark); background: rgba(244, 49, 57, 0.08);
@@ -98,7 +99,7 @@
         }
         .burger-icon:hover { background: rgba(35, 31, 32, 0.08); }
 
-        /* ===== МОБИЛЬНОЕ МЕНЮ (совместимо с вашим CSS) ===== */
+        /* ===== МОБИЛЬНОЕ МЕНЮ ===== */
         .mobile-nav {
             position: fixed; top: 0; right: -100%; width: 75%; max-width: 320px;
             min-width: 240px; height: 100vh; height: -webkit-fill-available;
@@ -109,15 +110,12 @@
             border-radius: 0; box-shadow: -4px 0 16px rgba(0, 0, 0, 0.25);
         }
         .mobile-nav.open { right: 0; }
-        
-        /* Логотипы в мобильном меню — сначала! */
         .mobile-logo-group {
             display: flex; flex-direction: column; align-items: center;
             gap: 12px; margin-bottom: 16px; padding-bottom: 16px;
             border-bottom: 1px solid rgba(255,255,255,0.08);
         }
         .mobile-logo-group .logo-img { height: 40px; }
-        
         .close-mobile-menu {
             position: absolute; top: 16px; right: 16px;
             width: 38px; height: 38px; display: flex; align-items: center;
@@ -126,7 +124,6 @@
             z-index: 10001; border: none; transition: background 0.2s;
         }
         .close-mobile-menu:hover { background: rgba(255, 255, 255, 0.2); }
-        
         .mobile-nav ul {
             list-style: none; display: flex; flex-direction: column;
             gap: 12px; margin: 0; padding: 0;
@@ -139,7 +136,6 @@
         .mobile-nav ul li a:hover, .mobile-nav ul li a.active {
             color: var(--color-accent-red);
         }
-        
         .overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.5); z-index: 9999;
@@ -427,6 +423,137 @@
         .download-item strong { display: block; font-size: var(--text-base); margin-bottom: 2px; }
         .download-item small { color: var(--color-text-secondary); font-size: var(--text-xs); }
 
+        /* ===== ТИПОГРАФИКА: ПАНЕЛЬ УПРАВЛЕНИЯ (sticky) ===== */
+        .typo-controls {
+            position: sticky; top: 70px; z-index: 150;
+            background: rgba(242, 241, 240, 0.98); backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--color-border); border-top: 1px solid var(--color-border);
+            padding: var(--space-4) var(--container-padding);
+            display: none; flex-wrap: wrap; gap: var(--space-4);
+            align-items: center; justify-content: space-between;
+            transition: var(--transition);
+        }
+        .typo-controls.active { display: flex; }
+        .main-header.scrolled + .typo-controls {
+            box-shadow: 0 4px 20px var(--color-shadow);
+            top: 73px;
+        }
+        .font-family-selector {
+            display: flex; gap: var(--space-2); flex-wrap: wrap;
+        }
+        .font-weight-selector {
+            display: flex; gap: var(--space-2); flex-wrap: wrap;
+        }
+        .weight-btn {
+            padding: var(--space-2) var(--space-4);
+            font-family: var(--font-display); font-weight: 600; font-size: var(--text-sm);
+            border: 2px solid var(--color-border); border-radius: 8px;
+            background: #fff; color: var(--color-text-secondary);
+            transition: var(--transition); cursor: pointer;
+            white-space: nowrap;
+        }
+        .weight-btn:hover, .weight-btn.active {
+            border-color: var(--color-accent-red); color: var(--color-accent-red);
+            background: rgba(244, 49, 57, 0.08);
+        }
+        .font-family-btn {
+            padding: var(--space-2) var(--space-4);
+            font-family: var(--font-display); font-weight: 600; font-size: var(--text-sm);
+            border: 2px solid var(--color-border); border-radius: 8px;
+            background: #fff; color: var(--color-text-secondary);
+            transition: var(--transition); cursor: pointer;
+            white-space: nowrap;
+        }
+        .font-family-btn:hover, .font-family-btn.active {
+            border-color: var(--color-accent-red); color: var(--color-accent-red);
+            background: rgba(244, 49, 57, 0.08);
+        }
+        .preview-size {
+            display: flex; align-items: center; gap: var(--space-3);
+        }
+        .preview-size label {
+            font-family: var(--font-display); font-weight: 600; font-size: var(--text-sm);
+            color: var(--color-text-secondary); white-space: nowrap;
+        }
+        .preview-size input {
+            width: 60px; padding: var(--space-1) var(--space-2);
+            border: 1px solid var(--color-border); border-radius: 6px;
+            font-family: var(--font-body); font-size: var(--text-sm);
+            text-align: center;
+        }
+
+        /* ===== ПРЕДПРОСМОТР ШРИФТА ===== */
+        .font-preview {
+            background: #fff; border-radius: var(--border-radius-lg);
+            padding: var(--space-6) var(--space-8);
+            box-shadow: 0 4px 20px var(--color-shadow);
+            border: 1px solid var(--color-border);
+            margin-bottom: var(--space-8);
+            display: none;
+        }
+        .font-preview.active { display: block; }
+        .preview-title {
+            font-family: var(--font-display); font-weight: 700; font-size: var(--text-lg);
+            color: var(--color-bg-dark); margin-bottom: var(--space-4);
+            display: flex; align-items: center; gap: var(--space-3);
+        }
+        .preview-title i { color: var(--color-accent-red); }
+        .preview-content {
+            font-size: 2.5rem; line-height: 1.3; letter-spacing: 0.02em;
+            margin-bottom: var(--space-6);
+            transition: var(--transition-smooth);
+            word-break: break-word;
+        }
+        .preview-meta {
+            display: flex; gap: var(--space-4); flex-wrap: wrap;
+            font-size: var(--text-sm); color: var(--color-text-secondary);
+            padding-top: var(--space-4); border-top: 1px solid var(--color-border);
+        }
+        .preview-meta span {
+            display: flex; align-items: center; gap: var(--space-2);
+        }
+        .preview-meta i { color: var(--color-accent-red); }
+
+        /* ===== СЕТКА СИМВОЛОВ 2×2 ===== */
+        .symbols-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-6);
+            margin-bottom: var(--space-8);
+            display: none;
+        }
+        .symbols-grid.active { display: grid; }
+        
+        .symbol-card {
+            background: #fff; border-radius: var(--border-radius-lg);
+            padding: var(--space-5) var(--space-6);
+            box-shadow: 0 4px 20px var(--color-shadow);
+            border: 1px solid var(--color-border);
+        }
+        .symbol-card h4 {
+            font-family: var(--font-display); font-weight: 700; font-size: var(--text-lg);
+            color: var(--color-bg-dark); margin-bottom: var(--space-4);
+            display: flex; align-items: center; gap: var(--space-3);
+        }
+        .symbol-card h4 i { color: var(--color-accent-red); }
+        
+        .symbol-block {
+            font-size: 1.1rem; line-height: 1.8; letter-spacing: 0.05em;
+            color: var(--color-text-primary);
+            padding: var(--space-4);
+            background: var(--color-bg-light);
+            border-radius: 8px;
+            display: block;
+            width: 100%;
+            word-break: break-all;
+            user-select: text;
+            text-align: left; /* ← ВСЕ БЛОКИ ВЫРОВНЕНЫ СЛЕВА */
+        }
+        .symbol-block.cyrillic { font-size: 1.25rem; line-height: 2; }
+        .symbol-block.latin { font-size: 1.15rem; line-height: 1.9; }
+        .symbol-block.numbers { font-size: 1.5rem; letter-spacing: 0.15em; }
+        .symbol-block.symbols { font-size: 1.3rem; letter-spacing: 0.1em; line-height: 2.2; }
+
         /* ===== АДАПТИВ ДЛЯ БОЛЬШИХ ЭКРАНОВ ===== */
         @media (min-width: 1600px) {
             :root { --container-padding: var(--space-10); }
@@ -441,6 +568,8 @@
             .burger-icon { display: flex; align-items: center; }
             .header-left { gap: var(--space-4); }
             .brandbook-label { font-size: var(--text-lg); padding-left: var(--space-3); }
+            .typo-controls { flex-direction: column; align-items: flex-start; top: 68px; }
+            .main-header.scrolled + .typo-controls { top: 69px; }
         }
 
         @media (max-width: 768px) {
@@ -451,6 +580,7 @@
             .media-detail-header .btn-secondary { position: static; margin-bottom: var(--space-4); }
             .grid-2col, .grid-3col { grid-template-columns: 1fr; }
             .hero-brand { padding: var(--space-12) var(--container-padding); }
+            .symbols-grid { grid-template-columns: 1fr; }
         }
 
         @media (max-width: 640px) {
@@ -462,6 +592,13 @@
             .content-wrapper { padding: var(--space-8) var(--container-padding); }
             .brand-card { padding: var(--space-5); }
             .photo-large img { aspect-ratio: 4/3; }
+            .typo-controls { top: 64px; }
+            .main-header.scrolled + .typo-controls { top: 65px; }
+            .symbol-block { font-size: 0.95rem !important; line-height: 1.6; }
+            .symbol-block.cyrillic,
+            .symbol-block.latin { font-size: 1.05rem !important; }
+            .symbol-block.numbers { font-size: 1.2rem !important; }
+            .symbol-block.symbols { font-size: 1.1rem !important; }
         }
 
         /* ===== ГАРАНТИЯ СКРЫТИЯ ДЕТАЛЬНЫХ СТРАНИЦ ===== */
@@ -488,30 +625,28 @@
             .mobile-nav { height: -webkit-fill-available !important; }
         }
         .mobile-logo-group { 
-    display: flex !important; 
-    flex-direction: column !important; 
-    align-items: center !important; 
-    gap: 12px !important; 
-    margin-bottom: 16px !important; 
-    padding-bottom: 16px !important; 
-    border-bottom: 1px solid rgba(255,255,255,.08) !important; 
-}
-.mobile-logo-group img { max-width: 110px !important; height: auto !important; }
-.close-mobile-menu:hover { background: rgba(255,255,255,.2) !important; }
-.mobile-nav ul li a { 
-    color: #F2F1F0 !important; 
-    font-family: 'Unbounded', sans-serif !important; 
-    font-size: 15px !important; 
-    text-decoration: none !important; 
-    display: block !important; 
-    padding: 6px 0 !important; 
-    line-height: 1.2 !important; 
-    transition: color .2s !important; 
-}
-.mobile-nav ul li a:hover, 
-.mobile-nav ul li a.active { color: #E8454D !important; }
-
-
+            display: flex !important; 
+            flex-direction: column !important; 
+            align-items: center !important; 
+            gap: 12px !important; 
+            margin-bottom: 16px !important; 
+            padding-bottom: 16px !important; 
+            border-bottom: 1px solid rgba(255,255,255,.08) !important; 
+        }
+        .mobile-logo-group img { max-width: 110px !important; height: auto !important; }
+        .close-mobile-menu:hover { background: rgba(255,255,255,.2) !important; }
+        .mobile-nav ul li a { 
+            color: #F2F1F0 !important; 
+            font-family: 'Unbounded', sans-serif !important; 
+            font-size: 15px !important; 
+            text-decoration: none !important; 
+            display: block !important; 
+            padding: 6px 0 !important; 
+            line-height: 1.2 !important; 
+            transition: color .2s !important; 
+        }
+        .mobile-nav ul li a:hover, 
+        .mobile-nav ul li a.active { color: #E8454D !important; }
     </style>
 </head>
 <body>
@@ -521,16 +656,16 @@
     <header class="main-header" id="mainHeader">
         <div class="header-inner">
             <div class="header-left">
-				<a href="index.html" class="logo-link" aria-label="На главную">
-					<div class="logo-group">
-						<img class="logo-img" src="SVG/logo-2.svg" alt="Знак" loading="lazy">
-						<img class="logo-img" src="SVG/logo.svg" alt="Логотип" loading="lazy">
-					</div>
-				</a>
-				<span class="brandbook-label">Брендбук</span>
-			</div>
+                <a href="index.html" class="logo-link" aria-label="На главную">
+                    <div class="logo-group">
+                        <img class="logo-img" src="SVG/logo-2.svg" alt="Знак" loading="lazy">
+                        <img class="logo-img" src="SVG/logo.svg" alt="Логотип" loading="lazy">
+                    </div>
+                </a>
+                <span class="brandbook-label">Брендбук</span>
+            </div>
             <nav class="nav-menu" id="brandNav" aria-label="Основная навигация">
-				<li><button class="nav-btn" onclick="window.location.href='index.html'" data-page="about">Сайт театра</button></li>
+                <li><button class="nav-btn" onclick="window.location.href='index.html'" data-page="about">Сайт театра</button></li>
                 <li><button class="nav-btn active" data-page="about">О бренде</button></li>
                 <li><button class="nav-btn" data-page="logo">Логотип</button></li>
                 <li><button class="nav-btn" data-page="colors">Цвета</button></li>
@@ -545,24 +680,20 @@
         </div>
     </header>
 
-    <!-- В МОБИЛЬНОМ МЕНЮ (тоже оберните) -->
-<aside class="mobile-nav" id="mobileNav" aria-hidden="true">
-    <button class="close-mobile-menu" id="closeMobileMenu" aria-label="Закрыть меню">
-        <i class="fas fa-times"></i>
-    </button>
-    
-    <!-- Логотипы в мобильном меню -- кликабельные -->
-    <a href="index.html" class="logo-link mobile-logo-link" aria-label="На главную">
-        <div class="mobile-logo-group">
-            <img class="logo-img" src="SVG/logo-black.svg" alt="Знак">
-            <img class="logo-img" src="SVG/logo-black-2.svg" alt="Логотип">
-        </div>
-    </a>
-        
-        <!-- ПУНКТЫ МЕНЮ ПОТОМ -->
+    <!-- МОБИЛЬНОЕ МЕНЮ -->
+    <aside class="mobile-nav" id="mobileNav" aria-hidden="true">
+        <button class="close-mobile-menu" id="closeMobileMenu" aria-label="Закрыть меню">
+            <i class="fas fa-times"></i>
+        </button>
+        <a href="index.html" class="logo-link mobile-logo-link" aria-label="На главную">
+            <div class="mobile-logo-group">
+                <img class="logo-img" src="SVG/logo-black.svg" alt="Знак">
+                <img class="logo-img" src="SVG/logo-black-2.svg" alt="Логотип">
+            </div>
+        </a>
         <nav aria-label="Мобильная навигация">
             <ul>
-				<li><a href="index.html" data-mobile-page="about">Сайт театра</a></li>
+                <li><a href="index.html" data-mobile-page="about">Сайт театра</a></li>
                 <li><a href="#" data-mobile-page="about">О бренде</a></li>
                 <li><a href="#" data-mobile-page="logo">Логотип</a></li>
                 <li><a href="#" data-mobile-page="colors">Цвета</a></li>
@@ -577,7 +708,7 @@
     <div class="overlay" id="overlay" aria-hidden="true"></div>
 
     <!-- СТРАНИЦА: О БРЕНДЕ -->
-    <section class="page-section active" id="page-about">
+    <section class="page-section" id="page-about">
         <div class="hero-brand" data-color="blue">
             <div class="hero-brand-content"><h1>О бренде</h1><p>Кодекс визуальной и смысловой идентичности театра клоунады «Микос»</p></div>
         </div>
@@ -634,23 +765,111 @@
         </div>
     </section>
 
-    <!-- СТРАНИЦА: ТИПОГРАФИКА -->
-    <section class="page-section" id="page-typo">
-        <div class="hero-brand" data-color="blue"><div class="hero-brand-content"><h1>Типографика</h1></div></div>
-        <div class="content-wrapper">
-            <div class="grid-2col">
-                <article class="brand-card"><h3>Unbounded <small>(заголовки)</small></h3> <h3><small>Кирилистический алфавит:</small></h3><p style="font-family:'Unbounded'; font-size: 2.5rem; font-weight: 800; line-height: 1.1; margin: var(--space-4) 0;">
-
-Аа Бб Вв Гг Дд Ее Ёё Жж З з, И и, Й й, К к, Л л, М м, Н н, О о, П п, Р р, С с, Т т, У у, Ф ф, Х х, Ц ц, Ч ч, Ш ш, Щ щ, Ъ ъ, Ы ы, Ь ь, Э э, Ю ю, Я я. 
-
-<h3><small>Латинский алфавит:</small></h3>
-A a, B b, C c, D d, E e, F f, G g, H h, I i, J j, K k, L l, M m, N n, O o, P p, Q q, R r, S s, T t, U u, V v, W w, X x, Y y, Z z. 
-
-<h3><small>Цифры:</small></h3>
-0, 1, 2, 3, 4, 5, 6, 7, 8, 9.</p><p>Для H1–H3, навигации, акцентных слов. Начертания: <strong>600, 700, 800</strong>.</p></article>
-                <article class="brand-card"><h3>Nunito Sans <small>(текст)</small></h3><p style="font-family:'Nunito Sans'; font-size: 1.375rem; margin: var(--space-4) 0;">Аа Бб Вв</p><p>Основной текст, описания, цитаты. Высокая читаемость. Начертания: <strong>400, 600, 700</strong>.</p></article>
+    <!-- СТРАНИЦА: ТИПОГРАФИКА (УЛУЧШЕННАЯ) -->
+    <section class="page-section active" id="page-typo">
+        <div class="hero-brand" data-color="blue"><div class="hero-brand-content"><h1>Типографика</h1><p>Фирменные шрифты и правила их использования</p></div></div>
+        
+        <!-- STICKY CONTROLS PANEL -->
+        <div class="typo-controls active">
+            <div class="font-family-selector">
+                <button class="font-family-btn active" data-font="unbounded">Unbounded</button>
+                <button class="font-family-btn" data-font="nunito">Nunito Sans</button>
             </div>
-            <article class="brand-card mt-6"><h3>Правила использования</h3><ul style="list-style: none; padding-left: 0;"><li>• Заголовки от 24px, межстрочный интервал 1.2</li><li>• Основной текст 16–18px, интерлиньяж 1.5</li><li>• Не более двух гарнитур в макете</li><li>• Избегать выравнивания по центру для длинных текстов</li></ul></article>
+            <div class="font-weight-selector" id="weightButtons"></div>
+            <div class="preview-size">
+                <label for="fontSize">Размер:</label>
+                <input type="number" id="fontSize" value="40" min="16" max="120" step="2">
+                <span style="font-size: var(--text-sm); color: var(--color-text-secondary);">px</span>
+            </div>
+        </div>
+        
+        <div class="content-wrapper">
+            <!-- ПРЕДПРОСМОТР -->
+            <div class="font-preview active">
+                <div class="preview-title">
+                    <i class="fas fa-eye"></i>
+                    <span>Предпросмотр</span>
+                </div>
+                <div class="preview-content" id="previewText" style="font-family: 'Unbounded'; font-weight: 700; font-size: 40px;">
+                    Театр клоунады «Микос» — искусство улыбаться всерьёз
+                </div>
+                <div class="preview-meta">
+                    <span><i class="fas fa-font"></i> <span id="currentFont">Unbounded</span></span>
+                    <span><i class="fas fa-weight-hanging"></i> <span id="currentWeight">Bold</span></span>
+                    <span><i class="fas fa-ruler"></i> <span id="currentSize">40px</span></span>
+                </div>
+            </div>
+
+            <!-- СЕТКА СИМВОЛОВ 2×2 -->
+            <div class="symbols-grid active">
+                <!-- Кириллица -->
+                <div class="symbol-card">
+                    <h4><i class="fas fa-language"></i> Кириллица</h4>
+                    <div class="symbol-block cyrillic" style="font-family: 'Unbounded'; font-weight: 700;">
+                        Аа Бб Вв Гг Дд Ее Ёё Жж Зз Ии Йй Кк Лл Мм Нн Оо Пп Рр Сс Тт Уу Фф Хх Цц Чч Шш Щщ Ъъ Ыы Ьь Ээ Юю Яя
+                    </div>
+                </div>
+                
+                <!-- Латиница -->
+                <div class="symbol-card">
+                    <h4><i class="fas fa-globe"></i> Латиница</h4>
+                    <div class="symbol-block latin" style="font-family: 'Unbounded'; font-weight: 700;">
+                        Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj Kk Ll Mm Nn Oo Pp Qq Rr Ss Tt Uu Vv Ww Xx Yy Zz
+                    </div>
+                </div>
+                
+                <!-- Цифры (выравнивание слева!) -->
+                <div class="symbol-card">
+                    <h4><i class="fas fa-hashtag"></i> Цифры</h4>
+                    <div class="symbol-block numbers" style="font-family: 'Unbounded'; font-weight: 700;">
+                        0 1 2 3 4 5 6 7 8 9
+                    </div>
+                </div>
+                
+                <!-- Символы -->
+                <div class="symbol-card">
+                    <h4><i class="fas fa-signs-post"></i> Символы</h4>
+                    <div class="symbol-block symbols" style="font-family: 'Unbounded'; font-weight: 700;">
+                        . , : ; – ! ? « » / * ( ) [ ] { } @ # $ % ^ & + = \ | ~ ` ' "
+                    </div>
+                </div>
+            </div>
+
+            <!-- ПРАВИЛА -->
+            <div class="brand-card mt-8">
+                <h3><i class="fas fa-book"></i> Правила использования типографики</h3>
+                <ul class="rules-list mt-4" style="list-style: none; padding-left: 0;">
+                    <li style="padding: var(--space-3) 0; padding-left: var(--space-6); border-bottom: 1px solid var(--color-border); position: relative;"><strong>Заголовки:</strong> использовать шрифт <strong>Unbounded</strong>, начертания <strong>Bold</strong> или <strong>ExtraBold</strong>, размер от 24px</li>
+                    <li style="padding: var(--space-3) 0; padding-left: var(--space-6); border-bottom: 1px solid var(--color-border); position: relative;"><strong>Подзаголовки:</strong> <strong>Unbounded SemiBold</strong>, размер 18–22px</li>
+                    <li style="padding: var(--space-3) 0; padding-left: var(--space-6); border-bottom: 1px solid var(--color-border); position: relative;"><strong>Основной текст:</strong> шрифт <strong>Nunito Sans</strong>, начертание <strong>Regular</strong> или <strong>SemiBold</strong>, размер 16–18px</li>
+                    <li style="padding: var(--space-3) 0; padding-left: var(--space-6); border-bottom: 1px solid var(--color-border); position: relative;"><strong>Интерлиньяж:</strong> для заголовков — 1.2, для основного текста — 1.5–1.6</li>
+                    <li style="padding: var(--space-3) 0; padding-left: var(--space-6); border-bottom: 1px solid var(--color-border); position: relative;"><strong>Межбуквенный интервал:</strong> для заголовков — -0.02em, для основного текста — 0</li>
+                    <li style="padding: var(--space-3) 0; padding-left: var(--space-6); border-bottom: 1px solid var(--color-border); position: relative;"><strong>Выравнивание:</strong> по левому краю для длинных текстов, по центру — только для коротких заголовков</li>
+                    <li style="padding: var(--space-3) 0; padding-left: var(--space-6); position: relative;"><strong>Ограничения:</strong> не использовать более двух гарнитур в одном макете; не применять курсив — использовать жирное начертание или цвет</li>
+                </ul>
+            </div>
+
+            <!-- СКАЧАТЬ ШРИФТЫ -->
+            <div class="grid-2col mt-8">
+                <article class="brand-card">
+                    <h3><i class="fas fa-download"></i> Скачать шрифты</h3>
+                    <p class="mb-4">Официальные файлы шрифтов для использования в проектах театра «Микос».</p>
+                    <div style="display: grid; gap: var(--space-3);">
+                        <a href="https://fonts.google.com/download?family=Unbounded" class="btn btn-primary" target="_blank" rel="noopener">
+                            <i class="fas fa-file-font"></i> Unbounded (Google Fonts)
+                        </a>
+                        <a href="https://fonts.google.com/download?family=Nunito+Sans" class="btn btn-primary" target="_blank" rel="noopener">
+                            <i class="fas fa-file-font"></i> Nunito Sans (Google Fonts)
+                        </a>
+                    </div>
+                </article>
+                <article class="brand-card">
+                    <h3><i class="fas fa-lightbulb"></i> Рекомендации</h3>
+                    <p><strong>Для цифровых носителей:</strong> использовать веб-версии шрифтов с подгрузкой через Google Fonts или локально.</p>
+                    <p class="mt-4"><strong>Для полиграфии:</strong> обязательно конвертировать текст в кривые при передаче макетов в типографию.</p>
+                    <p class="mt-4"><strong>Доступность:</strong> минимальный размер текста для чтения — 14px; для основного контента — не менее 16px.</p>
+                </article>
+            </div>
         </div>
     </section>
 
@@ -681,7 +900,7 @@ A a, B b, C c, D d, E e, F f, G g, H h, I i, J j, K k, L l, M m, N n, O o, P p, 
         </div>
     </section>
 
-    <!-- СТРАНИЦА: НОСИТЕЛИ (карусель + детали) -->
+    <!-- СТРАНИЦА: НОСИТЕЛИ -->
     <section class="page-section" id="page-media">
         <div class="hero-brand" data-color="blue"><div class="hero-brand-content"><h1>Носители</h1><p>Применение бренда в разных контекстах</p></div></div>
         <div class="content-wrapper">
@@ -689,27 +908,22 @@ A a, B b, C c, D d, E e, F f, G g, H h, I i, J j, K k, L l, M m, N n, O o, P p, 
             <div class="media-carousel-wrapper">
                 <button class="carousel-btn prev" id="mediaPrev" aria-label="Назад"><i class="fas fa-chevron-left"></i></button>
                 <div class="media-carousel" id="mediaCarousel" tabindex="0">
-                    <!-- Визитка -->
                     <article class="media-card" data-media-id="business-card">
                         <div class="media-card-image"><img src="https://placehold.co/600x400/231F20/D4BF95?text=ВИЗИТКА+МИКОС" alt="Визитка" loading="lazy"><span class="media-card-tag">Полиграфия</span></div>
                         <div class="media-card-content"><h3>Визитная карточка</h3><p>Двусторонняя визитка с тиснением и золотым акцентом</p><div class="media-card-meta"><span><i class="fas fa-ruler-combined"></i> 90 × 50 мм</span><span><i class="fas fa-file-pdf"></i> PDF + INDD</span></div><button class="btn btn-primary media-open-btn" data-target="business-card">Подробнее <i class="fas fa-arrow-right"></i></button></div>
                     </article>
-                    <!-- Афиша -->
                     <article class="media-card" data-media-id="poster">
                         <div class="media-card-image"><img src="https://placehold.co/600x400/2C4068/F2F1F0?text=АФИША+ПРЕМЬЕРА" alt="Афиша" loading="lazy"><span class="media-card-tag">Наружная реклама</span></div>
                         <div class="media-card-content"><h3>Афиша спектакля</h3><p>Формат А2 и А1 для размещения в городе и соцсетях</p><div class="media-card-meta"><span><i class="fas fa-ruler-combined"></i> 420 × 594 мм</span><span><i class="fas fa-layer-group"></i> 3 варианта</span></div><button class="btn btn-primary media-open-btn" data-target="poster">Подробнее <i class="fas fa-arrow-right"></i></button></div>
                     </article>
-                    <!-- Соцсети -->
                     <article class="media-card" data-media-id="social">
                         <div class="media-card-image"><img src="https://placehold.co/600x400/F43139/white?text=СОЦСЕТИ+ШАБЛОН" alt="Соцсети" loading="lazy"><span class="media-card-tag">Digital</span></div>
                         <div class="media-card-content"><h3>Шаблоны для соцсетей</h3><p>Stories, посты, обложки в едином визуальном стиле</p><div class="media-card-meta"><span><i class="fas fa-mobile-alt"></i> 1080 × 1920 px</span><span><i class="fas fa-palette"></i> Figma + PNG</span></div><button class="btn btn-primary media-open-btn" data-target="social">Подробнее <i class="fas fa-arrow-right"></i></button></div>
                     </article>
-                    <!-- Мерч -->
                     <article class="media-card" data-media-id="merch">
                         <div class="media-card-image"><img src="https://placehold.co/600x400/D4BF95/231F20?text=МЕРЧ+МИКОС" alt="Мерч" loading="lazy"><span class="media-card-tag">Сувениры</span></div>
                         <div class="media-card-content"><h3>Фирменный мерч</h3><p>Футболки, шоперы, значки с минималистичным знаком театра</p><div class="media-card-meta"><span><i class="fas fa-tshirt"></i> 5 товаров</span><span><i class="fas fa-print"></i> Вектор + мокапы</span></div><button class="btn btn-primary media-open-btn" data-target="merch">Подробнее <i class="fas fa-arrow-right"></i></button></div>
                     </article>
-                    <!-- Билет -->
                     <article class="media-card" data-media-id="ticket">
                         <div class="media-card-image"><img src="https://placehold.co/600x400/231F20/F43139?text=БИЛЕТ+ЭЛЕКТРОННЫЙ" alt="Билет" loading="lazy"><span class="media-card-tag">Digital</span></div>
                         <div class="media-card-content"><h3>Электронный билет</h3><p>QR-код, информация о спектакле, фирменные цвета</p><div class="media-card-meta"><span><i class="fas fa-ticket-alt"></i> 210 × 70 мм</span><span><i class="fas fa-qrcode"></i> PDF + HTML</span></div><button class="btn btn-primary media-open-btn" data-target="ticket">Подробнее <i class="fas fa-arrow-right"></i></button></div>
@@ -722,7 +936,7 @@ A a, B b, C c, D d, E e, F f, G g, H h, I i, J j, K k, L l, M m, N n, O o, P p, 
         </div>
     </section>
 
-    <!-- ДЕТАЛЬНЫЕ СТРАНИЦЫ НОСИТЕЛЕЙ (примеры) -->
+    <!-- ДЕТАЛЬНЫЕ СТРАНИЦЫ НОСИТЕЛЕЙ (скрыты по умолчанию) -->
     <section class="media-detail-page" id="media-business-card" hidden>
         <div class="media-detail-header">
             <button class="btn btn-secondary media-close-btn" aria-label="Назад"><i class="fas fa-arrow-left"></i> Назад к носителям</button>
@@ -738,130 +952,337 @@ A a, B b, C c, D d, E e, F f, G g, H h, I i, J j, K k, L l, M m, N n, O o, P p, 
                 </div>
             </div>
             <div class="media-specs-grid">
-                <article class="brand-card"><h3>Описание</h3><p>Визитная карточка театра выполнена в минималистичном стиле. Лицевая сторона содержит логотип и имя сотрудника, оборотная — контактные данные и слоган. Золотой акцент (#D4BF95) нанесён методом фольгирования.</p><h4 class="mt-4">Особенности:</h4><ul style="list-style: none; padding-left: 0;"><li>• Бумага: дизайнерская, 300 г/м², тактильная</li><li>• Печать: офсет + фольгирование золотом</li><li>• Постпечатка: биговка, скругление углов 3 мм</li></ul></article>
-                <article class="brand-card"><h3>Технические параметры</h3><table class="specs-table"><tr><th>Формат готового изделия</th><td>90 × 50 мм</td></tr><tr><th>Вылеты под обрез</th><td>по 2 мм с каждой стороны</td></tr><tr><th>Цветовая модель</th><td>CMYK (для печати), RGB (для экрана)</td></tr><tr><th>Разрешение</th><td>300 dpi</td></tr><tr><th>Шрифты</th><td>Unbounded Bold, Nunito Sans Regular</td></tr><tr><th>Охранное поле</th><td>5 мм от края</td></tr></table></article>
+                <article class="brand-card"><h3>Описание</h3><p>Визитная карточка театра выполнена в минималистичном стиле. Лицевая сторона содержит логотип и имя сотрудника, оборотная — контактные данные и слоган.</p></article>
+                <article class="brand-card"><h3>Параметры</h3><table class="specs-table"><tr><th>Формат</th><td>90 × 50 мм</td></tr><tr><th>Цвет</th><td>CMYK / RGB</td></tr><tr><th>Шрифты</th><td>Unbounded, Nunito Sans</td></tr></table></article>
             </div>
-            <article class="brand-card mt-6"><h3><i class="fas fa-download"></i> Скачать макеты</h3><div class="downloads-grid"><a href="#" class="download-item" download><i class="fas fa-file-pdf"></i><div><strong>Визитка_готовый_макет.pdf</strong><small>PDF/X-4, 2.4 МБ, для типографии</small></div></a><a href="#" class="download-item" download><i class="fas fa-file-alt"></i><div><strong>Визитка_исходник.indd</strong><small>InDesign CC 2023, 18.7 МБ, для редактирования</small></div></a><a href="#" class="download-item" download><i class="fas fa-image"></i><div><strong>Визитка_превью.png</strong><small>PNG@2x, 1.2 МБ, для презентаций</small></div></a><a href="#" class="download-item" download><i class="fas fa-book"></i><div><strong>Инструкция_печати.pdf</strong><small>PDF, 450 КБ, требования к печати</small></div></a></div></article>
         </div>
     </section>
 
-    <!-- Афиша (сокращённо) -->
     <section class="media-detail-page" id="media-poster" hidden>
         <div class="media-detail-header"><button class="btn btn-secondary media-close-btn"><i class="fas fa-arrow-left"></i> Назад</button><div class="media-detail-title"><span class="media-detail-tag">Наружная реклама</span><h1>Афиша спектакля</h1><p>Формат А2 и А1 для размещения в городе и соцсетях</p></div></div>
         <div class="media-detail-content">
-            <div class="media-gallery"><div class="gallery-main"><img id="galleryMainImg" src="https://placehold.co/800x500/2C4068/F2F1F0?text=АФИША+А1" alt="Афиша"><button class="gallery-nav prev" id="galleryPrev"><i class="fas fa-chevron-left"></i></button><button class="gallery-nav next" id="galleryNext"><i class="fas fa-chevron-right"></i></button></div><div class="gallery-thumbs" id="galleryThumbs"><img src="https://placehold.co/120x80/2C4068/F2F1F0?text=А1" class="thumb active" data-src="https://placehold.co/800x500/2C4068/F2F1F0?text=АФИША+А1"><img src="https://placehold.co/120x80/2C4068/F2F1F0?text=А2" class="thumb" data-src="https://placehold.co/800x500/2C4068/F2F1F0?text=АФИША+А2"><img src="https://placehold.co/120x80/F43139/white?text=СОЦСЕТЬ" class="thumb" data-src="https://placehold.co/800x500/F43139/white?text=АФИША+ДЛЯ+СОЦСЕТЕЙ"></div></div>
-            <div class="media-specs-grid"><article class="brand-card"><h3>Описание</h3><p>Афиша строится на контрасте крупного эмоционального фото и строгой типографики. Красный акцент (#F43139) выделяет дату премьеры.</p></article><article class="brand-card"><h3>Параметры</h3><table class="specs-table"><tr><th>Форматы</th><td>А1 (594×841 мм), А2 (420×594 мм), квадрат (1080×1080 px)</td></tr><tr><th>Вылеты</th><td>5 мм под обрез</td></tr><tr><th>Цветовая модель</th><td>CMYK / RGB</td></tr></table></article></div>
-            <article class="brand-card mt-6"><h3><i class="fas fa-download"></i> Скачать</h3><div class="downloads-grid"><a href="#" class="download-item" download><i class="fas fa-file-pdf"></i><div><strong>Афиша_А1_А2.pdf</strong><small>PDF/X-4, 8.2 МБ</small></div></a><a href="#" class="download-item" download><i class="fas fa-file-alt"></i><div><strong>Афиша_исходник.indd</strong><small>InDesign, 24.1 МБ</small></div></a></div></article>
+            <div class="media-gallery"><div class="gallery-main"><img id="galleryMainImg" src="https://placehold.co/800x500/2C4068/F2F1F0?text=АФИША+А1" alt="Афиша"></div></div>
+            <article class="brand-card"><h3>Параметры</h3><table class="specs-table"><tr><th>Форматы</th><td>А1, А2, 1080×1080 px</td></tr><tr><th>Цвет</th><td>CMYK / RGB</td></tr></table></article>
         </div>
     </section>
 
-    <!-- Заглушка для подгрузки футера -->
-    <div id="site-footer"></div>
+    <!-- FOOTER -->
+    <div id="site-footer" style="margin-top: var(--space-16); padding: var(--space-8) var(--container-padding); text-align: center; color: var(--color-text-secondary); border-top: 1px solid var(--color-border); background: #fff;">
+        <p style="font-size: var(--text-sm);">© 2026 Театр клоунады «Микос». Все права защищены.</p>
+        <p style="font-size: var(--text-xs); margin-top: var(--space-2);">Брендбук · Версия 2.1 · Обновлено: апрель 2026</p>
+    </div>
+
+</div>
 
 <!-- СКРИПТЫ -->
 <script>
+    // ===== ДАННЫЕ ШРИФТОВ ДЛЯ ТИПОГРАФИКИ =====
+    const fonts = {
+        unbounded: {
+            name: 'Unbounded',
+            weights: [
+                { value: 400, label: 'Regular' },
+                { value: 600, label: 'SemiBold' },
+                { value: 700, label: 'Bold' },
+                { value: 800, label: 'ExtraBold' }
+            ],
+            defaultWeight: 700
+        },
+        nunito: {
+            name: 'Nunito Sans',
+            weights: [
+                { value: 300, label: 'Light' },
+                { value: 400, label: 'Regular' },
+                { value: 600, label: 'SemiBold' },
+                { value: 700, label: 'Bold' }
+            ],
+            defaultWeight: 400
+        }
+    };
+
+    let typoState = { font: 'unbounded', weight: 700, size: 40 };
+
     // ===== ОБЪЕКТ СТРАНИЦ =====
     const pages = {
-        about: document.getElementById('page-about'), logo: document.getElementById('page-logo'),
-        colors: document.getElementById('page-colors'), typo: document.getElementById('page-typo'),
-        graphics: document.getElementById('page-graphics'), photo: document.getElementById('page-photo'),
+        about: document.getElementById('page-about'),
+        logo: document.getElementById('page-logo'),
+        colors: document.getElementById('page-colors'),
+        typo: document.getElementById('page-typo'),
+        graphics: document.getElementById('page-graphics'),
+        photo: document.getElementById('page-photo'),
         media: document.getElementById('page-media')
     };
 
     // ===== ПЕРЕКЛЮЧЕНИЕ СТРАНИЦ =====
     function switchPage(id) {
         closeMediaDetail();
-        Object.values(pages).forEach(p => { if (p) { p.classList.remove('active'); p.style.display = 'none'; } });
-        if (pages[id]) { pages[id].classList.add('active'); pages[id].style.display = 'block'; window.scrollTo({ top: 0, behavior: 'smooth' }); }
-        document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.page === id));
+        Object.values(pages).forEach(p => { 
+            if (p) { 
+                p.classList.remove('active'); 
+                p.style.display = 'none'; 
+            } 
+        });
+        if (pages[id]) { 
+            pages[id].classList.add('active'); 
+            pages[id].style.display = 'block'; 
+            // Показать/скрыть панель типографики
+            const controls = document.querySelector('.typo-controls');
+            const preview = document.querySelector('.font-preview');
+            const grid = document.querySelector('.symbols-grid');
+            if (id === 'typo') {
+                controls?.classList.add('active');
+                preview?.classList.add('active');
+                grid?.classList.add('active');
+            } else {
+                controls?.classList.remove('active');
+                preview?.classList.remove('active');
+                grid?.classList.remove('active');
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' }); 
+        }
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.page === id);
+        });
     }
 
     function closeMediaDetail() {
-        document.querySelectorAll('.media-detail-page').forEach(p => { p.hidden = true; p.classList.remove('active'); p.style.display = 'none'; });
+        document.querySelectorAll('.media-detail-page').forEach(p => { 
+            p.hidden = true; 
+            p.classList.remove('active'); 
+            p.style.display = 'none'; 
+        });
     }
 
     function openMediaDetail(mediaId) {
         Object.values(pages).forEach(p => { if (p) { p.classList.remove('active'); p.style.display = 'none'; } });
         closeMediaDetail();
-        const mediaMain = document.getElementById('page-media'); if (mediaMain) mediaMain.style.display = 'none';
+        const mediaMain = document.getElementById('page-media'); 
+        if (mediaMain) mediaMain.style.display = 'none';
         const detail = document.getElementById(`media-${mediaId}`);
-        if (detail) { detail.hidden = false; detail.classList.add('active'); detail.style.display = 'block'; window.scrollTo({ top: 0, behavior: 'smooth' }); setTimeout(initGallery, 100); }
-        document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.page === 'media'));
+        if (detail) { 
+            detail.hidden = false; 
+            detail.classList.add('active'); 
+            detail.style.display = 'block'; 
+            window.scrollTo({ top: 0, behavior: 'smooth' }); 
+        }
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.page === 'media');
+        });
+    }
+
+    // ===== ТИПОГРАФИКА: УПРАВЛЕНИЕ =====
+    function initWeightButtons() {
+        const container = document.getElementById('weightButtons');
+        if (!container) return;
+        container.innerHTML = '';
+        fonts[typoState.font].weights.forEach(w => {
+            const btn = document.createElement('button');
+            btn.className = `weight-btn ${w.value === typoState.weight ? 'active' : ''}`;
+            btn.textContent = w.label;
+            btn.title = `${w.label} (${w.value})`;
+            btn.dataset.weight = w.value;
+            btn.addEventListener('click', () => {
+                typoState.weight = parseInt(w.value);
+                document.querySelectorAll('.weight-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                updateTypoPreview();
+            });
+            container.appendChild(btn);
+        });
+    }
+
+    function updateTypoPreview() {
+        const preview = document.getElementById('previewText');
+        const fontData = fonts[typoState.font];
+        if (!preview) return;
+        
+        preview.style.fontFamily = `'${fontData.name}'`;
+        preview.style.fontWeight = typoState.weight;
+        preview.style.fontSize = `${typoState.size}px`;
+        
+        const fontEl = document.getElementById('currentFont');
+        const weightEl = document.getElementById('currentWeight');
+        const sizeEl = document.getElementById('currentSize');
+        if (fontEl) fontEl.textContent = fontData.name;
+        if (weightEl) weightEl.textContent = fontData.weights.find(w => w.value === typoState.weight)?.label || typoState.weight;
+        if (sizeEl) sizeEl.textContent = `${typoState.size}px`;
+        
+        document.querySelectorAll('.symbol-block').forEach(block => {
+            block.style.fontFamily = `'${fontData.name}'`;
+            block.style.fontWeight = typoState.weight;
+        });
     }
 
     // ===== МОБИЛЬНОЕ МЕНЮ =====
-    const mobileNav = document.getElementById('mobileNav'), overlay = document.getElementById('overlay'),
-          burgerIcon = document.getElementById('burgerIcon'), closeMobileBtn = document.getElementById('closeMobileMenu');
+    const mobileNav = document.getElementById('mobileNav'), 
+          overlay = document.getElementById('overlay'),
+          burgerIcon = document.getElementById('burgerIcon'), 
+          closeMobileBtn = document.getElementById('closeMobileMenu');
 
     function openMobileMenu() {
         if (!mobileNav || !overlay) return;
-        mobileNav.classList.add('open'); overlay.classList.add('active');
-        mobileNav.setAttribute('aria-hidden', 'false'); overlay.setAttribute('aria-hidden', 'false');
+        mobileNav.classList.add('open'); 
+        overlay.classList.add('active');
+        mobileNav.setAttribute('aria-hidden', 'false'); 
+        overlay.setAttribute('aria-hidden', 'false');
         document.body.style.overflow = 'hidden';
         if (burgerIcon) burgerIcon.setAttribute('aria-expanded', 'true');
     }
     function closeMobileMenu() {
         if (!mobileNav || !overlay) return;
-        mobileNav.classList.remove('open'); overlay.classList.remove('active');
-        mobileNav.setAttribute('aria-hidden', 'true'); overlay.setAttribute('aria-hidden', 'true');
+        mobileNav.classList.remove('open'); 
+        overlay.classList.remove('active');
+        mobileNav.setAttribute('aria-hidden', 'true'); 
+        overlay.setAttribute('aria-hidden', 'true');
         document.body.style.overflow = '';
         if (burgerIcon) burgerIcon.setAttribute('aria-expanded', 'false');
     }
 
-    // ===== КАРУСЕЛЬ =====
+    // ===== КАРУСЕЛЬ НОСИТЕЛЕЙ =====
     function initCarouselDots() {
-        const carousel = document.getElementById('mediaCarousel'), dotsContainer = document.getElementById('mediaDots');
+        const carousel = document.getElementById('mediaCarousel'), 
+              dotsContainer = document.getElementById('mediaDots');
         if (!carousel || !dotsContainer) return;
-        const cards = carousel.querySelectorAll('.media-card'); dotsContainer.innerHTML = '';
-        cards.forEach((_, i) => { const dot = document.createElement('span'); dot.className = `carousel-dot ${i === 0 ? 'active' : ''}`; dot.addEventListener('click', () => scrollToCard(i)); dotsContainer.appendChild(dot); });
+        const cards = carousel.querySelectorAll('.media-card'); 
+        dotsContainer.innerHTML = '';
+        cards.forEach((_, i) => { 
+            const dot = document.createElement('span'); 
+            dot.className = `carousel-dot ${i === 0 ? 'active' : ''}`; 
+            dot.addEventListener('click', () => scrollToCard(i)); 
+            dotsContainer.appendChild(dot); 
+        });
     }
     function scrollToCard(index) {
-        const carousel = document.getElementById('mediaCarousel'), cards = carousel?.querySelectorAll('.media-card');
+        const carousel = document.getElementById('mediaCarousel'), 
+              cards = carousel?.querySelectorAll('.media-card');
         if (!cards || !cards[index]) return;
-        const cardWidth = cards[index].offsetWidth + 20; carousel.scrollTo({ left: index * cardWidth, behavior: 'smooth' });
+        const cardWidth = cards[index].offsetWidth + 20; 
+        carousel.scrollTo({ left: index * cardWidth, behavior: 'smooth' });
         document.querySelectorAll('.carousel-dot').forEach((d, i) => d.classList.toggle('active', i === index));
     }
 
     // ===== ГАЛЕРЕЯ =====
     function initGallery() {
-        const mainImg = document.getElementById('galleryMainImg'), thumbs = document.querySelectorAll('.thumb'),
-              prevBtn = document.getElementById('galleryPrev'), nextBtn = document.getElementById('galleryNext');
+        const mainImg = document.getElementById('galleryMainImg'), 
+              thumbs = document.querySelectorAll('.thumb'),
+              prevBtn = document.getElementById('galleryPrev'), 
+              nextBtn = document.getElementById('galleryNext');
         if (!mainImg || thumbs.length === 0) return;
         thumbs.forEach(thumb => thumb.addEventListener('click', () => {
-            mainImg.src = thumb.dataset.src; mainImg.alt = thumb.alt;
-            thumbs.forEach(t => t.classList.remove('active')); thumb.classList.add('active');
+            mainImg.src = thumb.dataset.src; 
+            mainImg.alt = thumb.alt;
+            thumbs.forEach(t => t.classList.remove('active')); 
+            thumb.classList.add('active');
         }));
         let idx = 0;
         function update(i) { if (thumbs[i]) { thumbs[i].click(); idx = i; } }
         prevBtn?.addEventListener('click', () => update(idx > 0 ? idx - 1 : thumbs.length - 1));
         nextBtn?.addEventListener('click', () => update(idx < thumbs.length - 1 ? idx + 1 : 0));
-        let swipeX = 0;
-        mainImg.parentElement?.addEventListener('touchstart', e => swipeX = e.touches[0].clientX, { passive: true });
-        mainImg.parentElement?.addEventListener('touchend', e => { const d = swipeX - e.changedTouches[0].clientX; if (d > 50) nextBtn?.click(); else if (d < -50) prevBtn?.click(); }, { passive: true });
     }
 
     // ===== ИНИЦИАЛИЗАЦИЯ =====
     document.addEventListener('DOMContentLoaded', () => {
-        closeMediaDetail(); initCarouselDots(); initGallery();
+        // Инициализация типографики
+        initWeightButtons();
+        updateTypoPreview();
         
-        document.querySelectorAll('.nav-btn').forEach(btn => btn.addEventListener('click', e => { e.preventDefault(); if (btn.dataset.page) switchPage(btn.dataset.page); }));
-        burgerIcon?.addEventListener('click', openMobileMenu); closeMobileBtn?.addEventListener('click', closeMobileMenu); overlay?.addEventListener('click', closeMobileMenu);
-        document.querySelectorAll('[data-mobile-page]').forEach(link => link.addEventListener('click', e => { e.preventDefault(); const id = link.dataset.mobilePage; if (id) { switchPage(id); closeMobileMenu(); } }));
-        document.querySelectorAll('.media-open-btn').forEach(btn => btn.addEventListener('click', e => { e.stopPropagation(); const target = btn.dataset.target; if (target) openMediaDetail(target); }));
-        document.querySelectorAll('.media-card').forEach(card => card.addEventListener('click', () => { const target = card.dataset.mediaId; if (target) openMediaDetail(target); }));
-        document.querySelectorAll('.media-close-btn').forEach(btn => btn.addEventListener('click', () => { closeMediaDetail(); switchPage('media'); }));
+        // Инициализация брендбука
+        closeMediaDetail(); 
+        initCarouselDots(); 
+        initGallery();
         
+        // Навигация
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.addEventListener('click', e => { 
+                e.preventDefault(); 
+                if (btn.dataset.page) switchPage(btn.dataset.page); 
+            });
+        });
+        
+        // Мобильное меню
+        burgerIcon?.addEventListener('click', openMobileMenu); 
+        closeMobileBtn?.addEventListener('click', closeMobileMenu); 
+        overlay?.addEventListener('click', closeMobileMenu);
+        
+        document.querySelectorAll('[data-mobile-page]').forEach(link => {
+            link.addEventListener('click', e => { 
+                e.preventDefault(); 
+                const id = link.dataset.mobilePage; 
+                if (id) { switchPage(id); closeMobileMenu(); } 
+            });
+        });
+        
+        // Носители
+        document.querySelectorAll('.media-open-btn').forEach(btn => {
+            btn.addEventListener('click', e => { 
+                e.stopPropagation(); 
+                const target = btn.dataset.target; 
+                if (target) openMediaDetail(target); 
+            });
+        });
+        document.querySelectorAll('.media-card').forEach(card => {
+            card.addEventListener('click', () => { 
+                const target = card.dataset.mediaId; 
+                if (target) openMediaDetail(target); 
+            });
+        });
+        document.querySelectorAll('.media-close-btn').forEach(btn => {
+            btn.addEventListener('click', () => { 
+                closeMediaDetail(); 
+                switchPage('media'); 
+            });
+        });
+        
+        // Скролл хедера
         const header = document.getElementById('mainHeader');
-        window.addEventListener('scroll', () => { if (header) header.classList.toggle('scrolled', window.scrollY > 10); }, { passive: true });
-        document.addEventListener('keydown', e => { if (e.key === 'Escape' && mobileNav?.classList.contains('open')) closeMobileMenu(); });
+        window.addEventListener('scroll', () => { 
+            if (header) header.classList.toggle('scrolled', window.scrollY > 10); 
+        }, { passive: true });
         
-        const carousel = document.getElementById('mediaCarousel'), prevBtn = document.getElementById('mediaPrev'), nextBtn = document.getElementById('mediaNext');
+        // Escape для закрытия меню
+        document.addEventListener('keydown', e => { 
+            if (e.key === 'Escape' && mobileNav?.classList.contains('open')) closeMobileMenu(); 
+        });
+        
+        // Карусель тач
+        const carousel = document.getElementById('mediaCarousel'), 
+              prevBtn = document.getElementById('mediaPrev'), 
+              nextBtn = document.getElementById('mediaNext');
         let startX = 0, isDragging = false;
-        carousel?.addEventListener('touchstart', e => { startX = e.touches[0].clientX; isDragging = true; }, { passive: true });
-        carousel?.addEventListener('touchmove', e => { if (!isDragging || !carousel) return; const diff = startX - e.touches[0].clientX; if (Math.abs(diff) > 50) { carousel.scrollBy({ left: diff > 0 ? 300 : -300, behavior: 'smooth' }); isDragging = false; } }, { passive: true });
+        carousel?.addEventListener('touchstart', e => { 
+            startX = e.touches[0].clientX; 
+            isDragging = true; 
+        }, { passive: true });
+        carousel?.addEventListener('touchmove', e => { 
+            if (!isDragging || !carousel) return; 
+            const diff = startX - e.touches[0].clientX; 
+            if (Math.abs(diff) > 50) { 
+                carousel.scrollBy({ left: diff > 0 ? 300 : -300, behavior: 'smooth' }); 
+                isDragging = false; 
+            } 
+        }, { passive: true });
         carousel?.addEventListener('touchend', () => { isDragging = false; });
         prevBtn?.addEventListener('click', () => carousel?.scrollBy({ left: -300, behavior: 'smooth' }));
         nextBtn?.addEventListener('click', () => carousel?.scrollBy({ left: 300, behavior: 'smooth' }));
+        
+        // Типографика: переключение шрифтов
+        document.querySelectorAll('.font-family-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                typoState.font = btn.dataset.font;
+                document.querySelectorAll('.font-family-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                typoState.weight = fonts[typoState.font].defaultWeight;
+                initWeightButtons();
+                updateTypoPreview();
+            });
+        });
+        
+        // Типографика: размер
+        document.getElementById('fontSize')?.addEventListener('input', (e) => {
+            typoState.size = Math.max(16, Math.min(120, parseInt(e.target.value) || 40));
+            e.target.value = typoState.size;
+            updateTypoPreview();
+        });
     });
 </script>
 </body>
