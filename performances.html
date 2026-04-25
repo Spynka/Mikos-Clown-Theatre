@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <script src="js/tour-data.js"></script>
         <style>
         /* Дополнительные стили для модального окна в стиле сайта */
         .modal-overlay {
@@ -367,227 +368,301 @@
 <script src="js/components-loader.js"></script>
 <script src="js/header-scripts.js"></script>
 <script src="js/common.js"></script>
+
 <script>
-    (function() {
-        // ----- СПИСОК ИЗ 5 СПЕКТАКЛЕЙ -----
-        const performances = [
-            { id: 1, name: 'Лишь бы не было детей', date: '15 апреля 19:00', monthKey: 'апрель', year: 2026, desc: 'История сосуществования очень разных людей. Клоунада о выживании.', age: '18+', time: '90 минут', tickets: true, venue: 'Основная сцена', img: 'images/content/performances/15.jpg' },
-            { id: 2, name: 'Богатыри', date: '22 апреля 18:00', monthKey: 'апрель', year: 2026, desc: 'Былины в современном прочтении. Эпическая комедия для всей семьи.', age: '12+', time: '100 минут', tickets: true, venue: 'Основная сцена', img: 'images/content/performances/3.jpg' },
-            { id: 3, name: 'Ожидание', date: '5 мая 20:00', monthKey: 'май', year: 2026, desc: 'Трогательная история о времени, надежде и встречах.', age: '16+', time: '80 минут', tickets: true, venue: 'Малая сцена', img: 'images/content/performances/9.jpg' },
-            { id: 4, name: 'Кабаре-Шапито', date: '12 мая 19:00', monthKey: 'май', year: 2026, desc: 'Феерия клоунады и музыки. Кабаре с цирковыми номерами.', age: '18+', time: '110 минут', tickets: true, venue: 'Основная сцена', img: 'images/content/performances/10.jpg' },
-            { id: 5, name: 'Авиаторы', date: '20 октября 19:00', monthKey: 'октябрь', year: 2026, desc: 'О мечтах, полетах и свободе. Вдохновляющая драма.', age: '16+', time: '95 минут', tickets: true, venue: 'Основная сцена', img: 'images/content/performances/6.jpg' }
-        ];
-
-        // Расширенный список сеансов для демонстрации
-        const extendedSessions = [
-            { performanceId: 1, date: '15 апреля 19:00', venue: 'Основная сцена', month: 'апрель' },
-            { performanceId: 1, date: '16 апреля 19:00', venue: 'Основная сцена', month: 'апрель' },
-            { performanceId: 1, date: '22 апреля 19:00', venue: 'Основная сцена', month: 'апрель' },
-            { performanceId: 1, date: '5 мая 19:00', venue: 'Основная сцена', month: 'май' },
-            { performanceId: 1, date: '12 мая 19:00', venue: 'Малая сцена', month: 'май' },
-            { performanceId: 2, date: '22 апреля 18:00', venue: 'Основная сцена', month: 'апрель' },
-            { performanceId: 2, date: '29 апреля 18:00', venue: 'Основная сцена', month: 'апрель' },
-            { performanceId: 2, date: '10 мая 18:00', venue: 'Основная сцена', month: 'май' },
-            { performanceId: 3, date: '5 мая 20:00', venue: 'Малая сцена', month: 'май' },
-            { performanceId: 3, date: '15 мая 20:00', venue: 'Малая сцена', month: 'май' },
-            { performanceId: 4, date: '12 мая 19:00', venue: 'Основная сцена', month: 'май' },
-            { performanceId: 4, date: '19 мая 19:00', venue: 'Основная сцена', month: 'май' },
-            { performanceId: 5, date: '20 октября 19:00', venue: 'Основная сцена', month: 'октябрь' },
-            { performanceId: 5, date: '27 октября 19:00', venue: 'Основная сцена', month: 'октябрь' }
-        ];
-
-        // Переменные для модального окна
-        let currentPerformance = null;
-        let selectedSession = null;
-        let currentMonthFilter = 'all';
-
-        const grid = document.getElementById('performancesGrid');
-        function renderCards() {
-            let html = '';
-            performances.forEach(p => {
-                // Убрали тег с билетами, оставили только возраст и время
-                html += `
-                    <div class="performance-card">
-                        <img class="performance-img" src="${p.img}" alt="${p.name}">
-                        <div class="performance-content">
-                            <div class="performance-tags">
-                                <span class="tag tag-age">${p.age}</span>
-                                <span class="tag tag-time">${p.time}</span>
-                            </div>
-                            <h3 class="performance-name">${p.name}</h3>
-                            <p class="performance-desc">${p.desc}</p>
-                            <div class="performance-btns">
-                                <button class="btn-details" data-id="${p.id}">Подробнее</button>
-                                <button class="btn-buy-performance" data-id="${p.id}">Купить билет</button>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            });
-            grid.innerHTML = html;
+(function() {
+    'use strict';
+    
+    // 🔥 ИСПОЛЬЗУЕМ ДАННЫЕ ИЗ tour-data.js
+    // Локальные массивы performances и extendedSessions больше не нужны!
+    
+    // ===== СОСТОЯНИЕ ДЛЯ МОДАЛКИ =====
+    let currentEvent = null;
+    let selectedSession = null;
+    let currentMonthFilter = 'all';
+    
+    const grid = document.getElementById('performancesGrid');
+    
+    // =============================================
+    // 🔥 ЕДИНАЯ ФУНКЦИЯ ОБРАБОТКИ КНОПОК "КУПИТЬ"
+    // Определяет действие по атрибуту:
+    // • data-event-id → сразу переход на checkout
+    // • data-performance-id → открывает модалку выбора даты
+    // =============================================
+    window.handleBuyClick = function(btn) {
+        const eventId = btn.dataset.eventId;
+        const perfId = btn.dataset.performanceId;
+        
+        if (eventId) {
+            // Есть конкретное событие → сразу оформление
+            goToCheckout(eventId);
+        } else if (perfId) {
+            // Только спектакль → открываем выбор даты
+            openSessionModalByPerfId(parseInt(perfId));
         }
-        renderCards();
-
-        // Открытие модального окна с выбором сеанса
-        function openSessionModal(performance) {
-            currentPerformance = performance;
-            selectedSession = null;
-            currentMonthFilter = 'all';
-            
-            document.getElementById('selectedPlayTitle').textContent = performance.name;
-            
-            renderMonthFilter();
-            renderSessionsList();
-            
-            document.getElementById('confirmSessionBtn').disabled = true;
-            document.getElementById('sessionModal').classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        window.closeSessionModal = function() {
-            document.getElementById('sessionModal').classList.remove('active');
-            document.body.style.overflow = '';
-            currentPerformance = null;
-            selectedSession = null;
+    };
+    
+    // =============================================
+    // ЕДИНАЯ ФУНКЦИЯ ПЕРЕХОДА К ОФОРМЛЕНИЮ
+    // =============================================
+    window.goToCheckout = function(eventId) {
+        const event = TOUR_SCHEDULE.find(ev => ev.id === eventId);
+        if (!event) { console.error('Событие не найдено:', eventId); return; }
+        
+        const orderInfo = {
+            title: event.title,
+            dateTime: formatEventDate(event.date, event.time),
+            hall: event.venue,
+            address: event.address,
+            price: event.price ? `от ${event.price.min.toLocaleString('ru-RU')} ₽` : 'Уточняйте',
+            poster: event.image,
+            eventId: event.id,
+            performanceId: event.performanceId
         };
-
-        // Рендер фильтра по месяцам
-        function renderMonthFilter() {
-            const container = document.getElementById('dateFilterContainer');
-            const sessionsForPerf = extendedSessions.filter(s => s.performanceId === currentPerformance.id);
-            const months = [...new Set(sessionsForPerf.map(s => s.month))];
-            
-            let html = `<button class="filter-btn ${currentMonthFilter === 'all' ? 'active' : ''}" data-month="all">Все даты</button>`;
-            months.forEach(month => {
-                html += `<button class="filter-btn ${currentMonthFilter === month ? 'active' : ''}" data-month="${month}">${month}</button>`;
-            });
-            container.innerHTML = html;
-            
-            container.querySelectorAll('.filter-btn').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    currentMonthFilter = btn.dataset.month;
-                    renderMonthFilter();
-                    renderSessionsList();
-                });
-            });
+        
+        localStorage.setItem('selectedPerformance', JSON.stringify(orderInfo));
+        window.location.href = 'checkout.html';
+    };
+    
+    // =============================================
+    // ОТКРЫТИЕ МОДАЛКИ ВЫБОРА ДАТЫ ПО ID СПЕКТАКЛЯ
+    // =============================================
+    function openSessionModalByPerfId(performanceId) {
+        const events = filterEventsByPerformance(performanceId, getUpcomingEvents(TOUR_SCHEDULE));
+        if (!events.length) {
+            alert('На этот спектакль пока нет запланированных показов. Следите за обновлениями!');
+            return;
         }
-
-        // Рендер списка сеансов
-        function renderSessionsList() {
-            const container = document.getElementById('sessionsListContainer');
-            let sessions = extendedSessions.filter(s => s.performanceId === currentPerformance.id);
-            
-            if (currentMonthFilter !== 'all') {
-                sessions = sessions.filter(s => s.month === currentMonthFilter);
+        openSessionModal(events[0]);
+    }
+    
+    // =============================================
+    // РЕНДЕР КАРТОЧЕК СПЕКТАКЛЕЙ (использует tour-data.js)
+    // =============================================
+    function renderCards() {
+        if (!grid) return;
+        
+        // Группируем события по performanceId, берём по одному представителю на спектакль
+        const uniquePerformances = {};
+        TOUR_SCHEDULE.forEach(event => {
+            if (!uniquePerformances[event.performanceId]) {
+                uniquePerformances[event.performanceId] = event;
             }
-            
-            // Сортировка по дате (примерная)
-            sessions.sort((a, b) => a.date.localeCompare(b.date));
-            
-            if (sessions.length === 0) {
-                container.innerHTML = '<div class="no-sessions"><i class="far fa-calendar-times"></i> Нет сеансов в выбранном месяце</div>';
-                return;
-            }
-            
-            let html = '';
-            sessions.forEach(session => {
-                const isSelected = selectedSession && 
-                    selectedSession.date === session.date && 
-                    selectedSession.venue === session.venue;
-                
-                html += `
-                    <div class="session-item ${isSelected ? 'selected' : ''}" data-session='${JSON.stringify(session)}'>
-                        <div class="session-info">
-                            <div class="session-date">${session.date}</div>
-                            <div class="session-meta">
-                                <span><i class="fas fa-map-marker-alt"></i> ${session.venue}</span>
-                                <span><i class="far fa-clock"></i> ${currentPerformance.time}</span>
-                            </div>
+        });
+        
+        const cards = Object.values(uniquePerformances).map(event => {
+            return `
+                <div class="performance-card">
+                    <img class="performance-img" src="${event.image}" alt="${event.title}">
+                    <div class="performance-content">
+                        <div class="performance-tags">
+                            <span class="tag tag-age">${event.age}</span>
+                            <span class="tag tag-time">${event.duration}</span>
                         </div>
-                        <div class="session-select-indicator">
-                            ${isSelected ? '<i class="fas fa-check"></i>' : ''}
+                        <h3 class="performance-name">${event.title}</h3>
+                        <p class="performance-desc">${event.description}</p>
+                        <div class="performance-btns">
+                            <button class="btn-details" data-performance-id="${event.performanceId}">Подробнее</button>
+                            <button class="btn-buy" data-performance-id="${event.performanceId}">Купить билет</button>
                         </div>
                     </div>
-                `;
+                </div>
+            `;
+        }).join('');
+        
+        grid.innerHTML = cards;
+        attachPerformanceEvents();
+    }
+    
+    // 🔥 ЕДИНЫЙ ОБРАБОТЧИК ДЛЯ ВСЕХ КНОПОК
+    function attachPerformanceEvents() {
+        // Кнопка "Подробнее"
+        document.querySelectorAll('.btn-details').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const perfId = parseInt(e.currentTarget.dataset.performanceId);
+                window.location.href = `performance.html?id=${perfId}`;
             });
-            container.innerHTML = html;
-            
-            container.querySelectorAll('.session-item').forEach(item => {
-                item.addEventListener('click', () => {
-                    const sessionData = JSON.parse(item.dataset.session);
-                    selectedSession = sessionData;
-                    renderSessionsList();
-                    document.getElementById('confirmSessionBtn').disabled = false;
-                });
+        });
+        
+        // 🔥 Все кнопки "Купить билет" обрабатываются одной функцией
+        document.querySelectorAll('.btn-buy').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                handleBuyClick(e.currentTarget);
             });
+        });
+    }
+    
+    // =============================================
+    // МОДАЛКА ВЫБОРА СЕАНСА
+    // =============================================
+    function openSessionModal(event) {
+        currentEvent = event;
+        selectedSession = null;
+        currentMonthFilter = 'all';
+        
+        document.getElementById('selectedPlayTitle').textContent = event.title;
+        
+        renderMonthFilter(event.performanceId);
+        renderSessionsList(event.performanceId);
+        
+        document.getElementById('confirmSessionBtn').disabled = true;
+        document.getElementById('sessionModal').classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+    
+    window.closeSessionModal = function() {
+        document.getElementById('sessionModal').classList.remove('active');
+        document.body.style.overflow = '';
+        currentEvent = null;
+        selectedSession = null;
+    };
+    
+    function renderMonthFilter(performanceId) {
+        const container = document.getElementById('dateFilterContainer');
+        const events = filterEventsByPerformance(performanceId, getUpcomingEvents(TOUR_SCHEDULE));
+        const months = getEventMonths(events);
+        
+        let html = `<button class="filter-btn ${currentMonthFilter === 'all' ? 'active' : ''}" data-month="all">Все даты</button>`;
+        months.forEach(month => {
+            html += `<button class="filter-btn ${currentMonthFilter === `${month.name}-${month.year}` ? 'active' : ''}" data-month="${month.name}-${month.year}">${month.name} ${month.year}</button>`;
+        });
+        container.innerHTML = html;
+        
+        container.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                currentMonthFilter = btn.dataset.month;
+                renderMonthFilter(performanceId);
+                renderSessionsList(performanceId);
+            });
+        });
+    }
+    
+    function renderSessionsList(performanceId) {
+        const container = document.getElementById('sessionsListContainer');
+        let events = filterEventsByPerformance(performanceId, getUpcomingEvents(TOUR_SCHEDULE));
+        
+        if (currentMonthFilter !== 'all') {
+            events = filterEventsByMonth(events, currentMonthFilter);
         }
-
-        // Закрытие по клику на оверлей
-        document.getElementById('sessionModal').addEventListener('click', (e) => {
-            if (e.target.classList.contains('modal-overlay')) {
-                closeSessionModal();
-            }
+        events = sortEventsByDate(events);
+        
+        if (!events.length) {
+            container.innerHTML = '<div class="no-sessions"><i class="far fa-calendar-times"></i> Нет сеансов в выбранном периоде</div>';
+            return;
+        }
+        
+        container.innerHTML = events.map(ev => {
+            const isSelected = selectedSession?.id === ev.id;
+            return `
+                <div class="session-item ${isSelected ? 'selected' : ''}" data-event-id="${ev.id}">
+                    <div class="session-info">
+                        <div class="session-date">${formatEventDate(ev.date, ev.time)}</div>
+                        <div class="session-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> ${ev.venue}${ev.address ? ', ' + ev.address.split(',')[0] : ''}</span>
+                            <span><i class="far fa-clock"></i> ${ev.duration}</span>
+                        </div>
+                        ${ev.price ? `<div class="session-price">от ${ev.price.min.toLocaleString('ru-RU')} ₽</div>` : ''}
+                    </div>
+                    <div class="session-select-indicator">${isSelected ? '<i class="fas fa-check"></i>' : ''}</div>
+                </div>
+            `;
+        }).join('');
+        
+        container.querySelectorAll('.session-item').forEach(item => {
+            item.addEventListener('click', () => {
+                selectedSession = TOUR_SCHEDULE.find(ev => ev.id === item.dataset.eventId);
+                renderSessionsList(performanceId);
+                document.getElementById('confirmSessionBtn').disabled = false;
+            });
         });
-
-        // Подтверждение выбора и переход к оформлению
-        document.getElementById('confirmSessionBtn').addEventListener('click', () => {
-            if (selectedSession && currentPerformance) {
-                const performanceData = {
-                    id: currentPerformance.id,
-                    title: currentPerformance.name,
-                    dateTime: selectedSession.date,
-                    hall: selectedSession.venue,
-                    poster: currentPerformance.img,
-                    duration: currentPerformance.time
-                };
-                localStorage.setItem('selectedPerformance', JSON.stringify(performanceData));
-                window.location.href = 'checkout.html';
-            }
-        });
-
-        // Обработчики кликов на карточках
-        grid.addEventListener('click', (e) => {
-            const btn = e.target.closest('button');
-            if (!btn) return;
-            const id = btn.getAttribute('data-id');
-            if (!id) return;
-            const perf = performances.find(p => p.id == id);
-            
-            if (btn.classList.contains('btn-details')) {
-                window.location.href = `performance.html?id=${perf.id}`;
-            } else if (btn.classList.contains('btn-buy-performance')) {
-                if (perf.tickets) {
-                    openSessionModal(perf);
-                } else {
-                    alert(`Билетов на "${perf.name}" пока нет.`);
-                }
-            }
-        });
-
-        // Хедер, бургер, подписка
+    }
+    
+    // Подтверждение выбора сеанса
+    document.getElementById('confirmSessionBtn')?.addEventListener('click', () => {
+        if (selectedSession) {
+            goToCheckout(selectedSession.id);
+        }
+    });
+    
+    // Закрытие модалки по клику на оверлей
+    document.getElementById('sessionModal')?.addEventListener('click', (e) => {
+        if (e.target.classList.contains('modal-overlay')) closeSessionModal();
+    });
+    
+    // =============================================
+    // ХЕДЕР И БУРГЕР-МЕНЮ
+    // =============================================
+    function initHeader() {
         const dotsIcon = document.getElementById('dotsIcon');
         const closeIcon = document.getElementById('closeIcon');
         const extraRow = document.getElementById('extraMenuRow');
-        if (dotsIcon) dotsIcon.addEventListener('click', () => { extraRow.classList.add('open'); dotsIcon.style.display='none'; closeIcon.style.display='inline-flex'; });
-        if (closeIcon) closeIcon.addEventListener('click', () => { extraRow.classList.remove('open'); dotsIcon.style.display='inline-flex'; closeIcon.style.display='none'; });
         
-        const burger = document.getElementById('burgerIcon'), mobileNav = document.getElementById('mobileNav'), overlay = document.getElementById('overlay'), closeMobile = document.getElementById('closeMobileMenu');
-        function openMob() { mobileNav.classList.add('open'); overlay.classList.add('active'); document.body.style.overflow='hidden'; }
-        function closeMob() { mobileNav.classList.remove('open'); overlay.classList.remove('active'); document.body.style.overflow=''; }
-        if(burger) burger.addEventListener('click', openMob);
-        if(closeMobile) closeMobile.addEventListener('click', closeMob);
-        if(overlay) overlay.addEventListener('click', closeMob);
+        if (dotsIcon && closeIcon && extraRow) {
+            dotsIcon.addEventListener('click', () => { extraRow.classList.add('open'); dotsIcon.style.display = 'none'; closeIcon.style.display = 'inline-flex'; });
+            closeIcon.addEventListener('click', () => { extraRow.classList.remove('open'); dotsIcon.style.display = 'inline-flex'; closeIcon.style.display = 'none'; });
+        }
         
-        document.getElementById('subscribeBtn')?.addEventListener('click', ()=>{
+        const burgerIcon = document.getElementById('burgerIcon');
+        const mobileNav = document.getElementById('mobileNav');
+        const overlay = document.getElementById('overlay');
+        const closeMobileBtn = document.getElementById('closeMobileMenu');
+        
+        if (burgerIcon && mobileNav && overlay) {
+            const openMobile = () => { mobileNav.classList.add('open'); overlay.classList.add('active'); document.body.style.overflow = 'hidden'; };
+            const closeMobile = () => { mobileNav.classList.remove('open'); overlay.classList.remove('active'); document.body.style.overflow = ''; };
+            burgerIcon.addEventListener('click', openMobile);
+            closeMobileBtn?.addEventListener('click', closeMobile);
+            overlay.addEventListener('click', closeMobile);
+        }
+    }
+    
+    // =============================================
+    // ПОДПИСКА В ФУТЕРЕ
+    // =============================================
+    function initFooter() {
+        document.getElementById('subscribeBtn')?.addEventListener('click', () => {
             const chk = document.getElementById('consentCheckbox');
             const err = document.getElementById('consentError');
-            if(!chk.checked) { if(err) err.style.display='block'; setTimeout(()=> err && (err.style.display='none'),2000); }
-            else { alert('Спасибо за подписку!'); document.getElementById('subscribeEmail').value=''; chk.checked=false; }
+            if (!chk?.checked) {
+                if (err) { err.style.display = 'block'; setTimeout(() => err.style.display = 'none', 2000); }
+            } else {
+                alert('Спасибо за подписку!');
+                document.getElementById('subscribeEmail').value = '';
+                if (chk) chk.checked = false;
+            }
         });
-        document.querySelectorAll('.footer-btn-primary, .buy-ticket-btn').forEach(b=>b.addEventListener('click',()=>alert('Билеты скоро в продаже')));
-        document.querySelector('.footer-btn-secondary')?.addEventListener('click',()=>alert('Заказ шоу: +7 (495) 123-45-67'));
-    })();
+        
+        document.querySelectorAll('.footer-btn-primary, .buy-ticket-btn').forEach(b => 
+            b.addEventListener('click', () => alert('Билеты скоро в продаже'))
+        );
+        document.querySelector('.footer-btn-secondary')?.addEventListener('click', () => 
+            alert('Заказ шоу: +7 (495) 123-45-67')
+        );
+    }
+    
+    // =============================================
+    // ГЛОБАЛЬНЫЙ ОБРАБОТЧИК ESCAPE
+    // =============================================
+    document.addEventListener('keydown', (e) => {
+        if (e.key !== 'Escape') return;
+        const modal = document.getElementById('sessionModal');
+        if (modal?.classList.contains('active')) closeSessionModal();
+    });
+    
+    // =============================================
+    // ИНИЦИАЛИЗАЦИЯ
+    // =============================================
+    document.addEventListener('DOMContentLoaded', () => {
+        setTimeout(() => {
+            renderCards();
+            initHeader();
+            initFooter();
+        }, 100);
+    });
+    
+})();
 </script>
-<script src="js/common.js"></script>
+
 </body>
 </html>

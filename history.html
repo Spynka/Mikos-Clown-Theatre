@@ -2,216 +2,292 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
     <title>Театр клоунады «Микос» | О театре</title>
     <link rel="icon" type="image/svg+xml" href="SVG/logo-2.svg" sizes="any">
-    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;800&family=Nunito+Sans:ital,opsz,wght@0,6..12,400;0,6..12,600;0,6..12,700;1,6..12,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-	<link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css">
     <style>
-/* ============================================= */
-/* МОДАЛЬНОЕ ОКНО ГАЛЕРЕИ                         */
-/* ============================================= */
+        /* ===== ПРИНУДИТЕЛЬНЫЙ СБРОС СТИЛЕЙ ДЛЯ НОВЫХ БЛОКОВ ===== */
+        /* Стили для истории, миссии и философии с !important, чтобы перебить style.css */
+        .about-page .timeline-section *,
+        .about-page .mission-section * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-.gallery-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 100000;
-    display: none;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
+        :root {
+            --white: #FFFFFF;
+            --grey-89: #E5E3E1;
+            --grey-96: #F5F5F5;
+            --grey-97: #F8F7F6;
+            --azure-27: #2A3D5E;
+            --azure-35: #3A5078;
+            --azure-44: #4A6294;
+            --red-59: #E8454D;
+        }
 
-.gallery-modal.active {
-    display: block;
-    opacity: 1;
-}
+        /* ----- НОВЫЙ ТАЙМЛАЙН (ИСТОРИЯ) ----- */
+        .timeline-section {
+            padding: 3rem 0 4rem !important;
+        }
+        .timeline-section .section-title {
+            font-family: 'Unbounded', sans-serif !important;
+            font-weight: 700 !important;
+            font-size: clamp(2rem, 5vw, 2.8rem) !important;
+            color: #1A1718 !important;
+            margin-bottom: 2.5rem !important;
+            display: block !important;
+            text-align: left !important;
+            text-decoration: none !important;
+            border-bottom: none !important;
+            position: static !important;
+        }
+        .timeline-section .section-title::after,
+        .timeline-section .section-title::before {
+            display: none !important;
+        }
+        .timeline-container {
+            position: relative !important;
+            margin: 2rem 0 !important;
+            padding: 0 !important;
+        }
+        .timeline-container::before {
+            content: '' !important;
+            position: absolute !important;
+            left: 50% !important;
+            transform: translateX(-50%) !important;
+            width: 3px !important;
+            height: 100% !important;
+            background: linear-gradient(to bottom, var(--azure-27), var(--grey-89)) !important;
+            border-radius: 3px !important;
+            z-index: 0 !important;
+        }
+        .timeline-item {
+            display: flex !important;
+            align-items: center !important;
+            margin-bottom: 4rem !important;
+            position: relative !important;
+            opacity: 0 !important;
+            transform: translateY(30px) !important;
+            transition: opacity 0.7s cubic-bezier(0.23, 1, 0.32, 1), transform 0.7s cubic-bezier(0.23, 1, 0.32, 1) !important;
+            padding: 0 !important;
+            width: 100% !important;
+        }
+        .timeline-item.visible {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+        .timeline-item.left {
+            flex-direction: row !important;
+            justify-content: flex-start !important;
+            padding-right: 5% !important;
+        }
+        .timeline-item.right {
+            flex-direction: row-reverse !important;
+            justify-content: flex-start !important;
+            padding-left: 5% !important;
+        }
+        .timeline-content {
+            width: 42% !important;
+            background: var(--white) !important;
+            border-radius: 24px !important;
+            padding: 1.8rem !important;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.04), 0 5px 15px rgba(42,61,94,0.08) !important;
+            border: 1px solid rgba(74,98,148,0.1) !important;
+            backdrop-filter: blur(2px) !important;
+            transition: transform 0.25s ease, box-shadow 0.3s ease !important;
+            z-index: 2 !important;
+            display: flex !important;
+            flex-wrap: wrap !important;
+            align-items: center !important;
+            gap: 1.2rem !important;
+            text-align: left !important;
+            margin: 0 !important;
+        }
+        .timeline-content:hover {
+            transform: translateY(-6px) !important;
+            box-shadow: 0 25px 40px rgba(42,61,94,0.12) !important;
+            border-color: rgba(232,69,77,0.25) !important;
+        }
+        .timeline-photo {
+            width: 70px !important;
+            height: 70px !important;
+            border-radius: 18px !important;
+            overflow: hidden !important;
+            background: var(--grey-96) !important;
+            flex-shrink: 0 !important;
+            border: 2px solid var(--white) !important;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.08) !important;
+        }
+        .timeline-photo img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            display: block !important;
+        }
+        .timeline-text {
+            flex: 1 !important;
+            text-align: left !important;
+        }
+        .timeline-year {
+            font-family: 'Unbounded', sans-serif !important;
+            font-weight: 800 !important;
+            font-size: 2rem !important;
+            color: var(--red-59) !important;
+            line-height: 1 !important;
+            margin-bottom: 0.2rem !important;
+        }
+        .timeline-title {
+            font-family: 'Unbounded', sans-serif !important;
+            font-weight: 700 !important;
+            font-size: 1.2rem !important;
+            color: var(--azure-27) !important;
+            margin-bottom: 0.4rem !important;
+            text-decoration: none !important;
+        }
+        .timeline-desc {
+            font-size: 0.95rem !important;
+            color: #3D393A !important;
+            line-height: 1.6 !important;
+        }
+        .timeline-marker {
+            position: absolute !important;
+            left: 50% !important;
+            transform: translateX(-50%) !important;
+            width: 18px !important;
+            height: 18px !important;
+            background: var(--red-59) !important;
+            border: 3px solid white !important;
+            border-radius: 50% !important;
+            box-shadow: 0 0 0 4px rgba(232,69,77,0.2) !important;
+            z-index: 3 !important;
+            top: 40px !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
 
-.gallery-modal-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.95);
-    backdrop-filter: blur(5px);
-}
+        /* ----- НОВАЯ МИССИЯ И ФИЛОСОФИЯ ----- */
+        .mission-section {
+            display: grid !important;
+            grid-template-columns: 1fr 1fr !important;
+            gap: 2.5rem !important;
+            margin: 4rem 0 !important;
+        }
+        .mission-block {
+            background: #F8F7F6 !important;
+            border-radius: 28px !important;
+            padding: 2.5rem !important;
+            transition: background 0.3s !important;
+            border: 1px solid transparent !important;
+            text-align: left !important;
+        }
+        .mission-block:hover {
+            background: #fff !important;
+            border-color: var(--grey-89) !important;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.03) !important;
+        }
+        .mission-block h2 {
+            font-family: 'Unbounded', sans-serif !important;
+            font-weight: 700 !important;
+            font-size: 1.8rem !important;
+            color: var(--azure-27) !important;
+            margin-bottom: 1.2rem !important;
+            text-decoration: none !important;
+        }
+        .mission-block p {
+            margin-bottom: 1rem !important;
+            font-size: 1.05rem !important;
+        }
+        .quote {
+            margin-top: 1.5rem !important;
+            font-style: italic !important;
+            font-weight: 600 !important;
+            color: var(--azure-35) !important;
+            border-left: 5px solid var(--red-59) !important;
+            padding-left: 1.5rem !important;
+            font-size: 1.2rem !important;
+        }
 
-.gallery-modal-container {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    box-sizing: border-box;
-}
+        /* ============================================= */
+        /* МОДАЛЬНОЕ ОКНО ГАЛЕРЕИ (БЕЗ ИЗМЕНЕНИЙ)       */
+        /* ============================================= */
+        .gallery-modal {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 100000; display: none; opacity: 0; transition: opacity 0.3s ease;
+        }
+        .gallery-modal.active { display: block; opacity: 1; }
+        .gallery-modal-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.95); backdrop-filter: blur(5px);
+        }
+        .gallery-modal-container {
+            position: relative; width: 100%; height: 100%; display: flex;
+            align-items: center; justify-content: center; padding: 20px; box-sizing: border-box;
+        }
+        .gallery-modal-content {
+            position: relative; max-width: 90%; max-height: 90vh; display: flex;
+            align-items: center; justify-content: center; z-index: 1;
+        }
+        .gallery-modal-content img {
+            max-width: 100%; max-height: 90vh; width: auto; height: auto;
+            object-fit: contain; border-radius: 8px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            user-select: none; -webkit-user-select: none;
+        }
+        .gallery-modal-close, .gallery-modal-prev, .gallery-modal-next {
+            position: absolute; background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3); color: white; cursor: pointer;
+            display: flex; align-items: center; justify-content: center; transition: all 0.2s ease;
+            z-index: 10; backdrop-filter: blur(4px);
+        }
+        .gallery-modal-close:hover, .gallery-modal-prev:hover, .gallery-modal-next:hover {
+            background: rgba(255, 255, 255, 0.25); border-color: rgba(255, 255, 255, 0.5); transform: scale(1.05);
+        }
+        .gallery-modal-close { top: 20px; right: 20px; width: 48px; height: 48px; border-radius: 50%; font-size: 24px; }
+        .gallery-modal-prev, .gallery-modal-next { top: 50%; transform: translateY(-50%); width: 56px; height: 56px; border-radius: 50%; font-size: 28px; }
+        .gallery-modal-prev { left: 20px; }
+        .gallery-modal-next { right: 20px; }
+        .gallery-modal-prev:hover { transform: translateY(-50%) scale(1.05); }
+        .gallery-modal-next:hover { transform: translateY(-50%) scale(1.05); }
+        .gallery-modal-counter {
+            position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.6); color: white; padding: 8px 20px; border-radius: 40px;
+            font-family: 'Unbounded', sans-serif; font-size: 14px; font-weight: 600;
+            backdrop-filter: blur(4px); border: 1px solid rgba(255, 255, 255, 0.2); z-index: 10;
+        }
+        body.modal-open { overflow: hidden !important; }
 
-.gallery-modal-content {
-    position: relative;
-    max-width: 90%;
-    max-height: 90vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1;
-}
-
-.gallery-modal-content img {
-    max-width: 100%;
-    max-height: 90vh;
-    width: auto;
-    height: auto;
-    object-fit: contain;
-    border-radius: 8px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-    user-select: none;
-    -webkit-user-select: none;
-}
-
-/* Кнопки навигации */
-.gallery-modal-close,
-.gallery-modal-prev,
-.gallery-modal-next {
-    position: absolute;
-    background: rgba(255, 255, 255, 0.15);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    color: white;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.2s ease;
-    z-index: 10;
-    backdrop-filter: blur(4px);
-}
-
-.gallery-modal-close:hover,
-.gallery-modal-prev:hover,
-.gallery-modal-next:hover {
-    background: rgba(255, 255, 255, 0.25);
-    border-color: rgba(255, 255, 255, 0.5);
-    transform: scale(1.05);
-}
-
-.gallery-modal-close {
-    top: 20px;
-    right: 20px;
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    font-size: 24px;
-}
-
-.gallery-modal-prev,
-.gallery-modal-next {
-    top: 50%;
-    transform: translateY(-50%);
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    font-size: 28px;
-}
-
-.gallery-modal-prev {
-    left: 20px;
-}
-
-.gallery-modal-next {
-    right: 20px;
-}
-
-.gallery-modal-prev:hover {
-    transform: translateY(-50%) scale(1.05);
-}
-
-.gallery-modal-next:hover {
-    transform: translateY(-50%) scale(1.05);
-}
-
-/* Счетчик изображений */
-.gallery-modal-counter {
-    position: absolute;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(0, 0, 0, 0.6);
-    color: white;
-    padding: 8px 20px;
-    border-radius: 40px;
-    font-family: 'Unbounded', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    backdrop-filter: blur(4px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    z-index: 10;
-}
-
-/* Адаптив для мобильных */
-@media (max-width: 860px) {
-    .gallery-modal-container {
-        padding: 10px;
-    }
-    
-    .gallery-modal-content {
-        max-width: 95%;
-    }
-    
-    .gallery-modal-close {
-        top: 12px;
-        right: 12px;
-        width: 44px;
-        height: 44px;
-        font-size: 20px;
-    }
-    
-    .gallery-modal-prev,
-    .gallery-modal-next {
-        width: 48px;
-        height: 48px;
-        font-size: 24px;
-    }
-    
-    .gallery-modal-prev {
-        left: 8px;
-    }
-    
-    .gallery-modal-next {
-        right: 8px;
-    }
-    
-    .gallery-modal-counter {
-        bottom: 20px;
-        padding: 6px 16px;
-        font-size: 13px;
-    }
-}
-
-@media (max-width: 480px) {
-    .gallery-modal-prev,
-    .gallery-modal-next {
-        width: 40px;
-        height: 40px;
-        font-size: 20px;
-    }
-    
-    .gallery-modal-prev {
-        left: 5px;
-    }
-    
-    .gallery-modal-next {
-        right: 5px;
-    }
-}
-
-/* Предотвращаем прокрутку body при открытом модальном окне */
-body.modal-open {
-    overflow: hidden !important;
-}
+        /* Адаптив для новых блоков и модального окна */
+        @media (max-width: 860px) {
+            .timeline-container::before { left: 24px !important; }
+            .timeline-item.left, .timeline-item.right {
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                padding-left: 50px !important;
+                padding-right: 0 !important;
+                margin-bottom: 2.5rem !important;
+            }
+            .timeline-content { width: 100% !important; }
+            .timeline-marker { left: 24px !important; top: 30px !important; }
+            .mission-section { grid-template-columns: 1fr !important; }
+            .gallery-modal-container { padding: 10px; }
+            .gallery-modal-content { max-width: 95%; }
+            .gallery-modal-close { top: 12px; right: 12px; width: 44px; height: 44px; font-size: 20px; }
+            .gallery-modal-prev, .gallery-modal-next { width: 48px; height: 48px; font-size: 24px; }
+            .gallery-modal-prev { left: 8px; }
+            .gallery-modal-next { right: 8px; }
+            .gallery-modal-counter { bottom: 20px; padding: 6px 16px; font-size: 13px; }
+        }
+        @media (max-width: 480px) {
+            .gallery-modal-prev, .gallery-modal-next { width: 40px; height: 40px; font-size: 20px; }
+            .gallery-modal-prev { left: 5px; }
+            .gallery-modal-next { right: 5px; }
+            .timeline-content { padding: 1.2rem !important; gap: 0.8rem !important; }
+            .timeline-photo { width: 50px !important; height: 50px !important; }
+            .timeline-year { font-size: 1.6rem !important; }
+        }
     </style>
 </head>
 <body>
@@ -228,59 +304,13 @@ body.modal-open {
             <p class="page-subtitle-about">Тридцать лет на сцене. Классика и эксперимент. Диалог со зрителем.</p>
         </div>
 
-        <!-- История театра (таймлайн) -->
+        <!-- История театра (НОВЫЙ ТАЙМЛАЙН) -->
         <div class="timeline-section">
             <h2 class="section-title">История театра</h2>
-            <div class="timeline-container">
-                <div class="timeline-item left">
-                    <div class="timeline-content">
-                        <div class="timeline-photo"><img src="https://placehold.co/100x100/EFEEED/white?text=1995" alt="1995"></div>
-                        <div class="timeline-year">1995</div>
-                        <div class="timeline-title">Основание</div>
-                        <div class="timeline-desc">Группа выпускников ГИТИСа создаёт независимую труппу. Первый спектакль — «Игроки».</div>
-                    </div>
-                    <div class="timeline-marker"></div>
-                </div>
-                <div class="timeline-item right">
-                    <div class="timeline-content">
-                        <div class="timeline-photo"><img src="https://placehold.co/100x100/EFEEED/white?text=2003" alt="2003"></div>
-                        <div class="timeline-year">2003</div>
-                        <div class="timeline-title">Собственная сцена</div>
-                        <div class="timeline-desc">Театр получает здание в центре Москвы. Премьера «Гамлета» открывает новый этап.</div>
-                    </div>
-                    <div class="timeline-marker"></div>
-                </div>
-                <div class="timeline-item left">
-                    <div class="timeline-content">
-                        <div class="timeline-photo"><img src="https://placehold.co/100x100/EFEEED/white?text=2010" alt="2010"></div>
-                        <div class="timeline-year">2010</div>
-                        <div class="timeline-title">Первая «Золотая маска»</div>
-                        <div class="timeline-desc">«Вишневый сад» получает главную театральную премию страны.</div>
-                    </div>
-                    <div class="timeline-marker"></div>
-                </div>
-                <div class="timeline-item right">
-                    <div class="timeline-content">
-                        <div class="timeline-photo"><img src="https://placehold.co/100x100/EFEEED/white?text=2018" alt="2018"></div>
-                        <div class="timeline-year">2018</div>
-                        <div class="timeline-title">Международное признание</div>
-                        <div class="timeline-desc">Гастроли в Париже, Лондоне, Берлине. Вхождение в топ-10 независимых театров Европы.</div>
-                    </div>
-                    <div class="timeline-marker"></div>
-                </div>
-                <div class="timeline-item left">
-                    <div class="timeline-content">
-                        <div class="timeline-photo"><img src="https://placehold.co/100x100/EFEEED/white?text=2025" alt="2025"></div>
-                        <div class="timeline-year">2025</div>
-                        <div class="timeline-title">30-й сезон</div>
-                        <div class="timeline-desc">Юбилейный год: новая сцена, премьера «Мастера и Маргариты», фестиваль современной драматургии.</div>
-                    </div>
-                    <div class="timeline-marker"></div>
-                </div>
-            </div>
+            <div class="timeline-container" id="timelineContainer"></div>
         </div>
 
-        <!-- Миссия и философия -->
+        <!-- Миссия и философия (НОВЫЙ ДИЗАЙН) -->
         <div class="mission-section">
             <div class="mission-block">
                 <h2>Миссия</h2>
@@ -296,7 +326,7 @@ body.modal-open {
             </div>
         </div>
 
-        <!-- Художественный руководитель -->
+        <!-- Художественный руководитель (ОСТАВЛЕНО БЕЗ ИЗМЕНЕНИЙ) -->
         <div class="director-highlight">
             <div class="director-photo">
                 <img src="images/content/actors/Давыдов-4.jpg" alt="Сергей Давыдов">
@@ -310,7 +340,7 @@ body.modal-open {
             </div>
         </div>
 
-        <!-- Награды и признание -->
+        <!-- Награды и признание (ОСТАВЛЕНО БЕЗ ИЗМЕНЕНИЙ) -->
         <div class="awards-section">
             <h2 class="section-title">Награды и признание</h2>
             <div class="awards-grid">
@@ -323,7 +353,7 @@ body.modal-open {
             </div>
         </div>
 
-        <!-- Галерея -->
+        <!-- Галерея (ОСТАВЛЕНО БЕЗ ИЗМЕНЕНИЙ) -->
         <div class="gallery-section">
             <h2 class="section-title">Галерея</h2>
             <div class="gallery-grid" id="galleryGrid"></div>
@@ -332,19 +362,13 @@ body.modal-open {
             </div>
         </div>
     </div>
-    <!-- Модальное окно галереи -->
+    <!-- Модальное окно галереи (ОСТАВЛЕНО БЕЗ ИЗМЕНЕНИЙ) -->
     <div class="gallery-modal" id="galleryModal">
         <div class="gallery-modal-overlay"></div>
         <div class="gallery-modal-container">
-            <button class="gallery-modal-close" id="galleryModalClose">
-                <i class="fas fa-times"></i>
-            </button>
-            <button class="gallery-modal-prev" id="galleryModalPrev">
-                <i class="fas fa-chevron-left"></i>
-            </button>
-            <button class="gallery-modal-next" id="galleryModalNext">
-                <i class="fas fa-chevron-right"></i>
-            </button>
+            <button class="gallery-modal-close" id="galleryModalClose"><i class="fas fa-times"></i></button>
+            <button class="gallery-modal-prev" id="galleryModalPrev"><i class="fas fa-chevron-left"></i></button>
+            <button class="gallery-modal-next" id="galleryModalNext"><i class="fas fa-chevron-right"></i></button>
             <div class="gallery-modal-content">
                 <img id="galleryModalImage" src="" alt="Галерея">
             </div>
@@ -355,259 +379,178 @@ body.modal-open {
     </div>
 
     <!-- FOOTER -->
-<div id="site-footer"></div>
+    <div id="site-footer"></div>
 </div>
 <script src="js/components-loader.js"></script>
 <script src="js/header-scripts.js"></script>
 <script src="js/common.js"></script>
 <script>
-// Галерея (19 фото)
-const galleryImages = [
-    'images/content/performances/6.jpg',
-    'images/content/performances/7.jpg',
-    'images/content/performances/8.jpg',
-    'images/content/performances/13.jpg',
-    'images/content/performances/14.jpg',
-    'images/content/performances/15.jpg',
-    'images/content/performances/21.jpg',
-    'images/content/performances/24.jpg',
-    'images/content/performances/19.jpg',
-    'images/content/performances/22.jpg',
-    'images/content/performances/23.jpg',
-    'images/content/performances/20.jpg',
-    'images/content/performances/18.jpg',
-    'images/content/performances/3.jpg',
-    'images/content/performances/4.jpg',
-    'images/content/performances/9.jpg',
-    'images/content/performances/10.jpg',
-    'images/content/performances/17.jpg',
-    'images/content/performances/16.jpg'
-];
+    // Галерея (19 фото) - ОРИГИНАЛЬНЫЙ МАССИВ
+    const galleryImages = [
+        'images/content/performances/6.jpg', 'images/content/performances/7.jpg', 'images/content/performances/8.jpg',
+        'images/content/performances/13.jpg', 'images/content/performances/14.jpg', 'images/content/performances/15.jpg',
+        'images/content/performances/21.jpg', 'images/content/performances/24.jpg', 'images/content/performances/19.jpg',
+        'images/content/performances/22.jpg', 'images/content/performances/23.jpg', 'images/content/performances/20.jpg',
+        'images/content/performances/18.jpg', 'images/content/performances/3.jpg', 'images/content/performances/4.jpg',
+        'images/content/performances/9.jpg', 'images/content/performances/10.jpg', 'images/content/performances/17.jpg',
+        'images/content/performances/16.jpg'
+    ];
 
-let visibleGallery = 3;
-let currentGalleryIndex = 0;
+    // Данные для нового таймлайна
+    const timelineData = [
+        { year: 1995, title: 'Основание', desc: 'Группа выпускников ГИТИСа создаёт независимую труппу. Первый спектакль — «Игроки».', img: 'images/content/performances/6.jpg' },
+        { year: 2003, title: 'Собственная сцена', desc: 'Театр получает здание в центре Москвы. Премьера «Гамлета» открывает новый этап.', img: 'images/content/performances/13.jpg' },
+        { year: 2010, title: 'Первая «Золотая маска»', desc: '«Вишневый сад» получает главную театральную премию страны.', img: 'images/content/performances/8.jpg' },
+        { year: 2018, title: 'Международное признание', desc: 'Гастроли в Париже, Лондоне, Берлине. Вхождение в топ-10 независимых театров Европы.', img: 'images/content/performances/14.jpg' },
+        { year: 2025, title: '30-й сезон', desc: 'Юбилейный год: новая сцена, премьера «Мастера и Маргариты», фестиваль современной драматургии.', img: 'images/content/performances/15.jpg' }
+    ];
 
-// Функция рендера галереи
-function renderGallery() {
-    const grid = document.getElementById('galleryGrid');
-    const displayItems = galleryImages.slice(0, visibleGallery);
-    grid.innerHTML = '';
-    
-    displayItems.forEach((img, index) => {
-        const item = document.createElement('div');
-        item.className = 'gallery-item';
-        item.setAttribute('data-index', index);
-        item.setAttribute('data-src', img);
-        item.innerHTML = `<img src="${img}" alt="Сцена из спектакля">`;
-        
-        // Добавляем обработчик клика для открытия модального окна
-        item.addEventListener('click', function() {
-            const clickedIndex = parseInt(this.getAttribute('data-index'));
-            openGalleryModal(clickedIndex);
+    let visibleGallery = 3;
+    let currentGalleryIndex = 0;
+
+    // ---------- НОВЫЙ РЕНДЕР ТАЙМЛАЙНА ----------
+    function renderTimeline() {
+        const container = document.getElementById('timelineContainer');
+        if (!container) return;
+        container.innerHTML = '';
+        timelineData.forEach((item, index) => {
+            const side = index % 2 === 0 ? 'left' : 'right';
+            const div = document.createElement('div');
+            div.className = `timeline-item ${side}`;
+            div.setAttribute('data-animate', 'true');
+            div.innerHTML = `
+                <div class="timeline-content">
+                    <div class="timeline-photo"><img src="${item.img}" alt="${item.year}" onerror="this.src='https://placehold.co/100x100/2A3D5E/white?text=${item.year}'"></div>
+                    <div class="timeline-text">
+                        <div class="timeline-year">${item.year}</div>
+                        <div class="timeline-title">${item.title}</div>
+                        <div class="timeline-desc">${item.desc}</div>
+                    </div>
+                </div>
+                <div class="timeline-marker"></div>
+            `;
+            container.appendChild(div);
         });
-        
-        grid.appendChild(item);
-    });
-    
-    const showMoreBtn = document.getElementById('showMoreGalleryBtn');
-    if (showMoreBtn) {
-        showMoreBtn.style.display = visibleGallery >= galleryImages.length ? 'none' : 'block';
     }
-}
 
-// Функция открытия модального окна
-function openGalleryModal(startIndex) {
-    currentGalleryIndex = startIndex;
-    
-    const modal = document.getElementById('galleryModal');
-    const modalImage = document.getElementById('galleryModalImage');
-    const currentSpan = document.getElementById('currentImageIndex');
-    const totalSpan = document.getElementById('totalImagesCount');
-    
-    if (!modal || !modalImage) return;
-    
-    // Показываем изображение
-    modalImage.src = galleryImages[currentGalleryIndex];
-    
-    // Обновляем счетчик
-    if (currentSpan && totalSpan) {
-        currentSpan.textContent = currentGalleryIndex + 1;
-        totalSpan.textContent = galleryImages.length;
+    // ---------- ОРИГИНАЛЬНЫЙ РЕНДЕР ГАЛЕРЕИ ----------
+    function renderGallery() {
+        const grid = document.getElementById('galleryGrid');
+        const displayItems = galleryImages.slice(0, visibleGallery);
+        grid.innerHTML = '';
+        displayItems.forEach((img, index) => {
+            const item = document.createElement('div');
+            item.className = 'gallery-item';
+            item.setAttribute('data-index', index);
+            item.setAttribute('data-src', img);
+            item.innerHTML = `<img src="${img}" alt="Сцена из спектакля">`;
+            item.addEventListener('click', function() {
+                openGalleryModal(parseInt(this.getAttribute('data-index')));
+            });
+            grid.appendChild(item);
+        });
+        const showMoreBtn = document.getElementById('showMoreGalleryBtn');
+        if (showMoreBtn) {
+            showMoreBtn.style.display = visibleGallery >= galleryImages.length ? 'none' : 'block';
+        }
     }
-    
-    // Показываем модальное окно
-    modal.classList.add('active');
-    document.body.classList.add('modal-open');
-    
-    // Обновляем состояние кнопок навигации
-    updateNavigationButtons();
-}
 
-// Функция закрытия модального окна
-function closeGalleryModal() {
-    const modal = document.getElementById('galleryModal');
-    if (modal) {
-        modal.classList.remove('active');
-        document.body.classList.remove('modal-open');
-    }
-}
-
-// Функция переключения на предыдущее изображение
-function prevImage() {
-    if (currentGalleryIndex > 0) {
-        currentGalleryIndex--;
-        updateModalImage();
-    }
-}
-
-// Функция переключения на следующее изображение
-function nextImage() {
-    if (currentGalleryIndex < galleryImages.length - 1) {
-        currentGalleryIndex++;
-        updateModalImage();
-    }
-}
-
-// Функция обновления изображения в модальном окне
-function updateModalImage() {
-    const modalImage = document.getElementById('galleryModalImage');
-    const currentSpan = document.getElementById('currentImageIndex');
-    
-    if (modalImage) {
+    // ---------- ОРИГИНАЛЬНЫЕ ФУНКЦИИ МОДАЛЬНОГО ОКНА ----------
+    function openGalleryModal(startIndex) {
+        currentGalleryIndex = startIndex;
+        const modal = document.getElementById('galleryModal');
+        const modalImage = document.getElementById('galleryModalImage');
+        const currentSpan = document.getElementById('currentImageIndex');
+        const totalSpan = document.getElementById('totalImagesCount');
+        if (!modal || !modalImage) return;
         modalImage.src = galleryImages[currentGalleryIndex];
-    }
-    
-    if (currentSpan) {
-        currentSpan.textContent = currentGalleryIndex + 1;
-    }
-    
-    updateNavigationButtons();
-}
-
-// Функция обновления состояния кнопок навигации
-function updateNavigationButtons() {
-    const prevBtn = document.getElementById('galleryModalPrev');
-    const nextBtn = document.getElementById('galleryModalNext');
-    
-    if (prevBtn) {
-        if (currentGalleryIndex === 0) {
-            prevBtn.style.opacity = '0.5';
-            prevBtn.style.cursor = 'not-allowed';
-        } else {
-            prevBtn.style.opacity = '1';
-            prevBtn.style.cursor = 'pointer';
+        if (currentSpan && totalSpan) {
+            currentSpan.textContent = currentGalleryIndex + 1;
+            totalSpan.textContent = galleryImages.length;
         }
+        modal.classList.add('active');
+        document.body.classList.add('modal-open');
+        updateNavigationButtons();
     }
-    
-    if (nextBtn) {
-        if (currentGalleryIndex === galleryImages.length - 1) {
-            nextBtn.style.opacity = '0.5';
-            nextBtn.style.cursor = 'not-allowed';
-        } else {
-            nextBtn.style.opacity = '1';
-            nextBtn.style.cursor = 'pointer';
-        }
-    }
-}
 
-// Инициализация модального окна
-function initGalleryModal() {
-    const modal = document.getElementById('galleryModal');
-    const closeBtn = document.getElementById('galleryModalClose');
-    const prevBtn = document.getElementById('galleryModalPrev');
-    const nextBtn = document.getElementById('galleryModalNext');
-    const overlay = document.querySelector('.gallery-modal-overlay');
-    
-    if (!modal) return;
-    
-    // Закрытие по клику на крестик
-    if (closeBtn) {
-        closeBtn.addEventListener('click', closeGalleryModal);
+    function closeGalleryModal() {
+        const modal = document.getElementById('galleryModal');
+        if (modal) { modal.classList.remove('active'); document.body.classList.remove('modal-open'); }
     }
-    
-    // Закрытие по клику на оверлей
-    if (overlay) {
-        overlay.addEventListener('click', closeGalleryModal);
+
+    function prevImage() { if (currentGalleryIndex > 0) { currentGalleryIndex--; updateModalImage(); } }
+    function nextImage() { if (currentGalleryIndex < galleryImages.length - 1) { currentGalleryIndex++; updateModalImage(); } }
+
+    function updateModalImage() {
+        const modalImage = document.getElementById('galleryModalImage');
+        const currentSpan = document.getElementById('currentImageIndex');
+        if (modalImage) modalImage.src = galleryImages[currentGalleryIndex];
+        if (currentSpan) currentSpan.textContent = currentGalleryIndex + 1;
+        updateNavigationButtons();
     }
-    
-    // Навигация
-    if (prevBtn) {
-        prevBtn.addEventListener('click', prevImage);
+
+    function updateNavigationButtons() {
+        const prevBtn = document.getElementById('galleryModalPrev');
+        const nextBtn = document.getElementById('galleryModalNext');
+        if (prevBtn) { prevBtn.style.opacity = currentGalleryIndex === 0 ? '0.5' : '1'; prevBtn.style.cursor = currentGalleryIndex === 0 ? 'not-allowed' : 'pointer'; }
+        if (nextBtn) { nextBtn.style.opacity = currentGalleryIndex === galleryImages.length - 1 ? '0.5' : '1'; nextBtn.style.cursor = currentGalleryIndex === galleryImages.length - 1 ? 'not-allowed' : 'pointer'; }
     }
-    
-    if (nextBtn) {
-        nextBtn.addEventListener('click', nextImage);
+
+    function initGalleryModal() {
+        const modal = document.getElementById('galleryModal');
+        document.getElementById('galleryModalClose')?.addEventListener('click', closeGalleryModal);
+        document.querySelector('.gallery-modal-overlay')?.addEventListener('click', closeGalleryModal);
+        document.getElementById('galleryModalPrev')?.addEventListener('click', prevImage);
+        document.getElementById('galleryModalNext')?.addEventListener('click', nextImage);
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && modal.classList.contains('active')) closeGalleryModal();
+            if (modal.classList.contains('active')) {
+                if (e.key === 'ArrowLeft') { e.preventDefault(); if (currentGalleryIndex > 0) prevImage(); }
+                else if (e.key === 'ArrowRight') { e.preventDefault(); if (currentGalleryIndex < galleryImages.length - 1) nextImage(); }
+            }
+        });
+        let touchStartX = 0;
+        modal.addEventListener('touchstart', function(e) { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
+        modal.addEventListener('touchend', function(e) {
+            const diff = touchStartX - e.changedTouches[0].screenX;
+            if (Math.abs(diff) > 50) {
+                if (diff > 0 && currentGalleryIndex < galleryImages.length - 1) nextImage();
+                else if (diff < 0 && currentGalleryIndex > 0) prevImage();
+            }
+        }, { passive: true });
     }
-    
-    // Закрытие по клавише Escape
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && modal.classList.contains('active')) {
-            closeGalleryModal();
+
+    // ---------- АНИМАЦИЯ ПРИ СКРОЛЛЕ (для нового таймлайна) ----------
+    function observeAnimatedItems() {
+        const elements = document.querySelectorAll('[data-animate="true"]');
+        if (!('IntersectionObserver' in window)) {
+            elements.forEach(el => el.classList.add('visible'));
+            return;
+        }
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2 });
+        elements.forEach(el => observer.observe(el));
+    }
+
+    // Кнопка "Показать еще"
+    document.getElementById('showMoreGalleryBtn')?.addEventListener('click', () => {
+        if (visibleGallery < galleryImages.length) {
+            visibleGallery = Math.min(visibleGallery + 3, galleryImages.length);
+            renderGallery();
         }
     });
-    
-    // Навигация стрелками клавиатуры
-    document.addEventListener('keydown', function(e) {
-        if (!modal.classList.contains('active')) return;
-        
-        if (e.key === 'ArrowLeft') {
-            e.preventDefault();
-            if (currentGalleryIndex > 0) {
-                prevImage();
-            }
-        } else if (e.key === 'ArrowRight') {
-            e.preventDefault();
-            if (currentGalleryIndex < galleryImages.length - 1) {
-                nextImage();
-            }
-        }
-    });
-    
-    // Поддержка свайпов на мобильных
-    let touchStartX = 0;
-    let touchEndX = 0;
-    
-    modal.addEventListener('touchstart', function(e) {
-        touchStartX = e.changedTouches[0].screenX;
-    }, { passive: true });
-    
-    modal.addEventListener('touchend', function(e) {
-        touchEndX = e.changedTouches[0].screenX;
-        handleSwipe();
-    }, { passive: true });
-    
-    function handleSwipe() {
-        const swipeThreshold = 50;
-        const diff = touchStartX - touchEndX;
-        
-        if (Math.abs(diff) > swipeThreshold) {
-            if (diff > 0) {
-                // Свайп влево - следующее изображение
-                if (currentGalleryIndex < galleryImages.length - 1) {
-                    nextImage();
-                }
-            } else {
-                // Свайп вправо - предыдущее изображение
-                if (currentGalleryIndex > 0) {
-                    prevImage();
-                }
-            }
-        }
-    }
-}
 
-// Кнопка "Показать еще"
-document.getElementById('showMoreGalleryBtn')?.addEventListener('click', () => {
-    if (visibleGallery < galleryImages.length) {
-        visibleGallery = Math.min(visibleGallery + 3, galleryImages.length);
-        renderGallery();
-    }
-});
-
-// Запуск
-renderGallery();
-initGalleryModal();
-    
+    // Запуск
+    renderTimeline();
+    renderGallery();
+    initGalleryModal();
+    setTimeout(observeAnimatedItems, 100);
 </script>
 <script src="js/common.js"></script>
 </body>

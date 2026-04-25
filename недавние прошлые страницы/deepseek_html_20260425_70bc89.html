@@ -121,15 +121,22 @@
             gap: 6px;
             color: #4A6294;
             font-size: 13px;
-            margin-bottom: 0;
+            margin-bottom: 12px;
             font-family: 'Nunito Sans', sans-serif;
+        }
+        
+        .performance-price-afisha {
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 600;
+            font-size: 18px;
+            color: #E8454D;
+            margin-bottom: 16px;
         }
         
         .performance-btns-afisha {
             display: flex;
             gap: 12px;
             margin-top: auto;
-            padding-top: 16px;
         }
         
         .btn-details-afisha,
@@ -162,65 +169,12 @@
         .btn-buy-afisha:hover {
             background: #C0392B;
         }
-
-        /* ===== ФИЛЬТРЫ ===== */
-        .filters-section-afisha {
-            margin-bottom: 32px;
-            width: 100%;
-        }
-        .filter-chips-afisha {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-            align-items: center;
-        }
-        .filter-chip-afisha {
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-family: 'Unbounded', sans-serif;
-            font-size: 14px;
-            font-weight: 600;
+        .btn-buy-afisha.disabled {
+            background: #E5E3E1;
+            color: #888;
             cursor: pointer;
-            transition: all 0.2s;
-            border: 1px solid #E5E3E1;
-            background: #fff;
-            color: #1A1718;
-            -webkit-tap-highlight-color: transparent;
         }
-        .filter-chip-afisha.active {
-            background: #2A3D5E;
-            color: #fff;
-            border-color: #2A3D5E;
-        }
-        .filter-chip-date { position: relative; }
-        .month-select {
-            padding: 10px 36px 10px 16px;
-            border-radius: 8px;
-            font-family: 'Unbounded', sans-serif;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            border: 1px solid #E5E3E1;
-            background: #fff;
-            color: #1A1718;
-            appearance: none;
-            -webkit-appearance: none;
-            min-width: 160px;
-        }
-        .filter-chip-date i {
-            position: absolute;
-            right: 12px;
-            top: 50%;
-            transform: translateY(-50%);
-            pointer-events: none;
-            color: #4A6294;
-        }
-        .month-select.active-filter {
-            background: #2A3D5E;
-            color: #fff;
-            border-color: #2A3D5E;
-        }
-
+        
         /* ===== КАРТА ГАСТРОЛЕЙ ===== */
         .tour-map-section {
             background: #fff;
@@ -424,7 +378,7 @@
         .show-more-btn:active,
         .load-more-btn:active { background: #DCE4F0; }
         
-        /* ===== БАЛУНЫ ЯНДЕКС.КАРТ ===== */
+        /* ===== БАЛУНЫ ЯНДЕКС.КАРТ - ШРИФТ NUNITO SANS ===== */
         .balloon-content {
             font-family: 'Nunito Sans', sans-serif !important;
             font-size: 14px;
@@ -481,7 +435,7 @@
             box-shadow: 0 2px 6px rgba(232,69,77,0.25);
             -webkit-tap-highlight-color: transparent;
         }
-
+        
         /* ===== МОДАЛЬНЫЕ ОКНА ===== */
         .tag-modal-overlay,
         .modal-overlay {
@@ -877,6 +831,59 @@
         }
         .promo-goto-btn:active { background: #C0392B; color: #fff; }
         
+        /* ===== ФИЛЬТРЫ ===== */
+        .filters-section-afisha {
+            margin-bottom: 32px;
+            width: 100%;
+        }
+        .filter-chips-afisha {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .filter-chip-afisha {
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-family: 'Unbounded', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid #E5E3E1;
+            background: #fff;
+            color: #1A1718;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .filter-chip-afisha.active {
+            background: #2A3D5E;
+            color: #fff;
+            border-color: #2A3D5E;
+        }
+        .filter-chip-date { position: relative; }
+        .month-select {
+            padding: 10px 36px 10px 16px;
+            border-radius: 8px;
+            font-family: 'Unbounded', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            border: 1px solid #E5E3E1;
+            background: #fff;
+            color: #1A1718;
+            appearance: none;
+            -webkit-appearance: none;
+            min-width: 160px;
+        }
+        .filter-chip-date i {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+            color: #4A6294;
+        }
+        
         /* Нет событий */
         .no-events {
             text-align: center;
@@ -889,20 +896,56 @@
         
         /* ===== АДАПТИВНОСТЬ ===== */
         @media (max-width: 1100px) {
-            .tour-map-container { grid-template-columns: 1fr; }
+            .tour-map-container {
+                grid-template-columns: 1fr;
+            }
             #yandexMap { height: 400px; }
             .tour-list { max-height: 300px; }
         }
         
         @media (max-width: 860px) {
-            .afisha-page { padding: 0 16px; }
-            .events-grid { grid-template-columns: 1fr; gap: 16px; }
-            .performance-card-afisha { border-radius: 12px; }
-            .performance-content-afisha { padding: 14px; }
-            .performance-tags-afisha { margin-bottom: 8px; gap: 6px; }
-            .performance-name-afisha { font-size: 18px; margin-bottom: 4px; }
-            .performance-date-afisha { margin-bottom: 4px; font-size: 13px; }
-            .performance-desc-afisha { font-size: 13px; margin-bottom: 8px; }
+            .afisha-page {
+                padding: 0 16px;
+            }
+            .events-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+            .performance-card-afisha {
+                border-radius: 12px;
+            }
+            .performance-content-afisha {
+                padding: 14px;
+            }
+            .performance-tags-afisha {
+                margin-bottom: 8px;
+                gap: 6px;
+            }
+            .performance-name-afisha {
+                font-size: 18px;
+                margin-bottom: 4px;
+            }
+            .performance-date-afisha {
+                margin-bottom: 4px;
+                font-size: 13px;
+            }
+            .performance-desc-afisha {
+                font-size: 13px;
+                margin-bottom: 8px;
+            }
+            .event-venue-afisha {
+                margin-bottom: 8px;
+                font-size: 12px;
+            }
+            .performance-price-afisha {
+                margin-bottom: 12px;
+                font-size: 16px;
+            }
+            .btn-details-afisha,
+            .btn-buy-afisha {
+                padding: 11px 16px;
+                font-size: 13px;
+            }
             
             .tour-map-section {
                 padding: 20px 16px;
@@ -911,45 +954,171 @@
                 width: 100%;
                 box-sizing: border-box;
             }
-            .tour-header { flex-direction: column; align-items: flex-start; gap: 12px; }
-            .tour-title { font-size: 22px; text-align: left; width: 100%; }
-            #yandexMap { height: 300px; width: 100%; }
-            .tour-list { max-height: none; overflow-y: visible; padding-right: 0; gap: 8px; }
-            .tour-item { padding: 12px; width: 100%; box-sizing: border-box; }
+            .tour-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+            .tour-title {
+                font-size: 22px;
+                text-align: left;
+                width: 100%;
+            }
+            #yandexMap {
+                height: 300px;
+                width: 100%;
+            }
+            .tour-list {
+                max-height: none;
+                overflow-y: visible;
+                padding-right: 0;
+                gap: 8px;
+            }
+            .tour-item {
+                padding: 12px;
+                width: 100%;
+                box-sizing: border-box;
+            }
             .tour-item.mobile-hidden { display: none; }
-            .tour-status { padding: 10px 20px; font-size: 13px; }
-            .show-more-btn, .load-more-btn { width: 100%; max-width: 300px; padding: 14px 24px; font-size: 15px; }
-            .DivModalTourItem { flex-direction: column; align-items: flex-start; gap: 12px; padding: 16px; }
+            .tour-status {
+                padding: 10px 20px;
+                font-size: 13px;
+            }
+            .show-more-btn,
+            .load-more-btn {
+                width: 100%;
+                max-width: 300px;
+                padding: 14px 24px;
+                font-size: 15px;
+            }
+            .DivModalTourItem {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+                padding: 16px;
+            }
             .SpanModalTourCity { width: 100%; }
             .SpanTourStatus { align-self: flex-start; }
         }
         
         @media (max-width: 480px) {
-            .afisha-page { padding: 0 12px; }
-            .performance-content-afisha { padding: 12px; }
-            .performance-tags-afisha { margin-bottom: 6px; gap: 4px; }
-            .performance-name-afisha { font-size: 16px; margin-bottom: 2px; }
-            .performance-date-afisha { margin-bottom: 2px; }
-            .performance-desc-afisha { font-size: 12px; margin-bottom: 6px; }
-            .btn-details-afisha, .btn-buy-afisha { padding: 10px 12px; font-size: 12px; }
+            .afisha-page {
+                padding: 0 12px;
+            }
+            .performance-content-afisha {
+                padding: 12px;
+            }
+            .performance-tags-afisha {
+                margin-bottom: 6px;
+                gap: 4px;
+            }
+            .performance-name-afisha {
+                font-size: 16px;
+                margin-bottom: 2px;
+            }
+            .performance-date-afisha {
+                margin-bottom: 2px;
+            }
+            .performance-desc-afisha {
+                font-size: 12px;
+                margin-bottom: 6px;
+            }
+            .event-venue-afisha {
+                margin-bottom: 6px;
+            }
+            .performance-price-afisha {
+                margin-bottom: 10px;
+            }
+            .btn-details-afisha,
+            .btn-buy-afisha {
+                padding: 10px 12px;
+                font-size: 12px;
+            }
             
-            .tour-map-section { padding: 16px 12px; margin: 24px 0; border-radius: 12px; width: 100%; box-sizing: border-box; }
-            .tour-title { font-size: 20px; width: 100%; }
-            #yandexMap { height: 250px; width: 100%; }
+            .tour-map-section {
+                padding: 16px 12px;
+                margin: 24px 0;
+                border-radius: 12px;
+                width: 100%;
+                box-sizing: border-box;
+            }
+            .tour-title {
+                font-size: 20px;
+                width: 100%;
+            }
+            #yandexMap {
+                height: 250px;
+                width: 100%;
+            }
             .tour-item { padding: 10px; }
             .tour-city { font-size: 13px; }
-            .tour-dates, .tour-venue { font-size: 12px; }
-            .tour-status { padding: 12px 20px; font-size: 14px; }
-            .show-more-btn, .load-more-btn { max-width: 100%; padding: 14px 20px; font-size: 15px; }
+            .tour-dates,
+            .tour-venue { font-size: 12px; }
+            .tour-status {
+                padding: 12px 20px;
+                font-size: 14px;
+            }
+            .show-more-btn,
+            .load-more-btn {
+                max-width: 100%;
+                padding: 14px 20px;
+                font-size: 15px;
+            }
+            .DivModalContent {
+                padding: 16px 12px;
+                border-radius: 16px;
+            }
+            .ButtonModalClose {
+                top: 12px;
+                right: 12px;
+                font-size: 24px;
+                width: 36px;
+                height: 36px;
+            }
+            .DivModalHeader {
+                padding-right: 40px;
+                padding-bottom: 14px;
+                margin-bottom: 20px;
+            }
+            .DivModalHeader .H2 { font-size: 20px; }
+            .DivModalHeader .P { font-size: 13px; }
+            .DivModalTourItem {
+                padding: 14px;
+                border-radius: 16px;
+                gap: 8px;
+            }
+            .SpanModalTourCity { font-size: 16px; }
+            .DivModalTourDates .Strong { font-size: 14px; }
+            .SpanModalTourVenue { font-size: 12px; }
+            .SpanTourStatus { padding: 10px 20px; font-size: 13px; }
         }
         
         @media (max-width: 380px) {
             .afisha-page { padding: 0 8px; }
             .performance-content-afisha { padding: 10px; }
-            .tour-map-section { padding: 12px 8px; margin: 16px 0; border-radius: 10px; width: 100%; box-sizing: border-box; }
+            .tour-map-section {
+                padding: 12px 8px;
+                margin: 16px 0;
+                border-radius: 10px;
+                width: 100%;
+                box-sizing: border-box;
+            }
             .tour-title { font-size: 18px; }
-            #yandexMap { height: 220px; width: 100%; }
+            #yandexMap {
+                height: 220px;
+                width: 100%;
+            }
             .tour-item { padding: 8px; }
+            .tour-status {
+                padding: 10px 16px;
+                font-size: 12px;
+                min-width: 100px;
+            }
+            .show-more-btn,
+            .load-more-btn {
+                padding: 12px 16px;
+                font-size: 14px;
+            }
         }
     </style>
 </head>
@@ -1013,8 +1182,10 @@
                         <i class="fas fa-undo-alt"></i> Вернуться ко всей карте
                     </button>
                 </div>
+                
                 <div class="tour-list" id="tourList"></div>
             </div>
+            
             <div class="show-more-wrapper">
                 <button class="show-more-btn" id="showMorePerformancesBtn" style="display: none;">Показать еще</button>
             </div>
@@ -1131,6 +1302,7 @@ function renderEvents() {
     
     grid.innerHTML = displayEvents.map(event => {
         const formattedDate = formatEventDate(event.date, event.time);
+        const priceDisplay = event.price ? `от ${event.price.min.toLocaleString('ru-RU')} ₽` : '';
         
         return `
             <div class="performance-card-afisha" data-event-id="${event.id}">
@@ -1145,6 +1317,7 @@ function renderEvents() {
                     <div class="performance-date-afisha"><i class="far fa-calendar"></i> ${formattedDate}</div>
                     <p class="performance-desc-afisha">${event.description}</p>
                     <div class="event-venue-afisha"><i class="fas fa-map-marker-alt"></i><span>${event.venue}${event.address ? ', ' + event.address.split(',')[0] : ''}</span></div>
+                    ${priceDisplay ? `<div class="performance-price-afisha">${priceDisplay}</div>` : ''}
                     <div class="performance-btns-afisha">
                         <button class="btn-details-afisha" data-performance-id="${event.performanceId}">Подробнее</button>
                         <button class="btn-buy-afisha" data-event-id="${event.id}">Купить билет</button>
@@ -1492,85 +1665,6 @@ function initTourModal() {
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modalOverlay?.classList.contains('active')) closeModal(); });
 }
 
-function initCustomMonthSelect() {
-    const originalSelect = document.getElementById('monthSelect');
-    if (!originalSelect || document.querySelector('.custom-month-select')) return;
-    originalSelect.style.display = 'none';
-    
-    const wrapper = document.createElement('div');
-    wrapper.className = 'custom-month-select';
-    const trigger = document.createElement('div');
-    trigger.className = 'custom-month-trigger';
-    const dropdown = document.createElement('div');
-    dropdown.className = 'custom-month-dropdown';
-    
-    function renderOptions() {
-        dropdown.innerHTML = '';
-        Array.from(originalSelect.options).forEach(option => {
-            const optionEl = document.createElement('div');
-            optionEl.className = 'custom-month-option';
-            if (option.selected) optionEl.classList.add('selected');
-            optionEl.textContent = option.text;
-            optionEl.dataset.value = option.value;
-            optionEl.addEventListener('click', (e) => {
-                e.stopPropagation(); e.preventDefault();
-                originalSelect.value = optionEl.dataset.value;
-                trigger.innerHTML = `${optionEl.textContent} <span class="arrow-icon">▾</span>`;
-                if (originalSelect.selectedIndex !== 0) {
-                    originalSelect.classList.add('active-filter');
-                    trigger.classList.add('active');
-                } else {
-                    originalSelect.classList.remove('active-filter');
-                    trigger.classList.remove('active');
-                }
-                dropdown.querySelectorAll('.custom-month-option').forEach(opt => opt.classList.remove('selected'));
-                optionEl.classList.add('selected');
-                wrapper.classList.remove('open');
-                originalSelect.dispatchEvent(new Event('change', { bubbles: true }));
-            });
-            dropdown.appendChild(optionEl);
-        });
-    }
-    
-    const getSelectedText = () => {
-        const selected = originalSelect.options[originalSelect.selectedIndex];
-        return selected ? selected.text : 'Все даты';
-    };
-    trigger.innerHTML = `${getSelectedText()} <span class="arrow-icon">▾</span>`;
-    if (originalSelect.selectedIndex !== 0) trigger.classList.add('active');
-    
-    renderOptions();
-    
-    trigger.addEventListener('click', (e) => {
-        e.stopPropagation();
-        document.querySelectorAll('.custom-month-select.open').forEach(el => { if (el !== wrapper) el.classList.remove('open'); });
-        wrapper.classList.toggle('open');
-    });
-    
-    document.addEventListener('click', (e) => { if (!wrapper.contains(e.target)) wrapper.classList.remove('open'); });
-    
-    wrapper.appendChild(trigger);
-    wrapper.appendChild(dropdown);
-    originalSelect.parentNode.insertBefore(wrapper, originalSelect);
-    
-    if (allChip) {
-        allChip.addEventListener('click', () => {
-            originalSelect.selectedIndex = 0;
-            originalSelect.classList.remove('active-filter');
-            trigger.classList.remove('active');
-            trigger.innerHTML = `${originalSelect.options[0].text} <span class="arrow-icon">▾</span>`;
-            dropdown.querySelectorAll('.custom-month-option').forEach(opt => opt.classList.toggle('selected', opt.dataset.value === originalSelect.value));
-            wrapper.classList.remove('open');
-        });
-    }
-    
-    const observer = new MutationObserver(() => {
-        trigger.innerHTML = `${getSelectedText()} <span class="arrow-icon">▾</span>`;
-        trigger.classList.toggle('active', originalSelect.selectedIndex !== 0);
-    });
-    observer.observe(originalSelect, { attributes: true, attributeFilter: ['class', 'value'] });
-}
-
 function initPromoRunner() {
     const runnerTrack = document.getElementById('promoRunnerTrack');
     const runnerSection = document.getElementById('promoRunner');
@@ -1653,7 +1747,9 @@ function initShowMoreTourBtn() {
     const showMoreBtn = document.getElementById('showMorePerformancesBtn');
     if (!showMoreBtn) return;
     let showAllTours = false;
-    showMoreBtn.addEventListener('click', () => { showAllTours = !showAllTours; renderTourList(showAllTours); });
+    
+    const toggleTours = () => { showAllTours = !showAllTours; renderTourList(showAllTours); };
+    showMoreBtn.addEventListener('click', toggleTours);
     window.addEventListener('resize', () => renderTourList(showAllTours));
 }
 
@@ -1694,7 +1790,6 @@ function refreshOnReturn() {
             initTagModals();
             initPromoRunner();
             renderEvents();
-            setTimeout(initCustomMonthSelect, 50);
             setTimeout(initYandexMap, 100);
             setTimeout(initShowMoreTourBtn, 150);
             setTimeout(refreshOnReturn, 200);

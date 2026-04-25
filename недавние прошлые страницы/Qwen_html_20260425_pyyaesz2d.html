@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Театр клоунады «Микос» | О театре</title>
+    <link rel="icon" type="image/svg+xml" href="SVG/logo-2.svg" sizes="any">
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+/* ===== БАЗОВЫЕ СТИЛИ И ПЕРЕМЕННЫЕ ===== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+    --white: #FFFFFF;
+    --grey-89: #E5E3E1;
+    --grey-97: #F8F7F6;
+    --grey-10: #1A1718;
+    --azure-44: #4A6294;
+    --azure-27: #2A3D5E;
+    --red-59: #E8454D;
+    --red-60: #D62830;
+    --accent-gold: #D4BF95;
+    --shadow-sm: 0 2px 8px rgba(26, 23, 24, 0.08);
+    --shadow-md: 0 4px 20px rgba(26, 23, 24, 0.12);
+    --shadow-lg: 0 8px 40px rgba(42, 61, 94, 0.2);
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    --transition-slow: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+body {
+    background: var(--white);
+    font-family: 'Nunito Sans', sans-serif;
+    color: var(--grey-10);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+img { max-width: 100%; display: block; }
+button { cursor: pointer; font-family: inherit; }
+
+/* ===== АНИМАЦИИ ПРИ ПРОКРУТКЕ ===== */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity var(--transition-slow), transform var(--transition-slow);
+    will-change: opacity, transform;
+}
+.animate-on-scroll.animated {
+    opacity: 1;
+    transform: translateY(0);
+}
+.animate-on-scroll.delay-1 { transition-delay: 0.1s; }
+.animate-on-scroll.delay-2 { transition-delay: 0.2s; }
+.animate-on-scroll.delay-3 { transition-delay: 0.3s; }
+.animate-on-scroll.delay-4 { transition-delay: 0.4s; }
+
+/* Параллакс-эффект для фото в таймлайне */
+@keyframes floatPhoto {
+    0%, 100% { transform: translateY(0) rotate(-1deg); }
+    50% { transform: translateY(-8px) rotate(1deg); }
+}
+.timeline-photo img {
+    animation: floatPhoto 6s ease-in-out infinite;
+    transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+}
+.timeline-photo img:hover {
+    transform: scale(1.05) rotate(0);
+    box-shadow: var(--shadow-lg);
+}
+
+/* ===== СТРУКТУРА СТРАНИЦЫ ===== */
+.about-page { max-width: 1200px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 40px); }
+
+/* Заголовок страницы */
+.page-header-about {
+    text-align: center;
+    padding: clamp(40px, 8vw, 80px) 0 clamp(30px, 6vw, 60px);
+    background: linear-gradient(135deg, var(--grey-97) 0%, var(--white) 100%);
+    border-radius: 0 0 24px 24px;
+    margin-bottom: clamp(30px, 6vw, 60px);
+    position: relative;
+    overflow: hidden;
+}
+.page-header-about::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(232, 69, 77, 0.08) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+}
+.page-title-about {
+    font-family: 'Unbounded', sans-serif;
+    font-size: clamp(28px, 5vw, 44px);
+    font-weight: 700;
+    color: var(--grey-10);
+    margin-bottom: 12px;
+    position: relative;
+    display: inline-block;
+}
+.page-title-about::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background: var(--red-59);
+    border-radius: 2px;
+}
+.page-subtitle-about {
+    font-size: clamp(16px, 2.5vw, 20px);
+    color: var(--azure-44);
+    max-width: 600px;
+    margin: 24px auto 0;
+    font-weight: 400;
+}
+
+/* ===== СЕКЦИЯ ИСТОРИИ (ТАЙМЛАЙН) ===== */
+.timeline-section {
+    padding: clamp(20px, 4vw, 40px) 0 clamp(40px, 8vw, 80px);
+    position: relative;
+}
+.section-title {
+    font-family: 'Unbounded', sans-serif;
+    font-size: clamp(22px, 4vw, 32px);
+    font-weight: 700;
+    color: var(--grey-10);
+    text-align: center;
+    margin-bottom: clamp(30px, 6vw, 50px);
+    position: relative;
+    display: inline-block;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 48px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--red-59), var(--accent-gold));
+    border-radius: 2px;
+}
+
+.timeline-container {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+/* Центральная линия таймлайна */
+.timeline-container::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 30px;
+    bottom: 30px;
+    width: 3px;
+    background: linear-gradient(to bottom, var(--azure-44), var(--accent-gold), var(--red-59));
+    border-radius: 2px;
+    opacity: 0.3;
+}
+
+.timeline-item {
+    position: relative;
+    width: 100%;
+    padding: clamp(20px, 4vw, 30px) 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: clamp(20px, 4vw, 40px);
+}
+.timeline-item.left { flex-direction: row-reverse; }
+.timeline-item.left .timeline-content { text-align: right; }
+
+.timeline-content {
+    flex: 1;
+    max-width: 45%;
+    background: var(--white);
+    padding: clamp(16px, 3vw, 24px);
+    border-radius: 16px;
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--grey-89);
+    transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+    position: relative;
+    z-index: 2;
+}
+.timeline-content:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--azure-44);
+}
+/* Стрелочка к карточке */
+.timeline-content::before {
+    content: '';
+    position: absolute;
+    top: 28px;
+    width: 0;
+    height: 0;
+    border: 10px solid transparent;
+}
+.timeline-item:not(.left) .timeline-content::before {
+    right: -20px;
+    border-left-color: var(--white);
+}
+.timeline-item.left .timeline-content::before {
+    left: -20px;
+    border-right-color: var(--white);
+}
+
+.timeline-photo {
+    width: clamp(70px, 12vw, 90px);
+    height: clamp(70px, 12vw, 90px);
+    margin: 0 auto 16px;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 3px solid var(--white);
+    box-shadow: var(--shadow-sm);
+    background: var(--azure-27);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.timeline-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.timeline-year {
+    font-family: 'Unbounded', sans-serif;
+    font-size: clamp(20px, 3.5vw, 28px);
+    font-weight: 700;
+    color: var(--red-59);
+    margin-bottom: 4px;
+    letter-spacing: -0.5px;
+}
+.timeline-title {
+    font-family: 'Unbounded', sans-serif;
+    font-size: clamp(16px, 2.5vw, 20px);
+    font-weight: 600;
+    color: var(--azure-27);
+    margin-bottom: 8px;
+}
+.timeline-desc {
+    font-size: clamp(14px, 2vw, 16px);
+    color: var(--grey-10);
+    opacity: 0.85;
+    line-height: 1.5;
+}
+
+/* Маркер на линии */
+.timeline-marker {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 16px;
+    height: 16px;
+    background: var(--white);
+    border: 3px solid var(--red-59);
+    border-radius: 50%;
+    top: clamp(36px, 6vw, 50px);
+    z-index: 3;
+    transition: transform var(--transition-fast), background var(--transition-fast);
+    box-shadow: 0 0 0 4px rgba(232, 69, 77, 0.15);
+}
+.timeline-item:hover .timeline-marker {
+    transform: translateX(-50%) scale(1.3);
+    background: var(--red-59);
+}
+
+/* ===== МИССИЯ И ФИЛОСОФИЯ ===== */
+.mission-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: clamp(20px, 4vw, 32px);
+    padding: clamp(30px, 6vw, 60px) 0;
+    background: var(--grey-97);
+    border-radius: 24px;
+    margin: clamp(30px, 6vw, 60px) 0;
+}
+.mission-block {
+    background: var(--white);
+    padding: clamp(24px, 4vw, 32px);
+    border-radius: 20px;
+    box-shadow: var(--shadow-sm);
+    border-left: 4px solid var(--accent-gold);
+    transition: transform var(--transition-normal);
+}
+.mission-block:hover { transform: translateY(-3px); }
+.mission-block h2 {
+    font-family: 'Unbounded', sans-serif;
+    font-size: clamp(20px, 3.5vw, 24px);
+    font-weight: 700;
+    color: var(--azure-27);
+    margin-bottom: 16px;
+    position: relative;
+    padding-bottom: 12px;
+}
+.mission-block h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    background: var(--red-59);
+    border-radius: 1px;
+}
+.mission-block p {
+    font-size: clamp(14px, 2vw, 16px);
+    color: var(--grey-10);
+    margin-bottom: 12px;
+    opacity: 0.9;
+}
+.quote {
+    margin-top: 20px;
+    padding: 16px 20px;
+    background: linear-gradient(135deg, rgba(74, 98, 148, 0.08), rgba(232, 69, 77, 0.08));
+    border-radius: 12px;
+    border-left: 3px solid var(--azure-44);
+}
+.quote p {
+    font-style: italic;
+    color: var(--azure-27);
+    font-weight: 500;
+    margin: 0;
+    font-size: clamp(14px, 2vw, 15px);
+}
+
+/* ===== ХУДОЖЕСТВЕННЫЙ РУКОВОДИТЕЛЬ ===== */
+.director-highlight {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: clamp(24px, 5vw, 40px);
+    align-items: center;
+    padding: clamp(30px, 6vw, 60px) 0;
+    background: linear-gradient(135deg, var(--azure-27) 0%, var(--azure-44) 100%);
+    border-radius: 24px;
+    margin: clamp(30px, 6vw, 60px) 0;
+    color: var(--white);
+    position: relative;
+    overflow: hidden;
+}
+.director-highlight::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(212, 191, 149, 0.2) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+}
+.director-photo {
+    width: clamp(180px, 35vw, 240px);
+    height: clamp(180px, 35vw, 240px);
+    margin: 0 auto;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 4px solid var(--accent-gold);
+    box-shadow: var(--shadow-lg);
+    position: relative;
+    z-index: 2;
+    transition: transform var(--transition-normal);
+}
+.director-photo:hover { transform: scale(1.03); }
+.director-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.director-info { text-align: center; padding: 0 clamp(16px, 4vw, 24px); }
+.director-tag {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent-gold);
+    margin-bottom: 8px;
+    opacity: 0.9;
+}
+.director-name {
+    font-family: 'Unbounded', sans-serif;
+    font-size: clamp(22px, 4vw, 32px);
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+.director-name span {
+    color: var(--accent-gold);
+    font-weight: 400;
+}
+.director-position {
+    font-size: clamp(14px, 2.2vw, 16px);
+    opacity: 0.95;
+    margin-bottom: 16px;
+    font-weight: 500;
+}
+.director-bio {
+    font-size: clamp(14px, 2vw, 15px);
+    opacity: 0.92;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+.director-btn {
+    background: var(--red-59);
+    color: var(--white);
+    border: none;
+    padding: 12px 28px;
+    border-radius: 50px;
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all var(--transition-fast);
+    box-shadow: 0 4px 14px rgba(214, 40, 48, 0.3);
+}
+.director-btn:hover {
+    background: var(--red-60);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(214, 40, 48, 0.45);
+}
+
+/* ===== НАГРАДЫ ===== */
+.awards-section { padding: clamp(30px, 6vw, 60px) 0; }
+.awards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: clamp(16px, 3vw, 24px);
+    margin-top: clamp(24px, 4vw, 40px);
+}
+.award-card {
+    background: var(--white);
+    padding: clamp(20px, 4vw, 28px);
+    border-radius: 16px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--grey-89);
+    transition: all var(--transition-normal);
+    position: relative;
+    overflow: hidden;
+}
+.award-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(to bottom, var(--accent-gold), var(--red-59));
+    opacity: 0;
+    transition: opacity var(--transition-fast);
+}
+.award-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--azure-44);
+}
+.award-card:hover::before { opacity: 1; }
+.award-year {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--azure-44);
+    background: rgba(74, 98, 148, 0.08);
+    padding: 4px 12px;
+    border-radius: 20px;
+    display: inline-block;
+    margin-bottom: 12px;
+}
+.award-title {
+    font-family: 'Unbounded', sans-serif;
+    font-size: clamp(16px, 2.5vw, 19px);
+    font-weight: 700;
+    color: var(--grey-10);
+    margin-bottom: 8px;
+}
+.award-desc {
+    font-size: clamp(13px, 2vw, 14px);
+    color: var(--grey-10);
+    opacity: 0.8;
+    line-height: 1.5;
+}
+
+/* ===== ГАЛЕРЕЯ ===== */
+.gallery-section {
+    padding: clamp(30px, 6vw, 60px) 0 clamp(60px, 10vw, 100px);
+}
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: clamp(12px, 2.5vw, 20px);
+    margin: clamp(24px, 4vw, 40px) 0;
+}
+.gallery-item {
+    aspect-ratio: 4/3;
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+    background: var(--grey-97);
+}
+.gallery-item:hover {
+    transform: scale(1.02);
+    box-shadow: var(--shadow-lg);
+}
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-slow);
+}
+.gallery-item:hover img { transform: scale(1.08); }
+/* Оверлей при наведении */
+.gallery-item::after {
+    content: '\f00e';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    inset: 0;
+    background: rgba(42, 61, 94, 0.7);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    opacity: 0;
+    transition: opacity var(--transition-fast);
+}
+.gallery-item:hover::after { opacity: 1; }
+
+.show-more-wrapper { text-align: center; margin-top: 20px; }
+.show-more-btn {
+    background: transparent;
+    color: var(--azure-44);
+    border: 2px solid var(--azure-44);
+    padding: 12px 32px;
+    border-radius: 50px;
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all var(--transition-fast);
+}
+.show-more-btn:hover {
+    background: var(--azure-44);
+    color: var(--white);
+    transform: translateY(-2px);
+}
+
+/* ===== АДАПТИВ ===== */
+@media (max-width: 860px) {
+    .timeline-container::before { left: 24px; }
+    .timeline-item, .timeline-item.left {
+        flex-direction: column !important;
+        align-items: flex-start;
+        padding-left: 48px;
+    }
+    .timeline-item.left .timeline-content { text-align: left; }
+    .timeline-content { max-width: 100%; }
+    .timeline-content::before {
+        left: -20px !important;
+        right: auto !important;
+        border-right-color: var(--white) !important;
+        border-left-color: transparent !important;
+    }
+    .timeline-marker { left: 24px; }
+    
+    .mission-section { grid-template-columns: 1fr; }
+    .director-highlight { grid-template-columns: 1fr; text-align: center; }
+    .director-photo { margin: 0 auto 24px; }
+}
+@media (max-width: 480px) {
+    .timeline-container::before { left: 18px; width: 2px; }
+    .timeline-item { padding-left: 38px; }
+    .timeline-marker { left: 18px; width: 12px; height: 12px; }
+    .timeline-photo { width: 60px; height: 60px; }
+    .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+}
+
+/* ===== МОДАЛЬНОЕ ОКНО (обновлённые стили) ===== */
+.gallery-modal { 
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+    z-index: 100000; display: none; opacity: 0; 
+    transition: opacity 0.3s ease; 
+}
+.gallery-modal.active { display: block; opacity: 1; }
+.gallery-modal-overlay {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(26, 23, 24, 0.92);
+    backdrop-filter: blur(8px);
+}
+.gallery-modal-container {
+    position: relative; width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    padding: 20px; box-sizing: border-box;
+}
+.gallery-modal-content {
+    position: relative; max-width: 95%; max-height: 90vh;
+    display: flex; align-items: center; justify-content: center;
+}
+.gallery-modal-content img {
+    max-width: 100%; max-height: 90vh;
+    border-radius: 12px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    animation: modalZoomIn 0.3s ease;
+}
+@keyframes modalZoomIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+.gallery-modal-close, .gallery-modal-prev, .gallery-modal-next {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: white; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s ease; z-index: 10;
+    backdrop-filter: blur(4px); border-radius: 50%;
+}
+.gallery-modal-close:hover, .gallery-modal-prev:hover, .gallery-modal-next:hover {
+    background: var(--red-59); border-color: var(--red-59);
+    transform: scale(1.1);
+}
+.gallery-modal-close { top: 24px; right: 24px; width: 44px; height: 44px; font-size: 18px; }
+.gallery-modal-prev, .gallery-modal-next {
+    top: 50%; transform: translateY(-50%);
+    width: 52px; height: 52px; font-size: 20px;
+}
+.gallery-modal-prev { left: 24px; }
+.gallery-modal-next { right: 24px; }
+.gallery-modal-counter {
+    position: absolute; bottom: 28px; left: 50%;
+    transform: translateX(-50%);
+    background: rgba(42, 61, 94, 0.85);
+    color: white; padding: 8px 20px;
+    border-radius: 40px;
+    font-family: 'Unbounded', sans-serif;
+    font-size: 13px; font-weight: 600;
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+body.modal-open { overflow: hidden !important; }
+@media (max-width: 600px) {
+    .gallery-modal-close { top: 16px; right: 16px; width: 40px; height: 40px; }
+    .gallery-modal-prev, .gallery-modal-next { width: 44px; height: 44px; font-size: 18px; }
+    .gallery-modal-prev { left: 12px; }
+    .gallery-modal-next { right: 12px; }
+}
+    </style>
+</head>
+<body>
+<div class="shop-container">
+    <!-- HEADER -->
+    <div id="site-header"></div>
+    <div class="mobile-nav" id="mobileNav"><div class="close-mobile-menu" id="closeMobileMenu">✕</div><ul><li><a href="#">Главная</a></li><li><a href="#">Афиша</a></li><li><a href="#">Заказчикам</a></li><li><a href="#">Брендбук</a></li><li><a href="#">Спектакли</a></li><li><a href="#">Команда</a></li><li><a href="#">О театре</a></li><li><a href="#">Магазин</a></li><li><a href="#">Контакты</a></li></ul></div>
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Основной контент -->
+    <div class="about-page">
+        <div class="page-header-about animate-on-scroll">
+            <h1 class="page-title-about">О театре</h1>
+            <p class="page-subtitle-about">Тридцать лет на сцене. Классика и эксперимент. Диалог со зрителем.</p>
+        </div>
+
+        <!-- История театра -->
+        <div class="timeline-section">
+            <h2 class="section-title animate-on-scroll">История театра</h2>
+            <div class="timeline-container">
+                <div class="timeline-item left animate-on-scroll">
+                    <div class="timeline-content">
+                        <div class="timeline-photo"><img src="https://placehold.co/100x100/EFEEED/4A6294?text=1995" alt="1995"></div>
+                        <div class="timeline-year">1995</div>
+                        <div class="timeline-title">Основание</div>
+                        <div class="timeline-desc">Группа выпускников ГИТИСа создаёт независимую труппу. Первый спектакль — «Игроки».</div>
+                    </div>
+                    <div class="timeline-marker"></div>
+                </div>
+                <div class="timeline-item right animate-on-scroll delay-1">
+                    <div class="timeline-content">
+                        <div class="timeline-photo"><img src="https://placehold.co/100x100/EFEEED/4A6294?text=2003" alt="2003"></div>
+                        <div class="timeline-year">2003</div>
+                        <div class="timeline-title">Собственная сцена</div>
+                        <div class="timeline-desc">Театр получает здание в центре Москвы. Премьера «Гамлета» открывает новый этап.</div>
+                    </div>
+                    <div class="timeline-marker"></div>
+                </div>
+                <div class="timeline-item left animate-on-scroll delay-2">
+                    <div class="timeline-content">
+                        <div class="timeline-photo"><img src="https://placehold.co/100x100/EFEEED/4A6294?text=2010" alt="2010"></div>
+                        <div class="timeline-year">2010</div>
+                        <div class="timeline-title">Первая «Золотая маска»</div>
+                        <div class="timeline-desc">«Вишневый сад» получает главную театральную премию страны.</div>
+                    </div>
+                    <div class="timeline-marker"></div>
+                </div>
+                <div class="timeline-item right animate-on-scroll delay-3">
+                    <div class="timeline-content">
+                        <div class="timeline-photo"><img src="https://placehold.co/100x100/EFEEED/4A6294?text=2018" alt="2018"></div>
+                        <div class="timeline-year">2018</div>
+                        <div class="timeline-title">Международное признание</div>
+                        <div class="timeline-desc">Гастроли в Париже, Лондоне, Берлине. Вхождение в топ-10 независимых театров Европы.</div>
+                    </div>
+                    <div class="timeline-marker"></div>
+                </div>
+                <div class="timeline-item left animate-on-scroll delay-4">
+                    <div class="timeline-content">
+                        <div class="timeline-photo"><img src="https://placehold.co/100x100/EFEEED/4A6294?text=2025" alt="2025"></div>
+                        <div class="timeline-year">2025</div>
+                        <div class="timeline-title">30-й сезон</div>
+                        <div class="timeline-desc">Юбилейный год: новая сцена, премьера «Мастера и Маргариты», фестиваль современной драматургии.</div>
+                    </div>
+                    <div class="timeline-marker"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Миссия и философия -->
+        <div class="mission-section animate-on-scroll">
+            <div class="mission-block">
+                <h2>Миссия</h2>
+                <p>Мы создаём театр, в котором классическая традиция встречается с языком сегодняшнего дня. Наша задача — говорить со зрителем о сложном просто, честно и без пафоса.</p>
+                <p>Каждый спектакль — это исследование. Мы не даём готовых ответов, но задаём вопросы, которые важны здесь и сейчас.</p>
+                <div class="quote"><p>«Театр начинается не с вешалки, а с диалога. И этот диалог длится уже тридцать лет».</p></div>
+            </div>
+            <div class="mission-block">
+                <h2>Философия</h2>
+                <p>Мы убеждены, что искусство — это территория свободы. В нашей труппе нет деления на «звёзд» и «массовку». Каждый актёр — соавтор спектакля.</p>
+                <p>Мы за медленный театр. Долгие репетиции, глубокий разбор материала, внимание к деталям. Нам важно не количество премьер, а их качество.</p>
+                <p>Открытость, уважение к зрителю, смелость в экспериментах — три принципа, которым мы не изменяем.</p>
+            </div>
+        </div>
+
+        <!-- Художественный руководитель -->
+        <div class="director-highlight animate-on-scroll">
+            <div class="director-photo">
+                <img src="images/content/actors/Давыдов-4.jpg" alt="Сергей Давыдов" onerror="this.src='https://placehold.co/240x240/2A3D5E/D4BF95?text=С.Давыдов'">
+            </div>
+            <div class="director-info">
+                <div class="director-tag">ХУДОЖЕСТВЕННЫЙ РУКОВОДИТЕЛЬ</div>
+                <div class="director-name">Сергей <span>«Паганель»</span> Давыдов</div>
+                <div class="director-position">Основатель театра, режиссер, народный артист РФ</div>
+                <div class="director-bio">Выпускник ГИТИСа, ученик Петра Фоменко. За 28 лет поставил более 40 спектаклей. Обладатель трех премий «Золотая маска», лауреат международных фестивалей. Разработал авторскую систему актерского тренинга.</div>
+                <button class="director-btn">Подробнее</button>
+            </div>
+        </div>
+
+        <!-- Награды -->
+        <div class="awards-section">
+            <h2 class="section-title animate-on-scroll">Награды и признание</h2>
+            <div class="awards-grid">
+                <div class="award-card animate-on-scroll"><div class="award-year">2010, 2015, 2021</div><div class="award-title">Золотая маска</div><div class="award-desc">Лучший драматический спектакль, лучшая мужская роль, лучшая работа режиссёра.</div></div>
+                <div class="award-card animate-on-scroll delay-1"><div class="award-year">2012, 2019</div><div class="award-title">Хрустальная Турандот</div><div class="award-desc">За лучший актёрский ансамбль и новаторство в сценографии.</div></div>
+                <div class="award-card animate-on-scroll delay-2"><div class="award-year">2018</div><div class="award-title">Государственная премия РФ</div><div class="award-desc">За вклад в развитие театрального искусства и воспитание молодых актёров.</div></div>
+                <div class="award-card animate-on-scroll delay-3"><div class="award-year">2020</div><div class="award-title">Премия Станиславского</div><div class="award-desc">Международная премия за сохранение традиций русской театральной школы.</div></div>
+                <div class="award-card animate-on-scroll delay-4"><div class="award-year">2022</div><div class="award-title">Фестиваль «СРЕДА»</div><div class="award-desc">Золото за визуальное оформление спектакля «Мастер и Маргарита».</div></div>
+                <div class="award-card animate-on-scroll delay-4"><div class="award-year">2024</div><div class="award-title">ТОП-10 независимых театров</div><div class="award-desc">По версии европейской театральной ассоциации.</div></div>
+            </div>
+        </div>
+
+        <!-- Галерея -->
+        <div class="gallery-section">
+            <h2 class="section-title animate-on-scroll">Галерея</h2>
+            <div class="gallery-grid" id="galleryGrid"></div>
+            <div class="show-more-wrapper">
+                <button class="show-more-btn" id="showMoreGalleryBtn">Показать еще</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно галереи -->
+    <div class="gallery-modal" id="galleryModal">
+        <div class="gallery-modal-overlay"></div>
+        <div class="gallery-modal-container">
+            <button class="gallery-modal-close" id="galleryModalClose"><i class="fas fa-times"></i></button>
+            <button class="gallery-modal-prev" id="galleryModalPrev"><i class="fas fa-chevron-left"></i></button>
+            <button class="gallery-modal-next" id="galleryModalNext"><i class="fas fa-chevron-right"></i></button>
+            <div class="gallery-modal-content">
+                <img id="galleryModalImage" src="" alt="Галерея">
+            </div>
+            <div class="gallery-modal-counter" id="galleryModalCounter">
+                <span id="currentImageIndex">1</span> / <span id="totalImagesCount">3</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div id="site-footer"></div>
+</div>
+
+<script>
+// ===== АНИМАЦИИ ПРИ ПРОКРУТКЕ =====
+document.addEventListener('DOMContentLoaded', () => {
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.12
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animated');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+    
+    document.querySelectorAll('.animate-on-scroll').forEach(el => {
+        observer.observe(el);
+    });
+});
+
+// ===== ГАЛЕРЕЯ (сокращённая версия) =====
+const galleryImages = [
+    'images/content/performances/6.jpg','images/content/performances/7.jpg','images/content/performances/8.jpg',
+    'images/content/performances/13.jpg','images/content/performances/14.jpg','images/content/performances/15.jpg',
+    'images/content/performances/21.jpg','images/content/performances/24.jpg','images/content/performances/19.jpg',
+    'images/content/performances/22.jpg','images/content/performances/23.jpg','images/content/performances/20.jpg',
+    'images/content/performances/18.jpg','images/content/performances/3.jpg','images/content/performances/4.jpg',
+    'images/content/performances/9.jpg','images/content/performances/10.jpg','images/content/performances/17.jpg',
+    'images/content/performances/16.jpg'
+];
+
+let visibleGallery = 3;
+let currentGalleryIndex = 0;
+
+function renderGallery() {
+    const grid = document.getElementById('galleryGrid');
+    if (!grid) return;
+    const displayItems = galleryImages.slice(0, visibleGallery);
+    grid.innerHTML = '';
+    
+    displayItems.forEach((img, index) => {
+        const item = document.createElement('div');
+        item.className = 'gallery-item animate-on-scroll';
+        item.setAttribute('data-index', index);
+        item.setAttribute('data-src', img);
+        item.innerHTML = `<img src="${img}" alt="Сцена из спектакля" onerror="this.src='https://placehold.co/400x300/2A3D5E/white?text=Фото'">`;
+        item.addEventListener('click', () => openGalleryModal(index));
+        grid.appendChild(item);
+        
+        // Запускаем анимацию для новых элементов
+        setTimeout(() => item.classList.add('animated'), 100 * index);
+    });
+    
+    const btn = document.getElementById('showMoreGalleryBtn');
+    if (btn) btn.style.display = visibleGallery >= galleryImages.length ? 'none' : 'block';
+}
+
+function openGalleryModal(startIndex) {
+    currentGalleryIndex = startIndex;
+    const modal = document.getElementById('galleryModal');
+    const modalImage = document.getElementById('galleryModalImage');
+    const currentSpan = document.getElementById('currentImageIndex');
+    const totalSpan = document.getElementById('totalImagesCount');
+    
+    if (!modal || !modalImage) return;
+    modalImage.src = galleryImages[currentGalleryIndex];
+    if (currentSpan && totalSpan) {
+        currentSpan.textContent = currentGalleryIndex + 1;
+        totalSpan.textContent = galleryImages.length;
+    }
+    modal.classList.add('active');
+    document.body.classList.add('modal-open');
+    updateNavigationButtons();
+}
+
+function closeGalleryModal() {
+    const modal = document.getElementById('galleryModal');
+    if (modal) {
+        modal.classList.remove('active');
+        document.body.classList.remove('modal-open');
+    }
+}
+
+function prevImage() {
+    if (currentGalleryIndex > 0) { currentGalleryIndex--; updateModalImage(); }
+}
+function nextImage() {
+    if (currentGalleryIndex < galleryImages.length - 1) { currentGalleryIndex++; updateModalImage(); }
+}
+function updateModalImage() {
+    const modalImage = document.getElementById('galleryModalImage');
+    const currentSpan = document.getElementById('currentImageIndex');
+    if (modalImage) modalImage.src = galleryImages[currentGalleryIndex];
+    if (currentSpan) currentSpan.textContent = currentGalleryIndex + 1;
+    updateNavigationButtons();
+}
+function updateNavigationButtons() {
+    const prevBtn = document.getElementById('galleryModalPrev');
+    const nextBtn = document.getElementById('galleryModalNext');
+    if (prevBtn) {
+        prevBtn.style.opacity = currentGalleryIndex === 0 ? '0.5' : '1';
+        prevBtn.style.cursor = currentGalleryIndex === 0 ? 'not-allowed' : 'pointer';
+    }
+    if (nextBtn) {
+        nextBtn.style.opacity = currentGalleryIndex === galleryImages.length - 1 ? '0.5' : '1';
+        nextBtn.style.cursor = currentGalleryIndex === galleryImages.length - 1 ? 'not-allowed' : 'pointer';
+    }
+}
+
+function initGalleryModal() {
+    const modal = document.getElementById('galleryModal');
+    if (!modal) return;
+    
+    document.getElementById('galleryModalClose')?.addEventListener('click', closeGalleryModal);
+    document.querySelector('.gallery-modal-overlay')?.addEventListener('click', closeGalleryModal);
+    document.getElementById('galleryModalPrev')?.addEventListener('click', prevImage);
+    document.getElementById('galleryModalNext')?.addEventListener('click', nextImage);
+    
+    document.addEventListener('keydown', (e) => {
+        if (!modal.classList.contains('active')) return;
+        if (e.key === 'Escape') closeGalleryModal();
+        if (e.key === 'ArrowLeft' && currentGalleryIndex > 0) { e.preventDefault(); prevImage(); }
+        if (e.key === 'ArrowRight' && currentGalleryIndex < galleryImages.length - 1) { e.preventDefault(); nextImage(); }
+    });
+    
+    // Свайпы для мобильных
+    let touchStartX = 0;
+    modal.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
+    modal.addEventListener('touchend', (e) => {
+        const diff = touchStartX - e.changedTouches[0].screenX;
+        if (Math.abs(diff) > 50) {
+            if (diff > 0 && currentGalleryIndex < galleryImages.length - 1) nextImage();
+            else if (diff < 0 && currentGalleryIndex > 0) prevImage();
+        }
+    }, { passive: true });
+}
+
+document.getElementById('showMoreGalleryBtn')?.addEventListener('click', () => {
+    if (visibleGallery < galleryImages.length) {
+        visibleGallery = Math.min(visibleGallery + 3, galleryImages.length);
+        renderGallery();
+    }
+});
+
+// Инициализация
+renderGallery();
+initGalleryModal();
+</script>
+</body>
+</html>

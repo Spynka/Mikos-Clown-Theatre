@@ -331,7 +331,7 @@ body { background: #fff; font-family: 'Nunito Sans', sans-serif; overflow-x: hid
 .timeline-title { font-size: clamp(16px, 2vw, 19px); font-weight: 600; color: #212529; margin-bottom: 8px; }
 .timeline-desc { font-size: clamp(14px, 1.6vw, 15px); line-height: 1.5; color: #495057; max-width: 280px; }
 .timeline-marker { position: absolute; left: 50%; top: 50px; transform: translateX(-50%); width: 20px; height: 20px; background: #E53E3E; border-radius: 50%; box-shadow: 0 0 0 4px #fff, 0 0 0 6px #DEE2E6; }
-.mission-section { background: #F8F7F6; border-radius: 12px; padding: clamp(30px, 5vw, 56px) clamp(30px, 4vw, 48px); margin-bottom: 60px; }
+.mission-section { border-radius: 12px; padding: clamp(30px, 5vw, 56px) clamp(30px, 4vw, 48px); margin-bottom: 60px; }
 .mission-block { margin-bottom: 48px; }
 .mission-block:last-child { margin-bottom: 0; }
 .mission-block h2 { font-family: 'Unbounded', sans-serif; font-size: clamp(28px, 4vw, 40px); font-weight: 600; color: #1A1718; margin-bottom: 24px; }
@@ -6769,7 +6769,6 @@ body {
 
 /* ----- 5. МИССИЯ И ФИЛОСОФИЯ ----- */
 .mission-section {
-    background: #F8F7F6 !important;
     border-radius: 16px !important;
     padding: 40px !important;
     margin-bottom: 48px !important;

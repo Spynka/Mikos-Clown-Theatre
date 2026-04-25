@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" type="image/svg+xml" href="SVG/logo-2.svg" sizes="any">
+    <script src="js/tour-data.js"></script>
     <style>
         /* ===== СТИЛИ МОДАЛЬНОГО ОКНА КОМАНДЫ (как в team.html) ===== */
         .team-modal-overlay {
@@ -1070,1027 +1071,362 @@
     </div>
 </div>
 
-<!-- Скрипты -->
+
 <script src="js/components-loader.js"></script>
 <script src="js/header-scripts.js"></script>
 <script src="js/common.js"></script>
 <script src="js/slider-scripts.js"></script>
 
-<!-- Основной скрипт страницы -->
+
+
 <script>
-    (function() {
-        'use strict';
-        
-        // ===== ДАННЫЕ =====
-        const allPerformances = [
-            { id: 1, name: 'Лишь бы не было детей', date: '15 апреля 19:00', monthKey: 'апрель', year: 2026, desc: 'История сосуществования очень разных людей. Клоунада о выживании.', age: '18+', time: '90 минут', tickets: true, venue: 'Основная сцена', img: 'images/content/performances/15.jpg' },
-            { id: 2, name: 'Богатыри', date: '22 апреля 18:00', monthKey: 'апрель', year: 2026, desc: 'Былины в современном прочтении. Эпическая комедия для всей семьи.', age: '12+', time: '100 минут', tickets: true, venue: 'Основная сцена', img: 'images/content/performances/3.jpg' },
-            { id: 3, name: 'Ожидание', date: '5 мая 20:00', monthKey: 'май', year: 2026, desc: 'Трогательная история о времени, надежде и встречах.', age: '16+', time: '80 минут', tickets: true, venue: 'Малая сцена', img: 'images/content/performances/9.jpg' },
-            { id: 4, name: 'Кабаре-Шапито', date: '12 мая 19:00', monthKey: 'май', year: 2026, desc: 'Феерия клоунады и музыки. Кабаре с цирковыми номерами.', age: '18+', time: '110 минут', tickets: true, venue: 'Основная сцена', img: 'images/content/performances/10.jpg' },
-            { id: 5, name: 'Авиаторы', date: '20 октября 19:00', monthKey: 'октябрь', year: 2026, desc: 'О мечтах, полетах и свободе. Вдохновляющая драма.', age: '16+', time: '95 минут', tickets: true, venue: 'Основная сцена', img: 'images/content/performances/6.jpg' }
-        ];
-
-        const extendedSessions = [
-            { performanceId: 1, date: '15 апреля 19:00', venue: 'Основная сцена', month: 'апрель' },
-            { performanceId: 1, date: '16 апреля 19:00', venue: 'Основная сцена', month: 'апрель' },
-            { performanceId: 1, date: '22 апреля 19:00', venue: 'Основная сцена', month: 'апрель' },
-            { performanceId: 1, date: '5 мая 19:00', venue: 'Основная сцена', month: 'май' },
-            { performanceId: 1, date: '12 мая 19:00', venue: 'Малая сцена', month: 'май' },
-            { performanceId: 2, date: '22 апреля 18:00', venue: 'Основная сцена', month: 'апрель' },
-            { performanceId: 2, date: '29 апреля 18:00', venue: 'Основная сцена', month: 'апрель' },
-            { performanceId: 2, date: '10 мая 18:00', venue: 'Основная сцена', month: 'май' },
-            { performanceId: 3, date: '5 мая 20:00', venue: 'Малая сцена', month: 'май' },
-            { performanceId: 3, date: '15 мая 20:00', venue: 'Малая сцена', month: 'май' },
-            { performanceId: 4, date: '12 мая 19:00', venue: 'Основная сцена', month: 'май' },
-            { performanceId: 4, date: '19 мая 19:00', venue: 'Основная сцена', month: 'май' },
-            { performanceId: 5, date: '20 октября 19:00', venue: 'Основная сцена', month: 'октябрь' },
-            { performanceId: 5, date: '27 октября 19:00', venue: 'Основная сцена', month: 'октябрь' }
-        ];
-
-        // 🔥 ОБНОВЛЁННЫЕ ДАННЫЕ ТОВАРОВ С МАССИВОМ ИЗОБРАЖЕНИЙ
-        const products = [
-            { 
-                id: 1, 
-                name: 'Футболка', 
-                desc: 'Хлопковая футболка с логотипом театра', 
-                price: 2500, 
-                isClothing: true, 
-                images: [
-                    'images/content/shop/1.png',
-                    'images/content/shop/5.png',
-                    'https://placehold.co/428x220/2A3D5E/white?text=Футболка+вид+2',
-                    'https://placehold.co/428x220/4A6294/white?text=Футболка+вид+3'
-                ],
-                category: 'clothes' 
-            },
-            { 
-                id: 2, 
-                name: 'Носки', 
-                desc: 'Принт с логотипом театра', 
-                price: 500, 
-                isClothing: false, 
-                images: [
-                    'images/content/shop/2.png',
-                    'https://placehold.co/428x220/E8454D/white?text=Носки+вид+2'
-                ],
-                category: 'clothes' 
-            },
-            { 
-                id: 3, 
-                name: 'Подвес на рюкзак "Микос Team"', 
-                desc: 'Современный аксессуар', 
-                price: 900, 
-                isClothing: false, 
-                images: [
-                    'images/content/shop/3.png',
-                    'https://placehold.co/428x220/5A74A8/white?text=Подвес+вид+2',
-                    'https://placehold.co/428x220/2A3D5E/white?text=Подвес+вид+3'
-                ],
-                category: 'accessories' 
-            },
-            { 
-                id: 4, 
-                name: 'Футболка', 
-                desc: 'Хлопковая футболка', 
-                price: 2500, 
-                isClothing: true, 
-                images: [
-                    'images/content/shop/5.png',
-                    'images/content/shop/1.png'
-                ],
-                category: 'clothes' 
-            },
-            { 
-                id: 5, 
-                name: 'Кружка театральная', 
-                desc: 'Фарфор', 
-                price: 1200, 
-                isClothing: false, 
-                images: [
-                    'https://placehold.co/428x220/2A3D5E/white?text=Кружка',
-                    'https://placehold.co/428x220/4A6294/white?text=Кружка+вид+2',
-                    'https://placehold.co/428x220/E8454D/white?text=Кружка+вид+3'
-                ],
-                category: 'tableware' 
-            },
-            { 
-                id: 6, 
-                name: 'Магнит символ', 
-                desc: 'Сувенирный магнит', 
-                price: 450, 
-                isClothing: false, 
-                images: [
-                    'https://placehold.co/428x220/4A6294/white?text=Магнит',
-                    'https://placehold.co/428x220/2A3D5E/white?text=Магнит+вид+2'
-                ],
-                category: 'souvenirs' 
-            },
-            { 
-                id: 7, 
-                name: 'Сумка шоппер', 
-                desc: 'Эко-сумка', 
-                price: 1800, 
-                isClothing: false, 
-                images: [
-                    'https://placehold.co/428x220/5A74A8/white?text=Сумка',
-                    'https://placehold.co/428x220/2A3D5E/white?text=Сумка+вид+2'
-                ],
-                category: 'accessories' 
-            },
-            { 
-                id: 8, 
-                name: 'Программа спектакля', 
-                desc: 'Иллюстрированная', 
-                price: 350, 
-                isClothing: false, 
-                images: [
-                    'https://placehold.co/428x220/2A3D5E/white?text=Программа',
-                    'https://placehold.co/428x220/4A6294/white?text=Программа+вид+2',
-                    'https://placehold.co/428x220/E8454D/white?text=Программа+вид+3',
-                    'https://placehold.co/428x220/5A74A8/white?text=Программа+вид+4'
-                ],
-                category: 'printed' 
-            }
-        ];
-
-        // ===== ДАННЫЕ КОМАНДЫ ДЛЯ МОДАЛКИ (как в team.html) =====
-        const teamMembersData = {
-            'Сергей Давыдов': {
-                name: 'Сергей Давыдов',
-                nickname: 'Паганель',
-                photo: 'images/content/actors/Давыдов-3.jpg',
-                position: 'Художественный руководитель / Актер',
-                bio: 'Выпускник ГИТИСа (мастерская П. Фоменко, 1995). Основатель театра «Микос». Разработал уникальную систему актерского тренинга. Лауреат трех премий «Золотая маска». Владеет пантомимой, жонглированием и акробатикой.',
-                performances: [
-                    '«Гамлет» — Гамлет',
-                    '«Вишневый сад» — Лопахин',
-                    '«Три сестры» — Вершинин',
-                    '«Ревизор» — Хлестаков',
-                    '«Мастер и Маргарита» — Мастер'
-                ]
-            },
-            'Ксения Иванова': {
-                name: 'Ксения Иванова',
-                nickname: 'Муза',
-                photo: 'images/content/actors/Иванова-3.jpg',
-                position: 'Актриса, директор, продюсер',
-                bio: 'Выпускница Школы-студии МХАТ (2008). В театре «Микос» с 2010 года. Обладательница уникального пластического дара. Лауреат «Золотой маски» за роль Нины Заречной (2015).',
-                performances: [
-                    '«Чайка» — Нина Заречная',
-                    '«Анна Каренина» — Анна',
-                    '«Три сестры» — Маша',
-                    '«Дядя Ваня» — Елена',
-                    '«Мастер и Маргарита» — Маргарита'
-                ]
-            },
-            'Максим Гамаюнов': {
-                name: 'Максим Гамаюнов',
-                nickname: 'Гам',
-                photo: 'images/content/actors/Гамаюнов-3.jpg',
-                position: 'Актёр, музыкант',
-                bio: 'Окончил РАМ им. Гнесиных по классу аккордеона. Играет на 7 инструментах. В спектаклях создает живое музыкальное сопровождение. С 2015 года в труппе театра.',
-                performances: [
-                    '«Пиковая дама» — Шарманщик',
-                    '«Снежная королева» — Сказочник',
-                    '«Дон Жуан» — Лепорелло',
-                    '«Ревизор» — Бобчинский'
-                ]
-            },
-            'Тотраз Циукаев': {
-                name: 'Тотраз Циукаев',
-                nickname: 'Тот',
-                photo: 'images/content/actors/Циукаев-3.jpg',
-                position: 'Актёр, каскадер',
-                bio: 'До прихода в театр работал в Цирке дю Солей. Владеет жонглированием, эквилибром, сценическим фехтованием. В театре с 2018 года. Мастер трюковых сцен.',
-                performances: [
-                    '«Ромео и Джульетта» — Меркуцио',
-                    '«Слуга двух господ» — Труффальдино',
-                    '«Мастер и Маргарита» — Кот Бегемот',
-                    '«Сон в летнюю ночь» — Пэк'
-                ]
-            }
-        };
-
-        // ===== СОСТОЯНИЕ =====
-        let currentPerformance = null;
-        let selectedSession = null;
-        let currentMonthFilter = 'all';
-        
-        let cartItems = [];
-        let currentProduct = null;
-        let editingIndex = -1;
-        let returnToContacts = false;
-
-        // 🔥 СОСТОЯНИЕ ГАЛЕРЕИ
-        let galleryImages = [];
-        let currentGalleryIndex = 0;
-
-        // ===== ГАЛЕРЕЯ ИЗОБРАЖЕНИЙ =====
-        const productGallery = document.getElementById('productGallery');
-        const galleryMainImage = document.getElementById('galleryMainImage');
-        const galleryPrevBtn = document.getElementById('galleryPrevBtn');
-        const galleryNextBtn = document.getElementById('galleryNextBtn');
-        const galleryCloseBtn = document.getElementById('galleryCloseBtn');
-        const galleryThumbnails = document.getElementById('galleryThumbnails');
-        const galleryCounter = document.getElementById('galleryCounter');
-        const galleryContainer = document.getElementById('galleryContainer');
-
-        function openGallery(images) {
-            if (!images || images.length === 0) return;
-            
-            galleryImages = images;
-            currentGalleryIndex = 0;
-            
-            updateGalleryImage();
-            renderThumbnails();
-            updateCounter();
-            updateNavButtons();
-            
-            productGallery.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeGallery() {
-            productGallery.classList.remove('active');
-            document.body.style.overflow = '';
-            galleryImages = [];
-            currentGalleryIndex = 0;
-        }
-
-        function updateGalleryImage() {
-            if (galleryImages.length > 0) {
-                galleryMainImage.src = galleryImages[currentGalleryIndex];
-                galleryMainImage.alt = `Фото ${currentGalleryIndex + 1}`;
-            }
-        }
-
-        function renderThumbnails() {
-            galleryThumbnails.innerHTML = '';
-            
-            if (galleryImages.length <= 1) {
-                galleryThumbnails.style.display = 'none';
-                return;
-            }
-            
-            galleryThumbnails.style.display = 'flex';
-            
-            galleryImages.forEach((img, index) => {
-                const thumb = document.createElement('div');
-                thumb.className = `gallery-thumb ${index === currentGalleryIndex ? 'active' : ''}`;
-                thumb.innerHTML = `<img src="${img}" alt="Миниатюра ${index + 1}">`;
-                thumb.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    goToImage(index);
-                });
-                galleryThumbnails.appendChild(thumb);
-            });
-        }
-
-        function updateCounter() {
-            if (galleryImages.length > 1) {
-                galleryCounter.textContent = `${currentGalleryIndex + 1} / ${galleryImages.length}`;
-                galleryCounter.style.display = 'block';
-            } else {
-                galleryCounter.style.display = 'none';
-            }
-        }
-
-        function updateNavButtons() {
-            if (galleryImages.length <= 1) {
-                galleryPrevBtn.style.display = 'none';
-                galleryNextBtn.style.display = 'none';
-            } else {
-                galleryPrevBtn.style.display = 'flex';
-                galleryNextBtn.style.display = 'flex';
-            }
-        }
-
-        function goToImage(index) {
-            if (index < 0 || index >= galleryImages.length) return;
-            currentGalleryIndex = index;
-            updateGalleryImage();
-            renderThumbnails();
-            updateCounter();
-        }
-
-        function nextImage() {
-            if (galleryImages.length === 0) return;
-            currentGalleryIndex = (currentGalleryIndex + 1) % galleryImages.length;
-            updateGalleryImage();
-            renderThumbnails();
-            updateCounter();
-        }
-
-        function prevImage() {
-            if (galleryImages.length === 0) return;
-            currentGalleryIndex = (currentGalleryIndex - 1 + galleryImages.length) % galleryImages.length;
-            updateGalleryImage();
-            renderThumbnails();
-            updateCounter();
-        }
-
-        // Обработчики галереи
-        if (galleryPrevBtn) {
-            galleryPrevBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                prevImage();
-            });
-        }
-        
-        if (galleryNextBtn) {
-            galleryNextBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                nextImage();
-            });
-        }
-        
-        if (galleryCloseBtn) {
-            galleryCloseBtn.addEventListener('click', closeGallery);
-        }
-        
-        if (productGallery) {
-            productGallery.addEventListener('click', (e) => {
-                if (e.target === productGallery) {
-                    closeGallery();
-                }
-            });
-        }
-
-        // Клавиатурная навигация
-        document.addEventListener('keydown', (e) => {
-            if (!productGallery || !productGallery.classList.contains('active')) return;
-            
-            switch(e.key) {
-                case 'Escape':
-                    closeGallery();
-                    break;
-                case 'ArrowLeft':
-                    prevImage();
-                    break;
-                case 'ArrowRight':
-                    nextImage();
-                    break;
-            }
-        });
-
-        // Свайпы для мобильных
-        let touchStartX = 0;
-        let touchEndX = 0;
-
-        if (galleryContainer) {
-            galleryContainer.addEventListener('touchstart', (e) => {
-                touchStartX = e.changedTouches[0].screenX;
-            }, { passive: true });
-
-            galleryContainer.addEventListener('touchend', (e) => {
-                touchEndX = e.changedTouches[0].screenX;
-                handleSwipe();
-            }, { passive: true });
-        }
-
-        function handleSwipe() {
-            const swipeThreshold = 50;
-            const diff = touchStartX - touchEndX;
-            
-            if (Math.abs(diff) > swipeThreshold) {
-                if (diff > 0) {
-                    nextImage();
-                } else {
-                    prevImage();
-                }
-            }
-        }
-
-        // ===== МОДАЛКА КОМАНДЫ =====
-        const teamModal = document.getElementById('teamModal');
-        const teamModalBody = document.getElementById('teamModalBody');
-        const teamModalClose = document.getElementById('teamModalClose');
-
-        function closeTeamModal() {
-            if (teamModal) {
-                teamModal.classList.remove('active');
-                document.body.style.overflow = '';
-            }
-        }
-
-        function openTeamModal(memberName) {
-            const data = teamMembersData[memberName];
-            if (!data || !teamModal || !teamModalBody) return;
-            
-            const nicknameHtml = data.nickname ? `<div class="team-modal-nickname">«${data.nickname}»</div>` : '';
-            const performancesHtml = data.performances ? data.performances.map(p => `
-                <div class="team-performance-item">
-                    <span class="team-performance-bullet">•</span>
-                    <span class="team-performance-text">${p}</span>
-                </div>
-            `).join('') : '';
-
-            teamModalBody.innerHTML = `
-                <div class="team-modal-photo">
-                    <img src="${data.photo}" alt="${data.name}" loading="lazy">
-                </div>
-                <div class="team-modal-info">
-                    <div class="team-modal-name">${data.name}</div>
-                    ${nicknameHtml}
-                    <div class="team-modal-position">${data.position}</div>
-                    
-                    ${data.bio ? `
-                    <div class="team-modal-section-title">Творческий путь</div>
-                    <div class="team-modal-bio">${data.bio}</div>
-                    ` : ''}
-                    
-                    ${data.performances && data.performances.length ? `
-                    <div class="team-modal-section-title">Спектакли в репертуаре</div>
-                    <div class="team-performances-list">
-                        ${performancesHtml}
-                    </div>
-                    ` : ''}
-                </div>
-            `;
-            
-            teamModal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        // Обработчики закрытия модалки команды
-        if (teamModalClose) {
-            teamModalClose.addEventListener('click', closeTeamModal);
-        }
-        if (teamModal) {
-            teamModal.addEventListener('click', (e) => {
-                if (e.target === teamModal) closeTeamModal();
-            });
-        }
-
-        // ===== РЕНДЕР СПЕКТАКЛЕЙ =====
-        function renderUpcomingScroll() {
-            const wrapper = document.getElementById('upcomingScroll');
-            if (!wrapper) return;
-            wrapper.innerHTML = '';
-            allPerformances.forEach(p => {
-                const card = document.createElement('div');
-                card.className = 'performance-card';
-                card.innerHTML = `
-                    <img class="performance-img" src="${p.img}" alt="${p.name}">
-                    <div class="performance-content">
-                        <div class="performance-tags">
-                            <span class="tag tag-age">${p.age}</span>
-                            <span class="tag tag-time">${p.time}</span>
-                            <span class="tag tag-tickets">${p.tickets ? 'Есть билеты' : 'Билетов нет'}</span>
-                        </div>
-                        <h3 class="performance-name">${p.name}</h3>
-                        <div class="performance-date">${p.date}</div>
-                        <p class="performance-desc">${p.desc}</p>
-                        <div class="event-venue"><i class="fas fa-map-marker-alt"></i><span>${p.venue}</span></div>
-                        <div class="performance-btns">
-                            <button class="btn-details" data-id="${p.id}">Подробнее</button>
-                            <button class="btn-buy" data-id="${p.id}">Купить билет</button>
-                        </div>
-                    </div>
-                `;
-                wrapper.appendChild(card);
-            });
-            attachPerformanceEvents();
-        }
-
-        function renderAllPlaysScroll() {
-            const wrapper = document.getElementById('allPlaysScroll');
-            if (!wrapper) return;
-            wrapper.innerHTML = '';
-            allPerformances.forEach(p => {
-                const card = document.createElement('div');
-                card.className = 'performance-card';
-                card.innerHTML = `
-                    <img class="performance-img" src="${p.img}" alt="${p.name}">
-                    <div class="performance-content">
-                        <div class="performance-tags">
-                            <span class="tag tag-age">${p.age}</span>
-                            <span class="tag tag-time">${p.time}</span>
-                        </div>
-                        <h3 class="performance-name">${p.name}</h3>
-                        <p class="performance-desc">${p.desc}</p>
-                        <div class="performance-btns">
-                            <button class="btn-details" data-id="${p.id}">Подробнее</button>
-                            <button class="btn-buy" data-id="${p.id}">Купить билет</button>
-                        </div>
-                    </div>
-                `;
-                wrapper.appendChild(card);
-            });
-            attachPerformanceEvents();
-        }
-
-        function attachPerformanceEvents() {
-            document.querySelectorAll('.btn-details').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    const id = e.currentTarget.dataset.id;
-                    window.location.href = `performance.html?id=${id}`;
-                });
-            });
-            document.querySelectorAll('.btn-buy').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    const id = parseInt(e.currentTarget.dataset.id);
-                    const perf = allPerformances.find(p => p.id === id);
-                    if (perf) openSessionModal(perf);
-                });
-            });
-        }
-
-        // ===== РЕНДЕР МАГАЗИНА С КЛИКАБЕЛЬНЫМИ КАРТОЧКАМИ =====
-function renderMerchScroll() {
-    const wrapper = document.getElementById('merchScroll');
-    if (!wrapper) return;
-    wrapper.innerHTML = '';
+(function() {
+    'use strict';
     
-    products.forEach(item => {
-        const card = document.createElement('div');
-        card.className = 'merch-card';
-        // Используем первое изображение как основное
-        const mainImage = item.images && item.images.length > 0 ? item.images[0] : 'https://placehold.co/428x220/cccccc/white?text=Нет+фото';
-        const hasMultipleImages = item.images && item.images.length > 1;
-        
-        card.innerHTML = `
-            <div class="merch-img-wrapper">
-                <img class="merch-img" src="${mainImage}" alt="${item.name}">
-                ${hasMultipleImages ? `<span class="merch-photo-count"><i class="fas fa-images"></i> ${item.images.length}</span>` : ''}
-            </div>
-            <div class="merch-content">
-                <h3 class="merch-name">${item.name}</h3>
-                <div class="merch-price">${item.price.toLocaleString('ru-RU')} ₽</div>
-                <button class="merch-btn" data-id="${item.id}">Купить</button>
-            </div>
-        `;
-        
-        // 🔥 КЛИК ПО КАРТОЧКЕ ОТКРЫВАЕТ ГАЛЕРЕЮ
-        card.addEventListener('click', (e) => {
-            // Не открываем галерею, если кликнули по кнопке "Купить"
-            if (e.target.classList.contains('merch-btn')) return;
-            
-            if (item.images && item.images.length > 0) {
-                openGallery(item.images);
-            }
-        });
-        
-        wrapper.appendChild(card);
-    });
+    // 🔥 ИСПОЛЬЗУЕМ ДАННЫЕ ИЗ tour-data.js
+    // Локальные массивы allPerformances и extendedSessions больше не нужны!
     
-    // Обработчики кнопок "Купить"
-    document.querySelectorAll('.merch-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            e.stopPropagation(); // Предотвращаем открытие галереи
-            const id = parseInt(e.currentTarget.dataset.id);
-            const product = products.find(p => p.id === id);
-            if (product) openProductModal(product);
+    // ===== ДАННЫЕ ТОВАРОВ (остаются локальными) =====
+    const products = [
+        { id: 1, name: 'Футболка', desc: 'Хлопковая футболка с логотипом театра', price: 2500, isClothing: true, images: ['images/content/shop/1.png', 'images/content/shop/5.png'], category: 'clothes' },
+        { id: 2, name: 'Носки', desc: 'Принт с логотипом театра', price: 500, isClothing: false, images: ['images/content/shop/2.png'], category: 'clothes' },
+        { id: 3, name: 'Подвес на рюкзак "Микос Team"', desc: 'Современный аксессуар', price: 900, isClothing: false, images: ['images/content/shop/3.png'], category: 'accessories' },
+        { id: 4, name: 'Футболка', desc: 'Хлопковая футболка', price: 2500, isClothing: true, images: ['images/content/shop/5.png', 'images/content/shop/1.png'], category: 'clothes' },
+        { id: 5, name: 'Кружка театральная', desc: 'Фарфор', price: 1200, isClothing: false, images: ['https://placehold.co/428x220/2A3D5E/white?text=Кружка'], category: 'tableware' },
+        { id: 6, name: 'Магнит символ', desc: 'Сувенирный магнит', price: 450, isClothing: false, images: ['https://placehold.co/428x220/4A6294/white?text=Магнит'], category: 'souvenirs' },
+        { id: 7, name: 'Сумка шоппер', desc: 'Эко-сумка', price: 1800, isClothing: false, images: ['https://placehold.co/428x220/5A74A8/white?text=Сумка'], category: 'accessories' },
+        { id: 8, name: 'Программа спектакля', desc: 'Иллюстрированная', price: 350, isClothing: false, images: ['https://placehold.co/428x220/2A3D5E/white?text=Программа'], category: 'printed' }
+    ];
+
+    // ===== ДАННЫЕ КОМАНДЫ ДЛЯ МОДАЛКИ =====
+    const teamMembersData = {
+        'Сергей Давыдов': { name: 'Сергей Давыдов', nickname: 'Паганель', photo: 'images/content/actors/Давыдов-3.jpg', position: 'Художественный руководитель / Актер', bio: 'Выпускник ГИТИСа (мастерская П. Фоменко, 1995). Основатель театра «Микос». Разработал уникальную систему актерского тренинга. Лауреат трех премий «Золотая маска». Владеет пантомимой, жонглированием и акробатикой.', performances: ['«Гамлет» — Гамлет', '«Вишневый сад» — Лопахин', '«Три сестры» — Вершинин', '«Ревизор» — Хлестаков', '«Мастер и Маргарита» — Мастер'] },
+        'Ксения Иванова': { name: 'Ксения Иванова', nickname: 'Муза', photo: 'images/content/actors/Иванова-3.jpg', position: 'Актриса, директор, продюсер', bio: 'Выпускница Школы-студии МХАТ (2008). В театре «Микос» с 2010 года. Обладательница уникального пластического дара. Лауреат «Золотой маски» за роль Нины Заречной (2015).', performances: ['«Чайка» — Нина Заречная', '«Анна Каренина» — Анна', '«Три сестры» — Маша', '«Дядя Ваня» — Елена', '«Мастер и Маргарита» — Маргарита'] },
+        'Максим Гамаюнов': { name: 'Максим Гамаюнов', nickname: 'Гам', photo: 'images/content/actors/Гамаюнов-3.jpg', position: 'Актёр, музыкант', bio: 'Окончил РАМ им. Гнесиных по классу аккордеона. Играет на 7 инструментах. В спектаклях создает живое музыкальное сопровождение. С 2015 года в труппе театра.', performances: ['«Пиковая дама» — Шарманщик', '«Снежная королева» — Сказочник', '«Дон Жуан» — Лепорелло', '«Ревизор» — Бобчинский'] },
+        'Тотраз Циукаев': { name: 'Тотраз Циукаев', nickname: 'Тот', photo: 'images/content/actors/Циукаев-3.jpg', position: 'Актёр, каскадер', bio: 'До прихода в театр работал в Цирке дю Солей. Владеет жонглированием, эквилибром, сценическим фехтованием. В театре с 2018 года. Мастер трюковых сцен.', performances: ['«Ромео и Джульетта» — Меркуцио', '«Слуга двух господ» — Труффальдино', '«Мастер и Маргарита» — Кот Бегемот', '«Сон в летнюю ночь» — Пэк'] }
+    };
+
+    // ===== СОСТОЯНИЕ =====
+    let currentEvent = null, selectedSession = null, currentMonthFilter = 'all';
+    let cartItems = [], currentProduct = null, editingIndex = -1;
+    let galleryImages = [], currentGalleryIndex = 0;
+
+    // ===== ГАЛЕРЕЯ ИЗОБРАЖЕНИЙ =====
+    const productGallery = document.getElementById('productGallery');
+    const galleryMainImage = document.getElementById('galleryMainImage');
+    const galleryPrevBtn = document.getElementById('galleryPrevBtn');
+    const galleryNextBtn = document.getElementById('galleryNextBtn');
+    const galleryCloseBtn = document.getElementById('galleryCloseBtn');
+    const galleryThumbnails = document.getElementById('galleryThumbnails');
+    const galleryCounter = document.getElementById('galleryCounter');
+    const galleryContainer = document.getElementById('galleryContainer');
+
+    function openGallery(images) {
+        if (!images?.length) return;
+        galleryImages = images; currentGalleryIndex = 0;
+        updateGalleryImage(); renderThumbnails(); updateCounter(); updateNavButtons();
+        productGallery.classList.add('active'); document.body.style.overflow = 'hidden';
+    }
+    function closeGallery() { productGallery.classList.remove('active'); document.body.style.overflow = ''; galleryImages = []; currentGalleryIndex = 0; }
+    function updateGalleryImage() { if (galleryImages.length) { galleryMainImage.src = galleryImages[currentGalleryIndex]; galleryMainImage.alt = `Фото ${currentGalleryIndex + 1}`; } }
+    function renderThumbnails() {
+        galleryThumbnails.innerHTML = '';
+        if (galleryImages.length <= 1) { galleryThumbnails.style.display = 'none'; return; }
+        galleryThumbnails.style.display = 'flex';
+        galleryImages.forEach((img, i) => {
+            const thumb = document.createElement('div');
+            thumb.className = `gallery-thumb ${i === currentGalleryIndex ? 'active' : ''}`;
+            thumb.innerHTML = `<img src="${img}" alt="Миниатюра ${i+1}">`;
+            thumb.addEventListener('click', (e) => { e.stopPropagation(); goToImage(i); });
+            galleryThumbnails.appendChild(thumb);
         });
+    }
+    function updateCounter() { if (galleryImages.length > 1) { galleryCounter.textContent = `${currentGalleryIndex+1} / ${galleryImages.length}`; galleryCounter.style.display = 'block'; } else galleryCounter.style.display = 'none'; }
+    function updateNavButtons() { if (galleryImages.length <= 1) { galleryPrevBtn.style.display = 'none'; galleryNextBtn.style.display = 'none'; } else { galleryPrevBtn.style.display = 'flex'; galleryNextBtn.style.display = 'flex'; } }
+    function goToImage(i) { if (i < 0 || i >= galleryImages.length) return; currentGalleryIndex = i; updateGalleryImage(); renderThumbnails(); updateCounter(); }
+    function nextImage() { if (!galleryImages.length) return; currentGalleryIndex = (currentGalleryIndex + 1) % galleryImages.length; updateGalleryImage(); renderThumbnails(); updateCounter(); }
+    function prevImage() { if (!galleryImages.length) return; currentGalleryIndex = (currentGalleryIndex - 1 + galleryImages.length) % galleryImages.length; updateGalleryImage(); renderThumbnails(); updateCounter(); }
+
+    if (galleryPrevBtn) galleryPrevBtn.addEventListener('click', (e) => { e.stopPropagation(); prevImage(); });
+    if (galleryNextBtn) galleryNextBtn.addEventListener('click', (e) => { e.stopPropagation(); nextImage(); });
+    if (galleryCloseBtn) galleryCloseBtn.addEventListener('click', closeGallery);
+    if (productGallery) productGallery.addEventListener('click', (e) => { if (e.target === productGallery) closeGallery(); });
+
+    document.addEventListener('keydown', (e) => {
+        if (!productGallery?.classList.contains('active')) return;
+        if (e.key === 'Escape') closeGallery(); else if (e.key === 'ArrowLeft') prevImage(); else if (e.key === 'ArrowRight') nextImage();
     });
-}
 
-        // ===== МОДАЛКА СЕАНСОВ =====
-        function openSessionModal(performance) {
-            currentPerformance = performance;
-            selectedSession = null;
-            currentMonthFilter = 'all';
-            
-            document.getElementById('selectedPlayTitle').textContent = performance.name;
-            document.getElementById('modalPerformanceName').textContent = `Выбор сеанса: ${performance.name}`;
-            
-            renderMonthFilter();
-            renderSessionsList();
-            
-            document.getElementById('confirmSessionBtn').disabled = true;
-            document.getElementById('sessionModal').classList.add('active');
-            document.body.style.overflow = 'hidden';
+    let touchStartX = 0, touchEndX = 0;
+    if (galleryContainer) {
+        galleryContainer.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
+        galleryContainer.addEventListener('touchend', (e) => { touchEndX = e.changedTouches[0].screenX; handleSwipe(); }, { passive: true });
+    }
+    function handleSwipe() { const diff = touchStartX - touchEndX; if (Math.abs(diff) > 50) { if (diff > 0) nextImage(); else prevImage(); } }
+
+    // ===== МОДАЛКА КОМАНДЫ =====
+    const teamModal = document.getElementById('teamModal'), teamModalBody = document.getElementById('teamModalBody'), teamModalClose = document.getElementById('teamModalClose');
+    function closeTeamModal() { if (teamModal) { teamModal.classList.remove('active'); document.body.style.overflow = ''; } }
+    function openTeamModal(memberName) {
+        const data = teamMembersData[memberName]; if (!data || !teamModal || !teamModalBody) return;
+        const nicknameHtml = data.nickname ? `<div class="team-modal-nickname">«${data.nickname}»</div>` : '';
+        const perfHtml = data.performances?.map(p => `<div class="team-performance-item"><span class="team-performance-bullet">•</span><span class="team-performance-text">${p}</span></div>`).join('') || '';
+        teamModalBody.innerHTML = `<div class="team-modal-photo"><img src="${data.photo}" alt="${data.name}" loading="lazy"></div><div class="team-modal-info"><div class="team-modal-name">${data.name}</div>${nicknameHtml}<div class="team-modal-position">${data.position}</div>${data.bio ? `<div class="team-modal-section-title">Творческий путь</div><div class="team-modal-bio">${data.bio}</div>` : ''}${data.performances?.length ? `<div class="team-modal-section-title">Спектакли в репертуаре</div><div class="team-performances-list">${perfHtml}</div>` : ''}</div>`;
+        teamModal.classList.add('active'); document.body.style.overflow = 'hidden';
+    }
+    if (teamModalClose) teamModalClose.addEventListener('click', closeTeamModal);
+    if (teamModal) teamModal.addEventListener('click', (e) => { if (e.target === teamModal) closeTeamModal(); });
+
+    // =============================================
+    // 🔥 ЕДИНАЯ ФУНКЦИЯ ОБРАБОТКИ КНОПОК "КУПИТЬ"
+    // Определяет действие по атрибуту:
+    // • data-event-id → сразу переход на checkout
+    // • data-performance-id → открывает модалку выбора даты
+    // =============================================
+    window.handleBuyClick = function(btn) {
+        const eventId = btn.dataset.eventId;
+        const perfId = btn.dataset.performanceId;
+        if (eventId) {
+            goToCheckout(eventId);
+        } else if (perfId) {
+            openSessionModalByPerfId(parseInt(perfId));
         }
+    };
 
-        window.closeSessionModal = function() {
-            document.getElementById('sessionModal').classList.remove('active');
-            document.body.style.overflow = '';
-            currentPerformance = null;
-            selectedSession = null;
+    // =============================================
+    // ЕДИНАЯ ФУНКЦИЯ ПЕРЕХОДА К ОФОРМЛЕНИЮ
+    // =============================================
+    window.goToCheckout = function(eventId) {
+        const event = TOUR_SCHEDULE.find(ev => ev.id === eventId);
+        if (!event) { console.error('Событие не найдено:', eventId); return; }
+        const orderInfo = {
+            title: event.title, dateTime: formatEventDate(event.date, event.time), hall: event.venue,
+            address: event.address, price: event.price ? `от ${event.price.min.toLocaleString('ru-RU')} ₽` : 'Уточняйте',
+            poster: event.image, eventId: event.id, performanceId: event.performanceId
         };
+        localStorage.setItem('selectedPerformance', JSON.stringify(orderInfo));
+        window.location.href = 'checkout.html';
+    };
 
-        function renderMonthFilter() {
-            const container = document.getElementById('dateFilterContainer');
-            const sessionsForPerf = extendedSessions.filter(s => s.performanceId === currentPerformance.id);
-            const months = [...new Set(sessionsForPerf.map(s => s.month))];
-            
-            let html = `<button class="filter-btn ${currentMonthFilter === 'all' ? 'active' : ''}" data-month="all">Все даты</button>`;
-            months.forEach(month => {
-                html += `<button class="filter-btn ${currentMonthFilter === month ? 'active' : ''}" data-month="${month}">${month}</button>`;
-            });
-            container.innerHTML = html;
-            
-            container.querySelectorAll('.filter-btn').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    currentMonthFilter = btn.dataset.month;
-                    renderMonthFilter();
-                    renderSessionsList();
-                });
-            });
-        }
+    // =============================================
+    // ОТКРЫТИЕ МОДАЛКИ ВЫБОРА ДАТЫ ПО ID СПЕКТАКЛЯ
+    // =============================================
+    function openSessionModalByPerfId(performanceId) {
+        const events = filterEventsByPerformance(performanceId, getUpcomingEvents(TOUR_SCHEDULE));
+        if (!events.length) { alert('На этот спектакль пока нет запланированных показов. Следите за обновлениями!'); return; }
+        openSessionModal(events[0]);
+    }
 
-        function renderSessionsList() {
-            const container = document.getElementById('sessionsListContainer');
-            let sessions = extendedSessions.filter(s => s.performanceId === currentPerformance.id);
-            
-            if (currentMonthFilter !== 'all') {
-                sessions = sessions.filter(s => s.month === currentMonthFilter);
-            }
-            
-            sessions.sort((a, b) => a.date.localeCompare(b.date));
-            
-            if (sessions.length === 0) {
-                container.innerHTML = '<div class="no-sessions"><i class="far fa-calendar-times"></i> Нет сеансов в выбранном месяце</div>';
-                return;
-            }
-            
-            let html = '';
-            sessions.forEach(session => {
-                const isSelected = selectedSession && 
-                    selectedSession.date === session.date && 
-                    selectedSession.venue === session.venue;
-                
-                html += `
-                    <div class="session-item ${isSelected ? 'selected' : ''}" data-session='${JSON.stringify(session)}'>
-                        <div class="session-info">
-                            <div class="session-date">${session.date}</div>
-                            <div class="session-meta">
-                                <span><i class="fas fa-map-marker-alt"></i> ${session.venue}</span>
-                                <span><i class="far fa-clock"></i> ${currentPerformance.time}</span>
-                            </div>
-                        </div>
-                        <div class="session-select-indicator">
-                            ${isSelected ? '<i class="fas fa-check"></i>' : ''}
-                        </div>
-                    </div>
-                `;
-            });
-            container.innerHTML = html;
-            
-            container.querySelectorAll('.session-item').forEach(item => {
-                item.addEventListener('click', () => {
-                    const sessionData = JSON.parse(item.dataset.session);
-                    selectedSession = sessionData;
-                    renderSessionsList();
-                    document.getElementById('confirmSessionBtn').disabled = false;
-                });
-            });
-        }
+    function openSessionModal(event) {
+        currentEvent = event; selectedSession = null; currentMonthFilter = 'all';
+        document.getElementById('selectedPlayTitle').textContent = event.title;
+        document.getElementById('modalPerformanceName').textContent = `Выбор сеанса: ${event.title}`;
+        renderMonthFilter(event.performanceId); renderSessionsList(event.performanceId);
+        document.getElementById('confirmSessionBtn').disabled = true;
+        document.getElementById('sessionModal').classList.add('active'); document.body.style.overflow = 'hidden';
+    }
+    window.closeSessionModal = function() { document.getElementById('sessionModal').classList.remove('active'); document.body.style.overflow = ''; currentEvent = null; selectedSession = null; };
 
-        document.getElementById('confirmSessionBtn').addEventListener('click', () => {
-            if (selectedSession && currentPerformance) {
-                const performanceData = {
-                    id: currentPerformance.id,
-                    title: currentPerformance.name,
-                    dateTime: selectedSession.date,
-                    hall: selectedSession.venue,
-                    poster: currentPerformance.img,
-                    duration: currentPerformance.time
-                };
-                localStorage.setItem('selectedPerformance', JSON.stringify(performanceData));
-                window.location.href = 'checkout.html';
-            }
+    function renderMonthFilter(performanceId) {
+        const container = document.getElementById('dateFilterContainer');
+        const events = filterEventsByPerformance(performanceId, getUpcomingEvents(TOUR_SCHEDULE));
+        const months = getEventMonths(events);
+        let html = `<button class="filter-btn ${currentMonthFilter==='all'?'active':''}" data-month="all">Все даты</button>`;
+        months.forEach(m => { html += `<button class="filter-btn ${currentMonthFilter===`${m.name}-${m.year}`?'active':''}" data-month="${m.name}-${m.year}">${m.name} ${m.year}</button>`; });
+        container.innerHTML = html;
+        container.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => { currentMonthFilter = btn.dataset.month; renderMonthFilter(performanceId); renderSessionsList(performanceId); });
         });
+    }
 
-        document.getElementById('sessionModal').addEventListener('click', (e) => {
-            if (e.target.classList.contains('modal-overlay')) {
-                closeSessionModal();
-            }
+    function renderSessionsList(performanceId) {
+        const container = document.getElementById('sessionsListContainer');
+        let events = filterEventsByPerformance(performanceId, getUpcomingEvents(TOUR_SCHEDULE));
+        if (currentMonthFilter !== 'all') events = filterEventsByMonth(events, currentMonthFilter);
+        events = sortEventsByDate(events);
+        if (!events.length) { container.innerHTML = '<div class="no-sessions"><i class="far fa-calendar-times"></i> Нет сеансов в выбранном периоде</div>'; return; }
+        container.innerHTML = events.map(ev => {
+            const isSelected = selectedSession?.id === ev.id;
+            return `<div class="session-item ${isSelected?'selected':''}" data-event-id="${ev.id}"><div class="session-info"><div class="session-date">${formatEventDate(ev.date, ev.time)}</div><div class="session-meta"><span><i class="fas fa-map-marker-alt"></i> ${ev.venue}${ev.address?', '+ev.address.split(',')[0]:''}</span><span><i class="far fa-clock"></i> ${ev.duration}</span></div>${ev.price?`<div class="session-price">от ${ev.price.min.toLocaleString('ru-RU')} ₽</div>`:''}</div><div class="session-select-indicator">${isSelected?'<i class="fas fa-check"></i>':''}</div></div>`;
+        }).join('');
+        container.querySelectorAll('.session-item').forEach(item => {
+            item.addEventListener('click', () => { selectedSession = TOUR_SCHEDULE.find(ev => ev.id === item.dataset.eventId); renderSessionsList(performanceId); document.getElementById('confirmSessionBtn').disabled = false; });
         });
+    }
 
-        // ===== МОДАЛКА ТОВАРА =====
-        function openProductModal(product) {
-            currentProduct = product;
-            editingIndex = -1;
-            renderProductModalContent();
-            
-            const footer = document.getElementById('productModalFooter');
-            footer.innerHTML = `
-                <div class="modal-buttons">
-                    <button class="modal-btn btn-outline-modal" id="moreItemsBtn">Выбрать еще</button>
-                    <button class="modal-btn btn-primary-modal" id="buyNowBtn">Купить</button>
-                </div>
-            `;
-            returnToContacts = false;
-            
-            document.getElementById('modalProductName').textContent = product.name;
-            document.getElementById('productModal').classList.add('active');
-            document.body.style.overflow = 'hidden';
-            
-            document.getElementById('moreItemsBtn').addEventListener('click', () => {
-                if (addCurrentToCart()) closeAllModals();
-            });
-            document.getElementById('buyNowBtn').addEventListener('click', () => {
-                if (addCurrentToCart()) {
-                    closeAllModals();
-                    openContactsModal();
-                }
-            });
-        }
+    document.getElementById('confirmSessionBtn').addEventListener('click', () => { if (selectedSession) goToCheckout(selectedSession.id); });
+    document.getElementById('sessionModal').addEventListener('click', (e) => { if (e.target.classList.contains('modal-overlay')) closeSessionModal(); });
 
-        window.closeProductModal = function() {
-            document.getElementById('productModal').classList.remove('active');
-            document.body.style.overflow = '';
-        };
-
-        function renderProductModalContent() {
-            const container = document.getElementById('productModalContent');
-            let html = '';
-            
-            if (cartItems.length > 0 && editingIndex === -1) {
-                html += `<div style="font-size:18px; font-weight:700; margin-bottom:16px;">Корзина</div>`;
-                let total = 0;
-                cartItems.forEach(item => { total += item.price * item.quantity; });
-                
-                html += `<div class="cart-summary">`;
-                cartItems.forEach((item, idx) => {
-                    const itemTotal = item.price * item.quantity;
-                    const sizeText = item.size ? ` (${item.size})` : '';
-                    html += `
-                        <div class="cart-item">
-                            <div class="cart-item-info">
-                                <span class="cart-item-name">${item.name}${sizeText}</span>
-                                <span class="cart-item-details">${item.quantity} шт. × ${item.price.toLocaleString()} ₽</span>
-                            </div>
-                            <div class="cart-item-actions">
-                                <button class="edit-item" data-index="${idx}"><i class="fas fa-pencil-alt"></i></button>
-                                <button class="delete-item" data-index="${idx}"><i class="fas fa-trash-alt"></i></button>
-                            </div>
-                            <div class="cart-item-price">${itemTotal.toLocaleString()} ₽</div>
-                        </div>`;
-                });
-                html += `<div class="total-row"><span>Итого</span><span>${total.toLocaleString()} ₽</span></div></div>`;
-            }
-            
-            html += `<div class="form-group"><label>Количество</label><input type="number" id="productQuantity" min="1" value="1" class="form-input"></div>`;
-            
-            if (currentProduct && currentProduct.isClothing) {
-                html += `<div class="form-group"><label>Размер</label>
-                    <select id="productSize" class="form-select">
-                        <option value="S">S</option>
-                        <option value="M" selected>M</option>
-                        <option value="L">L</option>
-                        <option value="XL">XL</option>
-                    </select>
-                </div>`;
-            }
-            
-            container.innerHTML = html;
-            
-            if (cartItems.length > 0 && editingIndex === -1) {
-                document.querySelectorAll('.delete-item').forEach(btn => {
-                    btn.addEventListener('click', (e) => {
-                        const idx = parseInt(btn.dataset.index);
-                        cartItems.splice(idx, 1);
-                        renderProductModalContent();
-                    });
-                });
-                document.querySelectorAll('.edit-item').forEach(btn => {
-                    btn.addEventListener('click', (e) => {
-                        const idx = parseInt(btn.dataset.index);
-                        openEditModal(idx);
-                    });
-                });
-            }
-        }
-
-        function openEditModal(index) {
-            const item = cartItems[index];
-            if (!item) return;
-            
-            currentProduct = { 
-                id: item.id, 
-                name: item.name, 
-                price: item.price, 
-                isClothing: item.isClothing 
-            };
-            editingIndex = index;
-            renderProductModalContent();
-            
-            document.getElementById('productQuantity').value = item.quantity;
-            if (item.isClothing && document.getElementById('productSize')) {
-                document.getElementById('productSize').value = item.size || 'M';
-            }
-            
-            const footer = document.getElementById('productModalFooter');
-            footer.innerHTML = `
-                <div class="modal-buttons">
-                    <button class="modal-btn btn-outline-modal" id="cancelEditBtn">Отмена</button>
-                    <button class="modal-btn btn-primary-modal" id="saveEditBtn">Сохранить</button>
-                </div>
-            `;
-            
-            document.getElementById('modalProductName').textContent = item.name;
-            
-            document.getElementById('cancelEditBtn').addEventListener('click', () => closeAllModals());
-            document.getElementById('saveEditBtn').addEventListener('click', () => {
-                if (saveEditItem()) closeAllModals();
-            });
-        }
-
-        function addCurrentToCart() {
-            const qtyInput = document.getElementById('productQuantity');
-            if (!qtyInput) return false;
-            
-            const qty = parseInt(qtyInput.value);
-            if (qty < 1) {
-                alert('Введите количество от 1');
-                return false;
-            }
-            
-            let size = null;
-            if (currentProduct.isClothing) {
-                const sizeSelect = document.getElementById('productSize');
-                if (sizeSelect) size = sizeSelect.value;
-            }
-            
-            cartItems.push({
-                id: currentProduct.id,
-                name: currentProduct.name,
-                price: currentProduct.price,
-                quantity: qty,
-                size: size,
-                isClothing: currentProduct.isClothing
-            });
-            
-            return true;
-        }
-
-        function saveEditItem() {
-            if (editingIndex === -1) return false;
-            
-            const qtyInput = document.getElementById('productQuantity');
-            if (!qtyInput) return false;
-            
-            const qty = parseInt(qtyInput.value);
-            if (qty < 1) {
-                alert('Введите количество от 1');
-                return false;
-            }
-            
-            let size = null;
-            if (currentProduct.isClothing) {
-                const sizeSelect = document.getElementById('productSize');
-                if (sizeSelect) size = sizeSelect.value;
-            }
-            
-            cartItems[editingIndex] = {
-                ...cartItems[editingIndex],
-                quantity: qty,
-                size: size
-            };
-            
-            return true;
-        }
-
-        // ===== МОДАЛКА КОНТАКТОВ =====
-        function openContactsModal() {
-            if (cartItems.length === 0) {
-                alert("Корзина пуста");
-                return;
-            }
-            updateOrderSummary();
-            
-            document.getElementById('contactName').value = '';
-            document.getElementById('contactPhone').value = '';
-            document.getElementById('contactEmail').value = '';
-            document.getElementById('contactMethod').value = '';
-            
-            document.getElementById('contactsModal').classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        window.closeContactsModal = function() {
-            document.getElementById('contactsModal').classList.remove('active');
-            document.body.style.overflow = '';
-        };
-
-        function updateOrderSummary() {
-            const container = document.getElementById('orderSummaryFull');
-            if (!container) return;
-            
-            if (cartItems.length === 0) {
-                container.innerHTML = '<div style="text-align:center; padding:16px; color:#5A5556;">Корзина пуста</div>';
-                return;
-            }
-            
-            let html = '', total = 0;
-            cartItems.forEach((item, idx) => {
-                const itemTotal = item.price * item.quantity;
-                total += itemTotal;
-                const sizeText = item.size ? ` (${item.size})` : '';
-                html += `
-                    <div class="cart-item">
-                        <div class="cart-item-info">
-                            <span class="cart-item-name">${item.name}${sizeText}</span>
-                            <span class="cart-item-details">${item.quantity} шт. × ${item.price.toLocaleString()} ₽</span>
-                        </div>
-                        <div class="cart-item-price">${itemTotal.toLocaleString()} ₽</div>
-                    </div>`;
-            });
-            html += `<div class="total-row"><span>Итого</span><span>${total.toLocaleString()} ₽</span></div>`;
-            container.innerHTML = html;
-        }
-
-        // 🔥 ОБРАБОТЧИК ОФОРМЛЕНИЯ ЗАКАЗА
-        document.getElementById('submitOrderBtn').addEventListener('click', () => {
-            const name = document.getElementById('contactName')?.value.trim();
-            const phone = document.getElementById('contactPhone')?.value.trim();
-            const email = document.getElementById('contactEmail')?.value.trim();
-            const method = document.getElementById('contactMethod')?.value.trim();
-            
-            if (!name || !phone || !email || !method) {
-                alert("Заполните все поля");
-                return;
-            }
-            
-            // 💾 Сохраняем данные заказа в localStorage
-            const orderData = {
-                customerName: name,
-                customerPhone: phone,
-                customerEmail: email,
-                contactMethod: method,
-                items: [...cartItems],
-                total: cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0),
-                timestamp: new Date().toISOString(),
-                source: 'index-home'
-            };
-            localStorage.setItem('mikos_order_success', JSON.stringify(orderData));
-            
-            // 🧹 Очищаем корзину
-            cartItems = [];
-            
-            // 🔄 Перенаправляем на shop.html с флагом успеха
-            window.location.href = 'shop.html?order=success';
+    // ===== РЕНДЕР СПЕКТАКЛЕЙ (использует tour-data.js) =====
+    
+    // 🔹 Ближайшие спектакли — только будущие, отсортированные
+    function renderUpcomingScroll() {
+        const wrapper = document.getElementById('upcomingScroll'); if (!wrapper) return; wrapper.innerHTML = '';
+        const upcoming = getNearestEvents(6, TOUR_SCHEDULE);
+        if (!upcoming.length) { wrapper.innerHTML = '<div style="color:#5A5556;padding:20px;">🎭 Скоро новые показы. Следите за афишей!</div>'; return; }
+        upcoming.forEach(event => {
+            const card = document.createElement('div'); card.className = 'performance-card';
+            card.innerHTML = `<img class="performance-img" src="${event.image}" alt="${event.title}"><div class="performance-content"><div class="performance-tags"><span class="tag tag-age">${event.age}</span><span class="tag tag-time">${event.duration}</span>${event.isPremiere?'<span class="tag tag-premiere">🎉</span>':''}<span class="tag tag-tickets">${event.ticketUrl?'Есть билеты':'Скоро'}</span></div><h3 class="performance-name">${event.title}</h3><div class="performance-date">${formatEventDate(event.date, event.time)}</div><p class="performance-desc">${event.description}</p><div class="event-venue"><i class="fas fa-map-marker-alt"></i><span>${event.venue}${event.address?', '+event.address.split(',')[0]:''}</span></div><div class="performance-btns"><button class="btn-details" data-performance-id="${event.performanceId}">Подробнее</button>${event.ticketUrl?`<button class="btn-buy" data-event-id="${event.id}">Купить билет</button>`:`<button class="btn-buy disabled" disabled>Скоро</button>`}</div></div>`;
+            wrapper.appendChild(card);
         });
+        attachPerformanceEvents();
+    }
 
-        document.getElementById('contactsModal').addEventListener('click', (e) => {
-            if (e.target.classList.contains('modal-overlay')) {
-                closeContactsModal();
-            }
+    // 🔹 Все спектакли — группировка по performanceId
+    function renderAllPlaysScroll() {
+        const wrapper = document.getElementById('allPlaysScroll'); if (!wrapper) return; wrapper.innerHTML = '';
+        const unique = {};
+        TOUR_SCHEDULE.forEach(ev => { if (!unique[ev.performanceId]) unique[ev.performanceId] = ev; });
+        Object.values(unique).forEach(event => {
+            const card = document.createElement('div'); card.className = 'performance-card';
+            card.innerHTML = `<img class="performance-img" src="${event.image}" alt="${event.title}"><div class="performance-content"><div class="performance-tags"><span class="tag tag-age">${event.age}</span><span class="tag tag-time">${event.duration}</span></div><h3 class="performance-name">${event.title}</h3><p class="performance-desc">${event.description}</p><div class="performance-btns"><button class="btn-details" data-performance-id="${event.performanceId}">Подробнее</button><button class="btn-buy" data-performance-id="${event.performanceId}">Купить билет</button></div></div>`;
+            wrapper.appendChild(card);
         });
+        attachPerformanceEvents();
+    }
 
-        // ===== ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ =====
-        function closeAllModals() {
-            document.getElementById('sessionModal')?.classList.remove('active');
-            document.getElementById('productModal')?.classList.remove('active');
-            document.getElementById('contactsModal')?.classList.remove('active');
-            closeTeamModal();
-            closeGallery();
-            document.body.style.overflow = '';
-        }
+    // 🔥 ЕДИНЫЙ ОБРАБОТЧИК ДЛЯ ВСЕХ КНОПОК "КУПИТЬ"
+    function attachPerformanceEvents() {
+        document.querySelectorAll('.btn-details').forEach(btn => {
+            btn.addEventListener('click', (e) => { window.location.href = `performance.html?id=${parseInt(e.currentTarget.dataset.performanceId)}`; });
+        });
+        // Все кнопки .btn-buy обрабатываются одной функцией
+        document.querySelectorAll('.btn-buy').forEach(btn => {
+            btn.addEventListener('click', (e) => { e.preventDefault(); handleBuyClick(e.currentTarget); });
+        });
+    }
 
-        // ===== СКРОЛЛ =====
-        window.scrollHorizontally = function(elementId, amount) {
-            const element = document.getElementById(elementId);
-            if (element) {
-                element.scrollBy({ left: amount, behavior: 'smooth' });
-            }
-        };
+    // ===== РЕНДЕР МАГАЗИНА =====
+    function renderMerchScroll() {
+        const wrapper = document.getElementById('merchScroll'); if (!wrapper) return; wrapper.innerHTML = '';
+        products.forEach(item => {
+            const card = document.createElement('div'); card.className = 'merch-card';
+            const mainImg = item.images?.[0] || 'https://placehold.co/428x220/cccccc/white?text=Нет+фото';
+            const hasMulti = item.images?.length > 1;
+            card.innerHTML = `<div class="merch-img-wrapper"><img class="merch-img" src="${mainImg}" alt="${item.name}">${hasMulti?`<span class="merch-photo-count"><i class="fas fa-images"></i> ${item.images.length}</span>`:''}</div><div class="merch-content"><h3 class="merch-name">${item.name}</h3><div class="merch-price">${item.price.toLocaleString('ru-RU')} ₽</div><button class="merch-btn" data-id="${item.id}">Купить</button></div>`;
+            card.addEventListener('click', (e) => { if (!e.target.classList.contains('merch-btn') && item.images?.length) openGallery(item.images); });
+            wrapper.appendChild(card);
+        });
+        document.querySelectorAll('.merch-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => { e.stopPropagation(); const p = products.find(x => x.id === parseInt(btn.dataset.id)); if (p) openProductModal(p); });
+        });
+    }
 
-        // ===== ИНИЦИАЛИЗАЦИЯ КОМАНДЫ =====
-        function initTeamCards() {
-            const teamCards = document.querySelectorAll('.team-card');
-            teamCards.forEach(card => {
-                const memberName = card.dataset.member;
-                if (!memberName) return;
-                
-                card.addEventListener('click', (e) => {
-                    if (e.target.closest('a')) return;
-                    openTeamModal(memberName);
-                });
+    // ===== МОДАЛКА ТОВАРА =====
+    function openProductModal(product) {
+        currentProduct = product; editingIndex = -1; renderProductModalContent();
+        document.getElementById('productModalFooter').innerHTML = `<div class="modal-buttons"><button class="modal-btn btn-outline-modal" id="moreItemsBtn">Выбрать еще</button><button class="modal-btn btn-primary-modal" id="buyNowBtn">Купить</button></div>`;
+        document.getElementById('modalProductName').textContent = product.name;
+        document.getElementById('productModal').classList.add('active'); document.body.style.overflow = 'hidden';
+        document.getElementById('moreItemsBtn').addEventListener('click', () => { if (addCurrentToCart()) closeAllModals(); });
+        document.getElementById('buyNowBtn').addEventListener('click', () => { if (addCurrentToCart()) { closeAllModals(); openContactsModal(); } });
+    }
+    window.closeProductModal = function() { document.getElementById('productModal').classList.remove('active'); document.body.style.overflow = ''; };
+
+    function renderProductModalContent() {
+        const container = document.getElementById('productModalContent'); let html = '';
+        if (cartItems.length && editingIndex === -1) {
+            html += `<div style="font-size:18px;font-weight:700;margin-bottom:16px;">Корзина</div><div class="cart-summary">`;
+            let total = 0;
+            cartItems.forEach((it, idx) => { total += it.price * it.quantity; const sz = it.size?` (${it.size})`:'';
+                html += `<div class="cart-item"><div class="cart-item-info"><span class="cart-item-name">${it.name}${sz}</span><span class="cart-item-details">${it.quantity} шт. × ${it.price.toLocaleString()} ₽</span></div><div class="cart-item-actions"><button class="edit-item" data-index="${idx}"><i class="fas fa-pencil-alt"></i></button><button class="delete-item" data-index="${idx}"><i class="fas fa-trash-alt"></i></button></div><div class="cart-item-price">${(it.price*it.quantity).toLocaleString()} ₽</div></div>`;
             });
+            html += `<div class="total-row"><span>Итого</span><span>${total.toLocaleString()} ₽</span></div></div>`;
         }
+        html += `<div class="form-group"><label>Количество</label><input type="number" id="productQuantity" min="1" value="1" class="form-input"></div>`;
+        if (currentProduct?.isClothing) html += `<div class="form-group"><label>Размер</label><select id="productSize" class="form-select"><option value="S">S</option><option value="M" selected>M</option><option value="L">L</option><option value="XL">XL</option></select></div>`;
+        container.innerHTML = html;
+        if (cartItems.length && editingIndex === -1) {
+            document.querySelectorAll('.delete-item').forEach(b => b.addEventListener('click', (e) => { cartItems.splice(parseInt(b.dataset.index),1); renderProductModalContent(); }));
+            document.querySelectorAll('.edit-item').forEach(b => b.addEventListener('click', (e) => openEditModal(parseInt(b.dataset.index))));
+        }
+    }
 
-        // ===== ГЛОБАЛЬНЫЙ ОБРАБОТЧИК ESCAPE =====
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                // Закрываем все модальные окна
-                if (productGallery && productGallery.classList.contains('active')) {
-                    closeGallery();
-                } else if (teamModal && teamModal.classList.contains('active')) {
-                    closeTeamModal();
-                } else if (document.getElementById('sessionModal')?.classList.contains('active')) {
-                    closeSessionModal();
-                } else if (document.getElementById('productModal')?.classList.contains('active')) {
-                    closeProductModal();
-                } else if (document.getElementById('contactsModal')?.classList.contains('active')) {
-                    closeContactsModal();
-                }
-            }
-        });
+    function openEditModal(idx) {
+        const it = cartItems[idx]; if (!it) return;
+        currentProduct = { id: it.id, name: it.name, price: it.price, isClothing: it.isClothing }; editingIndex = idx;
+        renderProductModalContent();
+        document.getElementById('productQuantity').value = it.quantity;
+        if (it.isClothing && document.getElementById('productSize')) document.getElementById('productSize').value = it.size || 'M';
+        document.getElementById('productModalFooter').innerHTML = `<div class="modal-buttons"><button class="modal-btn btn-outline-modal" id="cancelEditBtn">Отмена</button><button class="modal-btn btn-primary-modal" id="saveEditBtn">Сохранить</button></div>`;
+        document.getElementById('modalProductName').textContent = it.name;
+        document.getElementById('cancelEditBtn').addEventListener('click', () => closeAllModals());
+        document.getElementById('saveEditBtn').addEventListener('click', () => { if (saveEditItem()) closeAllModals(); });
+    }
 
-        // ===== ИНИЦИАЛИЗАЦИЯ =====
-        document.addEventListener('DOMContentLoaded', () => {
-            setTimeout(() => {
-                renderUpcomingScroll();
-                renderAllPlaysScroll();
-                renderMerchScroll();
-                initTeamCards();
-            }, 100);
+    function addCurrentToCart() {
+        const qty = parseInt(document.getElementById('productQuantity')?.value || '1');
+        if (qty < 1) { alert('Введите количество от 1'); return false; }
+        let size = null; if (currentProduct.isClothing) { const sel = document.getElementById('productSize'); if (sel) size = sel.value; }
+        cartItems.push({ id: currentProduct.id, name: currentProduct.name, price: currentProduct.price, quantity: qty, size, isClothing: currentProduct.isClothing });
+        return true;
+    }
+    function saveEditItem() {
+        if (editingIndex === -1) return false;
+        const qty = parseInt(document.getElementById('productQuantity')?.value || '1');
+        if (qty < 1) { alert('Введите количество от 1'); return false; }
+        let size = null; if (currentProduct.isClothing) { const sel = document.getElementById('productSize'); if (sel) size = sel.value; }
+        cartItems[editingIndex] = { ...cartItems[editingIndex], quantity: qty, size };
+        return true;
+    }
+
+    // ===== МОДАЛКА КОНТАКТОВ =====
+    function openContactsModal() {
+        if (!cartItems.length) { alert("Корзина пуста"); return; }
+        updateOrderSummary();
+        ['contactName','contactPhone','contactEmail','contactMethod'].forEach(id => document.getElementById(id).value = '');
+        document.getElementById('contactsModal').classList.add('active'); document.body.style.overflow = 'hidden';
+    }
+    window.closeContactsModal = function() { document.getElementById('contactsModal').classList.remove('active'); document.body.style.overflow = ''; };
+    function updateOrderSummary() {
+        const container = document.getElementById('orderSummaryFull'); if (!container) return;
+        if (!cartItems.length) { container.innerHTML = '<div style="text-align:center;padding:16px;color:#5A5556;">Корзина пуста</div>'; return; }
+        let html = '', total = 0;
+        cartItems.forEach(it => { const t = it.price * it.quantity; total += t; const sz = it.size?` (${it.size})`:'';
+            html += `<div class="cart-item"><div class="cart-item-info"><span class="cart-item-name">${it.name}${sz}</span><span class="cart-item-details">${it.quantity} шт. × ${it.price.toLocaleString()} ₽</span></div><div class="cart-item-price">${t.toLocaleString()} ₽</div></div>`;
         });
-        
-    })();
+        html += `<div class="total-row"><span>Итого</span><span>${total.toLocaleString()} ₽</span></div>`;
+        container.innerHTML = html;
+    }
+    document.getElementById('submitOrderBtn').addEventListener('click', () => {
+        const name = document.getElementById('contactName')?.value.trim(), phone = document.getElementById('contactPhone')?.value.trim(), email = document.getElementById('contactEmail')?.value.trim(), method = document.getElementById('contactMethod')?.value.trim();
+        if (!name || !phone || !email || !method) { alert("Заполните все поля"); return; }
+        localStorage.setItem('mikos_order_success', JSON.stringify({ customerName:name, customerPhone:phone, customerEmail:email, contactMethod:method, items:[...cartItems], total:cartItems.reduce((s,it)=>s+it.price*it.quantity,0), timestamp:new Date().toISOString(), source:'index-home' }));
+        cartItems = []; window.location.href = 'shop.html?order=success';
+    });
+    document.getElementById('contactsModal').addEventListener('click', (e) => { if (e.target.classList.contains('modal-overlay')) closeContactsModal(); });
+
+    // ===== ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ =====
+    function closeAllModals() {
+        ['sessionModal','productModal','contactsModal'].forEach(id => document.getElementById(id)?.classList.remove('active'));
+        closeTeamModal(); closeGallery(); document.body.style.overflow = '';
+    }
+    window.scrollHorizontally = function(id, amount) { const el = document.getElementById(id); if (el) el.scrollBy({ left: amount, behavior: 'smooth' }); };
+    function initTeamCards() {
+        document.querySelectorAll('.team-card').forEach(card => {
+            const name = card.dataset.member; if (!name) return;
+            card.addEventListener('click', (e) => { if (!e.target.closest('a')) openTeamModal(name); });
+        });
+    }
+    document.addEventListener('keydown', (e) => {
+        if (e.key !== 'Escape') return;
+        if (productGallery?.classList.contains('active')) closeGallery();
+        else if (teamModal?.classList.contains('active')) closeTeamModal();
+        else if (document.getElementById('sessionModal')?.classList.contains('active')) closeSessionModal();
+        else if (document.getElementById('productModal')?.classList.contains('active')) closeProductModal();
+        else if (document.getElementById('contactsModal')?.classList.contains('active')) closeContactsModal();
+    });
+
+    // ===== ИНИЦИАЛИЗАЦИЯ =====
+    document.addEventListener('DOMContentLoaded', () => {
+        setTimeout(() => {
+            renderUpcomingScroll();
+            renderAllPlaysScroll();
+            renderMerchScroll();
+            initTeamCards();
+        }, 100);
+    });
+})();
 </script>
 </body>
 </html>
