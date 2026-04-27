@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Театр клоунады «Микос» | Заказчикам</title>
+    <link rel="icon" type="image/svg+xml" href="SVG/logo-2.svg" sizes="any">
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .dash-icon {
+            width: 20px;
+            height: 16px;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+
+        /* Стили для кастомных селектов (уже были, но добавим надёжность) */
+        .custom-select-wrapper { position: relative; display: block; width: 100%; }
+        .custom-select-btn { width: 100%; background: #FFFFFF; border: 2px solid #E5E3E1; border-radius: 8px; padding: 12px 16px; text-align: left; font-family: 'Nunito Sans', sans-serif; font-size: 15px; color: #1A1718; cursor: pointer; transition: all 0.2s; display: flex; justify-content: space-between; align-items: center; }
+        .custom-select-btn::after { content: '\f0d7'; font-family: 'Font Awesome 6 Free'; font-weight: 900; font-size: 14px; color: #4A6294; transition: transform 0.2s; }
+        .custom-select-btn.active::after { transform: rotate(180deg); }
+        .custom-select-dropdown { position: absolute; top: 100%; left: 0; right: 0; background: #FFFFFF; border: 2px solid #E5E3E1; border-radius: 8px; margin-top: 4px; z-index: 1000; display: none; max-height: 240px; overflow-y: auto; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .custom-select-dropdown.show { display: block; }
+        .custom-select-option { padding: 10px 16px; cursor: pointer; font-family: 'Nunito Sans', sans-serif; transition: background 0.2s; }
+        .custom-select-option:hover { background: #F8F7F6; }
+        .custom-select-option.selected { background: #E8EEF7; font-weight: 600; color: #2A3D5E; }
+
+        /* Обёртка для поля даты с иконкой (только одна) */
+        .date-input-wrapper { position: relative; display: flex; align-items: center; }
+        .calendar-icon { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #8A8A8A; font-size: 18px; background: transparent; border: none; opacity: 0.7; transition: opacity 0.2s, color 0.2s; z-index: 2; display: flex; align-items: center; justify-content: center; padding: 0; pointer-events: auto; }
+        .calendar-icon:hover { opacity: 1; color: #E8454D; }
+        .form-input-customers { padding-right: 44px !important; }
+        .form-input-customers.error { border-color: #E8454D !important; box-shadow: 0 0 0 3px rgba(232,69,77,0.1) !important; }
+        .form-input-customers.valid { border-color: #2E7D32 !important; box-shadow: 0 0 0 3px rgba(46,125,50,0.1) !important; }
+        .hidden-date-picker { position: absolute; opacity: 0; pointer-events: none; width: 0; height: 0; }
+
+        /* Модальное окно успеха (как на главной) */
+        .success-modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(8px); z-index: 20000; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease; padding: 20px; box-sizing: border-box; }
+        .success-modal-overlay.active { opacity: 1; visibility: visible; }
+        .success-modal-content { background: #FFFFFF; border-radius: 24px; max-width: 480px; width: 100%; padding: 40px 32px; text-align: center; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4); border: 1px solid rgba(232, 69, 77, 0.2); transform: scale(0.9); transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); position: relative; }
+        .success-modal-overlay.active .success-modal-content { transform: scale(1); }
+        .success-icon { width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #E8454D, #D62830); display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; animation: pulse 0.6s ease-out; }
+        @keyframes pulse { 0% { transform: scale(0.8); opacity: 0.7; } 50% { transform: scale(1.1); opacity: 1; } 100% { transform: scale(1); opacity: 1; } }
+        .success-icon i { font-size: 36px; color: white; }
+        .success-modal-title { font-family: 'Unbounded', sans-serif; font-size: 24px; font-weight: 700; color: #1A1718; margin-bottom: 12px; }
+        .success-modal-text { font-family: 'Nunito Sans', sans-serif; font-size: 16px; color: #5A5556; line-height: 1.5; margin-bottom: 28px; }
+        .success-modal-btn { background: #E8454D; color: white; border: none; padding: 14px 32px; border-radius: 10px; font-family: 'Unbounded', sans-serif; font-weight: 600; font-size: 15px; cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px; }
+        .success-modal-btn:hover { background: #D62830; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(232, 69, 77, 0.3); }
+        .success-modal-close { position: absolute; top: 16px; right: 16px; width: 32px; height: 32px; border-radius: 50%; background: #F8F7F6; border: 1px solid #E5E3E1; color: #5A5556; font-size: 16px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; }
+        .success-modal-close:hover { background: #E8454D; color: white; border-color: #E8454D; }
+
+        @media (max-width: 480px) {
+            .success-modal-content { padding: 32px 24px; }
+            .success-icon { width: 70px; height: 70px; }
+            .success-icon i { font-size: 30px; }
+            .success-modal-title { font-size: 20px; }
+            .calendar-icon { right: 8px; font-size: 16px; }
+            .form-input-customers { padding-right: 38px !important; }
+        }
+    </style>
+</head>
+<body>
+<div class="shop-container">
+    <div id="site-header"></div>
+    <div class="mobile-nav" id="mobileNav">
+        <div class="close-mobile-menu" id="closeMobileMenu">✕</div>
+        <ul>
+            <li><a href="index.html">Главная</a></li>
+            <li><a href="affiche.html">Афиша</a></li>
+            <li><a href="for-customers.html">Заказчикам</a></li>
+            <li><a href="brandbook.html">Брендбук</a></li>
+            <li><a href="performances.html">Спектакли</a></li>
+            <li><a href="team.html">Команда</a></li>
+            <li><a href="history.html">О театре</a></li>
+            <li><a href="shop.html">Магазин</a></li>
+            <li><a href="contacts.html">Контакты</a></li>
+        </ul>
+    </div>
+    <div class="overlay" id="overlay"></div>
+
+    <main class="customers-page">
+        <h1 class="page-title-customers">Сотрудничество и частные мероприятия</h1>
+        <p class="page-subtitle-customers">Организуем закрытые показы, корпоративные события и частные мероприятия.<br>Адаптируем спектакли под вашу площадку и задачи.</p>
+
+        <!-- Услуги -->
+        <section>
+            <div class="section-header-custom"><h2 class="section-title-custom">Услуги</h2><a href="#" class="section-link-custom">Все услуги <i class="fas fa-arrow-right"></i></a></div>
+            <div class="services-grid">
+                <article class="service-card"><div class="service-number">/01</div><h3 class="service-title">Корпоративные показы</h3><p class="service-desc">Закрытые спектакли для компаний. Полное техническое сопровождение, адаптация под любую площадку.</p><a href="#" class="service-link">Подробнее <i class="fas fa-arrow-right"></i></a></article>
+                <article class="service-card"><div class="service-number">/02</div><h3 class="service-title">Частные события</h3><p class="service-desc">Эксклюзивные постановки для свадеб, юбилеев, дней рождений. Разработка уникального сценария.</p><a href="#" class="service-link">Подробнее <i class="fas fa-arrow-right"></i></a></article>
+                <article class="service-card"><div class="service-number">/03</div><h3 class="service-title">Образовательные проекты</h3><p class="service-desc">Мастер-классы и лекции от актеров и режиссеров. Для школ, вузов и корпоративных университетов.</p><a href="#" class="service-link">Подробнее <i class="fas fa-arrow-right"></i></a></article>
+            </div>
+        </section>
+
+        <!-- Конструктор запроса -->
+        <section>
+            <div class="section-header-custom"><h2 class="section-title-custom">Конструктор запроса</h2><a href="#" class="section-link-custom">Как это работает <i class="fas fa-arrow-right"></i></a></div>
+            <div class="request-builder">
+                <form class="builder-form" id="requestForm">
+                    <div class="form-group-custom"><label for="eventType">Тип мероприятия</label><select id="eventType" name="eventType" class="form-select-customers"><option value="corporate">Корпоративный показ</option><option value="private">Частное событие</option><option value="education">Образовательный проект</option></select></div>
+                    <div class="form-row"><div class="form-group-custom"><label for="eventDate">Предполагаемая дата</label><input type="text" id="eventDate" name="eventDate" placeholder="ДД.ММ.ГГГГ" autocomplete="off" class="form-input-customers"></div><div class="form-group-custom"><label for="audienceCount">Количество зрителей</label><select id="audienceCount" name="audienceCount" class="form-select-customers"><option value="up-to-100">до 100</option><option value="100-300">100–300</option><option value="300-plus">300+</option></select></div></div>
+                    <div class="form-group-custom"><label for="eventFormat">Формат</label><select id="eventFormat" name="eventFormat" class="form-select-customers"><option value="ready">Готовый спектакль</option><option value="custom">Индивидуальная постановка</option><option value="workshop">Мастер-класс</option></select></div>
+                    <div class="form-group-custom"><label for="extraWishes">Дополнительные пожелания</label><textarea id="extraWishes" name="extraWishes" placeholder="Опишите задачу, площадку, бюджет..."></textarea></div>
+                    <div style="display: flex; gap: 16px; flex-wrap: wrap;"><button type="button" class="submit-request-btn" id="previewBtn">Сформировать запрос</button><button type="button" class="submit-request-btn secondary" id="resetBtn">Сбросить</button></div>
+                </form>
+                <aside class="builder-preview"><div class="preview-header"><span class="preview-title">Предварительный запрос</span><span class="preview-draft">черновик</span></div><div id="previewContent"><div class="preview-item"><div class="preview-label">Тип</div><div class="preview-value">Корпоративный показ</div></div><div class="preview-item"><div class="preview-label">Дата</div><div class="preview-value">—</div></div><div class="preview-item"><div class="preview-label">Зрителей</div><div class="preview-value">до 100</div></div><div class="preview-item"><div class="preview-label">Формат</div><div class="preview-value">Готовый спектакль</div></div></div><button class="submit-request-btn" id="sendRequestBtn">Отправить запрос</button></aside>
+            </div>
+        </section>
+
+        <!-- Технический райдер -->
+        <section>
+            <div class="section-header-custom"><h2 class="section-title-custom">Технический райдер</h2><a href="#" class="section-link-custom">Полная документация <i class="fas fa-arrow-right"></i></a></div>
+            <div class="rider-section"><div class="rider-info"><h3>В один клик</h3><p>Готовая документация для вашей площадки. Свет, звук, видео, сцена и монтаж. Адаптируем под любые условия.</p><div class="rider-features"><div class="rider-feature"><i class="fas fa-check-circle"></i><span>Световое оборудование (18+ позиций)</span></div><div class="rider-feature"><i class="fas fa-check-circle"></i><span>Звуковое усиление и микрофоны</span></div><div class="rider-feature"><i class="fas fa-check-circle"></i><span>Видеопроекция и медиаконтент</span></div><div class="rider-feature"><i class="fas fa-check-circle"></i><span>Параметры сцены и кулис</span></div></div></div><div class="rider-card"><h4>Технический райдер</h4><div class="rider-meta">Актуальная версия · февраль 2025</div><div class="rider-meta">Формат PDF, 2.1 МБ</div><div class="rider-file"><i class="fas fa-file-pdf"></i><div class="rider-file-info"><div class="rider-file-name">Технический_райдер_театр.pdf</div><div class="rider-file-date">Обновлен: 10.02.2025</div></div><a href="#" download><i class="fas fa-download"></i></a></div></div></div>
+        </section>
+
+        <!-- Условия сотрудничества -->
+        <section>
+            <div class="section-header-custom"><h2 class="section-title-custom">Условия сотрудничества</h2><a href="#" class="section-link-custom">Скачать договор <i class="fas fa-arrow-right"></i></a></div>
+            <div class="terms-grid"><div class="terms-card"><h4><i class="fas fa-file-contract"></i> Договор</h4><ul class="terms-list"><li><img src="SVG/nos.svg" alt="" class="dash-icon"><span>Предоплата 50% при подписании</span></li><li><img src="SVG/nos.svg" alt="" class="dash-icon"><span>Полный расчет за 3 дня до события</span></li><li><img src="SVG/nos.svg" alt="" class="dash-icon"><span>Работа с юрлицами и НДС</span></li><li><img src="SVG/nos.svg" alt="" class="dash-icon"><span>Закрывающие документы в день показа</span></li><li><img src="SVG/nos.svg" alt="" class="dash-icon"><span>NDA по запросу</span></li></ul></div><div class="terms-card"><h4><i class="fas fa-calendar-alt"></i> Порядок работы</h4><ul class="terms-list"><li><img src="SVG/nos.svg" alt="" class="dash-icon"><span>Заявка — 2–3 дня на расчет</span></li><li><img src="SVG/nos.svg" alt="" class="dash-icon"><span>Утверждение сметы и графика</span></li><li><img src="SVG/nos.svg" alt="" class="dash-icon"><span>Предпродакшн: 1–3 недели</span></li><li><img src="SVG/nos.svg" alt="" class="dash-icon"><span>Монтаж: за 4–6 часов до старта</span></li><li><img src="SVG/nos.svg" alt="" class="dash-icon"><span>Фотоотчет и постпродакшн</span></li></ul></div></div>
+        </section>
+
+        <!-- Связаться с нами -->
+        <section>
+            <div class="section-header-custom"><h2 class="section-title-custom">Связаться с нами</h2><a href="contacts.html" class="section-link-custom">Все контакты <i class="fas fa-arrow-right"></i></a></div>
+            <div class="contact-form-section"><div class="contact-info"><h3>Остались вопросы?</h3><p>Заполните форму — менеджер театра ответит в течение 2 часов в рабочие дни.</p><div class="contact-details"><div class="contact-item"><div class="contact-label">Email</div><div class="contact-value"><a href="mailto:partner@teatr-sreda.ru">partner@teatr-sreda.ru</a></div></div><div class="contact-item"><div class="contact-label">Телефон</div><div class="contact-value"><a href="tel:+74951234567">+7 (495) 123-45-67</a></div></div><div class="contact-item"><div class="contact-label">Время работы</div><div class="contact-value">Пн–Пт, 11:00 – 19:00</div></div></div></div><form class="contact-form-right" id="contactForm"><div class="form-group-custom"><label for="contactName">Имя</label><input type="text" id="contactName" name="contactName" placeholder="Александр" required></div><div class="form-group-custom"><label for="contactCompany">Компания</label><input type="text" id="contactCompany" name="contactCompany" placeholder="Название"></div><div class="form-group-custom"><label for="contactEmail">Email</label><input type="email" id="contactEmail" name="contactEmail" placeholder="partner@company.ru" required></div><div class="form-group-custom"><label for="contactPhone">Телефон</label><input type="tel" id="contactPhone" name="contactPhone" placeholder="+7 (___) ___-__-__" required></div><div class="form-group-custom"><label for="contactMessage">Сообщение</label><textarea id="contactMessage" name="contactMessage" placeholder="Расскажите о вашем мероприятии..." required></textarea></div><button type="submit" class="submit-request-btn" id="sendContactBtn">Отправить сообщение</button></form></div>
+        </section>
+    </main>
+
+    <div id="site-footer"></div>
+</div>
+
+<!-- Модальное окно успеха -->
+<div class="success-modal-overlay" id="successModal">
+    <div class="success-modal-content">
+        <button class="success-modal-close" id="successModalClose">&times;</button>
+        <div class="success-icon"><i class="fas fa-check"></i></div>
+        <h3 class="success-modal-title" id="successModalTitle">Заявка отправлена!</h3>
+        <p class="success-modal-text" id="successModalText">Спасибо за обращение! Наш менеджер свяжется с вами в ближайшее время.</p>
+        <button class="success-modal-btn" id="successModalBtn"><i class="fas fa-home"></i> Закрыть</button>
+    </div>
+</div>
+
+<script src="js/components-loader.js"></script>
+<script src="js/header-scripts.js"></script>
+<script src="js/common.js"></script>
+<script>
+    // ==================== МОДАЛЬНОЕ ОКНО УСПЕХА ====================
+    const successModal = document.getElementById('successModal');
+    const successModalTitle = document.getElementById('successModalTitle');
+    const successModalText = document.getElementById('successModalText');
+    const successModalClose = document.getElementById('successModalClose');
+    const successModalBtn = document.getElementById('successModalBtn');
+
+    function openSuccessModal(title, message) {
+        successModalTitle.textContent = title;
+        successModalText.textContent = message;
+        successModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+    function closeSuccessModal() {
+        successModal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+    if (successModalClose) successModalClose.addEventListener('click', closeSuccessModal);
+    if (successModalBtn) successModalBtn.addEventListener('click', closeSuccessModal);
+    if (successModal) successModal.addEventListener('click', (e) => { if (e.target === successModal) closeSuccessModal(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && successModal.classList.contains('active')) closeSuccessModal(); });
+
+    // ==================== КОНСТРУКТОР ЗАПРОСА ====================
+    function updatePreview() {
+        const type = document.getElementById('eventType');
+        const date = document.getElementById('eventDate').value || '—';
+        const audience = document.getElementById('audienceCount');
+        const format = document.getElementById('eventFormat');
+        const typeText = type.options[type.selectedIndex].text;
+        const audienceText = audience.options[audience.selectedIndex].text;
+        const formatText = format.options[format.selectedIndex].text;
+        document.getElementById('previewContent').innerHTML = `<div class="preview-item"><div class="preview-label">Тип</div><div class="preview-value">${typeText}</div></div><div class="preview-item"><div class="preview-label">Дата</div><div class="preview-value">${date}</div></div><div class="preview-item"><div class="preview-label">Зрителей</div><div class="preview-value">${audienceText}</div></div><div class="preview-item"><div class="preview-label">Формат</div><div class="preview-value">${formatText}</div></div>`;
+    }
+    document.getElementById('previewBtn')?.addEventListener('click', updatePreview);
+    document.getElementById('resetBtn')?.addEventListener('click', () => {
+        document.getElementById('requestForm').reset();
+        document.querySelectorAll('.custom-select-btn').forEach(btn => {
+            const wrapper = btn.closest('.custom-select-wrapper');
+            const nativeSelect = wrapper?.querySelector('select');
+            if (nativeSelect && nativeSelect.options.length > 0) btn.textContent = nativeSelect.options[0].text;
+        });
+        document.querySelectorAll('.custom-select-option').forEach(opt => opt.classList.remove('selected'));
+        document.querySelectorAll('.custom-select-option:first-child').forEach(opt => opt.classList.add('selected'));
+        updatePreview();
+    });
+    // Отправка запроса (конструктор) -> модалка, а не alert
+    document.getElementById('sendRequestBtn')?.addEventListener('click', () => {
+        openSuccessModal('Запрос отправлен!', 'Менеджер театра свяжется с вами в ближайшее время для обсуждения деталей.');
+    });
+
+    // ==================== МАСКА ТЕЛЕФОНА ====================
+    const phoneInput = document.getElementById('contactPhone');
+    if (phoneInput) {
+        phoneInput.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 11) value = value.slice(0, 11);
+            let formatted = '';
+            if (value.length > 0) { formatted = '+7'; if (value.length > 1) formatted += ' (' + value.slice(1, 4); if (value.length > 4) formatted += ') ' + value.slice(4, 7); if (value.length > 7) formatted += '-' + value.slice(7, 9); if (value.length > 9) formatted += '-' + value.slice(9, 11); }
+            e.target.value = formatted;
+        });
+        phoneInput.addEventListener('focus', function() { if (!this.value) this.value = '+7 ('; });
+        phoneInput.addEventListener('blur', function() { if (this.value === '+7 (' || this.value === '+7') this.value = ''; });
+    }
+
+    // ==================== ОТПРАВКА ФОРМЫ КОНТАКТОВ (с валидацией и модалкой) ====================
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            let isValid = true;
+            const name = document.getElementById('contactName');
+            const email = document.getElementById('contactEmail');
+            const phone = document.getElementById('contactPhone');
+            const message = document.getElementById('contactMessage');
+            
+            if (!name.value.trim()) { name.style.borderColor = '#E8454D'; isValid = false; } else name.style.borderColor = '';
+            if (!email.value.trim() || !/^\S+@\S+\.\S+$/.test(email.value)) { email.style.borderColor = '#E8454D'; isValid = false; } else email.style.borderColor = '';
+            const phoneClean = phone.value.replace(/\D/g, '');
+            if (!phone.value.trim() || phoneClean.length !== 11) { phone.style.borderColor = '#E8454D'; isValid = false; } else phone.style.borderColor = '';
+            if (!message.value.trim()) { message.style.borderColor = '#E8454D'; isValid = false; } else message.style.borderColor = '';
+            
+            if (!isValid) {
+                openSuccessModal('Ошибка', 'Пожалуйста, заполните все обязательные поля корректно.');
+                return;
+            }
+            // Если всё ок
+            console.log('Форма контактов отправлена:', { name: name.value, company: document.getElementById('contactCompany').value, email: email.value, phone: phone.value, message: message.value });
+            contactForm.reset();
+            openSuccessModal('Сообщение отправлено!', 'Спасибо! Наш менеджер свяжется с вами в течение 2 часов.');
+        });
+    }
+
+    // ==================== КАСТОМНЫЙ SELECT (без дублей) ====================
+    let customSelectsInitialized = false;
+    function initCustomSelects() {
+        if (customSelectsInitialized) return;
+        const selects = document.querySelectorAll('#eventType, #audienceCount, #eventFormat');
+        selects.forEach(function(nativeSelect) {
+            if (nativeSelect.closest('.custom-select-wrapper')) return;
+            const wrapper = document.createElement('div'); wrapper.className = 'custom-select-wrapper';
+            const btn = document.createElement('button'); btn.type = 'button'; btn.className = 'custom-select-btn'; btn.textContent = nativeSelect.options[nativeSelect.selectedIndex].text;
+            const dropdown = document.createElement('div'); dropdown.className = 'custom-select-dropdown';
+            Array.from(nativeSelect.options).forEach(function(option, index) {
+                const item = document.createElement('div'); item.className = 'custom-select-option' + (index === nativeSelect.selectedIndex ? ' selected' : '');
+                item.textContent = option.text; item.dataset.value = option.value;
+                item.addEventListener('click', function(e) { e.stopPropagation(); nativeSelect.value = this.dataset.value; btn.textContent = this.textContent; dropdown.querySelectorAll('.custom-select-option').forEach(el => el.classList.remove('selected')); this.classList.add('selected'); dropdown.classList.remove('show'); btn.classList.remove('active'); nativeSelect.dispatchEvent(new Event('change', { bubbles: true })); updatePreview(); });
+                dropdown.appendChild(item);
+            });
+            btn.addEventListener('click', function(e) { e.stopPropagation(); const isOpen = dropdown.classList.contains('show'); document.querySelectorAll('.custom-select-dropdown').forEach(d => { if (d !== dropdown) { d.classList.remove('show'); d.previousElementSibling?.classList.remove('active'); } }); if (!isOpen) { dropdown.classList.add('show'); btn.classList.add('active'); } else { dropdown.classList.remove('show'); btn.classList.remove('active'); } });
+            const clone = nativeSelect.cloneNode(true); clone.style.display = 'none';
+            wrapper.appendChild(clone); nativeSelect.style.display = 'none'; wrapper.insertBefore(btn, clone); wrapper.insertBefore(dropdown, clone); nativeSelect.parentNode.insertBefore(wrapper, nativeSelect); nativeSelect.parentNode.removeChild(nativeSelect);
+        });
+        document.addEventListener('click', function(e) { if (!e.target.closest('.custom-select-wrapper')) { document.querySelectorAll('.custom-select-dropdown').forEach(d => { d.classList.remove('show'); d.previousElementSibling?.classList.remove('active'); }); } });
+        customSelectsInitialized = true;
+    }
+
+    // ==================== ДАТА: МАСКА + ИКОНКА КАЛЕНДАРЯ (только одна) ====================
+    let dateFieldInitialized = false;
+    function initDateField() {
+        if (dateFieldInitialized) return;
+        const dateInput = document.getElementById('eventDate');
+        if (!dateInput) return;
+        // Если уже есть обёртка с классом date-input-wrapper, не создаём повторно
+        if (dateInput.parentNode.classList && dateInput.parentNode.classList.contains('date-input-wrapper')) return;
+        
+        const wrapper = document.createElement('div'); wrapper.className = 'date-input-wrapper';
+        dateInput.parentNode.insertBefore(wrapper, dateInput); wrapper.appendChild(dateInput);
+        const calendarIcon = document.createElement('span'); calendarIcon.className = 'calendar-icon'; calendarIcon.innerHTML = '<i class="far fa-calendar-alt"></i>'; calendarIcon.title = 'Выбрать дату';
+        wrapper.appendChild(calendarIcon);
+        const hiddenDatePicker = document.createElement('input'); hiddenDatePicker.type = 'date'; hiddenDatePicker.className = 'hidden-date-picker'; hiddenDatePicker.style.cssText = 'position: absolute; opacity: 0; pointer-events: none; width: 0; height: 0;';
+        wrapper.appendChild(hiddenDatePicker);
+        
+        dateInput.addEventListener('input', function(e) {
+            let value = this.value.replace(/\D/g, ''); if (value.length > 8) value = value.slice(0, 8);
+            let formatted = ''; if (value.length > 0) { formatted = value.slice(0, 2); if (value.length > 2) formatted += '.' + value.slice(2, 4); if (value.length > 4) formatted += '.' + value.slice(4, 8); }
+            this.value = formatted;
+        });
+        dateInput.addEventListener('keydown', function(e) { if (!/[0-9]/.test(e.key) && !['Backspace','Delete','ArrowLeft','ArrowRight','Tab','Escape','Enter'].includes(e.key)) e.preventDefault(); });
+        dateInput.addEventListener('blur', function() {
+            const value = this.value.trim(); if (!value) { this.classList.remove('error','valid'); return; }
+            const regex = /^(\d{2})\.(\d{2})\.(\d{4})$/; const match = value.match(regex);
+            if (!match) { this.classList.add('error'); this.classList.remove('valid'); return; }
+            const day = parseInt(match[1],10), month = parseInt(match[2],10), year = parseInt(match[3],10);
+            const date = new Date(year, month-1, day);
+            if (date.getDate() === day && date.getMonth() === month-1 && date.getFullYear() === year && year >= 2020 && year <= 2100) { this.classList.remove('error'); this.classList.add('valid'); } else { this.classList.add('error'); this.classList.remove('valid'); }
+        });
+        dateInput.addEventListener('focus', function() { this.classList.remove('error','valid'); });
+        calendarIcon.addEventListener('click', function(e) { e.stopPropagation(); const rect = calendarIcon.getBoundingClientRect(); hiddenDatePicker.style.position = 'fixed'; hiddenDatePicker.style.left = rect.left + 'px'; hiddenDatePicker.style.top = (rect.bottom + 4) + 'px'; hiddenDatePicker.style.width = '0px'; hiddenDatePicker.style.height = '0px'; hiddenDatePicker.style.opacity = '0'; hiddenDatePicker.style.pointerEvents = 'auto'; const current = dateInput.value.trim(); const match = current.match(/^(\d{2})\.(\d{2})\.(\d{4})$/); if (match) hiddenDatePicker.value = `${match[3]}-${match[2]}-${match[1]}`; else hiddenDatePicker.value = ''; if ('showPicker' in hiddenDatePicker) hiddenDatePicker.showPicker(); else { hiddenDatePicker.focus(); hiddenDatePicker.click(); } });
+        hiddenDatePicker.addEventListener('change', function() { if (this.value) { const [year, month, day] = this.value.split('-'); dateInput.value = `${day}.${month}.${year}`; dateInput.classList.add('valid'); dateInput.classList.remove('error'); updatePreview(); } hiddenDatePicker.style.position = 'absolute'; hiddenDatePicker.style.pointerEvents = 'none'; hiddenDatePicker.style.width = '0'; hiddenDatePicker.style.height = '0'; hiddenDatePicker.style.opacity = '0'; });
+        hiddenDatePicker.addEventListener('blur', function() { setTimeout(() => { hiddenDatePicker.style.position = 'absolute'; hiddenDatePicker.style.pointerEvents = 'none'; hiddenDatePicker.style.width = '0'; hiddenDatePicker.style.height = '0'; hiddenDatePicker.style.opacity = '0'; }, 200); });
+        dateInput.addEventListener('input', updatePreview); dateInput.addEventListener('change', updatePreview);
+        dateFieldInitialized = true;
+    }
+
+    // ==================== ИНИЦИАЛИЗАЦИЯ ПРИ ЗАГРУЗКЕ ====================
+    document.addEventListener('DOMContentLoaded', () => {
+        updatePreview();
+        initCustomSelects();
+        initDateField();
+    });
+</script>
+</body>
+</html>

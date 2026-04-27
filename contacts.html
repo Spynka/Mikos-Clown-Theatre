@@ -12,6 +12,215 @@
     <!-- ✅ Яндекс.Карты API (замените ВАШ_API_KEY на реальный ключ) -->
     <!-- Получить ключ: https://developer.tech.yandex.ru/ -->
     <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&apikey=ВАШ_API_KEY" defer></script>
+    
+    <!-- Подключаем IMask для масок ввода -->
+    <script src="https://cdn.jsdelivr.net/npm/imask@7.3.0/dist/imask.min.js"></script>
+    
+    <style>
+        /* ===== СТИЛИ МОДАЛЬНОГО ОКНА УСПЕХА ===== */
+        .success-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 10001;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .success-modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .success-modal-content {
+            background: #FFFFFF;
+            border-radius: 24px;
+            max-width: 480px;
+            width: 100%;
+            padding: 40px 32px;
+            text-align: center;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(232, 69, 77, 0.2);
+            transform: scale(0.9);
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+        }
+        .success-modal-overlay.active .success-modal-content {
+            transform: scale(1);
+        }
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #E8454D, #D62830);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            animation: pulse 0.6s ease-out;
+        }
+        @keyframes pulse {
+            0% { transform: scale(0.8); opacity: 0.7; }
+            50% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .success-icon i {
+            font-size: 36px;
+            color: white;
+        }
+        .success-modal-title {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #1A1718;
+            margin-bottom: 12px;
+        }
+        .success-modal-text {
+            font-family: 'Nunito Sans', sans-serif;
+            font-size: 16px;
+            color: #5A5556;
+            line-height: 1.5;
+            margin-bottom: 28px;
+        }
+        .success-modal-btn {
+            background: #E8454D;
+            color: white;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 10px;
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .success-modal-btn:hover {
+            background: #D62830;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(232, 69, 77, 0.3);
+        }
+        .success-modal-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #F8F7F6;
+            border: 1px solid #E5E3E1;
+            color: #5A5556;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .success-modal-close:hover {
+            background: #E8454D;
+            color: white;
+            border-color: #E8454D;
+        }
+
+        /* ===== СТИЛИ ВАЛИДАЦИИ (КАК НА ГЛАВНОЙ) ===== */
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .form-group label {
+            display: block;
+            font-family: 'Unbounded', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            color: #2A2627;
+            margin-bottom: 8px;
+        }
+        .form-group label .required {
+            color: #E8454D;
+            margin-left: 2px;
+        }
+        
+        .form-input, .form-select, .form-textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #E5E3E1;
+            border-radius: 8px;
+            font-size: 15px;
+            font-family: 'Nunito Sans', sans-serif;
+            background: #FFFFFF;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            box-sizing: border-box;
+        }
+        .form-textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            outline: none;
+            border-color: #4A6294;
+            box-shadow: 0 0 0 3px rgba(74, 98, 148, 0.15);
+        }
+        
+        /* Стили ошибок валидации */
+        .form-input.error, .form-select.error, .form-textarea.error {
+            border-color: #E8454D;
+            background-color: #FFF5F5;
+        }
+        .form-input.error:focus, .form-select.error:focus, .form-textarea.error:focus {
+            box-shadow: 0 0 0 3px rgba(232, 69, 77, 0.15);
+        }
+        .form-input.valid, .form-textarea.valid {
+            border-color: #4CAF50;
+        }
+        
+        .error-message {
+            display: none;
+            color: #E8454D;
+            font-size: 12px;
+            font-family: 'Nunito Sans', sans-serif;
+            margin-top: 6px;
+            padding-left: 4px;
+        }
+        .error-message.visible {
+            display: block;
+            animation: slideDown 0.2s ease;
+        }
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Адаптивность */
+        @media (max-width: 480px) {
+            .success-modal-content {
+                padding: 32px 24px;
+            }
+            .success-icon {
+                width: 70px;
+                height: 70px;
+            }
+            .success-icon i {
+                font-size: 30px;
+            }
+            .success-modal-title {
+                font-size: 20px;
+            }
+            .success-modal-text {
+                font-size: 15px;
+            }
+        }
+    </style>
 </head>
 <body>
 <div class="shop-container">
@@ -29,7 +238,6 @@
 
         <!-- 🔥 КАРТА ЯНДЕКС (без изменения стилей) 🔥 -->
         <div class="map-container">
-            <!-- ЗАМЕНЯЕМ placeholder на контейнер для карты -->
             <div id="ymap" class="map-placeholder" style="width:100%; height:400px; min-height:400px; background:#f5f5f5; border-radius:inherit;"></div>
             <div class="map-address-card">
                 <h4>Театр Клоунады</h4>
@@ -53,12 +261,24 @@
                 </div>
                 <div class="form-container">
                     <h3>Форма обратной связи</h3>
-                    <form id="contactForm">
-                        <div class="form-group"><label>Ваше имя *</label><input type="text" id="contactName" placeholder="Иванов Иванов"></div>
-                        <div class="form-group"><label>Email *</label><input type="email" id="contactEmail" placeholder="email@example.com"></div>
-                        <div class="form-group"><label>Телефон</label><input type="tel" id="contactPhone" placeholder="+7 (999) 123-45-67"></div>
+                    <form id="contactForm" novalidate>
                         <div class="form-group">
-                            <label>Тема обращения</label>
+                            <label>Ваше имя <span class="required">*</span></label>
+                            <input type="text" id="contactName" class="form-input" placeholder="Иван Иванов" required minlength="2" maxlength="50">
+                            <span class="error-message" id="contactNameError">Введите корректное имя (мин. 2 символа, только буквы)</span>
+                        </div>
+                        <div class="form-group">
+                            <label>Email <span class="required">*</span></label>
+                            <input type="email" id="contactEmail" class="form-input" placeholder="email@example.com" required>
+                            <span class="error-message" id="contactEmailError">Введите корректный email</span>
+                        </div>
+                        <div class="form-group">
+                            <label>Телефон</label>
+                            <input type="tel" id="contactPhone" class="form-input" placeholder="+7 (___) ___-__-__">
+                            <span class="error-message" id="contactPhoneError">Введите корректный номер телефона</span>
+                        </div>
+                        <div class="form-group">
+                            <label>Тема обращения <span class="required">*</span></label>
                             <div class="custom-select-wrapper" id="subjectWrapper">
                                 <div class="custom-select" id="customSelect">
                                     <span id="selectedSubject">Выберите тему</span>
@@ -72,8 +292,13 @@
                                     <div class="custom-option" data-value="Другое">Другое</div>
                                 </div>
                             </div>
+                            <span class="error-message" id="subjectError">Пожалуйста, выберите тему обращения</span>
                         </div>
-                        <div class="form-group"><label>Сообщение *</label><textarea id="contactMessage" placeholder="Опишите ваш вопрос..."></textarea></div>
+                        <div class="form-group">
+                            <label>Сообщение <span class="required">*</span></label>
+                            <textarea id="contactMessage" class="form-textarea form-input" placeholder="Опишите ваш вопрос..." required minlength="10" maxlength="1000"></textarea>
+                            <span class="error-message" id="contactMessageError">Сообщение должно содержать минимум 10 символов</span>
+                        </div>
                         <button type="submit" class="submit-btn">Отправить сообщение</button>
                     </form>
                 </div>
@@ -123,6 +348,21 @@
 
     <!-- FOOTER -->
     <div id="site-footer"></div>
+</div>
+
+<!-- МОДАЛЬНОЕ ОКНО УСПЕХА -->
+<div class="success-modal-overlay" id="successModal">
+    <div class="success-modal-content">
+        <button class="success-modal-close" id="successModalClose">&times;</button>
+        <div class="success-icon">
+            <i class="fas fa-check"></i>
+        </div>
+        <h3 class="success-modal-title" id="successModalTitle">Сообщение отправлено!</h3>
+        <p class="success-modal-text" id="successModalText">Спасибо за обращение! Мы ответим вам в ближайшее время.</p>
+        <button class="success-modal-btn" id="successModalBtn">
+            <i class="fas fa-home"></i> На главную
+        </button>
+    </div>
 </div>
 
 <script src="js/components-loader.js"></script>
@@ -198,6 +438,294 @@ if (document.readyState === 'loading') {
 </script>
 
 <script>
+(function() {
+    'use strict';
+    
+    // ===== МАСКИ ВВОДА =====
+    let phoneMask = null;
+    
+    function initMasks() {
+        const phoneInput = document.getElementById('contactPhone');
+        if (phoneInput && window.IMask) {
+            phoneMask = IMask(phoneInput, {
+                mask: '+{7} (000) 000-00-00',
+                lazy: false,
+                placeholderChar: '_'
+            });
+        }
+    }
+    
+    // ===== ВАЛИДАТОРЫ =====
+    const validators = {
+        name: (value) => value.trim().length >= 2 && value.trim().length <= 50 && /^[а-яА-ЯёЁa-zA-Z\s\-']+$/.test(value.trim()),
+        email: (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim()),
+        phone: (value) => {
+            if (!value.trim()) return true; // Телефон необязателен
+            const cleaned = value.replace(/\D/g, '');
+            return cleaned.length === 11 && cleaned.startsWith('7');
+        },
+        message: (value) => value.trim().length >= 10 && value.trim().length <= 1000
+    };
+    
+    // ===== ФУНКЦИИ ВАЛИДАЦИИ =====
+    function showError(input, errorId) {
+        input.classList.remove('valid');
+        input.classList.add('error');
+        const errorEl = document.getElementById(errorId);
+        if (errorEl) errorEl.classList.add('visible');
+    }
+    
+    function hideError(input, errorId) {
+        input.classList.remove('error');
+        const errorEl = document.getElementById(errorId);
+        if (errorEl) errorEl.classList.remove('visible');
+    }
+    
+    function showSuccess(input) {
+        input.classList.remove('error');
+        input.classList.add('valid');
+    }
+    
+    function validateField(input, validator, errorId, isRequired = true) {
+        const value = input.value;
+        
+        // Если поле необязательное и пустое
+        if (!isRequired && !value.trim()) {
+            hideError(input, errorId);
+            input.classList.remove('valid');
+            return true;
+        }
+        
+        // Если поле обязательное и пустое
+        if (isRequired && !value.trim()) {
+            showError(input, errorId);
+            return false;
+        }
+        
+        // Проверка валидатором
+        if (value.trim() && !validator(value)) {
+            showError(input, errorId);
+            return false;
+        }
+        
+        hideError(input, errorId);
+        if (value.trim()) showSuccess(input);
+        return true;
+    }
+    
+    // ===== МОДАЛЬНОЕ ОКНО УСПЕХА =====
+    const successModal = document.getElementById('successModal');
+    const successModalClose = document.getElementById('successModalClose');
+    const successModalBtn = document.getElementById('successModalBtn');
+    const successModalTitle = document.getElementById('successModalTitle');
+    const successModalText = document.getElementById('successModalText');
+    
+    function openSuccessModal(title, text, redirectTo = null) {
+        successModalTitle.textContent = title;
+        successModalText.textContent = text;
+        successModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        
+        if (redirectTo) {
+            successModalBtn.onclick = () => {
+                closeSuccessModal();
+                window.location.href = redirectTo;
+            };
+        } else {
+            successModalBtn.onclick = closeSuccessModal;
+        }
+    }
+    
+    function closeSuccessModal() {
+        successModal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+    
+    if (successModalClose) {
+        successModalClose.addEventListener('click', closeSuccessModal);
+    }
+    if (successModal) {
+        successModal.addEventListener('click', (e) => {
+            if (e.target === successModal) closeSuccessModal();
+        });
+    }
+    
+    // ===== КАСТОМНЫЙ СЕЛЕКТ =====
+    const customSelect = document.getElementById('customSelect');
+    const customOptions = document.getElementById('customOptions');
+    const selectedSubject = document.getElementById('selectedSubject');
+    let selectedValue = 'Выберите тему';
+    
+    if (customSelect) {
+        customSelect.addEventListener('click', (e) => {
+            e.stopPropagation();
+            customSelect.classList.toggle('active');
+            customOptions.classList.toggle('show');
+            
+            // Скрываем ошибку при открытии селекта
+            const subjectError = document.getElementById('subjectError');
+            if (subjectError) subjectError.classList.remove('visible');
+        });
+    }
+    
+    document.querySelectorAll('.custom-option').forEach(option => {
+        option.addEventListener('click', (e) => {
+            e.stopPropagation();
+            selectedValue = option.dataset.value;
+            selectedSubject.textContent = selectedValue;
+            customSelect.classList.remove('active');
+            customOptions.classList.remove('show');
+            document.querySelectorAll('.custom-option').forEach(opt => opt.classList.remove('selected'));
+            option.classList.add('selected');
+            
+            // Скрываем ошибку при выборе
+            const subjectError = document.getElementById('subjectError');
+            if (subjectError) subjectError.classList.remove('visible');
+        });
+    });
+    
+    document.addEventListener('click', (e) => {
+        if (customSelect && !customSelect.contains(e.target) && customOptions && !customOptions.contains(e.target)) {
+            customSelect.classList.remove('active');
+            customOptions.classList.remove('show');
+        }
+    });
+    
+    // ===== ВАЛИДАЦИЯ ФОРМЫ =====
+    const contactForm = document.getElementById('contactForm');
+    
+    if (contactForm) {
+        // Валидация в реальном времени
+        const nameInput = document.getElementById('contactName');
+        const emailInput = document.getElementById('contactEmail');
+        const phoneInput = document.getElementById('contactPhone');
+        const messageInput = document.getElementById('contactMessage');
+        
+        if (nameInput) {
+            nameInput.addEventListener('blur', () => validateField(nameInput, validators.name, 'contactNameError'));
+            nameInput.addEventListener('input', () => {
+                if (nameInput.classList.contains('error')) {
+                    validateField(nameInput, validators.name, 'contactNameError');
+                }
+            });
+        }
+        
+        if (emailInput) {
+            emailInput.addEventListener('blur', () => validateField(emailInput, validators.email, 'contactEmailError'));
+            emailInput.addEventListener('input', () => {
+                if (emailInput.classList.contains('error')) {
+                    validateField(emailInput, validators.email, 'contactEmailError');
+                }
+            });
+        }
+        
+        if (phoneInput) {
+            phoneInput.addEventListener('blur', () => validateField(phoneInput, validators.phone, 'contactPhoneError', false));
+            phoneInput.addEventListener('input', () => {
+                if (phoneInput.classList.contains('error')) {
+                    validateField(phoneInput, validators.phone, 'contactPhoneError', false);
+                }
+            });
+        }
+        
+        if (messageInput) {
+            messageInput.addEventListener('blur', () => validateField(messageInput, validators.message, 'contactMessageError'));
+            messageInput.addEventListener('input', () => {
+                if (messageInput.classList.contains('error')) {
+                    validateField(messageInput, validators.message, 'contactMessageError');
+                }
+            });
+        }
+        
+        // Отправка формы
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            let isValid = true;
+            
+            // Валидация всех полей
+            if (!validateField(nameInput, validators.name, 'contactNameError')) isValid = false;
+            if (!validateField(emailInput, validators.email, 'contactEmailError')) isValid = false;
+            if (!validateField(phoneInput, validators.phone, 'contactPhoneError', false)) isValid = false;
+            if (!validateField(messageInput, validators.message, 'contactMessageError')) isValid = false;
+            
+            // Валидация селекта
+            const subjectError = document.getElementById('subjectError');
+            if (selectedValue === 'Выберите тему') {
+                if (subjectError) subjectError.classList.add('visible');
+                isValid = false;
+            } else {
+                if (subjectError) subjectError.classList.remove('visible');
+            }
+            
+            if (!isValid) {
+                // Прокрутка к первому полю с ошибкой
+                const firstError = document.querySelector('#contactForm .form-input.error, #contactForm .form-textarea.error, #contactForm .error-message.visible');
+                if (firstError) {
+                    firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+                return;
+            }
+            
+            // Сбор данных формы
+            const formData = {
+                name: nameInput.value.trim(),
+                email: emailInput.value.trim(),
+                phone: phoneInput.value.trim(),
+                subject: selectedValue,
+                message: messageInput.value.trim(),
+                timestamp: new Date().toISOString(),
+                source: 'contacts-page'
+            };
+            
+            // Сохранение в localStorage (для демонстрации)
+            localStorage.setItem('mikos_contact_form', JSON.stringify(formData));
+            
+            // Очистка формы
+            contactForm.reset();
+            nameInput.classList.remove('valid', 'error');
+            emailInput.classList.remove('valid', 'error');
+            phoneInput.classList.remove('valid', 'error');
+            messageInput.classList.remove('valid', 'error');
+            
+            // Сброс селекта
+            selectedValue = 'Выберите тему';
+            selectedSubject.textContent = 'Выберите тему';
+            document.querySelectorAll('.custom-option').forEach(opt => opt.classList.remove('selected'));
+            document.querySelector('.custom-option[data-value="Выберите тему"]')?.classList.add('selected');
+            
+            // Сброс маски
+            if (phoneMask) {
+                phoneMask.value = '';
+            }
+            
+            // Показ модального окна успеха
+            openSuccessModal(
+                'Сообщение отправлено! ✨', 
+                `Спасибо, ${formData.name}! Мы получили ваше сообщение и ответим в течение одного рабочего дня на указанный email.`,
+                null
+            );
+        });
+    }
+    
+    // ===== ИНИЦИАЛИЗАЦИЯ =====
+    document.addEventListener('DOMContentLoaded', () => {
+        setTimeout(() => {
+            initMasks();
+        }, 100);
+    });
+    
+    // ===== ЗАКРЫТИЕ МОДАЛОК ПО ESC =====
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && successModal?.classList.contains('active')) {
+            closeSuccessModal();
+        }
+    });
+    
+})();
+</script>
+
+<script>
     // Header dropdown (три точки)
     const dotsIcon = document.getElementById('dotsIcon');
     const closeIcon = document.getElementById('closeIcon');
@@ -221,54 +749,6 @@ if (document.readyState === 'loading') {
     // FAQ аккордеон
     document.querySelectorAll('.faq-item').forEach(item => {
         item.addEventListener('click', () => { item.classList.toggle('open'); });
-    });
-    
-    // Кастомный выпадающий список
-    const customSelect = document.getElementById('customSelect');
-    const customOptions = document.getElementById('customOptions');
-    const selectedSubject = document.getElementById('selectedSubject');
-    let selectedValue = 'Выберите тему';
-    
-    customSelect.addEventListener('click', (e) => {
-        e.stopPropagation();
-        customSelect.classList.toggle('active');
-        customOptions.classList.toggle('show');
-    });
-    
-    document.querySelectorAll('.custom-option').forEach(option => {
-        option.addEventListener('click', (e) => {
-            e.stopPropagation();
-            selectedValue = option.dataset.value;
-            selectedSubject.textContent = selectedValue;
-            customSelect.classList.remove('active');
-            customOptions.classList.remove('show');
-            document.querySelectorAll('.custom-option').forEach(opt => opt.classList.remove('selected'));
-            option.classList.add('selected');
-        });
-    });
-    
-    document.addEventListener('click', (e) => {
-        if (!customSelect.contains(e.target) && !customOptions.contains(e.target)) {
-            customSelect.classList.remove('active');
-            customOptions.classList.remove('show');
-        }
-    });
-    
-    // Отправка формы
-    document.getElementById('contactForm')?.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const name = document.getElementById('contactName')?.value.trim();
-        const email = document.getElementById('contactEmail')?.value.trim();
-        const message = document.getElementById('contactMessage')?.value.trim();
-        const subject = selectedValue;
-        if (!name || !email || !message) { alert('Пожалуйста, заполните обязательные поля: Имя, Email и Сообщение'); return; }
-        if (subject === 'Выберите тему') { alert('Пожалуйста, выберите тему обращения'); return; }
-        alert('Спасибо! Ваше сообщение отправлено. Мы ответим вам в ближайшее время.');
-        e.target.reset();
-        selectedSubject.textContent = 'Выберите тему';
-        selectedValue = 'Выберите тему';
-        document.querySelectorAll('.custom-option').forEach(opt => opt.classList.remove('selected'));
-        document.querySelector('.custom-option[data-value="Выберите тему"]')?.classList.add('selected');
     });
     
     // Подписка в футере

@@ -9,62 +9,46 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
     <style>
-        /* --- SVG-иконки в стиле театра --- */
-        
-        /* Календарь для поля даты - цвет #4A6294 как у стрелок */
-        #eventDate {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%234A6294' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='18' rx='2' ry='2'%3E%3C/rect%3E%3Cline x1='16' y1='2' x2='16' y2='6'%3E%3C/line%3E%3Cline x1='8' y1='2' x2='8' y2='6'%3E%3C/line%3E%3Cline x1='3' y1='10' x2='21' y2='10'%3E%3C/line%3E%3C/svg%3E") !important;
-            background-repeat: no-repeat !important;
-            background-position: right 12px center !important;
-            background-size: 18px 18px !important;
-            padding-right: 40px !important;
-            cursor: pointer !important;
+        /* --- минималистичная иконка календаря --- */
+        .date-input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
         }
-        #eventDate:hover {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%23E8454D' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='18' rx='2' ry='2'%3E%3C/rect%3E%3Cline x1='16' y1='2' x2='16' y2='6'%3E%3C/line%3E%3Cline x1='8' y1='2' x2='8' y2='6'%3E%3C/line%3E%3Cline x1='3' y1='10' x2='21' y2='10'%3E%3C/line%3E%3C/svg%3E") !important;
-        }
-        
-        /* Стрелка для кастомных селектов */
-        .custom-select-btn {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%234A6294' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") !important;
-            background-repeat: no-repeat !important;
-            background-position: right 16px center !important;
-            background-size: 14px 14px !important;
-            padding-right: 40px !important;
-            transition: background-image 0.2s ease !important;
-        }
-        .custom-select-btn.active {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23E8454D' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='18 15 12 9 6 15'%3E%3C/polyline%3E%3C/svg%3E") !important;
-        }
-        
-        /* Обычные селекты */
-        .form-select-customers {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%234A6294' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") !important;
-            background-repeat: no-repeat !important;
-            background-position: right 16px center !important;
-            background-size: 14px 14px !important;
-            padding-right: 40px !important;
-        }
-
-        /* Скрываем старые иконки */
         .calendar-icon {
-            display: none !important;
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #8A8A8A;
+            font-size: 18px;
+            background: transparent;
+            border: none;
+            opacity: 0.7;
+            transition: opacity 0.2s, color 0.2s;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: auto;
+            padding: 0;
         }
-        .custom-select-btn::after {
-            display: none !important;
+        .calendar-icon:hover {
+            opacity: 1;
+            color: #E8454D;
         }
-
-        /* --- Валидация с голубой обводкой --- */
+        .form-input-customers {
+            padding-right: 44px !important;
+        }
         .form-input-customers.error {
             border-color: #E8454D !important;
             box-shadow: 0 0 0 3px rgba(232, 69, 77, 0.1) !important;
         }
         .form-input-customers.valid {
-            border-color: #4A6294 !important;
-            box-shadow: 0 0 0 3px rgba(74, 98, 148, 0.1) !important;
+            border-color: #2E7D32 !important;
+            box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.1) !important;
         }
-
-        /* --- Кастомный календарь в стиле театра --- */
         .hidden-date-picker {
             position: absolute;
             opacity: 0;
@@ -72,13 +56,8 @@
             width: 0;
             height: 0;
         }
-        /* Стилизация нативного календаря */
-        .hidden-date-picker::-webkit-calendar-picker-indicator {
-            background: none;
-            cursor: pointer;
-        }
 
-        /* --- Кастомные селекты --- */
+        /* --- кастомные селекты (без дублей, адаптивно) --- */
         .custom-select-wrapper { 
             position: relative; 
             display: block; 
@@ -86,7 +65,7 @@
         }
         .custom-select-btn { 
             width: 100%; 
-            background-color: #FFFFFF; 
+            background: #FFFFFF; 
             border: 2px solid #E5E3E1; 
             border-radius: 8px; 
             padding: 12px 16px; 
@@ -100,8 +79,16 @@
             justify-content: space-between; 
             align-items: center; 
         }
-        .custom-select-btn:hover {
-            border-color: #4A6294;
+        .custom-select-btn::after { 
+            content: '\f0d7'; 
+            font-family: 'Font Awesome 6 Free'; 
+            font-weight: 900; 
+            font-size: 14px; 
+            color: #4A6294; 
+            transition: transform 0.2s; 
+        }
+        .custom-select-btn.active::after { 
+            transform: rotate(180deg); 
         }
         .custom-select-dropdown { 
             position: absolute; 
@@ -109,14 +96,14 @@
             left: 0; 
             right: 0; 
             background: #FFFFFF; 
-            border: 2px solid #4A6294; 
+            border: 2px solid #E5E3E1; 
             border-radius: 8px; 
             margin-top: 4px; 
-            z-index: 10000;
+            z-index: 1000;   /* повышен, чтобы перекрывать другие элементы */
             display: none; 
             max-height: 240px; 
             overflow-y: auto; 
-            box-shadow: 0 8px 24px rgba(26, 23, 24, 0.15);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
         .custom-select-dropdown.show { 
             display: block; 
@@ -126,7 +113,6 @@
             cursor: pointer; 
             font-family: 'Nunito Sans', sans-serif; 
             transition: background 0.2s; 
-            color: #1A1718;
         }
         .custom-select-option:hover { 
             background: #F8F7F6; 
@@ -137,7 +123,16 @@
             color: #2A3D5E; 
         }
 
-        /* --- Модальное окно --- */
+        /* --- поля конструктора --- */
+        .form-input-customers.required-field {
+            /* стили для обязательных полей */
+        }
+        .form-group-custom .required-star {
+            color: #E8454D;
+            margin-left: 2px;
+        }
+
+        /* --- модальное окно успеха --- */
         .success-modal-overlay {
             position: fixed;
             top: 0;
@@ -253,31 +248,22 @@
             border-color: #E8454D;
         }
 
-        /* --- Обязательные поля --- */
-        .form-group-custom .required-star {
-            color: #E8454D;
-            margin-left: 2px;
-        }
-
-        /* --- Адаптив для мобильных --- */
+        /* --- адаптив для мобильных --- */
         @media (max-width: 768px) {
             .custom-select-dropdown {
                 max-height: 200px;
                 z-index: 10000;
-                position: absolute;
-                width: 100%;
             }
             .custom-select-btn {
-                background-position: right 12px center !important;
-                padding: 12px 36px 12px 14px !important;
+                padding: 12px 14px;
                 font-size: 14px;
             }
-            #eventDate {
-                background-position: right 8px center !important;
-                padding-right: 34px !important;
+            .calendar-icon {
+                right: 8px;
+                font-size: 16px;
             }
-            .builder-preview {
-                scroll-margin-top: 20px;
+            .form-input-customers {
+                padding-right: 38px !important;
             }
         }
         @media (max-width: 480px) {
@@ -339,51 +325,37 @@
                     <div class="form-row">
                         <div class="form-group-custom">
                             <label for="requestName">Имя <span class="required-star">*</span></label>
-                            <input type="text" id="requestName" name="requestName" placeholder="Александр" class="form-input-customers" required autocomplete="name">
+                            <input type="text" id="requestName" name="requestName" placeholder="Александр" class="form-input-customers" required>
                         </div>
                         <div class="form-group-custom">
                             <label for="requestCompany">Компания</label>
-                            <input type="text" id="requestCompany" name="requestCompany" placeholder="Название (необязательно)" class="form-input-customers" autocomplete="organization">
+                            <input type="text" id="requestCompany" name="requestCompany" placeholder="Название (необязательно)" class="form-input-customers">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group-custom">
                             <label for="requestEmail">Email <span class="required-star">*</span></label>
-                            <input type="email" id="requestEmail" name="requestEmail" placeholder="partner@company.ru" class="form-input-customers" required autocomplete="email">
+                            <input type="email" id="requestEmail" name="requestEmail" placeholder="partner@company.ru" class="form-input-customers" required>
                         </div>
                         <div class="form-group-custom">
                             <label for="requestPhone">Телефон <span class="required-star">*</span></label>
-                            <input type="tel" id="requestPhone" name="requestPhone" placeholder="+7 (___) ___-__-__" class="form-input-customers" required autocomplete="tel">
+                            <input type="tel" id="requestPhone" name="requestPhone" placeholder="+7 (___) ___-__-__" class="form-input-customers" required>
                         </div>
                     </div>
                     <div class="form-group-custom"><label for="eventType">Тип мероприятия</label><select id="eventType" name="eventType" class="form-select-customers"><option value="corporate">Корпоративный показ</option><option value="private">Частное событие</option><option value="education">Образовательный проект</option></select></div>
-                    <div class="form-row"><div class="form-group-custom"><label for="eventDate">Предполагаемая дата</label><div class="date-input-wrapper"><input type="text" id="eventDate" name="eventDate" placeholder="ДД.ММ.ГГГГ" autocomplete="off" class="form-input-customers"></div></div><div class="form-group-custom"><label for="audienceCount">Количество зрителей</label><select id="audienceCount" name="audienceCount" class="form-select-customers"><option value="up-to-100">до 100</option><option value="100-300">100–300</option><option value="300-plus">300+</option></select></div></div>
+                    <div class="form-row"><div class="form-group-custom"><label for="eventDate">Предполагаемая дата</label><input type="text" id="eventDate" name="eventDate" placeholder="ДД.ММ.ГГГГ" autocomplete="off" class="form-input-customers"></div><div class="form-group-custom"><label for="audienceCount">Количество зрителей</label><select id="audienceCount" name="audienceCount" class="form-select-customers"><option value="up-to-100">до 100</option><option value="100-300">100–300</option><option value="300-plus">300+</option></select></div></div>
                     <div class="form-group-custom"><label for="eventFormat">Формат</label><select id="eventFormat" name="eventFormat" class="form-select-customers"><option value="ready">Готовый спектакль</option><option value="custom">Индивидуальная постановка</option><option value="workshop">Мастер-класс</option></select></div>
                     <div class="form-group-custom"><label for="extraWishes">Дополнительные пожелания</label><textarea id="extraWishes" name="extraWishes" placeholder="Опишите задачу, площадку, бюджет..."></textarea></div>
                     <div style="display: flex; gap: 16px; flex-wrap: wrap;"><button type="button" class="submit-request-btn" id="previewBtn">Сформировать запрос</button><button type="button" class="submit-request-btn secondary" id="resetBtn">Сбросить</button></div>
                 </form>
-                <aside class="builder-preview" id="builderPreview">
-                    <div class="preview-header"><span class="preview-title">Предварительный запрос</span><span class="preview-draft">черновик</span></div>
-                    <div id="previewContent">
-                        <div class="preview-item"><div class="preview-label">Имя</div><div class="preview-value">—</div></div>
-                        <div class="preview-item"><div class="preview-label">Компания</div><div class="preview-value">—</div></div>
-                        <div class="preview-item"><div class="preview-label">Email</div><div class="preview-value">—</div></div>
-                        <div class="preview-item"><div class="preview-label">Телефон</div><div class="preview-value">—</div></div>
-                        <div class="preview-item"><div class="preview-label">Тип</div><div class="preview-value">—</div></div>
-                        <div class="preview-item"><div class="preview-label">Дата</div><div class="preview-value">—</div></div>
-                        <div class="preview-item"><div class="preview-label">Зрителей</div><div class="preview-value">—</div></div>
-                        <div class="preview-item"><div class="preview-label">Формат</div><div class="preview-value">—</div></div>
-                        <div class="preview-item"><div class="preview-label">Пожелания</div><div class="preview-value">—</div></div>
-                    </div>
-                    <button class="submit-request-btn" id="sendRequestBtn">Отправить запрос</button>
-                </aside>
+                <aside class="builder-preview"><div class="preview-header"><span class="preview-title">Предварительный запрос</span><span class="preview-draft">черновик</span></div><div id="previewContent"><div class="preview-item"><div class="preview-label">Имя</div><div class="preview-value">—</div></div><div class="preview-item"><div class="preview-label">Компания</div><div class="preview-value">—</div></div><div class="preview-item"><div class="preview-label">Email</div><div class="preview-value">—</div></div><div class="preview-item"><div class="preview-label">Телефон</div><div class="preview-value">—</div></div><div class="preview-item"><div class="preview-label">Тип</div><div class="preview-value">Корпоративный показ</div></div><div class="preview-item"><div class="preview-label">Дата</div><div class="preview-value">—</div></div><div class="preview-item"><div class="preview-label">Зрителей</div><div class="preview-value">до 100</div></div><div class="preview-item"><div class="preview-label">Формат</div><div class="preview-value">Готовый спектакль</div></div></div><button class="submit-request-btn" id="sendRequestBtn">Отправить запрос</button></aside>
             </div>
         </section>
 
         <!-- Технический райдер -->
         <section>
-            <div class="section-header-custom"><h2 class="section-title-custom">Технический райдер</h2><a href="images/content/Tex_райдер_Микос.pdf" class="section-link-custom" download>Полная документация <i class="fas fa-arrow-right"></i></a></div>
-            <div class="rider-section"><div class="rider-info"><h3>В один клик</h3><p>Готовая документация для вашей площадки. Свет, звук, видео, сцена и монтаж. Адаптируем под любые условия.</p><div class="rider-features"><div class="rider-feature"><i class="fas fa-check-circle"></i><span>Световое оборудование (18+ позиций)</span></div><div class="rider-feature"><i class="fas fa-check-circle"></i><span>Звуковое усиление и микрофоны</span></div><div class="rider-feature"><i class="fas fa-check-circle"></i><span>Видеопроекция и медиаконтент</span></div><div class="rider-feature"><i class="fas fa-check-circle"></i><span>Параметры сцены и кулис</span></div></div></div><div class="rider-card"><h4>Технический райдер</h4><div class="rider-meta">Актуальная версия · февраль 2025</div><div class="rider-meta">Формат PDF, 2.1 МБ</div><div class="rider-file"><i class="fas fa-file-pdf"></i><div class="rider-file-info"><div class="rider-file-name">Технический_райдер_Микос.pdf</div><div class="rider-file-date">Обновлен: 10.02.2025</div></div><a href="images/content/Tex_райдер_Микос.pdf" download><i class="fas fa-download"></i></a></div></div></div>
+            <div class="section-header-custom"><h2 class="section-title-custom">Технический райдер</h2><a href="#" class="section-link-custom">Полная документация <i class="fas fa-arrow-right"></i></a></div>
+            <div class="rider-section"><div class="rider-info"><h3>В один клик</h3><p>Готовая документация для вашей площадки. Свет, звук, видео, сцена и монтаж. Адаптируем под любые условия.</p><div class="rider-features"><div class="rider-feature"><i class="fas fa-check-circle"></i><span>Световое оборудование (18+ позиций)</span></div><div class="rider-feature"><i class="fas fa-check-circle"></i><span>Звуковое усиление и микрофоны</span></div><div class="rider-feature"><i class="fas fa-check-circle"></i><span>Видеопроекция и медиаконтент</span></div><div class="rider-feature"><i class="fas fa-check-circle"></i><span>Параметры сцены и кулис</span></div></div></div><div class="rider-card"><h4>Технический райдер</h4><div class="rider-meta">Актуальная версия · февраль 2025</div><div class="rider-meta">Формат PDF, 2.1 МБ</div><div class="rider-file"><i class="fas fa-file-pdf"></i><div class="rider-file-info"><div class="rider-file-name">Технический_райдер_театр.pdf</div><div class="rider-file-date">Обновлен: 10.02.2025</div></div><a href="#" download><i class="fas fa-download"></i></a></div></div></div>
         </section>
 
         <!-- Условия сотрудничества -->
@@ -443,81 +415,6 @@
     if (successModal) successModal.addEventListener('click', (e) => { if (e.target === successModal) closeSuccessModal(); });
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && successModal.classList.contains('active')) closeSuccessModal(); });
 
-    // ==================== УНИВЕРСАЛЬНАЯ МАСКА ТЕЛЕФОНА ====================
-    function applyPhoneMask(inputElement) {
-        if (!inputElement) return;
-        
-        inputElement.addEventListener('input', function(e) {
-            let value = this.value.replace(/\D/g, '');
-            if (value.length > 11) value = value.slice(0, 11);
-            let formatted = '';
-            if (value.length > 0) {
-                formatted = '+7';
-                if (value.length > 1) formatted += ' (' + value.slice(1, 4);
-                if (value.length >= 4) formatted += ') ' + value.slice(4, 7);
-                if (value.length >= 7) formatted += '-' + value.slice(7, 9);
-                if (value.length >= 9) formatted += '-' + value.slice(9, 11);
-            }
-            this.value = formatted;
-        });
-        
-        inputElement.addEventListener('focus', function() {
-            if (!this.value || this.value === '+7' || this.value === '+7 (') {
-                this.value = '+7 (';
-            }
-        });
-        
-        inputElement.addEventListener('blur', function() {
-            if (this.value === '+7 (' || this.value === '+7' || this.value === '+7 (') {
-                this.value = '';
-            }
-        });
-        
-        inputElement.addEventListener('keydown', function(e) {
-            if (!/[0-9]/.test(e.key) && !['Backspace','Delete','ArrowLeft','ArrowRight','Tab','Escape','Enter','Home','End'].includes(e.key)) {
-                e.preventDefault();
-            }
-        });
-    }
-
-    // ==================== ФУНКЦИЯ ВАЛИДАЦИИ ПОЛЯ ====================
-    function validateField(field, validationType) {
-        if (!field) return true;
-        
-        const value = field.value.trim();
-        let isValid = true;
-        
-        switch(validationType) {
-            case 'name':
-                isValid = value.length >= 2;
-                break;
-            case 'email':
-                isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-                break;
-            case 'phone':
-                const digits = value.replace(/\D/g, '');
-                isValid = digits.length === 11 && digits.startsWith('7');
-                break;
-            case 'required':
-                isValid = value.length > 0;
-                break;
-        }
-        
-        if (!isValid) {
-            field.classList.add('error');
-            field.classList.remove('valid');
-        } else {
-            field.classList.remove('error');
-            if (value.length > 0) {
-                field.classList.add('valid');
-            } else {
-                field.classList.remove('valid');
-            }
-        }
-        
-        return isValid;
-    }
-
     // ==================== КОНСТРУКТОР ЗАПРОСА ====================
     function updatePreview() {
         const name = document.getElementById('requestName').value || '—';
@@ -528,67 +425,22 @@
         const date = document.getElementById('eventDate').value || '—';
         const audience = document.getElementById('audienceCount');
         const format = document.getElementById('eventFormat');
-        const wishes = document.getElementById('extraWishes').value || '—';
         const typeText = type.options[type.selectedIndex].text;
         const audienceText = audience.options[audience.selectedIndex].text;
         const formatText = format.options[format.selectedIndex].text;
-        
         document.getElementById('previewContent').innerHTML = 
-            `<div class="preview-item"><div class="preview-label">Имя</div><div class="preview-value">${escapeHtml(name)}</div></div>
-            <div class="preview-item"><div class="preview-label">Компания</div><div class="preview-value">${escapeHtml(company)}</div></div>
-            <div class="preview-item"><div class="preview-label">Email</div><div class="preview-value">${escapeHtml(email)}</div></div>
-            <div class="preview-item"><div class="preview-label">Телефон</div><div class="preview-value">${escapeHtml(phone)}</div></div>
+            `<div class="preview-item"><div class="preview-label">Имя</div><div class="preview-value">${name}</div></div>
+            <div class="preview-item"><div class="preview-label">Компания</div><div class="preview-value">${company}</div></div>
+            <div class="preview-item"><div class="preview-label">Email</div><div class="preview-value">${email}</div></div>
+            <div class="preview-item"><div class="preview-label">Телефон</div><div class="preview-value">${phone}</div></div>
             <div class="preview-item"><div class="preview-label">Тип</div><div class="preview-value">${typeText}</div></div>
             <div class="preview-item"><div class="preview-label">Дата</div><div class="preview-value">${date}</div></div>
             <div class="preview-item"><div class="preview-label">Зрителей</div><div class="preview-value">${audienceText}</div></div>
-            <div class="preview-item"><div class="preview-label">Формат</div><div class="preview-value">${formatText}</div></div>
-            <div class="preview-item"><div class="preview-label">Пожелания</div><div class="preview-value">${escapeHtml(wishes)}</div></div>`;
+            <div class="preview-item"><div class="preview-label">Формат</div><div class="preview-value">${formatText}</div></div>`;
     }
-
-    function escapeHtml(text) {
-        const div = document.createElement('div');
-        div.textContent = text;
-        return div.innerHTML;
-    }
-
-    // Кнопка "Сформировать запрос" - валидация и обновление превью
-    document.getElementById('previewBtn')?.addEventListener('click', () => {
-        let isValid = true;
-        
-        // Валидируем обязательные поля
-        if (!validateField(document.getElementById('requestName'), 'name')) isValid = false;
-        if (!validateField(document.getElementById('requestEmail'), 'email')) isValid = false;
-        if (!validateField(document.getElementById('requestPhone'), 'phone')) isValid = false;
-        
-        if (!isValid) {
-            const firstError = document.querySelector('.form-input-customers.error');
-            if (firstError) {
-                firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                firstError.focus();
-            }
-            return; // Не обновляем превью, пока поля не заполнены корректно
-        }
-        
-        updatePreview();
-        
-        // На мобильных устройствах прокручиваем к превью
-        if (window.innerWidth <= 768) {
-            const preview = document.getElementById('builderPreview');
-            if (preview) {
-                setTimeout(() => {
-                    preview.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }, 100);
-            }
-        }
-    });
-
-    // Кнопка "Сбросить"
+    document.getElementById('previewBtn')?.addEventListener('click', updatePreview);
     document.getElementById('resetBtn')?.addEventListener('click', () => {
         document.getElementById('requestForm').reset();
-        // Сбрасываем стили валидации
-        document.querySelectorAll('.form-input-customers.error, .form-input-customers.valid').forEach(el => {
-            el.classList.remove('error', 'valid');
-        });
         // Синхронизируем кастомные кнопки с select
         document.querySelectorAll('.custom-select-wrapper').forEach(wrapper => {
             const nativeSelect = wrapper.querySelector('select');
@@ -597,91 +449,91 @@
                 btn.textContent = nativeSelect.options[nativeSelect.selectedIndex].text;
             }
         });
-        // Сбрасываем телефон в конструкторе
-        const requestPhone = document.getElementById('requestPhone');
-        if (requestPhone) requestPhone.value = '';
-        
-        // Сбрасываем превью к исходному состоянию
-        document.getElementById('previewContent').innerHTML = 
-            `<div class="preview-item"><div class="preview-label">Имя</div><div class="preview-value">—</div></div>
-            <div class="preview-item"><div class="preview-label">Компания</div><div class="preview-value">—</div></div>
-            <div class="preview-item"><div class="preview-label">Email</div><div class="preview-value">—</div></div>
-            <div class="preview-item"><div class="preview-label">Телефон</div><div class="preview-value">—</div></div>
-            <div class="preview-item"><div class="preview-label">Тип</div><div class="preview-value">—</div></div>
-            <div class="preview-item"><div class="preview-label">Дата</div><div class="preview-value">—</div></div>
-            <div class="preview-item"><div class="preview-label">Зрителей</div><div class="preview-value">—</div></div>
-            <div class="preview-item"><div class="preview-label">Формат</div><div class="preview-value">—</div></div>
-            <div class="preview-item"><div class="preview-label">Пожелания</div><div class="preview-value">—</div></div>`;
+        updatePreview();
     });
 
-    // Отправка запроса из конструктора
+    // Валидация и отправка запроса из конструктора
     document.getElementById('sendRequestBtn')?.addEventListener('click', () => {
+        const name = document.getElementById('requestName');
+        const email = document.getElementById('requestEmail');
+        const phone = document.getElementById('requestPhone');
         let isValid = true;
-        
-        // Валидируем обязательные поля
-        if (!validateField(document.getElementById('requestName'), 'name')) isValid = false;
-        if (!validateField(document.getElementById('requestEmail'), 'email')) isValid = false;
-        if (!validateField(document.getElementById('requestPhone'), 'phone')) isValid = false;
-        
+
+        if (!name.value.trim()) { name.style.borderColor = '#E8454D'; isValid = false; } else name.style.borderColor = '';
+        if (!email.value.trim() || !/^\S+@\S+\.\S+$/.test(email.value)) { email.style.borderColor = '#E8454D'; isValid = false; } else email.style.borderColor = '';
+        if (!phone.value.trim() || phone.value.replace(/\D/g, '').length !== 11) { phone.style.borderColor = '#E8454D'; isValid = false; } else phone.style.borderColor = '';
+
         if (!isValid) {
-            openSuccessModal('Ошибка заполнения', 'Пожалуйста, проверьте обязательные поля: Имя, Email и Телефон. Они выделены красным.');
+            openSuccessModal('Ошибка', 'Пожалуйста, заполните обязательные поля: Имя, Email и Телефон.');
             return;
         }
-        
+
         const formData = {
-            name: document.getElementById('requestName').value,
+            name: name.value,
             company: document.getElementById('requestCompany').value || 'Не указана',
-            email: document.getElementById('requestEmail').value,
-            phone: document.getElementById('requestPhone').value,
+            email: email.value,
+            phone: phone.value,
             type: document.getElementById('eventType').value,
             date: document.getElementById('eventDate').value,
             audience: document.getElementById('audienceCount').value,
             format: document.getElementById('eventFormat').value,
             wishes: document.getElementById('extraWishes').value
         };
-        
         console.log('Запрос из конструктора:', formData);
         openSuccessModal('Запрос отправлен!', 'Менеджер театра свяжется с вами в ближайшее время для обсуждения деталей.');
     });
 
-    // ==================== ПРИМЕНЯЕМ МАСКИ К ТЕЛЕФОНАМ ====================
+    // ==================== МАСКА ТЕЛЕФОНА (конструктор) ====================
+    function applyPhoneMask(inputElement) {
+        if (!inputElement) return;
+        inputElement.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 11) value = value.slice(0, 11);
+            let formatted = '';
+            if (value.length > 0) { formatted = '+7'; if (value.length > 1) formatted += ' (' + value.slice(1, 4); if (value.length > 4) formatted += ') ' + value.slice(4, 7); if (value.length > 7) formatted += '-' + value.slice(7, 9); if (value.length > 9) formatted += '-' + value.slice(9, 11); }
+            e.target.value = formatted;
+        });
+        inputElement.addEventListener('focus', function() { if (!this.value) this.value = '+7 ('; });
+        inputElement.addEventListener('blur', function() { if (this.value === '+7 (' || this.value === '+7') this.value = ''; });
+    }
+    // Применяем маску к телефону в конструкторе
     applyPhoneMask(document.getElementById('requestPhone'));
-    applyPhoneMask(document.getElementById('contactPhone'));
 
-    // ==================== ВАЛИДАЦИЯ КОНТАКТНОЙ ФОРМЫ ====================
+    // ==================== МАСКА ТЕЛЕФОНА И ВАЛИДАЦИЯ КОНТАКТОВ (нижняя форма) ====================
+    const contactPhoneInput = document.getElementById('contactPhone');
+    if (contactPhoneInput) {
+        applyPhoneMask(contactPhoneInput);
+    }
+
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
             let isValid = true;
-            
-            if (!validateField(document.getElementById('contactName'), 'name')) isValid = false;
-            if (!validateField(document.getElementById('contactEmail'), 'email')) isValid = false;
-            if (!validateField(document.getElementById('contactPhone'), 'phone')) isValid = false;
-            if (!validateField(document.getElementById('contactMessage'), 'required')) isValid = false;
-            
-            if (!isValid) {
-                openSuccessModal('Ошибка', 'Пожалуйста, заполните все обязательные поля корректно.');
-                return;
-            }
-            
-            console.log('Форма контактов отправлена:', {
-                name: document.getElementById('contactName').value,
-                company: document.getElementById('contactCompany').value,
-                email: document.getElementById('contactEmail').value,
-                phone: document.getElementById('contactPhone').value,
-                message: document.getElementById('contactMessage').value
-            });
+            const name = document.getElementById('contactName');
+            const email = document.getElementById('contactEmail');
+            const phone = document.getElementById('contactPhone');
+            const message = document.getElementById('contactMessage');
+
+            if (!name.value.trim()) { name.style.borderColor = '#E8454D'; isValid = false; } else name.style.borderColor = '';
+            if (!email.value.trim() || !/^\S+@\S+\.\S+$/.test(email.value)) { email.style.borderColor = '#E8454D'; isValid = false; } else email.style.borderColor = '';
+            if (!phone.value.trim() || phone.value.replace(/\D/g, '').length !== 11) { phone.style.borderColor = '#E8454D'; isValid = false; } else phone.style.borderColor = '';
+            if (!message.value.trim()) { message.style.borderColor = '#E8454D'; isValid = false; } else message.style.borderColor = '';
+
+            if (!isValid) { openSuccessModal('Ошибка', 'Пожалуйста, заполните все обязательные поля корректно.'); return; }
+
+            console.log('Форма контактов отправлена:', { name: name.value, company: document.getElementById('contactCompany').value, email: email.value, phone: phone.value, message: message.value });
             contactForm.reset();
             openSuccessModal('Сообщение отправлено!', 'Спасибо! Наш менеджер свяжется с вами в течение 2 часов.');
         });
     }
 
-    // ==================== КАСТОМНЫЙ SELECT ====================
+    // ==================== КАСТОМНЫЙ SELECT (без дублей, адаптивно) ====================
     function initCustomSelects() {
         if (customSelectsInitialized) return;
         const selects = document.querySelectorAll('#eventType, #audienceCount, #eventFormat');
         selects.forEach(function(nativeSelect) {
+            // Если уже обёрнут, пропускаем
             if (nativeSelect.closest('.custom-select-wrapper')) return;
             const wrapper = document.createElement('div'); 
             wrapper.className = 'custom-select-wrapper';
@@ -706,6 +558,7 @@
                     dropdown.classList.remove('show'); 
                     btn.classList.remove('active'); 
                     nativeSelect.dispatchEvent(new Event('change', { bubbles: true })); 
+                    updatePreview(); 
                 });
                 dropdown.appendChild(item);
             });
@@ -713,6 +566,7 @@
             btn.addEventListener('click', function(e) { 
                 e.stopPropagation(); 
                 const isOpen = dropdown.classList.contains('show');
+                // Закрываем все остальные
                 document.querySelectorAll('.custom-select-dropdown').forEach(d => {
                     if (d !== dropdown) {
                         d.classList.remove('show');
@@ -728,6 +582,7 @@
                 }
             });
             
+            // Скрываем оригинальный select и вставляем обёртку
             const clone = nativeSelect.cloneNode(true); 
             clone.style.display = 'none';
             wrapper.appendChild(clone);
@@ -738,6 +593,7 @@
             nativeSelect.parentNode.removeChild(nativeSelect);
         });
         
+        // Закрытие dropdown при клике вне
         document.addEventListener('click', function(e) { 
             if (!e.target.closest('.custom-select-wrapper')) { 
                 document.querySelectorAll('.custom-select-dropdown').forEach(d => { 
@@ -750,14 +606,24 @@
         customSelectsInitialized = true;
     }
 
-    // ==================== ДАТА: МАСКА + СКРЫТЫЙ ПИКЕР ====================
+    // ==================== ДАТА: МАСКА + ИКОНКА КАЛЕНДАРЯ (без дублей) ====================
     function initDateField() {
         if (dateFieldInitialized) return;
         const dateInput = document.getElementById('eventDate');
         if (!dateInput) return;
+        // Если уже есть обёртка, не создаём новую
+        if (dateInput.parentNode.classList && dateInput.parentNode.classList.contains('date-input-wrapper')) return;
         
-        const wrapper = dateInput.closest('.date-input-wrapper');
-        if (!wrapper) return;
+        const wrapper = document.createElement('div'); 
+        wrapper.className = 'date-input-wrapper';
+        dateInput.parentNode.insertBefore(wrapper, dateInput); 
+        wrapper.appendChild(dateInput);
+        
+        const calendarIcon = document.createElement('span'); 
+        calendarIcon.className = 'calendar-icon'; 
+        calendarIcon.innerHTML = '<i class="far fa-calendar-alt"></i>'; 
+        calendarIcon.title = 'Выбрать дату';
+        wrapper.appendChild(calendarIcon);
         
         const hiddenDatePicker = document.createElement('input'); 
         hiddenDatePicker.type = 'date'; 
@@ -765,6 +631,7 @@
         hiddenDatePicker.style.cssText = 'position: absolute; opacity: 0; pointer-events: none; width: 0; height: 0;';
         wrapper.appendChild(hiddenDatePicker);
         
+        // Маска ввода ДД.ММ.ГГГГ
         dateInput.addEventListener('input', function(e) {
             let value = this.value.replace(/\D/g, ''); 
             if (value.length > 8) value = value.slice(0, 8);
@@ -795,8 +662,9 @@
         });
         dateInput.addEventListener('focus', function() { this.classList.remove('error','valid'); });
         
-        dateInput.addEventListener('click', function(e) {
-            const rect = dateInput.getBoundingClientRect(); 
+        calendarIcon.addEventListener('click', function(e) { 
+            e.stopPropagation(); 
+            const rect = calendarIcon.getBoundingClientRect(); 
             hiddenDatePicker.style.position = 'fixed'; 
             hiddenDatePicker.style.left = rect.left + 'px'; 
             hiddenDatePicker.style.top = (rect.bottom + 4) + 'px'; 
@@ -809,7 +677,7 @@
             if (match) hiddenDatePicker.value = `${match[3]}-${match[2]}-${match[1]}`; 
             else hiddenDatePicker.value = ''; 
             if ('showPicker' in hiddenDatePicker) hiddenDatePicker.showPicker(); 
-            else { hiddenDatePicker.focus(); hiddenDatePicker.click(); }
+            else { hiddenDatePicker.focus(); hiddenDatePicker.click(); } 
         });
         
         hiddenDatePicker.addEventListener('change', function() { 
@@ -818,6 +686,7 @@
                 dateInput.value = `${day}.${month}.${year}`; 
                 dateInput.classList.add('valid'); 
                 dateInput.classList.remove('error'); 
+                updatePreview(); 
             } 
             hiddenDatePicker.style.position = 'absolute'; 
             hiddenDatePicker.style.pointerEvents = 'none'; 
@@ -834,14 +703,22 @@
                 hiddenDatePicker.style.opacity = '0'; 
             }, 200); 
         });
+        dateInput.addEventListener('input', updatePreview); 
+        dateInput.addEventListener('change', updatePreview);
         
         dateFieldInitialized = true;
     }
 
     // ==================== ИНИЦИАЛИЗАЦИЯ ====================
     document.addEventListener('DOMContentLoaded', () => {
+        updatePreview();
         initCustomSelects();
         initDateField();
+        // Добавляем отслеживание изменений в текстовых полях конструктора для превью
+        ['requestName', 'requestCompany', 'requestEmail', 'requestPhone'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.addEventListener('input', updatePreview);
+        });
     });
 </script>
 </body>
