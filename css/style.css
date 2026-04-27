@@ -877,7 +877,7 @@ body { background: #fff; font-family: 'Nunito Sans', sans-serif; overflow-x: hid
   .header-inner .logo-group, .header-inner .nav-menu, .header-inner .buy-ticket-btn, .extra-menu-row { display: none !important; }
   .performance-card, .play-card, .merch-card, .service-card { outline: 0 !important; border: 1px solid #E5E3E1 !important; }
   * { -webkit-tap-highlight-color: transparent; }
-  [class*=card], .cast-card, .similar-card { outline: 0 !important; box-shadow: none !important; border: 1px solid #E5E3E1 !important; border-radius: 8px !important; }
+  [class*=card], .cast-card, .similar-card { outline: 0 !important; box-shadow: none !important; border-radius: 8px !important; }
   .hero-slider-afisha { height: 460px; }
   .hero-content-afisha { padding-bottom: 40px; padding-left: 20px; }
   .hero-title-afisha { font-size: 26px; }
