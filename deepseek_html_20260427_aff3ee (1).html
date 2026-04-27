@@ -9,117 +9,50 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" type="image/svg+xml" href="SVG/logo-2.svg" sizes="any">
     <script src="js/tour-data.js"></script>
-    <!-- Подключаем IMask для масок ввода -->
     <script src="https://cdn.jsdelivr.net/npm/imask@7.3.0/dist/imask.min.js"></script>
     <style>
-        /* ===== СТИЛИ МОДАЛЬНОГО ОКНА КОМАНДЫ (как в team.html) ===== */
+        /* ===== СТИЛИ МОДАЛЬНОГО ОКНА КОМАНДЫ ===== */
         .team-modal-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(6px);
-            z-index: 10000;
-            display: flex; align-items: center; justify-content: center;
-            opacity: 0; visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
+            background-color: rgba(0, 0, 0, 0.85); backdrop-filter: blur(6px);
+            z-index: 10000; display: flex; align-items: center; justify-content: center;
+            opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease;
             padding: 20px; box-sizing: border-box;
         }
         .team-modal-overlay.active { opacity: 1; visibility: visible; }
-        
         .team-modal-content {
-            background: #1A1A1A;
-            border-radius: 24px;
-            max-width: 900px; width: 100%;
-            max-height: 85vh; overflow-y: auto;
-            position: relative;
+            background: #1A1A1A; border-radius: 24px; max-width: 900px; width: 100%;
+            max-height: 85vh; overflow-y: auto; position: relative;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            transform: scale(0.95);
-            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transform: scale(0.95); transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
         .team-modal-overlay.active .team-modal-content { transform: scale(1); }
-        
         .team-modal-close {
-            position: absolute; top: 20px; right: 20px;
-            width: 44px; height: 44px; border-radius: 50%;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: rgba(255, 255, 255, 0.8);
+            position: absolute; top: 20px; right: 20px; width: 44px; height: 44px;
+            border-radius: 50%; background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1); color: rgba(255, 255, 255, 0.8);
             font-size: 24px; display: flex; align-items: center; justify-content: center;
-            cursor: pointer; z-index: 10;
-            transition: all 0.2s ease;
+            cursor: pointer; z-index: 10; transition: all 0.2s ease;
         }
-        .team-modal-close:hover {
-            background: #E8454D;
-            color: white;
-            border-color: #E8454D;
-            transform: rotate(90deg);
-        }
-        
+        .team-modal-close:hover { background: #E8454D; color: white; border-color: #E8454D; transform: rotate(90deg); }
         .team-modal-body { display: flex; flex-direction: column; }
-        
-        .team-modal-photo {
-            width: 100%; height: 350px; overflow: hidden;
-            border-radius: 24px 24px 0 0; flex-shrink: 0;
-        }
-        .team-modal-photo img {
-            width: 100%; height: 100%; object-fit: cover; display: block;
-        }
-        
+        .team-modal-photo { width: 100%; height: 350px; overflow: hidden; border-radius: 24px 24px 0 0; flex-shrink: 0; }
+        .team-modal-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
         .team-modal-info { padding: 30px; }
-        
-        .team-modal-name {
-            font-family: 'Unbounded', sans-serif; font-size: 32px;
-            font-weight: 700; color: #FFFFFF; margin-bottom: 6px;
-            line-height: 1.2;
-        }
-        .team-modal-nickname {
-            color: #E8454D; font-weight: 700; font-size: 18px;
-            margin-bottom: 12px; font-family: 'Nunito Sans', sans-serif;
-        }
-        .team-modal-position {
-            font-size: 13px; font-weight: 700; color: #4A6294;
-            text-transform: uppercase; letter-spacing: 1.5px;
-            margin-bottom: 20px; padding-bottom: 16px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-        }
-        
-        .team-modal-section-title {
-            font-family: 'Unbounded', sans-serif; font-size: 18px;
-            font-weight: 700; color: #F8F7F6;
-            margin-top: 24px; margin-bottom: 14px;
-            border-left: 4px solid #E8454D; padding-left: 16px;
-        }
-        .team-modal-bio {
-            color: rgba(255, 255, 255, 0.85);
-            font-family: 'Nunito Sans', sans-serif;
-            line-height: 1.6; font-size: 15px;
-            margin-bottom: 8px;
-        }
-        
-        .team-performances-list {
-            display: flex; flex-direction: column;
-            margin-top: 8px; margin-bottom: 8px;
-        }
-        .team-performance-item {
-            display: flex; align-items: baseline;
-            padding: 12px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-            color: rgba(255, 255, 255, 0.9);
-            font-family: 'Nunito Sans', sans-serif; font-size: 15px;
-        }
+        .team-modal-name { font-family: 'Unbounded', sans-serif; font-size: 32px; font-weight: 700; color: #FFFFFF; margin-bottom: 6px; line-height: 1.2; }
+        .team-modal-nickname { color: #E8454D; font-weight: 700; font-size: 18px; margin-bottom: 12px; font-family: 'Nunito Sans', sans-serif; }
+        .team-modal-position { font-size: 13px; font-weight: 700; color: #4A6294; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid rgba(255, 255, 255, 0.08); }
+        .team-modal-section-title { font-family: 'Unbounded', sans-serif; font-size: 18px; font-weight: 700; color: #F8F7F6; margin-top: 24px; margin-bottom: 14px; border-left: 4px solid #E8454D; padding-left: 16px; }
+        .team-modal-bio { color: rgba(255, 255, 255, 0.85); font-family: 'Nunito Sans', sans-serif; line-height: 1.6; font-size: 15px; margin-bottom: 8px; }
+        .team-performances-list { display: flex; flex-direction: column; margin-top: 8px; margin-bottom: 8px; }
+        .team-performance-item { display: flex; align-items: baseline; padding: 12px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.06); color: rgba(255, 255, 255, 0.9); font-family: 'Nunito Sans', sans-serif; font-size: 15px; }
         .team-performance-item:last-child { border-bottom: none; }
-        .team-performance-bullet {
-            color: #4A6294; font-weight: 700; font-size: 20px;
-            margin-right: 16px; min-width: 16px;
-        }
+        .team-performance-bullet { color: #4A6294; font-weight: 700; font-size: 20px; margin-right: 16px; min-width: 16px; }
         .team-performance-text { line-height: 1.5; flex: 1; }
-
-        /* Адаптив модалки команды */
         @media (min-width: 768px) {
             .team-modal-body { flex-direction: row; }
-            .team-modal-photo {
-                width: 40%; height: auto;
-                border-radius: 24px 0 0 24px;
-            }
+            .team-modal-photo { width: 40%; height: auto; border-radius: 24px 0 0 24px; }
             .team-modal-info { width: 60%; padding: 36px; }
         }
         @media (max-width: 480px) {
@@ -127,893 +60,183 @@
             .team-modal-name { font-size: 28px; }
             .team-modal-close { top: 16px; right: 16px; width: 40px; height: 40px; }
         }
+        .team-card { cursor: pointer; transition: transform 0.25s ease, filter 0.25s ease; }
+        .team-card:hover { transform: scale(1.02); filter: brightness(1.1); }
 
-        /* Кликабельность карточек команды */
-        .team-card {
-            cursor: pointer;
-            transition: transform 0.25s ease, filter 0.25s ease;
-        }
-        .team-card:hover {
-            transform: scale(1.02);
-            filter: brightness(1.1);
-        }
-
-        /* ===== ОСТАЛЬНЫЕ СТИЛИ МОДАЛОК (сессии, товары, контакты) ===== */
+        /* ===== ОСТАЛЬНЫЕ СТИЛИ МОДАЛОК ===== */
         .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            display: flex;
-            align-items: flex-start;
-            justify-content: center;
-            z-index: 10000;
-            visibility: hidden;
-            opacity: 0;
-            transition: 0.3s ease;
-            padding: 20px;
-            padding-top: 100px;
-            box-sizing: border-box;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.7); display: flex; align-items: flex-start;
+            justify-content: center; z-index: 10000; visibility: hidden; opacity: 0;
+            transition: 0.3s ease; padding: 20px; padding-top: 100px; box-sizing: border-box;
             overflow-y: auto;
         }
-        .modal-overlay.active {
-            visibility: visible;
-            opacity: 1;
-        }
+        .modal-overlay.active { visibility: visible; opacity: 1; }
         .modal-container {
-            background: #FFFFFF;
-            max-width: 520px;
-            width: 100%;
-            max-height: calc(90vh - 100px);
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-            display: flex;
-            flex-direction: column;
-            transform: scale(0.95);
-            transition: transform 0.3s ease;
-            border: 1px solid #E5E3E1;
-            margin: 0 auto;
+            background: #FFFFFF; max-width: 520px; width: 100%;
+            max-height: calc(90vh - 100px); border-radius: 16px; overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2); display: flex; flex-direction: column;
+            transform: scale(0.95); transition: transform 0.3s ease;
+            border: 1px solid #E5E3E1; margin: 0 auto;
         }
-        .active .modal-container {
-            transform: scale(1);
-        }
-        .modal-header {
-            padding: 24px 24px 16px;
-            border-bottom: 1px solid #E5E3E1;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        .modal-header h3 {
-            font-family: 'Unbounded', sans-serif;
-            font-size: 20px;
-            font-weight: 700;
-            color: #1A1718;
-            margin: 0;
-            padding-left: 12px;
-            position: relative;
-        }
-        .modal-header h3::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 3px;
-            height: 100%;
-            background: #E8454D;
-            border-radius: 1.5px;
-        }
+        .active .modal-container { transform: scale(1); }
+        .modal-header { padding: 24px 24px 16px; border-bottom: 1px solid #E5E3E1; display: flex; align-items: center; justify-content: space-between; }
+        .modal-header h3 { font-family: 'Unbounded', sans-serif; font-size: 20px; font-weight: 700; color: #1A1718; margin: 0; padding-left: 12px; position: relative; }
+        .modal-header h3::before { content: ''; position: absolute; left: 0; top: 0; width: 3px; height: 100%; background: #E8454D; border-radius: 1.5px; }
         .modal-close {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            background: #F8F7F6;
-            border: 1px solid #E5E3E1;
-            color: #5A5556;
-            font-size: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.2s;
+            width: 36px; height: 36px; border-radius: 50%; background: #F8F7F6;
+            border: 1px solid #E5E3E1; color: #5A5556; font-size: 18px;
+            display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s;
         }
-        .modal-close:hover {
-            background: #E8454D;
-            color: #FFFFFF;
-            border-color: #E8454D;
-        }
-        .modal-body {
-            padding: 24px;
-            overflow-y: auto;
-            flex: 1;
-        }
-        .modal-performance-title {
-            font-size: 16px;
-            font-weight: 600;
-            color: #3D393A;
-            margin-bottom: 20px;
-            padding-bottom: 12px;
-            border-bottom: 1px dashed #E5E3E1;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .modal-performance-title i {
-            color: #E8454D;
-            font-size: 16px;
-        }
-        .modal-performance-title span {
-            font-family: 'Unbounded', sans-serif;
-            font-weight: 600;
-            color: #1A1718;
-        }
-
-        /* Фильтр по месяцам */
-        .date-filter {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-            margin-bottom: 24px;
-        }
+        .modal-close:hover { background: #E8454D; color: #FFFFFF; border-color: #E8454D; }
+        .modal-body { padding: 24px; overflow-y: auto; flex: 1; }
+        .modal-performance-title { font-size: 16px; font-weight: 600; color: #3D393A; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px dashed #E5E3E1; display: flex; align-items: center; gap: 8px; }
+        .modal-performance-title i { color: #E8454D; font-size: 16px; }
+        .modal-performance-title span { font-family: 'Unbounded', sans-serif; font-weight: 600; color: #1A1718; }
+        .date-filter { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
         .filter-btn {
-            background: #F8F7F6;
-            border: 1px solid #E5E3E1;
-            color: #404040;
-            padding: 8px 16px;
-            border-radius: 40px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-family: 'Unbounded', sans-serif;
+            background: #F8F7F6; border: 1px solid #E5E3E1; color: #404040;
+            padding: 8px 16px; border-radius: 40px; font-size: 14px; font-weight: 600;
+            cursor: pointer; transition: all 0.2s; font-family: 'Unbounded', sans-serif;
         }
-        .filter-btn:hover {
-            background: #E9E7E5;
-            border-color: #D5D3D1;
-        }
-        .filter-btn.active {
-            background: #2A3D5E;
-            border-color: #2A3D5E;
-            color: #FFFFFF;
-        }
-
-        /* Список сеансов */
-        .sessions-list {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
+        .filter-btn:hover { background: #E9E7E5; border-color: #D5D3D1; }
+        .filter-btn.active { background: #2A3D5E; border-color: #2A3D5E; color: #FFFFFF; }
+        .sessions-list { display: flex; flex-direction: column; gap: 12px; }
         .session-item {
-            background: #F8F7F6;
-            border-radius: 12px;
-            padding: 16px 18px;
-            border: 1px solid #E5E3E1;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            transition: all 0.2s;
-            cursor: pointer;
+            background: #F8F7F6; border-radius: 12px; padding: 16px 18px;
+            border: 1px solid #E5E3E1; display: flex; align-items: center;
+            justify-content: space-between; transition: all 0.2s; cursor: pointer;
         }
-        .session-item:hover {
-            border-color: #4A6294;
-            background: #FFFFFF;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-            transform: translateX(4px);
-        }
-        .session-item.selected {
-            border-color: #4A6294;
-            background: #E8EEF7;
-            box-shadow: 0 0 0 2px rgba(74, 98, 148, 0.15);
-        }
-        .session-info {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-        .session-date {
-            font-weight: 700;
-            font-size: 16px;
-            color: #1A1718;
-            font-family: 'Unbounded', sans-serif;
-        }
-        .session-meta {
-            display: flex;
-            gap: 16px;
-            font-size: 14px;
-            color: #5A5556;
-        }
-        .session-meta i {
-            width: 16px;
-            margin-right: 4px;
-            color: #4A6294;
-        }
-        .session-select-indicator {
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            border: 2px solid #D5D3D1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 12px;
-            background: transparent;
-            flex-shrink: 0;
-        }
-        .session-item.selected .session-select-indicator {
-            background: #4A6294;
-            border-color: #4A6294;
-        }
-        .no-sessions {
-            text-align: center;
-            padding: 40px 20px;
-            color: #5A5556;
-            font-style: italic;
-            background: #F8F7F6;
-            border-radius: 12px;
-            border: 1px dashed #E5E3E1;
-        }
-
-        .modal-footer {
-            padding: 20px 24px;
-            border-top: 1px solid #E5E3E1;
-            background: #FFFFFF;
-        }
+        .session-item:hover { border-color: #4A6294; background: #FFFFFF; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); transform: translateX(4px); }
+        .session-item.selected { border-color: #4A6294; background: #E8EEF7; box-shadow: 0 0 0 2px rgba(74, 98, 148, 0.15); }
+        .session-info { display: flex; flex-direction: column; gap: 6px; }
+        .session-date { font-weight: 700; font-size: 16px; color: #1A1718; font-family: 'Unbounded', sans-serif; }
+        .session-meta { display: flex; gap: 16px; font-size: 14px; color: #5A5556; }
+        .session-meta i { width: 16px; margin-right: 4px; color: #4A6294; }
+        .session-select-indicator { width: 24px; height: 24px; border-radius: 50%; border: 2px solid #D5D3D1; display: flex; align-items: center; justify-content: center; color: white; font-size: 12px; background: transparent; flex-shrink: 0; }
+        .session-item.selected .session-select-indicator { background: #4A6294; border-color: #4A6294; }
+        .no-sessions { text-align: center; padding: 40px 20px; color: #5A5556; font-style: italic; background: #F8F7F6; border-radius: 12px; border: 1px dashed #E5E3E1; }
+        .modal-footer { padding: 20px 24px; border-top: 1px solid #E5E3E1; background: #FFFFFF; }
         .modal-confirm-btn {
-            width: 100%;
-            background: #E8454D;
-            color: #FFFFFF;
-            border: none;
-            padding: 14px 20px;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 16px;
-            font-family: 'Unbounded', sans-serif;
-            cursor: pointer;
-            transition: background 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
+            width: 100%; background: #E8454D; color: #FFFFFF; border: none;
+            padding: 14px 20px; border-radius: 8px; font-weight: 600; font-size: 16px;
+            font-family: 'Unbounded', sans-serif; cursor: pointer; transition: background 0.2s;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
         }
-        .modal-confirm-btn:disabled {
-            background: #E5E3E1;
-            color: #9A9896;
-            cursor: not-allowed;
-            border: 1px solid #D5D3D1;
-        }
-        .modal-confirm-btn:not(:disabled):hover {
-            background: #D62830;
-        }
+        .modal-confirm-btn:disabled { background: #E5E3E1; color: #9A9896; cursor: not-allowed; border: 1px solid #D5D3D1; }
+        .modal-confirm-btn:not(:disabled):hover { background: #D62830; }
 
         /* ===== СТИЛИ ФОРМ И ВАЛИДАЦИИ ===== */
-        .form-group {
-            margin-bottom: 20px;
-            position: relative;
-        }
-        .form-group label {
-            display: block;
-            font-family: 'Unbounded', sans-serif;
-            font-size: 14px;
-            font-weight: 600;
-            color: #2A2627;
-            margin-bottom: 8px;
-        }
-        .form-group label .required {
-            color: #E8454D;
-            margin-left: 2px;
-        }
+        .form-group { margin-bottom: 20px; position: relative; }
+        .form-group label { display: block; font-family: 'Unbounded', sans-serif; font-size: 14px; font-weight: 600; color: #2A2627; margin-bottom: 8px; }
+        .form-group label .required { color: #E8454D; margin-left: 2px; }
         .form-input, .form-select, .form-textarea {
-            width: 100%;
-            padding: 12px 16px;
-            border: 2px solid #E5E3E1;
-            border-radius: 8px;
-            font-size: 15px;
-            font-family: 'Nunito Sans', sans-serif;
-            background: #FFFFFF;
-            transition: border-color 0.2s, box-shadow 0.2s;
-            box-sizing: border-box;
+            width: 100%; padding: 12px 16px; border: 2px solid #E5E3E1;
+            border-radius: 8px; font-size: 15px; font-family: 'Nunito Sans', sans-serif;
+            background: #FFFFFF; transition: border-color 0.2s, box-shadow 0.2s; box-sizing: border-box;
         }
-        .form-textarea {
-            min-height: 100px;
-            resize: vertical;
-        }
-        .form-input:focus, .form-select:focus, .form-textarea:focus {
-            outline: none;
-            border-color: #4A6294;
-            box-shadow: 0 0 0 3px rgba(74, 98, 148, 0.15);
-        }
-        
-        /* Стили ошибок валидации */
-        .form-input.error, .form-select.error, .form-textarea.error {
-            border-color: #E8454D;
-            background-color: #FFF5F5;
-        }
-        .form-input.error:focus, .form-select.error:focus, .form-textarea.error:focus {
-            box-shadow: 0 0 0 3px rgba(232, 69, 77, 0.15);
-        }
-        .error-message {
-            display: none;
-            color: #E8454D;
-            font-size: 12px;
-            font-family: 'Nunito Sans', sans-serif;
-            margin-top: 6px;
-            padding-left: 4px;
-        }
-        .error-message.visible {
-            display: block;
-            animation: slideDown 0.2s ease;
-        }
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-8px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        /* Индикатор обязательности */
-        .form-input[required]:not(:placeholder-shown):valid,
-        .form-textarea[required]:not(:placeholder-shown):valid {
-            border-color: #4CAF50;
-        }
+        .form-textarea { min-height: 100px; resize: vertical; }
+        .form-input:focus, .form-select:focus, .form-textarea:focus { outline: none; border-color: #4A6294; box-shadow: 0 0 0 3px rgba(74, 98, 148, 0.15); }
+        .form-input.error, .form-select.error, .form-textarea.error { border-color: #E8454D; background-color: #FFF5F5; }
+        .form-input.error:focus, .form-select.error:focus, .form-textarea.error:focus { box-shadow: 0 0 0 3px rgba(232, 69, 77, 0.15); }
+        .error-message { display: none; color: #E8454D; font-size: 12px; font-family: 'Nunito Sans', sans-serif; margin-top: 6px; padding-left: 4px; }
+        .error-message.visible { display: block; animation: slideDown 0.2s ease; }
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+        .form-input[required]:not(:placeholder-shown):valid, .form-textarea[required]:not(:placeholder-shown):valid { border-color: #4CAF50; }
 
-        /* Стили для модалки товара */
-        .modal-buttons {
-            display: flex;
-            gap: 16px;
-            margin-top: 24px;
-        }
-        .modal-btn {
-            flex: 1;
-            padding: 14px 20px;
-            border-radius: 8px;
-            font-family: 'Unbounded', sans-serif;
-            font-weight: 600;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.2s;
-            border: none;
-        }
-        .btn-outline-modal {
-            background: #F8F7F6;
-            color: #1A1718;
-            border: 1px solid #E5E3E1;
-        }
-        .btn-outline-modal:hover {
-            background: #E9E7E5;
-        }
-        .btn-primary-modal {
-            background: #E8454D;
-            color: #FFFFFF;
-        }
-        .btn-primary-modal:hover {
-            background: #D62830;
-        }
-        .cart-summary {
-            background: #F8F7F6;
-            padding: 16px;
-            border-radius: 12px;
-            margin-bottom: 20px;
-        }
-        .cart-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 0;
-            border-bottom: 1px solid #E5E3E1;
-        }
-        .cart-item:last-child {
-            border-bottom: none;
-        }
-        .cart-item-info {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-        .cart-item-name {
-            font-weight: 600;
-            color: #1A1718;
-        }
-        .cart-item-details {
-            font-size: 13px;
-            color: #5A5556;
-        }
-        .cart-item-price {
-            font-weight: 700;
-            color: #4A6294;
-        }
-        .cart-item-actions {
-            display: flex;
-            gap: 12px;
-        }
-        .cart-item-actions button {
-            background: none;
-            border: none;
-            color: #5A5556;
-            cursor: pointer;
-            font-size: 14px;
-            transition: color 0.2s;
-        }
-        .cart-item-actions button:hover {
-            color: #E8454D;
-        }
-        .total-row {
-            display: flex;
-            justify-content: space-between;
-            padding-top: 12px;
-            margin-top: 12px;
-            border-top: 1px solid #D5D3D1;
-            font-weight: 700;
-            font-size: 16px;
-        }
+        .modal-buttons { display: flex; gap: 16px; margin-top: 24px; }
+        .modal-btn { flex: 1; padding: 14px 20px; border-radius: 8px; font-family: 'Unbounded', sans-serif; font-weight: 600; font-size: 14px; cursor: pointer; transition: all 0.2s; border: none; }
+        .btn-outline-modal { background: #F8F7F6; color: #1A1718; border: 1px solid #E5E3E1; }
+        .btn-outline-modal:hover { background: #E9E7E5; }
+        .btn-primary-modal { background: #E8454D; color: #FFFFFF; }
+        .btn-primary-modal:hover { background: #D62830; }
+        .cart-summary { background: #F8F7F6; padding: 16px; border-radius: 12px; margin-bottom: 20px; }
+        .cart-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #E5E3E1; }
+        .cart-item:last-child { border-bottom: none; }
+        .cart-item-info { display: flex; flex-direction: column; gap: 4px; }
+        .cart-item-name { font-weight: 600; color: #1A1718; }
+        .cart-item-details { font-size: 13px; color: #5A5556; }
+        .cart-item-price { font-weight: 700; color: #4A6294; }
+        .cart-item-actions { display: flex; gap: 12px; }
+        .cart-item-actions button { background: none; border: none; color: #5A5556; cursor: pointer; font-size: 14px; transition: color 0.2s; }
+        .cart-item-actions button:hover { color: #E8454D; }
+        .total-row { display: flex; justify-content: space-between; padding-top: 12px; margin-top: 12px; border-top: 1px solid #D5D3D1; font-weight: 700; font-size: 16px; }
 
         /* ===== СТИЛИ ГАЛЕРЕИ ИЗОБРАЖЕНИЙ ТОВАРА ===== */
-        .product-gallery-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            z-index: 10001;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-            cursor: pointer;
-        }
-        .product-gallery-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        .product-gallery-container {
-            position: relative;
-            max-width: 90vw;
-            max-height: 90vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: default;
-        }
-        .product-gallery-image {
-            max-width: 90vw;
-            max-height: 85vh;
-            object-fit: contain;
-            border-radius: 12px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-            user-select: none;
-            -webkit-user-drag: none;
-        }
-        .gallery-nav-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: white;
-            font-size: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            z-index: 10;
-            backdrop-filter: blur(4px);
-        }
-        .gallery-nav-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-            border-color: rgba(255, 255, 255, 0.4);
-            transform: translateY(-50%) scale(1.1);
-        }
-        .gallery-nav-btn.prev {
-            left: 20px;
-        }
-        .gallery-nav-btn.next {
-            right: 20px;
-        }
-        .gallery-close-btn {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: white;
-            font-size: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            z-index: 10;
-            backdrop-filter: blur(4px);
-        }
-        .gallery-close-btn:hover {
-            background: #E8454D;
-            border-color: #E8454D;
-            transform: rotate(90deg);
-        }
-        .gallery-counter {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0, 0, 0, 0.6);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-family: 'Unbounded', sans-serif;
-            backdrop-filter: blur(4px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        .gallery-thumbnails {
-            position: absolute;
-            bottom: 70px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 8px;
-            z-index: 10;
-        }
-        .gallery-thumb {
-            width: 40px;
-            height: 40px;
-            border-radius: 6px;
-            overflow: hidden;
-            cursor: pointer;
-            border: 2px solid transparent;
-            transition: all 0.2s ease;
-            opacity: 0.6;
-        }
-        .gallery-thumb.active {
-            border-color: #E8454D;
-            opacity: 1;
-        }
-        .gallery-thumb:hover {
-            opacity: 0.9;
-        }
-        .gallery-thumb img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* Кликабельность карточек мерча */
-        .merch-card {
-            cursor: pointer;
-            transition: transform 0.25s ease, box-shadow 0.25s ease;
-        }
-        .merch-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
-        }
-        .merch-img {
-            pointer-events: none;
-        }
+        .product-gallery-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.95); z-index: 10001; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease; cursor: pointer; }
+        .product-gallery-overlay.active { opacity: 1; visibility: visible; }
+        .product-gallery-container { position: relative; max-width: 90vw; max-height: 90vh; display: flex; align-items: center; justify-content: center; cursor: default; }
+        .product-gallery-image { max-width: 90vw; max-height: 85vh; object-fit: contain; border-radius: 12px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5); user-select: none; -webkit-user-drag: none; }
+        .gallery-nav-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 50px; height: 50px; border-radius: 50%; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); color: white; font-size: 24px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s ease; z-index: 10; backdrop-filter: blur(4px); }
+        .gallery-nav-btn:hover { background: rgba(255, 255, 255, 0.2); border-color: rgba(255, 255, 255, 0.4); transform: translateY(-50%) scale(1.1); }
+        .gallery-nav-btn.prev { left: 20px; } .gallery-nav-btn.next { right: 20px; }
+        .gallery-close-btn { position: absolute; top: 20px; right: 20px; width: 44px; height: 44px; border-radius: 50%; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); color: white; font-size: 24px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s ease; z-index: 10; backdrop-filter: blur(4px); }
+        .gallery-close-btn:hover { background: #E8454D; border-color: #E8454D; transform: rotate(90deg); }
+        .gallery-counter { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(0, 0, 0, 0.6); color: white; padding: 8px 16px; border-radius: 20px; font-size: 14px; font-family: 'Unbounded', sans-serif; backdrop-filter: blur(4px); border: 1px solid rgba(255, 255, 255, 0.2); }
+        .gallery-thumbnails { position: absolute; bottom: 70px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 10; }
+        .gallery-thumb { width: 40px; height: 40px; border-radius: 6px; overflow: hidden; cursor: pointer; border: 2px solid transparent; transition: all 0.2s ease; opacity: 0.6; }
+        .gallery-thumb.active { border-color: #E8454D; opacity: 1; } .gallery-thumb:hover { opacity: 0.9; }
+        .gallery-thumb img { width: 100%; height: 100%; object-fit: cover; }
+        .merch-card { cursor: pointer; transition: transform 0.25s ease, box-shadow 0.25s ease; }
+        .merch-card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15); }
+        .merch-img { pointer-events: none; }
 
         /* ===== СТИЛИ МОДАЛЬНОГО ОКНА УСПЕХА ===== */
-        .success-modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(8px);
-            z-index: 10001;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-            padding: 20px;
-            box-sizing: border-box;
-        }
-        .success-modal-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        .success-modal-content {
-            background: #FFFFFF;
-            border-radius: 24px;
-            max-width: 480px;
-            width: 100%;
-            padding: 40px 32px;
-            text-align: center;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(232, 69, 77, 0.2);
-            transform: scale(0.9);
-            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-            position: relative;
-        }
-        .success-modal-overlay.active .success-modal-content {
-            transform: scale(1);
-        }
-        .success-icon {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #E8454D, #D62830);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 24px;
-            animation: pulse 0.6s ease-out;
-        }
-        @keyframes pulse {
-            0% { transform: scale(0.8); opacity: 0.7; }
-            50% { transform: scale(1.1); opacity: 1; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-        .success-icon i {
-            font-size: 36px;
-            color: white;
-        }
-        .success-modal-title {
-            font-family: 'Unbounded', sans-serif;
-            font-size: 24px;
-            font-weight: 700;
-            color: #1A1718;
-            margin-bottom: 12px;
-        }
-        .success-modal-text {
-            font-family: 'Nunito Sans', sans-serif;
-            font-size: 16px;
-            color: #5A5556;
-            line-height: 1.5;
-            margin-bottom: 28px;
-        }
-        .success-modal-btn {
-            background: #E8454D;
-            color: white;
-            border: none;
-            padding: 14px 32px;
-            border-radius: 10px;
-            font-family: 'Unbounded', sans-serif;
-            font-weight: 600;
-            font-size: 15px;
-            cursor: pointer;
-            transition: all 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .success-modal-btn:hover {
-            background: #D62830;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(232, 69, 77, 0.3);
-        }
-        .success-modal-close {
-            position: absolute;
-            top: 16px;
-            right: 16px;
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            background: #F8F7F6;
-            border: 1px solid #E5E3E1;
-            color: #5A5556;
-            font-size: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .success-modal-close:hover {
-            background: #E8454D;
-            color: white;
-            border-color: #E8454D;
-        }
+        .success-modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(8px); z-index: 10001; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease; padding: 20px; box-sizing: border-box; }
+        .success-modal-overlay.active { opacity: 1; visibility: visible; }
+        .success-modal-content { background: #FFFFFF; border-radius: 24px; max-width: 480px; width: 100%; padding: 40px 32px; text-align: center; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4); border: 1px solid rgba(232, 69, 77, 0.2); transform: scale(0.9); transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); position: relative; }
+        .success-modal-overlay.active .success-modal-content { transform: scale(1); }
+        .success-icon { width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #E8454D, #D62830); display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; animation: pulse 0.6s ease-out; }
+        @keyframes pulse { 0% { transform: scale(0.8); opacity: 0.7; } 50% { transform: scale(1.1); opacity: 1; } 100% { transform: scale(1); opacity: 1; } }
+        .success-icon i { font-size: 36px; color: white; }
+        .success-modal-title { font-family: 'Unbounded', sans-serif; font-size: 24px; font-weight: 700; color: #1A1718; margin-bottom: 12px; }
+        .success-modal-text { font-family: 'Nunito Sans', sans-serif; font-size: 16px; color: #5A5556; line-height: 1.5; margin-bottom: 28px; }
+        .success-modal-btn { background: #E8454D; color: white; border: none; padding: 14px 32px; border-radius: 10px; font-family: 'Unbounded', sans-serif; font-weight: 600; font-size: 15px; cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px; }
+        .success-modal-btn:hover { background: #D62830; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(232, 69, 77, 0.3); }
+        .success-modal-close { position: absolute; top: 16px; right: 16px; width: 32px; height: 32px; border-radius: 50%; background: #F8F7F6; border: 1px solid #E5E3E1; color: #5A5556; font-size: 16px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; }
+        .success-modal-close:hover { background: #E8454D; color: white; border-color: #E8454D; }
 
-        /* Адаптивность */
         @media (max-width: 860px) {
-            .modal-overlay {
-                padding-top: 80px;
-            }
-            .modal-container {
-                max-height: calc(90vh - 80px);
-            }
-            .gallery-nav-btn {
-                width: 40px;
-                height: 40px;
-                font-size: 18px;
-            }
-            .gallery-nav-btn.prev {
-                left: 10px;
-            }
-            .gallery-nav-btn.next {
-                right: 10px;
-            }
-            .gallery-close-btn {
-                top: 10px;
-                right: 10px;
-                width: 40px;
-                height: 40px;
-            }
-            .gallery-thumbnails {
-                bottom: 60px;
-                gap: 6px;
-            }
-            .gallery-thumb {
-                width: 32px;
-                height: 32px;
-            }
+            .modal-overlay { padding-top: 80px; }
+            .modal-container { max-height: calc(90vh - 80px); }
+            .gallery-nav-btn { width: 40px; height: 40px; font-size: 18px; }
+            .gallery-nav-btn.prev { left: 10px; } .gallery-nav-btn.next { right: 10px; }
+            .gallery-close-btn { top: 10px; right: 10px; width: 40px; height: 40px; }
+            .gallery-thumbnails { bottom: 60px; gap: 6px; }
+            .gallery-thumb { width: 32px; height: 32px; }
         }
-
         @media (max-width: 480px) {
-            .modal-overlay {
-                align-items: flex-end;
-                padding: 0;
-                padding-top: 60px;
-            }
-            .modal-container {
-                max-width: 100%;
-                border-radius: 16px 16px 0 0;
-                max-height: calc(90vh - 60px);
-            }
-            .active .modal-container {
-                transform: scale(1);
-            }
-            .modal-header {
-                padding: 20px 20px 12px;
-            }
-            .modal-body {
-                padding: 20px;
-            }
-            .modal-footer {
-                padding: 16px 20px;
-            }
-            .session-item {
-                padding: 14px 16px;
-            }
-            .filter-btn {
-                padding: 8px 14px;
-                font-size: 13px;
-            }
-            .modal-buttons {
-                flex-direction: column;
-            }
-            .gallery-nav-btn {
-                width: 36px;
-                height: 36px;
-                font-size: 16px;
-            }
-            .gallery-nav-btn.prev {
-                left: 5px;
-            }
-            .gallery-nav-btn.next {
-                right: 5px;
-            }
-            .gallery-close-btn {
-                top: 5px;
-                right: 5px;
-                width: 36px;
-                height: 36px;
-                font-size: 20px;
-            }
-            .gallery-thumbnails {
-                bottom: 50px;
-                gap: 4px;
-            }
-            .gallery-thumb {
-                width: 28px;
-                height: 28px;
-            }
-            .gallery-counter {
-                bottom: 10px;
-                padding: 6px 12px;
-                font-size: 12px;
-            }
-            
-            /* Адаптив модального окна успеха */
-            .success-modal-content {
-                padding: 32px 24px;
-            }
-            .success-icon {
-                width: 70px;
-                height: 70px;
-            }
-            .success-icon i {
-                font-size: 30px;
-            }
-            .success-modal-title {
-                font-size: 20px;
-            }
-            .success-modal-text {
-                font-size: 15px;
-            }
+            .modal-overlay { align-items: flex-end; padding: 0; padding-top: 60px; }
+            .modal-container { max-width: 100%; border-radius: 16px 16px 0 0; max-height: calc(90vh - 60px); }
+            .active .modal-container { transform: scale(1); }
+            .modal-header { padding: 20px 20px 12px; }
+            .modal-body { padding: 20px; } .modal-footer { padding: 16px 20px; }
+            .session-item { padding: 14px 16px; } .filter-btn { padding: 8px 14px; font-size: 13px; }
+            .modal-buttons { flex-direction: column; }
+            .gallery-nav-btn { width: 36px; height: 36px; font-size: 16px; }
+            .gallery-nav-btn.prev { left: 5px; } .gallery-nav-btn.next { right: 5px; }
+            .gallery-close-btn { top: 5px; right: 5px; width: 36px; height: 36px; font-size: 20px; }
+            .gallery-thumbnails { bottom: 50px; gap: 4px; } .gallery-thumb { width: 28px; height: 28px; }
+            .gallery-counter { bottom: 10px; padding: 6px 12px; font-size: 12px; }
+            .success-modal-content { padding: 32px 24px; }
+            .success-icon { width: 70px; height: 70px; } .success-icon i { font-size: 30px; }
+            .success-modal-title { font-size: 20px; } .success-modal-text { font-size: 15px; }
         }
-        
-        /* Обновленные стили карточек мерча */
-        .merch-card {
-            cursor: pointer;
-            transition: transform 0.25s ease, box-shadow 0.25s ease;
-            position: relative;
-            overflow: hidden;
-            background: #fff;
-            border-radius: 12px;
-        }
-        .merch-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
-        }
-
-        /* Обертка для изображения */
-        .merch-img-wrapper {
-            position: relative;
-            overflow: hidden;
-            width: 100%;
-        }
-
-        .merch-img {
-            width: 100%;
-            display: block;
-            pointer-events: none;
-            transition: transform 0.3s ease;
-        }
-        .merch-card:hover .merch-img {
-            transform: scale(1.05);
-        }
-
-        /* Счетчик фото */
-        .merch-photo-count {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: rgba(0, 0, 0, 0.65);
-            backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
-            color: white;
-            padding: 6px 10px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-            font-family: 'Nunito Sans', sans-serif;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            z-index: 2;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            pointer-events: none;
-            transition: opacity 0.2s ease, transform 0.2s ease;
-        }
-
-        .merch-photo-count {
-            opacity: 0;
-            transform: translateY(-5px);
-        }
-
-        .merch-card:hover .merch-photo-count {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .merch-card.force-visible .merch-photo-count {
-            opacity: 1 !important;
-            transform: translateY(0) !important;
-        }
+        .merch-card { cursor: pointer; transition: transform 0.25s ease, box-shadow 0.25s ease; position: relative; overflow: hidden; background: #fff; border-radius: 12px; }
+        .merch-card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15); }
+        .merch-img-wrapper { position: relative; overflow: hidden; width: 100%; }
+        .merch-img { width: 100%; display: block; pointer-events: none; transition: transform 0.3s ease; }
+        .merch-card:hover .merch-img { transform: scale(1.05); }
+        .merch-photo-count { position: absolute; top: 10px; right: 10px; background: rgba(0, 0, 0, 0.65); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); color: white; padding: 6px 10px; border-radius: 20px; font-size: 12px; font-weight: 600; font-family: 'Nunito Sans', sans-serif; display: inline-flex; align-items: center; gap: 5px; z-index: 2; border: 1px solid rgba(255, 255, 255, 0.2); pointer-events: none; transition: opacity 0.2s ease, transform 0.2s ease; opacity: 0; transform: translateY(-5px); }
+        .merch-card:hover .merch-photo-count { opacity: 1; transform: translateY(0); }
+        .merch-card.force-visible .merch-photo-count { opacity: 1 !important; transform: translateY(0) !important; }
     </style>
 </head>
 <body>
 <div class="shop-container">
-    
-    <!-- Заглушка для подгрузки хедера -->
     <div id="site-header"></div>
-
     <div class="overlay" id="overlay"></div>
 
-    <!-- Бегущая строка -->
     <div class="ticker">
         <div class="ticker-content">
             <span class="red-dot">•</span><span>Премьера 25 июля: «Лишь бы не было детей» • Билеты уже в продаже</span>
@@ -1027,10 +250,8 @@
         </div>
     </div>
 
-    <!-- Hero слайдер -->
     <div id="site-hero-slider"></div>
 
-    <!-- Ближайшие спектакли -->
     <div class="plays-section" style="margin-top: 60px;">
         <div class="container-main">
             <div class="section-header">
@@ -1045,12 +266,9 @@
         </div>
     </div>
 
-    <!-- О театре -->
     <div class="about-section">
         <div class="container-main">
-            <div class="section-header">
-                <h2 class="section-title">О театре</h2>
-            </div>
+            <div class="section-header"><h2 class="section-title">О театре</h2></div>
             <div class="about-content">
                 <div class="about-text">
                     <h3>История создания</h3>
@@ -1058,14 +276,11 @@
                     <p>За годы существования мы представили более 30 премьер, приняли участие в международных фестивалях и сформировали уникальную труппу, которая продолжает исследовать новые формы театрального искусства.</p>
                     <p>Наша миссия — создавать театр, который говорит со зрителем на современном языке, затрагивает актуальные темы и открыт для диалога с аудиторией любого возраста.</p>
                 </div>
-                <div class="about-img">
-                    <img src="SVG/main.svg" alt="История театра">
-                </div>
+                <div class="about-img"><img src="SVG/main.svg" alt="История театра"></div>
             </div>
         </div>
     </div>
 
-    <!-- Заказчикам -->
     <div class="clients-section">
         <div class="container-main">
             <div class="section-header">
@@ -1084,7 +299,7 @@
                     <div class="download-tech"><button class="download-btn-tech"><i class="fas fa-download"></i> Скачать тех. райдер</button></div>
                 </div>
                 <div class="clients-form">
-                    <h3>Отправить заявку </span></h3>
+                    <h3>Отправить заявку</h3>
                     <form id="clientFormMain" novalidate>
                         <div class="form-group">
                             <label>Имя <span class="required">*</span></label>
@@ -1106,16 +321,13 @@
                             <textarea id="clientMessage" class="form-textarea form-input" placeholder="Опишите вашу задачу" required minlength="10" maxlength="1000"></textarea>
                             <span class="error-message" id="clientMessageError">Сообщение должно содержать минимум 10 символов</span>
                         </div>
-                        <button type="submit" class="submit-client-btn modal-confirm-btn" style="width:100%;margin-top:8px;">
-                            <i class="fas fa-paper-plane"></i> Отправить заявку
-                        </button>
+                        <button type="submit" class="submit-client-btn modal-confirm-btn" style="width:100%;margin-top:8px;"><i class="fas fa-paper-plane"></i> Отправить заявку</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Спектакли (все, горизонтальный скролл) -->
     <div class="plays-section">
         <div class="container-main">
             <div class="section-header">
@@ -1130,7 +342,6 @@
         </div>
     </div>
 
-    <!-- Команда -->
     <div class="team-section">
         <div class="container-main">
             <div class="section-header">
@@ -1138,31 +349,14 @@
                 <a href="team.html" class="section-link">Вся команда <i class="fas fa-arrow-right"></i></a>
             </div>
             <div class="team-scroll-wrapper">
-                <div class="team-card" data-member="Сергей Давыдов">
-                    <img class="team-img" src="images/content/actors/Давыдов-2.jpg" alt="Сергей Давыдов">
-                    <h3 class="team-name">Сергей Давыдов</h3>
-                    <p class="team-position">Художественный руководитель</p>
-                </div>
-                <div class="team-card" data-member="Ксения Иванова">
-                    <img class="team-img" src="images/content/actors/Иванова-2.jpg" alt="Ксения Иванова">
-                    <h3 class="team-name">Ксения Иванова</h3>
-                    <p class="team-position">Актриса, директор, продюсер</p>
-                </div>
-                <div class="team-card" data-member="Максим Гамаюнов">
-                    <img class="team-img" src="images/content/actors/Гамаюнов-2.jpg" alt="Максим Гамаюнов">
-                    <h3 class="team-name">Максим Гамаюнов</h3>
-                    <p class="team-position">Актёр</p>
-                </div>
-                <div class="team-card" data-member="Тотраз Циукаев">
-                    <img class="team-img" src="images/content/actors/Циукаев-2.jpg" alt="Тотраз Циукаев">
-                    <h3 class="team-name">Тотраз Циукаев</h3>
-                    <p class="team-position">Актёр</p>
-                </div>
+                <div class="team-card" data-member="Сергей Давыдов"><img class="team-img" src="images/content/actors/Давыдов-2.jpg" alt="Сергей Давыдов"><h3 class="team-name">Сергей Давыдов</h3><p class="team-position">Художественный руководитель</p></div>
+                <div class="team-card" data-member="Ксения Иванова"><img class="team-img" src="images/content/actors/Иванова-2.jpg" alt="Ксения Иванова"><h3 class="team-name">Ксения Иванова</h3><p class="team-position">Актриса, директор, продюсер</p></div>
+                <div class="team-card" data-member="Максим Гамаюнов"><img class="team-img" src="images/content/actors/Гамаюнов-2.jpg" alt="Максим Гамаюнов"><h3 class="team-name">Максим Гамаюнов</h3><p class="team-position">Актёр</p></div>
+                <div class="team-card" data-member="Тотраз Циукаев"><img class="team-img" src="images/content/actors/Циукаев-2.jpg" alt="Тотраз Циукаев"><h3 class="team-name">Тотраз Циукаев</h3><p class="team-position">Актёр</p></div>
             </div>
         </div>
     </div>
 
-    <!-- Магазин -->
     <div class="shop-section">
         <div class="container-main">
             <div class="section-header">
@@ -1177,9 +371,7 @@
         </div>
     </div>
 
-    <!-- Заглушка для подгрузки футера -->
     <div id="site-footer"></div>
-    
 </div>
 
 <!-- ГАЛЕРЕЯ ИЗОБРАЖЕНИЙ ТОВАРА -->
@@ -1194,7 +386,7 @@
     </div>
 </div>
 
-<!-- МОДАЛЬНОЕ ОКНО КОМАНДЫ (в стиле team.html) -->
+<!-- МОДАЛЬНОЕ ОКНО КОМАНДЫ -->
 <div class="team-modal-overlay" id="teamModal">
     <div class="team-modal-content">
         <button class="team-modal-close" id="teamModalClose">&times;</button>
@@ -1205,40 +397,21 @@
 <!-- МОДАЛЬНОЕ ОКНО ВЫБОРА ДАТЫ И ВРЕМЕНИ -->
 <div class="modal-overlay" id="sessionModal">
     <div class="modal-container">
-        <div class="modal-header">
-            <h3 id="modalPerformanceName">Выбор сеанса</h3>
-            <button class="modal-close" onclick="closeSessionModal()"><i class="fas fa-times"></i></button>
-        </div>
+        <div class="modal-header"><h3 id="modalPerformanceName">Выбор сеанса</h3><button class="modal-close" onclick="closeSessionModal()"><i class="fas fa-times"></i></button></div>
         <div class="modal-body">
-            <div class="modal-performance-title">
-                <i class="fas fa-ticket-alt"></i> 
-                <span id="selectedPlayTitle"></span>
-            </div>
-            
-            <!-- Фильтр по месяцам -->
+            <div class="modal-performance-title"><i class="fas fa-ticket-alt"></i> <span id="selectedPlayTitle"></span></div>
             <div class="date-filter" id="dateFilterContainer"></div>
-            
-            <!-- Список сеансов -->
             <div class="sessions-list" id="sessionsListContainer"></div>
         </div>
-        <div class="modal-footer">
-            <button class="modal-confirm-btn" id="confirmSessionBtn" disabled>
-                <i class="fas fa-shopping-cart"></i> Перейти к покупке
-            </button>
-        </div>
+        <div class="modal-footer"><button class="modal-confirm-btn" id="confirmSessionBtn" disabled><i class="fas fa-shopping-cart"></i> Перейти к покупке</button></div>
     </div>
 </div>
 
 <!-- МОДАЛЬНОЕ ОКНО ТОВАРА -->
 <div class="modal-overlay" id="productModal">
     <div class="modal-container">
-        <div class="modal-header">
-            <h3 id="modalProductName">Товар</h3>
-            <button class="modal-close" onclick="closeProductModal()"><i class="fas fa-times"></i></button>
-        </div>
-        <div class="modal-body">
-            <div id="productModalContent"></div>
-        </div>
+        <div class="modal-header"><h3 id="modalProductName">Товар</h3><button class="modal-close" onclick="closeProductModal()"><i class="fas fa-times"></i></button></div>
+        <div class="modal-body"><div id="productModalContent"></div></div>
         <div class="modal-footer" id="productModalFooter"></div>
     </div>
 </div>
@@ -1246,38 +419,15 @@
 <!-- МОДАЛЬНОЕ ОКНО КОНТАКТОВ -->
 <div class="modal-overlay" id="contactsModal">
     <div class="modal-container">
-        <div class="modal-header">
-            <h3>Оформление заказа</h3>
-            <button class="modal-close" onclick="closeContactsModal()"><i class="fas fa-times"></i></button>
-        </div>
+        <div class="modal-header"><h3>Оформление заказа</h3><button class="modal-close" onclick="closeContactsModal()"><i class="fas fa-times"></i></button></div>
         <div class="modal-body">
             <div id="orderSummaryFull" class="cart-summary"></div>
-            <div class="form-group">
-                <label>Имя <span class="required">*</span></label>
-                <input type="text" id="contactName" class="form-input" placeholder="Иван Иванов" required minlength="2">
-                <span class="error-message" id="contactNameError">Введите корректное имя</span>
-            </div>
-            <div class="form-group">
-                <label>Телефон <span class="required">*</span></label>
-                <input type="tel" id="contactPhone" class="form-input" placeholder="+7 (___) ___-__-__" required>
-                <span class="error-message" id="contactPhoneError">Введите корректный номер телефона</span>
-            </div>
-            <div class="form-group">
-                <label>Email <span class="required">*</span></label>
-                <input type="email" id="contactEmail" class="form-input" placeholder="mail@example.com" required>
-                <span class="error-message" id="contactEmailError">Введите корректный email</span>
-            </div>
-            <div class="form-group">
-                <label>Способ связи <span class="required">*</span></label>
-                <input type="text" id="contactMethod" class="form-input" placeholder="Telegram / WhatsApp / звонок" required minlength="3">
-                <span class="error-message" id="contactMethodError">Укажите предпочтительный способ связи</span>
-            </div>
+            <div class="form-group"><label>Имя <span class="required">*</span></label><input type="text" id="contactName" class="form-input" placeholder="Иван Иванов" required minlength="2"><span class="error-message" id="contactNameError">Введите корректное имя</span></div>
+            <div class="form-group"><label>Телефон <span class="required">*</span></label><input type="tel" id="contactPhone" class="form-input" placeholder="+7 (___) ___-__-__" required><span class="error-message" id="contactPhoneError">Введите корректный номер телефона</span></div>
+            <div class="form-group"><label>Email <span class="required">*</span></label><input type="email" id="contactEmail" class="form-input" placeholder="mail@example.com" required><span class="error-message" id="contactEmailError">Введите корректный email</span></div>
+            <div class="form-group"><label>Способ связи <span class="required">*</span></label><input type="text" id="contactMethod" class="form-input" placeholder="Telegram / WhatsApp / звонок" required minlength="3"><span class="error-message" id="contactMethodError">Укажите предпочтительный способ связи</span></div>
         </div>
-        <div class="modal-footer">
-            <button class="modal-confirm-btn" id="submitOrderBtn">
-                <i class="fas fa-check"></i> Оформить заказ
-            </button>
-        </div>
+        <div class="modal-footer"><button class="modal-confirm-btn" id="submitOrderBtn"><i class="fas fa-check"></i> Оформить заказ</button></div>
     </div>
 </div>
 
@@ -1285,30 +435,22 @@
 <div class="success-modal-overlay" id="successModal">
     <div class="success-modal-content">
         <button class="success-modal-close" id="successModalClose">&times;</button>
-        <div class="success-icon">
-            <i class="fas fa-check"></i>
-        </div>
+        <div class="success-icon"><i class="fas fa-check"></i></div>
         <h3 class="success-modal-title" id="successModalTitle">Заявка отправлена!</h3>
         <p class="success-modal-text" id="successModalText">Спасибо за обращение! Наш менеджер свяжется с вами в ближайшее время.</p>
-        <button class="success-modal-btn" id="successModalBtn">
-            <i class="fas fa-home"></i> На главную
-        </button>
+        <button class="success-modal-btn" id="successModalBtn"><i class="fas fa-home"></i> На главную</button>
     </div>
 </div>
-
 
 <script src="js/components-loader.js"></script>
 <script src="js/header-scripts.js"></script>
 <script src="js/common.js"></script>
 <script src="js/slider-scripts.js"></script>
 
-
-
 <script>
 (function() {
     'use strict';
     
-    // ===== ДАННЫЕ ТОВАРОВ =====
     const products = [
         { id: 1, name: 'Футболка', desc: 'Хлопковая футболка с логотипом театра', price: 2500, isClothing: true, images: ['images/content/shop/1.png', 'images/content/shop/5.png'], category: 'clothes' },
         { id: 2, name: 'Носки', desc: 'Принт с логотипом театра', price: 500, isClothing: false, images: ['images/content/shop/2.png'], category: 'clothes' },
@@ -1320,7 +462,6 @@
         { id: 8, name: 'Программа спектакля', desc: 'Иллюстрированная', price: 350, isClothing: false, images: ['https://placehold.co/428x220/2A3D5E/white?text=Программа'], category: 'printed' }
     ];
 
-    // ===== ДАННЫЕ КОМАНДЫ ДЛЯ МОДАЛКИ =====
     const teamMembersData = {
         'Сергей Давыдов': { name: 'Сергей Давыдов', nickname: 'Паганель', photo: 'images/content/actors/Давыдов-3.jpg', position: 'Художественный руководитель / Актер', bio: 'Выпускник ГИТИСа (мастерская П. Фоменко, 1995). Основатель театра «Микос». Разработал уникальную систему актерского тренинга. Лауреат трех премий «Золотая маска». Владеет пантомимой, жонглированием и акробатикой.', performances: ['«Гамлет» — Гамлет', '«Вишневый сад» — Лопахин', '«Три сестры» — Вершинин', '«Ревизор» — Хлестаков', '«Мастер и Маргарита» — Мастер'] },
         'Ксения Иванова': { name: 'Ксения Иванова', nickname: 'Муза', photo: 'images/content/actors/Иванова-3.jpg', position: 'Актриса, директор, продюсер', bio: 'Выпускница Школы-студии МХАТ (2008). В театре «Микос» с 2010 года. Обладательница уникального пластического дара. Лауреат «Золотой маски» за роль Нины Заречной (2015).', performances: ['«Чайка» — Нина Заречная', '«Анна Каренина» — Анна', '«Три сестры» — Маша', '«Дядя Ваня» — Елена', '«Мастер и Маргарита» — Маргарита'] },
@@ -1328,81 +469,52 @@
         'Тотраз Циукаев': { name: 'Тотраз Циукаев', nickname: 'Тот', photo: 'images/content/actors/Циукаев-3.jpg', position: 'Актёр, каскадер', bio: 'До прихода в театр работал в Цирке дю Солей. Владеет жонглированием, эквилибром, сценическим фехтованием. В театре с 2018 года. Мастер трюковых сцен.', performances: ['«Ромео и Джульетта» — Меркуцио', '«Слуга двух господ» — Труффальдино', '«Мастер и Маргарита» — Кот Бегемот', '«Сон в летнюю ночь» — Пэк'] }
     };
 
-    // ===== СОСТОЯНИЕ =====
     let currentEvent = null, selectedSession = null, currentMonthFilter = 'all';
     let cartItems = [], currentProduct = null, editingIndex = -1;
     let galleryImages = [], currentGalleryIndex = 0;
-    
-    // ===== МАСКИ ВВОДА =====
     let phoneMask = null;
 
-    // ===== ВАЛИДАЦИЯ ФОРМ =====
     const validators = {
         name: (value) => value.trim().length >= 2 && value.trim().length <= 50 && /^[а-яА-ЯёЁa-zA-Z\s\-']+$/.test(value.trim()),
         company: (value) => value.trim().length >= 2 && value.trim().length <= 100,
         email: (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim()),
-        phone: (value) => {
-            const cleaned = value.replace(/\D/g, '');
-            return cleaned.length === 11 && cleaned.startsWith('7');
-        },
+        phone: (value) => { const cleaned = value.replace(/\D/g, ''); return cleaned.length === 11 && cleaned.startsWith('7'); },
         message: (value) => value.trim().length >= 10 && value.trim().length <= 1000,
         method: (value) => value.trim().length >= 3
     };
 
-    // ===== ИНИЦИАЛИЗАЦИЯ МАСОК =====
     function initMasks() {
-        // Маска для телефона в модалке контактов
         const phoneInput = document.getElementById('contactPhone');
         if (phoneInput && window.IMask) {
-            phoneMask = IMask(phoneInput, {
-                mask: '+{7} (000) 000-00-00',
-                lazy: false,
-                placeholderChar: '_'
-            });
+            phoneMask = IMask(phoneInput, { mask: '+{7} (000) 000-00-00', lazy: false, placeholderChar: '_' });
         }
     }
 
-    // ===== ФУНКЦИИ ВАЛИДАЦИИ =====
     function showError(input, errorId) {
         input.classList.add('error');
         const errorEl = document.getElementById(errorId);
         if (errorEl) errorEl.classList.add('visible');
     }
-
     function hideError(input, errorId) {
         input.classList.remove('error');
         const errorEl = document.getElementById(errorId);
         if (errorEl) errorEl.classList.remove('visible');
     }
-
     function validateField(input, validator, errorId) {
         const value = input.value;
-        if (!value.trim() && input.hasAttribute('required')) {
-            showError(input, errorId);
-            return false;
-        }
-        if (value.trim() && !validator(value)) {
-            showError(input, errorId);
-            return false;
-        }
-        hideError(input, errorId);
-        return true;
+        if (!value.trim() && input.hasAttribute('required')) { showError(input, errorId); return false; }
+        if (value.trim() && !validator(value)) { showError(input, errorId); return false; }
+        hideError(input, errorId); return true;
     }
-
     function validateForm(formId, fields) {
         let isValid = true;
         fields.forEach(field => {
             const input = document.getElementById(field.id);
-            if (input) {
-                if (!validateField(input, validators[field.validator], field.errorId)) {
-                    isValid = false;
-                }
-            }
+            if (input) { if (!validateField(input, validators[field.validator], field.errorId)) isValid = false; }
         });
         return isValid;
     }
 
-    // ===== МОДАЛЬНОЕ ОКНО УСПЕХА =====
     const successModal = document.getElementById('successModal');
     const successModalClose = document.getElementById('successModalClose');
     const successModalBtn = document.getElementById('successModalBtn');
@@ -1414,32 +526,13 @@
         successModalText.textContent = text;
         successModal.classList.add('active');
         document.body.style.overflow = 'hidden';
-        
-        if (redirectTo) {
-            successModalBtn.onclick = () => {
-                closeSuccessModal();
-                window.location.href = redirectTo;
-            };
-        } else {
-            successModalBtn.onclick = closeSuccessModal;
-        }
+        if (redirectTo) { successModalBtn.onclick = () => { closeSuccessModal(); window.location.href = redirectTo; }; }
+        else { successModalBtn.onclick = closeSuccessModal; }
     }
+    function closeSuccessModal() { successModal.classList.remove('active'); document.body.style.overflow = ''; }
+    if (successModalClose) successModalClose.addEventListener('click', closeSuccessModal);
+    if (successModal) successModal.addEventListener('click', (e) => { if (e.target === successModal) closeSuccessModal(); });
 
-    function closeSuccessModal() {
-        successModal.classList.remove('active');
-        document.body.style.overflow = '';
-    }
-
-    if (successModalClose) {
-        successModalClose.addEventListener('click', closeSuccessModal);
-    }
-    if (successModal) {
-        successModal.addEventListener('click', (e) => {
-            if (e.target === successModal) closeSuccessModal();
-        });
-    }
-
-    // ===== ГАЛЕРЕЯ ИЗОБРАЖЕНИЙ =====
     const productGallery = document.getElementById('productGallery');
     const galleryMainImage = document.getElementById('galleryMainImage');
     const galleryPrevBtn = document.getElementById('galleryPrevBtn');
@@ -1479,12 +572,10 @@
     if (galleryNextBtn) galleryNextBtn.addEventListener('click', (e) => { e.stopPropagation(); nextImage(); });
     if (galleryCloseBtn) galleryCloseBtn.addEventListener('click', closeGallery);
     if (productGallery) productGallery.addEventListener('click', (e) => { if (e.target === productGallery) closeGallery(); });
-
     document.addEventListener('keydown', (e) => {
         if (!productGallery?.classList.contains('active')) return;
         if (e.key === 'Escape') closeGallery(); else if (e.key === 'ArrowLeft') prevImage(); else if (e.key === 'ArrowRight') nextImage();
     });
-
     let touchStartX = 0, touchEndX = 0;
     if (galleryContainer) {
         galleryContainer.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
@@ -1492,7 +583,6 @@
     }
     function handleSwipe() { const diff = touchStartX - touchEndX; if (Math.abs(diff) > 50) { if (diff > 0) nextImage(); else prevImage(); } }
 
-    // ===== МОДАЛКА КОМАНДЫ =====
     const teamModal = document.getElementById('teamModal'), teamModalBody = document.getElementById('teamModalBody'), teamModalClose = document.getElementById('teamModalClose');
     function closeTeamModal() { if (teamModal) { teamModal.classList.remove('active'); document.body.style.overflow = ''; } }
     function openTeamModal(memberName) {
@@ -1505,22 +595,13 @@
     if (teamModalClose) teamModalClose.addEventListener('click', closeTeamModal);
     if (teamModal) teamModal.addEventListener('click', (e) => { if (e.target === teamModal) closeTeamModal(); });
 
-    // =============================================
-    // 🔥 ЕДИНАЯ ФУНКЦИЯ ОБРАБОТКИ КНОПОК "КУПИТЬ"
-    // =============================================
     window.handleBuyClick = function(btn) {
         const eventId = btn.dataset.eventId;
         const perfId = btn.dataset.performanceId;
-        if (eventId) {
-            goToCheckout(eventId);
-        } else if (perfId) {
-            openSessionModalByPerfId(parseInt(perfId));
-        }
+        if (eventId) { goToCheckout(eventId); }
+        else if (perfId) { openSessionModalByPerfId(parseInt(perfId)); }
     };
 
-    // =============================================
-    // ЕДИНАЯ ФУНКЦИЯ ПЕРЕХОДА К ОФОРМЛЕНИЮ
-    // =============================================
     window.goToCheckout = function(eventId) {
         const event = TOUR_SCHEDULE.find(ev => ev.id === eventId);
         if (!event) { console.error('Событие не найдено:', eventId); return; }
@@ -1533,9 +614,6 @@
         window.location.href = 'checkout.html';
     };
 
-    // =============================================
-    // ОТКРЫТИЕ МОДАЛКИ ВЫБОРА ДАТЫ ПО ID СПЕКТАКЛЯ
-    // =============================================
     function openSessionModalByPerfId(performanceId) {
         const events = filterEventsByPerformance(performanceId, getUpcomingEvents(TOUR_SCHEDULE));
         if (!events.length) { alert('На этот спектакль пока нет запланированных показов. Следите за обновлениями!'); return; }
@@ -1582,8 +660,6 @@
     document.getElementById('confirmSessionBtn').addEventListener('click', () => { if (selectedSession) goToCheckout(selectedSession.id); });
     document.getElementById('sessionModal').addEventListener('click', (e) => { if (e.target.classList.contains('modal-overlay')) closeSessionModal(); });
 
-    // ===== РЕНДЕР СПЕКТАКЛЕЙ =====
-    
     function renderUpcomingScroll() {
         const wrapper = document.getElementById('upcomingScroll'); if (!wrapper) return; wrapper.innerHTML = '';
         const upcoming = getNearestEvents(6, TOUR_SCHEDULE);
@@ -1617,7 +693,6 @@
         });
     }
 
-    // ===== РЕНДЕР МАГАЗИНА =====
     function renderMerchScroll() {
         const wrapper = document.getElementById('merchScroll'); if (!wrapper) return; wrapper.innerHTML = '';
         products.forEach(item => {
@@ -1633,7 +708,6 @@
         });
     }
 
-    // ===== МОДАЛКА ТОВАРА =====
     function openProductModal(product) {
         currentProduct = product; editingIndex = -1; renderProductModalContent();
         document.getElementById('productModalFooter').innerHTML = `<div class="modal-buttons"><button class="modal-btn btn-outline-modal" id="moreItemsBtn">Выбрать еще</button><button class="modal-btn btn-primary-modal" id="buyNowBtn">Купить</button></div>`;
@@ -1691,7 +765,6 @@
         return true;
     }
 
-    // ===== МОДАЛКА КОНТАКТОВ С ВАЛИДАЦИЕЙ =====
     function openContactsModal() {
         if (!cartItems.length) { alert("Корзина пуста"); return; }
         updateOrderSummary();
@@ -1699,22 +772,18 @@
             const el = document.getElementById(id);
             if (el) { el.value = ''; hideError(el, id + 'Error'); }
         });
-        document.getElementById('contactsModal').classList.add('active'); 
+        document.getElementById('contactsModal').classList.add('active');
         document.body.style.overflow = 'hidden';
-        
-        // Переинициализация маски при открытии
         if (phoneMask) {
             const phoneInput = document.getElementById('contactPhone');
-            if (phoneInput && phoneInput !== phoneMask.el) {
-                phoneMask.updateOptions({});
-            }
+            if (phoneInput && phoneInput !== phoneMask.el) { phoneMask.updateOptions({}); }
         }
     }
-    window.closeContactsModal = function() { 
-        document.getElementById('contactsModal').classList.remove('active'); 
-        document.body.style.overflow = ''; 
+    window.closeContactsModal = function() {
+        document.getElementById('contactsModal').classList.remove('active');
+        document.body.style.overflow = '';
     };
-    
+
     function updateOrderSummary() {
         const container = document.getElementById('orderSummaryFull'); if (!container) return;
         if (!cartItems.length) { container.innerHTML = '<div style="text-align:center;padding:16px;color:#5A5556;">Корзина пуста</div>'; return; }
@@ -1725,7 +794,7 @@
         html += `<div class="total-row"><span>Итого</span><span>${total.toLocaleString()} ₽</span></div>`;
         container.innerHTML = html;
     }
-    
+
     document.getElementById('submitOrderBtn').addEventListener('click', () => {
         const fields = [
             { id: 'contactName', validator: 'name', errorId: 'contactNameError' },
@@ -1733,40 +802,26 @@
             { id: 'contactEmail', validator: 'email', errorId: 'contactEmailError' },
             { id: 'contactMethod', validator: 'method', errorId: 'contactMethodError' }
         ];
-        
         if (!validateForm('contactsModal', fields)) {
-            // Прокрутка к первому полю с ошибкой
             const firstError = document.querySelector('.form-input.error, .form-textarea.error');
             if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
             return;
         }
-        
         const name = document.getElementById('contactName').value.trim();
         const phone = document.getElementById('contactPhone').value.trim();
         const email = document.getElementById('contactEmail').value.trim();
         const method = document.getElementById('contactMethod').value.trim();
-        
-        localStorage.setItem('mikos_order_success', JSON.stringify({ 
-            customerName: name, 
-            customerPhone: phone, 
-            customerEmail: email, 
-            contactMethod: method, 
-            items: [...cartItems], 
-            total: cartItems.reduce((s,it) => s + it.price * it.quantity, 0), 
-            timestamp: new Date().toISOString(), 
-            source: 'index-home' 
+        localStorage.setItem('mikos_order_success', JSON.stringify({
+            customerName: name, customerPhone: phone, customerEmail: email,
+            contactMethod: method, items: [...cartItems],
+            total: cartItems.reduce((s,it) => s + it.price * it.quantity, 0),
+            timestamp: new Date().toISOString(), source: 'index-home'
         }));
-        
         cartItems = [];
         closeContactsModal();
-        openSuccessModal(
-            'Заказ оформлен! 🎉', 
-            'Спасибо за покупку! Наш менеджер свяжется с вами в ближайшее время для подтверждения заказа.',
-            'shop.html?order=success'
-        );
+        openSuccessModal('Заказ оформлен! 🎉', 'Спасибо за покупку! Наш менеджер свяжется с вами в ближайшее время для подтверждения заказа.', 'shop.html?order=success');
     });
-    
-    // Валидация полей в реальном времени для модалки контактов
+
     ['contactName', 'contactPhone', 'contactEmail', 'contactMethod'].forEach(id => {
         const input = document.getElementById(id);
         if (input) {
@@ -1794,31 +849,26 @@
             });
         }
     });
-    
-    document.getElementById('contactsModal').addEventListener('click', (e) => { 
-        if (e.target.classList.contains('modal-overlay')) closeContactsModal(); 
+
+    document.getElementById('contactsModal').addEventListener('click', (e) => {
+        if (e.target.classList.contains('modal-overlay')) closeContactsModal();
     });
 
-    // ===== ФОРМА ЗАКАЗЧИКАМ С ВАЛИДАЦИЕЙ =====
     const clientForm = document.getElementById('clientFormMain');
     if (clientForm) {
         clientForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            
             const fields = [
                 { id: 'clientName', validator: 'name', errorId: 'clientNameError' },
                 { id: 'clientCompany', validator: 'company', errorId: 'clientCompanyError' },
                 { id: 'clientEmail', validator: 'email', errorId: 'clientEmailError' },
                 { id: 'clientMessage', validator: 'message', errorId: 'clientMessageError' }
             ];
-            
             if (!validateForm('clientFormMain', fields)) {
                 const firstError = document.querySelector('#clientFormMain .form-input.error, #clientFormMain .form-textarea.error');
                 if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 return;
             }
-            
-            // Сбор данных формы
             const formData = {
                 name: document.getElementById('clientName').value.trim(),
                 company: document.getElementById('clientCompany').value.trim(),
@@ -1827,26 +877,15 @@
                 timestamp: new Date().toISOString(),
                 source: 'index-clients-form'
             };
-            
-            // Сохранение в localStorage (для демонстрации)
             localStorage.setItem('mikos_client_request', JSON.stringify(formData));
-            
-            // Очистка формы
             clientForm.reset();
             ['clientName', 'clientCompany', 'clientEmail', 'clientMessage'].forEach(id => {
                 const input = document.getElementById(id);
                 if (input) hideError(input, id + 'Error');
             });
-            
-            // Показ модального окна успеха
-            openSuccessModal(
-                'Заявка отправлена! ✨', 
-                'Спасибо за интерес к нашему театру! Менеджер свяжется с вами в течение рабочего дня для обсуждения деталей сотрудничества.',
-                null
-            );
+            openSuccessModal('Заявка отправлена! ✨', 'Спасибо за интерес к нашему театру! Менеджер свяжется с вами в течение рабочего дня для обсуждения деталей сотрудничества.', null);
         });
-        
-        // Валидация полей в реальном времени
+
         ['clientName', 'clientCompany', 'clientEmail', 'clientMessage'].forEach(id => {
             const input = document.getElementById(id);
             if (input) {
@@ -1876,7 +915,6 @@
         });
     }
 
-    // ===== ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ =====
     function closeAllModals() {
         ['sessionModal','productModal','contactsModal'].forEach(id => document.getElementById(id)?.classList.remove('active'));
         closeTeamModal(); closeGallery(); document.body.style.overflow = '';
@@ -1898,7 +936,6 @@
         else if (successModal?.classList.contains('active')) closeSuccessModal();
     });
 
-    // ===== ИНИЦИАЛИЗАЦИЯ =====
     document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
             renderUpcomingScroll();
