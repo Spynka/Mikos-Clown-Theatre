@@ -248,13 +248,16 @@
             .success-icon i { font-size: 30px; }
             .success-modal-title { font-size: 20px; }
             .success-modal-text { font-size: 15px; }
-            .service-card-illustration {
-                height: 200px;
-                top: -35%;
-                left: 50%;
-                transform: translateX(5%);
-            }
+                .service-card-illustration {
+        height: 180px;
+        top: -50%;
+        left: 50%;
+        transform: translateX(10%);
+    }
         }
+        .text-nowrap {
+  display: inline-block;
+}
         
         .dash-icon { width: 20px; height: 16px; margin-right: 8px; vertical-align: middle; }
     </style>
@@ -276,7 +279,15 @@
         <section>
             <div class="section-header-custom"><h2 class="section-title-custom">Услуги</h2><a href="#" class="section-link-custom">Все услуги <i class="fas fa-arrow-right"></i></a></div>
             <div class="services-grid">
-                <article class="service-card"><div class="service-number">/01</div><h3 class="service-title">Корпоративные показы</h3><p class="service-desc">Закрытые спектакли для компаний. Полное техническое сопровождение, адаптация под любую площадку.</p><a href="#" class="service-link">Подробнее <i class="fas fa-arrow-right"></i></a></article>
+                <article class="service-card">
+  <div class="service-number">/01</div>
+  <h3 class="service-title">Корпоративные показы</h3>
+  <p class="service-desc">
+    Закрытые спектакли для компаний. Полное техническое сопровождение,
+    <span class="text-nowrap">адаптация под любую площадку.</span>
+  </p>
+  <a href="#" class="service-link">Подробнее <i class="fas fa-arrow-right"></i></a>
+</article>
                 
                 <article class="service-card illustrated">
                     <img src="SVG/Давыдов-сидит.svg" alt="Персонаж" class="service-card-illustration">

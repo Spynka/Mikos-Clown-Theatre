@@ -3,14 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Театр клоунады «Микос» | Афиша</title>
-    
-    <!-- Предзагрузка критических шрифтов -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&display=swap">
     <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&display=swap" rel="stylesheet">
-    
-    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
     <link rel="stylesheet" href="css/style.css">
@@ -18,29 +11,7 @@
     <link rel="icon" type="image/svg+xml" href="SVG/logo-2.svg" sizes="any">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     
-    <!-- Отложенная загрузка API Яндекс.Карт -->
-    <script>
-        // Загружаем API карт асинхронно
-        function loadYandexMaps() {
-            const script = document.createElement('script');
-            script.src = 'https://api-maps.yandex.ru/2.1/?lang=ru_RU&onload=onYandexMapsReady';
-            script.type = 'text/javascript';
-            script.async = true;
-            document.head.appendChild(script);
-        }
-        
-        window.onYandexMapsReady = function() {
-            // Инициализация карт произойдет после загрузки API
-            window.ymapsReady = true;
-            if (window.pendingMapInit) {
-                window.pendingMapInit();
-                window.pendingMapInit = null;
-            }
-        };
-        
-        // Отложенная загрузка API карт
-        setTimeout(loadYandexMaps, 500);
-    </script>
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
     
     <style>
         * { box-sizing: border-box; }
@@ -69,8 +40,6 @@
             gap: 24px;
             margin-bottom: 32px;
             width: 100%;
-            will-change: transform;
-            contain: layout style paint;
         }
         
         .performance-card-afisha {
@@ -82,8 +51,6 @@
             flex-direction: column;
             height: 100%;
             transition: box-shadow 0.2s ease, transform 0.2s ease;
-            will-change: transform;
-            contain: layout style paint;
         }
         .performance-card-afisha:hover {
             box-shadow: 0 8px 24px rgba(42,61,94,0.1);
@@ -94,7 +61,6 @@
             width: 100%;
             height: 200px;
             object-fit: cover;
-            loading: lazy;
         }
         
         .performance-content-afisha {
@@ -194,7 +160,6 @@
         .filters-section-afisha {
             margin-bottom: 28px;
             width: 100%;
-            contain: layout style;
         }
         .filter-chips-afisha {
             display: flex;
@@ -315,7 +280,6 @@
             position: relative;
             width: 100%;
             box-sizing: border-box;
-            contain: layout style;
         }
         
         .tour-header {
@@ -379,9 +343,9 @@
             position: relative;
             touch-action: manipulation;
             box-sizing: border-box;
+            /* БЕЗ СЕРОЙ ОБВОДКИ */
             outline: none;
             border: none;
-            background: #f0f0f0;
         }
         
         .reset-map-btn {
@@ -417,7 +381,6 @@
             padding-right: 6px;
             width: 100%;
             box-sizing: border-box;
-            -webkit-overflow-scrolling: touch;
         }
         
         .tour-item {
@@ -432,7 +395,7 @@
             transition: outline-color 0.2s, background 0.2s;
         }
         .tour-item:active { outline-color: #4A6294; background: #F8F7F6; }
-        .tour-item.active { outline: 2px solid #E8454D; background: #FFF5F5; }
+        .tour-item.active { outline-color: #E8454D; background: #FFF5F5; }
         
         .tour-city {
             font-family: 'Unbounded', sans-serif;
@@ -489,102 +452,6 @@
         .tour-status.soon { background: #fff; color: #1A1A1A; outline: 2px solid #2A3D5E; }
         .tour-status.soon:active { background: #DCE4F0; }
         
-        /* Мобильная всплывашка с информацией */
-        .mobile-balloon {
-            display: none;
-            position: fixed;
-            bottom: 20px;
-            left: 10px;
-            right: 10px;
-            background: white;
-            border-radius: 16px;
-            padding: 16px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
-            z-index: 1000;
-            transform: translateY(100px);
-            opacity: 0;
-            transition: transform 0.3s ease, opacity 0.3s ease;
-            pointer-events: auto;
-        }
-        .mobile-balloon.visible {
-            display: block;
-            transform: translateY(0);
-            opacity: 1;
-        }
-        .mobile-balloon-close {
-            position: absolute;
-            top: 8px;
-            right: 12px;
-            background: none;
-            border: none;
-            font-size: 20px;
-            cursor: pointer;
-            color: #888;
-            -webkit-tap-highlight-color: transparent;
-            padding: 4px;
-        }
-        .mobile-balloon-title {
-            font-family: 'Unbounded', sans-serif;
-            font-size: 16px;
-            font-weight: 700;
-            color: #E8454D;
-            margin-bottom: 8px;
-            padding-right: 24px;
-        }
-        .mobile-balloon-info {
-            font-family: 'Nunito Sans', sans-serif;
-            font-size: 13px;
-            color: #5A5556;
-            margin-bottom: 4px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .mobile-balloon-info i {
-            width: 16px;
-            color: #4A6294;
-        }
-        .mobile-balloon-price {
-            font-family: 'Unbounded', sans-serif;
-            font-weight: 700;
-            color: #E8454D;
-            font-size: 15px;
-            margin: 8px 0;
-        }
-        .mobile-balloon-btn {
-            display: block;
-            width: 100%;
-            padding: 12px;
-            background: #E8454D;
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            font-family: 'Unbounded', sans-serif;
-            font-weight: 600;
-            font-size: 13px;
-            cursor: pointer;
-            margin-top: 12px;
-            -webkit-tap-highlight-color: transparent;
-            text-align: center;
-        }
-        .mobile-balloon-btn:active { background: #C0392B; }
-        
-        /* Убеждаемся что на мобильных балуны карты не показываются */
-        @media (max-width: 860px) {
-            .ymaps-2-1-79-balloon,
-            .ymaps-2-1-79-balloon__content,
-            .ymaps-2-1-79-balloon__layout {
-                display: none !important;
-                visibility: hidden !important;
-                opacity: 0 !important;
-                pointer-events: none !important;
-            }
-            
-            .mobile-balloon {
-                display: none;
-            }
-        }
-
         /* Кнопки "Показать еще" */
         .show-more-wrapper,
         .load-more-wrapper {
@@ -941,7 +808,6 @@
             display: flex;
             align-items: center;
             user-select: none;
-            contain: layout style paint;
         }
         .promo-runner-track {
             position: absolute;
@@ -952,7 +818,6 @@
             height: 650px;
             cursor: pointer;
             z-index: 10;
-            will-change: left;
         }
         .promo-runner-track.running { animation: runAcross 4s linear infinite; }
         @keyframes runAcross {
@@ -1111,9 +976,6 @@
                 border-radius: 12px;
                 width: 100%;
                 box-sizing: border-box;
-                outline: none !important;
-                border: none !important;
-                box-shadow: none !important;
             }
             .tour-header { flex-direction: column; align-items: flex-start; gap: 8px; margin-bottom: 18px; }
             .tour-title { font-size: 19px; text-align: left; width: 100%; }
@@ -1123,25 +985,13 @@
                 width: 100%;
                 border-radius: 10px;
                 touch-action: manipulation;
-                outline: none !important;
-                border: none !important;
-                box-shadow: 0 2px 12px rgba(42,61,94,0.08) !important;
-            }
-            
-            /* Скрываем стандартные балуны Яндекс.Карт на мобильных */
-            .ymaps-2-1-79-balloon,
-            .ymaps-2-1-79-balloon__content,
-            .ymaps-2-1-79-balloon__layout {
-                display: none !important;
-                visibility: hidden !important;
-                opacity: 0 !important;
-                pointer-events: none !important;
+                outline: none;
+                border: none;
             }
             
             .tour-list { max-height: none; overflow-y: visible; padding-right: 0; gap: 7px; }
             .tour-item { padding: 12px 14px; width: 100%; box-sizing: border-box; }
             .tour-item.mobile-hidden { display: none; }
-            .tour-item.active { outline: 2px solid #E8454D; background: #FFF5F5; }
             
             .tour-city { font-size: 14px; margin-bottom: 1px; }
             .tour-dates { font-size: 13px; margin-bottom: 2px; }
@@ -1173,7 +1023,7 @@
             .event-venue-afisha { font-size: 10px; }
             .btn-details-afisha, .btn-buy-afisha { padding: 8px 8px; font-size: 10px; border-radius: 6px; }
             
-            .tour-map-section { padding: 10px 6px; margin: 14px 0; border-radius: 8px; width: 100%; box-sizing: border-box; outline: none !important; border: none !important; }
+            .tour-map-section { padding: 10px 6px; margin: 14px 0; border-radius: 8px; width: 100%; box-sizing: border-box; }
             .tour-title { font-size: 17px; width: 100%; }
             #yandexMap { height: 220px; width: 100%; border-radius: 6px; outline: none; border: none; }
             .tour-item { padding: 10px 12px; }
@@ -1218,36 +1068,28 @@
             .promo-copy-btn { font-size: 10px; padding: 6px 10px; }
             .promo-goto-btn { font-size: 11px; padding: 9px 14px; }
         }
-        
-        /* Скелетон-лоадер для карты */
-        .map-skeleton {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-            background-size: 200% 100%;
-            animation: skeleton-loading 1.5s infinite;
-            border-radius: 16px;
-            z-index: 1;
-        }
-        @keyframes skeleton-loading {
-            0% { background-position: -200% 0; }
-            100% { background-position: 200% 0; }
-        }
-        
-        @media (max-width: 860px) {
-            .map-skeleton {
-                border-radius: 10px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .map-skeleton {
-                border-radius: 6px;
-            }
-        }
+        /* Убираем серую рамку у карты гастролей на мобильных */
+@media (max-width: 860px) {
+    .tour-map-section {
+        outline: none !important;
+        border: none !important;
+        box-shadow: none !important;
+    }
+    
+    /* Фикс для карты — убираем любые обводки */
+    #yandexMap {
+        outline: none !important;
+        border: none !important;
+        box-shadow: 0 2px 12px rgba(42,61,94,0.08) !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .tour-map-section {
+        outline: none !important;
+        border: none !important;
+    }
+}
     </style>
 </head>
 <body>
@@ -1304,10 +1146,7 @@
             </div>
             <div class="tour-map-container">
                 <div class="map-wrapper">
-                    <div id="yandexMap">
-                        <!-- Скелетон-лоадер для карты -->
-                        <div class="map-skeleton" id="mapSkeleton"></div>
-                    </div>
+                    <div id="yandexMap"></div>
                     <button class="reset-map-btn" id="resetMapBtn">
                         <i class="fas fa-undo-alt"></i> Вернуться ко всей карте
                     </button>
@@ -1318,26 +1157,6 @@
                 <button class="show-more-btn" id="showMorePerformancesBtn" style="display: none;">Показать еще</button>
             </div>
         </div>
-    </div>
-
-    <!-- Мобильная всплывашка с информацией -->
-    <div class="mobile-balloon" id="mobileBalloon">
-        <button class="mobile-balloon-close" id="closeMobileBalloon">×</button>
-        <div class="mobile-balloon-title" id="mobileBalloonTitle"></div>
-        <div class="mobile-balloon-info" id="mobileBalloonDate">
-            <i class="far fa-calendar-alt"></i>
-            <span></span>
-        </div>
-        <div class="mobile-balloon-info" id="mobileBalloonVenue">
-            <i class="fas fa-theater-masks"></i>
-            <span></span>
-        </div>
-        <div class="mobile-balloon-info" id="mobileBalloonAddress">
-            <i class="fas fa-map-marker-alt"></i>
-            <span></span>
-        </div>
-        <div class="mobile-balloon-price" id="mobileBalloonPrice"></div>
-        <button class="mobile-balloon-btn" id="mobileBalloonBuyBtn">Купить билеты</button>
     </div>
 
     <div class="modal-overlay" id="tourModalOverlay">
@@ -1391,6 +1210,7 @@
 <script src="js/common.js"></script>
 <script src="js/slider-scripts.js"></script>
 
+
 <script>
 let myMap;
 let placemarks = [];
@@ -1403,9 +1223,6 @@ const grid = document.getElementById('eventsGrid');
 const showMoreBtn = document.getElementById('showMoreEventsBtn');
 const monthSelect = document.getElementById('monthSelect');
 const allChip = document.querySelector('[data-filter="all"]');
-
-// Мобильная всплывашка
-let currentMobileBalloonEventId = null;
 
 window.goToCheckout = function(eventId) {
     const event = TOUR_SCHEDULE.find(ev => ev.id === eventId);
@@ -1455,7 +1272,7 @@ function renderEvents() {
         const formattedDate = formatEventDate(event.date, event.time);
         return `
             <div class="performance-card-afisha" data-event-id="${event.id}">
-                <img class="performance-img-afisha" src="${event.image}" alt="${event.title}" loading="lazy">
+                <img class="performance-img-afisha" src="${event.image}" alt="${event.title}">
                 <div class="performance-content-afisha">
                     <div class="performance-tags-afisha">
                         <span class="tag-afisha tag-age">${event.age}</span>
@@ -1500,197 +1317,126 @@ function updateFilterVisuals() {
     }
 }
 
-// Функции для мобильной всплывашки
-function showMobileBalloon(markerData) {
-    const balloon = document.getElementById('mobileBalloon');
-    if (!balloon) return;
-    
-    const event = TOUR_SCHEDULE.find(ev => ev.id === markerData.eventId);
-    if (!event) return;
-    
-    document.getElementById('mobileBalloonTitle').textContent = event.title;
-    document.getElementById('mobileBalloonDate').querySelector('span').textContent = markerData.date;
-    document.getElementById('mobileBalloonVenue').querySelector('span').textContent = markerData.venueWithCity || markerData.venue;
-    document.getElementById('mobileBalloonAddress').querySelector('span').textContent = markerData.address;
-    
-    const priceEl = document.getElementById('mobileBalloonPrice');
-    if (markerData.price) {
-        priceEl.textContent = `💰 от ${markerData.price.min.toLocaleString('ru-RU')} ₽`;
-        priceEl.style.display = 'block';
-    } else {
-        priceEl.style.display = 'none';
-    }
-    
-    const buyBtn = document.getElementById('mobileBalloonBuyBtn');
-    if (markerData.hasTickets) {
-        buyBtn.style.display = 'block';
-        buyBtn.textContent = 'Купить билеты';
-    } else {
-        buyBtn.style.display = 'none';
-    }
-    
-    currentMobileBalloonEventId = markerData.eventId;
-    balloon.classList.add('visible');
-}
-
-function hideMobileBalloon() {
-    const balloon = document.getElementById('mobileBalloon');
-    if (balloon) {
-        balloon.classList.remove('visible');
-    }
-    currentMobileBalloonEventId = null;
-}
-
-function initMobileBalloon() {
-    const closeBtn = document.getElementById('closeMobileBalloon');
-    const buyBtn = document.getElementById('mobileBalloonBuyBtn');
-    
-    closeBtn?.addEventListener('click', hideMobileBalloon);
-    closeBtn?.addEventListener('touchend', (e) => {
-        e.preventDefault();
-        hideMobileBalloon();
-    });
-    
-    buyBtn?.addEventListener('click', () => {
-        if (currentMobileBalloonEventId) {
-            goToCheckout(currentMobileBalloonEventId);
-        }
-        hideMobileBalloon();
-    });
-    
-    buyBtn?.addEventListener('touchend', (e) => {
-        e.preventDefault();
-        if (currentMobileBalloonEventId) {
-            goToCheckout(currentMobileBalloonEventId);
-        }
-        hideMobileBalloon();
-    });
-    
-    // Закрытие по клику вне всплывашки
-    document.addEventListener('click', function(e) {
-        const balloon = document.getElementById('mobileBalloon');
-        if (!balloon || !balloon.classList.contains('visible')) return;
-        
-        const mapEl = document.getElementById('yandexMap');
-        if (!mapEl?.contains(e.target) && !balloon.contains(e.target)) {
-            hideMobileBalloon();
-        }
-    });
-}
-
 function initYandexMap() {
-    function doInit() {
-        if (typeof ymaps === 'undefined') return;
+    if (typeof ymaps === 'undefined') return;
+    ymaps.ready(function() {
+        const events = getUpcomingEvents(TOUR_SCHEDULE);
+        const markers = getMapMarkers(events);
         
-        ymaps.ready(function() {
-            // Скрываем скелетон
-            const skeleton = document.getElementById('mapSkeleton');
-            if (skeleton) skeleton.style.display = 'none';
-            
-            const events = getUpcomingEvents(TOUR_SCHEDULE);
-            const markers = getMapMarkers(events);
-            
-            if (markers.length === 0) {
-                document.getElementById('yandexMap').innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#5A5556;font-family:Nunito Sans,sans-serif;">🗺️ Гастролей не запланировано</div>';
-                return;
-            }
-            
-            myMap = new ymaps.Map("yandexMap", {
-                center: [55.7558, 37.6173], 
-                zoom: 5,
-                controls: ['zoomControl', 'geolocationControl', 'fullscreenControl']
-            }, { 
-                suppressMapOpenBlock: true 
-            });
-            
-            myMap.behaviors.enable('multiTouch');
-            myMap.behaviors.enable('drag');
-            
-            setTimeout(() => { 
-                originalBounds = myMap.getBounds(); 
-            }, 500);
-            
-            const isMobile = window.innerWidth <= 860;
-            
-            markers.forEach((marker, index) => {
-                const preset = marker.hasTickets ? 'islands#redCircleIcon' : 'islands#grayCircleIcon';
-                const iconColor = marker.hasTickets ? '#E8454D' : '#2A2627';
-                const priceText = marker.price ? `<div class="balloon-price">💰 от ${marker.price.min.toLocaleString('ru-RU')} ₽</div>` : '';
-                const buyButtonHtml = marker.hasTickets ? `<button type="button" class="balloon-buy-btn" data-event-id="${marker.eventId}">Купить билеты</button>` : '';
-                
-                const placemark = new ymaps.Placemark(marker.coords, {
-                    hintContent: `${marker.title} • ${marker.date}`,
-                    balloonContent: `<div class="balloon-content"><b>${marker.title}</b><div class="balloon-date">📅 ${marker.date}</div><div class="balloon-venue">🎭 ${marker.venueWithCity || marker.venue}</div><div class="balloon-address">📍 ${marker.address}</div>${priceText}${buyButtonHtml}</div>`
-                }, { 
-                    preset: preset, 
-                    iconColor: iconColor, 
-                    hideIconOnBalloonOpen: false 
-                });
-                
-                // Единый обработчик клика для всех устройств
-                placemark.events.add('click', function(e) {
-                    e.preventDefault();
-                    
-                    if (myMap) {
-                        myMap.setCenter(placemark.geometry.getCoordinates(), 12, { duration: 300 });
-                        isMapZoomed = true;
-                        const rb = document.getElementById('resetMapBtn');
-                        if (rb) rb.classList.add('visible');
-                    }
-                    
-                    // Выделяем плашку
-                    highlightTourItem(index);
-                    
-                    // На мобильных показываем кастомную всплывашку
-                    if (isMobile) {
-                        showMobileBalloon(marker);
-                    } else {
-                        // На десктопе открываем стандартный балун
-                        setTimeout(() => {
-                            if (placemark.balloon) {
-                                placemark.balloon.open();
-                            }
-                        }, 400);
-                    }
-                });
-                
-                myMap.geoObjects.add(placemark);
-                placemarks.push(placemark);
-            });
-            
-            myMap.setBounds(myMap.geoObjects.getBounds(), { checkZoomRange: true, zoomMargin: 50 });
-            setTimeout(() => { originalBounds = myMap.getBounds(); }, 600);
-            
-            initResetMapButton();
-            renderTourList();
-            
-            // Глобальный обработчик для кнопок в балунах
-            document.addEventListener('click', function(e) {
-                const btn = e.target.closest('.balloon-buy-btn');
-                if (btn && btn.dataset.eventId) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    goToCheckout(btn.dataset.eventId);
-                }
-            });
-            
-            document.addEventListener('touchend', function(e) {
-                const btn = e.target.closest('.balloon-buy-btn');
-                if (btn && btn.dataset.eventId) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    goToCheckout(btn.dataset.eventId);
-                }
-            });
+        if (markers.length === 0) {
+            document.getElementById('yandexMap').innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#5A5556;font-family:Nunito Sans,sans-serif;">🗺️ Гастролей не запланировано</div>';
+            return;
+        }
+        
+        myMap = new ymaps.Map("yandexMap", {
+            center: [55.7558, 37.6173], 
+            zoom: 5,
+            controls: ['zoomControl', 'geolocationControl', 'fullscreenControl']
+        }, { 
+            suppressMapOpenBlock: true 
         });
-    }
-    
-    // Проверяем, загрузился ли API карт
-    if (window.ymapsReady) {
-        doInit();
-    } else {
-        window.pendingMapInit = doInit;
-    }
+        
+        myMap.behaviors.enable('multiTouch');
+        myMap.behaviors.enable('drag');
+        
+        setTimeout(() => { 
+            originalBounds = myMap.getBounds(); 
+        }, 500);
+        
+        markers.forEach((marker, index) => {
+            const preset = marker.hasTickets ? 'islands#redCircleIcon' : 'islands#grayCircleIcon';
+            const iconColor = marker.hasTickets ? '#E8454D' : '#2A2627';
+            const priceText = marker.price ? `<div class="balloon-price">💰 от ${marker.price.min.toLocaleString('ru-RU')} ₽</div>` : '';
+            const buyButtonHtml = marker.hasTickets ? `<button type="button" class="balloon-buy-btn" data-event-id="${marker.eventId}">Купить билеты</button>` : '';
+            
+            const placemark = new ymaps.Placemark(marker.coords, {
+                hintContent: `${marker.title} • ${marker.date}`,
+                balloonContent: `<div class="balloon-content"><b>${marker.title}</b><div class="balloon-date">📅 ${marker.date}</div><div class="balloon-venue">🎭 ${marker.venueWithCity || marker.venue}</div><div class="balloon-address">📍 ${marker.address}</div>${priceText}${buyButtonHtml}</div>`
+            }, { 
+                preset: preset, 
+                iconColor: iconColor, 
+                hideIconOnBalloonOpen: false 
+            });
+            
+            // Основной обработчик - единый для всех устройств
+            placemark.events.add('click', function(e) {
+                e.preventDefault();
+                
+                // На мобильных устройствах НЕ открываем балун (чтобы избежать зависаний)
+                const isMobile = window.innerWidth <= 860;
+                
+                if (myMap) {
+                    myMap.setCenter(placemark.geometry.getCoordinates(), 12, { duration: 300 });
+                    isMapZoomed = true;
+                    const rb = document.getElementById('resetMapBtn');
+                    if (rb) rb.classList.add('visible');
+                }
+                
+                // Сначала скроллим к плашке
+                highlightTourItem(index);
+                
+                // На десктопе открываем балун с небольшой задержкой
+                if (!isMobile) {
+                    setTimeout(() => {
+                        if (placemark.balloon) {
+                            placemark.balloon.open();
+                        }
+                    }, 400);
+                }
+            });
+            
+            // Дополнительный обработчик для тач-устройств (предотвращает зависание)
+            placemark.events.add('touchend', function(e) {
+                e.preventDefault();
+                
+                const isMobile = window.innerWidth <= 860;
+                
+                if (myMap) {
+                    myMap.setCenter(placemark.geometry.getCoordinates(), 12, { duration: 300 });
+                    isMapZoomed = true;
+                    const rb = document.getElementById('resetMapBtn');
+                    if (rb) rb.classList.add('visible');
+                }
+                
+                highlightTourItem(index);
+                
+                // На мобильных НЕ открываем балун
+                if (!isMobile && placemark.balloon) {
+                    setTimeout(() => {
+                        placemark.balloon.open();
+                    }, 400);
+                }
+            });
+            
+            myMap.geoObjects.add(placemark);
+            placemarks.push(placemark);
+        });
+        
+        myMap.setBounds(myMap.geoObjects.getBounds(), { checkZoomRange: true, zoomMargin: 50 });
+        setTimeout(() => { originalBounds = myMap.getBounds(); }, 600);
+        
+        initResetMapButton();
+        renderTourList();
+        
+        // Глобальный обработчик для кнопок в балунах
+        document.addEventListener('click', function(e) {
+            const btn = e.target.closest('.balloon-buy-btn');
+            if (btn && btn.dataset.eventId) {
+                e.preventDefault();
+                e.stopPropagation();
+                goToCheckout(btn.dataset.eventId);
+            }
+        });
+        
+        document.addEventListener('touchend', function(e) {
+            const btn = e.target.closest('.balloon-buy-btn');
+            if (btn && btn.dataset.eventId) {
+                e.preventDefault();
+                e.stopPropagation();
+                goToCheckout(btn.dataset.eventId);
+            }
+        });
+    });
 }
 
 function initResetMapButton() {
@@ -1707,7 +1453,6 @@ function initResetMapButton() {
                 if (pm.balloon) pm.balloon.close();
             });
             document.querySelectorAll('.tour-item').forEach(item => item.classList.remove('active'));
-            hideMobileBalloon();
         }
     };
     
@@ -1729,7 +1474,6 @@ function initResetMapButton() {
                         isMapZoomed = false;
                         resetBtn.classList.remove('visible');
                         document.querySelectorAll('.tour-item').forEach(i => i.classList.remove('active'));
-                        hideMobileBalloon();
                     }
                 }, 100);
             }
@@ -1773,22 +1517,17 @@ function renderTourList(showAll = false) {
             <button class="tour-status ${statusClass}" data-status="${statusClass}" data-event-id="${marker.eventId}">${statusText}</button>
         `;
         
-        // Обработчик клика на плашку (кроме кнопки статуса)
-        const handleItemClick = function(e) {
+        // Обработчик клика на всю плашку (кроме кнопки статуса)
+        tourItem.addEventListener('click', function(e) {
             if (e.target.classList.contains('tour-status')) return;
-            e.preventDefault();
-            
-            // Выделяем плашку
             highlightTourItem(originalIndex);
-            
-            // На мобильных показываем всплывашку
-            if (window.innerWidth <= 860) {
-                showMobileBalloon(marker);
-            }
-        };
+        });
         
-        tourItem.addEventListener('click', handleItemClick);
-        tourItem.addEventListener('touchend', handleItemClick);
+        // Touch обработчик для плашки
+        tourItem.addEventListener('touchend', function(e) {
+            if (e.target.classList.contains('tour-status')) return;
+            highlightTourItem(originalIndex);
+        });
         
         // Обработчики для кнопки статуса
         const statusBtn = tourItem.querySelector('.tour-status');
@@ -1853,7 +1592,7 @@ function highlightTourItem(index) {
                 }
             }, 200);
         } else {
-            // Плашка видна - добавляем выделение и скроллим
+            // Плашка видна - просто скроллим
             targetItem.classList.add('active');
             targetItem.scrollIntoView({ 
                 behavior: 'smooth', 
@@ -1870,7 +1609,7 @@ function highlightTourItem(index) {
         const rb = document.getElementById('resetMapBtn');
         if (rb) rb.classList.add('visible');
         
-        // На десктопе открываем балун
+        // На десктопе открываем балун, на мобильных - нет
         if (window.innerWidth > 860) {
             setTimeout(() => {
                 if (placemarks[index].balloon) {
@@ -1879,6 +1618,18 @@ function highlightTourItem(index) {
             }, 350);
         }
     }
+}
+
+function handleStatusClick(statusClass, marker, event) {
+    if (event) { 
+        event.stopPropagation(); 
+        event.preventDefault(); 
+    }
+    const ed = TOUR_SCHEDULE.find(ev => ev.id === marker.eventId);
+    if (!ed) return;
+    if (statusClass === 'available') goToCheckout(marker.eventId);
+    else if (statusClass === 'soon') openSoonModal(ed.title);
+    else if (statusClass === 'sold') openSoldModal(ed.title);
 }
 
 function openSoonModal(title) {
@@ -1943,8 +1694,7 @@ function initTagModals() {
                 o.classList.remove('active'); 
                 document.body.style.overflow=''; 
             } 
-        });
-        hideMobileBalloon();
+        }); 
     });
 }
 
@@ -2348,32 +2098,21 @@ function refreshOnReturn() {
 }
 
 (function init() {
-    // Инициализируем все сразу при загрузке DOM
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initAll);
-    } else {
-        initAll();
-    }
-    
-    function initAll() {
-        populateMonthSelect(); 
-        initFilters(); 
-        initTourModal(); 
-        initHeader(); 
-        initTagModals(); 
-        initPromoRunner(); 
-        initMobileBalloon();
-        renderEvents();
-        
-        // Небольшая задержка для инициализации кастомных элементов
-        setTimeout(initCustomMonthSelect, 50); 
-        
-        // Инициализация карты с отложенной загрузкой
-        setTimeout(initYandexMap, 100); 
-        
-        setTimeout(initShowMoreTourBtn, 150); 
-        setTimeout(refreshOnReturn, 200);
-    }
+    document.addEventListener('DOMContentLoaded', () => {
+        setTimeout(() => {
+            populateMonthSelect(); 
+            initFilters(); 
+            initTourModal(); 
+            initHeader(); 
+            initTagModals(); 
+            initPromoRunner(); 
+            renderEvents();
+            setTimeout(initCustomMonthSelect, 50); 
+            setTimeout(initYandexMap, 100); 
+            setTimeout(initShowMoreTourBtn, 150); 
+            setTimeout(refreshOnReturn, 200);
+        }, 100);
+    });
 })();
 </script>
 </body>

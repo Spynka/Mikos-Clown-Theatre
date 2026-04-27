@@ -3,47 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <title>Театр клоунады «Микос» | Афиша</title>
-    
-    <!-- Предзагрузка критических шрифтов -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&display=swap">
     <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&display=swap" rel="stylesheet">
-    
-    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
     <link rel="stylesheet" href="css/style.css">
     <script src="js/tour-data.js"></script>
     <link rel="icon" type="image/svg+xml" href="SVG/logo-2.svg" sizes="any">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     
-    <!-- Отложенная загрузка API Яндекс.Карт -->
-    <script>
-        // Загружаем API карт асинхронно
-        function loadYandexMaps() {
-            const script = document.createElement('script');
-            script.src = 'https://api-maps.yandex.ru/2.1/?lang=ru_RU&onload=onYandexMapsReady';
-            script.type = 'text/javascript';
-            script.async = true;
-            document.head.appendChild(script);
-        }
-        
-        window.onYandexMapsReady = function() {
-            // Инициализация карт произойдет после загрузки API
-            window.ymapsReady = true;
-            if (window.pendingMapInit) {
-                window.pendingMapInit();
-                window.pendingMapInit = null;
-            }
-        };
-        
-        // Отложенная загрузка API карт
-        setTimeout(loadYandexMaps, 500);
-    </script>
+    <!-- Оптимизированный viewport для мобильных устройств -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
+    
+    <!-- Предзагрузка критических ресурсов для ускорения -->
+    <link rel="preload" href="https://api-maps.yandex.ru/2.1/?lang=ru_RU" as="script">
+    <link rel="preload" href="SVG/Промокод.svg" as="image" type="image/svg+xml">
+    
+    <!-- Асинхронная загрузка Яндекс.Карт -->
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript" async></script>
     
     <style>
-        * { box-sizing: border-box; }
+        /* === БАЗОВЫЕ НАСТРОЙКИ === */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        /* Оптимизация производительности: GPU-ускорение для анимаций */
+        .promo-runner-track,
+        .tour-item,
+        .performance-card-afisha,
+        #yandexMap {
+            will-change: transform;
+            transform: translateZ(0);
+        }
+        
+        /* Убираем лишние перерисовки */
+        .shop-container { transform: translateZ(0); -webkit-font-smoothing: antialiased; }
         
         .shop-container {
             max-width: 100%;
@@ -62,15 +53,13 @@
             overflow-x: hidden;
         }
         
-        /* Карточки спектаклей */
+        /* === КАРТОЧКИ СПЕКТАКЛЕЙ === */
         .events-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 24px;
             margin-bottom: 32px;
             width: 100%;
-            will-change: transform;
-            contain: layout style paint;
         }
         
         .performance-card-afisha {
@@ -82,8 +71,6 @@
             flex-direction: column;
             height: 100%;
             transition: box-shadow 0.2s ease, transform 0.2s ease;
-            will-change: transform;
-            contain: layout style paint;
         }
         .performance-card-afisha:hover {
             box-shadow: 0 8px 24px rgba(42,61,94,0.1);
@@ -94,7 +81,8 @@
             width: 100%;
             height: 200px;
             object-fit: cover;
-            loading: lazy;
+            /* Lazy loading для изображений */
+            content-visibility: auto;
         }
         
         .performance-content-afisha {
@@ -190,11 +178,10 @@
         }
         .btn-buy-afisha:active { background: #C0392B; }
 
-        /* Фильтры */
+        /* === ФИЛЬТРЫ === */
         .filters-section-afisha {
             margin-bottom: 28px;
             width: 100%;
-            contain: layout style;
         }
         .filter-chips-afisha {
             display: flex;
@@ -221,15 +208,10 @@
             border-color: #2A3D5E;
         }
         
-        /* Нативный селект (скрыт) */
-        .month-select {
-            display: none;
-        }
+        .month-select { display: none; }
 
-        /* Кастомный селект */
-        .filter-chip-date {
-            position: relative;
-        }
+        /* Кастомный селект месяцев */
+        .filter-chip-date { position: relative; }
         .custom-month-select {
             position: relative;
             min-width: 150px;
@@ -264,9 +246,8 @@
             color: #4A6294;
             transition: transform 0.2s;
         }
-        .custom-month-trigger.active .arrow-icon {
-            color: #fff;
-        }
+        .custom-month-trigger.active .arrow-icon { color: #fff; }
+        
         .custom-month-dropdown {
             position: absolute;
             top: calc(100% + 4px);
@@ -281,9 +262,8 @@
             max-height: 220px;
             overflow-y: auto;
         }
-        .custom-month-select.open .custom-month-dropdown {
-            display: block;
-        }
+        .custom-month-select.open .custom-month-dropdown { display: block; }
+        
         .custom-month-option {
             padding: 10px 14px;
             cursor: pointer;
@@ -296,16 +276,14 @@
             white-space: nowrap;
         }
         .custom-month-option:hover,
-        .custom-month-option:active {
-            background: #F8F7F6;
-        }
+        .custom-month-option:active { background: #F8F7F6; }
         .custom-month-option.selected {
             background: #DCE4F0;
             color: #2A3D5E;
             font-weight: 600;
         }
 
-        /* Карта гастролей */
+        /* === КАРТА ГАСТРОЛЕЙ === */
         .tour-map-section {
             background: #fff;
             border-radius: 28px;
@@ -315,7 +293,6 @@
             position: relative;
             width: 100%;
             box-sizing: border-box;
-            contain: layout style;
         }
         
         .tour-header {
@@ -381,7 +358,6 @@
             box-sizing: border-box;
             outline: none;
             border: none;
-            background: #f0f0f0;
         }
         
         .reset-map-btn {
@@ -417,7 +393,6 @@
             padding-right: 6px;
             width: 100%;
             box-sizing: border-box;
-            -webkit-overflow-scrolling: touch;
         }
         
         .tour-item {
@@ -429,10 +404,14 @@
             -webkit-tap-highlight-color: transparent;
             width: 100%;
             box-sizing: border-box;
-            transition: outline-color 0.2s, background 0.2s;
+            transition: outline-color 0.2s, background 0.2s, box-shadow 0.2s;
         }
         .tour-item:active { outline-color: #4A6294; background: #F8F7F6; }
-        .tour-item.active { outline: 2px solid #E8454D; background: #FFF5F5; }
+        .tour-item.active { 
+            outline: 2px solid #E8454D !important; 
+            background: #FFF5F5 !important;
+            box-shadow: 0 0 0 4px rgba(232, 69, 77, 0.15);
+        }
         
         .tour-city {
             font-family: 'Unbounded', sans-serif;
@@ -489,102 +468,6 @@
         .tour-status.soon { background: #fff; color: #1A1A1A; outline: 2px solid #2A3D5E; }
         .tour-status.soon:active { background: #DCE4F0; }
         
-        /* Мобильная всплывашка с информацией */
-        .mobile-balloon {
-            display: none;
-            position: fixed;
-            bottom: 20px;
-            left: 10px;
-            right: 10px;
-            background: white;
-            border-radius: 16px;
-            padding: 16px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
-            z-index: 1000;
-            transform: translateY(100px);
-            opacity: 0;
-            transition: transform 0.3s ease, opacity 0.3s ease;
-            pointer-events: auto;
-        }
-        .mobile-balloon.visible {
-            display: block;
-            transform: translateY(0);
-            opacity: 1;
-        }
-        .mobile-balloon-close {
-            position: absolute;
-            top: 8px;
-            right: 12px;
-            background: none;
-            border: none;
-            font-size: 20px;
-            cursor: pointer;
-            color: #888;
-            -webkit-tap-highlight-color: transparent;
-            padding: 4px;
-        }
-        .mobile-balloon-title {
-            font-family: 'Unbounded', sans-serif;
-            font-size: 16px;
-            font-weight: 700;
-            color: #E8454D;
-            margin-bottom: 8px;
-            padding-right: 24px;
-        }
-        .mobile-balloon-info {
-            font-family: 'Nunito Sans', sans-serif;
-            font-size: 13px;
-            color: #5A5556;
-            margin-bottom: 4px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .mobile-balloon-info i {
-            width: 16px;
-            color: #4A6294;
-        }
-        .mobile-balloon-price {
-            font-family: 'Unbounded', sans-serif;
-            font-weight: 700;
-            color: #E8454D;
-            font-size: 15px;
-            margin: 8px 0;
-        }
-        .mobile-balloon-btn {
-            display: block;
-            width: 100%;
-            padding: 12px;
-            background: #E8454D;
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            font-family: 'Unbounded', sans-serif;
-            font-weight: 600;
-            font-size: 13px;
-            cursor: pointer;
-            margin-top: 12px;
-            -webkit-tap-highlight-color: transparent;
-            text-align: center;
-        }
-        .mobile-balloon-btn:active { background: #C0392B; }
-        
-        /* Убеждаемся что на мобильных балуны карты не показываются */
-        @media (max-width: 860px) {
-            .ymaps-2-1-79-balloon,
-            .ymaps-2-1-79-balloon__content,
-            .ymaps-2-1-79-balloon__layout {
-                display: none !important;
-                visibility: hidden !important;
-                opacity: 0 !important;
-                pointer-events: none !important;
-            }
-            
-            .mobile-balloon {
-                display: none;
-            }
-        }
-
         /* Кнопки "Показать еще" */
         .show-more-wrapper,
         .load-more-wrapper {
@@ -612,22 +495,22 @@
         .show-more-btn:active,
         .load-more-btn:active { background: #DCE4F0; }
         
-        /* Балуны */
+        /* === БАЛУНЫ КАРТЫ === */
         .balloon-content {
             font-family: 'Nunito Sans', sans-serif !important;
             font-size: 14px;
             color: #2A2627;
             line-height: 1.5;
+            max-width: 280px;
         }
-        .balloon-content * {
-            font-family: 'Nunito Sans', sans-serif !important;
-        }
+        .balloon-content * { font-family: 'Nunito Sans', sans-serif !important; }
         .balloon-content b {
             font-family: 'Unbounded', sans-serif !important;
             color: #1A1718;
             font-size: 16px;
             display: block;
             margin-bottom: 6px;
+            font-weight: 700;
         }
         .balloon-content .balloon-date {
             color: #5A5556;
@@ -651,7 +534,7 @@
             font-family: 'Unbounded', sans-serif !important;
             color: #E8454D;
             font-size: 14px;
-            font-weight: 600;
+            font-weight: 700;
             margin: 4px 0;
         }
         .balloon-content .balloon-buy-btn {
@@ -670,7 +553,7 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        /* Модальные окна */
+        /* === МОДАЛЬНЫЕ ОКНА === */
         .tag-modal-overlay,
         .modal-overlay {
             position: fixed;
@@ -930,7 +813,7 @@
             font-family: 'Nunito Sans', sans-serif;
         }
         
-        /* Промокод */
+        /* === ПРОМО-РАННЕР === */
         .promo-runner-section {
             position: relative;
             width: 100%;
@@ -941,29 +824,28 @@
             display: flex;
             align-items: center;
             user-select: none;
-            contain: layout style paint;
         }
         .promo-runner-track {
             position: absolute;
             top: 50%;
-            transform: translateY(-50%);
-            left: 100%;
+            transform: translateY(-50%) translateX(100%) rotate(-5deg);
             width: 800px;
             height: 650px;
             cursor: pointer;
             z-index: 10;
-            will-change: left;
         }
-        .promo-runner-track.running { animation: runAcross 4s linear infinite; }
+        .promo-runner-track.running { 
+            animation: runAcross 4s linear infinite; 
+            will-change: transform;
+        }
         @keyframes runAcross {
-            0% { left: 100%; }
-            100% { left: -850px; }
+            0% { transform: translateY(-50%) translateX(100%) rotate(-5deg); }
+            100% { transform: translateY(-50%) translateX(-110%) rotate(-5deg); }
         }
         .promo-runner-track img {
             width: 100%;
             height: 100%;
             object-fit: contain;
-            transform: rotate(-5deg);
             filter: drop-shadow(4px 8px 12px rgba(0,0,0,0.15));
         }
         .promo-caption {
@@ -1084,7 +966,7 @@
             grid-column: 1 / -1;
         }
         
-        /* Адаптивность */
+        /* === АДАПТИВНОСТЬ === */
         @media (max-width: 1100px) {
             .tour-map-container { grid-template-columns: 1fr; }
             #yandexMap { height: 380px; }
@@ -1128,20 +1010,9 @@
                 box-shadow: 0 2px 12px rgba(42,61,94,0.08) !important;
             }
             
-            /* Скрываем стандартные балуны Яндекс.Карт на мобильных */
-            .ymaps-2-1-79-balloon,
-            .ymaps-2-1-79-balloon__content,
-            .ymaps-2-1-79-balloon__layout {
-                display: none !important;
-                visibility: hidden !important;
-                opacity: 0 !important;
-                pointer-events: none !important;
-            }
-            
             .tour-list { max-height: none; overflow-y: visible; padding-right: 0; gap: 7px; }
             .tour-item { padding: 12px 14px; width: 100%; box-sizing: border-box; }
             .tour-item.mobile-hidden { display: none; }
-            .tour-item.active { outline: 2px solid #E8454D; background: #FFF5F5; }
             
             .tour-city { font-size: 14px; margin-bottom: 1px; }
             .tour-dates { font-size: 13px; margin-bottom: 2px; }
@@ -1173,9 +1044,9 @@
             .event-venue-afisha { font-size: 10px; }
             .btn-details-afisha, .btn-buy-afisha { padding: 8px 8px; font-size: 10px; border-radius: 6px; }
             
-            .tour-map-section { padding: 10px 6px; margin: 14px 0; border-radius: 8px; width: 100%; box-sizing: border-box; outline: none !important; border: none !important; }
+            .tour-map-section { padding: 10px 6px; margin: 14px 0; border-radius: 8px; width: 100%; box-sizing: border-box; }
             .tour-title { font-size: 17px; width: 100%; }
-            #yandexMap { height: 220px; width: 100%; border-radius: 6px; outline: none; border: none; }
+            #yandexMap { height: 240px !important; width: 100%; border-radius: 6px; outline: none !important; border: none !important; }
             .tour-item { padding: 10px 12px; }
             .tour-city { font-size: 13px; }
             .tour-dates, .tour-venue { font-size: 12px; }
@@ -1210,43 +1081,47 @@
             .custom-month-trigger { font-size: 11px; padding: 9px 28px 9px 10px; }
         }
         
-        @media (max-width: 370px) {
+        @media (max-width: 375px) {
             .promo-modal { padding: 14px 8px; margin: 0 4px; }
             .promo-modal-title { font-size: 16px; }
             .promo-modal-subtitle { font-size: 11px; }
             .promo-code-text { font-size: 14px; }
             .promo-copy-btn { font-size: 10px; padding: 6px 10px; }
             .promo-goto-btn { font-size: 11px; padding: 9px 14px; }
+            
+            .tour-map-container { gap: 12px !important; }
+            .tour-list { gap: 8px !important; }
+            .tour-item { padding: 10px 12px !important; }
+            .tour-city { font-size: 13px !important; }
+            .tour-dates, .tour-venue { font-size: 11px !important; }
+            .tour-status { padding: 6px 10px !important; font-size: 10px !important; }
+            
+            #yandexMap { height: 220px !important; }
         }
         
-        /* Скелетон-лоадер для карты */
-        .map-skeleton {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-            background-size: 200% 100%;
-            animation: skeleton-loading 1.5s infinite;
-            border-radius: 16px;
-            z-index: 1;
-        }
-        @keyframes skeleton-loading {
-            0% { background-position: -200% 0; }
-            100% { background-position: 200% 0; }
-        }
-        
+        /* Убираем серую рамку у карты на мобильных */
         @media (max-width: 860px) {
-            .map-skeleton {
-                border-radius: 10px;
+            .tour-map-section {
+                outline: none !important;
+                border: none !important;
+                box-shadow: none !important;
+            }
+            #yandexMap {
+                outline: none !important;
+                border: none !important;
+                box-shadow: 0 2px 12px rgba(42,61,94,0.08) !important;
             }
         }
         
-        @media (max-width: 480px) {
-            .map-skeleton {
-                border-radius: 6px;
+        /* Фикс для систем с reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
             }
+            .promo-runner-track { animation: none !important; }
         }
     </style>
 </head>
@@ -1258,7 +1133,7 @@
 
     <div class="promo-runner-section" id="promoRunner">
         <div class="promo-runner-track" id="promoRunnerTrack">
-            <img src="SVG/Промокод.svg" alt="Поймай Ксюшу — получи промокод!">
+            <img src="SVG/Промокод.svg" alt="Поймай Ксюшу — получи промокод!" loading="lazy">
         </div>
         <span class="promo-caption">Поймайте Ксюшу — получите промокод!</span>
     </div>
@@ -1304,10 +1179,7 @@
             </div>
             <div class="tour-map-container">
                 <div class="map-wrapper">
-                    <div id="yandexMap">
-                        <!-- Скелетон-лоадер для карты -->
-                        <div class="map-skeleton" id="mapSkeleton"></div>
-                    </div>
+                    <div id="yandexMap"></div>
                     <button class="reset-map-btn" id="resetMapBtn">
                         <i class="fas fa-undo-alt"></i> Вернуться ко всей карте
                     </button>
@@ -1318,26 +1190,6 @@
                 <button class="show-more-btn" id="showMorePerformancesBtn" style="display: none;">Показать еще</button>
             </div>
         </div>
-    </div>
-
-    <!-- Мобильная всплывашка с информацией -->
-    <div class="mobile-balloon" id="mobileBalloon">
-        <button class="mobile-balloon-close" id="closeMobileBalloon">×</button>
-        <div class="mobile-balloon-title" id="mobileBalloonTitle"></div>
-        <div class="mobile-balloon-info" id="mobileBalloonDate">
-            <i class="far fa-calendar-alt"></i>
-            <span></span>
-        </div>
-        <div class="mobile-balloon-info" id="mobileBalloonVenue">
-            <i class="fas fa-theater-masks"></i>
-            <span></span>
-        </div>
-        <div class="mobile-balloon-info" id="mobileBalloonAddress">
-            <i class="fas fa-map-marker-alt"></i>
-            <span></span>
-        </div>
-        <div class="mobile-balloon-price" id="mobileBalloonPrice"></div>
-        <button class="mobile-balloon-btn" id="mobileBalloonBuyBtn">Купить билеты</button>
     </div>
 
     <div class="modal-overlay" id="tourModalOverlay">
@@ -1392,21 +1244,48 @@
 <script src="js/slider-scripts.js"></script>
 
 <script>
-let myMap;
+// === ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ ===
+let myMap = null;
 let placemarks = [];
 let originalBounds = null;
 let isMapZoomed = false;
 let visibleCount = 6;
 let currentFilter = 'all';
+let mapInitialized = false;
+let tourShowAll = false;
 
+// DOM элементы
 const grid = document.getElementById('eventsGrid');
 const showMoreBtn = document.getElementById('showMoreEventsBtn');
 const monthSelect = document.getElementById('monthSelect');
 const allChip = document.querySelector('[data-filter="all"]');
 
-// Мобильная всплывашка
-let currentMobileBalloonEventId = null;
+// === УТИЛИТЫ ===
 
+// Debounce для оптимизации событий resize/scroll
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+// Проверка мобильного устройства
+function isMobile() {
+    return window.innerWidth <= 860;
+}
+
+// Проверка очень узкого экрана (360-375px)
+function isVeryNarrow() {
+    return window.innerWidth <= 375;
+}
+
+// === ПОКУПКА БИЛЕТОВ ===
 window.goToCheckout = function(eventId) {
     const event = TOUR_SCHEDULE.find(ev => ev.id === eventId);
     if (!event) return;
@@ -1423,6 +1302,8 @@ window.goToCheckout = function(eventId) {
     localStorage.setItem('selectedPerformance', JSON.stringify(orderInfo));
     window.location.href = 'checkout.html';
 };
+
+// === ФИЛЬТРЫ И РЕНДЕР ===
 
 function populateMonthSelect() {
     const months = getEventMonths(getUpcomingEvents(TOUR_SCHEDULE));
@@ -1478,13 +1359,13 @@ function renderEvents() {
     grid.querySelectorAll('.btn-details-afisha').forEach(btn => {
         btn.addEventListener('click', () => {
             window.location.href = `performance.html?id=${btn.dataset.performanceId}`;
-        });
+        }, { passive: true });
     });
     
     grid.querySelectorAll('.btn-buy-afisha').forEach(btn => {
         btn.addEventListener('click', (e) => {
             goToCheckout(e.currentTarget.dataset.eventId);
-        });
+        }, { passive: true });
     });
 
     showMoreBtn.style.display = filtered.length > visibleCount ? 'block' : 'none';
@@ -1500,197 +1381,129 @@ function updateFilterVisuals() {
     }
 }
 
-// Функции для мобильной всплывашки
-function showMobileBalloon(markerData) {
-    const balloon = document.getElementById('mobileBalloon');
-    if (!balloon) return;
-    
-    const event = TOUR_SCHEDULE.find(ev => ev.id === markerData.eventId);
-    if (!event) return;
-    
-    document.getElementById('mobileBalloonTitle').textContent = event.title;
-    document.getElementById('mobileBalloonDate').querySelector('span').textContent = markerData.date;
-    document.getElementById('mobileBalloonVenue').querySelector('span').textContent = markerData.venueWithCity || markerData.venue;
-    document.getElementById('mobileBalloonAddress').querySelector('span').textContent = markerData.address;
-    
-    const priceEl = document.getElementById('mobileBalloonPrice');
-    if (markerData.price) {
-        priceEl.textContent = `💰 от ${markerData.price.min.toLocaleString('ru-RU')} ₽`;
-        priceEl.style.display = 'block';
-    } else {
-        priceEl.style.display = 'none';
-    }
-    
-    const buyBtn = document.getElementById('mobileBalloonBuyBtn');
-    if (markerData.hasTickets) {
-        buyBtn.style.display = 'block';
-        buyBtn.textContent = 'Купить билеты';
-    } else {
-        buyBtn.style.display = 'none';
-    }
-    
-    currentMobileBalloonEventId = markerData.eventId;
-    balloon.classList.add('visible');
-}
-
-function hideMobileBalloon() {
-    const balloon = document.getElementById('mobileBalloon');
-    if (balloon) {
-        balloon.classList.remove('visible');
-    }
-    currentMobileBalloonEventId = null;
-}
-
-function initMobileBalloon() {
-    const closeBtn = document.getElementById('closeMobileBalloon');
-    const buyBtn = document.getElementById('mobileBalloonBuyBtn');
-    
-    closeBtn?.addEventListener('click', hideMobileBalloon);
-    closeBtn?.addEventListener('touchend', (e) => {
-        e.preventDefault();
-        hideMobileBalloon();
-    });
-    
-    buyBtn?.addEventListener('click', () => {
-        if (currentMobileBalloonEventId) {
-            goToCheckout(currentMobileBalloonEventId);
-        }
-        hideMobileBalloon();
-    });
-    
-    buyBtn?.addEventListener('touchend', (e) => {
-        e.preventDefault();
-        if (currentMobileBalloonEventId) {
-            goToCheckout(currentMobileBalloonEventId);
-        }
-        hideMobileBalloon();
-    });
-    
-    // Закрытие по клику вне всплывашки
-    document.addEventListener('click', function(e) {
-        const balloon = document.getElementById('mobileBalloon');
-        if (!balloon || !balloon.classList.contains('visible')) return;
-        
-        const mapEl = document.getElementById('yandexMap');
-        if (!mapEl?.contains(e.target) && !balloon.contains(e.target)) {
-            hideMobileBalloon();
-        }
-    });
-}
+// === КАРТА ЯНДЕКС ===
 
 function initYandexMap() {
-    function doInit() {
-        if (typeof ymaps === 'undefined') return;
-        
-        ymaps.ready(function() {
-            // Скрываем скелетон
-            const skeleton = document.getElementById('mapSkeleton');
-            if (skeleton) skeleton.style.display = 'none';
-            
-            const events = getUpcomingEvents(TOUR_SCHEDULE);
-            const markers = getMapMarkers(events);
-            
-            if (markers.length === 0) {
-                document.getElementById('yandexMap').innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#5A5556;font-family:Nunito Sans,sans-serif;">🗺️ Гастролей не запланировано</div>';
-                return;
-            }
-            
-            myMap = new ymaps.Map("yandexMap", {
-                center: [55.7558, 37.6173], 
-                zoom: 5,
-                controls: ['zoomControl', 'geolocationControl', 'fullscreenControl']
-            }, { 
-                suppressMapOpenBlock: true 
-            });
-            
-            myMap.behaviors.enable('multiTouch');
-            myMap.behaviors.enable('drag');
-            
-            setTimeout(() => { 
-                originalBounds = myMap.getBounds(); 
-            }, 500);
-            
-            const isMobile = window.innerWidth <= 860;
-            
-            markers.forEach((marker, index) => {
-                const preset = marker.hasTickets ? 'islands#redCircleIcon' : 'islands#grayCircleIcon';
-                const iconColor = marker.hasTickets ? '#E8454D' : '#2A2627';
-                const priceText = marker.price ? `<div class="balloon-price">💰 от ${marker.price.min.toLocaleString('ru-RU')} ₽</div>` : '';
-                const buyButtonHtml = marker.hasTickets ? `<button type="button" class="balloon-buy-btn" data-event-id="${marker.eventId}">Купить билеты</button>` : '';
-                
-                const placemark = new ymaps.Placemark(marker.coords, {
-                    hintContent: `${marker.title} • ${marker.date}`,
-                    balloonContent: `<div class="balloon-content"><b>${marker.title}</b><div class="balloon-date">📅 ${marker.date}</div><div class="balloon-venue">🎭 ${marker.venueWithCity || marker.venue}</div><div class="balloon-address">📍 ${marker.address}</div>${priceText}${buyButtonHtml}</div>`
-                }, { 
-                    preset: preset, 
-                    iconColor: iconColor, 
-                    hideIconOnBalloonOpen: false 
-                });
-                
-                // Единый обработчик клика для всех устройств
-                placemark.events.add('click', function(e) {
-                    e.preventDefault();
-                    
-                    if (myMap) {
-                        myMap.setCenter(placemark.geometry.getCoordinates(), 12, { duration: 300 });
-                        isMapZoomed = true;
-                        const rb = document.getElementById('resetMapBtn');
-                        if (rb) rb.classList.add('visible');
-                    }
-                    
-                    // Выделяем плашку
-                    highlightTourItem(index);
-                    
-                    // На мобильных показываем кастомную всплывашку
-                    if (isMobile) {
-                        showMobileBalloon(marker);
-                    } else {
-                        // На десктопе открываем стандартный балун
-                        setTimeout(() => {
-                            if (placemark.balloon) {
-                                placemark.balloon.open();
-                            }
-                        }, 400);
-                    }
-                });
-                
-                myMap.geoObjects.add(placemark);
-                placemarks.push(placemark);
-            });
-            
-            myMap.setBounds(myMap.geoObjects.getBounds(), { checkZoomRange: true, zoomMargin: 50 });
-            setTimeout(() => { originalBounds = myMap.getBounds(); }, 600);
-            
-            initResetMapButton();
-            renderTourList();
-            
-            // Глобальный обработчик для кнопок в балунах
-            document.addEventListener('click', function(e) {
-                const btn = e.target.closest('.balloon-buy-btn');
-                if (btn && btn.dataset.eventId) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    goToCheckout(btn.dataset.eventId);
-                }
-            });
-            
-            document.addEventListener('touchend', function(e) {
-                const btn = e.target.closest('.balloon-buy-btn');
-                if (btn && btn.dataset.eventId) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    goToCheckout(btn.dataset.eventId);
-                }
-            });
-        });
-    }
+    if (mapInitialized || typeof ymaps === 'undefined') return;
     
-    // Проверяем, загрузился ли API карт
-    if (window.ymapsReady) {
-        doInit();
-    } else {
-        window.pendingMapInit = doInit;
-    }
+    ymaps.ready(function() {
+        const events = getUpcomingEvents(TOUR_SCHEDULE);
+        const markers = getMapMarkers(events);
+        
+        if (markers.length === 0) {
+            document.getElementById('yandexMap').innerHTML = 
+                '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#5A5556;font-family:Nunito Sans,sans-serif;font-size:14px;">🗺️ Гастролей не запланировано</div>';
+            mapInitialized = true;
+            return;
+        }
+        
+        // Инициализация карты с оптимизированными настройками
+        myMap = new ymaps.Map("yandexMap", {
+            center: [55.7558, 37.6173], 
+            zoom: 5,
+            controls: ['zoomControl'] // Только зум для мобильных
+        }, { 
+            suppressMapOpenBlock: true,
+            suppressDeprecatedWarning: true
+        });
+        
+        // Поведения карты
+        myMap.behaviors.disable('scrollZoom'); // Отключаем зум колёсиком
+        myMap.behaviors.enable('drag');
+        myMap.behaviors.enable('multiTouch');
+        
+        setTimeout(() => { originalBounds = myMap.getBounds(); }, 300);
+        
+        // Создаём маркеры
+        markers.forEach((marker, index) => {
+            const preset = marker.hasTickets ? 'islands#redCircleIcon' : 'islands#grayCircleIcon';
+            const iconColor = marker.hasTickets ? '#E8454D' : '#2A2627';
+            const priceText = marker.price ? `<div class="balloon-price">💰 от ${marker.price.min.toLocaleString('ru-RU')} ₽</div>` : '';
+            const buyButtonHtml = marker.hasTickets ? 
+                `<button type="button" class="balloon-buy-btn" data-event-id="${marker.eventId}">Купить билеты</button>` : '';
+            
+            const placemark = new ymaps.Placemark(marker.coords, {
+                hintContent: `${marker.title} • ${marker.date}`,
+                balloonContentHeader: marker.title,
+                balloonContentBody: `<div class="balloon-content"><div class="balloon-date">📅 ${marker.date}</div><div class="balloon-venue">🎭 ${marker.venueWithCity || marker.venue}</div><div class="balloon-address">📍 ${marker.address}</div>${priceText}${buyButtonHtml}</div>`,
+                balloonContentFooter: ''
+            }, { 
+                preset: preset, 
+                iconColor: iconColor, 
+                hideIconOnBalloonOpen: false,
+                balloonCloseButton: true,
+                balloonMaxWidth: isVeryNarrow() ? 260 : 300
+            });
+            
+            // === ЕДИНЫЙ ОБРАБОТЧИК КЛИКА ДЛЯ ВСЕХ УСТРОЙСТВ ===
+            const handleMarkerClick = (e) => {
+                e?.preventDefault?.();
+                
+                // 1. Зум к маркеру
+                if (myMap) {
+                    myMap.setCenter(placemark.geometry.getCoordinates(), 12, { duration: 250 });
+                    isMapZoomed = true;
+                    const rb = document.getElementById('resetMapBtn');
+                    if (rb) rb.classList.add('visible');
+                }
+                
+                // 2. Выделяем плашку внизу (КРАСНАЯ РАМКА)
+                highlightTourItem(index);
+                
+                // 3. Открываем балун с информацией (И НА МОБИЛЬНЫХ ТОЖЕ!)
+                setTimeout(() => {
+                    if (placemark.balloon && !placemark.balloon.isOpen()) {
+                        placemark.balloon.open();
+                        
+                        // На очень узких экранах прокручиваем к балуну
+                        if (isVeryNarrow()) {
+                            setTimeout(() => {
+                                const balloon = document.querySelector('.ymaps-2-1-79-balloon');
+                                if (balloon) {
+                                    balloon.scrollIntoView({ 
+                                        behavior: 'smooth', 
+                                        block: 'center',
+                                        inline: 'nearest'
+                                    });
+                                }
+                            }, 100);
+                        }
+                    }
+                }, 150);
+            };
+            
+            // Добавляем обработчики с passive: true для производительности
+            placemark.events.add('click', handleMarkerClick, { passive: true });
+            placemark.events.add('touchend', handleMarkerClick, { passive: true });
+            
+            myMap.geoObjects.add(placemark);
+            placemarks.push(placemark);
+        });
+        
+        // Автозум с отступом
+        myMap.setBounds(myMap.geoObjects.getBounds(), { 
+            checkZoomRange: true, 
+            zoomMargin: isMobile() ? 30 : 50 
+        });
+        
+        setTimeout(() => { 
+            originalBounds = myMap.getBounds(); 
+            mapInitialized = true;
+        }, 400);
+        
+        initResetMapButton();
+        renderTourList();
+        
+        // Глобальный обработчик для кнопок "Купить" в балунах
+        document.addEventListener('click', function(e) {
+            const btn = e.target.closest('.balloon-buy-btn');
+            if (btn && btn.dataset.eventId) {
+                e.preventDefault();
+                e.stopPropagation();
+                goToCheckout(btn.dataset.eventId);
+            }
+        }, { passive: true });
+    });
 }
 
 function initResetMapButton() {
@@ -1703,16 +1516,13 @@ function initResetMapButton() {
             myMap.setBounds(originalBounds, { checkZoomRange: true, zoomMargin: 50 });
             isMapZoomed = false;
             resetBtn.classList.remove('visible');
-            placemarks.forEach(pm => {
-                if (pm.balloon) pm.balloon.close();
-            });
+            placemarks.forEach(pm => { if (pm.balloon) pm.balloon.close(); });
             document.querySelectorAll('.tour-item').forEach(item => item.classList.remove('active'));
-            hideMobileBalloon();
         }
     };
     
-    resetBtn.addEventListener('click', resetMap);
-    resetBtn.addEventListener('touchend', resetMap);
+    resetBtn.addEventListener('click', resetMap, { passive: true });
+    resetBtn.addEventListener('touchend', resetMap, { passive: true });
     
     if (myMap) {
         const mapClickHandler = function(e) {
@@ -1729,17 +1539,63 @@ function initResetMapButton() {
                         isMapZoomed = false;
                         resetBtn.classList.remove('visible');
                         document.querySelectorAll('.tour-item').forEach(i => i.classList.remove('active'));
-                        hideMobileBalloon();
                     }
                 }, 100);
             }
         };
         
-        myMap.events.add('click', mapClickHandler);
-        myMap.events.add('touchstart', mapClickHandler);
+        myMap.events.add('click', mapClickHandler, { passive: true });
+        myMap.events.add('touchstart', mapClickHandler, { passive: true });
     }
 }
 
+// === ВЫДЕЛЕНИЕ ПЛАШКИ (ИСПРАВЛЕННАЯ ВЕРСИЯ) ===
+function highlightTourItem(index) {
+    // Убираем активный класс со всех плашек
+    document.querySelectorAll('.tour-item').forEach(i => i.classList.remove('active'));
+    
+    // Находим целевую плашку
+    const targetItem = document.querySelector(`.tour-item[data-index="${index}"]`);
+    
+    if (targetItem) {
+        // Если плашка скрыта на мобильном — показываем все
+        if (targetItem.classList.contains('mobile-hidden')) {
+            renderTourList(true);
+            
+            // Используем requestAnimationFrame для надёжного скролла после рендера
+            requestAnimationFrame(() => {
+                const newTarget = document.querySelector(`.tour-item[data-index="${index}"]`);
+                if (newTarget) {
+                    newTarget.classList.add('active');
+                    newTarget.scrollIntoView({ 
+                        behavior: 'smooth', 
+                        block: 'center',
+                        inline: 'nearest'
+                    });
+                }
+            });
+        } else {
+            // Плашка видна — просто скроллим и выделяем
+            targetItem.classList.add('active');
+            targetItem.scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'center',
+                inline: 'nearest'
+            });
+        }
+    }
+    
+    // Центрируем карту на маркере (дублируем для надёжности)
+    if (placemarks[index] && myMap) {
+        const coordinates = placemarks[index].geometry.getCoordinates();
+        myMap.setCenter(coordinates, 12, { duration: 250 });
+        isMapZoomed = true;
+        const rb = document.getElementById('resetMapBtn');
+        if (rb) rb.classList.add('visible');
+    }
+}
+
+// === РЕНДЕР СПИСКА ГАСТРОЛЕЙ ===
 function renderTourList(showAll = false) {
     const tourList = document.getElementById('tourList');
     const showMoreBtn = document.getElementById('showMorePerformancesBtn');
@@ -1747,19 +1603,19 @@ function renderTourList(showAll = false) {
     
     const events = getUpcomingEvents(TOUR_SCHEDULE);
     const markers = getMapMarkers(events);
-    const isMobile = window.innerWidth <= 860;
     
-    tourList.innerHTML = '';
-    const itemsToShow = (isMobile && !showAll) ? markers.slice(0, 4) : markers;
+    // Используем DocumentFragment для уменьшения перерисовок DOM
+    const fragment = document.createDocumentFragment();
+    const itemsToShow = (isMobile() && !showAll) ? markers.slice(0, 4) : markers;
     
-    itemsToShow.forEach((marker, index) => {
+    itemsToShow.forEach((marker, idx) => {
         const originalIndex = markers.findIndex(m => m.eventId === marker.eventId);
         const event = TOUR_SCHEDULE.find(ev => ev.id === marker.eventId);
         if (!event) return;
         
         const tourItem = document.createElement('div');
         tourItem.className = 'tour-item';
-        if (isMobile && index >= 4 && !showAll) tourItem.classList.add('mobile-hidden');
+        if (isMobile() && idx >= 4 && !showAll) tourItem.classList.add('mobile-hidden');
         tourItem.dataset.index = originalIndex;
         tourItem.dataset.eventId = marker.eventId;
         
@@ -1774,23 +1630,15 @@ function renderTourList(showAll = false) {
         `;
         
         // Обработчик клика на плашку (кроме кнопки статуса)
-        const handleItemClick = function(e) {
+        const handleItemClick = (e) => {
             if (e.target.classList.contains('tour-status')) return;
-            e.preventDefault();
-            
-            // Выделяем плашку
             highlightTourItem(originalIndex);
-            
-            // На мобильных показываем всплывашку
-            if (window.innerWidth <= 860) {
-                showMobileBalloon(marker);
-            }
         };
         
-        tourItem.addEventListener('click', handleItemClick);
-        tourItem.addEventListener('touchend', handleItemClick);
+        tourItem.addEventListener('click', handleItemClick, { passive: true });
+        tourItem.addEventListener('touchend', handleItemClick, { passive: true });
         
-        // Обработчики для кнопки статуса
+        // Обработчик кнопки статуса
         const statusBtn = tourItem.querySelector('.tour-status');
         if (statusBtn) {
             const statusHandler = function(e) {
@@ -1812,15 +1660,19 @@ function renderTourList(showAll = false) {
                 }
             };
             
-            statusBtn.addEventListener('click', statusHandler);
-            statusBtn.addEventListener('touchend', statusHandler);
+            statusBtn.addEventListener('click', statusHandler, { passive: true });
+            statusBtn.addEventListener('touchend', statusHandler, { passive: true });
         }
         
-        tourList.appendChild(tourItem);
+        fragment.appendChild(tourItem);
     });
     
+    tourList.innerHTML = '';
+    tourList.appendChild(fragment);
+    
+    // Кнопка "Показать еще"
     if (showMoreBtn) {
-        if (isMobile && markers.length > 4) { 
+        if (isMobile() && markers.length > 4) { 
             showMoreBtn.style.display = 'block'; 
             showMoreBtn.textContent = showAll ? 'Скрыть' : 'Показать еще'; 
         } else { 
@@ -1829,57 +1681,7 @@ function renderTourList(showAll = false) {
     }
 }
 
-function highlightTourItem(index) {
-    // Убираем активный класс со всех плашек
-    document.querySelectorAll('.tour-item').forEach(i => i.classList.remove('active'));
-    
-    // Находим нужную плашку
-    const targetItem = document.querySelector(`.tour-item[data-index="${index}"]`);
-    
-    if (targetItem) {
-        // Если плашка скрыта в мобильной версии - показываем все
-        if (targetItem.classList.contains('mobile-hidden')) {
-            renderTourList(true);
-            
-            // Ждем рендера и затем скроллим
-            setTimeout(() => {
-                const newTarget = document.querySelector(`.tour-item[data-index="${index}"]`);
-                if (newTarget) {
-                    newTarget.classList.add('active');
-                    newTarget.scrollIntoView({ 
-                        behavior: 'smooth', 
-                        block: 'center'
-                    });
-                }
-            }, 200);
-        } else {
-            // Плашка видна - добавляем выделение и скроллим
-            targetItem.classList.add('active');
-            targetItem.scrollIntoView({ 
-                behavior: 'smooth', 
-                block: 'center'
-            });
-        }
-    }
-    
-    // Центрируем карту на маркере
-    if (placemarks[index] && myMap) {
-        const coordinates = placemarks[index].geometry.getCoordinates();
-        myMap.setCenter(coordinates, 12, { duration: 300 });
-        isMapZoomed = true;
-        const rb = document.getElementById('resetMapBtn');
-        if (rb) rb.classList.add('visible');
-        
-        // На десктопе открываем балун
-        if (window.innerWidth > 860) {
-            setTimeout(() => {
-                if (placemarks[index].balloon) {
-                    placemarks[index].balloon.open();
-                }
-            }, 350);
-        }
-    }
-}
+// === МОДАЛКИ ===
 
 function openSoonModal(title) {
     const m = document.getElementById('soonModalOverlay'); 
@@ -1917,12 +1719,12 @@ function initTagModals() {
             if(emailInput) emailInput.value=''; 
         };
         
-        closeBtn?.addEventListener('click', closeModal);
-        closeBtn?.addEventListener('touchend', (e) => { e.preventDefault(); closeModal(); });
+        closeBtn?.addEventListener('click', closeModal, { passive: true });
+        closeBtn?.addEventListener('touchend', (e) => { e.preventDefault(); closeModal(); }, { passive: true });
         
         overlay.addEventListener('click', (e) => { 
             if (e.target === overlay) closeModal(); 
-        });
+        }, { passive: true });
         
         submitBtn?.addEventListener('click', () => {
             const email = emailInput?.value.trim();
@@ -1932,7 +1734,7 @@ function initTagModals() {
             } else {
                 alert('Пожалуйста, введите корректный email');
             }
-        });
+        }, { passive: true });
     });
     
     document.addEventListener('keydown', (e) => { 
@@ -1943,8 +1745,7 @@ function initTagModals() {
                 o.classList.remove('active'); 
                 document.body.style.overflow=''; 
             } 
-        });
-        hideMobileBalloon();
+        }); 
     });
 }
 
@@ -2000,8 +1801,8 @@ function initTourModal() {
                 else if(st==='sold') openSoldModal(ed.title);
             };
             
-            btn.addEventListener('click', statusHandler);
-            btn.addEventListener('touchend', statusHandler);
+            btn.addEventListener('click', statusHandler, { passive: true });
+            btn.addEventListener('touchend', statusHandler, { passive: true });
         });
     }
     
@@ -2017,21 +1818,22 @@ function initTourModal() {
         document.body.style.overflow = ''; 
     };
     
-    openModalLink?.addEventListener('click', openModal);
-    openModalLink?.addEventListener('touchend', (e) => { e.preventDefault(); openModal(e); });
+    openModalLink?.addEventListener('click', openModal, { passive: true });
+    openModalLink?.addEventListener('touchend', (e) => { e.preventDefault(); openModal(e); }, { passive: true });
     
-    closeModalBtn?.addEventListener('click', closeModal);
-    closeModalBtn?.addEventListener('touchend', (e) => { e.preventDefault(); closeModal(); });
+    closeModalBtn?.addEventListener('click', closeModal, { passive: true });
+    closeModalBtn?.addEventListener('touchend', (e) => { e.preventDefault(); closeModal(); }, { passive: true });
     
     modalOverlay.addEventListener('click', (e) => { 
         if (e.target === modalOverlay) closeModal(); 
-    });
+    }, { passive: true });
     
     document.addEventListener('keydown', (e) => { 
         if (e.key === 'Escape' && modalOverlay?.classList.contains('active')) closeModal(); 
     });
 }
 
+// === КАСТОМНЫЙ СЕЛЕКТ МЕСЯЦЕВ ===
 function initCustomMonthSelect() {
     const originalSelect = document.getElementById('monthSelect');
     if (!originalSelect || document.querySelector('.custom-month-select')) return;
@@ -2076,8 +1878,8 @@ function initCustomMonthSelect() {
                 originalSelect.dispatchEvent(new Event('change', { bubbles: true }));
             };
             
-            optionEl.addEventListener('click', selectHandler);
-            optionEl.addEventListener('touchend', selectHandler);
+            optionEl.addEventListener('click', selectHandler, { passive: true });
+            optionEl.addEventListener('touchend', selectHandler, { passive: true });
             dropdown.appendChild(optionEl);
         });
     }
@@ -2101,20 +1903,20 @@ function initCustomMonthSelect() {
         wrapper.classList.toggle('open');
     };
     
-    trigger.addEventListener('click', toggleHandler);
-    trigger.addEventListener('touchend', toggleHandler);
+    trigger.addEventListener('click', toggleHandler, { passive: true });
+    trigger.addEventListener('touchend', toggleHandler, { passive: true });
     
     document.addEventListener('click', function(e) {
         if (!wrapper.contains(e.target)) {
             wrapper.classList.remove('open');
         }
-    });
+    }, { passive: true });
     
     document.addEventListener('touchend', function(e) {
         if (!wrapper.contains(e.target)) {
             wrapper.classList.remove('open');
         }
-    });
+    }, { passive: true });
     
     wrapper.appendChild(trigger);
     wrapper.appendChild(dropdown);
@@ -2141,8 +1943,8 @@ function initCustomMonthSelect() {
             wrapper.classList.remove('open');
         };
         
-        allChip.addEventListener('click', resetHandler);
-        allChip.addEventListener('touchend', resetHandler);
+        allChip.addEventListener('click', resetHandler, { passive: true });
+        allChip.addEventListener('touchend', resetHandler, { passive: true });
     }
     
     const observer = new MutationObserver(() => {
@@ -2153,28 +1955,38 @@ function initCustomMonthSelect() {
     observer.observe(originalSelect, { attributes: true, attributeFilter: ['class', 'value'] });
 }
 
+// === ПРОМО-РАННЕР С ОПТИМИЗАЦИЕЙ ===
 function initPromoRunner() {
-    const runnerTrack = document.getElementById('promoRunnerTrack'), 
-          runnerSection = document.getElementById('promoRunner');
-    const modalOverlay = document.getElementById('promoModalOverlay'), 
-          closeModalBtn = document.getElementById('closePromoModal');
-    const copyBtn = document.getElementById('copyPromoBtn'), 
-          gotoAfishaBtn = document.getElementById('gotoAfishaBtn'), 
-          promoCodeText = document.getElementById('promoCode');
+    const runnerTrack = document.getElementById('promoRunnerTrack');
+    const runnerSection = document.getElementById('promoRunner');
+    const modalOverlay = document.getElementById('promoModalOverlay');
+    const closeModalBtn = document.getElementById('closePromoModal');
+    const copyBtn = document.getElementById('copyPromoBtn');
+    const gotoAfishaBtn = document.getElementById('gotoAfishaBtn');
+    const promoCodeText = document.getElementById('promoCode');
     
     if (!runnerTrack || !runnerSection) return;
     
-    let animationStarted = false;
-    const observer = new IntersectionObserver((entries) => { 
-        entries.forEach(entry => { 
-            if (entry.isIntersecting && !animationStarted) { 
-                runnerTrack.classList.add('running'); 
-                animationStarted = true; 
-            } 
-        }); 
-    }, { threshold: 0.3 });
+    // Проверка на слабое устройство
+    const isLowEnd = navigator.deviceMemory && navigator.deviceMemory <= 2;
     
-    observer.observe(runnerSection);
+    if (!isLowEnd) {
+        const observer = new IntersectionObserver((entries) => { 
+            entries.forEach(entry => { 
+                if (entry.isIntersecting) { 
+                    runnerTrack.classList.add('running'); 
+                    observer.unobserve(runnerSection);
+                } 
+            }); 
+        }, { threshold: 0.3 });
+        
+        observer.observe(runnerSection);
+    } else {
+        // Фолбэк для слабых устройств: статичное положение
+        runnerTrack.style.animation = 'none';
+        runnerTrack.style.transform = 'translateY(-50%) translateX(-20%) rotate(-5deg)';
+        runnerTrack.style.cursor = 'pointer';
+    }
     
     runnerTrack.addEventListener('click', (e) => { 
         e.stopPropagation(); 
@@ -2186,24 +1998,24 @@ function initPromoRunner() {
                 copyBtn.classList.remove('copied'); 
             } 
         } 
-    });
+    }, { passive: true });
     
     if (closeModalBtn && modalOverlay) {
         closeModalBtn.addEventListener('click', () => { 
             modalOverlay.classList.remove('active'); 
             document.body.style.overflow = ''; 
-        });
+        }, { passive: true });
         closeModalBtn.addEventListener('touchend', (e) => { 
             e.preventDefault(); 
             modalOverlay.classList.remove('active'); 
             document.body.style.overflow = ''; 
-        });
+        }, { passive: true });
         modalOverlay.addEventListener('click', (e) => { 
             if (e.target === modalOverlay) { 
                 modalOverlay.classList.remove('active'); 
                 document.body.style.overflow = ''; 
             } 
-        });
+        }, { passive: true });
     }
     
     if (copyBtn && promoCodeText) {
@@ -2228,7 +2040,7 @@ function initPromoRunner() {
                 copyBtn.innerHTML = '<i class="far fa-copy"></i> Скопировать'; 
                 copyBtn.classList.remove('copied'); 
             }, 2500); 
-        });
+        }, { passive: true });
     }
     
     if (gotoAfishaBtn) { 
@@ -2237,7 +2049,7 @@ function initPromoRunner() {
             modalOverlay?.classList.remove('active'); 
             document.body.style.overflow = ''; 
             document.querySelector('.filters-section-afisha')?.scrollIntoView({ behavior: 'smooth' }); 
-        }); 
+        }, { passive: true }); 
     }
     
     document.addEventListener('keydown', (e) => { 
@@ -2248,20 +2060,21 @@ function initPromoRunner() {
     });
 }
 
+// === ФИЛЬТРЫ ===
 function initFilters() {
     allChip?.addEventListener('click', () => { 
         currentFilter = 'all'; 
         visibleCount = 6; 
         renderEvents(); 
         renderTourList(); 
-    });
+    }, { passive: true });
     
     monthSelect?.addEventListener('change', (e) => { 
         currentFilter = e.target.value; 
         visibleCount = 6; 
         renderEvents(); 
         renderTourList(); 
-    });
+    }, { passive: true });
     
     showMoreBtn?.addEventListener('click', () => { 
         const f = getFilteredEvents(); 
@@ -2269,112 +2082,16 @@ function initFilters() {
             visibleCount = Math.min(visibleCount + 3, f.length); 
             renderEvents(); 
         } 
-    });
+    }, { passive: true });
 }
 
 function initShowMoreTourBtn() {
     const btn = document.getElementById('showMorePerformancesBtn'); 
     if (!btn) return;
     
-    let showAll = false;
     const toggle = () => { 
-        showAll = !showAll; 
-        renderTourList(showAll); 
+        tourShowAll = !tourShowAll; 
+        renderTourList(tourShowAll); 
     };
     
-    btn.addEventListener('click', toggle);
-    btn.addEventListener('touchend', (e) => { 
-        e.preventDefault(); 
-        toggle(); 
-    });
-    
-    window.addEventListener('resize', () => renderTourList(showAll));
-}
-
-function initHeader() {
-    const dotsIcon = document.getElementById('dotsIcon'), 
-          closeIcon = document.getElementById('closeIcon'), 
-          extraRow = document.getElementById('extraMenuRow');
-    
-    if (dotsIcon && closeIcon && extraRow) {
-        dotsIcon.addEventListener('click', () => { 
-            extraRow.classList.add('open'); 
-            dotsIcon.style.display = 'none'; 
-            closeIcon.style.display = 'inline-flex'; 
-        });
-        closeIcon.addEventListener('click', () => { 
-            extraRow.classList.remove('open'); 
-            dotsIcon.style.display = 'inline-flex'; 
-            closeIcon.style.display = 'none'; 
-        });
-    }
-    
-    const burgerIcon = document.getElementById('burgerIcon'), 
-          mobileNav = document.getElementById('mobileNav'), 
-          overlay = document.getElementById('overlay'), 
-          closeMobileBtn = document.getElementById('closeMobileMenu');
-    
-    if (burgerIcon && mobileNav && overlay) {
-        const open = () => { 
-            mobileNav.classList.add('open'); 
-            overlay.classList.add('active'); 
-            document.body.style.overflow = 'hidden'; 
-        };
-        const close = () => { 
-            mobileNav.classList.remove('open'); 
-            overlay.classList.remove('active'); 
-            document.body.style.overflow = ''; 
-        };
-        
-        burgerIcon.addEventListener('click', open); 
-        closeMobileBtn?.addEventListener('click', close); 
-        overlay.addEventListener('click', close);
-    }
-}
-
-function refreshOnReturn() {
-    window.addEventListener('pageshow', (e) => { 
-        if (e.persisted) { 
-            renderEvents(); 
-            renderTourList(); 
-            if (myMap) { 
-                myMap.destroy(); 
-                myMap = null; 
-                placemarks = []; 
-                initYandexMap(); 
-            } 
-        } 
-    });
-}
-
-(function init() {
-    // Инициализируем все сразу при загрузке DOM
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initAll);
-    } else {
-        initAll();
-    }
-    
-    function initAll() {
-        populateMonthSelect(); 
-        initFilters(); 
-        initTourModal(); 
-        initHeader(); 
-        initTagModals(); 
-        initPromoRunner(); 
-        initMobileBalloon();
-        renderEvents();
-        
-        // Небольшая задержка для инициализации кастомных элементов
-        setTimeout(initCustomMonthSelect, 50); 
-        
-        // Инициализация карты с отложенной загрузкой
-        setTimeout(initYandexMap, 100); 
-        
-        setTimeout(initShowMoreTourBtn, 150); 
-        setTimeout(refreshOnReturn, 200);
-    }
-})();
-</script>
-</body>
-</html>
+    btn.addEventListener('click', toggle, { passive: true
