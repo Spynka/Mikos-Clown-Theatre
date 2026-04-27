@@ -1716,13 +1716,26 @@ body {
 
 <script>
     // === ДАННЫЕ О СПЕКТАКЛЯХ (синхронизированы с performance.html) ===
-    const PERFORMANCES = {
-        1: { title: 'Лишь бы не было детей', price: 1500, hall: 'Основная сцена', freeSeating: false, poster: 'https://placehold.co/78x78/2a3f5e/white?text=Дети' },
-        2: { title: 'Богатыри', price: 1400, hall: 'Основная сцена', freeSeating: false, poster: 'https://placehold.co/78x78/4a6294/white?text=Богатыри' },
-        3: { title: 'Ожидание', price: 1200, hall: 'Малая сцена', freeSeating: true, poster: 'https://placehold.co/78x78/3a5078/white?text=Ожидание' },
-        4: { title: 'Кабаре-Шапито', price: 1800, hall: 'Основная сцена', freeSeating: false, poster: 'https://placehold.co/78x78/2e4c7a/white?text=Кабаре' },
-        5: { title: 'Авиаторы', price: 1600, hall: 'Основная сцена', freeSeating: true, poster: 'https://placehold.co/78x78/1f3a5f/white?text=Авиаторы' }
+    // === БАЗОВЫЕ ДАННЫЕ О СПЕКТАКЛЯХ (цена, зал, свободная рассадка) ===
+const PERFORMANCE_BASE = {
+    1: { title: 'Лишь бы не было детей', price: 1500, hall: 'Основная сцена', freeSeating: false },
+    2: { title: 'Богатыри', price: 1400, hall: 'Основная сцена', freeSeating: false },
+    3: { title: 'Ожидание', price: 1200, hall: 'Малая сцена', freeSeating: true },
+    4: { title: 'Кабаре-Шапито', price: 1800, hall: 'Основная сцена', freeSeating: false },
+    5: { title: 'Авиаторы', price: 1600, hall: 'Основная сцена', freeSeating: true }
+};
+
+// === ПОДТЯГИВАЕМ ПОСТЕРЫ ИЗ tour-data.js ===
+const PERFORMANCES = {};
+for (let id in PERFORMANCE_BASE) {
+    const perfId = parseInt(id);
+    // Ищем первое событие с таким performanceId
+    const event = TOUR_SCHEDULE.find(e => e.performanceId === perfId);
+    PERFORMANCES[perfId] = {
+        ...PERFORMANCE_BASE[perfId],
+        poster: event ? event.image : `images/content/performances/default.jpg` // fallback-картинка
     };
+}
 
     let performanceData = null;
     let selectedSeats = []; // Для фиксированной рассадки

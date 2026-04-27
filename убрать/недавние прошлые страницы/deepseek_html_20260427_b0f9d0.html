@@ -219,7 +219,7 @@
             pointer-events: none;
             top: -50%;
             left: 50%;
-            transform: translateX(20%);
+            transform: translateX(20%); /* сдвиг вправо */
         }
 
         /* --- Адаптив --- */
@@ -314,17 +314,7 @@
                 </form>
                 <aside class="builder-preview" id="builderPreview">
                     <div class="preview-header"><span class="preview-title">Предварительный запрос</span><span class="preview-draft">черновик</span></div>
-                    <div id="previewContent">
-                        <div class="preview-item"><div class="preview-label">Имя</div><div class="preview-value">—</div></div>
-                        <div class="preview-item"><div class="preview-label">Компания</div><div class="preview-value">—</div></div>
-                        <div class="preview-item"><div class="preview-label">Email</div><div class="preview-value">—</div></div>
-                        <div class="preview-item"><div class="preview-label">Телефон</div><div class="preview-value">—</div></div>
-                        <div class="preview-item"><div class="preview-label">Тип</div><div class="preview-value">—</div></div>
-                        <div class="preview-item"><div class="preview-label">Дата</div><div class="preview-value">—</div></div>
-                        <div class="preview-item"><div class="preview-label">Зрителей</div><div class="preview-value">—</div></div>
-                        <div class="preview-item"><div class="preview-label">Формат</div><div class="preview-value">—</div></div>
-                        <div class="preview-item"><div class="preview-label">Пожелания</div><div class="preview-value">—</div></div>
-                    </div>
+                    <div id="previewContent"></div>
                     <button class="submit-request-btn" id="sendRequestBtn">Отправить запрос</button>
                 </aside>
             </div>
@@ -501,7 +491,6 @@
         return div.innerHTML;
     }
 
-    // Кнопка "Сформировать запрос" — валидация, обновление превью, прокрутка на мобильных
     document.getElementById('previewBtn')?.addEventListener('click', () => {
         let isValid = true;
         if (!validateField(document.getElementById('requestName'), 'name')) isValid = false;
@@ -519,18 +508,16 @@
         
         updatePreview();
         
-        // Прокрутка к превью на мобильных
         if (window.innerWidth <= 768) {
             const preview = document.getElementById('builderPreview');
             if (preview) {
                 setTimeout(() => {
                     preview.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }, 150);
+                }, 100);
             }
         }
     });
 
-    // Кнопка "Сбросить"
     document.getElementById('resetBtn')?.addEventListener('click', () => {
         document.getElementById('requestForm').reset();
         document.querySelectorAll('.form-input-customers.error, .form-input-customers.valid').forEach(el => {
@@ -558,7 +545,6 @@
             <div class="preview-item"><div class="preview-label">Пожелания</div><div class="preview-value">—</div></div>`;
     });
 
-    // Отправка запроса
     document.getElementById('sendRequestBtn')?.addEventListener('click', () => {
         let isValid = true;
         if (!validateField(document.getElementById('requestName'), 'name')) isValid = false;
@@ -586,11 +572,9 @@
         openSuccessModal('Запрос отправлен!', 'Менеджер театра свяжется с вами в ближайшее время для обсуждения деталей.');
     });
 
-    // Маски телефона
     applyPhoneMask(document.getElementById('requestPhone'));
     applyPhoneMask(document.getElementById('contactPhone'));
 
-    // Валидация контактной формы
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
@@ -618,7 +602,6 @@
         });
     }
 
-    // Кастомные селекты
     function initCustomSelects() {
         if (customSelectsInitialized) return;
         const selects = document.querySelectorAll('#eventType, #audienceCount, #eventFormat');
@@ -691,7 +674,6 @@
         customSelectsInitialized = true;
     }
 
-    // Дата: маска + скрытый пикер (без автообновления превью)
     function initDateField() {
         if (dateFieldInitialized) return;
         const dateInput = document.getElementById('eventDate');
@@ -759,6 +741,7 @@
                 dateInput.value = `${day}.${month}.${year}`; 
                 dateInput.classList.add('valid'); 
                 dateInput.classList.remove('error'); 
+                updatePreview(); 
             } 
             hiddenDatePicker.style.position = 'absolute'; 
             hiddenDatePicker.style.pointerEvents = 'none'; 
@@ -779,10 +762,14 @@
         dateFieldInitialized = true;
     }
 
-    // Инициализация
     document.addEventListener('DOMContentLoaded', () => {
+        updatePreview();
         initCustomSelects();
         initDateField();
+        ['requestName', 'requestCompany', 'requestEmail', 'requestPhone'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.addEventListener('input', updatePreview);
+        });
     });
 </script>
 </body>
