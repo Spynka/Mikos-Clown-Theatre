@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" type="image/svg+xml" href="SVG/logo-2.svg" sizes="any">
     <script src="js/tour-data.js"></script>
+    <!-- Подключаем IMask для масок ввода -->
+    <script src="https://cdn.jsdelivr.net/npm/imask@7.3.0/dist/imask.min.js"></script>
     <style>
         /* ===== СТИЛИ МОДАЛЬНОГО ОКНА КОМАНДЫ (как в team.html) ===== */
         .team-modal-overlay {
@@ -387,9 +389,10 @@
             background: #D62830;
         }
 
-        /* Стили для модалки товара */
+        /* ===== СТИЛИ ФОРМ И ВАЛИДАЦИИ ===== */
         .form-group {
             margin-bottom: 20px;
+            position: relative;
         }
         .form-group label {
             display: block;
@@ -399,21 +402,63 @@
             color: #2A2627;
             margin-bottom: 8px;
         }
-        .form-input, .form-select {
+        .form-group label .required {
+            color: #E8454D;
+            margin-left: 2px;
+        }
+        .form-input, .form-select, .form-textarea {
             width: 100%;
             padding: 12px 16px;
-            border: 1px solid #E5E3E1;
+            border: 2px solid #E5E3E1;
             border-radius: 8px;
             font-size: 15px;
             font-family: 'Nunito Sans', sans-serif;
             background: #FFFFFF;
-            transition: border-color 0.2s;
+            transition: border-color 0.2s, box-shadow 0.2s;
             box-sizing: border-box;
         }
-        .form-input:focus, .form-select:focus {
+        .form-textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
             outline: none;
             border-color: #4A6294;
+            box-shadow: 0 0 0 3px rgba(74, 98, 148, 0.15);
         }
+        
+        /* Стили ошибок валидации */
+        .form-input.error, .form-select.error, .form-textarea.error {
+            border-color: #E8454D;
+            background-color: #FFF5F5;
+        }
+        .form-input.error:focus, .form-select.error:focus, .form-textarea.error:focus {
+            box-shadow: 0 0 0 3px rgba(232, 69, 77, 0.15);
+        }
+        .error-message {
+            display: none;
+            color: #E8454D;
+            font-size: 12px;
+            font-family: 'Nunito Sans', sans-serif;
+            margin-top: 6px;
+            padding-left: 4px;
+        }
+        .error-message.visible {
+            display: block;
+            animation: slideDown 0.2s ease;
+        }
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Индикатор обязательности */
+        .form-input[required]:not(:placeholder-shown):valid,
+        .form-textarea[required]:not(:placeholder-shown):valid {
+            border-color: #4CAF50;
+        }
+
+        /* Стили для модалки товара */
         .modal-buttons {
             display: flex;
             gap: 16px;
@@ -655,6 +700,122 @@
             pointer-events: none;
         }
 
+        /* ===== СТИЛИ МОДАЛЬНОГО ОКНА УСПЕХА ===== */
+        .success-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 10001;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .success-modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .success-modal-content {
+            background: #FFFFFF;
+            border-radius: 24px;
+            max-width: 480px;
+            width: 100%;
+            padding: 40px 32px;
+            text-align: center;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(232, 69, 77, 0.2);
+            transform: scale(0.9);
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+        }
+        .success-modal-overlay.active .success-modal-content {
+            transform: scale(1);
+        }
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #E8454D, #D62830);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            animation: pulse 0.6s ease-out;
+        }
+        @keyframes pulse {
+            0% { transform: scale(0.8); opacity: 0.7; }
+            50% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .success-icon i {
+            font-size: 36px;
+            color: white;
+        }
+        .success-modal-title {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #1A1718;
+            margin-bottom: 12px;
+        }
+        .success-modal-text {
+            font-family: 'Nunito Sans', sans-serif;
+            font-size: 16px;
+            color: #5A5556;
+            line-height: 1.5;
+            margin-bottom: 28px;
+        }
+        .success-modal-btn {
+            background: #E8454D;
+            color: white;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 10px;
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .success-modal-btn:hover {
+            background: #D62830;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(232, 69, 77, 0.3);
+        }
+        .success-modal-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #F8F7F6;
+            border: 1px solid #E5E3E1;
+            color: #5A5556;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .success-modal-close:hover {
+            background: #E8454D;
+            color: white;
+            border-color: #E8454D;
+        }
+
         /* Адаптивность */
         @media (max-width: 860px) {
             .modal-overlay {
@@ -755,78 +916,93 @@
                 font-size: 12px;
             }
             
+            /* Адаптив модального окна успеха */
+            .success-modal-content {
+                padding: 32px 24px;
+            }
+            .success-icon {
+                width: 70px;
+                height: 70px;
+            }
+            .success-icon i {
+                font-size: 30px;
+            }
+            .success-modal-title {
+                font-size: 20px;
+            }
+            .success-modal-text {
+                font-size: 15px;
+            }
         }
+        
         /* Обновленные стили карточек мерча */
-.merch-card {
-    cursor: pointer;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-    position: relative;
-    overflow: hidden;
-    background: #fff;
-    border-radius: 12px;
-}
-.merch-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
-}
+        .merch-card {
+            cursor: pointer;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            position: relative;
+            overflow: hidden;
+            background: #fff;
+            border-radius: 12px;
+        }
+        .merch-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+        }
 
-/* Обертка для изображения */
-.merch-img-wrapper {
-    position: relative;
-    overflow: hidden;
-    width: 100%;
-}
+        /* Обертка для изображения */
+        .merch-img-wrapper {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+        }
 
-.merch-img {
-    width: 100%;
-    display: block;
-    pointer-events: none;
-    transition: transform 0.3s ease;
-}
-.merch-card:hover .merch-img {
-    transform: scale(1.05);
-}
+        .merch-img {
+            width: 100%;
+            display: block;
+            pointer-events: none;
+            transition: transform 0.3s ease;
+        }
+        .merch-card:hover .merch-img {
+            transform: scale(1.05);
+        }
 
-/* Счетчик фото */
-.merch-photo-count {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: rgba(0, 0, 0, 0.65);
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-    color: white;
-    padding: 6px 10px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 600;
-    font-family: 'Nunito Sans', sans-serif;
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    z-index: 2;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    pointer-events: none; /* Чтобы не мешал клику по карточке */
-    transition: opacity 0.2s ease, transform 0.2s ease;
-}
+        /* Счетчик фото */
+        .merch-photo-count {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            color: white;
+            padding: 6px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            font-family: 'Nunito Sans', sans-serif;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            z-index: 2;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            pointer-events: none;
+            transition: opacity 0.2s ease, transform 0.2s ease;
+        }
 
-/* По умолчанию скрываем счетчик */
-.merch-photo-count {
-    opacity: 0;
-    transform: translateY(-5px);
-}
+        .merch-photo-count {
+            opacity: 0;
+            transform: translateY(-5px);
+        }
 
-/* Показываем счетчик при наведении на карточку */
-.merch-card:hover .merch-photo-count {
-    opacity: 1;
-    transform: translateY(0);
-}
+        .merch-card:hover .merch-photo-count {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
-/* ВСЕГДА показываем счетчик, если он находится в зоне скролла (JS добавит класс) */
-.merch-card.force-visible .merch-photo-count {
-    opacity: 1 !important;
-    transform: translateY(0) !important;
-}
+        .merch-card.force-visible .merch-photo-count {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
     </style>
 </head>
 <body>
@@ -908,13 +1084,31 @@
                     <div class="download-tech"><button class="download-btn-tech"><i class="fas fa-download"></i> Скачать тех. райдер</button></div>
                 </div>
                 <div class="clients-form">
-                    <h3>Отправить заявку</h3>
-                    <form id="clientFormMain">
-                        <div class="form-group"><label>Имя</label><input type="text" placeholder="Ваше имя"></div>
-                        <div class="form-group"><label>Компания</label><input type="text" placeholder="Название компании"></div>
-                        <div class="form-group"><label>Email</label><input type="email" placeholder="email@example.com"></div>
-                        <div class="form-group"><label>Сообщение</label><textarea placeholder="Опишите вашу задачу"></textarea></div>
-                        <button type="submit" class="submit-client-btn">Отправить заявку</button>
+                    <h3>Отправить заявку </h3>
+                    <form id="clientFormMain" novalidate>
+                        <div class="form-group">
+                            <label>Имя <span class="required">*</span></label>
+                            <input type="text" id="clientName" class="form-input" placeholder="Ваше имя" required minlength="2" maxlength="50">
+                            <span class="error-message" id="clientNameError">Введите корректное имя (мин. 2 символа)</span>
+                        </div>
+                        <div class="form-group">
+                            <label>Компания <span class="required">*</span></label>
+                            <input type="text" id="clientCompany" class="form-input" placeholder="Название компании" required minlength="2" maxlength="100">
+                            <span class="error-message" id="clientCompanyError">Укажите название компании</span>
+                        </div>
+                        <div class="form-group">
+                            <label>Email <span class="required">*</span></label>
+                            <input type="email" id="clientEmail" class="form-input" placeholder="email@example.com" required>
+                            <span class="error-message" id="clientEmailError">Введите корректный email</span>
+                        </div>
+                        <div class="form-group">
+                            <label>Сообщение <span class="required">*</span></label>
+                            <textarea id="clientMessage" class="form-textarea form-input" placeholder="Опишите вашу задачу" required minlength="10" maxlength="1000"></textarea>
+                            <span class="error-message" id="clientMessageError">Сообщение должно содержать минимум 10 символов</span>
+                        </div>
+                        <button type="submit" class="submit-client-btn modal-confirm-btn" style="width:100%;margin-top:8px;">
+                            <i class="fas fa-paper-plane"></i> Отправить заявку
+                        </button>
                     </form>
                 </div>
             </div>
@@ -1058,16 +1252,47 @@
         </div>
         <div class="modal-body">
             <div id="orderSummaryFull" class="cart-summary"></div>
-            <div class="form-group"><label>Имя</label><input type="text" id="contactName" class="form-input" placeholder="Иван Иванов"></div>
-            <div class="form-group"><label>Телефон</label><input type="tel" id="contactPhone" class="form-input" placeholder="+7 (___) ___-__-__"></div>
-            <div class="form-group"><label>Email</label><input type="email" id="contactEmail" class="form-input" placeholder="mail@example.com"></div>
-            <div class="form-group"><label>Способ связи</label><input type="text" id="contactMethod" class="form-input" placeholder="Telegram / WhatsApp / звонок"></div>
+            <div class="form-group">
+                <label>Имя <span class="required">*</span></label>
+                <input type="text" id="contactName" class="form-input" placeholder="Иван Иванов" required minlength="2">
+                <span class="error-message" id="contactNameError">Введите корректное имя</span>
+            </div>
+            <div class="form-group">
+                <label>Телефон <span class="required">*</span></label>
+                <input type="tel" id="contactPhone" class="form-input" placeholder="+7 (___) ___-__-__" required>
+                <span class="error-message" id="contactPhoneError">Введите корректный номер телефона</span>
+            </div>
+            <div class="form-group">
+                <label>Email <span class="required">*</span></label>
+                <input type="email" id="contactEmail" class="form-input" placeholder="mail@example.com" required>
+                <span class="error-message" id="contactEmailError">Введите корректный email</span>
+            </div>
+            <div class="form-group">
+                <label>Способ связи <span class="required">*</span></label>
+                <input type="text" id="contactMethod" class="form-input" placeholder="Telegram / WhatsApp / звонок" required minlength="3">
+                <span class="error-message" id="contactMethodError">Укажите предпочтительный способ связи</span>
+            </div>
         </div>
         <div class="modal-footer">
             <button class="modal-confirm-btn" id="submitOrderBtn">
                 <i class="fas fa-check"></i> Оформить заказ
             </button>
         </div>
+    </div>
+</div>
+
+<!-- МОДАЛЬНОЕ ОКНО УСПЕХА -->
+<div class="success-modal-overlay" id="successModal">
+    <div class="success-modal-content">
+        <button class="success-modal-close" id="successModalClose">&times;</button>
+        <div class="success-icon">
+            <i class="fas fa-check"></i>
+        </div>
+        <h3 class="success-modal-title" id="successModalTitle">Заявка отправлена!</h3>
+        <p class="success-modal-text" id="successModalText">Спасибо за обращение! Наш менеджер свяжется с вами в ближайшее время.</p>
+        <button class="success-modal-btn" id="successModalBtn">
+            <i class="fas fa-home"></i> На главную
+        </button>
     </div>
 </div>
 
@@ -1083,10 +1308,7 @@
 (function() {
     'use strict';
     
-    // 🔥 ИСПОЛЬЗУЕМ ДАННЫЕ ИЗ tour-data.js
-    // Локальные массивы allPerformances и extendedSessions больше не нужны!
-    
-    // ===== ДАННЫЕ ТОВАРОВ (остаются локальными) =====
+    // ===== ДАННЫЕ ТОВАРОВ =====
     const products = [
         { id: 1, name: 'Футболка', desc: 'Хлопковая футболка с логотипом театра', price: 2500, isClothing: true, images: ['images/content/shop/1.png', 'images/content/shop/5.png'], category: 'clothes' },
         { id: 2, name: 'Носки', desc: 'Принт с логотипом театра', price: 500, isClothing: false, images: ['images/content/shop/2.png'], category: 'clothes' },
@@ -1110,6 +1332,112 @@
     let currentEvent = null, selectedSession = null, currentMonthFilter = 'all';
     let cartItems = [], currentProduct = null, editingIndex = -1;
     let galleryImages = [], currentGalleryIndex = 0;
+    
+    // ===== МАСКИ ВВОДА =====
+    let phoneMask = null;
+
+    // ===== ВАЛИДАЦИЯ ФОРМ =====
+    const validators = {
+        name: (value) => value.trim().length >= 2 && value.trim().length <= 50 && /^[а-яА-ЯёЁa-zA-Z\s\-']+$/.test(value.trim()),
+        company: (value) => value.trim().length >= 2 && value.trim().length <= 100,
+        email: (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim()),
+        phone: (value) => {
+            const cleaned = value.replace(/\D/g, '');
+            return cleaned.length === 11 && cleaned.startsWith('7');
+        },
+        message: (value) => value.trim().length >= 10 && value.trim().length <= 1000,
+        method: (value) => value.trim().length >= 3
+    };
+
+    // ===== ИНИЦИАЛИЗАЦИЯ МАСОК =====
+    function initMasks() {
+        // Маска для телефона в модалке контактов
+        const phoneInput = document.getElementById('contactPhone');
+        if (phoneInput && window.IMask) {
+            phoneMask = IMask(phoneInput, {
+                mask: '+{7} (000) 000-00-00',
+                lazy: false,
+                placeholderChar: '_'
+            });
+        }
+    }
+
+    // ===== ФУНКЦИИ ВАЛИДАЦИИ =====
+    function showError(input, errorId) {
+        input.classList.add('error');
+        const errorEl = document.getElementById(errorId);
+        if (errorEl) errorEl.classList.add('visible');
+    }
+
+    function hideError(input, errorId) {
+        input.classList.remove('error');
+        const errorEl = document.getElementById(errorId);
+        if (errorEl) errorEl.classList.remove('visible');
+    }
+
+    function validateField(input, validator, errorId) {
+        const value = input.value;
+        if (!value.trim() && input.hasAttribute('required')) {
+            showError(input, errorId);
+            return false;
+        }
+        if (value.trim() && !validator(value)) {
+            showError(input, errorId);
+            return false;
+        }
+        hideError(input, errorId);
+        return true;
+    }
+
+    function validateForm(formId, fields) {
+        let isValid = true;
+        fields.forEach(field => {
+            const input = document.getElementById(field.id);
+            if (input) {
+                if (!validateField(input, validators[field.validator], field.errorId)) {
+                    isValid = false;
+                }
+            }
+        });
+        return isValid;
+    }
+
+    // ===== МОДАЛЬНОЕ ОКНО УСПЕХА =====
+    const successModal = document.getElementById('successModal');
+    const successModalClose = document.getElementById('successModalClose');
+    const successModalBtn = document.getElementById('successModalBtn');
+    const successModalTitle = document.getElementById('successModalTitle');
+    const successModalText = document.getElementById('successModalText');
+
+    function openSuccessModal(title, text, redirectTo = null) {
+        successModalTitle.textContent = title;
+        successModalText.textContent = text;
+        successModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        
+        if (redirectTo) {
+            successModalBtn.onclick = () => {
+                closeSuccessModal();
+                window.location.href = redirectTo;
+            };
+        } else {
+            successModalBtn.onclick = closeSuccessModal;
+        }
+    }
+
+    function closeSuccessModal() {
+        successModal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    if (successModalClose) {
+        successModalClose.addEventListener('click', closeSuccessModal);
+    }
+    if (successModal) {
+        successModal.addEventListener('click', (e) => {
+            if (e.target === successModal) closeSuccessModal();
+        });
+    }
 
     // ===== ГАЛЕРЕЯ ИЗОБРАЖЕНИЙ =====
     const productGallery = document.getElementById('productGallery');
@@ -1179,9 +1507,6 @@
 
     // =============================================
     // 🔥 ЕДИНАЯ ФУНКЦИЯ ОБРАБОТКИ КНОПОК "КУПИТЬ"
-    // Определяет действие по атрибуту:
-    // • data-event-id → сразу переход на checkout
-    // • data-performance-id → открывает модалку выбора даты
     // =============================================
     window.handleBuyClick = function(btn) {
         const eventId = btn.dataset.eventId;
@@ -1257,9 +1582,8 @@
     document.getElementById('confirmSessionBtn').addEventListener('click', () => { if (selectedSession) goToCheckout(selectedSession.id); });
     document.getElementById('sessionModal').addEventListener('click', (e) => { if (e.target.classList.contains('modal-overlay')) closeSessionModal(); });
 
-    // ===== РЕНДЕР СПЕКТАКЛЕЙ (использует tour-data.js) =====
+    // ===== РЕНДЕР СПЕКТАКЛЕЙ =====
     
-    // 🔹 Ближайшие спектакли — только будущие, отсортированные
     function renderUpcomingScroll() {
         const wrapper = document.getElementById('upcomingScroll'); if (!wrapper) return; wrapper.innerHTML = '';
         const upcoming = getNearestEvents(6, TOUR_SCHEDULE);
@@ -1272,7 +1596,6 @@
         attachPerformanceEvents();
     }
 
-    // 🔹 Все спектакли — группировка по performanceId
     function renderAllPlaysScroll() {
         const wrapper = document.getElementById('allPlaysScroll'); if (!wrapper) return; wrapper.innerHTML = '';
         const unique = {};
@@ -1285,12 +1608,10 @@
         attachPerformanceEvents();
     }
 
-    // 🔥 ЕДИНЫЙ ОБРАБОТЧИК ДЛЯ ВСЕХ КНОПОК "КУПИТЬ"
     function attachPerformanceEvents() {
         document.querySelectorAll('.btn-details').forEach(btn => {
             btn.addEventListener('click', (e) => { window.location.href = `performance.html?id=${parseInt(e.currentTarget.dataset.performanceId)}`; });
         });
-        // Все кнопки .btn-buy обрабатываются одной функцией
         document.querySelectorAll('.btn-buy').forEach(btn => {
             btn.addEventListener('click', (e) => { e.preventDefault(); handleBuyClick(e.currentTarget); });
         });
@@ -1370,14 +1691,30 @@
         return true;
     }
 
-    // ===== МОДАЛКА КОНТАКТОВ =====
+    // ===== МОДАЛКА КОНТАКТОВ С ВАЛИДАЦИЕЙ =====
     function openContactsModal() {
         if (!cartItems.length) { alert("Корзина пуста"); return; }
         updateOrderSummary();
-        ['contactName','contactPhone','contactEmail','contactMethod'].forEach(id => document.getElementById(id).value = '');
-        document.getElementById('contactsModal').classList.add('active'); document.body.style.overflow = 'hidden';
+        ['contactName','contactPhone','contactEmail','contactMethod'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) { el.value = ''; hideError(el, id + 'Error'); }
+        });
+        document.getElementById('contactsModal').classList.add('active'); 
+        document.body.style.overflow = 'hidden';
+        
+        // Переинициализация маски при открытии
+        if (phoneMask) {
+            const phoneInput = document.getElementById('contactPhone');
+            if (phoneInput && phoneInput !== phoneMask.el) {
+                phoneMask.updateOptions({});
+            }
+        }
     }
-    window.closeContactsModal = function() { document.getElementById('contactsModal').classList.remove('active'); document.body.style.overflow = ''; };
+    window.closeContactsModal = function() { 
+        document.getElementById('contactsModal').classList.remove('active'); 
+        document.body.style.overflow = ''; 
+    };
+    
     function updateOrderSummary() {
         const container = document.getElementById('orderSummaryFull'); if (!container) return;
         if (!cartItems.length) { container.innerHTML = '<div style="text-align:center;padding:16px;color:#5A5556;">Корзина пуста</div>'; return; }
@@ -1388,13 +1725,156 @@
         html += `<div class="total-row"><span>Итого</span><span>${total.toLocaleString()} ₽</span></div>`;
         container.innerHTML = html;
     }
+    
     document.getElementById('submitOrderBtn').addEventListener('click', () => {
-        const name = document.getElementById('contactName')?.value.trim(), phone = document.getElementById('contactPhone')?.value.trim(), email = document.getElementById('contactEmail')?.value.trim(), method = document.getElementById('contactMethod')?.value.trim();
-        if (!name || !phone || !email || !method) { alert("Заполните все поля"); return; }
-        localStorage.setItem('mikos_order_success', JSON.stringify({ customerName:name, customerPhone:phone, customerEmail:email, contactMethod:method, items:[...cartItems], total:cartItems.reduce((s,it)=>s+it.price*it.quantity,0), timestamp:new Date().toISOString(), source:'index-home' }));
-        cartItems = []; window.location.href = 'shop.html?order=success';
+        const fields = [
+            { id: 'contactName', validator: 'name', errorId: 'contactNameError' },
+            { id: 'contactPhone', validator: 'phone', errorId: 'contactPhoneError' },
+            { id: 'contactEmail', validator: 'email', errorId: 'contactEmailError' },
+            { id: 'contactMethod', validator: 'method', errorId: 'contactMethodError' }
+        ];
+        
+        if (!validateForm('contactsModal', fields)) {
+            // Прокрутка к первому полю с ошибкой
+            const firstError = document.querySelector('.form-input.error, .form-textarea.error');
+            if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            return;
+        }
+        
+        const name = document.getElementById('contactName').value.trim();
+        const phone = document.getElementById('contactPhone').value.trim();
+        const email = document.getElementById('contactEmail').value.trim();
+        const method = document.getElementById('contactMethod').value.trim();
+        
+        localStorage.setItem('mikos_order_success', JSON.stringify({ 
+            customerName: name, 
+            customerPhone: phone, 
+            customerEmail: email, 
+            contactMethod: method, 
+            items: [...cartItems], 
+            total: cartItems.reduce((s,it) => s + it.price * it.quantity, 0), 
+            timestamp: new Date().toISOString(), 
+            source: 'index-home' 
+        }));
+        
+        cartItems = [];
+        closeContactsModal();
+        openSuccessModal(
+            'Заказ оформлен! 🎉', 
+            'Спасибо за покупку! Наш менеджер свяжется с вами в ближайшее время для подтверждения заказа.',
+            'shop.html?order=success'
+        );
     });
-    document.getElementById('contactsModal').addEventListener('click', (e) => { if (e.target.classList.contains('modal-overlay')) closeContactsModal(); });
+    
+    // Валидация полей в реальном времени для модалки контактов
+    ['contactName', 'contactPhone', 'contactEmail', 'contactMethod'].forEach(id => {
+        const input = document.getElementById(id);
+        if (input) {
+            input.addEventListener('blur', () => {
+                const fieldMap = {
+                    'contactName': { validator: 'name', errorId: 'contactNameError' },
+                    'contactPhone': { validator: 'phone', errorId: 'contactPhoneError' },
+                    'contactEmail': { validator: 'email', errorId: 'contactEmailError' },
+                    'contactMethod': { validator: 'method', errorId: 'contactMethodError' }
+                };
+                const field = fieldMap[id];
+                if (field) validateField(input, validators[field.validator], field.errorId);
+            });
+            input.addEventListener('input', () => {
+                if (input.classList.contains('error')) {
+                    const fieldMap = {
+                        'contactName': { validator: 'name', errorId: 'contactNameError' },
+                        'contactPhone': { validator: 'phone', errorId: 'contactPhoneError' },
+                        'contactEmail': { validator: 'email', errorId: 'contactEmailError' },
+                        'contactMethod': { validator: 'method', errorId: 'contactMethodError' }
+                    };
+                    const field = fieldMap[id];
+                    if (field) validateField(input, validators[field.validator], field.errorId);
+                }
+            });
+        }
+    });
+    
+    document.getElementById('contactsModal').addEventListener('click', (e) => { 
+        if (e.target.classList.contains('modal-overlay')) closeContactsModal(); 
+    });
+
+    // ===== ФОРМА ЗАКАЗЧИКАМ С ВАЛИДАЦИЕЙ =====
+    const clientForm = document.getElementById('clientFormMain');
+    if (clientForm) {
+        clientForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const fields = [
+                { id: 'clientName', validator: 'name', errorId: 'clientNameError' },
+                { id: 'clientCompany', validator: 'company', errorId: 'clientCompanyError' },
+                { id: 'clientEmail', validator: 'email', errorId: 'clientEmailError' },
+                { id: 'clientMessage', validator: 'message', errorId: 'clientMessageError' }
+            ];
+            
+            if (!validateForm('clientFormMain', fields)) {
+                const firstError = document.querySelector('#clientFormMain .form-input.error, #clientFormMain .form-textarea.error');
+                if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                return;
+            }
+            
+            // Сбор данных формы
+            const formData = {
+                name: document.getElementById('clientName').value.trim(),
+                company: document.getElementById('clientCompany').value.trim(),
+                email: document.getElementById('clientEmail').value.trim(),
+                message: document.getElementById('clientMessage').value.trim(),
+                timestamp: new Date().toISOString(),
+                source: 'index-clients-form'
+            };
+            
+            // Сохранение в localStorage (для демонстрации)
+            localStorage.setItem('mikos_client_request', JSON.stringify(formData));
+            
+            // Очистка формы
+            clientForm.reset();
+            ['clientName', 'clientCompany', 'clientEmail', 'clientMessage'].forEach(id => {
+                const input = document.getElementById(id);
+                if (input) hideError(input, id + 'Error');
+            });
+            
+            // Показ модального окна успеха
+            openSuccessModal(
+                'Заявка отправлена! ✨', 
+                'Спасибо за интерес к нашему театру! Менеджер свяжется с вами в течение рабочего дня для обсуждения деталей сотрудничества.',
+                null
+            );
+        });
+        
+        // Валидация полей в реальном времени
+        ['clientName', 'clientCompany', 'clientEmail', 'clientMessage'].forEach(id => {
+            const input = document.getElementById(id);
+            if (input) {
+                input.addEventListener('blur', () => {
+                    const fieldMap = {
+                        'clientName': { validator: 'name', errorId: 'clientNameError' },
+                        'clientCompany': { validator: 'company', errorId: 'clientCompanyError' },
+                        'clientEmail': { validator: 'email', errorId: 'clientEmailError' },
+                        'clientMessage': { validator: 'message', errorId: 'clientMessageError' }
+                    };
+                    const field = fieldMap[id];
+                    if (field) validateField(input, validators[field.validator], field.errorId);
+                });
+                input.addEventListener('input', () => {
+                    if (input.classList.contains('error')) {
+                        const fieldMap = {
+                            'clientName': { validator: 'name', errorId: 'clientNameError' },
+                            'clientCompany': { validator: 'company', errorId: 'clientCompanyError' },
+                            'clientEmail': { validator: 'email', errorId: 'clientEmailError' },
+                            'clientMessage': { validator: 'message', errorId: 'clientMessageError' }
+                        };
+                        const field = fieldMap[id];
+                        if (field) validateField(input, validators[field.validator], field.errorId);
+                    }
+                });
+            }
+        });
+    }
 
     // ===== ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ =====
     function closeAllModals() {
@@ -1415,6 +1895,7 @@
         else if (document.getElementById('sessionModal')?.classList.contains('active')) closeSessionModal();
         else if (document.getElementById('productModal')?.classList.contains('active')) closeProductModal();
         else if (document.getElementById('contactsModal')?.classList.contains('active')) closeContactsModal();
+        else if (successModal?.classList.contains('active')) closeSuccessModal();
     });
 
     // ===== ИНИЦИАЛИЗАЦИЯ =====
@@ -1424,6 +1905,7 @@
             renderAllPlaysScroll();
             renderMerchScroll();
             initTeamCards();
+            initMasks();
         }, 100);
     });
 })();
