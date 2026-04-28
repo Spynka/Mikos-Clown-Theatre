@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     
     <!-- Шрифты -->
-    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;800&family=Nunito+Sans:opsz,wght@6..12,300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;800&family=Nunito+Sans:opsz,wght@6..12,300,400,600,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/header-footercss"> 
     
@@ -636,8 +636,8 @@
         .mobile-logo-group img { max-width: 110px !important; height: auto !important; }
         .close-mobile-menu:hover { background: rgba(255,255,255,.2) !important; }
         .mobile-nav ul li a { 
-            color: #F2F1F0 !important; 
-            font-family: 'Unbounded', sans-serif !important; 
+    color: #F2F1F0 !important; 
+    font-family: var(--font-display) !important; 
             font-size: 15px !important; 
             text-decoration: none !important; 
             display: block !important; 
@@ -665,7 +665,9 @@
                 <span class="brandbook-label">Брендбук</span>
             </div>
             <nav class="nav-menu" id="brandNav" aria-label="Основная навигация">
-                <li><button class="nav-btn" onclick="window.location.href='index.html'" data-page="about">Сайт театра</button></li>
+                <li><button class="nav-btn" onclick="window.location.href='index.html'">
+    Сайт театра
+</button></li>
                 <li><button class="nav-btn active" data-page="about">О бренде</button></li>
                 <li><button class="nav-btn" data-page="logo">Логотип</button></li>
                 <li><button class="nav-btn" data-page="colors">Цвета</button></li>
