@@ -12,7 +12,7 @@
     
     <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    
+    <link rel="stylesheet" href="css/header-footer.css"> 
     <link rel="stylesheet" href="css/style.css">
     <script src="js/tour-data.js"></script>
     <link rel="icon" type="image/svg+xml" href="SVG/logo-2.svg" sizes="any">
@@ -1282,7 +1282,7 @@ body.modal-open {
             <h2 class="promo-modal-title">Вы поймали Ксюшу!</h2>
             <p class="promo-modal-subtitle">Ваш персональный промокод - 15% на спектакль:</p>
             <div class="promo-code-box">
-                <span class="promo-code-text" id="promoCode">KSUSHA10</span>
+                <span class="promo-code-text" id="promoCode">KSUSHA15</span>
                 <button class="promo-copy-btn" id="copyPromoBtn">
                     <i class="far fa-copy"></i> Скопировать
                 </button>
@@ -1865,7 +1865,7 @@ body.modal-open {
         document.getElementById('closePromoModal')?.addEventListener('click', () => closeModal('promoModalOverlay'));
         elements.promoModalOverlay?.addEventListener('click', (e) => { if (e.target === elements.promoModalOverlay) closeModal('promoModalOverlay'); });
         document.getElementById('copyPromoBtn')?.addEventListener('click', async () => {
-            const code = document.getElementById('promoCode')?.textContent.trim() || 'KSUSHA10';
+            const code = document.getElementById('promoCode')?.textContent.trim() || 'KSUSHA15';
             try {
                 await navigator.clipboard.writeText(code);
                 const btn = document.getElementById('copyPromoBtn');

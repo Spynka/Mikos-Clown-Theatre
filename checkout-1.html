@@ -579,84 +579,6 @@ body {
     outline: none;
     border-color: #4A6294;
 }
-
-/* ----- СТИЛИ ДЛЯ ПОЛЯ ПРОМОКОДА ----- */
-.promo-section {
-    margin-bottom: 24px;
-}
-.promo-input-row {
-    display: flex;
-    gap: 12px;
-    align-items: center;
-}
-.promo-input-row .form-group {
-    flex: 1;
-    margin-bottom: 0;
-}
-.promo-input-row input {
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-.promo-apply-btn {
-    padding: 12px 24px;
-    background: #4A6294;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-family: 'Unbounded', sans-serif;
-    font-weight: 600;
-    font-size: 13px;
-    cursor: pointer;
-    transition: background 0.2s;
-    white-space: nowrap;
-    height: 48px;
-}
-.promo-apply-btn:hover {
-    background: #3A5078;
-}
-.promo-message {
-    margin-top: 8px;
-    font-size: 13px;
-    font-weight: 600;
-    display: none;
-}
-.promo-message.success {
-    display: block;
-    color: #2E7D32;
-}
-.promo-message.error {
-    display: block;
-    color: #E8454D;
-}
-.promo-discount-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 0;
-    border-bottom: 1px solid #E5E3E1;
-    color: #2E7D32;
-    font-weight: 600;
-    font-size: 15px;
-}
-.promo-discount-row .discount-badge {
-    background: #E8F5E9;
-    color: #2E7D32;
-    padding: 4px 10px;
-    border-radius: 20px;
-    font-size: 13px;
-}
-
-/* Стили для блока суммы с учетом скидки */
-.price-before {
-    text-decoration: line-through;
-    color: #5A5556;
-    margin-right: 10px;
-    font-size: 16px;
-}
-.price-after {
-    color: #2E7D32;
-}
-
 .radio-group {
     display: flex;
     gap: 32px;
@@ -1095,6 +1017,471 @@ body {
     background: #F8F7F6;
     border-radius: 16px;
     padding: 28px 24px;
+}
+.quantity-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+.quantity-label {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    color: #1A1718;
+}
+.stepper-inline {
+    display: flex;
+    align-items: center;
+    background: white;
+    border-radius: 40px;
+    border: 1px solid #E5E3E1;
+}
+.stepper-btn {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: 600;
+    color: #4A6294;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.2s;
+}
+.stepper-btn:hover { background: #E9ECEF; }
+.quantity-input {
+    width: 60px;
+    border: none;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 700;
+    color: #1A1718;
+    background: transparent;
+    outline: none;
+}
+.price-summary-block {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px 0;
+    border-top: 1px solid #E5E3E1;
+    margin-bottom: 16px;
+}
+.price-label { color: #5A5556; }
+.price-value { font-weight: 700; color: #4A6294; }
+.arrival-hint {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: white;
+    border-radius: 12px;
+    padding: 12px 16px;
+    font-size: 13px;
+    color: #5A5556;
+}
+.arrival-hint i { color: #E8454D; }
+
+/* ============================================= */
+/* АДАПТИВНЫЕ СТИЛИ (МОБИЛЬНЫЕ)                  */
+/* ============================================= */
+
+@media (max-width: 1100px) {
+    .checkout-grid { flex-direction: column; }
+    .order-summary { width: 100%; }
+}
+
+@media (max-width: 860px) {
+    /* Хедер и футер */
+    .nav-menu { display: none; }
+    .burger-icon { display: block; }
+    .footer-top { flex-direction: column; gap: 40px; }
+    .main-footer { padding: 40px 20px 30px; margin-top: 40px; }
+
+    /* Опускаем хлебные крошки под бургер */
+    .seats-page, .checkout-page, .payment-page, .success-page {
+        padding-top: 60px;
+    }
+    .breadcrumbs {
+        padding: 12px 0 16px;
+        font-size: 13px;
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+        padding-top: 60px !important;
+    }
+    
+    /* Отступ между крошками и прогресс-баром */
+    .breadcrumbs + .progress-bar {
+        margin-top: 12px !important;
+    }
+
+    /* Прогресс-бар: горизонтальный скролл */
+    .progress-bar {
+        margin-top: 4px;
+        margin-bottom: 28px;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 8px;
+        gap: 8px;
+    }
+    .progress-step {
+        min-width: 70px;
+        flex-shrink: 0;
+    }
+    .step-number {
+        width: 36px;
+        height: 36px;
+        font-size: 14px;
+    }
+    .step-label {
+        font-size: 11px;
+        white-space: nowrap;
+    }
+
+    /* Схема зала с масштабированием */
+    .hall-scheme { 
+        padding: 20px 16px; 
+        touch-action: pan-x pan-y pinch-zoom;
+    }
+    .hall-header { flex-direction: column; align-items: flex-start; }
+    .hall-title { font-size: 20px; }
+    .legend { gap: 16px; }
+    .legend-item { font-size: 13px; }
+    .stage span { font-size: 12px; }
+    .seats-container {
+        overflow-x: auto;
+        overflow-y: visible;
+        padding-bottom: 8px;
+        touch-action: pan-x pan-y;
+        -webkit-overflow-scrolling: touch;
+    }
+    .seat-row { min-width: max-content; }
+    .row-label { width: 50px; font-size: 13px; }
+    .seat {
+        width: 40px;
+        height: 40px;
+        font-size: 12px;
+    }
+
+    /* Блок заказа */
+    .order-summary { padding: 24px 16px; margin-bottom: 32px; }
+    .summary-title { font-size: 15px; }
+    .selected-seat-info { gap: 12px; }
+    .seat-name { font-size: 14px; }
+    .seat-price { font-size: 14px; }
+
+    /* Кнопки */
+    .selection-actions { flex-direction: column; }
+    .btn-back, .btn-next, .btn-pay { width: 100%; }
+
+    /* Форма - уменьшенные отступы */
+    .checkout-grid { gap: 24px; margin-bottom: 24px; }
+    .checkout-form { padding: 20px 16px; }
+    .form-section { margin-bottom: 20px; }
+    .form-section:first-child { margin-top: 8px !important; }
+    .form-section:nth-child(2) { margin-top: 16px !important; }
+    .form-section h3 { 
+        font-size: 18px; 
+        margin-bottom: 14px;
+        padding-bottom: 8px;
+    }
+    .form-row { 
+        flex-direction: column !important; 
+        gap: 12px; 
+        margin-bottom: 12px;
+    }
+    .form-group { min-width: 100%; }
+    .form-group input { font-size: 16px; padding: 14px 16px; }
+    .form-group label { margin-bottom: 4px; }
+
+    /* Чекбокс */
+    .agree-check {
+        align-items: flex-start;
+        margin: 16px 0;
+    }
+    .agree-check label {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 4px;
+    }
+
+    /* Оплата - уменьшенные отступы */
+    .payment-page .form-section:first-child { margin-top: 8px !important; }
+    .payment-methods { gap: 10px; margin-bottom: 16px; }
+    .payment-method { padding: 12px 16px; }
+    .payment-icon { width: 40px; height: 36px; font-size: 22px; }
+    .card-details { padding: 20px 16px; }
+    .info-box { padding: 14px; margin: 16px 0; }
+
+    /* Свободная рассадка */
+    .free-seating-badge { padding: 10px 16px; font-size: 13px; }
+    .quantity-selector-wrapper { padding: 20px 16px; }
+    .quantity-row { flex-direction: column; align-items: flex-start; }
+    .stepper-inline { width: 100%; justify-content: space-between; }
+    .stepper-btn { width: 50px; height: 50px; }
+    .quantity-input { width: 80px; }
+
+    /* Страница успеха */
+    .success-container { padding: 0 16px; }
+    .success-title { font-size: 28px; }
+    .success-message { font-size: 16px; }
+    .order-details { padding: 24px 16px; }
+    .order-header { flex-direction: column; align-items: flex-start; }
+    .order-number { font-size: 16px; }
+    .order-status { font-size: 13px; padding: 6px 16px; }
+    .order-info-label { width: 100%; margin-bottom: 4px; }
+    .order-info-value { width: 100%; }
+    
+    /* Билеты: иконка + текст в ряд, цена по центру снизу */
+    .ticket-item { 
+        flex-direction: column; 
+        align-items: center;
+        text-align: center;
+    }
+    .ticket-icon { width: 40px; height: 40px; font-size: 20px; }
+    .ticket-info { 
+        flex-direction: row; 
+        align-items: center; 
+        gap: 8px;
+        justify-content: center;
+    }
+    .ticket-title { font-size: 14px; }
+    .ticket-price { 
+        margin-left: 0; 
+        font-size: 16px;
+        width: 100%;
+        text-align: center;
+        margin-top: 8px;
+    }
+    
+    .action-buttons { flex-direction: column; }
+    .btn-download, .btn-cabinet { width: 100%; justify-content: center; }
+
+    /* Иллюстрация */
+    .payment-summary-illustration img { max-height: 200px; object-fit: contain; }
+    
+    /* Уменьшаем отступ до футера */
+    .checkout-form { margin-bottom: 24px !important; }
+}
+
+@media (max-width: 480px) {
+    .checkout-page, .seats-page, .payment-page, .success-page { padding: 0 12px; }
+    .breadcrumbs { font-size: 12px; padding: 10px 0 14px; }
+    .hall-title { font-size: 18px; padding-left: 12px; }
+    .seat { width: 36px; height: 36px; font-size: 11px; }
+    .summary-item { flex-direction: column; }
+    .summary-img { width: 100%; height: 120px; }
+    .total-label, .total-price { font-size: 18px; }
+    .step-number { width: 32px; height: 32px; font-size: 13px; }
+    .step-label { font-size: 10px; }
+    .agree-check label { font-size: 13px; }
+    .order-number { word-break: break-all; }
+    .ticket-item { padding: 14px; }
+    .ticket-title { font-size: 13px; }
+    .ticket-price { font-size: 15px; }
+}
+
+/* ============================================= */
+/* МОДАЛЬНЫЕ ОКНА В СТИЛЕ САЙТА                  */
+/* ============================================= */
+.modal-overlay {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: rgba(26, 23, 24, 0.7) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    z-index: 10000 !important;
+    padding: 20px !important;
+    box-sizing: border-box !important;
+}
+.modal-container {
+    background: #fff !important;
+    border-radius: 16px !important;
+    outline: 1px solid #E5E3E1 !important;
+    max-width: 600px !important;
+    width: 100% !important;
+    max-height: 90vh !important;
+    overflow-y: auto !important;
+    padding: 32px !important;
+    position: relative !important;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15) !important;
+}
+.modal-close {
+    position: absolute !important;
+    top: 16px !important;
+    right: 16px !important;
+    width: 32px !important;
+    height: 32px !important;
+    border-radius: 50% !important;
+    background: #F8F7F6 !important;
+    border: none !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 18px !important;
+    color: #1A1718 !important;
+    cursor: pointer !important;
+    transition: background 0.2s !important;
+    z-index: 10 !important;
+}
+.modal-close:hover {
+    background: #E9E7E5 !important;
+    color: #E8454D !important;
+}
+.modal-title {
+    font-family: 'Unbounded', sans-serif !important;
+    font-size: 20px !important;
+    font-weight: 700 !important;
+    color: #1A1718 !important;
+    margin-bottom: 20px !important;
+    padding-left: 16px !important;
+    position: relative !important;
+}
+.modal-title::before {
+    content: '' !important;
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 3px !important;
+    height: 100% !important;
+    background: #E8454D !important;
+    border-radius: 1.5px !important;
+}
+.modal-content {
+    font-family: 'Nunito Sans', sans-serif !important;
+    font-size: 15px !important;
+    color: #3D393A !important;
+    line-height: 1.6 !important;
+}
+.modal-buttons {
+    display: flex !important;
+    gap: 12px !important;
+    margin-top: 24px !important;
+    flex-wrap: wrap !important;
+}
+.modal-btn {
+    flex: 1 !important;
+    min-width: 140px !important;
+    padding: 12px 20px !important;
+    border-radius: 8px !important;
+    font-family: 'Unbounded', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 14px !important;
+    cursor: pointer !important;
+    transition: background 0.2s !important;
+    text-align: center !important;
+}
+.modal-btn.primary {
+    background: #E8454D !important;
+    color: #fff !important;
+    border: none !important;
+}
+.modal-btn.primary:hover {
+    background: #D62830 !important;
+}
+.modal-btn.secondary {
+    background: #F8F7F6 !important;
+    color: #1A1718 !important;
+    border: 1px solid #E5E3E1 !important;
+}
+.modal-btn.secondary:hover {
+    background: #E9E7E5 !important;
+}
+
+/* Адаптив для модальных окон */
+@media (max-width: 860px) {
+    .modal-container {
+        padding: 24px 20px !important;
+        max-width: calc(100vw - 32px) !important;
+    }
+    .modal-title {
+        font-size: 18px !important;
+        padding-left: 12px !important;
+    }
+    .modal-buttons {
+        flex-direction: column !important;
+    }
+    .modal-btn {
+        width: 100% !important;
+        min-width: auto !important;
+    }
+}
+
+/* ============================================= */
+/* УЛУЧШЕНИЯ ДЛЯ TOUCH-УСТРОЙСТВ                 */
+/* ============================================= */
+@media (max-width: 860px) {
+    /* Увеличиваем области нажатия */
+    .btn-back, .btn-next, .btn-pay,
+    .btn-download, .btn-cabinet,
+    .stepper-btn, .modal-btn {
+        min-height: 44px !important;
+        min-width: 44px !important;
+    }
+    
+    /* Предотвращаем зум при вводе */
+    input, select, textarea {
+        font-size: 16px !important;
+    }
+    
+    /* Убираем тап-эффект */
+    * {
+        -webkit-tap-highlight-color: transparent !important;
+    }
+    
+    /* Плавный скролл */
+    .seats-container, .hall-scheme {
+        scroll-behavior: smooth !important;
+    }
+}
+
+/* ============================================= */
+/* Z-INDEX ДЛЯ МОБИЛЬНОГО МЕНЮ                   */
+/* ============================================= */
+@media (max-width: 860px) {
+    .mobile-nav { z-index: 100000 !important; }
+    .overlay { z-index: 99999 !important; }
+    .burger-icon { z-index: 100001 !important; }
+    .modal-overlay { z-index: 99998 !important; }
+}
+
+/* ----- 14. СВОБОДНАЯ РАССАДКА ----- */
+.free-seating-block {
+    text-align: center;
+    padding: 20px 0 10px;
+}
+.free-seating-icon {
+    font-size: 64px;
+    color: #4A6294;
+    margin-bottom: 16px;
+}
+.free-seating-badge {
+    background: #F8F7F6;
+    border-radius: 30px;
+    padding: 12px 24px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 32px;
+    border: 1px solid #E5E3E1;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.free-seating-badge i { color: #4A6294; font-size: 18px; }
+.quantity-selector-wrapper {
+    max-width: 380px;
+    margin: 0 auto;
+    background: #F8F7F6;
+    border-radius: 16px;
+    padding: 28px 24px;
     display: flex;
     flex-direction: column;
     align-items: center; /* Центрируем всё содержимое */
@@ -1207,9 +1594,6 @@ body {
         padding-top: 23px !important;
     }
 }
-.order-summary .promo-section {
-    margin-top: 20px;
-}
     </style>
 </head>
 <body>
@@ -1249,27 +1633,7 @@ body {
                 </div>
                 <!-- Контейнер для списка выбранных мест или количества билетов -->
                 <div id="selectedItemsContainer"></div>
-                
-                <!-- БЛОК ПРОМОКОДА НА ШАГЕ 1 -->
-                <div class="promo-section">
-                    <div class="promo-input-row">
-                        <div class="form-group">
-                            <label>Промокод</label>
-                            <input type="text" id="promoCodeInput1" placeholder="Введите промокод" autocomplete="off">
-                        </div>
-                        <button class="promo-apply-btn" id="applyPromoBtn1" style="margin-top: 22px;">Применить</button>
-                    </div>
-                    <div class="promo-message" id="promoMessage1"></div>
-                </div>
-                <div id="promoDiscountRow1" class="promo-discount-row" style="display: none;">
-                    <span>Скидка по промокоду (15%)</span>
-                    <span id="promoDiscountAmount1" class="discount-badge">-0 ₽</span>
-                </div>
-
-                <div class="summary-total">
-                    <span class="total-label">Итого</span>
-                    <span class="total-price" id="totalPrice">0 ₽</span>
-                </div>
+                <div class="summary-total"><span class="total-label">Итого</span><span class="total-price" id="totalPrice">0 ₽</span></div>
                 <div class="selection-actions">
                     <button class="btn-back" id="backBtn1">Назад</button>
                     <button class="btn-next" id="nextBtn1">Далее</button>
@@ -1341,23 +1705,6 @@ body {
                     </div>
                     <div id="orderSeatsList"></div>
                     <div class="summary-row"><span>Сервисный сбор</span><span>0 ₽</span></div>
-                    
-                    <!-- БЛОК ПРОМОКОДА НА ШАГЕ 2 -->
-                    <div class="promo-section">
-                        <div class="promo-input-row">
-                            <div class="form-group">
-                                <label>Промокод</label>
-                                <input type="text" id="promoCodeInput2" placeholder="Введите промокод" autocomplete="off">
-                            </div>
-                            <button class="promo-apply-btn" id="applyPromoBtn2" style="margin-top: 22px;">Применить</button>
-                        </div>
-                        <div class="promo-message" id="promoMessage2"></div>
-                    </div>
-                    <div id="promoDiscountRow2" class="promo-discount-row" style="display: none;">
-                        <span>Скидка по промокоду (15%)</span>
-                        <span id="promoDiscountAmount2" class="discount-badge">-0 ₽</span>
-                    </div>
-
                     <div class="summary-total"><span class="total-label">Итого</span><span class="total-price" id="totalPrice2">0 ₽</span></div>
                     <div class="info-block">
                         <i class="fas fa-envelope"></i>
@@ -1445,23 +1792,6 @@ body {
                         </div>
                         <div id="orderSeatsList3"></div>
                         <div class="summary-row"><span>Сервисный сбор</span><span>0 ₽</span></div>
-                        
-                        <!-- БЛОК ПРОМОКОДА НА ШАГЕ 3 -->
-                        <div class="promo-section">
-                            <div class="promo-input-row">
-                                <div class="form-group">
-                                    <label>Промокод</label>
-                                    <input type="text" id="promoCodeInput3" placeholder="Введите промокод" autocomplete="off">
-                                </div>
-                                <button class="promo-apply-btn" id="applyPromoBtn3" style="margin-top: 22px;">Применить</button>
-                            </div>
-                            <div class="promo-message" id="promoMessage3"></div>
-                        </div>
-                        <div id="promoDiscountRow3" class="promo-discount-row" style="display: none;">
-                            <span>Скидка по промокоду (15%)</span>
-                            <span id="promoDiscountAmount3" class="discount-badge">-0 ₽</span>
-                        </div>
-
                         <div class="summary-total"><span class="total-label">Итого</span><span class="total-price" id="totalPrice3">0 ₽</span></div>
                         <div class="info-block"><i class="fas fa-envelope"></i><span>Билеты придут на email: <span id="orderEmail3">ivan@example.com</span></span></div>
                         <div class="warning-block"><i class="fas fa-clock"></i><span>После оплаты билеты будут отправлены на почту.</span></div>
@@ -1551,11 +1881,6 @@ for (let id in PERFORMANCE_BASE) {
     let selectedSeats = [];
     let freeQuantity = 1;
     let currentStep = 1;
-    
-    // ПЕРЕМЕННЫЕ ДЛЯ ПРОМОКОДА
-    let promoApplied = false;
-    const PROMO_CODE = 'KSUSHA15';
-    const DISCOUNT_PERCENT = 15;
 
     const rows = [
         { row: 1, seats: [1,2,3,4,5,6,7,8,9,10], occupied: [1,2,3,4] },
@@ -1592,7 +1917,6 @@ for (let id in PERFORMANCE_BASE) {
         updateAllDisplays();
         renderHallBlock();
         initEventListeners();
-        initPromoListeners();
     });
 
     function loadPerformanceData() {
@@ -1647,62 +1971,27 @@ for (let id in PERFORMANCE_BASE) {
         return val.toLocaleString('ru-RU') + ' ₽'; 
     }
     
-    function calculateBaseTotal() {
+    function calculateTotal() {
         if (!performanceData) return 0;
         return performanceData.freeSeating ? freeQuantity * performanceData.price : selectedSeats.length * performanceData.price;
-    }
-    
-    function calculateDiscount() {
-        if (!promoApplied) return 0;
-        const baseTotal = calculateBaseTotal();
-        return Math.round(baseTotal * DISCOUNT_PERCENT / 100);
-    }
-    
-    function calculateFinalTotal() {
-        const baseTotal = calculateBaseTotal();
-        const discount = calculateDiscount();
-        return baseTotal - discount;
     }
 
     function updateAllDisplays() {
         if (!performanceData) return;
         
-        const baseTotal = calculateBaseTotal();
-        const discount = calculateDiscount();
-        const finalTotal = calculateFinalTotal();
-        const finalTotalFormatted = formatPrice(finalTotal);
+        const total = calculateTotal();
+        const totalFormatted = formatPrice(total);
         
-        // Обновляем итоговые цены
         ['totalPrice', 'totalPrice2', 'totalPrice3', 'successTotal'].forEach(id => { 
-            const el = document.getElementById(id);
-            if(el) {
-                if (promoApplied) {
-                    el.innerHTML = `<span class="price-before">${formatPrice(baseTotal)}</span><span class="price-after">${finalTotalFormatted}</span>`;
-                } else {
-                    el.textContent = finalTotalFormatted;
-                }
-            }
+            const el = document.getElementById(id); 
+            if(el) el.textContent = totalFormatted; 
         });
         
         const payAmountSpan = document.getElementById('payAmount');
-        if (payAmountSpan) payAmountSpan.textContent = finalTotal.toLocaleString('ru-RU');
+        if (payAmountSpan) payAmountSpan.textContent = total.toLocaleString('ru-RU');
         
         const qrAmountSpan = document.getElementById('qrAmount');
-        if (qrAmountSpan) qrAmountSpan.textContent = finalTotalFormatted;
-        
-        // Обновляем строки со скидкой
-        for (let i = 1; i <= 3; i++) {
-            const discountRow = document.getElementById(`promoDiscountRow${i}`);
-            const discountAmount = document.getElementById(`promoDiscountAmount${i}`);
-            if (discountRow && discountAmount) {
-                if (promoApplied) {
-                    discountRow.style.display = 'flex';
-                    discountAmount.textContent = `-${formatPrice(discount)}`;
-                } else {
-                    discountRow.style.display = 'none';
-                }
-            }
-        }
+        if (qrAmountSpan) qrAmountSpan.textContent = totalFormatted;
         
         const emailInput = document.getElementById('email');
         const email = emailInput ? emailInput.value : 'ivan@example.com';
@@ -1863,80 +2152,6 @@ for (let id in PERFORMANCE_BASE) {
         }
     }
 
-    // === ФУНКЦИЯ ПРИМЕНЕНИЯ ПРОМОКОДА ===
-    function applyPromoCode(stepNum) {
-        const inputEl = document.getElementById(`promoCodeInput${stepNum}`);
-        const messageEl = document.getElementById(`promoMessage${stepNum}`);
-        const code = inputEl ? inputEl.value.trim().toUpperCase() : '';
-        
-        if (!code) {
-            if (messageEl) {
-                messageEl.textContent = 'Введите промокод';
-                messageEl.className = 'promo-message error';
-            }
-            return;
-        }
-        
-        if (code === PROMO_CODE) {
-            promoApplied = true;
-            if (messageEl) {
-                messageEl.textContent = '✅ Промокод активирован! Скидка 15% применена.';
-                messageEl.className = 'promo-message success';
-            }
-            // Синхронизируем все поля ввода промокода
-            for (let i = 1; i <= 3; i++) {
-                if (i !== stepNum) {
-                    const otherInput = document.getElementById(`promoCodeInput${i}`);
-                    const otherMessage = document.getElementById(`promoMessage${i}`);
-                    if (otherInput) otherInput.value = PROMO_CODE;
-                    if (otherMessage) {
-                        otherMessage.textContent = '✅ Промокод активирован! Скидка 15% применена.';
-                        otherMessage.className = 'promo-message success';
-                    }
-                }
-            }
-        } else {
-            promoApplied = false;
-            if (messageEl) {
-                messageEl.textContent = '❌ Неверный промокод';
-                messageEl.className = 'promo-message error';
-            }
-            // Очищаем другие поля
-            for (let i = 1; i <= 3; i++) {
-                if (i !== stepNum) {
-                    const otherInput = document.getElementById(`promoCodeInput${i}`);
-                    const otherMessage = document.getElementById(`promoMessage${i}`);
-                    if (otherInput) otherInput.value = '';
-                    if (otherMessage) {
-                        otherMessage.textContent = '';
-                        otherMessage.className = 'promo-message';
-                    }
-                }
-            }
-        }
-        updateAllDisplays();
-    }
-
-    function initPromoListeners() {
-        // Кнопки применения промокода
-        for (let i = 1; i <= 3; i++) {
-            const applyBtn = document.getElementById(`applyPromoBtn${i}`);
-            if (applyBtn) {
-                applyBtn.addEventListener('click', () => applyPromoCode(i));
-            }
-            
-            // Применение по Enter
-            const inputEl = document.getElementById(`promoCodeInput${i}`);
-            if (inputEl) {
-                inputEl.addEventListener('keypress', (e) => {
-                    if (e.key === 'Enter') {
-                        applyPromoCode(i);
-                    }
-                });
-            }
-        }
-    }
-
     function showStep(step) {
         document.querySelectorAll('.step-section').forEach(section => section.classList.remove('active'));
         document.getElementById(`step${step}`).classList.add('active');
@@ -1962,33 +2177,6 @@ for (let id in PERFORMANCE_BASE) {
         
         if (step === 2 || step === 3) {
             updateAllDisplays();
-            // Синхронизируем поля промокода при переходе на шаг
-            syncPromoFields(step);
-        }
-    }
-    
-    function syncPromoFields(currentStepNum) {
-        // Находим поле с активированным промокодом
-        let activePromoValue = '';
-        let activePromoStatus = '';
-        for (let i = 1; i <= 3; i++) {
-            const msgEl = document.getElementById(`promoMessage${i}`);
-            if (msgEl && msgEl.classList.contains('success')) {
-                activePromoValue = PROMO_CODE;
-                activePromoStatus = 'success';
-                break;
-            }
-        }
-        
-        // Синхронизируем поле текущего шага
-        const currentInput = document.getElementById(`promoCodeInput${currentStepNum}`);
-        const currentMsg = document.getElementById(`promoMessage${currentStepNum}`);
-        if (currentInput && activePromoValue) {
-            currentInput.value = activePromoValue;
-        }
-        if (currentMsg && activePromoStatus === 'success') {
-            currentMsg.textContent = '✅ Промокод активирован! Скидка 15% применена.';
-            currentMsg.className = 'promo-message success';
         }
     }
 
@@ -2036,8 +2224,6 @@ for (let id in PERFORMANCE_BASE) {
             document.getElementById('successEmail').textContent = email;
             document.getElementById('successEmailHint').textContent = email;
             
-            const finalTotal = calculateFinalTotal();
-            
             const ticketsContainer = document.getElementById('successTickets');
             if (performanceData.freeSeating) {
                 const ticketWord = getTicketWordForm(freeQuantity);
@@ -2048,7 +2234,7 @@ for (let id in PERFORMANCE_BASE) {
                             <div class="ticket-title">Свободная рассадка (${freeQuantity} ${ticketWord})</div>
                             <div class="ticket-meta">Электронный билет · вход по QR-коду</div>
                         </div>
-                        <div class="ticket-price">${formatPrice(finalTotal)}</div>
+                        <div class="ticket-price">${formatPrice(freeQuantity * performanceData.price)}</div>
                     </div>
                 `;
             } else {
@@ -2059,12 +2245,10 @@ for (let id in PERFORMANCE_BASE) {
                             <div class="ticket-title">Ряд ${seat.row}, место ${seat.seat}</div>
                             <div class="ticket-meta">Электронный билет · вход по QR-коду</div>
                         </div>
-                        <div class="ticket-price">${formatPrice(performanceData.price)}</div>
+                        <div class="ticket-price">${performanceData.price} ₽</div>
                     </div>
                 `).join('');
             }
-            
-            document.getElementById('successTotal').textContent = formatPrice(finalTotal);
             
             showStep(4);
         });
