@@ -957,6 +957,22 @@
         padding-top: 80px !important;
     }
 }
+
+/* Только для десктопа */
+@media (min-width: 861px) {
+    .brandbook-container::before {
+        content: '';
+        display: block;
+        height: 73px; /* высота хедера */
+        width: 100%;
+    }
+    
+    /* Убираем отступ у hero, если он первый */
+    .hero-brand:first-of-type {
+        margin-top: -73px;
+        padding-top: calc(73px + var(--space-16)) !important;
+    }
+}
     </style>
 </head>
 <body>
