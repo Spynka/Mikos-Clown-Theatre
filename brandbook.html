@@ -7,9 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     
     <!-- Шрифты -->
-    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;800&family=Nunito+Sans:opsz,wght@6..12,300,400,600,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;800&family=Nunito+Sans:opsz,wght@6..12,300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="css/header-footercss"> 
+    <link rel="stylesheet" href="css/header-footer.css"> 
     
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="SVG/logo-2.svg">
@@ -34,6 +34,22 @@
             --container-max: 1440px; --container-padding: var(--space-6);
             --border-radius: 12px; --border-radius-lg: 20px;
             --transition: 0.2s ease; --transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    --color-bg-light: #F2F1F0;
+    --color-bg-dark: #231F20;
+    --color-accent-red: #F43139;
+    --color-deep-blue: #2C4068;  /* #2C4068 — глубокий синий */
+    --color-gold: #D4BF95;
+    
+    /* Добавьте эти переменные */
+    --blue-900: #2C4068;          /* или любой другой синий */
+    --blue-200: #DCE4F0;          /* для светлых элементов на тёмном фоне */
+    --red-59: #E8454D;            /* красный для ховеров */
+    
+    /* Убедитесь, что эти тоже есть */
+    --white-95: rgba(242, 241, 240, 0.95);
+    --grey-90: rgba(35, 31, 32, 0.12);
+    --primary-red: #E8454D;
         }
 
         /* ===== БАЗОВЫЕ СТИЛИ ===== */
@@ -636,8 +652,8 @@
         .mobile-logo-group img { max-width: 110px !important; height: auto !important; }
         .close-mobile-menu:hover { background: rgba(255,255,255,.2) !important; }
         .mobile-nav ul li a { 
-    color: #F2F1F0 !important; 
-    font-family: var(--font-display) !important; 
+            color: #F2F1F0 !important; 
+            font-family: 'Unbounded', sans-serif !important; 
             font-size: 15px !important; 
             text-decoration: none !important; 
             display: block !important; 
@@ -647,6 +663,300 @@
         }
         .mobile-nav ul li a:hover, 
         .mobile-nav ul li a.active { color: #E8454D !important; }
+
+
+
+        /* ===== ДОПОЛНИТЕЛЬНЫЕ МОБИЛЬНЫЕ СТИЛИ ДЛЯ БРЕНДБУКА ===== */
+
+/* ----- 1. Z-INDEX ФИКСЫ ДЛЯ МОБИЛЬНОГО МЕНЮ ----- */
+@media (max-width: 860px) {
+    .mobile-nav {
+        z-index: 100000 !important;
+    }
+    .overlay {
+        z-index: 99999 !important;
+    }
+    .burger-icon {
+        z-index: 100001 !important;
+    }
+    .main-header {
+        z-index: 99998 !important;
+    }
+}
+
+/* ----- 2. iOS SAFARI HEIGHT FIX ----- */
+@supports (-webkit-touch-callout: none) {
+    .mobile-nav {
+        height: -webkit-fill-available !important;
+    }
+}
+
+/* ----- 3. АДАПТИВ КОНТЕЙНЕРОВ ----- */
+@media (max-width: 1024px) {
+    .content-wrapper {
+        padding: var(--space-8) var(--container-padding) !important;
+    }
+}
+
+@media (max-width: 860px) {
+    .content-wrapper {
+        padding: var(--space-6) var(--space-4) !important;
+    }
+    
+    /* Хедер на мобильных */
+    .main-header {
+        background: transparent !important;
+        backdrop-filter: none !important;
+        border-bottom: none !important;
+        box-shadow: none !important;
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        z-index: 99998 !important;
+    }
+    
+    .header-inner {
+        justify-content: flex-end !important;
+        height: 0 !important;
+        padding: 0 var(--space-4) !important;
+        background: transparent !important;
+    }
+    
+    .header-left {
+        display: none !important;
+    }
+    
+    .nav-menu {
+        display: none !important;
+    }
+    
+    .burger-icon {
+        display: flex !important;
+        position: fixed !important;
+        top: 19px !important;
+        right: 20px !important;
+        z-index: 100001 !important;
+        width: 52px !important;
+        height: 52px !important;
+        background: #fff !important;
+        border-radius: 50% !important;
+        box-shadow: 0 2px 10px rgba(0,0,0,.15) !important;
+        color: #231F20 !important;
+        font-size: 26px !important;
+        align-items: center !important;
+        justify-content: center !important;
+        transition: all .2s !important;
+    }
+    
+    .burger-icon:hover {
+        color: var(--color-accent-red) !important;
+        transform: scale(1.02) !important;
+    }
+}
+
+/* ----- 4. УЛУЧШЕНИЯ ДЛЯ МОБИЛЬНОГО МЕНЮ ----- */
+@media (max-width: 860px) {
+    .mobile-nav ul li a {
+        padding: 12px 0 !important;
+        font-size: 16px !important;
+        min-height: 44px !important; /* Удобно для тапа */
+        display: flex !important;
+        align-items: center !important;
+    }
+    
+    .mobile-logo-group {
+        padding-top: 10px !important;
+    }
+    
+    .close-mobile-menu {
+        width: 44px !important;
+        height: 44px !important;
+        font-size: 22px !important;
+    }
+}
+
+/* ----- 5. АДАПТИВ ДЛЯ ОЧЕНЬ УЗКИХ ЭКРАНОВ ----- */
+@media (max-width: 480px) {
+    .content-wrapper {
+        padding: var(--space-4) var(--space-3) !important;
+    }
+    
+    .hero-brand h1 {
+        font-size: clamp(var(--text-3xl), 12vw, var(--text-5xl)) !important;
+    }
+    
+    .hero-brand p {
+        font-size: var(--text-base) !important;
+    }
+    
+    .brand-card {
+        padding: var(--space-4) !important;
+    }
+    
+    .grid-2col,
+    .grid-3col {
+        gap: var(--space-4) !important;
+    }
+    
+    /* Карусель носителей */
+    .media-card {
+        flex: 0 0 calc(100vw - 32px) !important;
+        width: calc(100vw - 32px) !important;
+        margin: 0 8px !important;
+    }
+    
+    .media-carousel-wrapper {
+        padding: 0 var(--space-2) !important;
+    }
+    
+    .carousel-btn {
+        display: none !important;
+    }
+    
+    /* Типографика */
+    .typo-controls {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: var(--space-3) !important;
+        padding: var(--space-3) var(--space-4) !important;
+    }
+    
+    .preview-content {
+        font-size: 1.5rem !important;
+    }
+    
+    .symbol-block {
+        font-size: 0.9rem !important;
+        line-height: 1.5 !important;
+    }
+}
+
+/* ----- 6. ПРЕДОТВРАЩЕНИЕ ЗУМА НА iOS В ПОЛЯХ ВВОДА ----- */
+@media (max-width: 860px) {
+    input, textarea, select {
+        font-size: 16px !important;
+    }
+}
+
+/* ----- 7. УЛУЧШЕНИЯ ТАЧ-ИНТЕРФЕЙСА ----- */
+@media (max-width: 860px) {
+    /* Убираем выделение при тапе */
+    * {
+        -webkit-tap-highlight-color: transparent;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        user-select: none;
+    }
+    
+    /* Разрешаем выделение текста в контенте */
+    .brand-card,
+    .symbol-block,
+    .preview-content,
+    .hero-brand-content {
+        -webkit-user-select: text !important;
+        user-select: text !important;
+    }
+    
+    /* Плавный скролл для каруселей */
+    .media-carousel,
+    .gallery-thumbs {
+        scroll-behavior: smooth !important;
+        -webkit-overflow-scrolling: touch !important;
+    }
+}
+
+/* ----- 8. ФИКС ДЛЯ STICKY ЭЛЕМЕНТОВ НА МОБИЛЬНЫХ ----- */
+@supports (position: sticky) {
+    @media (max-width: 860px) {
+        .typo-controls {
+            top: 60px !important;
+        }
+        
+        .main-header.scrolled + .typo-controls {
+            top: 61px !important;
+        }
+    }
+}
+
+/* ----- 9. ОПТИМИЗАЦИЯ ИЗОБРАЖЕНИЙ НА МОБИЛЬНЫХ ----- */
+@media (max-width: 860px) {
+    .photo-large img {
+        aspect-ratio: 4/3 !important;
+        object-fit: cover !important;
+    }
+    
+    .photo-medium img {
+        aspect-ratio: 1/1 !important;
+    }
+    
+    .logo-demo-box {
+        gap: var(--space-4) !important;
+    }
+    
+    .logo-version {
+        min-width: 140px !important;
+        padding: var(--space-4) !important;
+    }
+}
+
+/* ----- 10. ДОСТУПНОСТЬ НА МОБИЛЬНЫХ ----- */
+@media (max-width: 860px) {
+    /* Увеличиваем области клика */
+    .nav-btn,
+    .btn,
+    .media-open-btn,
+    .carousel-dot,
+    .thumb {
+        min-height: 44px !important;
+        min-width: 44px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+    
+    /* Контраст для текста на тёмном фоне мобильного меню */
+    .mobile-nav ul li a {
+        color: #F2F1F0 !important;
+    }
+    
+    .mobile-nav ul li a:hover,
+    .mobile-nav ul li a.active {
+        color: var(--color-accent-red) !important;
+    }
+
+}
+.main-footer {
+    background: #2C4068 !important; /* или #2C4068 */
+}
+
+@media (max-width: 860px) {
+    /* Добавляем отступ для всех заголовков страниц */
+    .page-title,
+    .page-title-about,
+    .page-title-team,
+    .page-title-contacts,
+    .page-title-customers,
+    .hero-brand h1,
+    .section-title {
+        padding-top: 70px !important; /* Отступ под бургер */
+    }
+    
+    /* Для брендбука — отступ у контента */
+    .hero-brand {
+        padding-top: clamp(70px, 15vw, 100px) !important;
+    }
+    
+    /* Для страниц с другим структурой */
+    .afisha-page,
+    .performances-page,
+    .about-page,
+    .team-page,
+    .contacts-page,
+    .customers-page {
+        padding-top: 80px !important;
+    }
+}
     </style>
 </head>
 <body>
@@ -665,9 +975,7 @@
                 <span class="brandbook-label">Брендбук</span>
             </div>
             <nav class="nav-menu" id="brandNav" aria-label="Основная навигация">
-                <li><button class="nav-btn" onclick="window.location.href='index.html'">
-    Сайт театра
-</button></li>
+                <li><button class="nav-btn" onclick="window.location.href='index.html'" data-page="about">Сайт театра</button></li>
                 <li><button class="nav-btn active" data-page="about">О бренде</button></li>
                 <li><button class="nav-btn" data-page="logo">Логотип</button></li>
                 <li><button class="nav-btn" data-page="colors">Цвета</button></li>
@@ -695,7 +1003,7 @@
         </a>
         <nav aria-label="Мобильная навигация">
             <ul>
-                <li><a href="index.html">Сайт театра</a></li>
+                <li><a href="index.html" data-mobile-page="about">Сайт театра</a></li>
                 <li><a href="#" data-mobile-page="about">О бренде</a></li>
                 <li><a href="#" data-mobile-page="logo">Логотип</a></li>
                 <li><a href="#" data-mobile-page="colors">Цвета</a></li>
@@ -969,7 +1277,7 @@
     </section>
 
     <!-- FOOTER -->
-    <div id="site-footer" style="margin-top: var(--space-16); padding: var(--space-8) var(--container-padding); text-align: center; color: var(--color-text-secondary); border-top: 1px solid var(--color-border); background: #fff;">
+    <div id="site-footer" >
         <p style="font-size: var(--text-sm);">© 2026 Театр клоунады «Микос». Все права защищены.</p>
         <p style="font-size: var(--text-xs); margin-top: var(--space-2);">Брендбук · Версия 2.1 · Обновлено: апрель 2026</p>
     </div>

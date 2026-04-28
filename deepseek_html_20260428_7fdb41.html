@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>Театр клоунады «Микос» | Афиша</title>
     
-    <!-- Предзагрузка критических шрифтов -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&display=swap">
@@ -18,7 +17,6 @@
     <link rel="icon" type="image/svg+xml" href="SVG/logo-2.svg" sizes="any">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     
-    <!-- Отложенная загрузка API Яндекс.Карт -->
     <script>
         function loadYandexMaps() {
             const script = document.createElement('script');
@@ -59,15 +57,12 @@
             overflow-x: hidden;
         }
         
-        /* Карточки спектаклей */
         .events-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 24px;
             margin-bottom: 32px;
             width: 100%;
-            will-change: transform;
-            contain: layout style paint;
         }
         
         .performance-card-afisha {
@@ -79,8 +74,6 @@
             flex-direction: column;
             height: 100%;
             transition: box-shadow 0.2s ease, transform 0.2s ease;
-            will-change: transform;
-            contain: layout style paint;
         }
         .performance-card-afisha:hover {
             box-shadow: 0 8px 24px rgba(42,61,94,0.1);
@@ -91,7 +84,6 @@
             width: 100%;
             height: 200px;
             object-fit: cover;
-            loading: lazy;
         }
         
         .performance-content-afisha {
@@ -187,13 +179,11 @@
         }
         .btn-buy-afisha:active { background: #C0392B; }
 
-        /* Фильтры */
         .filters-section-afisha {
             margin-bottom: 28px;
             width: 100%;
-            contain: layout style;
-            position: relative; /* для позиционирования дропдауна */
-            z-index: 1500; /* Увеличим z-index секции */
+            position: relative;
+            z-index: 100;
         }
         .filter-chips-afisha {
             display: flex;
@@ -220,15 +210,11 @@
             border-color: #2A3D5E;
         }
         
-        /* Нативный селект (скрыт) */
-        .month-select {
-            display: none;
-        }
+        .month-select { display: none; }
 
-        /* Кастомный селект */
         .filter-chip-date {
             position: relative;
-            z-index: 1001; /* выше чем у карточек */
+            z-index: 101;
         }
         .custom-month-select {
             position: relative;
@@ -264,9 +250,7 @@
             color: #4A6294;
             transition: transform 0.2s;
         }
-        .custom-month-trigger.active .arrow-icon {
-            color: #fff;
-        }
+        .custom-month-trigger.active .arrow-icon { color: #fff; }
         .custom-month-dropdown {
             position: absolute;
             top: calc(100% + 4px);
@@ -276,14 +260,12 @@
             border: 1px solid #E5E3E1;
             border-radius: 8px;
             box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-            z-index: 2000; /* Увеличен z-index для перекрытия модалок */
+            z-index: 200;
             display: none;
             max-height: 220px;
             overflow-y: auto;
         }
-        .custom-month-select.open .custom-month-dropdown {
-            display: block;
-        }
+        .custom-month-select.open .custom-month-dropdown { display: block; }
         .custom-month-option {
             padding: 10px 14px;
             cursor: pointer;
@@ -296,16 +278,13 @@
             white-space: nowrap;
         }
         .custom-month-option:hover,
-        .custom-month-option:active {
-            background: #F8F7F6;
-        }
+        .custom-month-option:active { background: #F8F7F6; }
         .custom-month-option.selected {
             background: #DCE4F0;
             color: #2A3D5E;
             font-weight: 600;
         }
 
-        /* Карта гастролей */
         .tour-map-section {
             background: #fff;
             border-radius: 28px;
@@ -315,7 +294,6 @@
             position: relative;
             width: 100%;
             box-sizing: border-box;
-            contain: layout style;
         }
         
         .tour-header {
@@ -389,7 +367,7 @@
             top: 16px;
             left: 50%;
             transform: translateX(-50%);
-            z-index: 100;
+            z-index: 10;
             background: #2A3D5E;
             color: #fff;
             border: none;
@@ -458,14 +436,6 @@
             font-family: 'Nunito Sans', sans-serif;
         }
         .tour-venue i { margin-top: 2px; flex-shrink: 0; font-size: 11px; }
-        .tour-venue span {
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            line-height: 1.3;
-        }
         
         .tour-status {
             display: inline-block;
@@ -489,7 +459,7 @@
         .tour-status.soon { background: #fff; color: #1A1A1A; outline: 2px solid #2A3D5E; }
         .tour-status.soon:active { background: #DCE4F0; }
         
-        /* Мобильная всплывашка с информацией */
+        /* ========== ИСПРАВЛЕННЫЕ МОДАЛЬНЫЕ ОКНА ========== */
         .mobile-balloon {
             display: none;
             position: fixed;
@@ -500,11 +470,13 @@
             border-radius: 16px;
             padding: 16px;
             box-shadow: 0 8px 32px rgba(0,0,0,0.2);
-            z-index: 10000; /* Высокий z-index */
+            z-index: 9999;
             transform: translateY(100px);
             opacity: 0;
             transition: transform 0.3s ease, opacity 0.3s ease;
             pointer-events: auto;
+            max-height: 70vh;
+            overflow-y: auto;
         }
         .mobile-balloon.visible {
             display: block;
@@ -569,7 +541,6 @@
         }
         .mobile-balloon-btn:active { background: #C0392B; }
         
-        /* Кнопки "Показать еще" */
         .show-more-wrapper,
         .load-more-wrapper {
             display: flex;
@@ -596,134 +567,147 @@
         .show-more-btn:active,
         .load-more-btn:active { background: #DCE4F0; }
         
-        /* Балуны */
-        .balloon-content {
-            font-family: 'Nunito Sans', sans-serif !important;
-            font-size: 14px;
-            color: #2A2627;
-            line-height: 1.5;
-        }
-        .balloon-content * {
-            font-family: 'Nunito Sans', sans-serif !important;
-        }
-        .balloon-content b {
-            font-family: 'Unbounded', sans-serif !important;
-            color: #1A1718;
-            font-size: 16px;
-            display: block;
-            margin-bottom: 6px;
-        }
-        .balloon-content .balloon-date {
-            color: #5A5556;
-            font-size: 14px;
-            display: block;
-            margin: 2px 0;
-        }
-        .balloon-content .balloon-venue {
-            color: #3D393A;
-            font-size: 13px;
-            display: block;
-            margin: 2px 0;
-        }
-        .balloon-content .balloon-address {
-            color: #5A5556;
-            font-size: 13px;
-            display: block;
-            margin: 2px 0;
-        }
-        .balloon-content .balloon-price {
-            font-family: 'Unbounded', sans-serif !important;
-            color: #E8454D;
-            font-size: 14px;
-            font-weight: 600;
-            margin: 4px 0;
-        }
-        .balloon-content .balloon-buy-btn {
-            display: inline-block;
-            margin-top: 8px;
-            padding: 7px 14px;
-            background: #E8454D;
-            color: #FFFFFF !important;
-            border-radius: 6px;
-            font-family: 'Unbounded', sans-serif !important;
-            font-size: 11px;
-            font-weight: 600;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 2px 4px rgba(232,69,77,0.2);
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        /* Модальные окна */
+        /* Базовые оверлеи модальных окон */
         .tag-modal-overlay,
-        .modal-overlay {
+        .modal-overlay,
+        .promo-modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.6);
-            backdrop-filter: blur(4px);
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(8px);
+            z-index: 100000;
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             justify-content: center;
-            z-index: 10000; /* Высокий z-index */
             opacity: 0;
             visibility: hidden;
             transition: opacity 0.3s ease, visibility 0.3s ease;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            padding: 20px;
+            box-sizing: border-box;
         }
+        
         .tag-modal-overlay.active,
-        .modal-overlay.active {
+        .modal-overlay.active,
+        .promo-modal-overlay.active {
             opacity: 1;
             visibility: visible;
         }
         
+        /* Контент модалок */
         .tag-modal {
-            background: #fff;
-            border-radius: 20px;
-            padding: 28px 24px;
-            max-width: 460px;
-            width: 92%;
+            background: #FFFFFF;
+            border-radius: 24px;
+            max-width: 480px;
+            width: 100%;
+            padding: 40px 32px;
             text-align: center;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.4);
+            border: 1px solid rgba(232,69,77,0.2);
             position: relative;
-            transform: translateY(20px);
-            transition: transform 0.3s ease;
-            margin: 0 12px;
+            transform: scale(0.9);
+            transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+            margin: auto;
+            max-height: 90vh;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
         }
-        .tag-modal-overlay.active .tag-modal { transform: translateY(0); }
         
-        .tag-modal-close {
+        .promo-modal {
+            background: #FFFFFF;
+            border-radius: 24px;
+            max-width: 480px;
+            width: 100%;
+            padding: 40px 32px;
+            text-align: center;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.4);
+            border: 1px solid rgba(232,69,77,0.2);
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+            margin: auto;
+            max-height: 90vh;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .DivModalContent {
+            background: #DCE4F0;
+            border-radius: 24px;
+            max-width: 800px;
+            width: 100%;
+            padding: clamp(14px, 3vw, 28px) clamp(14px, 3vw, 36px);
+            position: relative;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.4);
+            transform: scale(0.9);
+            transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+            margin: auto;
+            max-height: 90vh;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        /* Активное состояние */
+        .tag-modal-overlay.active .tag-modal,
+        .modal-overlay.active .DivModalContent,
+        .promo-modal-overlay.active .promo-modal {
+            transform: scale(1);
+        }
+        
+        /* Кнопки закрытия */
+        .tag-modal-close,
+        .promo-modal-close,
+        .ButtonModalClose {
             position: absolute;
-            top: 12px;
+            top: 16px;
             right: 16px;
-            background: none;
-            border: none;
-            font-size: 24px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #F8F7F6;
+            border: 1px solid #E5E3E1;
+            color: #5A5556;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
-            color: #888;
+            transition: all 0.2s;
             -webkit-tap-highlight-color: transparent;
-            padding: 4px;
+            z-index: 10;
         }
-        .tag-modal-close:active { color: #E8454D; }
+        .tag-modal-close:active,
+        .promo-modal-close:active,
+        .ButtonModalClose:active {
+            background: #E8454D;
+            color: white;
+            border-color: #E8454D;
+        }
         
-        .tag-modal-icon { font-size: 36px; margin-bottom: 10px; }
+        .tag-modal-icon,
+        .promo-modal-icon { font-size: 36px; margin-bottom: 10px; }
         
-        .tag-modal-title {
+        .tag-modal-title,
+        .promo-modal-title {
             font-family: 'Unbounded', sans-serif;
-            font-size: 18px;
+            font-size: 24px;
             font-weight: 700;
             color: #1A1718;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
             word-wrap: break-word;
         }
         
-        .tag-modal-text {
+        .tag-modal-text,
+        .promo-modal-subtitle {
             font-family: 'Nunito Sans', sans-serif;
+            font-size: 16px;
             color: #5A5556;
-            margin-bottom: 18px;
-            font-size: 14px;
-            line-height: 1.45;
+            line-height: 1.5;
+            margin-bottom: 28px;
         }
         
         .tag-modal-input-group {
@@ -770,58 +754,7 @@
             font-size: 13px;
         }
         
-        /* Модалка промокода */
-        .promo-modal {
-            background: #fff;
-            border-radius: 18px;
-            padding: 24px 18px;
-            max-width: 420px;
-            width: 92%;
-            text-align: center;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-            position: relative;
-            transform: translateY(20px);
-            transition: transform 0.3s ease;
-            margin: 0 10px;
-        }
-        
-        /* Модалка "Все гастроли" */
-        .DivModalContent {
-            width: 1098px;
-            max-width: 95vw;
-            max-height: 85vh;
-            background: #DCE4F0;
-            border-radius: 18px;
-            padding: clamp(14px, 3vw, 28px) clamp(14px, 3vw, 36px);
-            position: relative;
-            overflow-y: auto;
-            box-shadow: 0 20px 40px rgba(0,0,0,.1);
-            transform: translateY(20px);
-            transition: transform 0.3s ease;
-        }
-        .modal-overlay.active .DivModalContent { transform: translateY(0); }
-        
-        .ButtonModalClose {
-            position: absolute;
-            top: 12px;
-            right: 16px;
-            font-size: 26px;
-            cursor: pointer;
-            background: none;
-            border: none;
-            color: #1A1718;
-            -webkit-tap-highlight-color: transparent;
-            z-index: 10;
-            width: 34px;
-            height: 34px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            transition: background 0.2s, color 0.2s;
-        }
-        .ButtonModalClose:active { background: rgba(0,0,0,0.1); color: #E8454D; }
-        
+        /* Стили для модалки "Все гастроли" */
         .DivModalHeader {
             border-bottom: 1px solid #2A3D5E;
             padding-bottom: 14px;
@@ -925,7 +858,6 @@
             display: flex;
             align-items: center;
             user-select: none;
-            contain: layout style paint;
         }
         .promo-runner-track {
             position: absolute;
@@ -967,50 +899,7 @@
             pointer-events: none;
             box-shadow: 0 2px 6px rgba(0,0,0,0.04);
         }
-        .promo-modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.6);
-            backdrop-filter: blur(4px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 20000; /* Самый высокий z-index */
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-        }
-        .promo-modal-overlay.active { opacity: 1; visibility: visible; }
-        .promo-modal-overlay.active .promo-modal { transform: translateY(0); }
-        .promo-modal-close {
-            position: absolute;
-            top: 10px;
-            right: 14px;
-            background: none;
-            border: none;
-            font-size: 22px;
-            cursor: pointer;
-            color: #888;
-            -webkit-tap-highlight-color: transparent;
-            padding: 4px;
-        }
-        .promo-modal-icon { font-size: 36px; margin-bottom: 10px; }
-        .promo-modal-title {
-            font-family: 'Unbounded', sans-serif;
-            font-size: 18px;
-            font-weight: 700;
-            color: #1A1718;
-            margin-bottom: 5px;
-        }
-        .promo-modal-subtitle {
-            font-family: 'Nunito Sans', sans-serif;
-            color: #5A5556;
-            margin-bottom: 16px;
-            font-size: 13px;
-        }
+        
         .promo-code-box {
             background: #F8F7F6;
             border: 2px dashed #4A6294;
@@ -1068,7 +957,7 @@
             grid-column: 1 / -1;
         }
         
-        /* Адаптивность */
+        /* ========== АДАПТИВНОСТЬ ========== */
         @media (max-width: 1100px) {
             .tour-map-container { grid-template-columns: 1fr; }
             #yandexMap { height: 380px; }
@@ -1112,7 +1001,6 @@
                 box-shadow: 0 2px 12px rgba(42,61,94,0.08) !important;
             }
             
-            /* Скрываем стандартные балуны Яндекс.Карт на мобильных */
             .ymaps-2-1-79-balloon,
             .ymaps-2-1-79-balloon__content,
             .ymaps-2-1-79-balloon__layout {
@@ -1144,6 +1032,13 @@
             
             .custom-month-select { min-width: 140px; }
             .custom-month-trigger { font-size: 12px; padding: 10px 30px 10px 12px; }
+            
+            .tag-modal,
+            .promo-modal { padding: 32px 24px; border-radius: 20px; }
+            .tag-modal-title,
+            .promo-modal-title { font-size: 20px; }
+            .tag-modal-text,
+            .promo-modal-subtitle { font-size: 15px; }
         }
         
         @media (max-width: 480px) {
@@ -1167,13 +1062,11 @@
             .show-more-btn, .load-more-btn { max-width: 100%; padding: 10px 14px; font-size: 12px; }
             
             .promo-caption { font-size: 11px; padding: 4px 8px; bottom: 6px; }
-            .promo-modal { padding: 18px 10px; border-radius: 12px; margin: 0 6px; }
             .promo-code-box { flex-direction: column; gap: 6px; }
             .promo-code-text { font-size: 15px; }
             .promo-goto-btn { width: 100%; text-align: center; font-size: 12px; padding: 10px; }
             
-            .DivModalContent { padding: 10px 6px; border-radius: 10px; }
-            .ButtonModalClose { top: 6px; right: 8px; font-size: 20px; width: 28px; height: 28px; }
+            .DivModalContent { padding: 10px 6px; border-radius: 14px; }
             .DivModalHeader { padding-bottom: 8px; margin-bottom: 12px; padding-right: 28px; }
             .DivModalHeader .H2 { font-size: 16px; }
             .DivModalHeader .P { font-size: 11px; }
@@ -1184,9 +1077,12 @@
             .SpanTourStatus { padding: 4px 10px; font-size: 10px; min-width: 65px; }
             .DivModalFooter { font-size: 10px; }
             
-            .tag-modal { padding: 16px 10px; border-radius: 12px; margin: 0 6px; }
-            .tag-modal-title { font-size: 16px; }
-            .tag-modal-text { font-size: 12px; }
+            .tag-modal,
+            .promo-modal { padding: 24px 16px; border-radius: 16px; }
+            .tag-modal-title,
+            .promo-modal-title { font-size: 18px; }
+            .tag-modal-text,
+            .promo-modal-subtitle { font-size: 14px; }
             .tag-modal-input-group { flex-direction: column; gap: 6px; }
             .tag-modal-submit-btn { width: 100%; padding: 10px; font-size: 11px; }
             
@@ -1195,15 +1091,17 @@
         }
         
         @media (max-width: 370px) {
-            .promo-modal { padding: 14px 8px; margin: 0 4px; }
+            .tag-modal,
+            .promo-modal { padding: 20px 12px; border-radius: 14px; }
+            .tag-modal-title,
             .promo-modal-title { font-size: 16px; }
-            .promo-modal-subtitle { font-size: 11px; }
+            .tag-modal-text,
+            .promo-modal-subtitle { font-size: 13px; }
             .promo-code-text { font-size: 14px; }
             .promo-copy-btn { font-size: 10px; padding: 6px 10px; }
             .promo-goto-btn { font-size: 11px; padding: 9px 14px; }
         }
         
-        /* Скелетон-лоадер для карты */
         .map-skeleton {
             position: absolute;
             top: 0;
@@ -1221,443 +1119,41 @@
             100% { background-position: 200% 0; }
         }
         
-        @media (max-width: 860px) {
-            .map-skeleton {
-                border-radius: 10px;
-            }
+        @media (max-width: 860px) { .map-skeleton { border-radius: 10px; } }
+        @media (max-width: 480px) { .map-skeleton { border-radius: 6px; } }
+
+        .balloon-content {
+            font-family: 'Nunito Sans', sans-serif !important;
+            font-size: 14px;
+            color: #2A2627;
+            line-height: 1.5;
         }
-        
-        @media (max-width: 480px) {
-            .map-skeleton {
-                border-radius: 6px;
-            }
+        .balloon-content b {
+            font-family: 'Unbounded', sans-serif !important;
+            color: #1A1718;
+            font-size: 16px;
+            display: block;
+            margin-bottom: 6px;
         }
-        .tag-modal {
-    background: #fff;
-    border-radius: 20px;
-    padding: 28px 24px;
-    text-align: center;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-    margin: 0 12px;
-}
-
-.promo-modal {
-    background: #fff;
-    border-radius: 18px;
-    padding: 24px 18px;
-    text-align: center;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-    margin: 0 10px;
-}
-
-.DivModalContent {
-    background: #DCE4F0;
-    border-radius: 18px;
-    padding: clamp(14px, 3vw, 28px) clamp(14px, 3vw, 36px);
-    box-shadow: 0 20px 40px rgba(0,0,0,.1);
-}
-/* Исправленные стили для модальных окон в афише */
-/* Замените соответствующие блоки в вашем CSS */
-
-/* Базовые оверлеи */
-.tag-modal-overlay,
-.modal-overlay,
-.promo-modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.6);
-    backdrop-filter: blur(4px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 100000; /* Увеличен для гарантированного перекрытия */
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    padding: 20px; /* Добавлен отступ для мобильных */
-    box-sizing: border-box;
-}
-
-/* Активное состояние */
-.tag-modal-overlay.active,
-.modal-overlay.active,
-.promo-modal-overlay.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-/* Контент модалок для десктопа */
-.tag-modal {
-    background: #fff;
-    border-radius: 20px;
-    padding: 28px 24px;
-    max-width: 460px;
-    width: 92%;
-    text-align: center;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-    position: relative;
-    transform: scale(0.9); /* Как в "Заказчикам" */
-    transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1); /* Плавная анимация */
-    margin: auto;
-}
-
-.promo-modal {
-    background: #fff;
-    border-radius: 18px;
-    padding: 24px 18px;
-    max-width: 420px;
-    width: 92%;
-    text-align: center;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-    position: relative;
-    transform: scale(0.9);
-    transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
-    margin: auto;
-}
-
-.DivModalContent {
-    width: 1098px;
-    max-width: 95vw;
-    max-height: 85vh;
-    background: #DCE4F0;
-    border-radius: 18px;
-    padding: clamp(14px, 3vw, 28px) clamp(14px, 3vw, 36px);
-    position: relative;
-    overflow-y: auto;
-    box-shadow: 0 20px 40px rgba(0,0,0,.1);
-    transform: scale(0.9);
-    transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
-    margin: auto;
-}
-
-/* Анимация появления */
-.tag-modal-overlay.active .tag-modal,
-.modal-overlay.active .DivModalContent,
-.promo-modal-overlay.active .promo-modal {
-    transform: scale(1); /* Вместо translateY(0) */
-}
-
-/* Мобильная адаптация */
-@media (max-width: 860px) {
-    .tag-modal-overlay,
-    .modal-overlay,
-    .promo-modal-overlay {
-        align-items: flex-start; /* Верхнее выравнивание на мобильных */
-        padding: 20px 10px;
-    }
-    
-    .tag-modal {
-        width: 100%;
-        max-width: 460px;
-        margin: 0 auto;
-        max-height: 90vh;
-        overflow-y: auto;
-        border-radius: 16px;
-        padding: 24px 20px;
-    }
-    
-    .promo-modal {
-        width: 100%;
-        max-width: 420px;
-        margin: 0 auto;
-        max-height: 90vh;
-        overflow-y: auto;
-        border-radius: 14px;
-        padding: 20px 16px;
-    }
-    
-    .DivModalContent {
-        width: 100%;
-        max-width: none;
-        max-height: 90vh;
-        border-radius: 14px;
-        padding: 14px 10px;
-    }
-}
-
-@media (max-width: 480px) {
-    .tag-modal-overlay,
-    .modal-overlay,
-    .promo-modal-overlay {
-        padding: 10px 5px;
-    }
-    
-    .tag-modal {
-        padding: 16px 12px;
-        border-radius: 12px;
-    }
-    
-    .promo-modal {
-        padding: 18px 10px;
-        border-radius: 12px;
-    }
-    
-    .DivModalContent {
-        padding: 10px 6px;
-        border-radius: 10px;
-    }
-}
-
-/* Исправление для мобильной всплывашки */
-.mobile-balloon {
-    display: none;
-    position: fixed;
-    bottom: 20px;
-    left: 10px;
-    right: 10px;
-    background: white;
-    border-radius: 16px;
-    padding: 16px;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
-    z-index: 100001; /* Выше оверлеев */
-    transform: translateY(100px);
-    opacity: 0;
-    transition: transform 0.3s ease, opacity 0.3s ease;
-    pointer-events: auto;
-    max-height: 70vh;
-    overflow-y: auto;
-}
-
-/* Исправление z-index для фильтров */
-.filters-section-afisha {
-    position: relative;
-    z-index: 1000; /* Уменьшен, чтобы не перекрывать модалки */
-}
-
-/* Исправление z-index для карты */
-#yandexMap {
-    z-index: 1; /* Базовый z-index для карты */
-}
-
-.reset-map-btn {
-    z-index: 10; /* Уменьшен */
-}
-
-/* Убираем конфликты с кастомными селектами */
-.custom-month-select {
-    z-index: 1001;
-}
-
-.custom-month-dropdown {
-    z-index: 2000; /* Уменьшен относительно модалок */
-}
-
-/* ========== ИСПРАВЛЕННЫЕ МОДАЛЬНЫЕ ОКНА - ПОЛНОСТЬЮ В VIEWPORT ========== */
-
-/* Базовые оверлеи модальных окон */
-.tag-modal-overlay,
-.modal-overlay,
-.promo-modal-overlay,
-.success-modal-overlay {
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 100vw !important;
-    height: 100vh !important;
-    background: rgba(0,0,0,0.85) !important;
-    backdrop-filter: blur(8px) !important;
-    z-index: 100000 !important;
-    display: flex !important;
-    align-items: center !important; /* 👈 ЦЕНТРИРОВАНИЕ ПО ВЕРТИКАЛИ */
-    justify-content: center !important;
-    opacity: 0 !important;
-    visibility: hidden !important;
-    transition: opacity 0.3s ease, visibility 0.3s ease !important;
-    overflow-y: auto !important;
-    overflow-x: hidden !important;
-    -webkit-overflow-scrolling: touch !important;
-    padding: 20px !important;
-    box-sizing: border-box !important;
-    /* 👇 ВАЖНО: предотвращаем прокрутку страницы при открытом модальном окне */
-    contain: layout style paint !important;
-}
-
-.tag-modal-overlay.active,
-.modal-overlay.active,
-.promo-modal-overlay.active,
-.success-modal-overlay.active {
-    opacity: 1 !important;
-    visibility: visible !important;
-}
-
-/* Контент модалок — ограничение по высоте */
-.tag-modal,
-.promo-modal,
-.DivModalContent,
-.success-modal-content {
-    background: #FFFFFF !important;
-    border-radius: 24px !important;
-    max-width: 480px !important;
-    width: 100% !important;
-    padding: 40px 32px !important;
-    text-align: center !important;
-    box-shadow: 0 25px 50px -12px rgba(0,0,0,0.4) !important;
-    border: 1px solid rgba(232,69,77,0.2) !important;
-    position: relative !important;
-    transform: scale(0.9) !important;
-    transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1) !important;
-    margin: auto !important;
-    
-    /* 👇 КЛЮЧЕВЫЕ СВОЙСТВА ДЛЯ ОГРАНИЧЕНИЯ ВЫСОТЫ */
-    max-height: 90vh !important;
-    overflow-y: auto !important;
-    overflow-x: hidden !important;
-    -webkit-overflow-scrolling: touch !important;
-    
-    /* 👇 Предотвращаем "прыжки" контента */
-    contain: layout style !important;
-}
-
-/* Активное состояние — плавное появление */
-.tag-modal-overlay.active .tag-modal,
-.modal-overlay.active .DivModalContent,
-.promo-modal-overlay.active .promo-modal,
-.success-modal-overlay.active .success-modal-content {
-    transform: scale(1) !important;
-}
-
-/* Кнопки закрытия — фиксированное позиционирование внутри модалки */
-.tag-modal-close,
-.promo-modal-close,
-.ButtonModalClose,
-.success-modal-close {
-    position: absolute !important;
-    top: 16px !important;
-    right: 16px !important;
-    width: 32px !important;
-    height: 32px !important;
-    border-radius: 50% !important;
-    background: #F8F7F6 !important;
-    border: 1px solid #E5E3E1 !important;
-    color: #5A5556 !important;
-    font-size: 16px !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    cursor: pointer !important;
-    transition: all 0.2s !important;
-    -webkit-tap-highlight-color: transparent !important;
-    z-index: 10 !important;
-    flex-shrink: 0 !important;
-}
-.tag-modal-close:active,
-.promo-modal-close:active,
-.ButtonModalClose:active,
-.success-modal-close:active {
-    background: #E8454D !important;
-    color: white !important;
-    border-color: #E8454D !important;
-}
-
-/* Предотвращаем прокрутку body при открытом модальном окне */
-body.modal-open {
-    overflow: hidden !important;
-    position: fixed !important;
-    width: 100% !important;
-    height: 100% !important;
-    touch-action: none !important;
-}
-
-/* ========== АДАПТИВ ДЛЯ МОБИЛЬНЫХ ========== */
-@media (max-width: 860px) {
-    .tag-modal,
-    .promo-modal,
-    .DivModalContent,
-    .success-modal-content {
-        padding: 32px 24px !important;
-        border-radius: 20px !important;
-        max-width: calc(100vw - 40px) !important;
-        max-height: calc(100vh - 40px) !important;
-        margin: 20px auto !important;
-    }
-    
-    .tag-modal-title,
-    .promo-modal-title,
-    .success-modal-title {
-        font-size: 20px !important;
-    }
-    
-    .tag-modal-text,
-    .promo-modal-subtitle,
-    .success-modal-text {
-        font-size: 15px !important;
-    }
-    
-    /* Увеличиваем область нажатия для кнопок */
-    .tag-modal-close,
-    .promo-modal-close,
-    .ButtonModalClose,
-    .success-modal-close {
-        width: 36px !important;
-        height: 36px !important;
-        top: 12px !important;
-        right: 12px !important;
-    }
-}
-
-@media (max-width: 480px) {
-    .tag-modal,
-    .promo-modal,
-    .DivModalContent,
-    .success-modal-content {
-        padding: 24px 16px !important;
-        border-radius: 16px !important;
-        max-width: calc(100vw - 24px) !important;
-        max-height: calc(100vh - 24px) !important;
-        margin: 12px auto !important;
-    }
-    
-    .tag-modal-title,
-    .promo-modal-title,
-    .success-modal-title {
-        font-size: 18px !important;
-    }
-    
-    .tag-modal-text,
-    .promo-modal-subtitle,
-    .success-modal-text {
-        font-size: 14px !important;
-        line-height: 1.4 !important;
-    }
-    
-    /* Кнопки на всю ширину для удобства */
-    .tag-modal-submit-btn,
-    .promo-goto-btn,
-    .success-modal-btn {
-        width: 100% !important;
-        padding: 12px !important;
-        font-size: 14px !important;
-    }
-}
-
-/* ========== ФИКС ДЛЯ SAFARI / iOS ========== */
-@supports (-webkit-touch-callout: none) {
-    .tag-modal,
-    .promo-modal,
-    .DivModalContent,
-    .success-modal-content {
-        -webkit-overflow-scrolling: touch !important;
-        max-height: -webkit-fill-available !important;
-    }
-}
-
-/* ========== БЛОКИРОВКА ПРОКРУТКИ ФОНА ========== */
-/* Добавляем этот класс через JS при открытии модалки */
-body.no-scroll {
-    overflow: hidden !important;
-    position: fixed !important;
-    width: 100% !important;
-    height: 100% !important;
-    top: 0 !important;
-    left: 0 !important;
-    touch-action: none !important;
-}
-
+        .balloon-content .balloon-date { color: #5A5556; font-size: 14px; display: block; margin: 2px 0; }
+        .balloon-content .balloon-venue { color: #3D393A; font-size: 13px; display: block; margin: 2px 0; }
+        .balloon-content .balloon-address { color: #5A5556; font-size: 13px; display: block; margin: 2px 0; }
+        .balloon-content .balloon-price { font-family: 'Unbounded', sans-serif !important; color: #E8454D; font-size: 14px; font-weight: 600; margin: 4px 0; }
+        .balloon-content .balloon-buy-btn {
+            display: inline-block;
+            margin-top: 8px;
+            padding: 7px 14px;
+            background: #E8454D;
+            color: #FFFFFF !important;
+            border-radius: 6px;
+            font-family: 'Unbounded', sans-serif !important;
+            font-size: 11px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(232,69,77,0.2);
+            -webkit-tap-highlight-color: transparent;
+        }
     </style>
 </head>
 <body>
@@ -1667,7 +1163,7 @@ body.no-scroll {
     <div id="site-hero-slider"></div>
 
     <div class="promo-runner-section" id="promoRunner">
-        <div class="promo-runner-track running" id="promoRunnerTrack"> <!-- Класс running добавлен сразу -->
+        <div class="promo-runner-track running" id="promoRunnerTrack">
             <img src="SVG/Промокод.svg" alt="Поймай Ксюшу — получи промокод!">
         </div>
         <span class="promo-caption">Поймайте Ксюшу — получите промокод!</span>
@@ -1729,21 +1225,17 @@ body.no-scroll {
         </div>
     </div>
 
-    <!-- Мобильная всплывашка с информацией -->
     <div class="mobile-balloon" id="mobileBalloon">
         <button class="mobile-balloon-close" id="closeMobileBalloon">×</button>
         <div class="mobile-balloon-title" id="mobileBalloonTitle"></div>
         <div class="mobile-balloon-info" id="mobileBalloonDate">
-            <i class="far fa-calendar-alt"></i>
-            <span></span>
+            <i class="far fa-calendar-alt"></i><span></span>
         </div>
         <div class="mobile-balloon-info" id="mobileBalloonVenue">
-            <i class="fas fa-theater-masks"></i>
-            <span></span>
+            <i class="fas fa-theater-masks"></i><span></span>
         </div>
         <div class="mobile-balloon-info" id="mobileBalloonAddress">
-            <i class="fas fa-map-marker-alt"></i>
-            <span></span>
+            <i class="fas fa-map-marker-alt"></i><span></span>
         </div>
         <div class="mobile-balloon-price" id="mobileBalloonPrice"></div>
         <button class="mobile-balloon-btn" id="mobileBalloonBuyBtn">Купить билеты</button>
@@ -1795,8 +1287,8 @@ body.no-scroll {
     <div id="site-footer"></div>
 </div>
 
-  <script src="js/loader-animation.js"></script>
-  <script src="js/components-loader.js"></script>
+<script src="js/loader-animation.js"></script>
+<script src="js/components-loader.js"></script>
 <script src="js/header-scripts.js"></script>
 <script src="js/common.js"></script>
 <script src="js/slider-scripts.js"></script>
@@ -1814,7 +1306,6 @@ const showMoreBtn = document.getElementById('showMoreEventsBtn');
 const monthSelect = document.getElementById('monthSelect');
 const allChip = document.querySelector('[data-filter="all"]');
 
-// Мобильная всплывашка
 let currentMobileBalloonEventId = null;
 
 window.goToCheckout = function(eventId) {
@@ -1910,7 +1401,6 @@ function updateFilterVisuals() {
     }
 }
 
-// Функции для мобильной всплывашки
 function showMobileBalloon(markerData) {
     const balloon = document.getElementById('mobileBalloon');
     if (!balloon) return;
@@ -1951,15 +1441,55 @@ function hideMobileBalloon() {
     currentMobileBalloonEventId = null;
 }
 
+function hideAllModals() {
+    ['soonModalOverlay', 'soldModalOverlay', 'tourModalOverlay', 'promoModalOverlay'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.classList.remove('active');
+    });
+    hideMobileBalloon();
+    document.body.style.overflow = '';
+}
+
+function openSoonModal(title) {
+    hideAllModals();
+    const m = document.getElementById('soonModalOverlay'); 
+    if (!m) return;
+    m.querySelector('.tag-modal-title').textContent = `«${title}» — скоро в продаже`;
+    m.classList.add('active'); 
+    document.body.style.overflow = 'hidden';
+    document.getElementById('soonSuccess').style.display = 'none';
+    document.getElementById('soonEmailInput').value = '';
+}
+
+function openSoldModal(title) {
+    hideAllModals();
+    const m = document.getElementById('soldModalOverlay'); 
+    if (!m) return;
+    m.querySelector('.tag-modal-title').textContent = `«${title}» — билеты раскуплены`;
+    m.classList.add('active'); 
+    document.body.style.overflow = 'hidden';
+    document.getElementById('soldSuccess').style.display = 'none';
+    document.getElementById('soldEmailInput').value = '';
+}
+
+function openPromoModal() {
+    hideAllModals();
+    const m = document.getElementById('promoModalOverlay');
+    if (m) {
+        m.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+function closeAllModals() {
+    hideAllModals();
+}
+
 function initMobileBalloon() {
     const closeBtn = document.getElementById('closeMobileBalloon');
     const buyBtn = document.getElementById('mobileBalloonBuyBtn');
     
     closeBtn?.addEventListener('click', hideMobileBalloon);
-    closeBtn?.addEventListener('touchend', (e) => {
-        e.preventDefault();
-        hideMobileBalloon();
-    });
     
     buyBtn?.addEventListener('click', () => {
         if (currentMobileBalloonEventId) {
@@ -1968,15 +1498,6 @@ function initMobileBalloon() {
         hideMobileBalloon();
     });
     
-    buyBtn?.addEventListener('touchend', (e) => {
-        e.preventDefault();
-        if (currentMobileBalloonEventId) {
-            goToCheckout(currentMobileBalloonEventId);
-        }
-        hideMobileBalloon();
-    });
-    
-    // Закрытие по клику вне всплывашки
     document.addEventListener('click', function(e) {
         const balloon = document.getElementById('mobileBalloon');
         if (!balloon || !balloon.classList.contains('visible')) return;
@@ -1993,7 +1514,6 @@ function initYandexMap() {
         if (typeof ymaps === 'undefined') return;
         
         ymaps.ready(function() {
-            // Скрываем скелетон
             const skeleton = document.getElementById('mapSkeleton');
             if (skeleton) skeleton.style.display = 'none';
             
@@ -2016,9 +1536,7 @@ function initYandexMap() {
             myMap.behaviors.enable('multiTouch');
             myMap.behaviors.enable('drag');
             
-            setTimeout(() => { 
-                originalBounds = myMap.getBounds(); 
-            }, 500);
+            setTimeout(() => { originalBounds = myMap.getBounds(); }, 500);
             
             const isMobile = window.innerWidth <= 860;
             
@@ -2037,7 +1555,6 @@ function initYandexMap() {
                     hideIconOnBalloonOpen: false 
                 });
                 
-                // Единый обработчик клика для всех устройств
                 placemark.events.add('click', function(e) {
                     e.preventDefault();
                     
@@ -2048,18 +1565,13 @@ function initYandexMap() {
                         if (rb) rb.classList.add('visible');
                     }
                     
-                    // Выделяем плашку
                     highlightTourItem(index);
                     
-                    // На мобильных показываем кастомную всплывашку
                     if (isMobile) {
                         showMobileBalloon(marker);
                     } else {
-                        // На десктопе открываем стандартный балун
                         setTimeout(() => {
-                            if (placemark.balloon) {
-                                placemark.balloon.open();
-                            }
+                            if (placemark.balloon) placemark.balloon.open();
                         }, 400);
                     }
                 });
@@ -2074,17 +1586,7 @@ function initYandexMap() {
             initResetMapButton();
             renderTourList();
             
-            // Глобальный обработчик для кнопок в балунах
             document.addEventListener('click', function(e) {
-                const btn = e.target.closest('.balloon-buy-btn');
-                if (btn && btn.dataset.eventId) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    goToCheckout(btn.dataset.eventId);
-                }
-            });
-            
-            document.addEventListener('touchend', function(e) {
                 const btn = e.target.closest('.balloon-buy-btn');
                 if (btn && btn.dataset.eventId) {
                     e.preventDefault();
@@ -2121,7 +1623,6 @@ function initResetMapButton() {
     };
     
     resetBtn.addEventListener('click', resetMap);
-    resetBtn.addEventListener('touchend', resetMap);
     
     if (myMap) {
         const mapClickHandler = function(e) {
@@ -2145,7 +1646,6 @@ function initResetMapButton() {
         };
         
         myMap.events.add('click', mapClickHandler);
-        myMap.events.add('touchstart', mapClickHandler);
     }
 }
 
@@ -2185,16 +1685,11 @@ function renderTourList(showAll = false) {
         const handleItemClick = function(e) {
             if (e.target.classList.contains('tour-status')) return;
             e.preventDefault();
-            
             highlightTourItem(originalIndex);
-            
-            if (window.innerWidth <= 860) {
-                showMobileBalloon(marker);
-            }
+            if (window.innerWidth <= 860) showMobileBalloon(marker);
         };
         
         tourItem.addEventListener('click', handleItemClick);
-        tourItem.addEventListener('touchend', handleItemClick);
         
         const statusBtn = tourItem.querySelector('.tour-status');
         if (statusBtn) {
@@ -2205,20 +1700,14 @@ function renderTourList(showAll = false) {
                 const status = this.dataset.status;
                 const eventId = this.dataset.eventId;
                 const eventData = TOUR_SCHEDULE.find(ev => ev.id === eventId);
-                
                 if (!eventData) return;
                 
-                if (status === 'available') {
-                    goToCheckout(eventId);
-                } else if (status === 'soon') {
-                    openSoonModal(eventData.title);
-                } else if (status === 'sold') {
-                    openSoldModal(eventData.title);
-                }
+                if (status === 'available') goToCheckout(eventId);
+                else if (status === 'soon') openSoonModal(eventData.title);
+                else if (status === 'sold') openSoldModal(eventData.title);
             };
             
             statusBtn.addEventListener('click', statusHandler);
-            statusBtn.addEventListener('touchend', statusHandler);
         }
         
         tourList.appendChild(tourItem);
@@ -2242,23 +1731,16 @@ function highlightTourItem(index) {
     if (targetItem) {
         if (targetItem.classList.contains('mobile-hidden')) {
             renderTourList(true);
-            
             setTimeout(() => {
                 const newTarget = document.querySelector(`.tour-item[data-index="${index}"]`);
                 if (newTarget) {
                     newTarget.classList.add('active');
-                    newTarget.scrollIntoView({ 
-                        behavior: 'smooth', 
-                        block: 'center'
-                    });
+                    newTarget.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 }
             }, 200);
         } else {
             targetItem.classList.add('active');
-            targetItem.scrollIntoView({ 
-                behavior: 'smooth', 
-                block: 'center'
-            });
+            targetItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
     }
     
@@ -2271,55 +1753,32 @@ function highlightTourItem(index) {
         
         if (window.innerWidth > 860) {
             setTimeout(() => {
-                if (placemarks[index].balloon) {
-                    placemarks[index].balloon.open();
-                }
+                if (placemarks[index].balloon) placemarks[index].balloon.open();
             }, 350);
         }
     }
-}
-
-function openSoonModal(title) {
-    const m = document.getElementById('soonModalOverlay'); 
-    if (!m) return;
-    m.querySelector('.tag-modal-title').textContent = `«${title}» — скоро в продаже`;
-    m.classList.add('active'); 
-    document.body.style.overflow = 'hidden';
-    document.getElementById('soonSuccess').style.display = 'none';
-    document.getElementById('soonEmailInput').value = '';
-}
-
-function openSoldModal(title) {
-    const m = document.getElementById('soldModalOverlay'); 
-    if (!m) return;
-    m.querySelector('.tag-modal-title').textContent = `«${title}» — билеты раскуплены`;
-    m.classList.add('active'); 
-    document.body.style.overflow = 'hidden';
-    document.getElementById('soldSuccess').style.display = 'none';
-    document.getElementById('soldEmailInput').value = '';
 }
 
 function initTagModals() {
     ['soon','sold'].forEach(type => {
         const overlay = document.getElementById(`${type}ModalOverlay`); 
         if (!overlay) return;
-        const closeBtn = document.getElementById(`close${type.charAt(0).toUpperCase()+type.slice(1)}Modal`);
+        const closeBtn = overlay.querySelector('.tag-modal-close');
         const submitBtn = document.getElementById(`${type}SubmitBtn`);
         const emailInput = document.getElementById(`${type}EmailInput`);
         const successMsg = document.getElementById(`${type}Success`);
         
-        const closeModal = () => { 
+        const closeThisModal = () => { 
             overlay.classList.remove('active'); 
             document.body.style.overflow = ''; 
             if(successMsg) successMsg.style.display='none'; 
             if(emailInput) emailInput.value=''; 
         };
         
-        closeBtn?.addEventListener('click', closeModal);
-        closeBtn?.addEventListener('touchend', (e) => { e.preventDefault(); closeModal(); });
+        closeBtn?.addEventListener('click', closeThisModal);
         
         overlay.addEventListener('click', (e) => { 
-            if (e.target === overlay) closeModal(); 
+            if (e.target === overlay) closeThisModal(); 
         });
         
         submitBtn?.addEventListener('click', () => {
@@ -2334,15 +1793,7 @@ function initTagModals() {
     });
     
     document.addEventListener('keydown', (e) => { 
-        if(e.key!=='Escape') return; 
-        ['soon','sold','tour','promo'].forEach(t => { 
-            const o=document.getElementById(`${t}ModalOverlay`); 
-            if(o?.classList.contains('active')){ 
-                o.classList.remove('active'); 
-                document.body.style.overflow=''; 
-            } 
-        });
-        hideMobileBalloon();
+        if (e.key === 'Escape') closeAllModals();
     });
 }
 
@@ -2377,18 +1828,9 @@ function initTourModal() {
             </div>`;
         }).join('');
         
-        const cities = [...new Set(events.map(e => e.city || 'Москва'))];
-        const hd = document.querySelector('.DivModalHeader .P div');
-        if (hd) { 
-            const cw = cities.length===1?'город':(cities.length>=2&&cities.length<=4?'города':'городов'); 
-            const sw = events.length===1?'показ':(events.length>=2&&events.length<=4?'показа':'показов'); 
-            hd.textContent = `${cities.length} ${cw}, ${events.length} ${sw}. Выберите удобный город и дату.`; 
-        }
-        
         modalListContainer.querySelectorAll('.SpanTourStatus').forEach(btn => {
-            const statusHandler = (e) => { 
+            btn.addEventListener('click', (e) => { 
                 e.stopPropagation(); 
-                e.preventDefault();
                 const eid = btn.dataset.eventId;
                 const st = btn.dataset.status;
                 const ed = TOUR_SCHEDULE.find(ev=>ev.id===eid); 
@@ -2396,15 +1838,13 @@ function initTourModal() {
                 if(st==='available') goToCheckout(eid); 
                 else if(st==='soon') openSoonModal(ed.title); 
                 else if(st==='sold') openSoldModal(ed.title);
-            };
-            
-            btn.addEventListener('click', statusHandler);
-            btn.addEventListener('touchend', statusHandler);
+            });
         });
     }
     
     const openModal = (e) => { 
         if(e) e.preventDefault(); 
+        hideAllModals();
         renderTourModal(); 
         modalOverlay.classList.add('active'); 
         document.body.style.overflow = 'hidden'; 
@@ -2416,17 +1856,9 @@ function initTourModal() {
     };
     
     openModalLink?.addEventListener('click', openModal);
-    openModalLink?.addEventListener('touchend', (e) => { e.preventDefault(); openModal(e); });
-    
     closeModalBtn?.addEventListener('click', closeModal);
-    closeModalBtn?.addEventListener('touchend', (e) => { e.preventDefault(); closeModal(); });
-    
     modalOverlay.addEventListener('click', (e) => { 
         if (e.target === modalOverlay) closeModal(); 
-    });
-    
-    document.addEventListener('keydown', (e) => { 
-        if (e.key === 'Escape' && modalOverlay?.classList.contains('active')) closeModal(); 
     });
 }
 
@@ -2454,9 +1886,8 @@ function initCustomMonthSelect() {
             optionEl.textContent = option.text;
             optionEl.dataset.value = option.value;
             
-            const selectHandler = (e) => {
+            optionEl.addEventListener('click', (e) => {
                 e.stopPropagation();
-                e.preventDefault();
                 originalSelect.value = optionEl.dataset.value;
                 trigger.innerHTML = `${optionEl.textContent} <i class="fas fa-chevron-down arrow-icon"></i>`;
                 
@@ -2472,10 +1903,7 @@ function initCustomMonthSelect() {
                 optionEl.classList.add('selected');
                 wrapper.classList.remove('open');
                 originalSelect.dispatchEvent(new Event('change', { bubbles: true }));
-            };
-            
-            optionEl.addEventListener('click', selectHandler);
-            optionEl.addEventListener('touchend', selectHandler);
+            });
             dropdown.appendChild(optionEl);
         });
     }
@@ -2490,27 +1918,17 @@ function initCustomMonthSelect() {
     
     renderOptions();
     
-    const toggleHandler = (e) => {
+    trigger.addEventListener('click', (e) => {
         e.stopPropagation();
-        e.preventDefault();
         document.querySelectorAll('.custom-month-select.open').forEach(el => {
             if (el !== wrapper) el.classList.remove('open');
         });
         wrapper.classList.toggle('open');
-    };
+    });
     
-    trigger.addEventListener('click', toggleHandler);
-    trigger.addEventListener('touchend', toggleHandler);
-    
-    // Улучшенный обработчик закрытия по клику вне селекта
-    const handleOutsideClick = function(e) {
-        if (!wrapper.contains(e.target)) {
-            wrapper.classList.remove('open');
-        }
-    };
-    
-    document.addEventListener('click', handleOutsideClick);
-    document.addEventListener('touchend', handleOutsideClick);
+    document.addEventListener('click', (e) => {
+        if (!wrapper.contains(e.target)) wrapper.classList.remove('open');
+    });
     
     wrapper.appendChild(trigger);
     wrapper.appendChild(dropdown);
@@ -2518,15 +1936,12 @@ function initCustomMonthSelect() {
     const filterChipDate = document.querySelector('.filter-chip-date');
     if (filterChipDate) {
         filterChipDate.appendChild(wrapper);
-        const icon = filterChipDate.querySelector('i.fa-chevron-down');
-        if (icon) icon.style.display = 'none';
     } else {
         originalSelect.parentNode.insertBefore(wrapper, originalSelect);
     }
     
     if (allChip) {
-        const resetHandler = (e) => {
-            if (e) e.preventDefault();
+        allChip.addEventListener('click', () => {
             originalSelect.selectedIndex = 0;
             originalSelect.classList.remove('active-filter');
             trigger.classList.remove('active');
@@ -2535,50 +1950,21 @@ function initCustomMonthSelect() {
                 opt.classList.toggle('selected', opt.dataset.value === originalSelect.value);
             });
             wrapper.classList.remove('open');
-        };
-        
-        allChip.addEventListener('click', resetHandler);
-        allChip.addEventListener('touchend', resetHandler);
+        });
     }
-    
-    const observer = new MutationObserver(() => {
-        trigger.innerHTML = `${getSelectedText()} <i class="fas fa-chevron-down arrow-icon"></i>`;
-        trigger.classList.toggle('active', originalSelect.selectedIndex !== 0);
-    });
-    
-    observer.observe(originalSelect, { attributes: true, attributeFilter: ['class', 'value'] });
 }
 
 function initPromoRunner() {
-    const runnerTrack = document.getElementById('promoRunnerTrack'), 
-          runnerSection = document.getElementById('promoRunner');
-    const modalOverlay = document.getElementById('promoModalOverlay'), 
-          closeModalBtn = document.getElementById('closePromoModal');
-    const copyBtn = document.getElementById('copyPromoBtn'), 
-          gotoAfishaBtn = document.getElementById('gotoAfishaBtn'), 
-          promoCodeText = document.getElementById('promoCode');
+    const runnerTrack = document.getElementById('promoRunnerTrack');
     
-    if (!runnerTrack || !runnerSection) return;
-    
-    // Анимация теперь запускается сразу через класс .running в HTML
-    // IntersectionObserver оставлен как fallback
-    const observer = new IntersectionObserver((entries) => { 
-        entries.forEach(entry => { 
-            if (entry.isIntersecting) { 
-                if (!runnerTrack.classList.contains('running')) {
-                    runnerTrack.classList.add('running');
-                }
-            } 
-        }); 
-    }, { threshold: 0.3 });
-    
-    observer.observe(runnerSection);
-    
-    runnerTrack.addEventListener('click', (e) => { 
-        e.stopPropagation(); 
+    runnerTrack?.addEventListener('click', (e) => { 
+        e.stopPropagation();
+        hideAllModals();
+        const modalOverlay = document.getElementById('promoModalOverlay');
         if (modalOverlay) { 
             modalOverlay.classList.add('active'); 
             document.body.style.overflow = 'hidden'; 
+            const copyBtn = document.getElementById('copyPromoBtn');
             if (copyBtn) { 
                 copyBtn.innerHTML = '<i class="far fa-copy"></i> Скопировать'; 
                 copyBtn.classList.remove('copied'); 
@@ -2586,13 +1972,11 @@ function initPromoRunner() {
         } 
     });
     
-    if (closeModalBtn && modalOverlay) {
-        closeModalBtn.addEventListener('click', () => { 
-            modalOverlay.classList.remove('active'); 
-            document.body.style.overflow = ''; 
-        });
-        closeModalBtn.addEventListener('touchend', (e) => { 
-            e.preventDefault(); 
+    const closeBtn = document.getElementById('closePromoModal');
+    const modalOverlay = document.getElementById('promoModalOverlay');
+    
+    if (closeBtn && modalOverlay) {
+        closeBtn.addEventListener('click', () => { 
             modalOverlay.classList.remove('active'); 
             document.body.style.overflow = ''; 
         });
@@ -2604,6 +1988,9 @@ function initPromoRunner() {
         });
     }
     
+    const copyBtn = document.getElementById('copyPromoBtn');
+    const promoCodeText = document.getElementById('promoCode');
+    
     if (copyBtn && promoCodeText) {
         copyBtn.addEventListener('click', async () => { 
             const code = promoCodeText.textContent.trim(); 
@@ -2612,13 +1999,13 @@ function initPromoRunner() {
                 copyBtn.innerHTML = '<i class="fas fa-check"></i> Скопировано!'; 
                 copyBtn.classList.add('copied'); 
             } catch { 
-                const ti = document.createElement('textarea'); 
-                ti.value = code; 
-                ti.style.cssText = 'position:fixed;opacity:0;left:-9999px'; 
-                document.body.appendChild(ti); 
-                ti.select(); 
+                const ta = document.createElement('textarea'); 
+                ta.value = code; 
+                ta.style.cssText = 'position:fixed;opacity:0;left:-9999px'; 
+                document.body.appendChild(ta); 
+                ta.select(); 
                 document.execCommand('copy'); 
-                document.body.removeChild(ti); 
+                document.body.removeChild(ta); 
                 copyBtn.innerHTML = '<i class="fas fa-check"></i> Скопировано!'; 
                 copyBtn.classList.add('copied'); 
             } 
@@ -2629,20 +2016,11 @@ function initPromoRunner() {
         });
     }
     
-    if (gotoAfishaBtn) { 
-        gotoAfishaBtn.addEventListener('click', (e) => { 
-            e.preventDefault(); 
-            modalOverlay?.classList.remove('active'); 
-            document.body.style.overflow = ''; 
-            document.querySelector('.filters-section-afisha')?.scrollIntoView({ behavior: 'smooth' }); 
-        }); 
-    }
-    
-    document.addEventListener('keydown', (e) => { 
-        if (e.key === 'Escape' && modalOverlay?.classList.contains('active')) { 
-            modalOverlay.classList.remove('active'); 
-            document.body.style.overflow = ''; 
-        } 
+    document.getElementById('gotoAfishaBtn')?.addEventListener('click', (e) => { 
+        e.preventDefault(); 
+        modalOverlay?.classList.remove('active'); 
+        document.body.style.overflow = ''; 
+        document.querySelector('.filters-section-afisha')?.scrollIntoView({ behavior: 'smooth' }); 
     });
 }
 
@@ -2681,53 +2059,7 @@ function initShowMoreTourBtn() {
     };
     
     btn.addEventListener('click', toggle);
-    btn.addEventListener('touchend', (e) => { 
-        e.preventDefault(); 
-        toggle(); 
-    });
-    
     window.addEventListener('resize', () => renderTourList(showAll));
-}
-
-function initHeader() {
-    const dotsIcon = document.getElementById('dotsIcon'), 
-          closeIcon = document.getElementById('closeIcon'), 
-          extraRow = document.getElementById('extraMenuRow');
-    
-    if (dotsIcon && closeIcon && extraRow) {
-        dotsIcon.addEventListener('click', () => { 
-            extraRow.classList.add('open'); 
-            dotsIcon.style.display = 'none'; 
-            closeIcon.style.display = 'inline-flex'; 
-        });
-        closeIcon.addEventListener('click', () => { 
-            extraRow.classList.remove('open'); 
-            dotsIcon.style.display = 'inline-flex'; 
-            closeIcon.style.display = 'none'; 
-        });
-    }
-    
-    const burgerIcon = document.getElementById('burgerIcon'), 
-          mobileNav = document.getElementById('mobileNav'), 
-          overlay = document.getElementById('overlay'), 
-          closeMobileBtn = document.getElementById('closeMobileMenu');
-    
-    if (burgerIcon && mobileNav && overlay) {
-        const open = () => { 
-            mobileNav.classList.add('open'); 
-            overlay.classList.add('active'); 
-            document.body.style.overflow = 'hidden'; 
-        };
-        const close = () => { 
-            mobileNav.classList.remove('open'); 
-            overlay.classList.remove('active'); 
-            document.body.style.overflow = ''; 
-        };
-        
-        burgerIcon.addEventListener('click', open); 
-        closeMobileBtn?.addEventListener('click', close); 
-        overlay.addEventListener('click', close);
-    }
 }
 
 function refreshOnReturn() {
@@ -2746,17 +2078,10 @@ function refreshOnReturn() {
 }
 
 (function init() {
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initAll);
-    } else {
-        initAll();
-    }
-    
-    function initAll() {
+    document.addEventListener('DOMContentLoaded', () => {
         populateMonthSelect(); 
         initFilters(); 
         initTourModal(); 
-        initHeader(); 
         initTagModals(); 
         initPromoRunner(); 
         initMobileBalloon();
@@ -2766,94 +2091,8 @@ function refreshOnReturn() {
         setTimeout(initYandexMap, 100); 
         setTimeout(initShowMoreTourBtn, 150); 
         setTimeout(refreshOnReturn, 200);
-    }
+    });
 })();
-
-
-// ===== УЛУЧШЕННОЕ УПРАВЛЕНИЕ МОДАЛЬНЫМИ ОКНАМИ =====
-function lockBodyScroll() {
-    const scrollY = window.scrollY;
-    document.body.style.position = 'fixed';
-    document.body.style.top = `-${scrollY}px`;
-    document.body.style.width = '100%';
-    document.body.style.overflow = 'hidden';
-    document.body.classList.add('modal-open');
-    document.body.dataset.scrollY = scrollY;
-}
-
-function unlockBodyScroll() {
-    const scrollY = document.body.dataset.scrollY;
-    document.body.style.position = '';
-    document.body.style.top = '';
-    document.body.style.width = '';
-    document.body.style.overflow = '';
-    document.body.classList.remove('modal-open');
-    if (scrollY) {
-        window.scrollTo(0, parseInt(scrollY) || 0);
-    }
-    delete document.body.dataset.scrollY;
-}
-
-// Перехватываем открытие всех модалок
-['promoModalOverlay', 'soonModalOverlay', 'soldModalOverlay', 'tourModalOverlay'].forEach(id => {
-    const overlay = document.getElementById(id);
-    if (overlay) {
-        const originalClassListAdd = overlay.classList.add;
-        overlay.classList.add = function(className) {
-            if (className === 'active') {
-                lockBodyScroll();
-            }
-            return originalClassListAdd.call(this, className);
-        };
-    }
-});
-
-// Перехватываем закрытие всех модалок
-function setupModalCloseHandlers() {
-    const closeButtons = document.querySelectorAll(`
-        .promo-modal-close, 
-        .tag-modal-close, 
-        .ButtonModalClose,
-        .success-modal-close
-    `);
-    
-    closeButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
-            unlockBodyScroll();
-        });
-    });
-    
-    // Закрытие по клику на оверлей
-    ['promoModalOverlay', 'soonModalOverlay', 'soldModalOverlay', 'tourModalOverlay'].forEach(id => {
-        const overlay = document.getElementById(id);
-        if (overlay) {
-            overlay.addEventListener('click', (e) => {
-                if (e.target === overlay) {
-                    unlockBodyScroll();
-                }
-            });
-        }
-    });
-    
-    // Закрытие по Escape
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-            const activeModal = document.querySelector('.tag-modal-overlay.active, .modal-overlay.active, .promo-modal-overlay.active');
-            if (activeModal) {
-                activeModal.classList.remove('active');
-                unlockBodyScroll();
-            }
-        }
-    });
-}
-
-// Запускаем после DOMContentLoaded
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', setupModalCloseHandlers);
-} else {
-    setupModalCloseHandlers();
-}
-
 </script>
 </body>
 </html>
