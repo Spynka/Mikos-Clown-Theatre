@@ -1003,49 +1003,33 @@
             opacity: 1 !important;
             transform: translateY(0) !important;
         }
-        /* ===== ИЛЛЮСТРАЦИЯ ПЕРСОНАЖА НА ФОРМЕ ЗАЯВКИ ===== */
-.clients-form.illustrated {
-    position: relative;
-    overflow: visible;
-}
-.clients-form-illustration {
-    position: absolute;
-    width: auto;
-    height: 280px;
-    z-index: 2;
-    pointer-events: none;
-    top: -27%;
-    right: 85%;
-    transform: translateX(0);
-    /* filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15)); */
-    transition: transform 0.3s ease;
-}
-.clients-form.illustrated:hover .clients-form-illustration {
-    transform: translateY(-4px);
-}
 
-/* Адаптив для иллюстрации */
-@media (max-width: 1024px) {
-    .clients-form-illustration {
-        height: 190px;
-        right: -10%;
-        top: -40%;
-    }
-}
-@media (max-width: 768px) {
-    .clients-form-illustration {
-        height: 160px;
-        right: -5%;
-        top: -35%;
-    }
-}
-@media (max-width: 480px) {
-    .clients-form-illustration {
-        height: 120px;
-        right: 0;
-        top: -30%;
-    }
-}
+        /* ===== СТИЛИ ДЛЯ ИЛЛЮСТРАЦИИ НА КНОПКЕ ОТПРАВКИ ЗАЯВКИ ===== */
+        .submit-client-btn {
+            position: relative;
+            overflow: visible;
+        }
+        
+        .submit-client-btn .btn-illustration {
+            width: 28px;
+            height: 28px;
+            margin-right: 10px;
+            vertical-align: middle;
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+        }
+        
+        .submit-client-btn:hover .btn-illustration {
+            transform: scale(1.15) rotate(-5deg);
+        }
+        
+        @media (max-width: 480px) {
+            .submit-client-btn .btn-illustration {
+                width: 24px;
+                height: 24px;
+                margin-right: 8px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1130,37 +1114,35 @@
     </a>
 </div>
                 </div>
-<div class="clients-form illustrated">
-    <!-- Иллюстрация персонажа -->
-    <img src="SVG/Гамаюнов-сидит.svg" alt="Персонаж Гамаюнов" class="clients-form-illustration" loading="lazy">
-    
-    <h3>Отправить заявку</h3>
-    <form id="clientFormMain" novalidate>
-        <div class="form-group">
-            <label>Имя <span class="required">*</span></label>
-            <input type="text" id="clientName" class="form-input" placeholder="Ваше имя" required minlength="2" maxlength="50">
-            <span class="error-message" id="clientNameError">Введите корректное имя (мин. 2 символа)</span>
-        </div>
-        <div class="form-group">
-            <label>Компания <span class="required">*</span></label>
-            <input type="text" id="clientCompany" class="form-input" placeholder="Название компании" required minlength="2" maxlength="100">
-            <span class="error-message" id="clientCompanyError">Укажите название компании</span>
-        </div>
-        <div class="form-group">
-            <label>Email <span class="required">*</span></label>
-            <input type="email" id="clientEmail" class="form-input" placeholder="email@example.com" required>
-            <span class="error-message" id="clientEmailError">Введите корректный email</span>
-        </div>
-        <div class="form-group">
-            <label>Сообщение <span class="required">*</span></label>
-            <textarea id="clientMessage" class="form-textarea form-input" placeholder="Опишите вашу задачу" required minlength="10" maxlength="1000"></textarea>
-            <span class="error-message" id="clientMessageError">Сообщение должно содержать минимум 10 символов</span>
-        </div>
-        <button type="submit" class="submit-client-btn modal-confirm-btn" style="width:100%;margin-top:8px;">
-             Отправить заявку
-        </button>
-    </form>
-</div>
+                <div class="clients-form">
+                    <h3>Отправить заявку</h3>
+                    <form id="clientFormMain" novalidate>
+                        <div class="form-group">
+                            <label>Имя <span class="required">*</span></label>
+                            <input type="text" id="clientName" class="form-input" placeholder="Ваше имя" required minlength="2" maxlength="50">
+                            <span class="error-message" id="clientNameError">Введите корректное имя (мин. 2 символа)</span>
+                        </div>
+                        <div class="form-group">
+                            <label>Компания <span class="required">*</span></label>
+                            <input type="text" id="clientCompany" class="form-input" placeholder="Название компании" required minlength="2" maxlength="100">
+                            <span class="error-message" id="clientCompanyError">Укажите название компании</span>
+                        </div>
+                        <div class="form-group">
+                            <label>Email <span class="required">*</span></label>
+                            <input type="email" id="clientEmail" class="form-input" placeholder="email@example.com" required>
+                            <span class="error-message" id="clientEmailError">Введите корректный email</span>
+                        </div>
+                        <div class="form-group">
+                            <label>Сообщение <span class="required">*</span></label>
+                            <textarea id="clientMessage" class="form-textarea form-input" placeholder="Опишите вашу задачу" required minlength="10" maxlength="1000"></textarea>
+                            <span class="error-message" id="clientMessageError">Сообщение должно содержать минимум 10 символов</span>
+                        </div>
+                        <button type="submit" class="submit-client-btn modal-confirm-btn" style="width:100%;margin-top:8px;">
+                            <img src="SVG/Гамаюнов-сидит.svg" alt="" class="btn-illustration">
+                            Отправить заявку
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

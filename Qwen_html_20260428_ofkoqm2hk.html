@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>Театр клоунады «Микос» | Афиша</title>
     
-    <!-- Предзагрузка критических шрифтов -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&display=swap">
@@ -18,7 +17,6 @@
     <link rel="icon" type="image/svg+xml" href="SVG/logo-2.svg" sizes="any">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     
-    <!-- Отложенная загрузка API Яндекс.Карт -->
     <script>
         function loadYandexMaps() {
             const script = document.createElement('script');
@@ -40,14 +38,24 @@
     </script>
     
     <style>
-        * { box-sizing: border-box; }
+        /* ===== БАЗОВЫЕ НАСТРОЙКИ ===== */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Nunito Sans', sans-serif;
+            overflow-x: hidden;
+            width: 100%;
+            max-width: 100%;
+        }
         
         .shop-container {
             max-width: 100%;
             margin: 0 auto;
             background: #fff;
             position: relative;
-            overflow-x: hidden;
+            overflow-x: clip;
             width: 100%;
         }
         
@@ -56,32 +64,38 @@
             max-width: 100%;
             padding: 0 clamp(16px, 5vw, 80px);
             box-sizing: border-box;
-            overflow-x: hidden;
+            overflow-x: clip;
         }
         
-        /* Карточки спектаклей */
+        /* ===== СЕТКА СОБЫТИЙ ===== */
         .events-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
             gap: 24px;
-            margin-bottom: 32px;
+            margin: 40px 0;
             width: 100%;
-            will-change: transform;
-            contain: layout style paint;
         }
         
         .performance-card-afisha {
+            flex: 0 0 428px;
+            width: 428px;
+            min-width: 428px;
+            max-width: 428px;
+            height: auto;
+            aspect-ratio: 428 / 568;
             background: #fff;
-            border-radius: 16px;
+            border-radius: 12px;
             outline: 1px solid #E5E3E1;
+            outline-offset: -1px;
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            height: 100%;
             transition: box-shadow 0.2s ease, transform 0.2s ease;
-            will-change: transform;
-            contain: layout style paint;
+            box-sizing: border-box;
+            margin: 0;
         }
+        
         .performance-card-afisha:hover {
             box-shadow: 0 8px 24px rgba(42,61,94,0.1);
             transform: translateY(-2px);
@@ -89,9 +103,12 @@
         
         .performance-img-afisha {
             width: 100%;
-            height: 200px;
+            height: auto;
+            aspect-ratio: 428 / 200;
+            flex-shrink: 0;
             object-fit: cover;
-            loading: lazy;
+            background: #F5F5F5;
+            display: block;
         }
         
         .performance-content-afisha {
@@ -99,78 +116,93 @@
             display: flex;
             flex-direction: column;
             flex: 1;
-            gap: 6px;
+            gap: 12px;
         }
         
         .performance-tags-afisha {
             display: flex;
             flex-wrap: wrap;
-            gap: 6px;
-            margin-bottom: 2px;
+            gap: 8px;
+            margin-bottom: 12px;
+            align-items: center;
         }
         
         .tag-afisha {
-            padding: 3px 10px;
-            border-radius: 6px;
-            font-size: 11px;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 12px;
             font-weight: 600;
             font-family: 'Unbounded', sans-serif;
+            white-space: nowrap;
+            line-height: 1.6;
         }
-        .tag-age { background: #DCE4F0; color: #2A3D5E; }
-        .tag-time { background: #F8F7F6; color: #1A1718; }
+        .tag-age { background: #E8EEF7; border: 1px solid #DCE4F0; color: #3A5078; }
+        .tag-time { background: #F8F7F6; border: 1px solid #DCE4F0; color: #2A2627; }
         .tag-premiere { background: #E8454D; color: #fff; }
+        .tag-tickets { background: #FDEBED; border: 1px solid #F66A70; color: #D62830; }
         
         .performance-name-afisha {
             font-family: 'Unbounded', sans-serif;
-            font-size: 20px;
-            font-weight: 700;
+            font-size: 24px;
+            font-weight: 600;
             color: #1A1718;
-            margin: 0;
-            line-height: 1.2;
+            margin: 8px 0 0 0;
+            line-height: 1.3;
+            /* 1 строка с многоточием */
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         
         .performance-date-afisha {
-            color: #5A5556;
-            font-size: 14px;
-            font-family: 'Nunito Sans', sans-serif;
+            color: #000;
+            font-size: 20px;
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 600;
+            margin: 0;
+            line-height: 1.4;
         }
         
         .performance-desc-afisha {
             color: #3D393A;
-            font-size: 14px;
-            line-height: 1.45;
+            font-size: 16px;
+            line-height: 1.5;
             margin: 0;
             font-family: 'Nunito Sans', sans-serif;
+            flex: 1;
         }
         
         .event-venue-afisha {
             display: flex;
             align-items: center;
-            gap: 5px;
-            color: #4A6294;
-            font-size: 13px;
+            gap: 6px;
+            color: #404040;
+            font-size: 14px;
             font-family: 'Nunito Sans', sans-serif;
+            margin-top: 4px;
         }
-        .event-venue-afisha i { font-size: 11px; }
+        .event-venue-afisha i { font-size: 12px; }
         
         .performance-btns-afisha {
             display: flex;
+            flex-direction: column;
             gap: 10px;
             margin-top: auto;
-            padding-top: 10px;
+            padding-top: 8px;
         }
         
         .btn-details-afisha,
         .btn-buy-afisha {
             flex: 1;
-            padding: 10px 14px;
-            border-radius: 8px;
+            width: 100%;
+            padding: 8px 18px;
+            border-radius: 6px;
             font-family: 'Unbounded', sans-serif;
             font-weight: 600;
-            font-size: 13px;
+            font-size: 14px;
             cursor: pointer;
             border: none;
-            transition: all 0.2s;
+            transition: background 0.2s;
             text-align: center;
             -webkit-tap-highlight-color: transparent;
         }
@@ -179,133 +211,221 @@
             background: #F8F7F6;
             color: #1A1718;
         }
-        .btn-details-afisha:active { background: #E5E3E1; }
+        .btn-details-afisha:active { background: #E9E7E5; }
         
         .btn-buy-afisha {
             background: #E8454D;
             color: #fff;
         }
-        .btn-buy-afisha:active { background: #C0392B; }
+        .btn-buy-afisha:active { background: #D62830; }
 
-        /* Фильтры */
+        /* ===== ФИЛЬТРЫ ===== */
         .filters-section-afisha {
             margin-bottom: 28px;
             width: 100%;
-            contain: layout style;
-            position: relative; /* для позиционирования дропдауна */
-            z-index: 1500; /* Увеличим z-index секции */
+            padding: 32px 0 24px;
         }
+        
         .filter-chips-afisha {
             display: flex;
-            gap: 10px;
+            gap: 12px;
             flex-wrap: wrap;
             align-items: center;
         }
+        
         .filter-chip-afisha {
-            padding: 10px 18px;
-            border-radius: 8px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 24px;
+            border-radius: 40px;
             font-family: 'Unbounded', sans-serif;
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.2s;
-            border: 1px solid #E5E3E1;
-            background: #fff;
-            color: #1A1718;
-            -webkit-tap-highlight-color: transparent;
+            transition: none;
+            border: none;
+            background: #F8F7F6;
+            color: #404040;
+            white-space: nowrap;
+            outline: none;
         }
+        
+        .filter-chip-afisha:hover,
+        .filter-chip-afisha:focus,
+        .filter-chip-afisha:active {
+            background: #F8F7F6;
+            color: #404040;
+            outline: none;
+            box-shadow: none;
+        }
+        
         .filter-chip-afisha.active {
             background: #2A3D5E;
             color: #fff;
-            border-color: #2A3D5E;
         }
         
-        /* Нативный селект (скрыт) */
-        .month-select {
-            display: none;
+        .filter-chip-afisha.active:hover,
+        .filter-chip-afisha.active:focus,
+        .filter-chip-afisha.active:active {
+            background: #2A3D5E;
+            color: #fff;
         }
+        
+        .month-select { display: none; }
 
-        /* Кастомный селект */
+        /* ===== КАСТОМНЫЙ ВЫПАДАЮЩИЙ СПИСОК — ИСПРАВЛЕННЫЙ ===== */
         .filter-chip-date {
             position: relative;
-            z-index: 1001; /* выше чем у карточек */
-        }
-        .custom-month-select {
-            position: relative;
-            min-width: 150px;
+            padding: 0;
+            background: transparent;
             display: inline-block;
         }
+        
+        .custom-month-select {
+            position: relative;
+            display: inline-block;
+            width: auto;
+            z-index: 100;
+        }
+        
         .custom-month-trigger {
-            padding: 10px 32px 10px 14px;
-            border-radius: 8px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px 24px;
+            border-radius: 40px;
             font-family: 'Unbounded', sans-serif;
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 600;
             cursor: pointer;
-            border: 1px solid #E5E3E1;
-            background: #fff;
-            color: #1A1718;
-            -webkit-tap-highlight-color: transparent;
-            user-select: none;
-            position: relative;
+            border: none;
+            background: #F8F7F6;
+            color: #404040;
             white-space: nowrap;
+            transition: none;
+            outline: none;
+            box-shadow: none;
+            -webkit-tap-highlight-color: transparent;
         }
+        
+        .custom-month-trigger .arrow-icon {
+            margin-left: 4px;
+            color: #4A6294;
+            font-size: 12px;
+            transition: transform 0.2s;
+        }
+        
+        .custom-month-trigger:hover,
+        .custom-month-trigger:focus,
+        .custom-month-trigger:active {
+            outline: none;
+            box-shadow: none;
+            border: none;
+            background: #F8F7F6;
+            color: #404040;
+        }
+        
         .custom-month-trigger.active {
             background: #2A3D5E;
             color: #fff;
-            border-color: #2A3D5E;
         }
-        .custom-month-trigger .arrow-icon {
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 10px;
-            color: #4A6294;
-            transition: transform 0.2s;
-        }
+        
         .custom-month-trigger.active .arrow-icon {
             color: #fff;
         }
+        
+        .custom-month-select.open .custom-month-trigger {
+            background: #2A3D5E;
+            color: #fff;
+        }
+        
+        .custom-month-select.open .custom-month-trigger .arrow-icon {
+            color: #fff;
+            transform: rotate(180deg);
+        }
+        
+        /* ВАЖНО: Выпадающий список — fixed позиционирование */
         .custom-month-dropdown {
-            position: absolute;
-            top: calc(100% + 4px);
-            left: 0;
-            min-width: 100%;
+            position: fixed !important;
+            top: 50% !important;
+            left: 50% !important;
+            transform: translate(-50%, -50%) !important;
             background: #fff;
             border: 1px solid #E5E3E1;
-            border-radius: 8px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-            z-index: 2000; /* Увеличен z-index для перекрытия модалок */
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3) !important;
+            z-index: 999999 !important;
             display: none;
-            max-height: 220px;
+            max-height: 280px;
             overflow-y: auto;
+            min-width: 200px;
+            width: calc(100vw - 32px);
+            max-width: 320px;
+            margin: 0 !important;
         }
+        
         .custom-month-select.open .custom-month-dropdown {
             display: block;
         }
+        
+        /* Затемнение фона при открытом дропдауне на мобильных */
+        .custom-month-select.open::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 999998;
+        }
+        
         .custom-month-option {
-            padding: 10px 14px;
+            padding: 14px 20px;
             cursor: pointer;
-            font-family: 'Unbounded', sans-serif;
-            font-size: 12px;
-            font-weight: 500;
+            font-family: 'Nunito Sans', sans-serif;
+            font-size: 16px;
+            font-weight: 400;
             color: #1A1718;
             transition: background 0.15s;
-            -webkit-tap-highlight-color: transparent;
-            white-space: nowrap;
+            border-bottom: 1px solid #F5F5F5;
+            min-height: 48px;
+            display: flex;
+            align-items: center;
         }
+        
+        .custom-month-option:last-child {
+            border-bottom: none;
+        }
+        
         .custom-month-option:hover,
         .custom-month-option:active {
             background: #F8F7F6;
         }
+        
         .custom-month-option.selected {
-            background: #DCE4F0;
+            background: #E8EEF7;
             color: #2A3D5E;
             font-weight: 600;
         }
+        
+        .custom-month-dropdown::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .custom-month-dropdown::-webkit-scrollbar-track {
+            background: #F5F5F5;
+            border-radius: 3px;
+        }
+        
+        .custom-month-dropdown::-webkit-scrollbar-thumb {
+            background: #4A6294;
+            border-radius: 3px;
+        }
 
-        /* Карта гастролей */
+        /* ===== КАРТА ГАСТРОЛЕЙ ===== */
         .tour-map-section {
             background: #fff;
             border-radius: 28px;
@@ -315,7 +435,6 @@
             position: relative;
             width: 100%;
             box-sizing: border-box;
-            contain: layout style;
         }
         
         .tour-header {
@@ -489,7 +608,7 @@
         .tour-status.soon { background: #fff; color: #1A1A1A; outline: 2px solid #2A3D5E; }
         .tour-status.soon:active { background: #DCE4F0; }
         
-        /* Мобильная всплывашка с информацией */
+        /* Мобильная всплывашка */
         .mobile-balloon {
             display: none;
             position: fixed;
@@ -500,7 +619,7 @@
             border-radius: 16px;
             padding: 16px;
             box-shadow: 0 8px 32px rgba(0,0,0,0.2);
-            z-index: 10000; /* Высокий z-index */
+            z-index: 10000;
             transform: translateY(100px);
             opacity: 0;
             transition: transform 0.3s ease, opacity 0.3s ease;
@@ -569,8 +688,6 @@
         }
         .mobile-balloon-btn:active { background: #C0392B; }
         
-        /* Кнопки "Показать еще" */
-        .show-more-wrapper,
         .load-more-wrapper {
             display: flex;
             justify-content: center;
@@ -578,7 +695,6 @@
             width: 100%;
         }
         
-        .show-more-btn,
         .load-more-btn {
             padding: 12px 36px;
             background: #F8F7F6;
@@ -593,92 +709,45 @@
             -webkit-tap-highlight-color: transparent;
             white-space: nowrap;
         }
-        .show-more-btn:active,
         .load-more-btn:active { background: #DCE4F0; }
         
-        /* Балуны */
-        .balloon-content {
-            font-family: 'Nunito Sans', sans-serif !important;
-            font-size: 14px;
-            color: #2A2627;
-            line-height: 1.5;
-        }
-        .balloon-content * {
-            font-family: 'Nunito Sans', sans-serif !important;
-        }
-        .balloon-content b {
-            font-family: 'Unbounded', sans-serif !important;
-            color: #1A1718;
-            font-size: 16px;
-            display: block;
-            margin-bottom: 6px;
-        }
-        .balloon-content .balloon-date {
-            color: #5A5556;
-            font-size: 14px;
-            display: block;
-            margin: 2px 0;
-        }
-        .balloon-content .balloon-venue {
-            color: #3D393A;
-            font-size: 13px;
-            display: block;
-            margin: 2px 0;
-        }
-        .balloon-content .balloon-address {
-            color: #5A5556;
-            font-size: 13px;
-            display: block;
-            margin: 2px 0;
-        }
-        .balloon-content .balloon-price {
-            font-family: 'Unbounded', sans-serif !important;
-            color: #E8454D;
-            font-size: 14px;
-            font-weight: 600;
-            margin: 4px 0;
-        }
-        .balloon-content .balloon-buy-btn {
-            display: inline-block;
-            margin-top: 8px;
-            padding: 7px 14px;
-            background: #E8454D;
-            color: #FFFFFF !important;
-            border-radius: 6px;
-            font-family: 'Unbounded', sans-serif !important;
-            font-size: 11px;
-            font-weight: 600;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 2px 4px rgba(232,69,77,0.2);
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        /* Модальные окна */
+        /* ===== МОДАЛЬНЫЕ ОКНА — ИСПРАВЛЕННЫЕ ===== */
         .tag-modal-overlay,
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+        .modal-overlay,
+        .promo-modal-overlay {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100vw !important;
+            height: 100vh !important;
+            height: 100dvh !important;
             background: rgba(0,0,0,0.6);
             backdrop-filter: blur(4px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 10000; /* Высокий z-index */
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            z-index: 99999 !important;
             opacity: 0;
             visibility: hidden;
             transition: opacity 0.3s ease, visibility 0.3s ease;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            padding: 20px;
+            margin: 0 !important;
+            /* Убираем влияние родителей */
+            transform: none !important;
+            contain: none !important;
         }
+        
         .tag-modal-overlay.active,
-        .modal-overlay.active {
+        .modal-overlay.active,
+        .promo-modal-overlay.active {
             opacity: 1;
             visibility: visible;
         }
         
-        .tag-modal {
+        .tag-modal,
+        .promo-modal {
             background: #fff;
             border-radius: 20px;
             padding: 28px 24px;
@@ -687,13 +756,30 @@
             text-align: center;
             box-shadow: 0 20px 40px rgba(0,0,0,0.15);
             position: relative;
-            transform: translateY(20px);
-            transition: transform 0.3s ease;
-            margin: 0 12px;
+            margin: auto !important;
+            transform: translateY(0);
+            max-height: 90vh;
+            max-height: 90dvh;
+            overflow-y: auto;
         }
-        .tag-modal-overlay.active .tag-modal { transform: translateY(0); }
         
-        .tag-modal-close {
+        .DivModalContent {
+            width: 1098px;
+            max-width: 95vw;
+            max-height: 85vh;
+            max-height: 85dvh;
+            background: #DCE4F0;
+            border-radius: 18px;
+            padding: clamp(14px, 3vw, 28px) clamp(14px, 3vw, 36px);
+            position: relative;
+            overflow-y: auto;
+            box-shadow: 0 20px 40px rgba(0,0,0,.1);
+            margin: auto !important;
+        }
+        
+        .tag-modal-close,
+        .ButtonModalClose,
+        .promo-modal-close {
             position: absolute;
             top: 12px;
             right: 16px;
@@ -704,12 +790,17 @@
             color: #888;
             -webkit-tap-highlight-color: transparent;
             padding: 4px;
+            z-index: 10;
         }
-        .tag-modal-close:active { color: #E8454D; }
+        .tag-modal-close:active,
+        .ButtonModalClose:active,
+        .promo-modal-close:active { color: #E8454D; }
         
-        .tag-modal-icon { font-size: 36px; margin-bottom: 10px; }
+        .tag-modal-icon,
+        .promo-modal-icon { font-size: 36px; margin-bottom: 10px; }
         
-        .tag-modal-title {
+        .tag-modal-title,
+        .promo-modal-title {
             font-family: 'Unbounded', sans-serif;
             font-size: 18px;
             font-weight: 700;
@@ -718,7 +809,8 @@
             word-wrap: break-word;
         }
         
-        .tag-modal-text {
+        .tag-modal-text,
+        .promo-modal-subtitle {
             font-family: 'Nunito Sans', sans-serif;
             color: #5A5556;
             margin-bottom: 18px;
@@ -770,79 +862,54 @@
             font-size: 13px;
         }
         
-        /* Модалка промокода */
-        .promo-modal {
-            background: #fff;
-            border-radius: 18px;
-            padding: 24px 18px;
-            max-width: 420px;
-            width: 92%;
-            text-align: center;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-            position: relative;
-            transform: translateY(20px);
-            transition: transform 0.3s ease;
-            margin: 0 10px;
-        }
-        
-        /* Модалка "Все гастроли" */
-        .DivModalContent {
-            width: 1098px;
-            max-width: 95vw;
-            max-height: 85vh;
-            background: #DCE4F0;
-            border-radius: 18px;
-            padding: clamp(14px, 3vw, 28px) clamp(14px, 3vw, 36px);
-            position: relative;
-            overflow-y: auto;
-            box-shadow: 0 20px 40px rgba(0,0,0,.1);
-            transform: translateY(20px);
-            transition: transform 0.3s ease;
-        }
-        .modal-overlay.active .DivModalContent { transform: translateY(0); }
-        
-        .ButtonModalClose {
-            position: absolute;
-            top: 12px;
-            right: 16px;
-            font-size: 26px;
-            cursor: pointer;
-            background: none;
-            border: none;
-            color: #1A1718;
-            -webkit-tap-highlight-color: transparent;
-            z-index: 10;
-            width: 34px;
-            height: 34px;
+        .promo-code-box {
+            background: #F8F7F6;
+            border: 2px dashed #4A6294;
+            border-radius: 10px;
+            padding: 10px;
+            margin-bottom: 14px;
             display: flex;
             align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            transition: background 0.2s, color 0.2s;
+            justify-content: space-between;
+            gap: 8px;
         }
-        .ButtonModalClose:active { background: rgba(0,0,0,0.1); color: #E8454D; }
-        
-        .DivModalHeader {
-            border-bottom: 1px solid #2A3D5E;
-            padding-bottom: 14px;
-            margin-bottom: 18px;
-            padding-right: 36px;
-        }
-        .DivModalHeader .H2 {
-            border-left: 3px solid #E8454D;
-            padding-left: 12px;
+        .promo-code-text {
             font-family: 'Unbounded', sans-serif;
-            font-size: clamp(18px, 2.5vw, 26px);
+            font-size: 16px;
             font-weight: 700;
-            color: #000;
-            margin-bottom: 5px;
+            color: #E8454D;
+            letter-spacing: 1px;
         }
-        .DivModalHeader .P {
-            color: #2A3D5E;
-            font-size: clamp(12px, 1.4vw, 14px);
-            padding-left: 15px;
-            font-family: 'Nunito Sans', sans-serif;
+        .promo-copy-btn {
+            background: #4A6294;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 7px 14px;
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 600;
+            font-size: 11px;
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
         }
+        .promo-copy-btn:active { background: #2A3D5E; }
+        .promo-copy-btn.copied { background: #2E7D32; }
+        .promo-goto-btn {
+            display: inline-block;
+            background: #E8454D;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 22px;
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            text-decoration: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .promo-goto-btn:active { background: #C0392B; color: #fff; }
+        
         .DivModalTourList {
             display: flex;
             flex-direction: column;
@@ -925,20 +992,21 @@
             display: flex;
             align-items: center;
             user-select: none;
-            contain: layout style paint;
         }
         .promo-runner-track {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            left: 100%;
             width: 800px;
             height: 650px;
             cursor: pointer;
             z-index: 10;
             will-change: left;
         }
-        .promo-runner-track.running { animation: runAcross 4s linear infinite; }
+        .promo-runner-track.running { 
+            animation: runAcross 4s linear infinite; 
+            left: 100%;
+        }
         @keyframes runAcross {
             0% { left: 100%; }
             100% { left: -850px; }
@@ -967,97 +1035,60 @@
             pointer-events: none;
             box-shadow: 0 2px 6px rgba(0,0,0,0.04);
         }
-        .promo-modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.6);
-            backdrop-filter: blur(4px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 20000; /* Самый высокий z-index */
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
+        
+        .balloon-content {
+            font-family: 'Nunito Sans', sans-serif !important;
+            font-size: 14px;
+            color: #2A2627;
+            line-height: 1.5;
         }
-        .promo-modal-overlay.active { opacity: 1; visibility: visible; }
-        .promo-modal-overlay.active .promo-modal { transform: translateY(0); }
-        .promo-modal-close {
-            position: absolute;
-            top: 10px;
-            right: 14px;
-            background: none;
-            border: none;
-            font-size: 22px;
-            cursor: pointer;
-            color: #888;
-            -webkit-tap-highlight-color: transparent;
-            padding: 4px;
-        }
-        .promo-modal-icon { font-size: 36px; margin-bottom: 10px; }
-        .promo-modal-title {
-            font-family: 'Unbounded', sans-serif;
-            font-size: 18px;
-            font-weight: 700;
+        .balloon-content b {
+            font-family: 'Unbounded', sans-serif !important;
             color: #1A1718;
-            margin-bottom: 5px;
-        }
-        .promo-modal-subtitle {
-            font-family: 'Nunito Sans', sans-serif;
-            color: #5A5556;
-            margin-bottom: 16px;
-            font-size: 13px;
-        }
-        .promo-code-box {
-            background: #F8F7F6;
-            border: 2px dashed #4A6294;
-            border-radius: 10px;
-            padding: 10px;
-            margin-bottom: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 8px;
-        }
-        .promo-code-text {
-            font-family: 'Unbounded', sans-serif;
             font-size: 16px;
-            font-weight: 700;
-            color: #E8454D;
-            letter-spacing: 1px;
+            display: block;
+            margin-bottom: 6px;
         }
-        .promo-copy-btn {
-            background: #4A6294;
-            color: #fff;
-            border: none;
-            border-radius: 6px;
-            padding: 7px 14px;
-            font-family: 'Unbounded', sans-serif;
-            font-weight: 600;
-            font-size: 11px;
-            cursor: pointer;
-            -webkit-tap-highlight-color: transparent;
+        .balloon-content .balloon-date {
+            color: #5A5556;
+            font-size: 14px;
+            display: block;
+            margin: 2px 0;
         }
-        .promo-copy-btn:active { background: #2A3D5E; }
-        .promo-copy-btn.copied { background: #2E7D32; }
-        .promo-goto-btn {
-            display: inline-block;
-            background: #E8454D;
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            padding: 10px 22px;
-            font-family: 'Unbounded', sans-serif;
-            font-weight: 600;
+        .balloon-content .balloon-venue {
+            color: #3D393A;
             font-size: 13px;
+            display: block;
+            margin: 2px 0;
+        }
+        .balloon-content .balloon-address {
+            color: #5A5556;
+            font-size: 13px;
+            display: block;
+            margin: 2px 0;
+        }
+        .balloon-content .balloon-price {
+            font-family: 'Unbounded', sans-serif !important;
+            color: #E8454D;
+            font-size: 14px;
+            font-weight: 600;
+            margin: 4px 0;
+        }
+        .balloon-content .balloon-buy-btn {
+            display: inline-block;
+            margin-top: 8px;
+            padding: 7px 14px;
+            background: #E8454D;
+            color: #FFFFFF !important;
+            border-radius: 6px;
+            font-family: 'Unbounded', sans-serif !important;
+            font-size: 11px;
+            font-weight: 600;
+            border: none;
             cursor: pointer;
-            text-decoration: none;
+            box-shadow: 0 2px 4px rgba(232,69,77,0.2);
             -webkit-tap-highlight-color: transparent;
         }
-        .promo-goto-btn:active { background: #C0392B; color: #fff; }
         
         .no-events {
             text-align: center;
@@ -1068,142 +1099,28 @@
             grid-column: 1 / -1;
         }
         
-        /* Адаптивность */
-        @media (max-width: 1100px) {
-            .tour-map-container { grid-template-columns: 1fr; }
-            #yandexMap { height: 380px; }
-            .tour-list { max-height: 280px; }
+        .show-more-wrapper {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0 0;
+            width: 100%;
         }
-        
-        @media (max-width: 860px) {
-            .afisha-page { padding: 0 10px; }
-            .events-grid { grid-template-columns: 1fr; gap: 12px; }
-            .performance-card-afisha { border-radius: 10px; }
-            .performance-content-afisha { padding: 10px; gap: 4px; }
-            .performance-tags-afisha { gap: 4px; margin-bottom: 1px; }
-            .tag-afisha { font-size: 10px; padding: 2px 8px; }
-            .performance-name-afisha { font-size: 15px; }
-            .performance-date-afisha { font-size: 12px; }
-            .performance-desc-afisha { font-size: 12px; }
-            .event-venue-afisha { font-size: 11px; gap: 4px; }
-            .performance-btns-afisha { padding-top: 8px; gap: 6px; }
-            .btn-details-afisha, .btn-buy-afisha { padding: 9px 10px; font-size: 11px; }
-            
-            .tour-map-section {
-                padding: 14px 10px;
-                margin: 20px 0;
-                border-radius: 12px;
-                width: 100%;
-                box-sizing: border-box;
-                outline: none !important;
-                border: none !important;
-                box-shadow: none !important;
-            }
-            .tour-header { flex-direction: column; align-items: flex-start; gap: 8px; margin-bottom: 18px; }
-            .tour-title { font-size: 19px; text-align: left; width: 100%; }
-            
-            #yandexMap {
-                height: 260px;
-                width: 100%;
-                border-radius: 10px;
-                touch-action: manipulation;
-                outline: none !important;
-                border: none !important;
-                box-shadow: 0 2px 12px rgba(42,61,94,0.08) !important;
-            }
-            
-            /* Скрываем стандартные балуны Яндекс.Карт на мобильных */
-            .ymaps-2-1-79-balloon,
-            .ymaps-2-1-79-balloon__content,
-            .ymaps-2-1-79-balloon__layout {
-                display: none !important;
-                visibility: hidden !important;
-                opacity: 0 !important;
-                pointer-events: none !important;
-            }
-            
-            .tour-list { max-height: none; overflow-y: visible; padding-right: 0; gap: 7px; }
-            .tour-item { padding: 12px 14px; width: 100%; box-sizing: border-box; }
-            .tour-item.mobile-hidden { display: none; }
-            .tour-item.active { outline: 2px solid #E8454D; background: #FFF5F5; }
-            
-            .tour-city { font-size: 14px; margin-bottom: 1px; }
-            .tour-dates { font-size: 13px; margin-bottom: 2px; }
-            .tour-venue { font-size: 12px; gap: 4px; }
-            
-            .tour-status { margin-top: 6px; padding: 8px 14px; font-size: 12px; min-width: 100px; }
-            .show-more-btn, .load-more-btn { width: 100%; max-width: 260px; padding: 11px 18px; font-size: 13px; }
-            
-            .reset-map-btn { font-size: 11px; padding: 7px 14px; top: 8px; }
-            
-            .DivModalTourItem { flex-direction: column; align-items: flex-start; gap: 6px; padding: 10px; }
-            .SpanModalTourCity { width: 100%; font-size: 14px; }
-            .SpanTourStatus { align-self: flex-start; }
-            
-            .promo-caption { font-size: 12px; padding: 5px 12px; bottom: 8px; }
-            
-            .custom-month-select { min-width: 140px; }
-            .custom-month-trigger { font-size: 12px; padding: 10px 30px 10px 12px; }
+        .show-more-btn {
+            padding: 12px 36px;
+            background: #F8F7F6;
+            border-radius: 8px;
+            border: none;
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            color: #1A1718;
+            cursor: pointer;
+            transition: background 0.2s;
+            -webkit-tap-highlight-color: transparent;
+            white-space: nowrap;
         }
+        .show-more-btn:active { background: #DCE4F0; }
         
-        @media (max-width: 480px) {
-            .afisha-page { padding: 0 6px; }
-            .performance-content-afisha { padding: 8px; gap: 3px; }
-            .performance-tags-afisha { gap: 3px; }
-            .tag-afisha { font-size: 9px; padding: 2px 7px; }
-            .performance-name-afisha { font-size: 14px; }
-            .performance-date-afisha { font-size: 11px; }
-            .performance-desc-afisha { font-size: 11px; }
-            .event-venue-afisha { font-size: 10px; }
-            .btn-details-afisha, .btn-buy-afisha { padding: 8px 8px; font-size: 10px; border-radius: 6px; }
-            
-            .tour-map-section { padding: 10px 6px; margin: 14px 0; border-radius: 8px; width: 100%; box-sizing: border-box; outline: none !important; border: none !important; }
-            .tour-title { font-size: 17px; width: 100%; }
-            #yandexMap { height: 220px; width: 100%; border-radius: 6px; outline: none; border: none; }
-            .tour-item { padding: 10px 12px; }
-            .tour-city { font-size: 13px; }
-            .tour-dates, .tour-venue { font-size: 12px; }
-            .tour-status { padding: 8px 12px; font-size: 11px; min-width: 85px; }
-            .show-more-btn, .load-more-btn { max-width: 100%; padding: 10px 14px; font-size: 12px; }
-            
-            .promo-caption { font-size: 11px; padding: 4px 8px; bottom: 6px; }
-            .promo-modal { padding: 18px 10px; border-radius: 12px; margin: 0 6px; }
-            .promo-code-box { flex-direction: column; gap: 6px; }
-            .promo-code-text { font-size: 15px; }
-            .promo-goto-btn { width: 100%; text-align: center; font-size: 12px; padding: 10px; }
-            
-            .DivModalContent { padding: 10px 6px; border-radius: 10px; }
-            .ButtonModalClose { top: 6px; right: 8px; font-size: 20px; width: 28px; height: 28px; }
-            .DivModalHeader { padding-bottom: 8px; margin-bottom: 12px; padding-right: 28px; }
-            .DivModalHeader .H2 { font-size: 16px; }
-            .DivModalHeader .P { font-size: 11px; }
-            .DivModalTourItem { padding: 8px; border-radius: 10px; gap: 4px; }
-            .SpanModalTourCity { font-size: 13px; }
-            .DivModalTourDates .Strong { font-size: 12px; }
-            .SpanModalTourVenue { font-size: 10px; }
-            .SpanTourStatus { padding: 4px 10px; font-size: 10px; min-width: 65px; }
-            .DivModalFooter { font-size: 10px; }
-            
-            .tag-modal { padding: 16px 10px; border-radius: 12px; margin: 0 6px; }
-            .tag-modal-title { font-size: 16px; }
-            .tag-modal-text { font-size: 12px; }
-            .tag-modal-input-group { flex-direction: column; gap: 6px; }
-            .tag-modal-submit-btn { width: 100%; padding: 10px; font-size: 11px; }
-            
-            .custom-month-select { min-width: 130px; }
-            .custom-month-trigger { font-size: 11px; padding: 9px 28px 9px 10px; }
-        }
-        
-        @media (max-width: 370px) {
-            .promo-modal { padding: 14px 8px; margin: 0 4px; }
-            .promo-modal-title { font-size: 16px; }
-            .promo-modal-subtitle { font-size: 11px; }
-            .promo-code-text { font-size: 14px; }
-            .promo-copy-btn { font-size: 10px; padding: 6px 10px; }
-            .promo-goto-btn { font-size: 11px; padding: 9px 14px; }
-        }
-        
-        /* Скелетон-лоадер для карты */
         .map-skeleton {
             position: absolute;
             top: 0;
@@ -1221,232 +1138,211 @@
             100% { background-position: 200% 0; }
         }
         
+        /* ===== АДАПТИВ ===== */
+        @media (max-width: 1100px) {
+            .tour-map-container { grid-template-columns: 1fr; }
+            #yandexMap { height: 380px; }
+            .tour-list { max-height: 280px; }
+        }
+        
         @media (max-width: 860px) {
-            .map-skeleton {
+            .afisha-page { padding: 0 16px; }
+            
+            .events-grid { 
+                justify-content: center; 
+                gap: 20px; 
+            }
+            
+            .performance-card-afisha {
+                flex: 0 0 calc(100vw - 32px) !important;
+                width: calc(100vw - 32px) !important;
+                min-width: calc(100vw - 32px) !important;
+                max-width: calc(100vw - 32px) !important;
+                aspect-ratio: auto !important;
+                height: auto !important;
+                margin: 0 auto;
+            }
+            
+            .performance-img-afisha {
+                aspect-ratio: 16 / 9 !important;
+            }
+            
+            .performance-content-afisha { padding: 16px; gap: 10px; }
+            .tag-afisha { font-size: 11px; padding: 3px 10px; }
+            .performance-name-afisha { font-size: 20px; }
+            .performance-date-afisha { font-size: 16px; }
+            .performance-desc-afisha { font-size: 14px; line-height: 1.4; }
+            .event-venue-afisha { font-size: 13px; }
+            .btn-details-afisha, .btn-buy-afisha { 
+                padding: 12px 16px; 
+                font-size: 14px; 
+                min-height: 44px; 
+            }
+            
+            .tour-map-section {
+                padding: 24px 16px;
+                margin: 40px 0;
+                border-radius: 12px;
+            }
+            .tour-header { flex-direction: column; align-items: flex-start; gap: 8px; margin-bottom: 18px; }
+            .tour-title { font-size: 28px; width: 100%; }
+            
+            #yandexMap {
+                height: 260px;
+                width: 100%;
                 border-radius: 10px;
             }
+            
+            .ymaps-2-1-79-balloon,
+            .ymaps-2-1-79-balloon__content,
+            .ymaps-2-1-79-balloon__layout {
+                display: none !important;
+                visibility: hidden !important;
+                opacity: 0 !important;
+                pointer-events: none !important;
+            }
+            
+            .tour-list { max-height: none; overflow-y: visible; padding-right: 0; gap: 7px; }
+            .tour-item { padding: 12px 14px; }
+            .tour-item.mobile-hidden { display: none; }
+            
+            .tour-city { font-size: 14px; }
+            .tour-dates { font-size: 13px; }
+            .tour-venue { font-size: 12px; }
+            
+            .tour-status { margin-top: 6px; padding: 8px 14px; font-size: 12px; min-width: 100px; }
+            .show-more-btn, .load-more-btn { width: 100%; max-width: 260px; padding: 11px 18px; font-size: 13px; }
+            
+            .reset-map-btn { font-size: 11px; padding: 7px 14px; top: 8px; }
+            
+            .DivModalTourItem { flex-direction: column; align-items: flex-start; gap: 6px; padding: 10px; }
+            .SpanModalTourCity { width: 100%; font-size: 14px; }
+            .SpanTourStatus { align-self: flex-start; }
+            
+            .promo-caption { font-size: 12px; padding: 5px 12px; bottom: 8px; }
+            
+            .filter-chips-afisha {
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                scrollbar-width: none;
+                -webkit-overflow-scrolling: touch;
+                padding-bottom: 4px;
+                gap: 8px;
+            }
+            .filter-chips-afisha::-webkit-scrollbar { display: none; }
+            .filter-chip-afisha, .filter-chip-date { flex-shrink: 0; }
+            .filter-chip-afisha, .custom-month-trigger {
+                padding: 10px 18px;
+                font-size: 14px;
+                min-height: 44px;
+            }
+            .custom-month-trigger { min-width: 150px; }
+            
+            /* Дропдаун на мобильных — центрированный */
+            .custom-month-dropdown {
+                position: fixed !important;
+                top: 50% !important;
+                left: 50% !important;
+                transform: translate(-50%, -50%) !important;
+                width: calc(100vw - 32px) !important;
+                max-width: 320px !important;
+                z-index: 999999 !important;
+                margin: 0 !important;
+                box-shadow: 0 8px 30px rgba(0,0,0,0.3) !important;
+            }
+            .custom-month-select.open::before {
+                content: '';
+                position: fixed;
+                top: 0; left: 0; right: 0; bottom: 0;
+                background: rgba(0,0,0,0.5);
+                z-index: 999998;
+            }
+            .custom-month-option {
+                padding: 14px 20px;
+                font-size: 16px;
+                min-height: 48px;
+                display: flex;
+                align-items: center;
+            }
+            .custom-month-trigger .arrow-icon { font-size: 14px; margin-left: 8px; }
         }
         
         @media (max-width: 480px) {
-            .map-skeleton {
-                border-radius: 6px;
+            .afisha-page { padding: 0 12px; }
+            
+            .performance-card-afisha {
+                flex: 0 0 calc(100vw - 24px) !important;
+                width: calc(100vw - 24px) !important;
+                min-width: calc(100vw - 24px) !important;
+                max-width: calc(100vw - 24px) !important;
             }
+            
+            .performance-content-afisha { padding: 14px; gap: 8px; }
+            .tag-afisha { font-size: 10px; padding: 2px 8px; }
+            .performance-name-afisha { font-size: 18px; }
+            .performance-date-afisha { font-size: 16px; }
+            .performance-desc-afisha { font-size: 13px; }
+            .event-venue-afisha { font-size: 12px; }
+            .btn-details-afisha, .btn-buy-afisha { 
+                padding: 10px 14px; 
+                font-size: 13px; 
+                min-height: 40px; 
+            }
+            
+            .tour-map-section { padding: 20px 12px; margin: 32px 0; border-radius: 8px; }
+            .tour-title { font-size: 24px; }
+            #yandexMap { height: 220px; border-radius: 6px; }
+            .tour-item { padding: 10px 12px; }
+            .tour-city { font-size: 13px; }
+            .tour-dates, .tour-venue { font-size: 12px; }
+            .tour-status { padding: 8px 12px; font-size: 11px; min-width: 85px; }
+            .show-more-btn, .load-more-btn { max-width: 100%; padding: 10px 14px; font-size: 12px; }
+            
+            .promo-caption { font-size: 11px; padding: 4px 8px; bottom: 6px; }
+            .promo-modal { padding: 18px 10px; border-radius: 12px; }
+            .promo-code-box { flex-direction: column; gap: 6px; }
+            .promo-code-text { font-size: 15px; }
+            .promo-goto-btn { width: 100%; text-align: center; font-size: 12px; padding: 10px; }
+            
+            .DivModalContent { padding: 10px 6px; border-radius: 10px; }
+            .ButtonModalClose { top: 6px; right: 8px; font-size: 20px; width: 28px; height: 28px; }
+            .DivModalHeader { padding-bottom: 8px; margin-bottom: 12px; padding-right: 28px; }
+            .DivModalHeader .H2 { font-size: 16px; }
+            .DivModalHeader .P { font-size: 11px; }
+            .DivModalTourItem { padding: 8px; border-radius: 10px; gap: 4px; }
+            .SpanModalTourCity { font-size: 13px; }
+            .DivModalTourDates .Strong { font-size: 12px; }
+            .SpanModalTourVenue { font-size: 10px; }
+            .SpanTourStatus { padding: 4px 10px; font-size: 10px; min-width: 65px; }
+            .DivModalFooter { font-size: 10px; }
+            
+            .tag-modal { padding: 16px 10px; border-radius: 12px; }
+            .tag-modal-title { font-size: 16px; }
+            .tag-modal-text { font-size: 12px; }
+            .tag-modal-input-group { flex-direction: column; gap: 6px; }
+            .tag-modal-submit-btn { width: 100%; padding: 10px; font-size: 11px; }
+            
+            .filter-chip-afisha, .custom-month-trigger {
+                padding: 10px 16px;
+                font-size: 13px;
+            }
+            .custom-month-trigger { min-width: 140px; }
+            .custom-month-option { padding: 14px 16px; font-size: 15px; }
         }
-        .tag-modal {
-    background: #fff;
-    border-radius: 20px;
-    padding: 28px 24px;
-    text-align: center;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-    margin: 0 12px;
-}
-
-.promo-modal {
-    background: #fff;
-    border-radius: 18px;
-    padding: 24px 18px;
-    text-align: center;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-    margin: 0 10px;
-}
-
-.DivModalContent {
-    background: #DCE4F0;
-    border-radius: 18px;
-    padding: clamp(14px, 3vw, 28px) clamp(14px, 3vw, 36px);
-    box-shadow: 0 20px 40px rgba(0,0,0,.1);
-}
-/* Исправленные стили для модальных окон в афише */
-/* Замените соответствующие блоки в вашем CSS */
-
-/* Базовые оверлеи */
-.tag-modal-overlay,
-.modal-overlay,
-.promo-modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.6);
-    backdrop-filter: blur(4px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 100000; /* Увеличен для гарантированного перекрытия */
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    padding: 20px; /* Добавлен отступ для мобильных */
-    box-sizing: border-box;
-}
-
-/* Активное состояние */
-.tag-modal-overlay.active,
-.modal-overlay.active,
-.promo-modal-overlay.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-/* Контент модалок для десктопа */
-.tag-modal {
-    background: #fff;
-    border-radius: 20px;
-    padding: 28px 24px;
-    max-width: 460px;
-    width: 92%;
-    text-align: center;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-    position: relative;
-    transform: scale(0.9); /* Как в "Заказчикам" */
-    transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1); /* Плавная анимация */
-    margin: auto;
-}
-
-.promo-modal {
-    background: #fff;
-    border-radius: 18px;
-    padding: 24px 18px;
-    max-width: 420px;
-    width: 92%;
-    text-align: center;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-    position: relative;
-    transform: scale(0.9);
-    transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
-    margin: auto;
-}
-
-.DivModalContent {
-    width: 1098px;
-    max-width: 95vw;
-    max-height: 85vh;
-    background: #DCE4F0;
-    border-radius: 18px;
-    padding: clamp(14px, 3vw, 28px) clamp(14px, 3vw, 36px);
-    position: relative;
-    overflow-y: auto;
-    box-shadow: 0 20px 40px rgba(0,0,0,.1);
-    transform: scale(0.9);
-    transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
-    margin: auto;
-}
-
-/* Анимация появления */
-.tag-modal-overlay.active .tag-modal,
-.modal-overlay.active .DivModalContent,
-.promo-modal-overlay.active .promo-modal {
-    transform: scale(1); /* Вместо translateY(0) */
-}
-
-/* Мобильная адаптация */
-@media (max-width: 860px) {
-    .tag-modal-overlay,
-    .modal-overlay,
-    .promo-modal-overlay {
-        align-items: flex-start; /* Верхнее выравнивание на мобильных */
-        padding: 20px 10px;
-    }
-    
-    .tag-modal {
-        width: 100%;
-        max-width: 460px;
-        margin: 0 auto;
-        max-height: 90vh;
-        overflow-y: auto;
-        border-radius: 16px;
-        padding: 24px 20px;
-    }
-    
-    .promo-modal {
-        width: 100%;
-        max-width: 420px;
-        margin: 0 auto;
-        max-height: 90vh;
-        overflow-y: auto;
-        border-radius: 14px;
-        padding: 20px 16px;
-    }
-    
-    .DivModalContent {
-        width: 100%;
-        max-width: none;
-        max-height: 90vh;
-        border-radius: 14px;
-        padding: 14px 10px;
-    }
-}
-
-@media (max-width: 480px) {
-    .tag-modal-overlay,
-    .modal-overlay,
-    .promo-modal-overlay {
-        padding: 10px 5px;
-    }
-    
-    .tag-modal {
-        padding: 16px 12px;
-        border-radius: 12px;
-    }
-    
-    .promo-modal {
-        padding: 18px 10px;
-        border-radius: 12px;
-    }
-    
-    .DivModalContent {
-        padding: 10px 6px;
-        border-radius: 10px;
-    }
-}
-
-/* Исправление для мобильной всплывашки */
-.mobile-balloon {
-    display: none;
-    position: fixed;
-    bottom: 20px;
-    left: 10px;
-    right: 10px;
-    background: white;
-    border-radius: 16px;
-    padding: 16px;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
-    z-index: 100001; /* Выше оверлеев */
-    transform: translateY(100px);
-    opacity: 0;
-    transition: transform 0.3s ease, opacity 0.3s ease;
-    pointer-events: auto;
-    max-height: 70vh;
-    overflow-y: auto;
-}
-
-/* Исправление z-index для фильтров */
-.filters-section-afisha {
-    position: relative;
-    z-index: 1000; /* Уменьшен, чтобы не перекрывать модалки */
-}
-
-/* Исправление z-index для карты */
-#yandexMap {
-    z-index: 1; /* Базовый z-index для карты */
-}
-
-.reset-map-btn {
-    z-index: 10; /* Уменьшен */
-}
-
-/* Убираем конфликты с кастомными селектами */
-.custom-month-select {
-    z-index: 1001;
-}
-
-.custom-month-dropdown {
-    z-index: 2000; /* Уменьшен относительно модалок */
-}
-
+        
+        /* Скрываем загрузчики */
+        .loader-container, .loader, .page-loader {
+            display: none !important;
+        }
+        
+        /* Z-index для мобильного меню */
+        @media (max-width: 860px) {
+            .mobile-nav { z-index: 100000 !important; }
+            .overlay { z-index: 99999 !important; }
+            .burger-icon { z-index: 100001 !important; }
+            .custom-month-select { z-index: 99999 !important; }
+            .custom-month-dropdown { z-index: 999999 !important; }
+        }
     </style>
 </head>
 <body>
@@ -1456,7 +1352,7 @@
     <div id="site-hero-slider"></div>
 
     <div class="promo-runner-section" id="promoRunner">
-        <div class="promo-runner-track running" id="promoRunnerTrack"> <!-- Класс running добавлен сразу -->
+        <div class="promo-runner-track running" id="promoRunnerTrack">
             <img src="SVG/Промокод.svg" alt="Поймай Ксюшу — получи промокод!">
         </div>
         <span class="promo-caption">Поймайте Ксюшу — получите промокод!</span>
@@ -1483,7 +1379,7 @@
     <div class="afisha-page">
         <div class="filters-section-afisha">
             <div class="filter-chips-afisha" id="filterChipsAfisha">
-                <div class="filter-chip-afisha active" data-filter="all">Все события</div>
+                <button class="filter-chip-afisha active" data-filter="all">Все события</button>
                 <div class="filter-chip-date">
                     <select id="monthSelect" class="month-select"></select>
                 </div>
@@ -1518,7 +1414,6 @@
         </div>
     </div>
 
-    <!-- Мобильная всплывашка с информацией -->
     <div class="mobile-balloon" id="mobileBalloon">
         <button class="mobile-balloon-close" id="closeMobileBalloon">×</button>
         <div class="mobile-balloon-title" id="mobileBalloonTitle"></div>
@@ -1584,8 +1479,7 @@
     <div id="site-footer"></div>
 </div>
 
-  <script src="js/loader-animation.js"></script>
-  <script src="js/components-loader.js"></script>
+<script src="js/components-loader.js"></script>
 <script src="js/header-scripts.js"></script>
 <script src="js/common.js"></script>
 <script src="js/slider-scripts.js"></script>
@@ -1597,14 +1491,73 @@ let originalBounds = null;
 let isMapZoomed = false;
 let visibleCount = 6;
 let currentFilter = 'all';
+let currentMobileBalloonEventId = null;
+let isPageInitialized = false; // Флаг защиты от повторной инициализации
 
 const grid = document.getElementById('eventsGrid');
 const showMoreBtn = document.getElementById('showMoreEventsBtn');
 const monthSelect = document.getElementById('monthSelect');
 const allChip = document.querySelector('[data-filter="all"]');
 
-// Мобильная всплывашка
-let currentMobileBalloonEventId = null;
+// ===== УНИВЕРСАЛЬНЫЙ ОБРАБОТЧИК КЛИКОВ ВНЕ ЭЛЕМЕНТОВ =====
+function setupCloseOnClickOutside(elements, callback) {
+    const handler = function(e) {
+        // Игнорируем клики внутри элементов
+        if (elements.some(el => el && (el.contains(e.target) || el === e.target))) {
+            return;
+        }
+        // Игнорируем клики по кнопкам внутри (чтобы не ломать функционал)
+        if (e.target.closest('button, a, input, select, textarea')) {
+            return;
+        }
+        callback(e);
+    };
+    
+    // Добавляем оба типа событий
+    document.addEventListener('click', handler, { capture: true });
+    document.addEventListener('touchend', handler, { capture: true, passive: true });
+    
+    return () => {
+        document.removeEventListener('click', handler, { capture: true });
+        document.removeEventListener('touchend', handler, { capture: true });
+    };
+}
+
+// ===== ИНИЦИАЛИЗАЦИЯ ВСЕХ ОБРАБОТЧИКОВ ЗАКРЫТИЯ =====
+function initAllCloseHandlers() {
+    // Закрытие модалок
+    const modalOverlays = [
+        document.getElementById('tourModalOverlay'),
+        document.getElementById('soonModalOverlay'),
+        document.getElementById('soldModalOverlay'),
+        document.getElementById('promoModalOverlay')
+    ].filter(Boolean);
+    
+    modalOverlays.forEach(overlay => {
+        const closeModal = () => {
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        };
+        
+        setupCloseOnClickOutside([overlay, overlay.querySelector('.DivModalContent, .tag-modal, .promo-modal')], closeModal);
+    });
+    
+    // Закрытие дропдауна месяца
+    const monthSelectWrapper = document.querySelector('.custom-month-select');
+    if (monthSelectWrapper) {
+        setupCloseOnClickOutside([monthSelectWrapper], () => {
+            monthSelectWrapper.classList.remove('open');
+        });
+    }
+    
+    // Закрытие мобильного балуна
+    const mobileBalloon = document.getElementById('mobileBalloon');
+    if (mobileBalloon) {
+        setupCloseOnClickOutside([mobileBalloon, document.getElementById('yandexMap')], () => {
+            mobileBalloon.classList.remove('visible');
+        });
+    }
+}
 
 window.goToCheckout = function(eventId) {
     const event = TOUR_SCHEDULE.find(ev => ev.id === eventId);
@@ -1692,14 +1645,12 @@ function renderEvents() {
 
 function updateFilterVisuals() {
     if (allChip) allChip.classList.toggle('active', currentFilter === 'all');
-    if (monthSelect) {
-        monthSelect.classList.toggle('active-filter', currentFilter !== 'all');
-        if (currentFilter !== 'all') monthSelect.value = currentFilter;
-        else monthSelect.selectedIndex = 0;
+    const customTrigger = document.querySelector('.custom-month-trigger');
+    if (customTrigger) {
+        customTrigger.classList.toggle('active', currentFilter !== 'all');
     }
 }
 
-// Функции для мобильной всплывашки
 function showMobileBalloon(markerData) {
     const balloon = document.getElementById('mobileBalloon');
     if (!balloon) return;
@@ -1765,7 +1716,6 @@ function initMobileBalloon() {
         hideMobileBalloon();
     });
     
-    // Закрытие по клику вне всплывашки
     document.addEventListener('click', function(e) {
         const balloon = document.getElementById('mobileBalloon');
         if (!balloon || !balloon.classList.contains('visible')) return;
@@ -1782,7 +1732,6 @@ function initYandexMap() {
         if (typeof ymaps === 'undefined') return;
         
         ymaps.ready(function() {
-            // Скрываем скелетон
             const skeleton = document.getElementById('mapSkeleton');
             if (skeleton) skeleton.style.display = 'none';
             
@@ -1826,7 +1775,6 @@ function initYandexMap() {
                     hideIconOnBalloonOpen: false 
                 });
                 
-                // Единый обработчик клика для всех устройств
                 placemark.events.add('click', function(e) {
                     e.preventDefault();
                     
@@ -1837,14 +1785,11 @@ function initYandexMap() {
                         if (rb) rb.classList.add('visible');
                     }
                     
-                    // Выделяем плашку
                     highlightTourItem(index);
                     
-                    // На мобильных показываем кастомную всплывашку
                     if (isMobile) {
                         showMobileBalloon(marker);
                     } else {
-                        // На десктопе открываем стандартный балун
                         setTimeout(() => {
                             if (placemark.balloon) {
                                 placemark.balloon.open();
@@ -1863,7 +1808,6 @@ function initYandexMap() {
             initResetMapButton();
             renderTourList();
             
-            // Глобальный обработчик для кнопок в балунах
             document.addEventListener('click', function(e) {
                 const btn = e.target.closest('.balloon-buy-btn');
                 if (btn && btn.dataset.eventId) {
@@ -2234,6 +2178,46 @@ function initCustomMonthSelect() {
     const dropdown = document.createElement('div');
     dropdown.className = 'custom-month-dropdown';
     
+    function positionDropdown() {
+        const triggerRect = trigger.getBoundingClientRect();
+        const dropdownRect = dropdown.getBoundingClientRect();
+        const viewportHeight = window.innerHeight;
+        const viewportWidth = window.innerWidth;
+        
+        const margin = 12;
+        const spaceBelow = viewportHeight - triggerRect.bottom - margin;
+        const spaceAbove = triggerRect.top - margin;
+        
+        dropdown.style.position = 'fixed';
+        dropdown.style.zIndex = '999999';
+        
+        let leftPos = triggerRect.left;
+        const dropdownWidth = Math.max(triggerRect.width, 200);
+        
+        if (leftPos + dropdownWidth > viewportWidth - margin) {
+            leftPos = viewportWidth - dropdownWidth - margin;
+        }
+        leftPos = Math.max(margin, leftPos);
+        
+        dropdown.style.left = leftPos + 'px';
+        dropdown.style.width = dropdownWidth + 'px';
+        
+        if (spaceBelow >= dropdownRect.height || spaceBelow >= spaceAbove) {
+            dropdown.style.top = (triggerRect.bottom + 4) + 'px';
+            dropdown.style.bottom = 'auto';
+        } else {
+            dropdown.style.top = 'auto';
+            dropdown.style.bottom = (viewportHeight - triggerRect.top + 4) + 'px';
+        }
+        
+        const maxHeight = Math.max(spaceBelow, spaceAbove);
+        if (maxHeight < 280) {
+            dropdown.style.maxHeight = maxHeight + 'px';
+        } else {
+            dropdown.style.maxHeight = '280px';
+        }
+    }
+    
     function renderOptions() {
         dropdown.innerHTML = '';
         Array.from(originalSelect.options).forEach(option => {
@@ -2282,6 +2266,11 @@ function initCustomMonthSelect() {
     const toggleHandler = (e) => {
         e.stopPropagation();
         e.preventDefault();
+        
+        if (!wrapper.classList.contains('open')) {
+            positionDropdown();
+        }
+        
         document.querySelectorAll('.custom-month-select.open').forEach(el => {
             if (el !== wrapper) el.classList.remove('open');
         });
@@ -2291,7 +2280,6 @@ function initCustomMonthSelect() {
     trigger.addEventListener('click', toggleHandler);
     trigger.addEventListener('touchend', toggleHandler);
     
-    // Улучшенный обработчик закрытия по клику вне селекта
     const handleOutsideClick = function(e) {
         if (!wrapper.contains(e.target)) {
             wrapper.classList.remove('open');
@@ -2300,6 +2288,18 @@ function initCustomMonthSelect() {
     
     document.addEventListener('click', handleOutsideClick);
     document.addEventListener('touchend', handleOutsideClick);
+    
+    window.addEventListener('scroll', () => {
+        if (wrapper.classList.contains('open')) {
+            positionDropdown();
+        }
+    });
+    
+    window.addEventListener('resize', () => {
+        if (wrapper.classList.contains('open')) {
+            positionDropdown();
+        }
+    });
     
     wrapper.appendChild(trigger);
     wrapper.appendChild(dropdown);
@@ -2313,21 +2313,43 @@ function initCustomMonthSelect() {
         originalSelect.parentNode.insertBefore(wrapper, originalSelect);
     }
     
+    // ===== ИСПРАВЛЕНИЕ: Кнопка "Все события" активируется сама =====
     if (allChip) {
         const resetHandler = (e) => {
-            if (e) e.preventDefault();
+            if (e) { e.preventDefault(); e.stopPropagation(); }
+            
+            currentFilter = 'all';
+            visibleCount = 6;
+            
             originalSelect.selectedIndex = 0;
+            originalSelect.value = 'all';
             originalSelect.classList.remove('active-filter');
+            
             trigger.classList.remove('active');
             trigger.innerHTML = `${originalSelect.options[0].text} <i class="fas fa-chevron-down arrow-icon"></i>`;
+            
             dropdown.querySelectorAll('.custom-month-option').forEach(opt => {
-                opt.classList.toggle('selected', opt.dataset.value === originalSelect.value);
+                opt.classList.toggle('selected', opt.dataset.value === 'all');
             });
+            
             wrapper.classList.remove('open');
+            
+            // ===== ВАЖНО: Обновляем визуальное состояние кнопки "Все события" =====
+            allChip.classList.add('active');
+            
+            document.querySelectorAll('.filter-chip-afisha[data-filter]').forEach(chip => {
+                if (chip !== allChip) chip.classList.remove('active');
+            });
+            
+            renderEvents();
+            renderTourList();
+            
+            originalSelect.dispatchEvent(new Event('change', { bubbles: true }));
         };
         
         allChip.addEventListener('click', resetHandler);
         allChip.addEventListener('touchend', resetHandler);
+        allChip.addEventListener('touchstart', (e) => e.preventDefault(), { passive: false });
     }
     
     const observer = new MutationObserver(() => {
@@ -2349,8 +2371,10 @@ function initPromoRunner() {
     
     if (!runnerTrack || !runnerSection) return;
     
-    // Анимация теперь запускается сразу через класс .running в HTML
-    // IntersectionObserver оставлен как fallback
+    if (!runnerTrack.classList.contains('running')) {
+        runnerTrack.classList.add('running');
+    }
+    
     const observer = new IntersectionObserver((entries) => { 
         entries.forEach(entry => { 
             if (entry.isIntersecting) { 
@@ -2436,18 +2460,12 @@ function initPromoRunner() {
 }
 
 function initFilters() {
-    allChip?.addEventListener('click', () => { 
-        currentFilter = 'all'; 
-        visibleCount = 6; 
-        renderEvents(); 
-        renderTourList(); 
-    });
-    
     monthSelect?.addEventListener('change', (e) => { 
         currentFilter = e.target.value; 
         visibleCount = 6; 
         renderEvents(); 
         renderTourList(); 
+        updateFilterVisuals();
     });
     
     showMoreBtn?.addEventListener('click', () => { 
@@ -2534,7 +2552,18 @@ function refreshOnReturn() {
     });
 }
 
+function hideLoaderImmediately() {
+    const loaders = document.querySelectorAll('.loader-container, .loader, .page-loader');
+    loaders.forEach(loader => {
+        loader.style.display = 'none';
+        loader.style.opacity = '0';
+        loader.style.visibility = 'hidden';
+    });
+}
+
 (function init() {
+    hideLoaderImmediately();
+    
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', initAll);
     } else {
@@ -2542,6 +2571,12 @@ function refreshOnReturn() {
     }
     
     function initAll() {
+        // ===== ЗАЩИТА ОТ ПОВТОРНОЙ ИНИЦИАЛИЗАЦИИ =====
+        if (isPageInitialized) return;
+        isPageInitialized = true;
+        
+        hideLoaderImmediately();
+        
         populateMonthSelect(); 
         initFilters(); 
         initTourModal(); 
@@ -2549,12 +2584,15 @@ function refreshOnReturn() {
         initTagModals(); 
         initPromoRunner(); 
         initMobileBalloon();
+        initAllCloseHandlers(); // ===== НОВЫЙ ОБРАБОТЧИК КЛИКОВ =====
         renderEvents();
         
         setTimeout(initCustomMonthSelect, 50); 
         setTimeout(initYandexMap, 100); 
         setTimeout(initShowMoreTourBtn, 150); 
         setTimeout(refreshOnReturn, 200);
+        
+        // ===== НЕ ВЫЗЫВАЕМ hideLoaderImmediately ПОВТОРНО =====
     }
 })();
 </script>

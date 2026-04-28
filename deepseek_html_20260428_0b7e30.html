@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>Театр клоунады «Микос» | Афиша</title>
     
-    <!-- Предзагрузка критических шрифтов -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&display=swap">
@@ -18,7 +17,6 @@
     <link rel="icon" type="image/svg+xml" href="SVG/logo-2.svg" sizes="any">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     
-    <!-- Отложенная загрузка API Яндекс.Карт -->
     <script>
         function loadYandexMaps() {
             const script = document.createElement('script');
@@ -42,6 +40,11 @@
     <style>
         * { box-sizing: border-box; }
         
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        
         .shop-container {
             max-width: 100%;
             margin: 0 auto;
@@ -59,15 +62,12 @@
             overflow-x: hidden;
         }
         
-        /* Карточки спектаклей */
         .events-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 24px;
             margin-bottom: 32px;
             width: 100%;
-            will-change: transform;
-            contain: layout style paint;
         }
         
         .performance-card-afisha {
@@ -79,8 +79,6 @@
             flex-direction: column;
             height: 100%;
             transition: box-shadow 0.2s ease, transform 0.2s ease;
-            will-change: transform;
-            contain: layout style paint;
         }
         .performance-card-afisha:hover {
             box-shadow: 0 8px 24px rgba(42,61,94,0.1);
@@ -91,7 +89,6 @@
             width: 100%;
             height: 200px;
             object-fit: cover;
-            loading: lazy;
         }
         
         .performance-content-afisha {
@@ -191,9 +188,6 @@
         .filters-section-afisha {
             margin-bottom: 28px;
             width: 100%;
-            contain: layout style;
-            position: relative; /* для позиционирования дропдауна */
-            z-index: 1500; /* Увеличим z-index секции */
         }
         .filter-chips-afisha {
             display: flex;
@@ -220,7 +214,6 @@
             border-color: #2A3D5E;
         }
         
-        /* Нативный селект (скрыт) */
         .month-select {
             display: none;
         }
@@ -228,7 +221,6 @@
         /* Кастомный селект */
         .filter-chip-date {
             position: relative;
-            z-index: 1001; /* выше чем у карточек */
         }
         .custom-month-select {
             position: relative;
@@ -267,19 +259,19 @@
         .custom-month-trigger.active .arrow-icon {
             color: #fff;
         }
+        
+        /* ВАЖНОЕ ИСПРАВЛЕНИЕ: Выпадающий список теперь fixed */
         .custom-month-dropdown {
-            position: absolute;
-            top: calc(100% + 4px);
-            left: 0;
-            min-width: 100%;
+            position: fixed;
             background: #fff;
             border: 1px solid #E5E3E1;
             border-radius: 8px;
             box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-            z-index: 2000; /* Увеличен z-index для перекрытия модалок */
+            z-index: 99999;
             display: none;
             max-height: 220px;
             overflow-y: auto;
+            min-width: 150px;
         }
         .custom-month-select.open .custom-month-dropdown {
             display: block;
@@ -315,7 +307,6 @@
             position: relative;
             width: 100%;
             box-sizing: border-box;
-            contain: layout style;
         }
         
         .tour-header {
@@ -489,7 +480,7 @@
         .tour-status.soon { background: #fff; color: #1A1A1A; outline: 2px solid #2A3D5E; }
         .tour-status.soon:active { background: #DCE4F0; }
         
-        /* Мобильная всплывашка с информацией */
+        /* Мобильная всплывашка */
         .mobile-balloon {
             display: none;
             position: fixed;
@@ -500,7 +491,7 @@
             border-radius: 16px;
             padding: 16px;
             box-shadow: 0 8px 32px rgba(0,0,0,0.2);
-            z-index: 10000; /* Высокий z-index */
+            z-index: 10000;
             transform: translateY(100px);
             opacity: 0;
             transition: transform 0.3s ease, opacity 0.3s ease;
@@ -569,8 +560,6 @@
         }
         .mobile-balloon-btn:active { background: #C0392B; }
         
-        /* Кнопки "Показать еще" */
-        .show-more-wrapper,
         .load-more-wrapper {
             display: flex;
             justify-content: center;
@@ -578,7 +567,6 @@
             width: 100%;
         }
         
-        .show-more-btn,
         .load-more-btn {
             padding: 12px 36px;
             background: #F8F7F6;
@@ -593,92 +581,41 @@
             -webkit-tap-highlight-color: transparent;
             white-space: nowrap;
         }
-        .show-more-btn:active,
         .load-more-btn:active { background: #DCE4F0; }
         
-        /* Балуны */
-        .balloon-content {
-            font-family: 'Nunito Sans', sans-serif !important;
-            font-size: 14px;
-            color: #2A2627;
-            line-height: 1.5;
-        }
-        .balloon-content * {
-            font-family: 'Nunito Sans', sans-serif !important;
-        }
-        .balloon-content b {
-            font-family: 'Unbounded', sans-serif !important;
-            color: #1A1718;
-            font-size: 16px;
-            display: block;
-            margin-bottom: 6px;
-        }
-        .balloon-content .balloon-date {
-            color: #5A5556;
-            font-size: 14px;
-            display: block;
-            margin: 2px 0;
-        }
-        .balloon-content .balloon-venue {
-            color: #3D393A;
-            font-size: 13px;
-            display: block;
-            margin: 2px 0;
-        }
-        .balloon-content .balloon-address {
-            color: #5A5556;
-            font-size: 13px;
-            display: block;
-            margin: 2px 0;
-        }
-        .balloon-content .balloon-price {
-            font-family: 'Unbounded', sans-serif !important;
-            color: #E8454D;
-            font-size: 14px;
-            font-weight: 600;
-            margin: 4px 0;
-        }
-        .balloon-content .balloon-buy-btn {
-            display: inline-block;
-            margin-top: 8px;
-            padding: 7px 14px;
-            background: #E8454D;
-            color: #FFFFFF !important;
-            border-radius: 6px;
-            font-family: 'Unbounded', sans-serif !important;
-            font-size: 11px;
-            font-weight: 600;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 2px 4px rgba(232,69,77,0.2);
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        /* Модальные окна */
+        /* ВАЖНЕЙШЕЕ ИСПРАВЛЕНИЕ: Все модальные оверлеи */
         .tag-modal-overlay,
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+        .modal-overlay,
+        .promo-modal-overlay {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100vw !important;
+            height: 100vh !important;
+            height: 100dvh !important; /* Для мобильных */
             background: rgba(0,0,0,0.6);
             backdrop-filter: blur(4px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 10000; /* Высокий z-index */
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            z-index: 99999;
             opacity: 0;
             visibility: hidden;
             transition: opacity 0.3s ease, visibility 0.3s ease;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            padding: 20px;
+            margin: 0 !important;
         }
         .tag-modal-overlay.active,
-        .modal-overlay.active {
+        .modal-overlay.active,
+        .promo-modal-overlay.active {
             opacity: 1;
             visibility: visible;
         }
         
-        .tag-modal {
+        .tag-modal,
+        .promo-modal {
             background: #fff;
             border-radius: 20px;
             padding: 28px 24px;
@@ -687,13 +624,27 @@
             text-align: center;
             box-shadow: 0 20px 40px rgba(0,0,0,0.15);
             position: relative;
-            transform: translateY(20px);
-            transition: transform 0.3s ease;
-            margin: 0 12px;
+            margin: auto !important;
+            transform: translateY(0);
         }
-        .tag-modal-overlay.active .tag-modal { transform: translateY(0); }
         
-        .tag-modal-close {
+        .DivModalContent {
+            width: 1098px;
+            max-width: 95vw;
+            max-height: 85vh;
+            max-height: 85dvh;
+            background: #DCE4F0;
+            border-radius: 18px;
+            padding: clamp(14px, 3vw, 28px) clamp(14px, 3vw, 36px);
+            position: relative;
+            overflow-y: auto;
+            box-shadow: 0 20px 40px rgba(0,0,0,.1);
+            margin: auto !important;
+        }
+        
+        .tag-modal-close,
+        .ButtonModalClose,
+        .promo-modal-close {
             position: absolute;
             top: 12px;
             right: 16px;
@@ -704,12 +655,17 @@
             color: #888;
             -webkit-tap-highlight-color: transparent;
             padding: 4px;
+            z-index: 10;
         }
-        .tag-modal-close:active { color: #E8454D; }
+        .tag-modal-close:active,
+        .ButtonModalClose:active,
+        .promo-modal-close:active { color: #E8454D; }
         
-        .tag-modal-icon { font-size: 36px; margin-bottom: 10px; }
+        .tag-modal-icon,
+        .promo-modal-icon { font-size: 36px; margin-bottom: 10px; }
         
-        .tag-modal-title {
+        .tag-modal-title,
+        .promo-modal-title {
             font-family: 'Unbounded', sans-serif;
             font-size: 18px;
             font-weight: 700;
@@ -718,7 +674,8 @@
             word-wrap: break-word;
         }
         
-        .tag-modal-text {
+        .tag-modal-text,
+        .promo-modal-subtitle {
             font-family: 'Nunito Sans', sans-serif;
             color: #5A5556;
             margin-bottom: 18px;
@@ -770,79 +727,54 @@
             font-size: 13px;
         }
         
-        /* Модалка промокода */
-        .promo-modal {
-            background: #fff;
-            border-radius: 18px;
-            padding: 24px 18px;
-            max-width: 420px;
-            width: 92%;
-            text-align: center;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-            position: relative;
-            transform: translateY(20px);
-            transition: transform 0.3s ease;
-            margin: 0 10px;
-        }
-        
-        /* Модалка "Все гастроли" */
-        .DivModalContent {
-            width: 1098px;
-            max-width: 95vw;
-            max-height: 85vh;
-            background: #DCE4F0;
-            border-radius: 18px;
-            padding: clamp(14px, 3vw, 28px) clamp(14px, 3vw, 36px);
-            position: relative;
-            overflow-y: auto;
-            box-shadow: 0 20px 40px rgba(0,0,0,.1);
-            transform: translateY(20px);
-            transition: transform 0.3s ease;
-        }
-        .modal-overlay.active .DivModalContent { transform: translateY(0); }
-        
-        .ButtonModalClose {
-            position: absolute;
-            top: 12px;
-            right: 16px;
-            font-size: 26px;
-            cursor: pointer;
-            background: none;
-            border: none;
-            color: #1A1718;
-            -webkit-tap-highlight-color: transparent;
-            z-index: 10;
-            width: 34px;
-            height: 34px;
+        .promo-code-box {
+            background: #F8F7F6;
+            border: 2px dashed #4A6294;
+            border-radius: 10px;
+            padding: 10px;
+            margin-bottom: 14px;
             display: flex;
             align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            transition: background 0.2s, color 0.2s;
+            justify-content: space-between;
+            gap: 8px;
         }
-        .ButtonModalClose:active { background: rgba(0,0,0,0.1); color: #E8454D; }
-        
-        .DivModalHeader {
-            border-bottom: 1px solid #2A3D5E;
-            padding-bottom: 14px;
-            margin-bottom: 18px;
-            padding-right: 36px;
-        }
-        .DivModalHeader .H2 {
-            border-left: 3px solid #E8454D;
-            padding-left: 12px;
+        .promo-code-text {
             font-family: 'Unbounded', sans-serif;
-            font-size: clamp(18px, 2.5vw, 26px);
+            font-size: 16px;
             font-weight: 700;
-            color: #000;
-            margin-bottom: 5px;
+            color: #E8454D;
+            letter-spacing: 1px;
         }
-        .DivModalHeader .P {
-            color: #2A3D5E;
-            font-size: clamp(12px, 1.4vw, 14px);
-            padding-left: 15px;
-            font-family: 'Nunito Sans', sans-serif;
+        .promo-copy-btn {
+            background: #4A6294;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 7px 14px;
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 600;
+            font-size: 11px;
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
         }
+        .promo-copy-btn:active { background: #2A3D5E; }
+        .promo-copy-btn.copied { background: #2E7D32; }
+        .promo-goto-btn {
+            display: inline-block;
+            background: #E8454D;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 22px;
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            text-decoration: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .promo-goto-btn:active { background: #C0392B; color: #fff; }
+        
         .DivModalTourList {
             display: flex;
             flex-direction: column;
@@ -925,20 +857,21 @@
             display: flex;
             align-items: center;
             user-select: none;
-            contain: layout style paint;
         }
         .promo-runner-track {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            left: 100%;
             width: 800px;
             height: 650px;
             cursor: pointer;
             z-index: 10;
             will-change: left;
         }
-        .promo-runner-track.running { animation: runAcross 4s linear infinite; }
+        .promo-runner-track.running { 
+            animation: runAcross 4s linear infinite; 
+            left: 100%;
+        }
         @keyframes runAcross {
             0% { left: 100%; }
             100% { left: -850px; }
@@ -967,97 +900,60 @@
             pointer-events: none;
             box-shadow: 0 2px 6px rgba(0,0,0,0.04);
         }
-        .promo-modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.6);
-            backdrop-filter: blur(4px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 20000; /* Самый высокий z-index */
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
+        
+        .balloon-content {
+            font-family: 'Nunito Sans', sans-serif !important;
+            font-size: 14px;
+            color: #2A2627;
+            line-height: 1.5;
         }
-        .promo-modal-overlay.active { opacity: 1; visibility: visible; }
-        .promo-modal-overlay.active .promo-modal { transform: translateY(0); }
-        .promo-modal-close {
-            position: absolute;
-            top: 10px;
-            right: 14px;
-            background: none;
-            border: none;
-            font-size: 22px;
-            cursor: pointer;
-            color: #888;
-            -webkit-tap-highlight-color: transparent;
-            padding: 4px;
-        }
-        .promo-modal-icon { font-size: 36px; margin-bottom: 10px; }
-        .promo-modal-title {
-            font-family: 'Unbounded', sans-serif;
-            font-size: 18px;
-            font-weight: 700;
+        .balloon-content b {
+            font-family: 'Unbounded', sans-serif !important;
             color: #1A1718;
-            margin-bottom: 5px;
-        }
-        .promo-modal-subtitle {
-            font-family: 'Nunito Sans', sans-serif;
-            color: #5A5556;
-            margin-bottom: 16px;
-            font-size: 13px;
-        }
-        .promo-code-box {
-            background: #F8F7F6;
-            border: 2px dashed #4A6294;
-            border-radius: 10px;
-            padding: 10px;
-            margin-bottom: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 8px;
-        }
-        .promo-code-text {
-            font-family: 'Unbounded', sans-serif;
             font-size: 16px;
-            font-weight: 700;
-            color: #E8454D;
-            letter-spacing: 1px;
+            display: block;
+            margin-bottom: 6px;
         }
-        .promo-copy-btn {
-            background: #4A6294;
-            color: #fff;
-            border: none;
-            border-radius: 6px;
-            padding: 7px 14px;
-            font-family: 'Unbounded', sans-serif;
-            font-weight: 600;
-            font-size: 11px;
-            cursor: pointer;
-            -webkit-tap-highlight-color: transparent;
+        .balloon-content .balloon-date {
+            color: #5A5556;
+            font-size: 14px;
+            display: block;
+            margin: 2px 0;
         }
-        .promo-copy-btn:active { background: #2A3D5E; }
-        .promo-copy-btn.copied { background: #2E7D32; }
-        .promo-goto-btn {
-            display: inline-block;
-            background: #E8454D;
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            padding: 10px 22px;
-            font-family: 'Unbounded', sans-serif;
-            font-weight: 600;
+        .balloon-content .balloon-venue {
+            color: #3D393A;
             font-size: 13px;
+            display: block;
+            margin: 2px 0;
+        }
+        .balloon-content .balloon-address {
+            color: #5A5556;
+            font-size: 13px;
+            display: block;
+            margin: 2px 0;
+        }
+        .balloon-content .balloon-price {
+            font-family: 'Unbounded', sans-serif !important;
+            color: #E8454D;
+            font-size: 14px;
+            font-weight: 600;
+            margin: 4px 0;
+        }
+        .balloon-content .balloon-buy-btn {
+            display: inline-block;
+            margin-top: 8px;
+            padding: 7px 14px;
+            background: #E8454D;
+            color: #FFFFFF !important;
+            border-radius: 6px;
+            font-family: 'Unbounded', sans-serif !important;
+            font-size: 11px;
+            font-weight: 600;
+            border: none;
             cursor: pointer;
-            text-decoration: none;
+            box-shadow: 0 2px 4px rgba(232,69,77,0.2);
             -webkit-tap-highlight-color: transparent;
         }
-        .promo-goto-btn:active { background: #C0392B; color: #fff; }
         
         .no-events {
             text-align: center;
@@ -1066,6 +962,45 @@
             font-size: 15px;
             font-family: 'Nunito Sans', sans-serif;
             grid-column: 1 / -1;
+        }
+        
+        .show-more-wrapper {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0 0;
+            width: 100%;
+        }
+        .show-more-btn {
+            padding: 12px 36px;
+            background: #F8F7F6;
+            border-radius: 8px;
+            border: none;
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            color: #1A1718;
+            cursor: pointer;
+            transition: background 0.2s;
+            -webkit-tap-highlight-color: transparent;
+            white-space: nowrap;
+        }
+        .show-more-btn:active { background: #DCE4F0; }
+        
+        .map-skeleton {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: skeleton-loading 1.5s infinite;
+            border-radius: 16px;
+            z-index: 1;
+        }
+        @keyframes skeleton-loading {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
         }
         
         /* Адаптивность */
@@ -1080,13 +1015,11 @@
             .events-grid { grid-template-columns: 1fr; gap: 12px; }
             .performance-card-afisha { border-radius: 10px; }
             .performance-content-afisha { padding: 10px; gap: 4px; }
-            .performance-tags-afisha { gap: 4px; margin-bottom: 1px; }
             .tag-afisha { font-size: 10px; padding: 2px 8px; }
             .performance-name-afisha { font-size: 15px; }
             .performance-date-afisha { font-size: 12px; }
             .performance-desc-afisha { font-size: 12px; }
-            .event-venue-afisha { font-size: 11px; gap: 4px; }
-            .performance-btns-afisha { padding-top: 8px; gap: 6px; }
+            .event-venue-afisha { font-size: 11px; }
             .btn-details-afisha, .btn-buy-afisha { padding: 9px 10px; font-size: 11px; }
             
             .tour-map-section {
@@ -1095,24 +1028,16 @@
                 border-radius: 12px;
                 width: 100%;
                 box-sizing: border-box;
-                outline: none !important;
-                border: none !important;
-                box-shadow: none !important;
             }
             .tour-header { flex-direction: column; align-items: flex-start; gap: 8px; margin-bottom: 18px; }
-            .tour-title { font-size: 19px; text-align: left; width: 100%; }
+            .tour-title { font-size: 19px; width: 100%; }
             
             #yandexMap {
                 height: 260px;
                 width: 100%;
                 border-radius: 10px;
-                touch-action: manipulation;
-                outline: none !important;
-                border: none !important;
-                box-shadow: 0 2px 12px rgba(42,61,94,0.08) !important;
             }
             
-            /* Скрываем стандартные балуны Яндекс.Карт на мобильных */
             .ymaps-2-1-79-balloon,
             .ymaps-2-1-79-balloon__content,
             .ymaps-2-1-79-balloon__layout {
@@ -1123,13 +1048,12 @@
             }
             
             .tour-list { max-height: none; overflow-y: visible; padding-right: 0; gap: 7px; }
-            .tour-item { padding: 12px 14px; width: 100%; box-sizing: border-box; }
+            .tour-item { padding: 12px 14px; }
             .tour-item.mobile-hidden { display: none; }
-            .tour-item.active { outline: 2px solid #E8454D; background: #FFF5F5; }
             
-            .tour-city { font-size: 14px; margin-bottom: 1px; }
-            .tour-dates { font-size: 13px; margin-bottom: 2px; }
-            .tour-venue { font-size: 12px; gap: 4px; }
+            .tour-city { font-size: 14px; }
+            .tour-dates { font-size: 13px; }
+            .tour-venue { font-size: 12px; }
             
             .tour-status { margin-top: 6px; padding: 8px 14px; font-size: 12px; min-width: 100px; }
             .show-more-btn, .load-more-btn { width: 100%; max-width: 260px; padding: 11px 18px; font-size: 13px; }
@@ -1149,7 +1073,6 @@
         @media (max-width: 480px) {
             .afisha-page { padding: 0 6px; }
             .performance-content-afisha { padding: 8px; gap: 3px; }
-            .performance-tags-afisha { gap: 3px; }
             .tag-afisha { font-size: 9px; padding: 2px 7px; }
             .performance-name-afisha { font-size: 14px; }
             .performance-date-afisha { font-size: 11px; }
@@ -1157,9 +1080,9 @@
             .event-venue-afisha { font-size: 10px; }
             .btn-details-afisha, .btn-buy-afisha { padding: 8px 8px; font-size: 10px; border-radius: 6px; }
             
-            .tour-map-section { padding: 10px 6px; margin: 14px 0; border-radius: 8px; width: 100%; box-sizing: border-box; outline: none !important; border: none !important; }
-            .tour-title { font-size: 17px; width: 100%; }
-            #yandexMap { height: 220px; width: 100%; border-radius: 6px; outline: none; border: none; }
+            .tour-map-section { padding: 10px 6px; margin: 14px 0; border-radius: 8px; }
+            .tour-title { font-size: 17px; }
+            #yandexMap { height: 220px; border-radius: 6px; }
             .tour-item { padding: 10px 12px; }
             .tour-city { font-size: 13px; }
             .tour-dates, .tour-venue { font-size: 12px; }
@@ -1167,7 +1090,7 @@
             .show-more-btn, .load-more-btn { max-width: 100%; padding: 10px 14px; font-size: 12px; }
             
             .promo-caption { font-size: 11px; padding: 4px 8px; bottom: 6px; }
-            .promo-modal { padding: 18px 10px; border-radius: 12px; margin: 0 6px; }
+            .promo-modal { padding: 18px 10px; border-radius: 12px; }
             .promo-code-box { flex-direction: column; gap: 6px; }
             .promo-code-text { font-size: 15px; }
             .promo-goto-btn { width: 100%; text-align: center; font-size: 12px; padding: 10px; }
@@ -1184,7 +1107,7 @@
             .SpanTourStatus { padding: 4px 10px; font-size: 10px; min-width: 65px; }
             .DivModalFooter { font-size: 10px; }
             
-            .tag-modal { padding: 16px 10px; border-radius: 12px; margin: 0 6px; }
+            .tag-modal { padding: 16px 10px; border-radius: 12px; }
             .tag-modal-title { font-size: 16px; }
             .tag-modal-text { font-size: 12px; }
             .tag-modal-input-group { flex-direction: column; gap: 6px; }
@@ -1194,259 +1117,10 @@
             .custom-month-trigger { font-size: 11px; padding: 9px 28px 9px 10px; }
         }
         
-        @media (max-width: 370px) {
-            .promo-modal { padding: 14px 8px; margin: 0 4px; }
-            .promo-modal-title { font-size: 16px; }
-            .promo-modal-subtitle { font-size: 11px; }
-            .promo-code-text { font-size: 14px; }
-            .promo-copy-btn { font-size: 10px; padding: 6px 10px; }
-            .promo-goto-btn { font-size: 11px; padding: 9px 14px; }
+        /* Скрываем загрузчики */
+        .loader-container, .loader, .page-loader {
+            display: none !important;
         }
-        
-        /* Скелетон-лоадер для карты */
-        .map-skeleton {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-            background-size: 200% 100%;
-            animation: skeleton-loading 1.5s infinite;
-            border-radius: 16px;
-            z-index: 1;
-        }
-        @keyframes skeleton-loading {
-            0% { background-position: -200% 0; }
-            100% { background-position: 200% 0; }
-        }
-        
-        @media (max-width: 860px) {
-            .map-skeleton {
-                border-radius: 10px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .map-skeleton {
-                border-radius: 6px;
-            }
-        }
-        .tag-modal {
-    background: #fff;
-    border-radius: 20px;
-    padding: 28px 24px;
-    text-align: center;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-    margin: 0 12px;
-}
-
-.promo-modal {
-    background: #fff;
-    border-radius: 18px;
-    padding: 24px 18px;
-    text-align: center;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-    margin: 0 10px;
-}
-
-.DivModalContent {
-    background: #DCE4F0;
-    border-radius: 18px;
-    padding: clamp(14px, 3vw, 28px) clamp(14px, 3vw, 36px);
-    box-shadow: 0 20px 40px rgba(0,0,0,.1);
-}
-/* Исправленные стили для модальных окон в афише */
-/* Замените соответствующие блоки в вашем CSS */
-
-/* Базовые оверлеи */
-.tag-modal-overlay,
-.modal-overlay,
-.promo-modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.6);
-    backdrop-filter: blur(4px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 100000; /* Увеличен для гарантированного перекрытия */
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    padding: 20px; /* Добавлен отступ для мобильных */
-    box-sizing: border-box;
-}
-
-/* Активное состояние */
-.tag-modal-overlay.active,
-.modal-overlay.active,
-.promo-modal-overlay.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-/* Контент модалок для десктопа */
-.tag-modal {
-    background: #fff;
-    border-radius: 20px;
-    padding: 28px 24px;
-    max-width: 460px;
-    width: 92%;
-    text-align: center;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-    position: relative;
-    transform: scale(0.9); /* Как в "Заказчикам" */
-    transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1); /* Плавная анимация */
-    margin: auto;
-}
-
-.promo-modal {
-    background: #fff;
-    border-radius: 18px;
-    padding: 24px 18px;
-    max-width: 420px;
-    width: 92%;
-    text-align: center;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-    position: relative;
-    transform: scale(0.9);
-    transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
-    margin: auto;
-}
-
-.DivModalContent {
-    width: 1098px;
-    max-width: 95vw;
-    max-height: 85vh;
-    background: #DCE4F0;
-    border-radius: 18px;
-    padding: clamp(14px, 3vw, 28px) clamp(14px, 3vw, 36px);
-    position: relative;
-    overflow-y: auto;
-    box-shadow: 0 20px 40px rgba(0,0,0,.1);
-    transform: scale(0.9);
-    transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
-    margin: auto;
-}
-
-/* Анимация появления */
-.tag-modal-overlay.active .tag-modal,
-.modal-overlay.active .DivModalContent,
-.promo-modal-overlay.active .promo-modal {
-    transform: scale(1); /* Вместо translateY(0) */
-}
-
-/* Мобильная адаптация */
-@media (max-width: 860px) {
-    .tag-modal-overlay,
-    .modal-overlay,
-    .promo-modal-overlay {
-        align-items: flex-start; /* Верхнее выравнивание на мобильных */
-        padding: 20px 10px;
-    }
-    
-    .tag-modal {
-        width: 100%;
-        max-width: 460px;
-        margin: 0 auto;
-        max-height: 90vh;
-        overflow-y: auto;
-        border-radius: 16px;
-        padding: 24px 20px;
-    }
-    
-    .promo-modal {
-        width: 100%;
-        max-width: 420px;
-        margin: 0 auto;
-        max-height: 90vh;
-        overflow-y: auto;
-        border-radius: 14px;
-        padding: 20px 16px;
-    }
-    
-    .DivModalContent {
-        width: 100%;
-        max-width: none;
-        max-height: 90vh;
-        border-radius: 14px;
-        padding: 14px 10px;
-    }
-}
-
-@media (max-width: 480px) {
-    .tag-modal-overlay,
-    .modal-overlay,
-    .promo-modal-overlay {
-        padding: 10px 5px;
-    }
-    
-    .tag-modal {
-        padding: 16px 12px;
-        border-radius: 12px;
-    }
-    
-    .promo-modal {
-        padding: 18px 10px;
-        border-radius: 12px;
-    }
-    
-    .DivModalContent {
-        padding: 10px 6px;
-        border-radius: 10px;
-    }
-}
-
-/* Исправление для мобильной всплывашки */
-.mobile-balloon {
-    display: none;
-    position: fixed;
-    bottom: 20px;
-    left: 10px;
-    right: 10px;
-    background: white;
-    border-radius: 16px;
-    padding: 16px;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
-    z-index: 100001; /* Выше оверлеев */
-    transform: translateY(100px);
-    opacity: 0;
-    transition: transform 0.3s ease, opacity 0.3s ease;
-    pointer-events: auto;
-    max-height: 70vh;
-    overflow-y: auto;
-}
-
-/* Исправление z-index для фильтров */
-.filters-section-afisha {
-    position: relative;
-    z-index: 1000; /* Уменьшен, чтобы не перекрывать модалки */
-}
-
-/* Исправление z-index для карты */
-#yandexMap {
-    z-index: 1; /* Базовый z-index для карты */
-}
-
-.reset-map-btn {
-    z-index: 10; /* Уменьшен */
-}
-
-/* Убираем конфликты с кастомными селектами */
-.custom-month-select {
-    z-index: 1001;
-}
-
-.custom-month-dropdown {
-    z-index: 2000; /* Уменьшен относительно модалок */
-}
-
     </style>
 </head>
 <body>
@@ -1456,7 +1130,7 @@
     <div id="site-hero-slider"></div>
 
     <div class="promo-runner-section" id="promoRunner">
-        <div class="promo-runner-track running" id="promoRunnerTrack"> <!-- Класс running добавлен сразу -->
+        <div class="promo-runner-track running" id="promoRunnerTrack">
             <img src="SVG/Промокод.svg" alt="Поймай Ксюшу — получи промокод!">
         </div>
         <span class="promo-caption">Поймайте Ксюшу — получите промокод!</span>
@@ -1518,7 +1192,6 @@
         </div>
     </div>
 
-    <!-- Мобильная всплывашка с информацией -->
     <div class="mobile-balloon" id="mobileBalloon">
         <button class="mobile-balloon-close" id="closeMobileBalloon">×</button>
         <div class="mobile-balloon-title" id="mobileBalloonTitle"></div>
@@ -1584,8 +1257,7 @@
     <div id="site-footer"></div>
 </div>
 
-  <script src="js/loader-animation.js"></script>
-  <script src="js/components-loader.js"></script>
+<script src="js/components-loader.js"></script>
 <script src="js/header-scripts.js"></script>
 <script src="js/common.js"></script>
 <script src="js/slider-scripts.js"></script>
@@ -1597,14 +1269,12 @@ let originalBounds = null;
 let isMapZoomed = false;
 let visibleCount = 6;
 let currentFilter = 'all';
+let currentMobileBalloonEventId = null;
 
 const grid = document.getElementById('eventsGrid');
 const showMoreBtn = document.getElementById('showMoreEventsBtn');
 const monthSelect = document.getElementById('monthSelect');
 const allChip = document.querySelector('[data-filter="all"]');
-
-// Мобильная всплывашка
-let currentMobileBalloonEventId = null;
 
 window.goToCheckout = function(eventId) {
     const event = TOUR_SCHEDULE.find(ev => ev.id === eventId);
@@ -1692,14 +1362,12 @@ function renderEvents() {
 
 function updateFilterVisuals() {
     if (allChip) allChip.classList.toggle('active', currentFilter === 'all');
-    if (monthSelect) {
-        monthSelect.classList.toggle('active-filter', currentFilter !== 'all');
-        if (currentFilter !== 'all') monthSelect.value = currentFilter;
-        else monthSelect.selectedIndex = 0;
+    const customTrigger = document.querySelector('.custom-month-trigger');
+    if (customTrigger) {
+        customTrigger.classList.toggle('active', currentFilter !== 'all');
     }
 }
 
-// Функции для мобильной всплывашки
 function showMobileBalloon(markerData) {
     const balloon = document.getElementById('mobileBalloon');
     if (!balloon) return;
@@ -1765,7 +1433,6 @@ function initMobileBalloon() {
         hideMobileBalloon();
     });
     
-    // Закрытие по клику вне всплывашки
     document.addEventListener('click', function(e) {
         const balloon = document.getElementById('mobileBalloon');
         if (!balloon || !balloon.classList.contains('visible')) return;
@@ -1782,7 +1449,6 @@ function initYandexMap() {
         if (typeof ymaps === 'undefined') return;
         
         ymaps.ready(function() {
-            // Скрываем скелетон
             const skeleton = document.getElementById('mapSkeleton');
             if (skeleton) skeleton.style.display = 'none';
             
@@ -1826,7 +1492,6 @@ function initYandexMap() {
                     hideIconOnBalloonOpen: false 
                 });
                 
-                // Единый обработчик клика для всех устройств
                 placemark.events.add('click', function(e) {
                     e.preventDefault();
                     
@@ -1837,14 +1502,11 @@ function initYandexMap() {
                         if (rb) rb.classList.add('visible');
                     }
                     
-                    // Выделяем плашку
                     highlightTourItem(index);
                     
-                    // На мобильных показываем кастомную всплывашку
                     if (isMobile) {
                         showMobileBalloon(marker);
                     } else {
-                        // На десктопе открываем стандартный балун
                         setTimeout(() => {
                             if (placemark.balloon) {
                                 placemark.balloon.open();
@@ -1863,7 +1525,6 @@ function initYandexMap() {
             initResetMapButton();
             renderTourList();
             
-            // Глобальный обработчик для кнопок в балунах
             document.addEventListener('click', function(e) {
                 const btn = e.target.closest('.balloon-buy-btn');
                 if (btn && btn.dataset.eventId) {
@@ -2234,6 +1895,25 @@ function initCustomMonthSelect() {
     const dropdown = document.createElement('div');
     dropdown.className = 'custom-month-dropdown';
     
+    function positionDropdown() {
+        const triggerRect = trigger.getBoundingClientRect();
+        const dropdownHeight = 220;
+        const spaceBelow = window.innerHeight - triggerRect.bottom;
+        const spaceAbove = triggerRect.top;
+        
+        dropdown.style.position = 'fixed';
+        dropdown.style.left = triggerRect.left + 'px';
+        dropdown.style.width = Math.max(triggerRect.width, 150) + 'px';
+        
+        if (spaceBelow >= dropdownHeight || spaceBelow >= spaceAbove) {
+            dropdown.style.top = triggerRect.bottom + 4 + 'px';
+            dropdown.style.bottom = 'auto';
+        } else {
+            dropdown.style.top = 'auto';
+            dropdown.style.bottom = (window.innerHeight - triggerRect.top + 4) + 'px';
+        }
+    }
+    
     function renderOptions() {
         dropdown.innerHTML = '';
         Array.from(originalSelect.options).forEach(option => {
@@ -2282,6 +1962,11 @@ function initCustomMonthSelect() {
     const toggleHandler = (e) => {
         e.stopPropagation();
         e.preventDefault();
+        
+        if (!wrapper.classList.contains('open')) {
+            positionDropdown();
+        }
+        
         document.querySelectorAll('.custom-month-select.open').forEach(el => {
             if (el !== wrapper) el.classList.remove('open');
         });
@@ -2291,7 +1976,6 @@ function initCustomMonthSelect() {
     trigger.addEventListener('click', toggleHandler);
     trigger.addEventListener('touchend', toggleHandler);
     
-    // Улучшенный обработчик закрытия по клику вне селекта
     const handleOutsideClick = function(e) {
         if (!wrapper.contains(e.target)) {
             wrapper.classList.remove('open');
@@ -2300,6 +1984,18 @@ function initCustomMonthSelect() {
     
     document.addEventListener('click', handleOutsideClick);
     document.addEventListener('touchend', handleOutsideClick);
+    
+    window.addEventListener('scroll', () => {
+        if (wrapper.classList.contains('open')) {
+            positionDropdown();
+        }
+    });
+    
+    window.addEventListener('resize', () => {
+        if (wrapper.classList.contains('open')) {
+            positionDropdown();
+        }
+    });
     
     wrapper.appendChild(trigger);
     wrapper.appendChild(dropdown);
@@ -2316,6 +2012,8 @@ function initCustomMonthSelect() {
     if (allChip) {
         const resetHandler = (e) => {
             if (e) e.preventDefault();
+            currentFilter = 'all';
+            visibleCount = 6;
             originalSelect.selectedIndex = 0;
             originalSelect.classList.remove('active-filter');
             trigger.classList.remove('active');
@@ -2324,6 +2022,8 @@ function initCustomMonthSelect() {
                 opt.classList.toggle('selected', opt.dataset.value === originalSelect.value);
             });
             wrapper.classList.remove('open');
+            renderEvents();
+            renderTourList();
         };
         
         allChip.addEventListener('click', resetHandler);
@@ -2349,8 +2049,10 @@ function initPromoRunner() {
     
     if (!runnerTrack || !runnerSection) return;
     
-    // Анимация теперь запускается сразу через класс .running в HTML
-    // IntersectionObserver оставлен как fallback
+    if (!runnerTrack.classList.contains('running')) {
+        runnerTrack.classList.add('running');
+    }
+    
     const observer = new IntersectionObserver((entries) => { 
         entries.forEach(entry => { 
             if (entry.isIntersecting) { 
@@ -2436,18 +2138,12 @@ function initPromoRunner() {
 }
 
 function initFilters() {
-    allChip?.addEventListener('click', () => { 
-        currentFilter = 'all'; 
-        visibleCount = 6; 
-        renderEvents(); 
-        renderTourList(); 
-    });
-    
     monthSelect?.addEventListener('change', (e) => { 
         currentFilter = e.target.value; 
         visibleCount = 6; 
         renderEvents(); 
         renderTourList(); 
+        updateFilterVisuals();
     });
     
     showMoreBtn?.addEventListener('click', () => { 
@@ -2534,7 +2230,18 @@ function refreshOnReturn() {
     });
 }
 
+function hideLoaderImmediately() {
+    const loaders = document.querySelectorAll('.loader-container, .loader, .page-loader');
+    loaders.forEach(loader => {
+        loader.style.display = 'none';
+        loader.style.opacity = '0';
+        loader.style.visibility = 'hidden';
+    });
+}
+
 (function init() {
+    hideLoaderImmediately();
+    
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', initAll);
     } else {
@@ -2542,6 +2249,8 @@ function refreshOnReturn() {
     }
     
     function initAll() {
+        hideLoaderImmediately();
+        
         populateMonthSelect(); 
         initFilters(); 
         initTourModal(); 
@@ -2555,6 +2264,9 @@ function refreshOnReturn() {
         setTimeout(initYandexMap, 100); 
         setTimeout(initShowMoreTourBtn, 150); 
         setTimeout(refreshOnReturn, 200);
+        
+        setTimeout(hideLoaderImmediately, 500);
+        setTimeout(hideLoaderImmediately, 1500);
     }
 })();
 </script>
