@@ -709,6 +709,5 @@
         margin: 0 !important;
         transform: none !important;
     }
-    body { padding-top: 90px !important; }
     html { scroll-padding-top: 0 !important; }
 }

@@ -248,39 +248,6 @@ body {
     transition: transform 0.2s;
 }
 .custom-month-trigger.active .arrow-icon { color: #fff; }
-.custom-month-dropdown {
-    position: absolute;
-    top: calc(100% + 4px);
-    left: 0;
-    min-width: 100%;
-    background: #fff;
-    border: 1px solid #E5E3E1;
-    border-radius: 8px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-    z-index: 200;
-    display: none;
-    max-height: 220px;
-    overflow-y: auto;
-}
-.custom-month-select.open .custom-month-dropdown { display: block; }
-.custom-month-option {
-    padding: 10px 14px;
-    cursor: pointer;
-    font-family: 'Unbounded', sans-serif;
-    font-size: 12px;
-    font-weight: 500;
-    color: #1A1718;
-    transition: background 0.15s;
-    -webkit-tap-highlight-color: transparent;
-    white-space: nowrap;
-}
-.custom-month-option:hover,
-.custom-month-option:active { background: #F8F7F6; }
-.custom-month-option.selected {
-    background: #DCE4F0;
-    color: #2A3D5E;
-    font-weight: 600;
-}
 
 /* ===== КАРТА ГАСТРОЛЕЙ ===== */
 .tour-map-section {
@@ -603,7 +570,7 @@ body {
     -webkit-tap-highlight-color: transparent;
 }
 
-/* ===== МОДАЛЬНЫЕ ОКНА — ЕДИНЫЙ ЧИСТЫЙ НАБОР ===== */
+/* ===== МОДАЛЬНЫЕ ОКНА ===== */
 .tag-modal-overlay,
 .modal-overlay,
 .promo-modal-overlay {
@@ -649,16 +616,6 @@ body {
     position: relative !important;
     margin: auto !important;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15) !important;
-    transform: translateY(10px) !important;
-    opacity: 0 !important;
-    transition: transform 0.25s ease, opacity 0.25s ease !important;
-}
-
-.tag-modal-overlay.active .tag-modal,
-.modal-overlay.active .DivModalContent,
-.promo-modal-overlay.active .promo-modal {
-    transform: translateY(0) !important;
-    opacity: 1 !important;
 }
 
 .tag-modal-close,
@@ -671,7 +628,6 @@ body {
     height: 32px !important;
     border-radius: 50% !important;
     background: #F8F7F6 !important;
-    border: 1px solid #E5E3E1 !important;
     color: #5A5556 !important;
     font-size: 20px !important;
     display: flex !important;
@@ -698,7 +654,6 @@ body {
     font-weight: 700;
     color: #1A1718;
     margin-bottom: 8px;
-    word-wrap: break-word;
 }
 .tag-modal-text,
 .promo-modal-subtitle {
@@ -723,7 +678,6 @@ body {
     font-family: 'Nunito Sans', sans-serif;
     font-size: 15px;
     outline: none;
-    -webkit-appearance: none;
 }
 .tag-modal-email-input:focus { border-color: #4A6294; }
 .tag-modal-submit-btn {
@@ -736,7 +690,6 @@ body {
     font-weight: 600;
     font-size: 12px;
     cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
     white-space: nowrap;
 }
 .tag-modal-submit-btn:active { background: #C0392B; }
@@ -820,7 +773,6 @@ body {
     min-width: 80px;
     text-align: center;
     cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
     flex-shrink: 0;
     border: none;
 }
@@ -890,7 +842,6 @@ body {
     white-space: nowrap;
     z-index: 5;
     pointer-events: none;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.04);
 }
 
 .promo-code-box {
@@ -921,7 +872,6 @@ body {
     font-weight: 600;
     font-size: 11px;
     cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
 }
 .promo-copy-btn:active { background: #2A3D5E; }
 .promo-copy-btn.copied { background: #2E7D32; }
@@ -937,9 +887,8 @@ body {
     font-size: 13px;
     cursor: pointer;
     text-decoration: none;
-    -webkit-tap-highlight-color: transparent;
 }
-.promo-goto-btn:active { background: #C0392B; color: #fff; }
+.promo-goto-btn:active { background: #C0392B; }
 
 .no-events {
     text-align: center;
@@ -968,7 +917,7 @@ body {
     100% { background-position: 200% 0; }
 }
 
-/* ===== БЛОКИРОВКА ПРОКРУТКИ ФОНА ===== */
+/* ===== БЛОКИРОВКА ПРОКРУТКИ ===== */
 body.modal-open {
     overflow: hidden !important;
     position: fixed !important;
@@ -976,6 +925,93 @@ body.modal-open {
     height: 100% !important;
     top: 0 !important;
     left: 0 !important;
+}
+
+/* ===== МОДАЛЬНОЕ ОКНО МЕСЯЦЕВ ===== */
+.month-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+.month-modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+.month-modal-content {
+    background: #fff;
+    border-radius: 16px;
+    padding: 24px;
+    max-width: 400px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+.month-modal-title {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: #1A1718;
+    margin-bottom: 16px;
+    padding-right: 30px;
+}
+.month-modal-close {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #F8F7F6;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #5A5556;
+    -webkit-tap-highlight-color: transparent;
+}
+.month-modal-close:active { background: #E8454D; color: #fff; }
+.month-modal-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.month-modal-option {
+    padding: 12px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: 'Unbounded', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #1A1718;
+    transition: background 0.15s;
+    -webkit-tap-highlight-color: transparent;
+}
+.month-modal-option:hover,
+.month-modal-option:active { background: #F8F7F6; }
+.month-modal-option.selected {
+    background: #DCE4F0;
+    color: #2A3D5E;
+    font-weight: 600;
+}
+.month-modal-option-all {
+    border-bottom: 1px solid #E5E3E1;
+    margin-bottom: 8px;
+    padding-bottom: 16px;
 }
 
 /* ===== АДАПТИВНОСТЬ ===== */
@@ -990,290 +1026,239 @@ body.modal-open {
     .events-grid { grid-template-columns: 1fr; gap: 12px; }
     .performance-card-afisha { border-radius: 10px; }
     .performance-content-afisha { padding: 10px; gap: 4px; }
-    .performance-tags-afisha { gap: 4px; margin-bottom: 1px; }
-    .tag-afisha { font-size: 10px; padding: 2px 8px; }
     .performance-name-afisha { font-size: 15px; }
-    .performance-date-afisha { font-size: 12px; }
-    .performance-desc-afisha { font-size: 12px; }
-    .event-venue-afisha { font-size: 11px; gap: 4px; }
-    .performance-btns-afisha { padding-top: 8px; gap: 6px; }
-    .btn-details-afisha, .btn-buy-afisha { padding: 9px 10px; font-size: 11px; }
-    
-    .tour-map-section {
-        padding: 14px 10px;
-        margin: 20px 0;
-        border-radius: 12px;
-        width: 100%;
-        box-sizing: border-box;
-        outline: none !important;
-        border: none !important;
-        box-shadow: none !important;
-    }
-    .tour-header { flex-direction: column; align-items: flex-start; gap: 8px; margin-bottom: 18px; }
-    .tour-title { font-size: 19px; text-align: left; width: 100%; }
-    
-    #yandexMap {
-        height: 260px;
-        width: 100%;
-        border-radius: 10px;
-        touch-action: manipulation;
-        outline: none !important;
-        border: none !important;
-        box-shadow: 0 2px 12px rgba(42,61,94,0.08) !important;
-    }
-    
-    .ymaps-2-1-79-balloon,
-    .ymaps-2-1-79-balloon__content,
-    .ymaps-2-1-79-balloon__layout {
-        display: none !important;
-        visibility: hidden !important;
-        opacity: 0 !important;
-        pointer-events: none !important;
-    }
-    
-    .tour-list { max-height: none; overflow-y: visible; padding-right: 0; gap: 7px; }
-    .tour-item { padding: 12px 14px; width: 100%; box-sizing: border-box; }
-    .tour-item.mobile-hidden { display: none; }
-    .tour-item.active { outline: 2px solid #E8454D; background: #FFF5F5; }
-    
-    .tour-city { font-size: 14px; margin-bottom: 1px; }
-    .tour-dates { font-size: 13px; margin-bottom: 2px; }
-    .tour-venue { font-size: 12px; gap: 4px; }
-    
-    .tour-status { margin-top: 6px; padding: 8px 14px; font-size: 12px; min-width: 100px; }
-    .show-more-btn, .load-more-btn { width: 100%; max-width: 260px; padding: 11px 18px; font-size: 13px; }
-    
-    .reset-map-btn { font-size: 11px; padding: 7px 14px; top: 8px; }
-    
+    #yandexMap { height: 260px; border-radius: 10px; }
+    .tour-list { max-height: none; overflow-y: visible; }
+    .tour-map-section { padding: 14px 10px; margin: 20px 0; border-radius: 12px; }
     .DivModalTourItem { flex-direction: column; align-items: flex-start; gap: 6px; padding: 10px; }
     .SpanModalTourCity { width: 100%; font-size: 14px; }
-    .SpanTourStatus { align-self: flex-start; }
-    
-    .promo-caption { font-size: 12px; padding: 5px 12px; bottom: 8px; }
-    
-    .custom-month-select { min-width: 140px; }
-    .custom-month-trigger { font-size: 12px; padding: 10px 30px 10px 12px; }
-    
-    /* Модальные окна на мобильных */
-    .tag-modal,
-    .promo-modal,
-    .DivModalContent {
-        padding: 24px 20px !important;
-        border-radius: 16px !important;
-        max-width: calc(100vw - 40px) !important;
-        max-height: calc(100vh - 40px) !important;
-        margin: 20px auto !important;
+}
+/* ===== МОДАЛЬНОЕ ОКНО "СКОРО В ПРОДАЖЕ" ===== */
+.tag-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.25s ease, visibility 0.25s ease;
+    padding: 20px;
+}
+
+.tag-modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.tag-modal {
+    background: #ffffff;
+    border-radius: 24px;
+    padding: 32px 28px;
+    max-width: 440px;
+    width: 100%;
+    position: relative;
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    animation: modalSlideIn 0.3s ease;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
     }
-    .tag-modal-title,
-    .promo-modal-title { font-size: 18px !important; }
-    .tag-modal-text,
-    .promo-modal-subtitle { font-size: 14px !important; }
-    
-    .tag-modal-close,
-    .promo-modal-close,
-    .ButtonModalClose {
-        width: 28px !important;
-        height: 28px !important;
-        font-size: 18px !important;
-        top: 10px !important;
-        right: 12px !important;
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
     }
 }
 
+/* Кнопка закрытия */
+.tag-modal-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #F5F5F5;
+    border: none;
+    font-size: 18px;
+    color: #666;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.tag-modal-close:hover {
+    background: #E8454D;
+    color: #ffffff;
+}
+
+.tag-modal-close:active {
+    background: #C0392B;
+    color: #ffffff;
+    transform: scale(0.95);
+}
+
+/* Иконка */
+.tag-modal-icon {
+    font-size: 56px;
+    margin-bottom: 16px;
+    display: block;
+    animation: iconBounce 0.6s ease;
+}
+
+@keyframes iconBounce {
+    0% { transform: scale(0); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+/* Заголовок */
+.tag-modal-title {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #1A1718;
+    margin-bottom: 12px;
+    line-height: 1.3;
+}
+
+/* Текст описания */
+.tag-modal-text {
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 15px;
+    color: #5A5556;
+    margin-bottom: 24px;
+    line-height: 1.5;
+}
+
+/* Группа input + кнопка */
+.tag-modal-input-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+/* Поле ввода email */
+.tag-modal-email-input {
+    flex: 1;
+    padding: 14px 16px;
+    border-radius: 12px;
+    border: 2px solid #E5E3E1;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.2s ease;
+    background: #FAFAFA;
+    min-width: 0;
+}
+
+.tag-modal-email-input:focus {
+    border-color: #4A6294;
+    background: #ffffff;
+}
+
+.tag-modal-email-input::placeholder {
+    color: #999;
+}
+
+/* Кнопка отправки */
+.tag-modal-submit-btn {
+    padding: 14px 24px;
+    background: #E8454D;
+    color: #ffffff;
+    border: none;
+    border-radius: 12px;
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.tag-modal-submit-btn:hover {
+    background: #D0343A;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(232, 69, 77, 0.3);
+}
+
+.tag-modal-submit-btn:active {
+    background: #C0392B;
+    transform: translateY(0);
+}
+
+/* Сообщение об успехе */
+.tag-modal-success {
+    display: none;
+    color: #2E7D32;
+    font-weight: 600;
+    font-size: 14px;
+    font-family: 'Nunito Sans', sans-serif;
+    padding: 10px;
+    background: #E8F5E9;
+    border-radius: 8px;
+    margin-top: 8px;
+}
+
+/* Адаптивность для мобильных */
 @media (max-width: 480px) {
-    .afisha-page { padding: 0 6px; }
-    .performance-content-afisha { padding: 8px; gap: 3px; }
-    .performance-tags-afisha { gap: 3px; }
-    .tag-afisha { font-size: 9px; padding: 2px 7px; }
-    .performance-name-afisha { font-size: 14px; }
-    .performance-date-afisha { font-size: 11px; }
-    .performance-desc-afisha { font-size: 11px; }
-    .event-venue-afisha { font-size: 10px; }
-    .btn-details-afisha, .btn-buy-afisha { padding: 8px 8px; font-size: 10px; border-radius: 6px; }
-    
-    .tour-map-section { padding: 10px 6px; margin: 14px 0; border-radius: 8px; width: 100%; box-sizing: border-box; outline: none !important; border: none !important; }
-    .tour-title { font-size: 17px; width: 100%; }
-    #yandexMap { height: 220px; width: 100%; border-radius: 6px; outline: none; border: none; }
-    .tour-item { padding: 10px 12px; }
-    .tour-city { font-size: 13px; }
-    .tour-dates, .tour-venue { font-size: 12px; }
-    .tour-status { padding: 8px 12px; font-size: 11px; min-width: 85px; }
-    .show-more-btn, .load-more-btn { max-width: 100%; padding: 10px 14px; font-size: 12px; }
-    
-    .promo-caption { font-size: 11px; padding: 4px 8px; bottom: 6px; }
-    .promo-code-box { flex-direction: column; gap: 6px; }
-    .promo-code-text { font-size: 15px; }
-    .promo-goto-btn { width: 100%; text-align: center; font-size: 12px; padding: 10px; }
-    
-    .DivModalContent { padding: 10px 6px; border-radius: 14px; }
-    .DivModalHeader { padding-bottom: 8px; margin-bottom: 12px; padding-right: 28px; }
-    .DivModalHeader .H2 { font-size: 16px; }
-    .DivModalHeader .P { font-size: 11px; }
-    .DivModalTourItem { padding: 8px; border-radius: 10px; gap: 4px; }
-    .SpanModalTourCity { font-size: 13px; }
-    .DivModalTourDates .Strong { font-size: 12px; }
-    .SpanModalTourVenue { font-size: 10px; }
-    .SpanTourStatus { padding: 4px 10px; font-size: 10px; min-width: 65px; }
-    .DivModalFooter { font-size: 10px; }
-    
-    .tag-modal,
-    .promo-modal { padding: 20px 12px; border-radius: 14px; }
-    .tag-modal-title,
-    .promo-modal-title { font-size: 16px; }
-    .tag-modal-text,
-    .promo-modal-subtitle { font-size: 13px; }
-    .tag-modal-input-group { flex-direction: column; gap: 6px; }
-    .tag-modal-submit-btn { width: 100%; padding: 10px; font-size: 11px; }
-    
-    .custom-month-select { min-width: 130px; }
-    .custom-month-trigger { font-size: 11px; padding: 9px 28px 9px 10px; }
-    
-    /* Модальные окна на очень маленьких экранах */
-    .tag-modal,
-    .promo-modal,
-    .DivModalContent {
-        padding: 20px 12px !important;
-        border-radius: 14px !important;
-        max-width: calc(100vw - 24px) !important;
-        max-height: calc(100vh - 24px) !important;
-        margin: 12px auto !important;
-    }
-}
-
-@media (max-width: 370px) {
-    .tag-modal,
-    .promo-modal { padding: 16px 10px; border-radius: 12px; }
-    .tag-modal-title,
-    .promo-modal-title { font-size: 15px; }
-    .tag-modal-text,
-    .promo-modal-subtitle { font-size: 13px; }
-    .promo-code-text { font-size: 14px; }
-    .promo-copy-btn { font-size: 10px; padding: 6px 10px; }
-    .promo-goto-btn { font-size: 11px; padding: 9px 14px; }
-}
-
-/* ===== Z-INDEX ИЕРАРХИЯ ===== */
-.filters-section-afisha { z-index: 100 !important; }
-.custom-month-select { z-index: 150 !important; }
-.custom-month-dropdown { z-index: 160 !important; }
-#yandexMap { z-index: 1 !important; }
-.reset-map-btn { z-index: 10 !important; }
-.mobile-balloon { z-index: 99999 !important; }
-.tag-modal-overlay,
-.modal-overlay,
-.promo-modal-overlay { z-index: 100000 !important; }
-
-/* ===== ФИКС ПОЗИЦИОНИРОВАНИЯ МОДАЛОК ===== */
-
-/* Гарантируем, что оверлеи всегда поверх всего и центрированы */
-.tag-modal-overlay,
-.modal-overlay,
-.promo-modal-overlay {
-    /* Убираем возможные конфликты */
-    contain: layout style paint !important;
-    /* Гарантируем центрирование */
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    /* Фиксируем относительно viewport, а не родителя */
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    bottom: 0 !important;
-    /* Убираем отступы, которые могут сдвигать контент */
-    padding: 16px !important;
-    /* Предотвращаем прокрутку оверлея, если контент влезает */
-    overflow: hidden !important;
-}
-
-/* Контент модалки: ограничиваем высоту и разрешаем прокрутку ВНУТРИ */
-.tag-modal,
-.promo-modal,
-.DivModalContent {
-    /* Центрируем */
-    margin: auto !important;
-    /* Ограничиваем высоту с запасом */
-    max-height: calc(100vh - 32px) !important;
-    /* Разрешаем прокрутку только внутри модалки */
-    overflow-y: auto !important;
-    overflow-x: hidden !important;
-    /* Плавное появление */
-    transform: translateY(0) !important;
-    opacity: 1 !important;
-}
-
-/* ===== ФИКС ВЫПАДАЮЩЕГО СПИСКА МЕСЯЦА ===== */
-
-/* Десктоп: позиционируем относительно триггера, но с проверкой границ */
-.custom-month-dropdown {
-    position: absolute !important;
-    top: calc(100% + 4px) !important;
-    left: 0 !important;
-    right: auto !important;
-    /* Если список уходит за правый край — прижимаем к правому краю триггера */
-    max-width: 300px !important;
-}
-
-/* Мобильные: всегда по центру экрана */
-@media (max-width: 860px) {
-    .custom-month-dropdown {
-        position: fixed !important;
-        top: 50% !important;
-        left: 50% !important;
-        transform: translate(-50%, -50%) !important;
-        right: auto !important;
-        width: calc(100vw - 32px) !important;
-        max-width: 360px !important;
-        max-height: calc(100vh - 64px) !important;
-        z-index: 999999 !important;
-        /* Тёмный фон-подложка для фокуса */
-        box-shadow: 0 0 0 100vmax rgba(0, 0, 0, 0.5) !important;
+    .tag-modal {
+        padding: 24px 20px;
+        border-radius: 20px;
     }
     
-    /* Затемнение фона при открытом дропдауне */
-    .custom-month-select.open::after {
-        content: '' !important;
-        position: fixed !important;
-        top: 0 !important;
-        left: 0 !important;
-        right: 0 !important;
-        bottom: 0 !important;
-        background: rgba(0, 0, 0, 0.5) !important;
-        z-index: 999998 !important;
-        pointer-events: none !important;
+    .tag-modal-icon {
+        font-size: 44px;
+        margin-bottom: 12px;
     }
-}
-
-/* ===== ФИКС ПРОМО-МОДАЛКИ (не привязывать к слайдеру!) ===== */
-
-/* Убеждаемся, что промо-оверлей не наследует позиционирование родителя */
-#promoRunner {
-    /* Важно: не должен иметь position: fixed/relative, который влияет на children */
-    position: relative !important;
-    overflow: visible !important;
-}
-
-/* Промо-модалка всегда поверх всего */
-.promo-modal-overlay {
-    z-index: 100001 !important; /* Чуть выше остальных */
-}
-
-/* ===== ДОПОЛНИТЕЛЬНО: предотвращаем "прыжки" при открытии ===== */
-.modal-overlay.active,
-.tag-modal-overlay.active,
-.promo-modal-overlay.active {
-    /* Убираем анимацию появления, если она вызывает сдвиги */
-    transition: opacity 0.2s ease !important;
-}
-
-.modal-overlay.active .DivModalContent,
-.tag-modal-overlay.active .tag-modal,
-.promo-modal-overlay.active .promo-modal {
-    /* Мгновенное появление без сдвига */
-    transition: none !important;
-    transform: none !important;
-    opacity: 1 !important;
+    
+    .tag-modal-title {
+        font-size: 18px;
+    }
+    
+    .tag-modal-text {
+        font-size: 14px;
+        margin-bottom: 20px;
+    }
+    
+    .tag-modal-input-group {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .tag-modal-email-input {
+        padding: 12px 14px;
+        font-size: 14px;
+    }
+    
+    .tag-modal-submit-btn {
+        width: 100%;
+        text-align: center;
+        padding: 12px;
+        font-size: 13px;
+    }
+    
+    .tag-modal-close {
+        top: 12px;
+        right: 12px;
+        width: 28px;
+        height: 28px;
+        font-size: 16px;
+    }
 }
     </style>
 </head>
@@ -1284,7 +1269,7 @@ body.modal-open {
     <div id="site-hero-slider"></div>
 
     <div class="promo-runner-section" id="promoRunner">
-        <div class="promo-runner-track running" id="promoRunnerTrack"> <!-- Класс running добавлен сразу -->
+        <div class="promo-runner-track running" id="promoRunnerTrack">
             <img src="SVG/Промокод.svg" alt="Поймай Ксюшу — получи промокод!">
         </div>
         <span class="promo-caption">Поймайте Ксюшу — получите промокод!</span>
@@ -1346,26 +1331,24 @@ body.modal-open {
         </div>
     </div>
 
-    <!-- Мобильная всплывашка с информацией -->
+    <!-- Мобильная всплывашка -->
     <div class="mobile-balloon" id="mobileBalloon">
         <button class="mobile-balloon-close" id="closeMobileBalloon">×</button>
         <div class="mobile-balloon-title" id="mobileBalloonTitle"></div>
         <div class="mobile-balloon-info" id="mobileBalloonDate">
-            <i class="far fa-calendar-alt"></i>
-            <span></span>
+            <i class="far fa-calendar-alt"></i><span></span>
         </div>
         <div class="mobile-balloon-info" id="mobileBalloonVenue">
-            <i class="fas fa-theater-masks"></i>
-            <span></span>
+            <i class="fas fa-theater-masks"></i><span></span>
         </div>
         <div class="mobile-balloon-info" id="mobileBalloonAddress">
-            <i class="fas fa-map-marker-alt"></i>
-            <span></span>
+            <i class="fas fa-map-marker-alt"></i><span></span>
         </div>
         <div class="mobile-balloon-price" id="mobileBalloonPrice"></div>
         <button class="mobile-balloon-btn" id="mobileBalloonBuyBtn">Купить билеты</button>
     </div>
 
+    <!-- Модалка "Все гастроли" -->
     <div class="modal-overlay" id="tourModalOverlay">
         <div class="DivModalContent">
             <button class="ButtonModalClose" id="closeTourModal">×</button>
@@ -1381,6 +1364,7 @@ body.modal-open {
         </div>
     </div>
 
+    <!-- Модалка "Скоро" -->
     <div class="tag-modal-overlay" id="soonModalOverlay">
         <div class="tag-modal">
             <button class="tag-modal-close" id="closeSoonModal">×</button>
@@ -1395,6 +1379,7 @@ body.modal-open {
         </div>
     </div>
 
+    <!-- Модалка "Раскуплено" -->
     <div class="tag-modal-overlay" id="soldModalOverlay">
         <div class="tag-modal">
             <button class="tag-modal-close" id="closeSoldModal">×</button>
@@ -1409,24 +1394,28 @@ body.modal-open {
         </div>
     </div>
 
+    <!-- Модальное окно выбора месяца -->
+    <div class="month-modal-overlay" id="monthModalOverlay">
+        <div class="month-modal-content">
+            <button class="month-modal-close" id="closeMonthModal">×</button>
+            <h3 class="month-modal-title">Выберите месяц</h3>
+            <div class="month-modal-list" id="monthModalList"></div>
+        </div>
+    </div>
+
     <div id="site-footer"></div>
 </div>
 
-  <script src="js/loader-animation.js"></script>
-  <script src="js/components-loader.js"></script>
+<script src="js/loader-animation.js"></script>
+<script src="js/components-loader.js"></script>
 <script src="js/header-scripts.js"></script>
 <script src="js/common.js"></script>
 <script src="js/slider-scripts.js"></script>
 
 <script>
-// ============================================
-// СКРИПТЫ СТРАНИЦЫ «АФИША» — ЧИСТАЯ ВЕРСИЯ
-// ============================================
-
 (function() {
     'use strict';
     
-    // ===== ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ =====
     let myMap = null;
     let placemarks = [];
     let originalBounds = null;
@@ -1435,7 +1424,6 @@ body.modal-open {
     let currentFilter = 'all';
     let currentMobileBalloonEventId = null;
     
-    // DOM-элементы
     const elements = {
         grid: document.getElementById('eventsGrid'),
         showMoreBtn: document.getElementById('showMoreEventsBtn'),
@@ -1450,49 +1438,33 @@ body.modal-open {
         promoModalOverlay: document.getElementById('promoModalOverlay')
     };
     
-    // ===== УТИЛИТЫ =====
-    
-    // Блокировка прокрутки body при открытом модальном окне
     function lockBodyScroll() {
         const scrollY = window.scrollY || 0;
         document.body.classList.add('modal-open');
         document.body.style.top = `-${scrollY}px`;
-        document.body.style.position = 'fixed';
-        document.body.style.width = '100%';
         document.body.dataset.scrollY = scrollY;
     }
     
-    // Разблокировка прокрутки
     function unlockBodyScroll() {
         const scrollY = document.body.dataset.scrollY;
         document.body.classList.remove('modal-open');
-        document.body.style.position = '';
         document.body.style.top = '';
-        document.body.style.width = '';
-        if (scrollY) {
-            window.scrollTo(0, parseInt(scrollY, 10) || 0);
-        }
+        if (scrollY) window.scrollTo(0, parseInt(scrollY, 10) || 0);
         delete document.body.dataset.scrollY;
     }
     
-    // Открытие модального окна по ID
     function openModal(overlayId) {
-        const overlay = document.getElementById(overlayId);
-        if (!overlay) {
-            console.warn('Модалка не найдена:', overlayId);
-            return;
-        }
-        // Сначала закрываем все модалки
+        if (!overlayId) return;
         ['promoModalOverlay', 'soonModalOverlay', 'soldModalOverlay', 'tourModalOverlay'].forEach(id => {
             const el = document.getElementById(id);
             if (el) el.classList.remove('active');
         });
-        // Открываем нужную
+        const overlay = document.getElementById(overlayId);
+        if (!overlay) return;
         overlay.classList.add('active');
         lockBodyScroll();
     }
     
-    // Закрытие модального окна по ID
     function closeModal(overlayId) {
         const overlay = document.getElementById(overlayId);
         if (!overlay) return;
@@ -1500,20 +1472,10 @@ body.modal-open {
         unlockBodyScroll();
     }
     
-    // Закрытие всех модалок
-    function closeAllModals() {
-        ['promoModalOverlay', 'soonModalOverlay', 'soldModalOverlay', 'tourModalOverlay'].forEach(id => {
-            closeModal(id);
-        });
-        hideMobileBalloon();
-    }
-    
-    // ===== ПЕРЕХОД НА СТРАНИЦУ ОФОРМЛЕНИЯ =====
     window.goToCheckout = function(eventId) {
         if (typeof TOUR_SCHEDULE === 'undefined') return;
         const event = TOUR_SCHEDULE.find(ev => ev.id === eventId);
         if (!event) return;
-        
         const orderInfo = {
             title: event.title,
             dateTime: (typeof formatEventDate === 'function') ? formatEventDate(event.date, event.time) : '',
@@ -1524,61 +1486,46 @@ body.modal-open {
             eventId: event.id,
             performanceId: event.performanceId
         };
-        
         try {
             localStorage.setItem('selectedPerformance', JSON.stringify(orderInfo));
             window.location.href = 'checkout.html';
-        } catch (e) {
-            console.error('Ошибка при переходе к оформлению:', e);
-        }
+        } catch (e) {}
     };
-    
-    // ===== ФИЛЬТРЫ И РЕНДЕР СОБЫТИЙ =====
     
     function populateMonthSelect() {
         if (!elements.monthSelect || typeof getEventMonths !== 'function' || 
             typeof getUpcomingEvents !== 'function' || typeof TOUR_SCHEDULE === 'undefined') return;
-        
         const months = getEventMonths(getUpcomingEvents(TOUR_SCHEDULE));
         let optionsHtml = '<option value="all" selected>Все даты</option>';
-        
         months.forEach(month => {
             const value = `${month.name}-${month.year}`;
             const label = month.name.charAt(0).toUpperCase() + month.name.slice(1) + ' ' + month.year;
             optionsHtml += `<option value="${value}">${label}</option>`;
         });
-        
         elements.monthSelect.innerHTML = optionsHtml;
     }
     
     function getFilteredEvents() {
         if (typeof getUpcomingEvents !== 'function' || typeof TOUR_SCHEDULE === 'undefined') return [];
-        
         let events = getUpcomingEvents(TOUR_SCHEDULE);
-        
         if (currentFilter !== 'all' && typeof filterEventsByMonth === 'function') {
             events = filterEventsByMonth(events, currentFilter);
         }
-        
         return (typeof sortEventsByDate === 'function') ? sortEventsByDate(events) : events;
     }
     
     function renderEvents() {
         if (!elements.grid) return;
-        
         const filtered = getFilteredEvents();
         const displayEvents = filtered.slice(0, visibleCount);
-        
         if (displayEvents.length === 0) {
             elements.grid.innerHTML = '<div class="no-events">🎭 На выбранный период спектаклей нет. Следите за обновлениями!</div>';
             if (elements.showMoreBtn) elements.showMoreBtn.style.display = 'none';
             return;
         }
-        
         elements.grid.innerHTML = displayEvents.map(event => {
             const formattedDate = (typeof formatEventDate === 'function') ? formatEventDate(event.date, event.time) : '';
             const venueText = event.venue + (event.address ? ', ' + event.address.split(',')[0] : '');
-            
             return `
                 <div class="performance-card-afisha" data-event-id="${event.id}">
                     <img class="performance-img-afisha" src="${event.image}" alt="${event.title}" loading="lazy">
@@ -1591,10 +1538,7 @@ body.modal-open {
                         <h3 class="performance-name-afisha">${event.title}</h3>
                         <div class="performance-date-afisha">${formattedDate}</div>
                         <p class="performance-desc-afisha">${event.description || ''}</p>
-                        <div class="event-venue-afisha">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>${venueText}</span>
-                        </div>
+                        <div class="event-venue-afisha"><i class="fas fa-map-marker-alt"></i><span>${venueText}</span></div>
                         <div class="performance-btns-afisha">
                             <button class="btn-details-afisha" data-performance-id="${event.performanceId}">Подробнее</button>
                             <button class="btn-buy-afisha" data-event-id="${event.id}">Купить билет</button>
@@ -1604,7 +1548,6 @@ body.modal-open {
             `;
         }).join('');
         
-        // Обработчики кнопок
         elements.grid.querySelectorAll('.btn-details-afisha').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -1612,7 +1555,6 @@ body.modal-open {
                 if (perfId) window.location.href = `performance.html?id=${perfId}`;
             });
         });
-        
         elements.grid.querySelectorAll('.btn-buy-afisha').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -1621,212 +1563,109 @@ body.modal-open {
             });
         });
         
-        // Кнопка "Показать еще"
         if (elements.showMoreBtn) {
             elements.showMoreBtn.style.display = filtered.length > visibleCount ? 'block' : 'none';
         }
-        
         updateFilterVisuals();
     }
     
     function updateFilterVisuals() {
-        if (elements.allChip) {
-            elements.allChip.classList.toggle('active', currentFilter === 'all');
-        }
+        if (elements.allChip) elements.allChip.classList.toggle('active', currentFilter === 'all');
         if (elements.monthSelect) {
-            elements.monthSelect.classList.toggle('active-filter', currentFilter !== 'all');
-            if (currentFilter !== 'all') {
-                elements.monthSelect.value = currentFilter;
-            } else {
-                elements.monthSelect.selectedIndex = 0;
-            }
+            if (currentFilter !== 'all') elements.monthSelect.value = currentFilter;
+            else elements.monthSelect.selectedIndex = 0;
         }
     }
-    
-    // ===== МОБИЛЬНАЯ ВСПЛЫВАШКА НА КАРТЕ =====
     
     function showMobileBalloon(markerData) {
         const balloon = elements.mobileBalloon;
         if (!balloon || typeof TOUR_SCHEDULE === 'undefined') return;
-        
         const event = TOUR_SCHEDULE.find(ev => ev.id === markerData.eventId);
         if (!event) return;
-        
-        const setTitle = (id, text) => {
-            const el = document.getElementById(id);
-            if (el) el.textContent = text;
-        };
-        
-        setTitle('mobileBalloonTitle', event.title);
-        
+        document.getElementById('mobileBalloonTitle').textContent = event.title;
         const dateSpan = document.getElementById('mobileBalloonDate')?.querySelector('span');
         if (dateSpan) dateSpan.textContent = markerData.date || '';
-        
         const venueSpan = document.getElementById('mobileBalloonVenue')?.querySelector('span');
         if (venueSpan) venueSpan.textContent = markerData.venueWithCity || markerData.venue || '';
-        
         const addressSpan = document.getElementById('mobileBalloonAddress')?.querySelector('span');
         if (addressSpan) addressSpan.textContent = markerData.address || '';
-        
         const priceEl = document.getElementById('mobileBalloonPrice');
         if (priceEl) {
             if (markerData.price && markerData.price.min) {
                 priceEl.textContent = `💰 от ${markerData.price.min.toLocaleString('ru-RU')} ₽`;
                 priceEl.style.display = 'block';
-            } else {
-                priceEl.style.display = 'none';
-            }
+            } else priceEl.style.display = 'none';
         }
-        
         const buyBtn = document.getElementById('mobileBalloonBuyBtn');
-        if (buyBtn) {
-            if (markerData.hasTickets) {
-                buyBtn.style.display = 'block';
-                buyBtn.textContent = 'Купить билеты';
-            } else {
-                buyBtn.style.display = 'none';
-            }
-        }
-        
+        if (buyBtn) buyBtn.style.display = markerData.hasTickets ? 'block' : 'none';
         currentMobileBalloonEventId = markerData.eventId;
         balloon.classList.add('visible');
     }
     
     function hideMobileBalloon() {
-        if (elements.mobileBalloon) {
-            elements.mobileBalloon.classList.remove('visible');
-        }
+        if (elements.mobileBalloon) elements.mobileBalloon.classList.remove('visible');
         currentMobileBalloonEventId = null;
     }
     
     function initMobileBalloon() {
-        const closeBtn = document.getElementById('closeMobileBalloon');
-        const buyBtn = document.getElementById('mobileBalloonBuyBtn');
-        
-        if (closeBtn) {
-            closeBtn.addEventListener('click', hideMobileBalloon);
-            closeBtn.addEventListener('touchend', (e) => {
-                e.preventDefault();
-                hideMobileBalloon();
-            });
-        }
-        
-        if (buyBtn) {
-            const handleBuy = () => {
-                if (currentMobileBalloonEventId) {
-                    goToCheckout(currentMobileBalloonEventId);
-                }
-                hideMobileBalloon();
-            };
-            buyBtn.addEventListener('click', handleBuy);
-            buyBtn.addEventListener('touchend', (e) => {
-                e.preventDefault();
-                handleBuy();
-            });
-        }
-        
-        // Закрытие по клику вне
-        document.addEventListener('click', (e) => {
-            if (!elements.mobileBalloon?.classList.contains('visible')) return;
-            const mapEl = document.getElementById('yandexMap');
-            if (!mapEl?.contains(e.target) && !elements.mobileBalloon.contains(e.target)) {
-                hideMobileBalloon();
-            }
+        document.getElementById('closeMobileBalloon')?.addEventListener('click', hideMobileBalloon);
+        document.getElementById('mobileBalloonBuyBtn')?.addEventListener('click', () => {
+            if (currentMobileBalloonEventId) goToCheckout(currentMobileBalloonEventId);
+            hideMobileBalloon();
         });
     }
     
     // ===== ЯНДЕКС.КАРТЫ =====
-    
     function initYandexMap() {
         function doInit() {
             if (typeof ymaps === 'undefined') return;
-            
             ymaps.ready(function() {
-                // Скрываем скелетон
                 const skeleton = document.getElementById('mapSkeleton');
                 if (skeleton) skeleton.style.display = 'none';
-                
-                if (typeof getUpcomingEvents !== 'function' || typeof getMapMarkers !== 'function' || 
-                    typeof TOUR_SCHEDULE === 'undefined') return;
-                
+                if (typeof getUpcomingEvents !== 'function' || typeof getMapMarkers !== 'function' || typeof TOUR_SCHEDULE === 'undefined') return;
                 const events = getUpcomingEvents(TOUR_SCHEDULE);
                 const markers = getMapMarkers(events);
-                
                 if (markers.length === 0) {
                     const mapEl = document.getElementById('yandexMap');
-                    if (mapEl) {
-                        mapEl.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#5A5556;font-family:Nunito Sans,sans-serif;">🗺️ Гастролей не запланировано</div>';
-                    }
+                    if (mapEl) mapEl.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#5A5556;">🗺️ Гастролей не запланировано</div>';
                     return;
                 }
-                
-                // Создаём карту
                 myMap = new ymaps.Map('yandexMap', {
                     center: [55.7558, 37.6173],
                     zoom: 5,
                     controls: ['zoomControl', 'geolocationControl', 'fullscreenControl']
                 }, { suppressMapOpenBlock: true });
-                
                 myMap.behaviors.enable('multiTouch');
                 myMap.behaviors.enable('drag');
-                
                 setTimeout(() => { originalBounds = myMap.getBounds(); }, 500);
-                
                 const isMobile = window.innerWidth <= 860;
-                
-                // Добавляем метки
                 markers.forEach((marker, index) => {
                     const preset = marker.hasTickets ? 'islands#redCircleIcon' : 'islands#grayCircleIcon';
                     const iconColor = marker.hasTickets ? '#E8454D' : '#2A2627';
                     const priceText = marker.price ? `<div class="balloon-price">💰 от ${marker.price.min.toLocaleString('ru-RU')} ₽</div>` : '';
                     const buyButtonHtml = marker.hasTickets ? `<button type="button" class="balloon-buy-btn" data-event-id="${marker.eventId}">Купить билеты</button>` : '';
-                    
                     const placemark = new ymaps.Placemark(marker.coords, {
                         hintContent: `${marker.title} • ${marker.date}`,
-                        balloonContent: `
-                            <div class="balloon-content">
-                                <b>${marker.title}</b>
-                                <div class="balloon-date">📅 ${marker.date}</div>
-                                <div class="balloon-venue">🎭 ${marker.venueWithCity || marker.venue}</div>
-                                <div class="balloon-address">📍 ${marker.address}</div>
-                                ${priceText}
-                                ${buyButtonHtml}
-                            </div>
-                        `
+                        balloonContent: `<div class="balloon-content"><b>${marker.title}</b><div class="balloon-date">📅 ${marker.date}</div><div class="balloon-venue">🎭 ${marker.venueWithCity || marker.venue}</div><div class="balloon-address">📍 ${marker.address}</div>${priceText}${buyButtonHtml}</div>`
                     }, { preset: preset, iconColor: iconColor, hideIconOnBalloonOpen: false });
-                    
                     placemark.events.add('click', function(e) {
                         e.preventDefault();
-                        
                         if (myMap) {
                             myMap.setCenter(placemark.geometry.getCoordinates(), 12, { duration: 300 });
                             isMapZoomed = true;
-                            const rb = document.getElementById('resetMapBtn');
-                            if (rb) rb.classList.add('visible');
+                            document.getElementById('resetMapBtn')?.classList.add('visible');
                         }
-                        
                         highlightTourItem(index);
-                        
-                        if (isMobile) {
-                            showMobileBalloon(marker);
-                        } else {
-                            setTimeout(() => {
-                                if (placemark.balloon) placemark.balloon.open();
-                            }, 400);
-                        }
+                        if (isMobile) showMobileBalloon(marker);
+                        else setTimeout(() => { if (placemark.balloon) placemark.balloon.open(); }, 400);
                     });
-                    
                     myMap.geoObjects.add(placemark);
                     placemarks.push(placemark);
                 });
-                
                 myMap.setBounds(myMap.geoObjects.getBounds(), { checkZoomRange: true, zoomMargin: 50 });
                 setTimeout(() => { originalBounds = myMap.getBounds(); }, 600);
-                
                 initResetMapButton();
                 renderTourList();
-                
-                // Обработчик кнопок в балунах
                 document.addEventListener('click', function(e) {
                     const btn = e.target.closest('.balloon-buy-btn');
                     if (btn?.dataset.eventId) {
@@ -1837,18 +1676,13 @@ body.modal-open {
                 });
             });
         }
-        
-        if (window.ymapsReady) {
-            doInit();
-        } else {
-            window.pendingMapInit = doInit;
-        }
+        if (window.ymapsReady) doInit();
+        else window.pendingMapInit = doInit;
     }
     
     function initResetMapButton() {
         const resetBtn = document.getElementById('resetMapBtn');
         if (!resetBtn) return;
-        
         const resetMap = function(e) {
             if (e) e.preventDefault();
             if (originalBounds && myMap) {
@@ -1860,18 +1694,14 @@ body.modal-open {
                 hideMobileBalloon();
             }
         };
-        
         resetBtn.addEventListener('click', resetMap);
-        resetBtn.addEventListener('touchend', (e) => { e.preventDefault(); resetMap(e); });
-        
         if (myMap) {
-            const mapClickHandler = function(e) {
+            myMap.events.add('click', function(e) {
                 const coords = e.get('coords');
                 const clicked = placemarks.some(pm => {
                     const pc = pm.geometry.getCoordinates();
                     return Math.abs(pc[0] - coords[0]) < 0.3 && Math.abs(pc[1] - coords[1]) < 0.3;
                 });
-                
                 if (!clicked && isMapZoomed) {
                     setTimeout(() => {
                         if (myMap && originalBounds) {
@@ -1883,122 +1713,77 @@ body.modal-open {
                         }
                     }, 100);
                 }
-            };
-            myMap.events.add('click', mapClickHandler);
+            });
         }
     }
     
-    // ===== СПИСОК ГАСТРОЛЕЙ =====
-    
     function renderTourList(showAll = false) {
-        if (!elements.tourList || typeof getUpcomingEvents !== 'function' || 
-            typeof getMapMarkers !== 'function' || typeof TOUR_SCHEDULE === 'undefined') return;
-        
+        if (!elements.tourList || typeof getUpcomingEvents !== 'function' || typeof getMapMarkers !== 'function' || typeof TOUR_SCHEDULE === 'undefined') return;
         const events = getUpcomingEvents(TOUR_SCHEDULE);
         const markers = getMapMarkers(events);
         const isMobile = window.innerWidth <= 860;
-        
         elements.tourList.innerHTML = '';
         const itemsToShow = (isMobile && !showAll) ? markers.slice(0, 4) : markers;
-        
         itemsToShow.forEach((marker, index) => {
             const originalIndex = markers.findIndex(m => m.eventId === marker.eventId);
             const event = TOUR_SCHEDULE.find(ev => ev.id === marker.eventId);
             if (!event) return;
-            
             const tourItem = document.createElement('div');
             tourItem.className = 'tour-item';
             if (isMobile && index >= 4 && !showAll) tourItem.classList.add('mobile-hidden');
             tourItem.dataset.index = originalIndex;
             tourItem.dataset.eventId = marker.eventId;
-            
             const statusClass = marker.hasTickets ? 'available' : 'soon';
             const statusText = marker.hasTickets ? 'Билеты' : 'Скоро';
-            
             tourItem.innerHTML = `
                 <div class="tour-city">${marker.title}</div>
                 <div class="tour-dates"><span>${marker.date}</span></div>
                 <div class="tour-venue"><i class="fas fa-map-marker-alt"></i><span>${marker.venueWithCity || marker.venue}</span></div>
                 <button class="tour-status ${statusClass}" data-status="${statusClass}" data-event-id="${marker.eventId}">${statusText}</button>
             `;
-            
-            const handleItemClick = function(e) {
+            tourItem.addEventListener('click', function(e) {
                 if (e.target.classList.contains('tour-status')) return;
                 e.preventDefault();
                 highlightTourItem(originalIndex);
-                if (window.innerWidth <= 860) showMobileBalloon(marker);
-            };
-            
-            tourItem.addEventListener('click', handleItemClick);
-            tourItem.addEventListener('touchend', handleItemClick);
-            
+                if (isMobile) showMobileBalloon(marker);
+            });
             const statusBtn = tourItem.querySelector('.tour-status');
             if (statusBtn) {
-                const statusHandler = function(e) {
+                statusBtn.addEventListener('click', function(e) {
                     e.preventDefault();
                     e.stopPropagation();
                     const status = this.dataset.status;
                     const eventId = this.dataset.eventId;
                     const eventData = TOUR_SCHEDULE.find(ev => ev.id === eventId);
                     if (!eventData) return;
-                    
                     if (status === 'available') goToCheckout(eventId);
                     else if (status === 'soon') openSoonModal(eventData.title);
                     else if (status === 'sold') openSoldModal(eventData.title);
-                };
-                statusBtn.addEventListener('click', statusHandler);
-                statusBtn.addEventListener('touchend', statusHandler);
+                });
             }
-            
             elements.tourList.appendChild(tourItem);
         });
-        
         if (elements.showMoreTourBtn) {
             if (isMobile && markers.length > 4) {
                 elements.showMoreTourBtn.style.display = 'block';
                 elements.showMoreTourBtn.textContent = showAll ? 'Скрыть' : 'Показать еще';
-            } else {
-                elements.showMoreTourBtn.style.display = 'none';
-            }
+            } else elements.showMoreTourBtn.style.display = 'none';
         }
     }
     
     function highlightTourItem(index) {
         document.querySelectorAll('.tour-item').forEach(i => i.classList.remove('active'));
         const targetItem = document.querySelector(`.tour-item[data-index="${index}"]`);
-        
         if (targetItem) {
-            if (targetItem.classList.contains('mobile-hidden')) {
-                renderTourList(true);
-                setTimeout(() => {
-                    const newTarget = document.querySelector(`.tour-item[data-index="${index}"]`);
-                    if (newTarget) {
-                        newTarget.classList.add('active');
-                        newTarget.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    }
-                }, 200);
-            } else {
-                targetItem.classList.add('active');
-                targetItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }
+            targetItem.classList.add('active');
+            targetItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
-        
         if (placemarks[index] && myMap) {
-            const coordinates = placemarks[index].geometry.getCoordinates();
-            myMap.setCenter(coordinates, 12, { duration: 300 });
+            myMap.setCenter(placemarks[index].geometry.getCoordinates(), 12, { duration: 300 });
             isMapZoomed = true;
-            const rb = document.getElementById('resetMapBtn');
-            if (rb) rb.classList.add('visible');
-            
-            if (window.innerWidth > 860) {
-                setTimeout(() => {
-                    if (placemarks[index].balloon) placemarks[index].balloon.open();
-                }, 350);
-            }
+            document.getElementById('resetMapBtn')?.classList.add('visible');
         }
     }
-    
-    // ===== МОДАЛЬНЫЕ ОКНА "СКОРО" И "РАСКУПЛЕНО" =====
     
     function openSoonModal(title) {
         const m = elements.soonModalOverlay;
@@ -2006,10 +1791,8 @@ body.modal-open {
         const titleEl = m.querySelector('.tag-modal-title');
         if (titleEl) titleEl.textContent = `«${title}» — скоро в продаже`;
         openModal('soonModalOverlay');
-        const success = document.getElementById('soonSuccess');
-        const input = document.getElementById('soonEmailInput');
-        if (success) success.style.display = 'none';
-        if (input) input.value = '';
+        document.getElementById('soonSuccess').style.display = 'none';
+        document.getElementById('soonEmailInput').value = '';
     }
     
     function openSoldModal(title) {
@@ -2018,403 +1801,179 @@ body.modal-open {
         const titleEl = m.querySelector('.tag-modal-title');
         if (titleEl) titleEl.textContent = `«${title}» — билеты раскуплены`;
         openModal('soldModalOverlay');
-        const success = document.getElementById('soldSuccess');
-        const input = document.getElementById('soldEmailInput');
-        if (success) success.style.display = 'none';
-        if (input) input.value = '';
+        document.getElementById('soldSuccess').style.display = 'none';
+        document.getElementById('soldEmailInput').value = '';
     }
     
     function initTagModals() {
         ['soon', 'sold'].forEach(type => {
             const overlay = document.getElementById(`${type}ModalOverlay`);
             if (!overlay) return;
-            
-            const closeBtn = document.getElementById(`close${type.charAt(0).toUpperCase() + type.slice(1)}Modal`);
-            const submitBtn = document.getElementById(`${type}SubmitBtn`);
-            const emailInput = document.getElementById(`${type}EmailInput`);
-            const successMsg = document.getElementById(`${type}Success`);
-            
-            const closeModalLocal = () => {
-                overlay.classList.remove('active');
-                unlockBodyScroll();
-                if (successMsg) successMsg.style.display = 'none';
-                if (emailInput) emailInput.value = '';
-            };
-            
-            if (closeBtn) {
-                closeBtn.addEventListener('click', closeModalLocal);
-                closeBtn.addEventListener('touchend', (e) => { e.preventDefault(); closeModalLocal(); });
-            }
-            
-            overlay.addEventListener('click', (e) => {
-                if (e.target === overlay) closeModalLocal();
+            document.getElementById(`close${type.charAt(0).toUpperCase() + type.slice(1)}Modal`)?.addEventListener('click', () => closeModal(`${type}ModalOverlay`));
+            overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(`${type}ModalOverlay`); });
+            document.getElementById(`${type}SubmitBtn`)?.addEventListener('click', () => {
+                const emailInput = document.getElementById(`${type}EmailInput`);
+                const email = emailInput?.value.trim();
+                if (email && email.includes('@') && email.includes('.')) {
+                    document.getElementById(`${type}Success`).style.display = 'block';
+                    emailInput.value = '';
+                } else alert('Пожалуйста, введите корректный email');
             });
-            
-            if (submitBtn) {
-                submitBtn.addEventListener('click', () => {
-                    const email = emailInput?.value.trim();
-                    if (email && email.includes('@') && email.includes('.')) {
-                        if (successMsg) successMsg.style.display = 'block';
-                        if (emailInput) emailInput.value = '';
-                    } else {
-                        alert('Пожалуйста, введите корректный email');
-                    }
-                });
-            }
-        });
-        
-        // Закрытие по Escape
-        document.addEventListener('keydown', (e) => {
-            if (e.key !== 'Escape') return;
-            ['soon', 'sold', 'tour', 'promo'].forEach(t => {
-                const o = document.getElementById(`${t}ModalOverlay`);
-                if (o?.classList.contains('active')) {
-                    o.classList.remove('active');
-                    unlockBodyScroll();
-                }
-            });
-            hideMobileBalloon();
         });
     }
     
-    // ===== МОДАЛКА "ВСЕ ГАСТРОЛИ" =====
-    
     function initTourModal() {
         const modalOverlay = elements.tourModalOverlay;
-        const closeModalBtn = document.getElementById('closeTourModal');
-        const openModalLink = document.getElementById('openAllToursModal');
-        const modalListContainer = document.getElementById('modalTourListContainer');
-        
-        if (!modalOverlay || !modalListContainer) return;
+        const container = document.getElementById('modalTourListContainer');
+        if (!modalOverlay || !container) return;
         
         function renderTourModal() {
-            if (typeof getUpcomingEvents !== 'function' || typeof formatEventDate !== 'function' || 
-                typeof TOUR_SCHEDULE === 'undefined') return;
-            
+            if (typeof getUpcomingEvents !== 'function' || typeof TOUR_SCHEDULE === 'undefined') return;
             const events = getUpcomingEvents(TOUR_SCHEDULE);
-            if (events.length === 0) {
-                modalListContainer.innerHTML = '<div style="text-align:center;padding:16px;color:#5A5556;font-family:Nunito Sans,sans-serif;">Гастролей не запланировано</div>';
-                return;
-            }
-            
-            modalListContainer.innerHTML = events.map(event => {
-                const formattedDate = formatEventDate(event.date, event.time);
+            container.innerHTML = events.map(event => {
+                const formattedDate = (typeof formatEventDate === 'function') ? formatEventDate(event.date, event.time) : '';
                 const hasTickets = !!event.ticketUrl;
                 const statusClass = hasTickets ? 'available' : 'soon';
                 const statusText = hasTickets ? 'Билеты' : 'Скоро';
-                
-                return `
-                    <div class="DivModalTourItem">
-                        <div class="SpanModalTourCity"><div>${event.title}</div></div>
-                        <div class="DivModalTourDates">
-                            <div class="Strong"><div>${formattedDate}</div></div>
-                            <div class="SpanModalTourVenue">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <span>${event.venue}${event.address ? ', ' + event.address : ''}</span>
-                            </div>
-                        </div>
-                        <button class="SpanTourStatus ${statusClass}" data-status="${statusClass}" data-event-id="${event.id}">${statusText}</button>
-                    </div>
-                `;
+                return `<div class="DivModalTourItem"><div class="SpanModalTourCity"><div>${event.title}</div></div><div class="DivModalTourDates"><div class="Strong"><div>${formattedDate}</div></div><div class="SpanModalTourVenue"><i class="fas fa-map-marker-alt"></i><span>${event.venue}${event.address ? ', ' + event.address : ''}</span></div></div><button class="SpanTourStatus ${statusClass}" data-status="${statusClass}" data-event-id="${event.id}">${statusText}</button></div>`;
             }).join('');
-            
-            // Обработчики статусов
-            modalListContainer.querySelectorAll('.SpanTourStatus').forEach(btn => {
-                const handler = (e) => {
+            container.querySelectorAll('.SpanTourStatus').forEach(btn => {
+                btn.addEventListener('click', (e) => {
                     e.stopPropagation();
-                    e.preventDefault();
                     const eid = btn.dataset.eventId;
                     const st = btn.dataset.status;
                     const ed = TOUR_SCHEDULE.find(ev => ev.id === eid);
                     if (!ed) return;
-                    
                     if (st === 'available') goToCheckout(eid);
                     else if (st === 'soon') openSoonModal(ed.title);
                     else if (st === 'sold') openSoldModal(ed.title);
-                };
-                btn.addEventListener('click', handler);
-                btn.addEventListener('touchend', handler);
+                });
             });
         }
         
-        const handleOpen = (e) => {
-            if (e) { e.preventDefault(); e.stopPropagation(); }
+        document.getElementById('openAllToursModal')?.addEventListener('click', (e) => {
+            e.preventDefault();
             renderTourModal();
             openModal('tourModalOverlay');
-        };
-        
-        const handleClose = () => closeModal('tourModalOverlay');
-        
-        if (openModalLink) {
-            openModalLink.addEventListener('click', handleOpen);
-            openModalLink.addEventListener('touchend', (e) => { e.preventDefault(); handleOpen(e); });
-        }
-        
-        if (closeModalBtn) {
-            closeModalBtn.addEventListener('click', handleClose);
-            closeModalBtn.addEventListener('touchend', (e) => { e.preventDefault(); handleClose(); });
-        }
-        
-        modalOverlay.addEventListener('click', (e) => {
-            if (e.target === modalOverlay) handleClose();
+        });
+        document.getElementById('closeTourModal')?.addEventListener('click', () => closeModal('tourModalOverlay'));
+        modalOverlay.addEventListener('click', (e) => { if (e.target === modalOverlay) closeModal('tourModalOverlay'); });
+    }
+    
+    function initPromoRunner() {
+        document.getElementById('promoRunnerTrack')?.addEventListener('click', () => openModal('promoModalOverlay'));
+        document.getElementById('closePromoModal')?.addEventListener('click', () => closeModal('promoModalOverlay'));
+        elements.promoModalOverlay?.addEventListener('click', (e) => { if (e.target === elements.promoModalOverlay) closeModal('promoModalOverlay'); });
+        document.getElementById('copyPromoBtn')?.addEventListener('click', async () => {
+            const code = document.getElementById('promoCode')?.textContent.trim() || 'KSUSHA10';
+            try {
+                await navigator.clipboard.writeText(code);
+                const btn = document.getElementById('copyPromoBtn');
+                btn.innerHTML = '<i class="fas fa-check"></i> Скопировано!';
+                btn.classList.add('copied');
+                setTimeout(() => { btn.innerHTML = '<i class="far fa-copy"></i> Скопировать'; btn.classList.remove('copied'); }, 2500);
+            } catch {}
+        });
+        document.getElementById('gotoAfishaBtn')?.addEventListener('click', (e) => {
+            e.preventDefault();
+            closeModal('promoModalOverlay');
+            document.querySelector('.filters-section-afisha')?.scrollIntoView({ behavior: 'smooth' });
         });
     }
     
-    // ===== КАСТОМНЫЙ МЕСЯЧНЫЙ СЕЛЕКТ =====
-    
+    // ===== КАСТОМНЫЙ СЕЛЕКТ МЕСЯЦЕВ (МОДАЛЬНОЕ ОКНО) =====
     function initCustomMonthSelect() {
         const originalSelect = elements.monthSelect;
         if (!originalSelect || document.querySelector('.custom-month-select')) return;
-        
         originalSelect.style.display = 'none';
         
         const wrapper = document.createElement('div');
         wrapper.className = 'custom-month-select';
-        
         const trigger = document.createElement('div');
         trigger.className = 'custom-month-trigger';
-        
-        const dropdown = document.createElement('div');
-        dropdown.className = 'custom-month-dropdown';
-        
-        function renderOptions() {
-            dropdown.innerHTML = '';
-            Array.from(originalSelect.options).forEach(option => {
-                const optionEl = document.createElement('div');
-                optionEl.className = 'custom-month-option';
-                if (option.selected) optionEl.classList.add('selected');
-                optionEl.textContent = option.text;
-                optionEl.dataset.value = option.value;
-                
-                const selectHandler = (e) => {
-                    e.stopPropagation();
-                    e.preventDefault();
-                    originalSelect.value = optionEl.dataset.value;
-                    trigger.innerHTML = `${optionEl.textContent} <i class="fas fa-chevron-down arrow-icon"></i>`;
-                    
-                    if (originalSelect.selectedIndex !== 0) {
-                        originalSelect.classList.add('active-filter');
-                        trigger.classList.add('active');
-                    } else {
-                        originalSelect.classList.remove('active-filter');
-                        trigger.classList.remove('active');
-                    }
-                    
-                    dropdown.querySelectorAll('.custom-month-option').forEach(opt => opt.classList.remove('selected'));
-                    optionEl.classList.add('selected');
-                    wrapper.classList.remove('open');
-                    originalSelect.dispatchEvent(new Event('change', { bubbles: true }));
-                };
-                
-                optionEl.addEventListener('click', selectHandler);
-                optionEl.addEventListener('touchend', selectHandler);
-                dropdown.appendChild(optionEl);
-            });
-        }
         
         const getSelectedText = () => {
             const selected = originalSelect.options[originalSelect.selectedIndex];
             return selected ? selected.text : 'Все даты';
         };
-        
         trigger.innerHTML = `${getSelectedText()} <i class="fas fa-chevron-down arrow-icon"></i>`;
         if (originalSelect.selectedIndex !== 0) trigger.classList.add('active');
         
-        renderOptions();
+        const monthModal = document.getElementById('monthModalOverlay');
+        const monthModalList = document.getElementById('monthModalList');
         
-        const toggleHandler = (e) => {
-            e.stopPropagation();
-            e.preventDefault();
-            document.querySelectorAll('.custom-month-select.open').forEach(el => {
-                if (el !== wrapper) el.classList.remove('open');
+        function renderMonthOptions() {
+            monthModalList.innerHTML = '';
+            const allOption = document.createElement('div');
+            allOption.className = 'month-modal-option month-modal-option-all';
+            if (originalSelect.selectedIndex === 0) allOption.classList.add('selected');
+            allOption.textContent = 'Все даты';
+            allOption.addEventListener('click', (e) => { e.stopPropagation(); selectMonth('all', 'Все даты'); closeMonthModal(); });
+            monthModalList.appendChild(allOption);
+            Array.from(originalSelect.options).forEach(option => {
+                if (option.value === 'all') return;
+                const optionEl = document.createElement('div');
+                optionEl.className = 'month-modal-option';
+                if (option.selected) optionEl.classList.add('selected');
+                optionEl.textContent = option.text;
+                optionEl.addEventListener('click', (e) => { e.stopPropagation(); selectMonth(option.value, option.text); closeMonthModal(); });
+                monthModalList.appendChild(optionEl);
             });
-            wrapper.classList.toggle('open');
-        };
+        }
         
-        trigger.addEventListener('click', toggleHandler);
-        trigger.addEventListener('touchend', toggleHandler);
+        function selectMonth(value, text) {
+            originalSelect.value = value;
+            for (let i = 0; i < originalSelect.options.length; i++) {
+                if (originalSelect.options[i].value === value) { originalSelect.selectedIndex = i; break; }
+            }
+            if (value === 'all') {
+                trigger.classList.remove('active');
+                trigger.innerHTML = 'Все даты <i class="fas fa-chevron-down arrow-icon"></i>';
+                currentFilter = 'all';
+                document.querySelectorAll('.filter-chip-afisha').forEach(chip => chip.classList.remove('active'));
+                if (elements.allChip) elements.allChip.classList.add('active');
+            } else {
+                trigger.classList.add('active');
+                trigger.innerHTML = `${text} <i class="fas fa-chevron-down arrow-icon"></i>`;
+                currentFilter = value;
+                document.querySelectorAll('.filter-chip-afisha').forEach(chip => chip.classList.remove('active'));
+            }
+            visibleCount = 6;
+            renderEvents();
+            renderTourList();
+            originalSelect.dispatchEvent(new Event('change', { bubbles: true }));
+        }
         
-        document.addEventListener('click', (e) => {
-            if (!wrapper.contains(e.target)) wrapper.classList.remove('open');
-        });
-        document.addEventListener('touchend', (e) => {
-            if (!wrapper.contains(e.target)) wrapper.classList.remove('open');
-        });
+        function openMonthModal() { renderMonthOptions(); monthModal.classList.add('active'); lockBodyScroll(); }
+        function closeMonthModal() { monthModal.classList.remove('active'); unlockBodyScroll(); }
+        
+        trigger.addEventListener('click', (e) => { e.stopPropagation(); e.preventDefault(); openMonthModal(); });
+        document.getElementById('closeMonthModal')?.addEventListener('click', closeMonthModal);
+        monthModal.addEventListener('click', (e) => { if (e.target === monthModal) closeMonthModal(); });
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && monthModal.classList.contains('active')) closeMonthModal(); });
         
         wrapper.appendChild(trigger);
-        wrapper.appendChild(dropdown);
-        
         const filterChipDate = document.querySelector('.filter-chip-date');
-        if (filterChipDate) {
-            filterChipDate.appendChild(wrapper);
-            const icon = filterChipDate.querySelector('i.fa-chevron-down');
-            if (icon) icon.style.display = 'none';
-        } else {
-            originalSelect.parentNode?.insertBefore(wrapper, originalSelect);
-        }
+        if (filterChipDate) filterChipDate.appendChild(wrapper);
+        else originalSelect.parentNode?.insertBefore(wrapper, originalSelect);
         
         if (elements.allChip) {
-            const resetHandler = (e) => {
-                if (e) e.preventDefault();
-                originalSelect.selectedIndex = 0;
-                originalSelect.classList.remove('active-filter');
-                trigger.classList.remove('active');
-                trigger.innerHTML = `${originalSelect.options[0].text} <i class="fas fa-chevron-down arrow-icon"></i>`;
-                dropdown.querySelectorAll('.custom-month-option').forEach(opt => {
-                    opt.classList.toggle('selected', opt.dataset.value === originalSelect.value);
-                });
-                wrapper.classList.remove('open');
-            };
-            elements.allChip.addEventListener('click', resetHandler);
-            elements.allChip.addEventListener('touchend', resetHandler);
+            elements.allChip.addEventListener('click', (e) => { e.preventDefault(); selectMonth('all', 'Все даты'); });
         }
     }
-    
-    // ===== ПРОМОКОД =====
-    
-    function initPromoRunner() {
-        const runnerTrack = document.getElementById('promoRunnerTrack');
-        const modalOverlay = elements.promoModalOverlay;
-        const closeModalBtn = document.getElementById('closePromoModal');
-        const copyBtn = document.getElementById('copyPromoBtn');
-        const gotoAfishaBtn = document.getElementById('gotoAfishaBtn');
-        const promoCodeText = document.getElementById('promoCode');
-        
-        if (runnerTrack && modalOverlay) {
-            runnerTrack.addEventListener('click', (e) => {
-                e.stopPropagation();
-                openModal('promoModalOverlay');
-                if (copyBtn) {
-                    copyBtn.innerHTML = '<i class="far fa-copy"></i> Скопировать';
-                    copyBtn.classList.remove('copied');
-                }
-            });
-        }
-        
-        if (closeModalBtn && modalOverlay) {
-            closeModalBtn.addEventListener('click', () => closeModal('promoModalOverlay'));
-            closeModalBtn.addEventListener('touchend', (e) => { e.preventDefault(); closeModal('promoModalOverlay'); });
-            modalOverlay.addEventListener('click', (e) => {
-                if (e.target === modalOverlay) closeModal('promoModalOverlay');
-            });
-        }
-        
-        if (copyBtn && promoCodeText) {
-            copyBtn.addEventListener('click', async () => {
-                const code = promoCodeText.textContent.trim();
-                try {
-                    await navigator.clipboard.writeText(code);
-                    copyBtn.innerHTML = '<i class="fas fa-check"></i> Скопировано!';
-                    copyBtn.classList.add('copied');
-                } catch {
-                    const ta = document.createElement('textarea');
-                    ta.value = code;
-                    ta.style.cssText = 'position:fixed;opacity:0;left:-9999px';
-                    document.body.appendChild(ta);
-                    ta.select();
-                    document.execCommand('copy');
-                    document.body.removeChild(ta);
-                    copyBtn.innerHTML = '<i class="fas fa-check"></i> Скопировано!';
-                    copyBtn.classList.add('copied');
-                }
-                setTimeout(() => {
-                    copyBtn.innerHTML = '<i class="far fa-copy"></i> Скопировать';
-                    copyBtn.classList.remove('copied');
-                }, 2500);
-            });
-        }
-        
-        if (gotoAfishaBtn) {
-            gotoAfishaBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                closeModal('promoModalOverlay');
-                document.querySelector('.filters-section-afisha')?.scrollIntoView({ behavior: 'smooth' });
-            });
-        }
-    }
-    
-    // ===== ФИЛЬТРЫ =====
     
     function initFilters() {
-        if (elements.allChip) {
-            elements.allChip.addEventListener('click', () => {
-                currentFilter = 'all';
-                visibleCount = 6;
-                renderEvents();
-                renderTourList();
-            });
-        }
-        
-        if (elements.monthSelect) {
-            elements.monthSelect.addEventListener('change', (e) => {
-                currentFilter = e.target.value;
-                visibleCount = 6;
-                renderEvents();
-                renderTourList();
-            });
-        }
-        
         if (elements.showMoreBtn) {
             elements.showMoreBtn.addEventListener('click', () => {
                 const f = getFilteredEvents();
-                if (visibleCount < f.length) {
-                    visibleCount = Math.min(visibleCount + 3, f.length);
-                    renderEvents();
-                }
+                if (visibleCount < f.length) { visibleCount = Math.min(visibleCount + 3, f.length); renderEvents(); }
             });
         }
+        if (elements.showMoreTourBtn) {
+            let showAll = false;
+            elements.showMoreTourBtn.addEventListener('click', () => { showAll = !showAll; renderTourList(showAll); });
+        }
     }
-    
-    function initShowMoreTourBtn() {
-        if (!elements.showMoreTourBtn) return;
-        
-        let showAll = false;
-        const toggle = () => {
-            showAll = !showAll;
-            renderTourList(showAll);
-        };
-        
-        elements.showMoreTourBtn.addEventListener('click', toggle);
-        elements.showMoreTourBtn.addEventListener('touchend', (e) => { e.preventDefault(); toggle(); });
-        
-        window.addEventListener('resize', () => renderTourList(showAll));
-    }
-    
-    function refreshOnReturn() {
-        window.addEventListener('pageshow', (e) => {
-            if (!e.persisted) return;
-            renderEvents();
-            renderTourList();
-            if (myMap) {
-                myMap.destroy();
-                myMap = null;
-                placemarks = [];
-                initYandexMap();
-            }
-        });
-    }
-    
-    // ===== ГЛОБАЛЬНЫЙ ОБРАБОТЧИК КЛИКОВ ВНЕ МОДАЛОК =====
-    
-    function initGlobalModalHandlers() {
-        document.addEventListener('click', function(e) {
-            ['promoModalOverlay', 'soonModalOverlay', 'soldModalOverlay', 'tourModalOverlay'].forEach(id => {
-                const overlay = document.getElementById(id);
-                const modalContent = overlay?.querySelector('.tag-modal, .promo-modal, .DivModalContent');
-                
-                if (overlay?.classList.contains('active') && modalContent && 
-                    !modalContent.contains(e.target) && e.target !== overlay) {
-                    closeModal(id);
-                }
-            });
-        });
-        
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') closeAllModals();
-        });
-    }
-    
-    // ===== ИНИЦИАЛИЗАЦИЯ =====
     
     function initAll() {
         populateMonthSelect();
@@ -2424,20 +1983,13 @@ body.modal-open {
         initPromoRunner();
         initMobileBalloon();
         renderEvents();
-        
+        renderTourList();
         setTimeout(initCustomMonthSelect, 50);
         setTimeout(initYandexMap, 100);
-        setTimeout(initShowMoreTourBtn, 150);
-        setTimeout(refreshOnReturn, 200);
-        setTimeout(initGlobalModalHandlers, 100);
     }
     
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initAll);
-    } else {
-        initAll();
-    }
-    
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initAll);
+    else initAll();
 })();
 </script>
 </body>

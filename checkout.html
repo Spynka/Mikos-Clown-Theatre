@@ -1571,6 +1571,29 @@ body {
     color: #E8454D;
     flex-shrink: 0;
 }
+/* ===== ФИКС ДЛЯ ДЕСКТОПА: ОТСТУП ОТ ФИКСИРОВАННОГО ХЕДЕРА ===== */
+@media (min-width: 861px) {
+    /* Добавляем отступ сверху для всех страниц, равный высоте хедера */
+    .seats-page,
+    .checkout-page,
+    .payment-page,
+    .success-page {
+        padding-top: 110px !important; /* 90px хедер + 20px дополнительный отступ */
+    }
+    
+
+    
+    /* Убираем padding-top у body, если он мешает другим страницам */
+    /* и добавляем отступ только для конкретных элементов */
+    .step-section {
+        padding-top: 20px;
+    }
+    
+    /* Фикс для хлебных крошек - чтобы они не прилипали к хедеру */
+    .breadcrumbs {
+        padding-top: 23px !important;
+    }
+}
     </style>
 </head>
 <body>
