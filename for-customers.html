@@ -10,255 +10,411 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/header-footer.css"> 
     <style>
-        /* --- SVG-иконки --- */
-        #eventDate {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%234A6294' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='18' rx='2' ry='2'%3E%3C/rect%3E%3Cline x1='16' y1='2' x2='16' y2='6'%3E%3C/line%3E%3Cline x1='8' y1='2' x2='8' y2='6'%3E%3C/line%3E%3Cline x1='3' y1='10' x2='21' y2='10'%3E%3C/line%3E%3C/svg%3E") !important;
-            background-repeat: no-repeat !important;
-            background-position: right 12px center !important;
-            background-size: 18px 18px !important;
-            padding-right: 40px !important;
-            cursor: pointer !important;
-        }
-        #eventDate:hover {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%23E8454D' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='18' rx='2' ry='2'%3E%3C/rect%3E%3Cline x1='16' y1='2' x2='16' y2='6'%3E%3C/line%3E%3Cline x1='8' y1='2' x2='8' y2='6'%3E%3C/line%3E%3Cline x1='3' y1='10' x2='21' y2='10'%3E%3C/line%3E%3C/svg%3E") !important;
-        }
-        
-        .custom-select-btn {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%234A6294' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") !important;
-            background-repeat: no-repeat !important;
-            background-position: right 16px center !important;
-            background-size: 14px 14px !important;
-            padding-right: 40px !important;
-            transition: background-image 0.2s ease !important;
-        }
-        .custom-select-btn.active {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23E8454D' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='18 15 12 9 6 15'%3E%3C/polyline%3E%3C/svg%3E") !important;
-        }
-        
-        .form-select-customers {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%234A6294' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") !important;
-            background-repeat: no-repeat !important;
-            background-position: right 16px center !important;
-            background-size: 14px 14px !important;
-            padding-right: 40px !important;
-        }
+    /* --- Базовые стили для формы --- */
+    .form-group-custom {
+        margin-bottom: 16px;
+        width: 100%;
+        min-width: 0;
+    }
+    
+    .form-row {
+        display: flex;
+        gap: 16px;
+        width: 100%;
+    }
+    
+    .form-row .form-group-custom {
+        flex: 1;
+        min-width: 0;
+    }
 
-        .calendar-icon { display: none !important; }
-        .custom-select-btn::after { display: none !important; }
+    /* --- SVG-иконки --- */
+    #eventDate {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%234A6294' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='18' rx='2' ry='2'%3E%3C/rect%3E%3Cline x1='16' y1='2' x2='16' y2='6'%3E%3C/line%3E%3Cline x1='8' y1='2' x2='8' y2='6'%3E%3C/line%3E%3Cline x1='3' y1='10' x2='21' y2='10'%3E%3C/line%3E%3C/svg%3E") !important;
+        background-repeat: no-repeat !important;
+        background-position: right 12px center !important;
+        background-size: 18px 18px !important;
+        padding-right: 40px !important;
+        cursor: pointer !important;
+    }
+    
+    .custom-select-btn {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%234A6294' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") !important;
+        background-repeat: no-repeat !important;
+        background-position: right 16px center !important;
+        background-size: 14px 14px !important;
+        padding-right: 40px !important;
+    }
+    
+    .custom-select-btn.active {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23E8454D' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='18 15 12 9 6 15'%3E%3C/polyline%3E%3C/svg%3E") !important;
+    }
 
-        /* --- Валидация (голубая обводка для валидных) --- */
-        .form-input-customers.error {
-            border-color: #E8454D !important;
-            box-shadow: 0 0 0 3px rgba(232, 69, 77, 0.1) !important;
-        }
-        .form-input-customers.valid {
-            border-color: #4A6294 !important;
-            box-shadow: 0 0 0 3px rgba(74, 98, 148, 0.1) !important;
-        }
+    /* --- Валидация --- */
+    .form-input-customers.error {
+        border-color: #E8454D !important;
+        box-shadow: 0 0 0 3px rgba(232, 69, 77, 0.1) !important;
+    }
+    .form-input-customers.valid {
+        border-color: #4A6294 !important;
+        box-shadow: 0 0 0 3px rgba(74, 98, 148, 0.1) !important;
+    }
 
-        .hidden-date-picker {
-            position: absolute;
-            opacity: 0;
-            pointer-events: none;
-            width: 0;
-            height: 0;
-        }
+    .hidden-date-picker {
+        position: absolute;
+        opacity: 0;
+        pointer-events: none;
+        width: 0;
+        height: 0;
+    }
 
-        /* --- Кастомные селекты --- */
-        .custom-select-wrapper { position: relative; display: block; width: 100%; }
-        .custom-select-btn {
-            width: 100%;
-            background-color: #FFFFFF;
-            border: 2px solid #E5E3E1;
-            border-radius: 8px;
-            padding: 12px 16px;
-            text-align: left;
-            font-family: 'Nunito Sans', sans-serif;
-            font-size: 15px;
-            color: #1A1718;
-            cursor: pointer;
-            transition: all 0.2s;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .custom-select-btn:hover { border-color: #4A6294; }
-        .custom-select-dropdown {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            background: #FFFFFF;
-            border: 2px solid #4A6294;
-            border-radius: 8px;
-            margin-top: 4px;
-            z-index: 10000;
-            display: none;
-            max-height: 240px;
-            overflow-y: auto;
-            box-shadow: 0 8px 24px rgba(26, 23, 24, 0.15);
-        }
-        .custom-select-dropdown.show { display: block; }
-        .custom-select-option {
-            padding: 10px 16px;
-            cursor: pointer;
-            font-family: 'Nunito Sans', sans-serif;
-            transition: background 0.2s;
-            color: #1A1718;
-        }
-        .custom-select-option:hover { background: #F8F7F6; }
-        .custom-select-option.selected { background: #E8EEF7; font-weight: 600; color: #2A3D5E; }
+    /* --- Кастомные селекты --- */
+    .custom-select-wrapper {
+        position: relative;
+        display: block !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+    
+    .custom-select-btn {
+        width: 100% !important;
+        background-color: #FFFFFF;
+        border: 2px solid #E5E3E1;
+        border-radius: 8px;
+        padding: 12px 16px;
+        text-align: left;
+        font-family: 'Nunito Sans', sans-serif;
+        font-size: 15px;
+        color: #1A1718;
+        cursor: pointer;
+        transition: all 0.2s;
+        display: flex !important;
+        justify-content: space-between;
+        align-items: center;
+        box-sizing: border-box;
+    }
+    
+    .custom-select-btn:hover {
+        border-color: #4A6294;
+    }
+    
+    .custom-select-dropdown {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #FFFFFF;
+        border: 2px solid #4A6294;
+        border-radius: 8px;
+        margin-top: 4px;
+        z-index: 99999;
+        display: none;
+        max-height: 240px;
+        overflow-y: auto;
+        box-shadow: 0 8px 24px rgba(26, 23, 24, 0.15);
+    }
+    
+    .custom-select-dropdown.show {
+        display: block !important;
+    }
+    
+    .custom-select-option {
+        padding: 10px 16px;
+        cursor: pointer;
+        font-family: 'Nunito Sans', sans-serif;
+        transition: background 0.2s;
+        color: #1A1718;
+    }
+    
+    .custom-select-option:hover {
+        background: #F8F7F6;
+    }
+    
+    .custom-select-option.selected {
+        background: #E8EEF7;
+        font-weight: 600;
+        color: #2A3D5E;
+    }
 
-        /* --- Модальное окно --- */
-        .success-modal-overlay {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.85);
-            backdrop-filter: blur(8px);
-            z-index: 20000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-            padding: 20px;
-            box-sizing: border-box;
-        }
-        .success-modal-overlay.active { opacity: 1; visibility: visible; }
-        .success-modal-content {
-            background: #FFFFFF;
-            border-radius: 24px;
-            max-width: 480px;
-            width: 100%;
-            padding: 40px 32px;
-            text-align: center;
-            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.4);
-            border: 1px solid rgba(232,69,77,0.2);
-            transform: scale(0.9);
-            transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
-            position: relative;
-        }
-        .success-modal-overlay.active .success-modal-content { transform: scale(1); }
-        .success-icon {
-            width: 80px; height: 80px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #E8454D, #D62830);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 24px;
-            animation: pulse 0.6s ease-out;
-        }
-        @keyframes pulse {
-            0% { transform: scale(0.8); opacity: 0.7; }
-            50% { transform: scale(1.1); opacity: 1; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-        .success-icon i { font-size: 36px; color: white; }
-        .success-modal-title {
-            font-family: 'Unbounded', sans-serif;
-            font-size: 24px;
-            font-weight: 700;
-            color: #1A1718;
-            margin-bottom: 12px;
-        }
-        .success-modal-text {
-            font-family: 'Nunito Sans', sans-serif;
-            font-size: 16px;
-            color: #5A5556;
-            line-height: 1.5;
-            margin-bottom: 28px;
-        }
-        .success-modal-btn {
-            background: #E8454D;
-            color: white;
-            border: none;
-            padding: 14px 32px;
-            border-radius: 10px;
-            font-family: 'Unbounded', sans-serif;
-            font-weight: 600;
-            font-size: 15px;
-            cursor: pointer;
-            transition: all 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .success-modal-btn:hover { background: #D62830; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(232,69,77,0.3); }
-        .success-modal-close {
-            position: absolute;
-            top: 16px; right: 16px;
-            width: 32px; height: 32px;
-            border-radius: 50%;
-            background: #F8F7F6;
-            border: 1px solid #E5E3E1;
-            color: #5A5556;
-            font-size: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .success-modal-close:hover { background: #E8454D; color: white; border-color: #E8454D; }
+    /* --- Модальное окно --- */
+    .success-modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.85);
+        backdrop-filter: blur(8px);
+        z-index: 20000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+    
+    .success-modal-overlay.active {
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    .success-modal-content {
+        background: #FFFFFF;
+        border-radius: 24px;
+        max-width: 480px;
+        width: 100%;
+        padding: 40px 32px;
+        text-align: center;
+        box-shadow: 0 25px 50px -12px rgba(0,0,0,0.4);
+        border: 1px solid rgba(232,69,77,0.2);
+        transform: scale(0.9);
+        transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+        position: relative;
+    }
+    
+    .success-modal-overlay.active .success-modal-content {
+        transform: scale(1);
+    }
+    
+    .success-icon {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #E8454D, #D62830);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 24px;
+        animation: pulse 0.6s ease-out;
+    }
+    
+    @keyframes pulse {
+        0% { transform: scale(0.8); opacity: 0.7; }
+        50% { transform: scale(1.1); opacity: 1; }
+        100% { transform: scale(1); opacity: 1; }
+    }
+    
+    .success-icon i {
+        font-size: 36px;
+        color: white;
+    }
+    
+    .success-modal-title {
+        font-family: 'Unbounded', sans-serif;
+        font-size: 24px;
+        font-weight: 700;
+        color: #1A1718;
+        margin-bottom: 12px;
+    }
+    
+    .success-modal-text {
+        font-family: 'Nunito Sans', sans-serif;
+        font-size: 16px;
+        color: #5A5556;
+        line-height: 1.5;
+        margin-bottom: 28px;
+    }
+    
+    .success-modal-btn {
+        background: #E8454D;
+        color: white;
+        border: none;
+        padding: 14px 32px;
+        border-radius: 10px;
+        font-family: 'Unbounded', sans-serif;
+        font-weight: 600;
+        font-size: 15px;
+        cursor: pointer;
+        transition: all 0.2s;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+    }
+    
+    .success-modal-btn:hover {
+        background: #D62830;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(232,69,77,0.3);
+    }
+    
+    .success-modal-close {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: #F8F7F6;
+        border: 1px solid #E5E3E1;
+        color: #5A5556;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+    
+    .success-modal-close:hover {
+        background: #E8454D;
+        color: white;
+        border-color: #E8454D;
+    }
 
-        .form-group-custom .required-star { color: #E8454D; margin-left: 2px; }
+    .form-group-custom .required-star {
+        color: #E8454D;
+        margin-left: 2px;
+    }
 
-        /* --- Иллюстрация персонажа на карточке --- */
-        .service-card.illustrated {
-            position: relative;
-            overflow: visible;
-        }
-        .service-card-illustration {
-            position: absolute;
-            width: auto;
-            height: 260px;
-            z-index: 2;
-            pointer-events: none;
-            top: -50%;
-            left: 50%;
-            transform: translateX(20%);
-        }
-
-        /* --- Адаптив --- */
-        @media (max-width: 768px) {
-            .custom-select-dropdown { max-height: 200px; z-index: 10000; position: absolute; width: 100%; }
-            .custom-select-btn {
-                background-position: right 12px center !important;
-                padding: 12px 36px 12px 14px !important;
-                font-size: 14px;
-            }
-            #eventDate {
-                background-position: right 8px center !important;
-                padding-right: 34px !important;
-            }
-            .builder-preview { scroll-margin-top: 20px; }
-            .service-card-illustration {
-                height: 200px;
-                top: -40%;
-                left: 50%;
-                transform: translateX(15%);
-            }
-        }
-        @media (max-width: 480px) {
-            .success-modal-content { padding: 32px 24px; }
-            .success-icon { width: 70px; height: 70px; }
-            .success-icon i { font-size: 30px; }
-            .success-modal-title { font-size: 20px; }
-            .success-modal-text { font-size: 15px; }
-                .service-card-illustration {
-        height: 180px;
+    .service-card.illustrated {
+        position: relative;
+        overflow: visible;
+    }
+    
+    .service-card-illustration {
+        position: absolute;
+        width: auto;
+        height: 260px;
+        z-index: 2;
+        pointer-events: none;
         top: -50%;
         left: 50%;
-        transform: translateX(10%);
+        transform: translateX(20%);
     }
+
+    .text-nowrap {
+        display: inline-block;
+    }
+    
+    .dash-icon {
+        width: 20px;
+        height: 16px;
+        margin-right: 8px;
+        vertical-align: middle;
+    }
+
+    /* --- Адаптив для 768px --- */
+    @media (max-width: 768px) {
+        .form-row {
+            flex-direction: column;
+            gap: 0;
         }
-        .text-nowrap {
-  display: inline-block;
-}
+        
+        .custom-select-dropdown {
+            max-height: 200px;
+            z-index: 99999;
+            position: absolute;
+            width: 100%;
+        }
+        
+        .custom-select-btn {
+            background-position: right 12px center !important;
+            padding: 12px 36px 12px 14px !important;
+            font-size: 14px;
+        }
+        
+        #eventDate {
+            background-position: right 8px center !important;
+            padding-right: 34px !important;
+        }
+        
+        .builder-preview {
+            scroll-margin-top: 20px;
+        }
+        
+        .service-card-illustration {
+            height: 200px;
+            top: -40%;
+            left: 50%;
+            transform: translateX(15%);
+        }
+    }
+
+    /* --- Адаптив для 360px-480px --- */
+    @media (max-width: 480px) {
+        .form-group-custom {
+            margin-bottom: 12px;
+            width: 100% !important;
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+        
+        .form-row {
+            flex-direction: column;
+            gap: 0;
+        }
+        
+        .form-row .form-group-custom {
+            width: 100% !important;
+            flex: none !important;
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+        
+        .custom-select-wrapper {
+            width: 100% !important;
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+        
+        .custom-select-btn {
+            width: 100% !important;
+            display: flex !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            font-size: 14px;
+            padding: 10px 36px 10px 12px !important;
+        }
+        
+        .custom-select-dropdown {
+            max-height: 180px;
+            width: 100% !important;
+            display: none;
+        }
+        
+        .custom-select-dropdown.show {
+            display: block !important;
+        }
+        
+   
+        
+        .success-modal-content {
+            padding: 32px 24px;
+        }
+        
+        .success-icon {
+            width: 70px;
+            height: 70px;
+        }
+        
+        .success-icon i {
+            font-size: 30px;
+        }
+        
+        .success-modal-title {
+            font-size: 20px;
+        }
+        
+        .success-modal-text {
+            font-size: 15px;
+        }
+        
+        .service-card-illustration {
+            height: 180px;
+            top: -50%;
+            left: 50%;
+            transform: translateX(10%);
+        }
+    }
+
         
         .dash-icon { width: 20px; height: 16px; margin-right: 8px; vertical-align: middle; }
     </style>
@@ -375,42 +531,95 @@
     </div>
 </div>
 
-  <script src="js/loader-animation.js"></script>
-  <script src="js/components-loader.js"></script>
+<script src="js/loader-animation.js"></script>
+<script src="js/components-loader.js"></script>
 <script src="js/header-scripts.js"></script>
 <script src="js/common.js"></script>
 <script>
-    // Флаги предотвращения повторной инициализации
-    let customSelectsInitialized = false;
-    let dateFieldInitialized = false;
+(function() {
+    'use strict';
 
-    // ==================== МОДАЛЬНОЕ ОКНО УСПЕХА ====================
-    const successModal = document.getElementById('successModal');
-    const successModalTitle = document.getElementById('successModalTitle');
-    const successModalText = document.getElementById('successModalText');
-    const successModalClose = document.getElementById('successModalClose');
-    const successModalBtn = document.getElementById('successModalBtn');
+    // Ждем полной загрузки всех компонентов
+    function whenReady(callback) {
+        if (document.readyState === 'complete' || document.readyState === 'interactive') {
+            setTimeout(callback, 300);
+        } else {
+            document.addEventListener('DOMContentLoaded', function() {
+                setTimeout(callback, 300);
+            });
+        }
+    }
 
-    function openSuccessModal(title, message) {
-        successModalTitle.textContent = title;
-        successModalText.textContent = message;
-        successModal.classList.add('active');
+    whenReady(function() {
+        initAll();
+        // Дополнительные попытки для динамических компонентов
+        setTimeout(initAll, 800);
+        setTimeout(initAll, 2000);
+    });
+
+    function initAll() {
+        console.log('initAll called');
+        initCustomSelects();
+        initDateField();
+        initPhoneMasks();
+        initFormHandlers();
+        initModalHandlers();
+    }
+
+    // ==================== МОДАЛЬНОЕ ОКНО ====================
+    function initModalHandlers() {
+        const successModal = document.getElementById('successModal');
+        const successModalClose = document.getElementById('successModalClose');
+        const successModalBtn = document.getElementById('successModalBtn');
+
+        if (!successModal) return;
+
+        if (successModalClose) {
+            successModalClose.onclick = closeModal;
+        }
+        if (successModalBtn) {
+            successModalBtn.onclick = closeModal;
+        }
+        successModal.onclick = function(e) {
+            if (e.target === successModal) closeModal();
+        };
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && successModal.classList.contains('active')) {
+                closeModal();
+            }
+        });
+    }
+
+    function openModal(title, message) {
+        const modal = document.getElementById('successModal');
+        const titleEl = document.getElementById('successModalTitle');
+        const textEl = document.getElementById('successModalText');
+        if (!modal || !titleEl || !textEl) return;
+        titleEl.textContent = title;
+        textEl.textContent = message;
+        modal.classList.add('active');
         document.body.style.overflow = 'hidden';
     }
-    function closeSuccessModal() {
-        successModal.classList.remove('active');
+
+    function closeModal() {
+        const modal = document.getElementById('successModal');
+        if (!modal) return;
+        modal.classList.remove('active');
         document.body.style.overflow = '';
     }
-    if (successModalClose) successModalClose.addEventListener('click', closeSuccessModal);
-    if (successModalBtn) successModalBtn.addEventListener('click', closeSuccessModal);
-    if (successModal) successModal.addEventListener('click', (e) => { if (e.target === successModal) closeSuccessModal(); });
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && successModal.classList.contains('active')) closeSuccessModal(); });
 
-    // ==================== УНИВЕРСАЛЬНАЯ МАСКА ТЕЛЕФОНА ====================
-    function applyPhoneMask(inputElement) {
-        if (!inputElement) return;
-        
-        inputElement.addEventListener('input', function(e) {
+    // ==================== МАСКА ТЕЛЕФОНА ====================
+    function initPhoneMasks() {
+        applyPhoneMask('requestPhone');
+        applyPhoneMask('contactPhone');
+    }
+
+    function applyPhoneMask(inputId) {
+        const input = document.getElementById(inputId);
+        if (!input) return;
+
+        input.addEventListener('input', function() {
             let value = this.value.replace(/\D/g, '');
             if (value.length > 11) value = value.slice(0, 11);
             let formatted = '';
@@ -423,380 +632,324 @@
             }
             this.value = formatted;
         });
-        
-        inputElement.addEventListener('focus', function() {
+
+        input.addEventListener('focus', function() {
             if (!this.value || this.value === '+7' || this.value === '+7 (') {
                 this.value = '+7 (';
             }
         });
-        
-        inputElement.addEventListener('blur', function() {
-            if (this.value === '+7 (' || this.value === '+7' || this.value === '+7 (') {
+
+        input.addEventListener('blur', function() {
+            if (this.value === '+7 (' || this.value === '+7') {
                 this.value = '';
             }
         });
-        
-        inputElement.addEventListener('keydown', function(e) {
-            if (!/[0-9]/.test(e.key) && !['Backspace','Delete','ArrowLeft','ArrowRight','Tab','Escape','Enter','Home','End'].includes(e.key)) {
-                e.preventDefault();
-            }
-        });
     }
 
-    // ==================== ФУНКЦИЯ ВАЛИДАЦИИ ПОЛЯ ====================
-    function validateField(field, validationType) {
+    // ==================== ВАЛИДАЦИЯ ====================
+    function validateField(field, type) {
         if (!field) return true;
-        
         const value = field.value.trim();
         let isValid = true;
-        
-        switch(validationType) {
-            case 'name':
-                isValid = value.length >= 2;
+
+        switch(type) {
+            case 'name': isValid = value.length >= 2; break;
+            case 'email': isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value); break;
+            case 'phone': 
+                const d = value.replace(/\D/g, '');
+                isValid = d.length === 11 && d.startsWith('7');
                 break;
-            case 'email':
-                isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-                break;
-            case 'phone':
-                const digits = value.replace(/\D/g, '');
-                isValid = digits.length === 11 && digits.startsWith('7');
-                break;
-            case 'required':
-                isValid = value.length > 0;
-                break;
+            case 'required': isValid = value.length > 0; break;
         }
-        
-        if (!isValid) {
-            field.classList.add('error');
-            field.classList.remove('valid');
-        } else {
-            field.classList.remove('error');
-            if (value.length > 0) {
-                field.classList.add('valid');
-            } else {
-                field.classList.remove('valid');
-            }
+
+        field.classList.remove('error', 'valid');
+        if (value.length > 0) {
+            field.classList.add(isValid ? 'valid' : 'error');
         }
-        
         return isValid;
     }
 
-    // ==================== КОНСТРУКТОР ЗАПРОСА ====================
-    function updatePreview() {
-        const name = document.getElementById('requestName').value || '—';
-        const company = document.getElementById('requestCompany').value || '—';
-        const email = document.getElementById('requestEmail').value || '—';
-        const phone = document.getElementById('requestPhone').value || '—';
-        const type = document.getElementById('eventType');
-        const date = document.getElementById('eventDate').value || '—';
-        const audience = document.getElementById('audienceCount');
-        const format = document.getElementById('eventFormat');
-        const wishes = document.getElementById('extraWishes').value || '—';
-        const typeText = type.options[type.selectedIndex].text;
-        const audienceText = audience.options[audience.selectedIndex].text;
-        const formatText = format.options[format.selectedIndex].text;
+    // ==================== КАСТОМНЫЕ СЕЛЕКТЫ ====================
+    function initCustomSelects() {
+        const ids = ['eventType', 'audienceCount', 'eventFormat'];
         
-        document.getElementById('previewContent').innerHTML = 
-            `<div class="preview-item"><div class="preview-label">Имя</div><div class="preview-value">${escapeHtml(name)}</div></div>
-            <div class="preview-item"><div class="preview-label">Компания</div><div class="preview-value">${escapeHtml(company)}</div></div>
-            <div class="preview-item"><div class="preview-label">Email</div><div class="preview-value">${escapeHtml(email)}</div></div>
-            <div class="preview-item"><div class="preview-label">Телефон</div><div class="preview-value">${escapeHtml(phone)}</div></div>
-            <div class="preview-item"><div class="preview-label">Тип</div><div class="preview-value">${typeText}</div></div>
-            <div class="preview-item"><div class="preview-label">Дата</div><div class="preview-value">${date}</div></div>
-            <div class="preview-item"><div class="preview-label">Зрителей</div><div class="preview-value">${audienceText}</div></div>
-            <div class="preview-item"><div class="preview-label">Формат</div><div class="preview-value">${formatText}</div></div>
-            <div class="preview-item"><div class="preview-label">Пожелания</div><div class="preview-value">${escapeHtml(wishes)}</div></div>`;
-    }
-
-    function escapeHtml(text) {
-        const div = document.createElement('div');
-        div.textContent = text;
-        return div.innerHTML;
-    }
-
-    // Кнопка "Сформировать запрос" — валидация, обновление превью, прокрутка на мобильных
-    document.getElementById('previewBtn')?.addEventListener('click', () => {
-        let isValid = true;
-        if (!validateField(document.getElementById('requestName'), 'name')) isValid = false;
-        if (!validateField(document.getElementById('requestEmail'), 'email')) isValid = false;
-        if (!validateField(document.getElementById('requestPhone'), 'phone')) isValid = false;
-        
-        if (!isValid) {
-            const firstError = document.querySelector('.form-input-customers.error');
-            if (firstError) {
-                firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                firstError.focus();
-            }
-            return;
-        }
-        
-        updatePreview();
-        
-        // Прокрутка к превью на мобильных
-        if (window.innerWidth <= 768) {
-            const preview = document.getElementById('builderPreview');
-            if (preview) {
-                setTimeout(() => {
-                    preview.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }, 150);
-            }
-        }
-    });
-
-    // Кнопка "Сбросить"
-    document.getElementById('resetBtn')?.addEventListener('click', () => {
-        document.getElementById('requestForm').reset();
-        document.querySelectorAll('.form-input-customers.error, .form-input-customers.valid').forEach(el => {
-            el.classList.remove('error', 'valid');
-        });
-        document.querySelectorAll('.custom-select-wrapper').forEach(wrapper => {
-            const nativeSelect = wrapper.querySelector('select');
-            const btn = wrapper.querySelector('.custom-select-btn');
-            if (nativeSelect && btn && nativeSelect.options.length) {
-                btn.textContent = nativeSelect.options[nativeSelect.selectedIndex].text;
-            }
-        });
-        const requestPhone = document.getElementById('requestPhone');
-        if (requestPhone) requestPhone.value = '';
-        
-        document.getElementById('previewContent').innerHTML = 
-            `<div class="preview-item"><div class="preview-label">Имя</div><div class="preview-value">—</div></div>
-            <div class="preview-item"><div class="preview-label">Компания</div><div class="preview-value">—</div></div>
-            <div class="preview-item"><div class="preview-label">Email</div><div class="preview-value">—</div></div>
-            <div class="preview-item"><div class="preview-label">Телефон</div><div class="preview-value">—</div></div>
-            <div class="preview-item"><div class="preview-label">Тип</div><div class="preview-value">—</div></div>
-            <div class="preview-item"><div class="preview-label">Дата</div><div class="preview-value">—</div></div>
-            <div class="preview-item"><div class="preview-label">Зрителей</div><div class="preview-value">—</div></div>
-            <div class="preview-item"><div class="preview-label">Формат</div><div class="preview-value">—</div></div>
-            <div class="preview-item"><div class="preview-label">Пожелания</div><div class="preview-value">—</div></div>`;
-    });
-
-    // Отправка запроса
-    document.getElementById('sendRequestBtn')?.addEventListener('click', () => {
-        let isValid = true;
-        if (!validateField(document.getElementById('requestName'), 'name')) isValid = false;
-        if (!validateField(document.getElementById('requestEmail'), 'email')) isValid = false;
-        if (!validateField(document.getElementById('requestPhone'), 'phone')) isValid = false;
-        
-        if (!isValid) {
-            openSuccessModal('Ошибка заполнения', 'Пожалуйста, проверьте обязательные поля: Имя, Email и Телефон. Они выделены красным.');
-            return;
-        }
-        
-        const formData = {
-            name: document.getElementById('requestName').value,
-            company: document.getElementById('requestCompany').value || 'Не указана',
-            email: document.getElementById('requestEmail').value,
-            phone: document.getElementById('requestPhone').value,
-            type: document.getElementById('eventType').value,
-            date: document.getElementById('eventDate').value,
-            audience: document.getElementById('audienceCount').value,
-            format: document.getElementById('eventFormat').value,
-            wishes: document.getElementById('extraWishes').value
-        };
-        
-        console.log('Запрос из конструктора:', formData);
-        openSuccessModal('Запрос отправлен!', 'Менеджер театра свяжется с вами в ближайшее время для обсуждения деталей.');
-    });
-
-    // Маски телефона
-    applyPhoneMask(document.getElementById('requestPhone'));
-    applyPhoneMask(document.getElementById('contactPhone'));
-
-    // Валидация контактной формы
-    const contactForm = document.getElementById('contactForm');
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            let isValid = true;
-            if (!validateField(document.getElementById('contactName'), 'name')) isValid = false;
-            if (!validateField(document.getElementById('contactEmail'), 'email')) isValid = false;
-            if (!validateField(document.getElementById('contactPhone'), 'phone')) isValid = false;
-            if (!validateField(document.getElementById('contactMessage'), 'required')) isValid = false;
-            
-            if (!isValid) {
-                openSuccessModal('Ошибка', 'Пожалуйста, заполните все обязательные поля корректно.');
+        ids.forEach(function(id) {
+            const select = document.getElementById(id);
+            if (!select) {
+                console.log('Select not found:', id);
                 return;
             }
             
-            console.log('Форма контактов отправлена:', {
-                name: document.getElementById('contactName').value,
-                company: document.getElementById('contactCompany').value,
-                email: document.getElementById('contactEmail').value,
-                phone: document.getElementById('contactPhone').value,
-                message: document.getElementById('contactMessage').value
-            });
-            contactForm.reset();
-            openSuccessModal('Сообщение отправлено!', 'Спасибо! Наш менеджер свяжется с вами в течение 2 часов.');
-        });
-    }
+            // Проверяем, не обернут ли уже
+            if (select.parentElement && select.parentElement.classList.contains('custom-select-wrapper')) {
+                console.log('Already wrapped:', id);
+                return;
+            }
 
-    // Кастомные селекты
-    function initCustomSelects() {
-        if (customSelectsInitialized) return;
-        const selects = document.querySelectorAll('#eventType, #audienceCount, #eventFormat');
-        selects.forEach(function(nativeSelect) {
-            if (nativeSelect.closest('.custom-select-wrapper')) return;
-            const wrapper = document.createElement('div'); 
+            console.log('Wrapping select:', id);
+
+            // Создаем обертку
+            const wrapper = document.createElement('div');
             wrapper.className = 'custom-select-wrapper';
-            const btn = document.createElement('button'); 
-            btn.type = 'button'; 
-            btn.className = 'custom-select-btn'; 
-            btn.textContent = nativeSelect.options[nativeSelect.selectedIndex].text;
-            const dropdown = document.createElement('div'); 
+            wrapper.style.display = 'block';
+            wrapper.style.width = '100%';
+            wrapper.style.visibility = 'visible';
+            wrapper.style.opacity = '1';
+
+            // Создаем кнопку
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'custom-select-btn';
+            btn.textContent = select.options[select.selectedIndex]?.text || 'Выберите...';
+            btn.style.display = 'flex';
+            btn.style.visibility = 'visible';
+            btn.style.opacity = '1';
+
+            // Создаем выпадающий список
+            const dropdown = document.createElement('div');
             dropdown.className = 'custom-select-dropdown';
-            
-            Array.from(nativeSelect.options).forEach(function(option, index) {
-                const item = document.createElement('div'); 
-                item.className = 'custom-select-option' + (index === nativeSelect.selectedIndex ? ' selected' : '');
-                item.textContent = option.text; 
+
+            Array.from(select.options).forEach(function(option, index) {
+                const item = document.createElement('div');
+                item.className = 'custom-select-option';
+                if (index === select.selectedIndex) item.classList.add('selected');
+                item.textContent = option.text;
                 item.dataset.value = option.value;
-                item.addEventListener('click', function(e) { 
-                    e.stopPropagation(); 
-                    nativeSelect.value = this.dataset.value; 
-                    btn.textContent = this.textContent; 
-                    dropdown.querySelectorAll('.custom-select-option').forEach(el => el.classList.remove('selected'));
-                    this.classList.add('selected'); 
-                    dropdown.classList.remove('show'); 
-                    btn.classList.remove('active'); 
-                    nativeSelect.dispatchEvent(new Event('change', { bubbles: true })); 
+
+                item.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    select.value = this.dataset.value;
+                    btn.textContent = this.textContent;
+                    dropdown.querySelectorAll('.custom-select-option').forEach(function(el) {
+                        el.classList.remove('selected');
+                    });
+                    this.classList.add('selected');
+                    dropdown.classList.remove('show');
+                    btn.classList.remove('active');
                 });
+
                 dropdown.appendChild(item);
             });
-            
-            btn.addEventListener('click', function(e) { 
-                e.stopPropagation(); 
+
+            // Обработчик клика по кнопке
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                e.preventDefault();
+                
                 const isOpen = dropdown.classList.contains('show');
-                document.querySelectorAll('.custom-select-dropdown').forEach(d => {
-                    if (d !== dropdown) {
-                        d.classList.remove('show');
-                        d.previousElementSibling?.classList.remove('active');
+                
+                // Закрываем все другие дропдауны
+                document.querySelectorAll('.custom-select-dropdown.show').forEach(function(d) {
+                    d.classList.remove('show');
+                    if (d.previousElementSibling) {
+                        d.previousElementSibling.classList.remove('active');
                     }
                 });
-                if (!isOpen) { 
-                    dropdown.classList.add('show'); 
-                    btn.classList.add('active'); 
+
+                if (!isOpen) {
+                    dropdown.classList.add('show');
+                    btn.classList.add('active');
                 } else {
                     dropdown.classList.remove('show');
                     btn.classList.remove('active');
                 }
             });
-            
-            const clone = nativeSelect.cloneNode(true); 
-            clone.style.display = 'none';
-            wrapper.appendChild(clone);
-            nativeSelect.style.display = 'none'; 
-            wrapper.insertBefore(btn, clone); 
-            wrapper.insertBefore(dropdown, clone); 
-            nativeSelect.parentNode.insertBefore(wrapper, nativeSelect); 
-            nativeSelect.parentNode.removeChild(nativeSelect);
+
+            // Замена оригинального селекта
+            select.parentNode.insertBefore(wrapper, select);
+            wrapper.appendChild(btn);
+            wrapper.appendChild(dropdown);
+            wrapper.appendChild(select);
+            select.style.display = 'none';
         });
-        
-        document.addEventListener('click', function(e) { 
-            if (!e.target.closest('.custom-select-wrapper')) { 
-                document.querySelectorAll('.custom-select-dropdown').forEach(d => { 
-                    d.classList.remove('show'); 
-                    d.previousElementSibling?.classList.remove('active'); 
-                }); 
-            } 
+
+        // Закрытие дропдаунов при клике вне
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.custom-select-wrapper')) {
+                document.querySelectorAll('.custom-select-dropdown.show').forEach(function(d) {
+                    d.classList.remove('show');
+                    if (d.previousElementSibling) {
+                        d.previousElementSibling.classList.remove('active');
+                    }
+                });
+            }
         });
-        
-        customSelectsInitialized = true;
+
+        // Закрытие дропдаунов по Escape
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.custom-select-dropdown.show').forEach(function(d) {
+                    d.classList.remove('show');
+                    if (d.previousElementSibling) {
+                        d.previousElementSibling.classList.remove('active');
+                    }
+                });
+            }
+        });
     }
 
-    // Дата: маска + скрытый пикер (без автообновления превью)
+    // ==================== ПОЛЕ ДАТЫ ====================
     function initDateField() {
-        if (dateFieldInitialized) return;
         const dateInput = document.getElementById('eventDate');
-        if (!dateInput) return;
-        
+        if (!dateInput || dateInput.dataset.initialized === 'true') return;
+
         const wrapper = dateInput.closest('.date-input-wrapper');
         if (!wrapper) return;
-        
-        const hiddenDatePicker = document.createElement('input'); 
-        hiddenDatePicker.type = 'date'; 
-        hiddenDatePicker.className = 'hidden-date-picker'; 
-        hiddenDatePicker.style.cssText = 'position: absolute; opacity: 0; pointer-events: none; width: 0; height: 0;';
-        wrapper.appendChild(hiddenDatePicker);
-        
-        dateInput.addEventListener('input', function(e) {
-            let value = this.value.replace(/\D/g, ''); 
-            if (value.length > 8) value = value.slice(0, 8);
-            let formatted = ''; 
-            if (value.length > 0) { 
-                formatted = value.slice(0, 2); 
-                if (value.length > 2) formatted += '.' + value.slice(2, 4); 
-                if (value.length > 4) formatted += '.' + value.slice(4, 8); 
+
+        const oldPicker = wrapper.querySelector('.hidden-date-picker');
+        if (oldPicker) oldPicker.remove();
+
+        const picker = document.createElement('input');
+        picker.type = 'date';
+        picker.className = 'hidden-date-picker';
+        wrapper.appendChild(picker);
+
+        dateInput.addEventListener('input', function() {
+            let v = this.value.replace(/\D/g, '').slice(0, 8);
+            let f = '';
+            if (v.length > 0) { f = v.slice(0, 2); if (v.length > 2) f += '.' + v.slice(2, 4); if (v.length > 4) f += '.' + v.slice(4, 8); }
+            this.value = f;
+        });
+
+        dateInput.addEventListener('click', function() {
+            const r = dateInput.getBoundingClientRect();
+            Object.assign(picker.style, { position: 'fixed', left: r.left + 'px', top: (r.bottom + 4) + 'px', width: '0', height: '0', opacity: '0', pointerEvents: 'auto' });
+            const m = dateInput.value.match(/^(\d{2})\.(\d{2})\.(\d{4})$/);
+            picker.value = m ? `${m[3]}-${m[2]}-${m[1]}` : '';
+            if (picker.showPicker) picker.showPicker(); else { picker.focus(); picker.click(); }
+        });
+
+        picker.addEventListener('change', function() {
+            if (this.value) {
+                const [y, m, d] = this.value.split('-');
+                dateInput.value = `${d}.${m}.${y}`;
             }
-            this.value = formatted;
+            Object.assign(picker.style, { position: 'absolute', pointerEvents: 'none', width: '0', height: '0', opacity: '0' });
         });
-        dateInput.addEventListener('keydown', function(e) { 
-            if (!/[0-9]/.test(e.key) && !['Backspace','Delete','ArrowLeft','ArrowRight','Tab','Escape','Enter'].includes(e.key)) e.preventDefault(); 
-        });
-        dateInput.addEventListener('blur', function() {
-            const value = this.value.trim(); 
-            if (!value) { this.classList.remove('error','valid'); return; }
-            const regex = /^(\d{2})\.(\d{2})\.(\d{4})$/; 
-            const match = value.match(regex);
-            if (!match) { this.classList.add('error'); this.classList.remove('valid'); return; }
-            const day = parseInt(match[1],10), month = parseInt(match[2],10), year = parseInt(match[3],10);
-            const date = new Date(year, month-1, day);
-            if (date.getDate() === day && date.getMonth() === month-1 && date.getFullYear() === year && year >= 2020 && year <= 2100) { 
-                this.classList.remove('error'); this.classList.add('valid'); 
-            } else { 
-                this.classList.add('error'); this.classList.remove('valid'); 
-            }
-        });
-        dateInput.addEventListener('focus', function() { this.classList.remove('error','valid'); });
-        
-        dateInput.addEventListener('click', function(e) {
-            const rect = dateInput.getBoundingClientRect(); 
-            hiddenDatePicker.style.position = 'fixed'; 
-            hiddenDatePicker.style.left = rect.left + 'px'; 
-            hiddenDatePicker.style.top = (rect.bottom + 4) + 'px'; 
-            hiddenDatePicker.style.width = '0px'; 
-            hiddenDatePicker.style.height = '0px'; 
-            hiddenDatePicker.style.opacity = '0'; 
-            hiddenDatePicker.style.pointerEvents = 'auto'; 
-            const current = dateInput.value.trim(); 
-            const match = current.match(/^(\d{2})\.(\d{2})\.(\d{4})$/); 
-            if (match) hiddenDatePicker.value = `${match[3]}-${match[2]}-${match[1]}`; 
-            else hiddenDatePicker.value = ''; 
-            if ('showPicker' in hiddenDatePicker) hiddenDatePicker.showPicker(); 
-            else { hiddenDatePicker.focus(); hiddenDatePicker.click(); }
-        });
-        
-        hiddenDatePicker.addEventListener('change', function() { 
-            if (this.value) { 
-                const [year, month, day] = this.value.split('-'); 
-                dateInput.value = `${day}.${month}.${year}`; 
-                dateInput.classList.add('valid'); 
-                dateInput.classList.remove('error'); 
-            } 
-            hiddenDatePicker.style.position = 'absolute'; 
-            hiddenDatePicker.style.pointerEvents = 'none'; 
-            hiddenDatePicker.style.width = '0'; 
-            hiddenDatePicker.style.height = '0'; 
-            hiddenDatePicker.style.opacity = '0'; 
-        });
-        hiddenDatePicker.addEventListener('blur', function() { 
-            setTimeout(() => { 
-                hiddenDatePicker.style.position = 'absolute'; 
-                hiddenDatePicker.style.pointerEvents = 'none'; 
-                hiddenDatePicker.style.width = '0'; 
-                hiddenDatePicker.style.height = '0'; 
-                hiddenDatePicker.style.opacity = '0'; 
-            }, 200); 
-        });
-        
-        dateFieldInitialized = true;
+
+        dateInput.dataset.initialized = 'true';
     }
 
-    // Инициализация
-    document.addEventListener('DOMContentLoaded', () => {
-        initCustomSelects();
-        initDateField();
-    });
+    // ==================== ОБРАБОТЧИКИ ФОРМ ====================
+    function initFormHandlers() {
+        // Превью
+        const previewBtn = document.getElementById('previewBtn');
+        if (previewBtn) {
+            previewBtn.onclick = function() {
+                let valid = true;
+                if (!validateField(document.getElementById('requestName'), 'name')) valid = false;
+                if (!validateField(document.getElementById('requestEmail'), 'email')) valid = false;
+                if (!validateField(document.getElementById('requestPhone'), 'phone')) valid = false;
+                if (!valid) return;
+                updatePreview();
+                const bp = document.getElementById('builderPreview');
+                if (window.innerWidth <= 768 && bp) setTimeout(() => bp.scrollIntoView({ behavior: 'smooth' }), 150);
+            };
+        }
+
+        // Сброс
+        const resetBtn = document.getElementById('resetBtn');
+        if (resetBtn) {
+            resetBtn.onclick = function() {
+                const form = document.getElementById('requestForm');
+                if (form) form.reset();
+                document.querySelectorAll('.custom-select-wrapper select').forEach(function(s) {
+                    s.selectedIndex = 0;
+                    const wrapper = s.closest('.custom-select-wrapper');
+                    if (wrapper) {
+                        const btn = wrapper.querySelector('.custom-select-btn');
+                        if (btn) btn.textContent = s.options[0].text;
+                        wrapper.querySelectorAll('.custom-select-option').forEach(function(o, i) {
+                            o.classList.toggle('selected', i === 0);
+                        });
+                    }
+                });
+                document.querySelectorAll('.error, .valid').forEach(e => e.classList.remove('error', 'valid'));
+                const ph = document.getElementById('requestPhone');
+                if (ph) ph.value = '';
+                resetPreview();
+            };
+        }
+
+        // Отправка
+        const sendBtn = document.getElementById('sendRequestBtn');
+        if (sendBtn) {
+            sendBtn.onclick = function() {
+                let valid = true;
+                if (!validateField(document.getElementById('requestName'), 'name')) valid = false;
+                if (!validateField(document.getElementById('requestEmail'), 'email')) valid = false;
+                if (!validateField(document.getElementById('requestPhone'), 'phone')) valid = false;
+                if (!valid) { openModal('Ошибка', 'Проверьте обязательные поля.'); return; }
+
+                const getVal = function(id) {
+                    const el = document.querySelector('.custom-select-wrapper select#' + id) || document.getElementById(id);
+                    return el ? el.value : '';
+                };
+
+                console.log('Form data:', {
+                    name: document.getElementById('requestName')?.value,
+                    company: document.getElementById('requestCompany')?.value,
+                    email: document.getElementById('requestEmail')?.value,
+                    phone: document.getElementById('requestPhone')?.value,
+                    type: getVal('eventType'),
+                    date: document.getElementById('eventDate')?.value,
+                    audience: getVal('audienceCount'),
+                    format: getVal('eventFormat'),
+                    wishes: document.getElementById('extraWishes')?.value
+                });
+                openModal('Запрос отправлен!', 'Менеджер свяжется с вами в ближайшее время.');
+            };
+        }
+
+        // Контактная форма
+        const contactForm = document.getElementById('contactForm');
+        if (contactForm) {
+            contactForm.onsubmit = function(e) {
+                e.preventDefault();
+                let valid = true;
+                if (!validateField(document.getElementById('contactName'), 'name')) valid = false;
+                if (!validateField(document.getElementById('contactEmail'), 'email')) valid = false;
+                if (!validateField(document.getElementById('contactPhone'), 'phone')) valid = false;
+                if (!validateField(document.getElementById('contactMessage'), 'required')) valid = false;
+                if (!valid) { openModal('Ошибка', 'Заполните все поля корректно.'); return; }
+                contactForm.reset();
+                openModal('Сообщение отправлено!', 'Спасибо! Мы ответим в течение 2 часов.');
+            };
+        }
+    }
+
+    function updatePreview() {
+        const pc = document.getElementById('previewContent');
+        if (!pc) return;
+
+        const getText = function(id) {
+            const el = document.querySelector('.custom-select-wrapper select#' + id) || document.getElementById(id);
+            return el?.options[el.selectedIndex]?.text || '—';
+        };
+
+        const esc = function(t) { const d = document.createElement('div'); d.textContent = t; return d.innerHTML; };
+        const v = function(id) { return esc(document.getElementById(id)?.value || '—'); };
+
+        pc.innerHTML = 
+            `<div class="preview-item"><div class="preview-label">Имя</div><div class="preview-value">${v('requestName')}</div></div>
+            <div class="preview-item"><div class="preview-label">Компания</div><div class="preview-value">${v('requestCompany')}</div></div>
+            <div class="preview-item"><div class="preview-label">Email</div><div class="preview-value">${v('requestEmail')}</div></div>
+            <div class="preview-item"><div class="preview-label">Телефон</div><div class="preview-value">${v('requestPhone')}</div></div>
+            <div class="preview-item"><div class="preview-label">Тип</div><div class="preview-value">${getText('eventType')}</div></div>
+            <div class="preview-item"><div class="preview-label">Дата</div><div class="preview-value">${v('eventDate')}</div></div>
+            <div class="preview-item"><div class="preview-label">Зрителей</div><div class="preview-value">${getText('audienceCount')}</div></div>
+            <div class="preview-item"><div class="preview-label">Формат</div><div class="preview-value">${getText('eventFormat')}</div></div>
+            <div class="preview-item"><div class="preview-label">Пожелания</div><div class="preview-value">${v('extraWishes')}</div></div>`;
+    }
+
+    function resetPreview() {
+        const pc = document.getElementById('previewContent');
+        if (!pc) return;
+        pc.innerHTML = ['Имя','Компания','Email','Телефон','Тип','Дата','Зрителей','Формат','Пожелания']
+            .map(l => `<div class="preview-item"><div class="preview-label">${l}</div><div class="preview-value">—</div></div>`).join('');
+    }
+
+})();
 </script>
 </body>
 </html>
