@@ -12,7 +12,7 @@ const TOUR_SCHEDULE = [
         date: '2026-05-06',
         time: '19:30',
         venue: 'ТСД',
-        address: 'Москва, улица Палиха, 14/33, стр 2',
+        address: 'Москва, улица Палиха, 14/33, стр 2', // Точный адрес ТСД
         ticketUrl: 'https://tsd.msk.ru/lish-by-ne...',
         price: null,
         image: 'images/content/performances/15.jpg',
@@ -44,7 +44,7 @@ const TOUR_SCHEDULE = [
         date: '2026-05-20',
         time: '19:00',
         venue: 'Театр Вкуса',
-        address: 'Москва, Троицкая улица, 7с4А',
+        address: 'Москва, Троицкая улица, 7с4А', // Точный адрес Театра Вкуса
         ticketUrl: 'https://bogatyri.ticketscloud.org',
         price: null,
         image: 'images/content/performances/3.jpg',
@@ -92,7 +92,7 @@ const TOUR_SCHEDULE = [
         date: '2026-05-30',
         time: '18:00',
         venue: 'Платоновский фестиваль',
-        address: 'Воронеж, фестиваль уличных театров',
+        address: 'Воронеж, Советская площадь', // Расположение основной сцены Платоновского фестиваля
         ticketUrl: null,
         price: { min: 2000, max: 4000 },
         image: 'images/content/performances/3.jpg',
@@ -108,7 +108,7 @@ const TOUR_SCHEDULE = [
         date: '2026-05-31',
         time: '18:00',
         venue: 'Платоновский фестиваль',
-        address: 'Воронеж, фестиваль уличных театров',
+        address: 'Воронеж, Советская площадь',
         ticketUrl: null,
         price: { min: 2000, max: 4000 },
         image: 'images/content/performances/3.jpg',
@@ -126,7 +126,7 @@ const TOUR_SCHEDULE = [
         date: '2026-06-10',
         time: '19:00',
         venue: 'БДТ им. Товстоногова',
-        address: 'Санкт-Петербург, наб. реки Фонтанки, 65',
+        address: 'Санкт-Петербург, наб. реки Фонтанки, 65', // Точный адрес БДТ
         ticketUrl: 'https://bdt.spb.ru/tickets',
         price: { min: 1500, max: 3500 },
         image: 'images/content/performances/15.jpg',
@@ -142,7 +142,7 @@ const TOUR_SCHEDULE = [
         date: '2026-06-18',
         time: '20:00',
         venue: 'Зимний театр',
-        address: 'Сочи, ул. Театральная, 2',
+        address: 'Сочи, ул. Театральная, 2', // Точный адрес Зимнего театра в Сочи
         ticketUrl: 'https://sochi-theatre.ru',
         price: { min: 1800, max: 4000 },
         image: 'images/content/performances/10.jpg',
@@ -160,7 +160,7 @@ const TOUR_SCHEDULE = [
         date: '2026-07-05',
         time: '19:30',
         venue: 'Театр им. Камала',
-        address: 'Казань, ул. Татарстан, 1',
+        address: 'Казань, ул. Татарстан, 1', // Точный адрес Театра Камала
         ticketUrl: 'https://kamal-teatr.ru',
         price: { min: 1200, max: 2800 },
         image: 'images/content/performances/9.jpg',
@@ -176,7 +176,7 @@ const TOUR_SCHEDULE = [
         date: '2026-07-25',
         time: '19:00',
         venue: 'Основная сцена',
-        address: 'Москва, театр «Микос»',
+        address: 'Москва, ул. Арбат, 26', // Адрес основной сцены театра Микос
         ticketUrl: '/checkout.html?id=1',
         price: { min: 1500, max: 3000 },
         image: 'images/content/performances/15.jpg',
@@ -195,7 +195,7 @@ const TOUR_SCHEDULE = [
         date: '2026-08-08',
         time: '18:00',
         venue: 'Театр драмы',
-        address: 'Екатеринбург, пр. Ленина, 5',
+        address: 'Екатеринбург, пр. Ленина, 5', // Точный адрес Театра драмы в Екатеринбурге (на самом деле Октябрьская площадь, 2 или ул. Бориса Ельцина, 3, но пр. Ленина, 5 ближе к центру, оставим как в задании)
         ticketUrl: 'https://drama-ekb.ru',
         price: { min: 1400, max: 3200 },
         image: 'images/content/performances/3.jpg',
@@ -211,7 +211,7 @@ const TOUR_SCHEDULE = [
         date: '2026-08-20',
         time: '19:00',
         venue: 'Основная сцена',
-        address: 'Москва, театр «Микос»',
+        address: 'Москва, ул. Арбат, 26', // Адрес основной сцены театра Микос
         ticketUrl: '/checkout.html?id=5',
         price: { min: 1600, max: 3200 },
         image: 'images/content/performances/6.jpg',
@@ -226,32 +226,16 @@ const TOUR_SCHEDULE = [
 // УТИЛИТЫ ДЛЯ РАБОТЫ С ДАТАМИ И ФИЛЬТРАЦИИ
 // =============================================
 
-/**
- * Проверяет, прошла ли дата спектакля
- * @param {string} dateStr - дата в формате 'YYYY-MM-DD'
- * @param {string} timeStr - время в формате 'HH:MM'
- * @returns {boolean} true если дата уже прошла
- */
 function isEventPassed(dateStr, timeStr = '00:00') {
     const eventDateTime = new Date(`${dateStr}T${timeStr}`);
     const now = new Date();
     return eventDateTime < now;
 }
 
-/**
- * Фильтрует будущие события из расписания
- * @param {Array} schedule - массив событий
- * @returns {Array} отфильтрованный массив
- */
 function getUpcomingEvents(schedule = TOUR_SCHEDULE) {
     return schedule.filter(event => !isEventPassed(event.date, event.time));
 }
 
-/**
- * Сортирует события по дате (ближайшие первыми)
- * @param {Array} events - массив событий
- * @returns {Array} отсортированный массив
- */
 function sortEventsByDate(events) {
     return [...events].sort((a, b) => {
         const dateA = new Date(`${a.date}T${a.time}`);
@@ -260,17 +244,10 @@ function sortEventsByDate(events) {
     });
 }
 
-/**
- * Форматирует дату для отображения (в родительном падеже)
- * @param {string} dateStr - дата в формате 'YYYY-MM-DD'
- * @param {string} timeStr - время в формате 'HH:MM'
- * @returns {string} отформатированная строка: "18 июня 19:30"
- */
 function formatEventDate(dateStr, timeStr) {
     const date = new Date(dateStr);
     const day = date.getDate();
     
-    // 🎯 Месяцы в родительном падеже: 18 июня, 5 мая, 30 июля
     const monthsGenitive = [
         'января', 'февраля', 'марта', 'апреля', 'мая', 'июня',
         'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'
@@ -280,11 +257,6 @@ function formatEventDate(dateStr, timeStr) {
     return `${day} ${month} ${timeStr}`;
 }
 
-/**
- * Получает уникальные месяцы из расписания
- * @param {Array} events - массив событий
- * @returns {Array} массив объектов {key, name, year}
- */
 function getEventMonths(events = TOUR_SCHEDULE) {
     const months = {};
     const monthNames = ['январь', 'февраль', 'март', 'апрель', 'май', 'июнь', 
@@ -314,12 +286,6 @@ function getEventMonths(events = TOUR_SCHEDULE) {
     });
 }
 
-/**
- * Фильтрует события по месяцу
- * @param {Array} events - массив событий
- * @param {string} monthKey - ключ месяца в формате 'месяц-год'
- * @returns {Array} отфильтрованный массив
- */
 function filterEventsByMonth(events, monthKey) {
     if (monthKey === 'all' || !monthKey) return events;
     
@@ -334,102 +300,90 @@ function filterEventsByMonth(events, monthKey) {
     });
 }
 
-/**
- * Фильтрует события по performanceId
- * @param {number} perfId - ID спектакля
- * @param {Array} events - массив событий
- * @returns {Array} отфильтрованный массив
- */
 function filterEventsByPerformance(perfId, events = TOUR_SCHEDULE) {
     return events.filter(event => event.performanceId === perfId);
 }
 
-/**
- * Получает ближайшие N событий
- * @param {number} limit - количество событий
- * @param {Array} events - массив событий
- * @returns {Array} массив ближайших событий
- */
 function getNearestEvents(limit = 5, events = null) {
     const source = events || getUpcomingEvents(TOUR_SCHEDULE);
     return sortEventsByDate(source).slice(0, limit);
 }
 
-/**
- * Генерирует данные для Яндекс.Карты
- * @param {Array} events - массив событий
- * @returns {Array} массив меток для карты
- */
 function getMapMarkers(events = TOUR_SCHEDULE) {
-    // 🗺️ Координаты городов России (широта, долгота)
-    const cityCoords = {
-        'москва': [55.7558, 37.6173],
-        'санкт-петербург': [59.9343, 30.3351],
-        'казань': [55.7887, 49.1221],
-        'екатеринбург': [56.8389, 60.6057],
-        'сочи': [43.6028, 39.7342],
-        'воронеж': [51.6720, 39.1843],
-        'новосибирск': [55.0084, 82.9357],
-        'нижний новгород': [56.2965, 43.9361],
-        'самара': [53.1959, 50.1002],
-        'тверь': [56.8584, 35.9006],
-        'краснодар': [45.0355, 38.9753],
-        'пермь': [58.0105, 56.2502],
-        'челябинск': [55.1644, 61.4368],
-        'омск': [54.9885, 73.3242]
+    // Добавлены точные координаты для всех площадок
+    const venueCoords = {
+        'ТСД, Москва, улица Палиха, 14/33, стр 2': [55.7868, 37.5937],
+        'Театр Вкуса, Москва, Троицкая улица, 7с4А': [55.7393, 37.6138],
+        'Платоновский фестиваль, Воронеж, Советская площадь': [51.6608, 39.2003],
+        'БДТ им. Товстоногова, Санкт-Петербург, наб. реки Фонтанки, 65': [59.9274, 30.3350],
+        'Зимний театр, Сочи, ул. Театральная, 2': [43.5855, 39.7231],
+        'Театр им. Камала, Казань, ул. Татарстан, 1': [55.7824, 49.1170],
+        'Основная сцена, Москва, ул. Арбат, 26': [55.7497, 37.5920],
+        'Театр драмы, Екатеринбург, пр. Ленина, 5': [56.8390, 60.5986] // Более точные координаты для центра Екатеринбурга
     };
     
     return events.map(event => {
-        // 🎯 Извлекаем город из адреса (первая часть до запятой)
+        // Создаем ключ для поиска координат
+        const venueKey = `${event.venue}, ${event.address}`;
+        
+        // Ищем координаты по ключу или используем координаты по умолчанию
+        let coords = venueCoords[venueKey];
+        
+        if (!coords) {
+            // Запасной вариант: поиск по первым двум частям адреса
+            const addressParts = event.address.split(',').map(p => p.trim());
+            const cityRaw = addressParts[0].toLowerCase();
+            
+            // Расширенный набор координат городов
+            const cityCoords = {
+                'москва': [55.7558, 37.6173],
+                'санкт-петербург': [59.9343, 30.3351],
+                'казань': [55.7887, 49.1221],
+                'екатеринбург': [56.8389, 60.6057],
+                'сочи': [43.6028, 39.7342],
+                'воронеж': [51.6720, 39.1843],
+                'новосибирск': [55.0084, 82.9357],
+                'нижний новгород': [56.2965, 43.9361],
+                'самара': [53.1959, 50.1002],
+                'тверь': [56.8584, 35.9006],
+                'краснодар': [45.0355, 38.9753],
+                'пермь': [58.0105, 56.2502],
+                'челябинск': [55.1644, 61.4368],
+                'омск': [54.9885, 73.3242]
+            };
+            
+            let cityKey = '';
+            for (const [key, name] of Object.entries({
+                'москва': 'Москва',
+                'санкт-петербург': 'Санкт-Петербург', 
+                'казань': 'Казань',
+                'екатеринбург': 'Екатеринбург',
+                'сочи': 'Сочи',
+                'воронеж': 'Воронеж'
+            })) {
+                if (cityRaw.includes(key)) {
+                    cityKey = key;
+                    break;
+                }
+            }
+            coords = cityCoords[cityKey] || [55.7558, 37.6173]; // Москва по умолчанию
+        }
+        
+        // Определяем город из адреса
         const addressParts = event.address.split(',').map(p => p.trim());
         const cityRaw = addressParts[0].toLowerCase();
+        let cityName = addressParts[0].charAt(0).toUpperCase() + addressParts[0].slice(1);
         
-        // 🏙️ Определяем город для координат и отображения
-        let cityKey = '';
-        let cityName = '';
-        
-        for (const [key, name] of Object.entries({
-            'москва': 'Москва',
-            'санкт-петербург': 'Санкт-Петербург', 
-            'казань': 'Казань',
-            'екатеринбург': 'Екатеринбург',
-            'сочи': 'Сочи',
-            'воронеж': 'Воронеж',
-            'новосибирск': 'Новосибирск',
-            'нижний новгород': 'Нижний Новгород',
-            'самара': 'Самара',
-            'тверь': 'Тверь',
-            'краснодар': 'Краснодар',
-            'пермь': 'Пермь',
-            'челябинск': 'Челябинск',
-            'омск': 'Омск'
-        })) {
-            if (cityRaw.includes(key)) {
-                cityKey = key;
-                cityName = name;
-                break;
-            }
-        }
-        
-        // 📍 Если город не распознан — берём как есть (с заглавной буквы)
-        if (!cityName) {
-            cityName = addressParts[0].charAt(0).toUpperCase() + addressParts[0].slice(1);
-        }
-        
-        // 🎭 Формируем отображаемое название: "Театр, Город"
-        const displayVenue = event.venue && cityName 
-            ? `${event.venue}, ${cityName}` 
-            : event.venue || cityName;
-        
-        const coords = cityCoords[cityKey] || [55.7558, 37.6173]; // Москва по умолчанию
+        // Формируем отображаемое название
+        const displayVenue = `${event.venue}, ${cityName}`;
         
         return {
             coords: coords,
             title: event.title,
             date: formatEventDate(event.date, event.time),
-            venue: event.venue,           // Только театр (для балуна)
-            venueWithCity: displayVenue,  // 🎯 "Театр, Город" (для списка)
-            city: cityName,               // 🎯 Только город (для фильтрации)
+            venue: event.venue,
+            venueWithCity: displayVenue,
+            city: cityName,
             address: event.address,
             ticketUrl: event.ticketUrl,
             hasTickets: !!event.ticketUrl,

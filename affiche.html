@@ -20,7 +20,6 @@
     
     <!-- Отложенная загрузка API Яндекс.Карт -->
     <script>
-        // Загружаем API карт асинхронно
         function loadYandexMaps() {
             const script = document.createElement('script');
             script.src = 'https://api-maps.yandex.ru/2.1/?lang=ru_RU&onload=onYandexMapsReady';
@@ -30,7 +29,6 @@
         }
         
         window.onYandexMapsReady = function() {
-            // Инициализация карт произойдет после загрузки API
             window.ymapsReady = true;
             if (window.pendingMapInit) {
                 window.pendingMapInit();
@@ -38,7 +36,6 @@
             }
         };
         
-        // Отложенная загрузка API карт
         setTimeout(loadYandexMaps, 500);
     </script>
     
@@ -195,6 +192,8 @@
             margin-bottom: 28px;
             width: 100%;
             contain: layout style;
+            position: relative; /* для позиционирования дропдауна */
+            z-index: 1500; /* Увеличим z-index секции */
         }
         .filter-chips-afisha {
             display: flex;
@@ -229,6 +228,7 @@
         /* Кастомный селект */
         .filter-chip-date {
             position: relative;
+            z-index: 1001; /* выше чем у карточек */
         }
         .custom-month-select {
             position: relative;
@@ -276,7 +276,7 @@
             border: 1px solid #E5E3E1;
             border-radius: 8px;
             box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-            z-index: 1000;
+            z-index: 2000; /* Увеличен z-index для перекрытия модалок */
             display: none;
             max-height: 220px;
             overflow-y: auto;
@@ -500,7 +500,7 @@
             border-radius: 16px;
             padding: 16px;
             box-shadow: 0 8px 32px rgba(0,0,0,0.2);
-            z-index: 1000;
+            z-index: 10000; /* Высокий z-index */
             transform: translateY(100px);
             opacity: 0;
             transition: transform 0.3s ease, opacity 0.3s ease;
@@ -569,22 +569,6 @@
         }
         .mobile-balloon-btn:active { background: #C0392B; }
         
-        /* Убеждаемся что на мобильных балуны карты не показываются */
-        @media (max-width: 860px) {
-            .ymaps-2-1-79-balloon,
-            .ymaps-2-1-79-balloon__content,
-            .ymaps-2-1-79-balloon__layout {
-                display: none !important;
-                visibility: hidden !important;
-                opacity: 0 !important;
-                pointer-events: none !important;
-            }
-            
-            .mobile-balloon {
-                display: none;
-            }
-        }
-
         /* Кнопки "Показать еще" */
         .show-more-wrapper,
         .load-more-wrapper {
@@ -683,7 +667,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 10000;
+            z-index: 10000; /* Высокий z-index */
             opacity: 0;
             visibility: hidden;
             transition: opacity 0.3s ease, visibility 0.3s ease;
@@ -994,7 +978,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 9999;
+            z-index: 20000; /* Самый высокий z-index */
             opacity: 0;
             visibility: hidden;
             transition: opacity 0.3s ease, visibility 0.3s ease;
@@ -1257,7 +1241,7 @@
     <div id="site-hero-slider"></div>
 
     <div class="promo-runner-section" id="promoRunner">
-        <div class="promo-runner-track" id="promoRunnerTrack">
+        <div class="promo-runner-track running" id="promoRunnerTrack"> <!-- Класс running добавлен сразу -->
             <img src="SVG/Промокод.svg" alt="Поймай Ксюшу — получи промокод!">
         </div>
         <span class="promo-caption">Поймайте Ксюшу — получите промокод!</span>
@@ -1305,7 +1289,6 @@
             <div class="tour-map-container">
                 <div class="map-wrapper">
                     <div id="yandexMap">
-                        <!-- Скелетон-лоадер для карты -->
                         <div class="map-skeleton" id="mapSkeleton"></div>
                     </div>
                     <button class="reset-map-btn" id="resetMapBtn">
@@ -1686,7 +1669,6 @@ function initYandexMap() {
         });
     }
     
-    // Проверяем, загрузился ли API карт
     if (window.ymapsReady) {
         doInit();
     } else {
@@ -1774,15 +1756,12 @@ function renderTourList(showAll = false) {
             <button class="tour-status ${statusClass}" data-status="${statusClass}" data-event-id="${marker.eventId}">${statusText}</button>
         `;
         
-        // Обработчик клика на плашку (кроме кнопки статуса)
         const handleItemClick = function(e) {
             if (e.target.classList.contains('tour-status')) return;
             e.preventDefault();
             
-            // Выделяем плашку
             highlightTourItem(originalIndex);
             
-            // На мобильных показываем всплывашку
             if (window.innerWidth <= 860) {
                 showMobileBalloon(marker);
             }
@@ -1791,7 +1770,6 @@ function renderTourList(showAll = false) {
         tourItem.addEventListener('click', handleItemClick);
         tourItem.addEventListener('touchend', handleItemClick);
         
-        // Обработчики для кнопки статуса
         const statusBtn = tourItem.querySelector('.tour-status');
         if (statusBtn) {
             const statusHandler = function(e) {
@@ -1831,18 +1809,14 @@ function renderTourList(showAll = false) {
 }
 
 function highlightTourItem(index) {
-    // Убираем активный класс со всех плашек
     document.querySelectorAll('.tour-item').forEach(i => i.classList.remove('active'));
     
-    // Находим нужную плашку
     const targetItem = document.querySelector(`.tour-item[data-index="${index}"]`);
     
     if (targetItem) {
-        // Если плашка скрыта в мобильной версии - показываем все
         if (targetItem.classList.contains('mobile-hidden')) {
             renderTourList(true);
             
-            // Ждем рендера и затем скроллим
             setTimeout(() => {
                 const newTarget = document.querySelector(`.tour-item[data-index="${index}"]`);
                 if (newTarget) {
@@ -1854,7 +1828,6 @@ function highlightTourItem(index) {
                 }
             }, 200);
         } else {
-            // Плашка видна - добавляем выделение и скроллим
             targetItem.classList.add('active');
             targetItem.scrollIntoView({ 
                 behavior: 'smooth', 
@@ -1863,7 +1836,6 @@ function highlightTourItem(index) {
         }
     }
     
-    // Центрируем карту на маркере
     if (placemarks[index] && myMap) {
         const coordinates = placemarks[index].geometry.getCoordinates();
         myMap.setCenter(coordinates, 12, { duration: 300 });
@@ -1871,7 +1843,6 @@ function highlightTourItem(index) {
         const rb = document.getElementById('resetMapBtn');
         if (rb) rb.classList.add('visible');
         
-        // На десктопе открываем балун
         if (window.innerWidth > 860) {
             setTimeout(() => {
                 if (placemarks[index].balloon) {
@@ -2105,17 +2076,15 @@ function initCustomMonthSelect() {
     trigger.addEventListener('click', toggleHandler);
     trigger.addEventListener('touchend', toggleHandler);
     
-    document.addEventListener('click', function(e) {
+    // Улучшенный обработчик закрытия по клику вне селекта
+    const handleOutsideClick = function(e) {
         if (!wrapper.contains(e.target)) {
             wrapper.classList.remove('open');
         }
-    });
+    };
     
-    document.addEventListener('touchend', function(e) {
-        if (!wrapper.contains(e.target)) {
-            wrapper.classList.remove('open');
-        }
-    });
+    document.addEventListener('click', handleOutsideClick);
+    document.addEventListener('touchend', handleOutsideClick);
     
     wrapper.appendChild(trigger);
     wrapper.appendChild(dropdown);
@@ -2165,12 +2134,14 @@ function initPromoRunner() {
     
     if (!runnerTrack || !runnerSection) return;
     
-    let animationStarted = false;
+    // Анимация теперь запускается сразу через класс .running в HTML
+    // IntersectionObserver оставлен как fallback
     const observer = new IntersectionObserver((entries) => { 
         entries.forEach(entry => { 
-            if (entry.isIntersecting && !animationStarted) { 
-                runnerTrack.classList.add('running'); 
-                animationStarted = true; 
+            if (entry.isIntersecting) { 
+                if (!runnerTrack.classList.contains('running')) {
+                    runnerTrack.classList.add('running');
+                }
             } 
         }); 
     }, { threshold: 0.3 });
@@ -2349,7 +2320,6 @@ function refreshOnReturn() {
 }
 
 (function init() {
-    // Инициализируем все сразу при загрузке DOM
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', initAll);
     } else {
@@ -2366,12 +2336,8 @@ function refreshOnReturn() {
         initMobileBalloon();
         renderEvents();
         
-        // Небольшая задержка для инициализации кастомных элементов
         setTimeout(initCustomMonthSelect, 50); 
-        
-        // Инициализация карты с отложенной загрузкой
         setTimeout(initYandexMap, 100); 
-        
         setTimeout(initShowMoreTourBtn, 150); 
         setTimeout(refreshOnReturn, 200);
     }
