@@ -957,7 +957,154 @@
         padding-top: 80px !important;
     }
 }
+/* ===== НОВЫЕ СТИЛИ ДЛЯ СТРАНИЦЫ ЛОГОТИПА ===== */
+.section-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--text-2xl);
+    color: var(--color-bg-dark);
+    margin-bottom: var(--space-4);
+}
 
+.logo-variants-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-4);
+    margin-bottom: var(--space-10);
+}
+
+.logo-variant-item {
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    background: #fff;
+    padding: var(--space-5);
+    text-align: center;
+    transition: var(--transition-smooth);
+}
+.logo-variant-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px var(--color-shadow);
+}
+.logo-variant-item.light-bg {
+    background: #F2F1F0;
+}
+.logo-variant-item.dark-bg {
+    background: #221E1F;
+    color: var(--color-text-inverse);
+}
+.logo-variant-item p {
+    margin-top: var(--space-3);
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: var(--text-sm);
+    color: inherit;
+    opacity: 0.85;
+}
+.variant-placeholder {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.variant-placeholder img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+/* Сетка охранных полей */
+.clearspace-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-6);
+    margin-bottom: var(--space-10);
+}
+
+.clearspace-demo {
+    background: #fff;
+    border-radius: var(--border-radius-lg);
+    padding: var(--space-6);
+    border: 1px solid var(--color-border);
+    box-shadow: 0 4px 20px var(--color-shadow);
+    text-align: center;
+}
+.clearspace-demo p {
+    margin-top: var(--space-4);
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+}
+
+.clearspace-box {
+    width: 100%;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed rgba(0,0,0,0.15);
+    border-radius: var(--border-radius);
+    position: relative;
+}
+.clearspace-box.light-bg {
+    background: #F2F1F0;
+}
+.clearspace-box.dark-bg {
+    background: #221E1F;
+    border-color: rgba(255,255,255,0.25);
+}
+.clearspace-box.vertical {
+    height: 250px;
+}
+.clearspace-inner {
+    padding: 30px; /* отступ, имитирующий охранное поле */
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.clearspace-inner img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+/* Минимальный размер */
+.min-size-demo {
+    background: #fff;
+    border-radius: var(--border-radius-lg);
+    padding: var(--space-8);
+    border: 1px solid var(--color-border);
+    box-shadow: 0 4px 20px var(--color-shadow);
+    text-align: center;
+    max-width: 400px;
+    margin: 0 auto var(--space-10);
+}
+.min-size-visual {
+    display: inline-block;
+    position: relative;
+    margin-bottom: var(--space-4);
+    border: 1px solid var(--color-border);
+    padding: var(--space-4);
+    background: #F2F1F0;
+    border-radius: var(--border-radius);
+}
+.size-indicator {
+    position: absolute;
+    bottom: -24px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--color-accent-red);
+    color: #fff;
+    font-family: var(--font-display);
+    font-size: var(--text-xs);
+    font-weight: 700;
+    padding: 2px 12px;
+    border-radius: 20px;
+    white-space: nowrap;
+    letter-spacing: 0.03em;
+}
 
     </style>
 </head>
@@ -1043,21 +1190,142 @@
         </div>
     </section>
 
-    <!-- СТРАНИЦА: ЛОГОТИП -->
-    <section class="page-section" id="page-logo">
-        <div class="hero-brand" data-color="dark"><div class="hero-brand-content"><h1>Логотип</h1><p>Структура, модификации, охранное поле</p></div></div>
-        <div class="content-wrapper">
-            <div class="logo-demo-box">
-                <div class="logo-version"><img src="https://placehold.co/200x100/231F20/F2F1F0?text=МИКОС" alt="Основной" loading="lazy"><p>Основной<br><small>(тёмный)</small></p></div>
-                <div class="logo-version"><img src="https://placehold.co/200x100/F2F1F0/231F20?text=МИКОС" alt="Светлый" loading="lazy"><p>Светлый вариант</p></div>
-                <div class="logo-version"><img src="https://placehold.co/200x100/F43139/F2F1F0?text=МИКОС" alt="Акцент" loading="lazy"><p>Красный акцент</p></div>
+    <!-- СТРАНИЦА: ЛОГОТИП (обновлённая) -->
+<section class="page-section" id="page-logo">
+    <div class="hero-brand" data-color="dark">
+        <div class="hero-brand-content">
+            <h1>Логотип</h1>
+            <p>Структура, модификации, охранное поле</p>
+        </div>
+    </div>
+    <div class="content-wrapper">
+        <!-- 1. ВАРИАЦИИ НА СВЕТЛОМ ФОНЕ (#F2F1F0) -->
+        <h2 class="section-title" style="font-family:var(--font-display); font-weight:700; margin-bottom:var(--space-4);">
+            Вариации на светлом фоне (#F2F1F0)
+        </h2>
+        <div class="logo-variants-grid">
+            <!-- Основной тёмный -->
+            <div class="logo-variant-item light-bg">
+                <div class="variant-placeholder">
+                    <!-- Заготовка для SVG -->
+                    <img src="SVG/znak-sv.svg" alt="">
+                </div>
+                <p></p>
             </div>
-            <div class="grid-2col">
-                <article class="brand-card"><h3>Структура</h3><p>Логотип состоит из знака (стилизованная маска) и текстовой части шрифтом Unbounded. Минимальный размер в печати — 25 мм.</p><h3 class="mt-4">Охранное поле</h3><p>Равно высоте буквы «М» в слове «Микос». Запрещено размещать другие элементы ближе.</p></article>
-                <article class="brand-card"><h3>Цветовые модификации</h3><p>Основной <code>#231F20</code> на светлом фоне, светлый <code>#F2F1F0</code> на тёмном, красный <code>#F43139</code> — для специальных проектов.</p><div class="mistake-badge"><i class="fas fa-exclamation-triangle"></i> <strong>Ошибки:</strong> искажение пропорций, добавление теней, замена шрифта, цвет вне палитры.</div></article>
+            <!-- Красный -->
+            <div class="logo-variant-item light-bg">
+                <div class="variant-placeholder">
+                    <img src="SVG/all-sv.svg" alt="">
+                </div>
+                <p></p>
+            </div>
+            <!-- Синий -->
+            <div class="logo-variant-item light-bg">
+                <div class="variant-placeholder">
+                    <img src="SVG/text+sv.svg" alt="">
+                </div>
+                <p></p>
+            </div>
+            <!-- Золотой -->
+            <div class="logo-variant-item light-bg">
+                <div class="variant-placeholder">
+                    <img src="SVG/text-sv.svg" alt="">
+                </div>
+                <p></p>
             </div>
         </div>
-    </section>
+
+        <!-- 2. ВАРИАЦИИ НА ТЁМНОМ ФОНЕ (#221E1F) -->
+        <h2 class="section-title mt-8" style="font-family:var(--font-display); font-weight:700; margin-bottom:var(--space-4);">
+            Вариации на тёмном фоне (#221E1F)
+        </h2>
+        <div class="logo-variants-grid">
+            <!-- Светлый -->
+            <div class="logo-variant-item dark-bg">
+                <div class="variant-placeholder">
+                    <img src="SVG/znak-tm.svg" alt="">
+                </div>
+                <p></p>
+            </div>
+            <!-- Красный на тёмном -->
+            <div class="logo-variant-item dark-bg">
+                <div class="variant-placeholder">
+                    <img src="SVG/all-tm.svg" alt="">
+                </div>
+                <p></p>
+            </div>
+            <!-- Синий на тёмном -->
+            <div class="logo-variant-item dark-bg">
+                <div class="variant-placeholder">
+                    <img src="SVG/text+tm.svg"" alt="">
+                </div>
+                <p></p>
+            </div>
+            <!-- Золотой на тёмном -->
+            <div class="logo-variant-item dark-bg">
+                <div class="variant-placeholder">
+                    <img src="SVG/text-tm.svg" alt="">
+                </div>
+                <p></p>
+            </div>
+        </div>
+
+        <!-- 3. ОХРАННЫЕ ПОЛЯ (4 блока) -->
+        <h2 class="section-title mt-8" style="font-family:var(--font-display); font-weight:700; margin-bottom:var(--space-4);">
+            Охранные поля
+        </h2>
+        <div class="clearspace-grid">
+            <!-- Пример 1: светлый фон, горизонтальная ориентация -->
+            <div class="clearspace-demo">
+                <div class="clearspace-box light-bg">
+                    <div class="clearspace-inner">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='60'%3E%3Crect width='160' height='60' fill='%23F2F1F0'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Unbounded' font-weight='bold' font-size='14' fill='%23221E1F'%3EЛОГО%3C/text%3E%3C/svg%3E" alt="Логотип">
+                    </div>
+                </div>
+                <p>Светлый фон · Горизонтальное поле</p>
+            </div>
+            <!-- Пример 2: тёмный фон, горизонтальная ориентация -->
+            <div class="clearspace-demo">
+                <div class="clearspace-box dark-bg">
+                    <div class="clearspace-inner">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='60'%3E%3Crect width='160' height='60' fill='%23221E1F'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Unbounded' font-weight='bold' font-size='14' fill='%23F2F1F0'%3EЛОГО%3C/text%3E%3C/svg%3E" alt="Логотип">
+                    </div>
+                </div>
+                <p>Тёмный фон · Горизонтальное поле</p>
+            </div>
+            <!-- Пример 3: светлый фон, вертикальная ориентация -->
+            <div class="clearspace-demo">
+                <div class="clearspace-box light-bg vertical">
+                    <div class="clearspace-inner">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='160'%3E%3Crect width='60' height='160' fill='%23F2F1F0'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Unbounded' font-weight='bold' font-size='12' fill='%23221E1F'%3EЛ%3C/text%3E%3C/svg%3E" alt="Логотип">
+                    </div>
+                </div>
+                <p>Светлый фон · Вертикальное поле</p>
+            </div>
+            <!-- Пример 4: тёмный фон, вертикальная ориентация -->
+            <div class="clearspace-demo">
+                <div class="clearspace-box dark-bg vertical">
+                    <div class="clearspace-inner">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='160'%3E%3Crect width='60' height='160' fill='%23221E1F'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Unbounded' font-weight='bold' font-size='12' fill='%23F2F1F0'%3EЛ%3C/text%3E%3C/svg%3E" alt="Логотип">
+                    </div>
+                </div>
+                <p>Тёмный фон · Вертикальное поле</p>
+            </div>
+        </div>
+
+        <!-- 4. МИНИМАЛЬНЫЙ РАЗМЕР -->
+        <h2 class="section-title mt-8" style="font-family:var(--font-display); font-weight:700; margin-bottom:var(--space-4);">
+            Минимальный размер
+        </h2>
+        <div class="min-size-demo">
+            <div class="min-size-visual">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='30'%3E%3Crect width='80' height='30' fill='%23F2F1F0'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Unbounded' font-weight='bold' font-size='10' fill='%23221E1F'%3EМИКОС%3C/text%3E%3C/svg%3E" alt="Минимальный размер">
+                <div class="size-indicator">25 мм / 72 px</div>
+            </div>
+            <p>Минимальный размер логотипа в печати — 25 мм по ширине.<br>Для цифровых носителей — не менее 72 пикселей.</p>
+        </div>
+    </div>
+</section>
 
     <!-- СТРАНИЦА: ЦВЕТА -->
     <section class="page-section" id="page-colors">
