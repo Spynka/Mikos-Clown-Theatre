@@ -6505,13 +6505,11 @@ body {
 
 .timeline-item.left .timeline-content {
     text-align: right !important;
-    padding-right: 80px !important;
     margin-left: auto !important;
 }
 
 .timeline-item.right .timeline-content {
     text-align: left !important;
-    padding-left: 80px !important;
     margin-right: auto !important;
 }
 
