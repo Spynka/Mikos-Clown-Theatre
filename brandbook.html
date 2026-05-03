@@ -399,70 +399,282 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 .filter-chip { padding: var(--space-2) var(--space-5); font-family: var(--font-display); font-weight: 600; font-size: var(--text-sm); border-radius: 30px; border: 2px solid var(--color-border); background: #fff; color: var(--color-text-secondary); cursor: pointer; transition: var(--transition); white-space: nowrap; }
 .filter-chip:hover { border-color: var(--color-accent-red); color: var(--color-accent-red); }
 .filter-chip.active { background: var(--color-accent-red); border-color: var(--color-accent-red); color: #fff; }
-.media-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: var(--space-5); padding: 0 var(--container-padding); margin-bottom: var(--space-10); }
-.media-card-new { background: #fff; border-radius: var(--border-radius-lg); overflow: hidden; box-shadow: 0 4px 20px var(--color-shadow); border: 1px solid var(--color-border); display: flex; flex-direction: column; transition: var(--transition-smooth); cursor: pointer; }
-.media-card-new:hover { transform: translateY(-4px); box-shadow: 0 12px 40px var(--color-shadow); }
-.media-card-image { height: 200px; overflow: hidden; position: relative; cursor: pointer; }
-.media-card-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
-.media-card-new:hover .media-card-image img { transform: scale(1.05); }
-.media-card-tag { position: absolute; top: var(--space-3); left: var(--space-3); background: var(--color-accent-red); color: #fff; font-size: var(--text-xs); font-weight: 600; padding: 4px 10px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.03em; }
-.media-card-content { padding: var(--space-5); flex: 1; display: flex; flex-direction: column; }
-.media-card-content h3 { font-family: var(--font-display); font-weight: 700; font-size: var(--text-xl); margin-bottom: var(--space-2); color: var(--color-bg-dark); }
-.media-card-content p { color: var(--color-text-secondary); font-size: var(--text-sm); line-height: 1.5; margin-bottom: var(--space-4); flex: 1; }
-.media-card-btn { align-self: flex-start; }
+
+/* ===== НОВАЯ СТРУКТУРА КАРТОЧКИ НОСИТЕЛЯ ===== */
+.media-grid { 
+  display: grid; 
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+  gap: var(--space-5); 
+  padding: 0 var(--container-padding); 
+  margin-bottom: var(--space-10); 
+}
+
+.media-card-new { 
+  background: #fff; 
+  border-radius: var(--border-radius-lg); 
+  overflow: hidden; 
+  box-shadow: 0 4px 20px var(--color-shadow); 
+  border: 1px solid var(--color-border); 
+  display: flex; 
+  flex-direction: column; 
+  transition: var(--transition-smooth); 
+  cursor: pointer; 
+}
+.media-card-new:hover { 
+  transform: translateY(-4px); 
+  box-shadow: 0 12px 40px var(--color-shadow); 
+}
+
+/* АВАТАР КАРТОЧКИ - ОДНО ФОТО */
+.media-card-avatar { 
+  height: 200px; 
+  overflow: hidden; 
+  position: relative; 
+  cursor: pointer; 
+  background: var(--color-bg-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.media-card-avatar img { 
+  width: 100%; 
+  height: 100%; 
+  object-fit: cover; 
+  transition: transform 0.3s ease; 
+}
+.media-card-new:hover .media-card-avatar img { 
+  transform: scale(1.05); 
+}
+.media-card-tag { 
+  position: absolute; 
+  top: var(--space-3); 
+  left: var(--space-3); 
+  background: var(--color-accent-red); 
+  color: #fff; 
+  font-size: var(--text-xs); 
+  font-weight: 600; 
+  padding: 4px 10px; 
+  border-radius: 20px; 
+  text-transform: uppercase; 
+  letter-spacing: 0.03em; 
+}
+
+/* КОНТЕНТ КАРТОЧКИ */
+.media-card-content { 
+  padding: var(--space-5); 
+  flex: 1; 
+  display: flex; 
+  flex-direction: column; 
+}
+.media-card-content h3 { 
+  font-family: var(--font-display); 
+  font-weight: 700; 
+  font-size: var(--text-xl); 
+  margin-bottom: var(--space-2); 
+  color: var(--color-bg-dark); 
+}
+.media-card-content p { 
+  color: var(--color-text-secondary); 
+  font-size: var(--text-sm); 
+  line-height: 1.5; 
+  margin-bottom: var(--space-4); 
+  flex: 1; 
+}
+.media-card-btn { 
+  align-self: flex-start; 
+}
+
 .show-more-wrapper { text-align: center; margin: var(--space-8) 0; }
-.show-more-btn { padding: var(--space-3) var(--space-8); font-family: var(--font-display); font-weight: 600; font-size: var(--text-base); border: 2px solid var(--color-border); border-radius: 30px; background: #fff; color: var(--color-text-primary); cursor: pointer; transition: var(--transition); }
-.show-more-btn:hover { border-color: var(--color-accent-red); color: var(--color-accent-red); }
+.show-more-btn { 
+  padding: var(--space-3) var(--space-8); 
+  font-family: var(--font-display); 
+  font-weight: 600; 
+  font-size: var(--text-base); 
+  border: 2px solid var(--color-border); 
+  border-radius: 30px; 
+  background: #fff; 
+  color: var(--color-text-primary); 
+  cursor: pointer; 
+  transition: var(--transition); 
+}
+.show-more-btn:hover { 
+  border-color: var(--color-accent-red); 
+  color: var(--color-accent-red); 
+}
 
 /* ===== ДЕТАЛЬНЫЙ ПРОСМОТР НОСИТЕЛЕЙ ===== */
 .media-detail-page { display: none; }
 .media-detail-page.active { display: block; animation: fadeIn 0.3s ease; }
-.media-detail-header { background: var(--color-bg-dark); color: var(--color-text-inverse); padding: var(--space-8) var(--container-padding); text-align: center; position: relative; }
-.media-detail-header .btn-secondary { position: absolute; left: var(--container-padding); top: var(--space-8); background: rgba(255,255,255,0.15); color: #fff; border-color: rgba(255,255,255,0.3); }
-.media-detail-tag { display: inline-block; background: var(--color-accent-red); color: #fff; font-size: var(--text-xs); font-weight: 600; padding: 4px 12px; border-radius: 20px; margin-bottom: var(--space-3); text-transform: uppercase; letter-spacing: 0.05em; }
-.media-detail-title h1 { font-family: var(--font-display); font-weight: 800; font-size: clamp(var(--text-3xl), 6vw, var(--text-5xl)); margin-bottom: var(--space-2); line-height: 1.1; }
-.media-detail-title p { font-size: var(--text-lg); opacity: 0.9; max-width: 600px; margin: 0 auto; }
-.media-detail-content { max-width: var(--container-max); margin: 0 auto; padding: var(--space-10) var(--container-padding); }
+.media-detail-header { 
+  background: var(--color-bg-dark); 
+  color: var(--color-text-inverse); 
+  padding: var(--space-8) var(--container-padding); 
+  text-align: center; 
+  position: relative; 
+}
+.media-detail-header .btn-secondary { 
+  position: absolute; 
+  left: var(--container-padding); 
+  top: var(--space-8); 
+  background: rgba(255,255,255,0.15); 
+  color: #fff; 
+  border-color: rgba(255,255,255,0.3); 
+}
+.media-detail-tag { 
+  display: inline-block; 
+  background: var(--color-accent-red); 
+  color: #fff; 
+  font-size: var(--text-xs); 
+  font-weight: 600; 
+  padding: 4px 12px; 
+  border-radius: 20px; 
+  margin-bottom: var(--space-3); 
+  text-transform: uppercase; 
+  letter-spacing: 0.05em; 
+}
+.media-detail-title h1 { 
+  font-family: var(--font-display); 
+  font-weight: 800; 
+  font-size: clamp(var(--text-3xl), 6vw, var(--text-5xl)); 
+  margin-bottom: var(--space-2); 
+  line-height: 1.1; 
+}
+.media-detail-title p { 
+  font-size: var(--text-lg); 
+  opacity: 0.9; 
+  max-width: 600px; 
+  margin: 0 auto; 
+}
+.media-detail-content { 
+  max-width: var(--container-max); 
+  margin: 0 auto; 
+  padding: var(--space-10) var(--container-padding); 
+}
 
-/* Галерея детального просмотра */
+/* Галерея детального просмотра - ОТДЕЛЬНЫЕ ФОТО ОТ АВАТАРА */
 .media-gallery { margin-bottom: var(--space-8); }
 .gallery-main { 
-  position: relative; border-radius: var(--border-radius-lg); overflow: hidden; 
-  box-shadow: 0 12px 40px var(--color-shadow); margin-bottom: var(--space-4); 
-  background: #fff; display: flex; align-items: center; justify-content: center;
-  min-height: 300px; cursor: zoom-in;
+  position: relative; 
+  border-radius: var(--border-radius-lg); 
+  overflow: hidden; 
+  box-shadow: 0 12px 40px var(--color-shadow); 
+  margin-bottom: var(--space-4); 
+  background: #fff; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+  min-height: 300px; 
+  cursor: zoom-in;
 }
 .gallery-main img { 
-  width: 100%; height: auto; max-height: 70vh; 
-  object-fit: contain; display: block; border-radius: var(--border-radius); 
+  width: 100%; 
+  height: auto; 
+  max-height: 70vh; 
+  object-fit: contain; 
+  display: block; 
+  border-radius: var(--border-radius); 
   transition: transform 0.2s ease;
 }
 .gallery-main:hover img { transform: scale(1.01); }
 .gallery-nav { 
-  position: absolute; top: 50%; transform: translateY(-50%); 
-  width: 48px; height: 48px; border-radius: 50%; 
-  background: rgba(35, 31, 32, 0.7); color: #fff; border: none; 
-  font-size: var(--text-xl); display: flex; align-items: center; justify-content: center; 
-  cursor: pointer; transition: var(--transition); z-index: 5;
-  user-select: none; -webkit-tap-highlight-color: transparent;
+  position: absolute; 
+  top: 50%; 
+  transform: translateY(-50%); 
+  width: 48px; 
+  height: 48px; 
+  border-radius: 50%; 
+  background: rgba(35, 31, 32, 0.7); 
+  color: #fff; 
+  border: none; 
+  font-size: var(--text-xl); 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  cursor: pointer; 
+  transition: var(--transition); 
+  z-index: 5;
+  user-select: none; 
+  -webkit-tap-highlight-color: transparent;
 }
 .gallery-nav:hover { background: var(--color-accent-red); }
 .gallery-nav.prev { left: var(--space-4); }
 .gallery-nav.next { right: var(--space-4); }
 .gallery-thumbs { 
-  display: flex; gap: var(--space-3); overflow-x: auto; 
-  padding: var(--space-2) 0; scrollbar-width: thin; 
-  scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+  display: flex; 
+  gap: var(--space-3); 
+  overflow-x: auto; 
+  padding: var(--space-2) 0; 
+  scrollbar-width: thin; 
+  scroll-snap-type: x mandatory; 
+  -webkit-overflow-scrolling: touch;
 }
 .gallery-thumbs::-webkit-scrollbar { height: 6px; }
 .gallery-thumbs::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 3px; }
 .thumb { 
-  flex: 0 0 100px; height: 66px; border-radius: 8px; 
-  object-fit: cover; cursor: pointer; opacity: 0.7; 
-  transition: var(--transition); border: 2px solid transparent;
-  scroll-snap-align: start; -webkit-tap-highlight-color: transparent;
+  flex: 0 0 100px; 
+  height: 66px; 
+  border-radius: 8px; 
+  object-fit: cover; 
+  cursor: pointer; 
+  opacity: 0.7; 
+  transition: var(--transition); 
+  border: 2px solid transparent;
+  scroll-snap-align: start; 
+  -webkit-tap-highlight-color: transparent;
 }
-.thumb:hover, .thumb.active { opacity: 1; border-color: var(--color-accent-red); transform: scale(1.03); }
+.thumb:hover, .thumb.active { 
+  opacity: 1; 
+  border-color: var(--color-accent-red); 
+  transform: scale(1.03); 
+}
+
+/* БЛОК ИНФОРМАЦИИ О НОСИТЕЛЕ */
+.media-info-block {
+  background: #fff;
+  border-radius: var(--border-radius-lg);
+  padding: var(--space-6);
+  box-shadow: 0 4px 20px var(--color-shadow);
+  border: 1px solid var(--color-border);
+  margin-bottom: var(--space-6);
+}
+.media-info-block h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--text-xl);
+  color: var(--color-bg-dark);
+  margin-bottom: var(--space-4);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+.media-info-block h3 i {
+  color: var(--color-accent-red);
+}
+.media-info-block p {
+  color: var(--color-text-secondary);
+  font-size: var(--text-base);
+  line-height: 1.7;
+  margin-bottom: var(--space-3);
+}
+.media-info-block ul {
+  list-style: none;
+  padding-left: 0;
+  display: grid;
+  gap: var(--space-2);
+}
+.media-info-block ul li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  color: var(--color-text-secondary);
+  font-size: var(--text-sm);
+}
+.media-info-block ul li::before {
+  content: "•";
+  color: var(--color-accent-red);
+  font-weight: bold;
+  margin-top: 2px;
+}
 
 /* Двухколоночная сетка для спецификаций и загрузок */
 .media-specs-grid { 
@@ -506,6 +718,15 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   .lightbox-nav.next { right: 10px; }
   .color-selector { justify-content: center; }
   .color-selector-label { margin-right: 0; width: 100%; text-align: center; margin-bottom: var(--space-2); }
+  
+  /* ФИКС ДЛЯ МОБИЛЬНОЙ ВЕРСИИ - фото подвеса */
+  .media-card-avatar img,
+  .gallery-main img {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 180px !important;
+    object-fit: contain !important;
+  }
 }
 
 @media (max-width: 480px) {
@@ -515,24 +736,114 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   .thumb { flex: 0 0 70px; height: 47px; }
   .download-btn { padding: var(--space-2) var(--space-4); font-size: var(--text-xs); }
   .lightbox-media-container img { max-height: 60vh; }
+  
+  /* ДОПОЛНИТЕЛЬНЫЙ ФИКС ДЛЯ ОЧЕНЬ УЗКИХ ЭКРАНОВ */
+  .media-card-avatar {
+    min-height: 160px !important;
+  }
+  .media-card-avatar img {
+    min-height: 160px !important;
+  }
 }
 
 /* ===== АДАПТИВ ===== */
-@media (max-width: 1024px) { .nav-menu { display: none; } .burger-icon { display: flex; align-items: center; } .header-left { gap: var(--space-4); } .brandbook-label { font-size: var(--text-lg); padding-left: var(--space-3); } .typo-controls { flex-direction: column; align-items: flex-start; top: 68px; } .main-header.scrolled + .typo-controls { top: 69px; } .logo-variants-grid { grid-template-columns: repeat(2, 1fr); } .clearspace-grid { grid-template-columns: 1fr; } .min-size-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 768px) { .gallery-nav { width: 40px; height: 40px; font-size: var(--text-lg); } .thumb { flex: 0 0 80px; height: 53px; } .media-detail-header .btn-secondary { position: static; margin-bottom: var(--space-4); } .grid-2col, .grid-3col { grid-template-columns: 1fr; } .hero-brand { padding: var(--space-12) var(--container-padding); } .symbols-grid { grid-template-columns: 1fr; } }
-@media (max-width: 640px) { :root { --container-padding: var(--space-4); --space-12: 2.5rem; --space-16: 3rem; } .header-inner { padding: var(--space-3) var(--container-padding); } .logo-img { height: 28px; } .hero-brand { padding: var(--space-10) var(--container-padding); } .hero-brand h1 { font-size: clamp(var(--text-3xl), 10vw, var(--text-5xl)); } .content-wrapper { padding: var(--space-8) var(--container-padding); } .brand-card { padding: var(--space-5); } .photo-large img { aspect-ratio: 4/3; } .typo-controls { top: 64px; } .main-header.scrolled + .typo-controls { top: 65px; } .logo-variants-grid { grid-template-columns: 1fr; } .min-size-grid { grid-template-columns: 1fr; } .scroll-item { flex: 0 0 calc(100vw - 48px); } .scroll-nav-btn { display: none; } .lightbox-media-container img { max-height: 50vh; } }
-@media (max-width: 480px) { .content-wrapper { padding: var(--space-4) var(--space-3) !important; } .hero-brand h1 { font-size: clamp(var(--text-3xl), 12vw, var(--text-5xl)) !important; } .hero-brand p { font-size: var(--text-base) !important; } .brand-card { padding: var(--space-4) !important; } .grid-2col, .grid-3col { gap: var(--space-4) !important; } .typo-controls { flex-direction: column !important; align-items: stretch !important; gap: var(--space-3) !important; padding: var(--space-3) var(--space-4) !important; } .preview-content { font-size: 1.5rem !important; } }
-@media (max-width: 860px) { .mobile-nav { z-index: 100000 !important; } .overlay { z-index: 99999 !important; } .burger-icon { z-index: 100001 !important; } .main-header { z-index: 99998 !important; } .content-wrapper { padding: var(--space-6) var(--space-4) !important; } .main-header { background: transparent !important; backdrop-filter: none !important; border-bottom: none !important; box-shadow: none !important; position: absolute !important; top: 0 !important; left: 0 !important; width: 100% !important; } .header-inner { justify-content: flex-end !important; height: 0 !important; padding: 0 var(--space-4) !important; background: transparent !important; } .header-left { display: none !important; } .nav-menu { display: none !important; } .burger-icon { display: flex !important; position: fixed !important; top: 19px !important; right: 20px !important; width: 52px !important; height: 52px !important; background: #fff !important; border-radius: 50% !important; box-shadow: 0 2px 10px rgba(0,0,0,.15) !important; color: #231F20 !important; font-size: 26px !important; align-items: center !important; justify-content: center !important; } }
-@media (max-width: 860px) { .mobile-nav ul li a { padding: 12px 0 !important; font-size: 16px !important; min-height: 44px !important; display: flex !important; align-items: center !important; } .mobile-logo-group { padding-top: 10px !important; } .close-mobile-menu { width: 44px !important; height: 44px !important; font-size: 22px !important; } }
-@media (max-width: 860px) { .photo-large img { aspect-ratio: 4/3 !important; object-fit: cover !important; } .photo-medium img { aspect-ratio: 1/1 !important; } }
-@supports (-webkit-touch-callout: none) { .mobile-nav { height: -webkit-fill-available !important; } }
+@media (max-width: 1024px) { 
+  .nav-menu { display: none; } 
+  .burger-icon { display: flex; align-items: center; } 
+  .header-left { gap: var(--space-4); } 
+  .brandbook-label { font-size: var(--text-lg); padding-left: var(--space-3); } 
+  .typo-controls { flex-direction: column; align-items: flex-start; top: 68px; } 
+  .main-header.scrolled + .typo-controls { top: 69px; } 
+  .logo-variants-grid { grid-template-columns: repeat(2, 1fr); } 
+  .clearspace-grid { grid-template-columns: 1fr; } 
+  .min-size-grid { grid-template-columns: repeat(2, 1fr); } 
+}
+
+@media (max-width: 768px) { 
+  .gallery-nav { width: 40px; height: 40px; font-size: var(--text-lg); } 
+  .thumb { flex: 0 0 80px; height: 53px; } 
+  .media-detail-header .btn-secondary { position: static; margin-bottom: var(--space-4); } 
+  .grid-2col, .grid-3col { grid-template-columns: 1fr; } 
+  .hero-brand { padding: var(--space-12) var(--container-padding); } 
+  .symbols-grid { grid-template-columns: 1fr; } 
+}
+
+@media (max-width: 640px) { 
+  :root { --container-padding: var(--space-4); --space-12: 2.5rem; --space-16: 3rem; } 
+  .header-inner { padding: var(--space-3) var(--container-padding); } 
+  .logo-img { height: 28px; } 
+  .hero-brand { padding: var(--space-10) var(--container-padding); } 
+  .hero-brand h1 { font-size: clamp(var(--text-3xl), 10vw, var(--text-5xl)); } 
+  .content-wrapper { padding: var(--space-8) var(--container-padding); } 
+  .brand-card { padding: var(--space-5); } 
+  .photo-large img { aspect-ratio: 4/3; } 
+  .typo-controls { top: 64px; } 
+  .main-header.scrolled + .typo-controls { top: 65px; } 
+  .logo-variants-grid { grid-template-columns: 1fr; } 
+  .min-size-grid { grid-template-columns: 1fr; } 
+  .scroll-item { flex: 0 0 calc(100vw - 48px); } 
+  .scroll-nav-btn { display: none; } 
+  .lightbox-media-container img { max-height: 50vh; } 
+}
+
+@media (max-width: 480px) { 
+  .content-wrapper { padding: var(--space-4) var(--space-3) !important; } 
+  .hero-brand h1 { font-size: clamp(var(--text-3xl), 12vw, var(--text-5xl)) !important; } 
+  .hero-brand p { font-size: var(--text-base) !important; } 
+  .brand-card { padding: var(--space-4) !important; } 
+  .grid-2col, .grid-3col { gap: var(--space-4) !important; } 
+  .typo-controls { flex-direction: column !important; align-items: stretch !important; gap: var(--space-3) !important; padding: var(--space-3) var(--space-4) !important; } 
+  .preview-content { font-size: 1.5rem !important; } 
+}
+
+@media (max-width: 860px) { 
+  .mobile-nav { z-index: 100000 !important; } 
+  .overlay { z-index: 99999 !important; } 
+  .burger-icon { z-index: 100001 !important; } 
+  .main-header { z-index: 99998 !important; } 
+  .content-wrapper { padding: var(--space-6) var(--space-4) !important; } 
+  .main-header { background: transparent !important; backdrop-filter: none !important; border-bottom: none !important; box-shadow: none !important; position: absolute !important; top: 0 !important; left: 0 !important; width: 100% !important; } 
+  .header-inner { justify-content: flex-end !important; height: 0 !important; padding: 0 var(--space-4) !important; background: transparent !important; } 
+  .header-left { display: none !important; } 
+  .nav-menu { display: none !important; } 
+  .burger-icon { display: flex !important; position: fixed !important; top: 19px !important; right: 20px !important; width: 52px !important; height: 52px !important; background: #fff !important; border-radius: 50% !important; box-shadow: 0 2px 10px rgba(0,0,0,.15) !important; color: #231F20 !important; font-size: 26px !important; align-items: center !important; justify-content: center !important; } 
+}
+
+@media (max-width: 860px) { 
+  .mobile-nav ul li a { padding: 12px 0 !important; font-size: 16px !important; min-height: 44px !important; display: flex !important; align-items: center !important; } 
+  .mobile-logo-group { padding-top: 10px !important; } 
+  .close-mobile-menu { width: 44px !important; height: 44px !important; font-size: 22px !important; } 
+}
+
+@media (max-width: 860px) { 
+  .photo-large img { aspect-ratio: 4/3 !important; object-fit: cover !important; } 
+  .photo-medium img { aspect-ratio: 1/1 !important; } 
+}
+
+@supports (-webkit-touch-callout: none) { 
+  .mobile-nav { height: -webkit-fill-available !important; 
+  } 
+}
+
 .mobile-logo-group { display: flex !important; flex-direction: column !important; align-items: center !important; gap: 12px !important; margin-bottom: 16px !important; padding-bottom: 16px !important; border-bottom: 1px solid rgba(255,255,255,.08) !important; }
 .mobile-logo-group img { max-width: 110px !important; height: auto !important; }
 .mobile-nav ul li a { color: #F2F1F0 !important; font-family: 'Unbounded', sans-serif !important; font-size: 15px !important; text-decoration: none !important; display: block !important; padding: 6px 0 !important; line-height: 1.2 !important; transition: color .2s !important; }
 .mobile-nav ul li a:hover, .mobile-nav ul li a.active { color: #E8454D !important; }
 .main-footer { background: #2C4068 !important; }
-@media (max-width: 860px) { .page-title, .hero-brand h1, .section-title { padding-top: 20px !important; } .hero-brand { padding-top: clamp(70px, 15vw, 100px) !important; } }
-.text-center { text-align: center; } .mt-4 { margin-top: var(--space-4); } .mt-6 { margin-top: var(--space-6); } .mt-8 { margin-top: var(--space-8); } .mb-4 { margin-bottom: var(--space-4); } .mb-6 { margin-bottom: var(--space-6); } .hidden { display: none !important; }
+
+@media (max-width: 860px) { 
+  .page-title, .hero-brand h1, .section-title { padding-top: 20px !important; } 
+  .hero-brand { padding-top: clamp(70px, 15vw, 100px) !important; } 
+}
+
+.text-center { text-align: center; } 
+.mt-4 { margin-top: var(--space-4); } 
+.mt-6 { margin-top: var(--space-6); } 
+.mt-8 { margin-top: var(--space-8); } 
+.mb-4 { margin-bottom: var(--space-4); } 
+.mb-6 { margin-bottom: var(--space-6); } 
+.hidden { display: none !important; }
+
 /* ===== ЦВЕТОВЫЕ СЕЛЕКТОРЫ (ИСПРАВЛЕННЫЕ) ===== */
 .color-selector { 
   display: flex; 
@@ -564,7 +875,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   background-position: center;
   background-repeat: no-repeat;
   padding: 0;
-  outline: none; /* Убираем стандартную браузерную обводку */
+  outline: none;
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -664,7 +975,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 /* ✅ АКТИВНЫЙ СОСТОЯНИЕ: ТОЛЬКО ЧИСТЫЙ КРАСНЫЙ #F43139 */
 .color-swatch.active {
   transform: scale(1.15);
-  outline: 3px solid #F43139; /* Жёсткий HEX, без var(), без прозрачности */
+  outline: 3px solid #F43139;
   outline-offset: 3px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.2);
   z-index: 2;
@@ -1107,6 +1418,12 @@ data-fullscreen="SVG/src.png" data-name="Структура логотипа" da
 <div class="gallery-thumbs" id="detailThumbs"></div>
 </div>
 
+<!-- БЛОК ИНФОРМАЦИИ О НОСИТЕЛЕ (НОВЫЙ) -->
+<div class="media-info-block" id="detailInfoBlock">
+<h3><i class="fas fa-info-circle"></i> О носителе</h3>
+<div id="detailInfoContent"></div>
+</div>
+
 <!-- Двухколоночная сетка: спецификации и скачивание -->
 <div class="media-specs-grid">
 <div id="detailSpecs"></div>
@@ -1481,14 +1798,71 @@ function updateImagesByColor(productId, colorId) {
   return config.images[colorId];
 }
 
-// ===== НОСИТЕЛИ =====
+// ===== НОСИТЕЛИ - ОБНОВЛЁННАЯ СТРУКТУРА =====
 const mediaItems = [
-    { id:'business-card', title:'Визитная карточка', category:'printed', desc:'Двусторонняя визитка с тиснением', images:['https://placehold.co/800x500/231F20/D4BF95?text=Визитка+лицевая','https://placehold.co/800x500/D4BF95/231F20?text=Визитка+оборот'], specs:[['Формат','90×50 мм'],['Цвет','CMYK / RGB']], downloads:[{label:'PDF макет', href:'files/business-card.pdf', icon:'fa-file-ai'},{label:'INDD шаблон', href:'files/business-card.indd', icon:'fa-file-ai'}] },
-    { id:'poster', title:'Афиша спектакля', category:'printed', desc:'Формат А2 и А1', images:['files/fir-stil//1.jpg'], specs:[['Форматы','А1, А2']], downloads:[{label:'PDF', href:'files/poster.pdf', icon:'fa-file-ai'}] },
-    { id:'social', title:'Шаблоны для соцсетей', category:'digital', desc:'Stories, посты, обложки', images:['files/fir-stil//1.jpg'], specs:[['Размеры','1080×1920 px']], downloads:[{label:'Figma', href:'https://figma.com/mikos', icon:'fa-file-ai'}] },
-    { id:'merch', title:'Фирменный мерч', category:'souvenirs', desc:'Футболки, шоперы, значки', images:['files/fir-stil//1.jpg'], specs:[['Материалы','хлопок']], downloads:[{label:'Вектор', href:'files/merch.ai', icon:'fa-file-ai'}] },
-    { id:'ticket', title:'Электронный билет', category:'digital', desc:'QR-код, информация', images:['files/fir-stil//1.jpg'], specs:[['Формат','210×70 мм']], downloads:[{label:'PDF + HTML', href:'files/ticket.zip', icon:'fa-file-ai'}] },
-    { id:'panamka', title:'Панамка', category:'clothes', desc:'Лёгкая панама с вышитым знаком', images:['files/fir-stil/Панамка/1.jpg'], specs:[['Материал','хлопок']], downloads:[{label:'Макет вышивки', href:'files/panamka.dst', icon:'fa-file-ai'}] },
+    { 
+      id:'business-card', 
+      title:'Визитная карточка', 
+      category:'printed', 
+      desc:'Двусторонняя визитка с тиснением',
+      avatar: 'https://placehold.co/600x400/231F20/D4BF95?text=Визитка+аватар', // ОДНО ФОТО ДЛЯ КАРТОЧКИ
+      gallery: ['https://placehold.co/800x500/231F20/D4BF95?text=Визитка+лицевая','https://placehold.co/800x500/D4BF95/231F20?text=Визитка+оборот'], // ОТДЕЛЬНЫЕ ФОТО ДЛЯ ГАЛЕРЕИ
+      info: 'Классическая двусторонняя визитка формата 90×50 мм. Лицевая сторона — минималистичный дизайн с логотипом и названием театра. Оборотная сторона — контактная информация. Рекомендуется печать на плотной матовой бумаге с выборочным УФ-лаком или тиснением фольгой для акцента на логотипе.',
+      specs:[['Формат','90×50 мм'],['Цвет','CMYK / RGB']], 
+      downloads:[{label:'PDF макет', href:'files/business-card.pdf', icon:'fa-file-ai'},{label:'INDD шаблон', href:'files/business-card.indd', icon:'fa-file-ai'}] 
+    },
+    { 
+      id:'poster', 
+      title:'Афиша спектакля', 
+      category:'printed', 
+      desc:'Формат А2 и А1', 
+      avatar: 'files/fir-stil//1.jpg',
+      gallery: ['files/fir-stil//1.jpg'], 
+      info: 'Афиша для анонса спектаклей. Используется как в печатном виде (размещение в городе), так и в цифровом (соцсети, сайт). Основной акцент — на названии спектакля и дате. Допускается использование фирменных графических элементов (линии кулис, маска) в качестве фона.',
+      specs:[['Форматы','А1, А2']], 
+      downloads:[{label:'PDF', href:'files/poster.pdf', icon:'fa-file-ai'}] 
+    },
+    { 
+      id:'social', 
+      title:'Шаблоны для соцсетей', 
+      category:'digital', 
+      desc:'Stories, посты, обложки', 
+      avatar: 'files/fir-stil//1.jpg',
+      gallery: ['files/fir-stil//1.jpg'], 
+      info: 'Набор адаптивных шаблонов для социальных сетей. Включает обложки профилей, шаблоны для постов, stories и highlight covers. Все макеты созданы с учётом технических требований площадок (размеры, безопасные зоны).',
+      specs:[['Размеры','1080×1920 px']], 
+      downloads:[{label:'Figma', href:'https://figma.com/mikos', icon:'fa-file-ai'}] 
+    },
+    { 
+      id:'merch', 
+      title:'Фирменный мерч', 
+      category:'souvenirs', 
+      desc:'Футболки, шоперы, значки', 
+      avatar: 'files/fir-stil//1.jpg',
+      gallery: ['files/fir-stil//1.jpg'], 
+      specs:[['Материалы','хлопок']], 
+      downloads:[{label:'Вектор', href:'files/merch.ai', icon:'fa-file-ai'}] 
+    },
+    { 
+      id:'ticket', 
+      title:'Электронный билет', 
+      category:'digital', 
+      desc:'QR-код, информация', 
+      avatar: 'files/fir-stil//1.jpg',
+      gallery: ['files/fir-stil//1.jpg'], 
+      specs:[['Формат','210×70 мм']], 
+      downloads:[{label:'PDF + HTML', href:'files/ticket.zip', icon:'fa-file-ai'}] 
+    },
+    { 
+      id:'panamka', 
+      title:'Панамка', 
+      category:'clothes', 
+      desc:'Лёгкая панама с вышитым знаком', 
+      avatar: 'files/fir-stil/Панамка/1.jpg',
+      gallery: ['files/fir-stil/Панамка/1.jpg'], 
+      specs:[['Материал','хлопок']], 
+      downloads:[{label:'Макет вышивки', href:'files/panamka.dst', icon:'fa-file-ai'}] 
+    },
     { 
       id:'backpack-pendant', 
       title:'Подвес на рюкзак', 
@@ -1496,12 +1870,32 @@ const mediaItems = [
       desc:'Металлический подвес «Микос Team»', 
       hasColorSelector: true,
       defaultColor: 'pendant-black',
-      images:['files/fir-stil/Подвес/1.jpg'], 
+      avatar: 'files/fir-stil/Подвес/1.jpg', // ОДНО ФОТО ДЛЯ КАРТОЧКИ
+      gallery: ['files/fir-stil/Подвес/1.jpg'], // ОТДЕЛЬНЫЕ ФОТО ДЛЯ ГАЛЕРЕИ (могут совпадать)
+      info: 'Металлический подвес на карабине для рюкзаков и сумок. Изготавливается из нержавеющей стали с гравировкой логотипа. Доступен в четырёх цветовых вариантах. Идеальный сувенир для поклонников театра и участников мероприятий.',
       specs:[['Размер','40×25 мм']], 
       downloads:[{label:'3D-модель', href:'files/pendant.stl', icon:'fa-file-ai'}] 
     },
-    { id:'socks', title:'Носки', category:'clothes', desc:'Принт с логотипом', images:['files/fir-stil/Носки/4.jpg','files/fir-stil/Носки/2.jpg','files/fir-stil/Носки/3.jpg'], specs:[['Состав','хлопок 80%']], downloads:[{label:'Шаблон принта', href:'files/socks.ai', icon:'fa-file-ai'}] },
-    { id:'tshirt-mikos', title:'Футболка «Микос тут»', category:'clothes', desc:'Хлопковая футболка с авторским принтом', images:['files/fir-stil/Футболка Микос-тут/1.jpg', 'files/fir-stil/Футболка Микос-тут/Футболка_Макет.png', 'files/fir-stil/Футболка Микос-тут/Микос-тут.png', 'files/fir-stil/Футболка Микос-тут/Микос-тим.png'], specs:[['Размер','L']], downloads:[{label:'Макет AI', href:'files/fir-stil/Футболка Микос-тут/Футболка_Макет.ai', icon:'fa-file-ai'}] },
+    { 
+      id:'socks', 
+      title:'Носки', 
+      category:'clothes', 
+      desc:'Принт с логотипом', 
+      avatar: 'files/fir-stil/Носки/4.jpg',
+      gallery: ['files/fir-stil/Носки/4.jpg','files/fir-stil/Носки/2.jpg','files/fir-stil/Носки/3.jpg'], 
+      specs:[['Состав','хлопок 80%']], 
+      downloads:[{label:'Шаблон принта', href:'files/socks.ai', icon:'fa-file-ai'}] 
+    },
+    { 
+      id:'tshirt-mikos', 
+      title:'Футболка «Микос тут»', 
+      category:'clothes', 
+      desc:'Хлопковая футболка с авторским принтом', 
+      avatar: 'files/fir-stil/Футболка Микос-тут/1.jpg',
+      gallery: ['files/fir-stil/Футболка Микос-тут/1.jpg', 'files/fir-stil/Футболка Микос-тут/Футболка_Макет.png', 'files/fir-stil/Футболка Микос-тут/Микос-тут.png', 'files/fir-stil/Футболка Микос-тут/Микос-тим.png'], 
+      specs:[['Размер','L']], 
+      downloads:[{label:'Макет AI', href:'files/fir-stil/Футболка Микос-тут/Футболка_Макет.ai', icon:'fa-file-ai'}] 
+    },
     { 
       id:'limited-tshirt', 
       title:'Лимитка-футболка', 
@@ -1509,25 +1903,153 @@ const mediaItems = [
       desc:'Лимитированная серия', 
       hasColorSelector: true,
       defaultColor: 'tshirt-bw',
-      images:['files/fir-stil/Футболка Микос-тут/1.jpg'], 
+      avatar: 'files/fir-stil/Футболка Микос-тут/1.jpg',
+      gallery: ['files/fir-stil/Футболка Микос-тут/1.jpg'], 
       specs:[['Тираж','100 шт.']], 
       downloads:[{label:'Макет', href:'files/limited-tshirt.ai', icon:'fa-file-ai'}] 
     },
-    { id:'limited-hoodie', title:'Лимитка-худи', category:'limited-collection', desc:'Худи с принтом', images:['files/fir-stil/Худи/Худи_Мокап_1.jpg', 'files/fir-stil/Худи/Худи_Мокап_2.jpg', 'files/fir-stil/Худи/Худи_Макет.png','files/fir-stil/Худи/Худи.png', 'files/fir-stil/Худи/Нашивка.svg'], specs:[['Размер','XL','52']], downloads:[{label:'Вектор', href:'files/fir-stil/Худи/Худи_Макет.ai', icon:'fa-file-ai'}] },
-    { id:'limited-notebook', title:'Лимитка-блокнот', category:'limited-collection', desc:'Блокнот с символикой', images:['files/fir-stil//1.jpg'], specs:[['Формат','А5']], downloads:[{label:'Обложка', href:'files/notebook-cover.ai', icon:'fa-file-ai'}] },
-    { id:'badges', title:'Значки', category:'souvenirs', desc:'Набор значков', images:['files/fir-stil//1.jpg'], specs:[['Диаметр','38 мм']], downloads:[{label:'AI шаблон', href:'files/badges.ai', icon:'fa-file-ai'}] },
-    { id:'thermo-stickers', title:'Термобутылка с наклейками', category:'home', desc:'Бутылка + набор стикеров', images:['files/fir-stil//1.jpg'], specs:[['Объём','500 мл']], downloads:[{label:'Наклейки', href:'files/stickers.ai', icon:'fa-file-ai'}] },
-    { id:'hoodie-stickers', title:'Худи с наклейками', category:'clothes', desc:'Худи и лист наклеек', images:['files/fir-stil//1.jpg'], specs:[['Размеры','S–XXL']], downloads:[{label:'Наклейки', href:'files/hoodie-stickers.ai', icon:'fa-file-ai'}] },
-    { id:'ad-booklet', title:'Буклет рекламный', category:'printed', desc:'Информационный буклет', images:['files/fir-stil//1.jpg'], specs:[['Формат','А4 (фальц)']], downloads:[{label:'PDF', href:'files/booklet.pdf', icon:'fa-file-ai'}] },
-    { id:'chair', title:'Стул', category:'home', desc:'Брендированный стул', images:['files/fir-stil//1.jpg'], specs:[['Материал','дерево']], downloads:[{label:'Чертёж', href:'files/chair.dwg', icon:'fa-file-ai'}] },
-    { id:'drip-coffee', title:'Дрип-кофе', category:'home', desc:'Порционный кофе в фирменной упаковке', images:['files/fir-stil//1.jpg'], specs:[['Вес','10 г']], downloads:[{label:'Макет упаковки', href:'files/coffee-pack.ai', icon:'fa-file-ai'}] },
-    { id:'shopper', title:'Шопер', category:'accessories', desc:'Эко-сумка', images:['files/fir-stil/Шопер/1.jpg', 'files/fir-stil/Шопер/2.jpg', 'files/fir-stil/Шопер/Шопер-Макет.png'], specs:[['Размер','35×40 см']], downloads:[{label:'Макет', href:'files/fir-stil/Шопер/Шопер-Макет.ai', icon:'fa-file-ai'}] },
-    { id:'lanyard', title:'Лента с бейджем', category:'accessories', desc:'Репсовая лента + пластиковый бейдж', images:['files/fir-stil//1.jpg'], specs:[['Ширина','15 мм']], downloads:[{label:'Макет', href:'files/lanyard.ai', icon:'fa-file-ai'}] },
-    { id:'envelope', title:'Конверт', category:'printed', desc:'Фирменный конверт', images:['files/fir-stil//1.jpg'], specs:[['Формат','C6']], downloads:[{label:'PDF', href:'files/envelope.pdf', icon:'fa-file-ai'}] },
-    { id:'tshirt-characters', title:'Футболка с персонажами', category:'clothes', desc:'Принт с персонажами спектаклей', images:['files/fir-stil//1.jpg'], specs:[['Размеры','S–XXL']], downloads:[{label:'Макет', href:'files/tshirt-characters.ai', icon:'fa-file-ai'}] },
-    { id:'two-clowns', title:'Два клоуна смотрят друг на друга', category:'art', desc:'Художественный постер', images:['files/fir-stil//1.jpg'], specs:[['Размер','А3']], downloads:[{label:'TIFF для печати', href:'files/two-clowns.tiff', icon:'fa-file-ai'}] },
-    { id:'social-stickers', title:'Стикеры для соцсетей', category:'digital', desc:'Набор стикеров Telegram / VK', images:['files/fir-stil//1.jpg'], specs:[['Формат','PNG 512×512']], downloads:[{label:'Скачать стикеры', href:'files/stickers-pack.zip', icon:'fa-file-ai'}] }
+    { 
+      id:'limited-hoodie', 
+      title:'Лимитка-худи', 
+      category:'limited-collection', 
+      desc:'Худи с принтом', 
+      avatar: 'files/fir-stil/Худи/Худи_Мокап_1.jpg',
+      gallery: ['files/fir-stil/Худи/Худи_Мокап_1.jpg', 'files/fir-stil/Худи/Худи_Мокап_2.jpg', 'files/fir-stil/Худи/Худи_Макет.png','files/fir-stil/Худи/Худи.png', 'files/fir-stil/Худи/Нашивка.svg'], 
+      specs:[['Размер','XL','52']], 
+      downloads:[{label:'Вектор', href:'files/fir-stil/Худи/Худи_Макет.ai', icon:'fa-file-ai'}] 
+    },
+    { 
+      id:'limited-notebook', 
+      title:'Лимитка-блокнот', 
+      category:'limited-collection', 
+      desc:'Блокнот с символикой', 
+      avatar: 'files/fir-stil//1.jpg',
+      gallery: ['files/fir-stil//1.jpg'], 
+      specs:[['Формат','А5']], 
+      downloads:[{label:'Обложка', href:'files/notebook-cover.ai', icon:'fa-file-ai'}] 
+    },
+    { 
+      id:'badges', 
+      title:'Значки', 
+      category:'souvenirs', 
+      desc:'Набор значков', 
+      avatar: 'files/fir-stil//1.jpg',
+      gallery: ['files/fir-stil//1.jpg'], 
+      specs:[['Диаметр','38 мм']], 
+      downloads:[{label:'AI шаблон', href:'files/badges.ai', icon:'fa-file-ai'}] 
+    },
+    { 
+      id:'thermo-stickers', 
+      title:'Термобутылка с наклейками', 
+      category:'home', 
+      desc:'Бутылка + набор стикеров', 
+      avatar: 'files/fir-stil//1.jpg',
+      gallery: ['files/fir-stil//1.jpg'], 
+      specs:[['Объём','500 мл']], 
+      downloads:[{label:'Наклейки', href:'files/stickers.ai', icon:'fa-file-ai'}] 
+    },
+    { 
+      id:'hoodie-stickers', 
+      title:'Худи с наклейками', 
+      category:'clothes', 
+      desc:'Худи и лист наклеек', 
+      avatar: 'files/fir-stil//1.jpg',
+      gallery: ['files/fir-stil//1.jpg'], 
+      specs:[['Размеры','S–XXL']], 
+      downloads:[{label:'Наклейки', href:'files/hoodie-stickers.ai', icon:'fa-file-ai'}] 
+    },
+    { 
+      id:'ad-booklet', 
+      title:'Буклет рекламный', 
+      category:'printed', 
+      desc:'Информационный буклет', 
+      avatar: 'files/fir-stil//1.jpg',
+      gallery: ['files/fir-stil//1.jpg'], 
+      specs:[['Формат','А4 (фальц)']], 
+      downloads:[{label:'PDF', href:'files/booklet.pdf', icon:'fa-file-ai'}] 
+    },
+    { 
+      id:'chair', 
+      title:'Стул', 
+      category:'home', 
+      desc:'Брендированный стул', 
+      avatar: 'files/fir-stil//1.jpg',
+      gallery: ['files/fir-stil//1.jpg'], 
+      specs:[['Материал','дерево']], 
+      downloads:[{label:'Чертёж', href:'files/chair.dwg', icon:'fa-file-ai'}] 
+    },
+    { 
+      id:'drip-coffee', 
+      title:'Дрип-кофе', 
+      category:'home', 
+      desc:'Порционный кофе в фирменной упаковке', 
+      avatar: 'files/fir-stil//1.jpg',
+      gallery: ['files/fir-stil//1.jpg'], 
+      specs:[['Вес','10 г']], 
+      downloads:[{label:'Макет упаковки', href:'files/coffee-pack.ai', icon:'fa-file-ai'}] 
+    },
+    { 
+      id:'shopper', 
+      title:'Шопер', 
+      category:'accessories', 
+      desc:'Эко-сумка', 
+      avatar: 'files/fir-stil/Шопер/1.jpg',
+      gallery: ['files/fir-stil/Шопер/1.jpg', 'files/fir-stil/Шопер/2.jpg', 'files/fir-stil/Шопер/Шопер-Макет.png'], 
+      specs:[['Размер','35×40 см']], 
+      downloads:[{label:'Макет', href:'files/fir-stil/Шопер/Шопер-Макет.ai', icon:'fa-file-ai'}] 
+    },
+    { 
+      id:'lanyard', 
+      title:'Лента с бейджем', 
+      category:'accessories', 
+      desc:'Репсовая лента + пластиковый бейдж', 
+      avatar: 'files/fir-stil//1.jpg',
+      gallery: ['files/fir-stil//1.jpg'], 
+      specs:[['Ширина','15 мм']], 
+      downloads:[{label:'Макет', href:'files/lanyard.ai', icon:'fa-file-ai'}] 
+    },
+    { 
+      id:'envelope', 
+      title:'Конверт', 
+      category:'printed', 
+      desc:'Фирменный конверт', 
+      avatar: 'files/fir-stil//1.jpg',
+      gallery: ['files/fir-stil//1.jpg'], 
+      specs:[['Формат','C6']], 
+      downloads:[{label:'PDF', href:'files/envelope.pdf', icon:'fa-file-ai'}] 
+    },
+    { 
+      id:'tshirt-characters', 
+      title:'Футболка с персонажами', 
+      category:'clothes', 
+      desc:'Принт с персонажами спектаклей', 
+      avatar: 'files/fir-stil//1.jpg',
+      gallery: ['files/fir-stil//1.jpg'], 
+      specs:[['Размеры','S–XXL']], 
+      downloads:[{label:'Макет', href:'files/tshirt-characters.ai', icon:'fa-file-ai'}] 
+    },
+    { 
+      id:'two-clowns', 
+      title:'Два клоуна смотрят друг на друга', 
+      category:'art', 
+      desc:'Художественный постер', 
+      avatar: 'files/fir-stil//1.jpg',
+      gallery: ['files/fir-stil//1.jpg'], 
+      specs:[['Размер','А3']], 
+      downloads:[{label:'TIFF для печати', href:'files/two-clowns.tiff', icon:'fa-file-ai'}] 
+    },
+    { 
+      id:'social-stickers', 
+      title:'Стикеры для соцсетей', 
+      category:'digital', 
+      desc:'Набор стикеров Telegram / VK', 
+      avatar: 'files/fir-stil//1.jpg',
+      gallery: ['files/fir-stil//1.jpg'], 
+      specs:[['Формат','PNG 512×512']], 
+      downloads:[{label:'Скачать стикеры', href:'files/stickers-pack.zip', icon:'fa-file-ai'}] 
+    }
 ];
+
 let activeCategory = 'all';
 let visibleCount = 8;
 const STEP = 4;
@@ -1560,10 +2082,23 @@ function renderMediaCards() {
   }
   
   toShow.forEach(item => {
-    const img = item.images?.[0] || 'https://placehold.co/600x400/cccccc/white?text=Нет+фото';
+    // ✅ ИСПОЛЬЗУЕМ avatar ДЛЯ КАРТОЧКИ
+    const img = item.avatar || item.images?.[0] || 'https://placehold.co/600x400/cccccc/white?text=Нет+фото';
     const card = document.createElement('div'); 
     card.className = 'media-card-new';
-    card.innerHTML = `<div class="media-card-image"><img src="${img}" alt="${item.title}"><span class="media-card-tag">${categoryLabel(item.category)}</span></div><div class="media-card-content"><h3>${item.title}</h3><p>${item.desc}</p><button class="btn btn-primary media-card-btn" data-id="${item.id}">Подробнее <i class="fas fa-arrow-right"></i></button></div>`;
+    
+    // ✅ НОВАЯ СТРУКТУРА КАРТОЧКИ С avatar
+    card.innerHTML = `
+      <div class="media-card-avatar">
+        <img src="${img}" alt="${item.title}" loading="lazy">
+        <span class="media-card-tag">${categoryLabel(item.category)}</span>
+      </div>
+      <div class="media-card-content">
+        <h3>${item.title}</h3>
+        <p>${item.desc}</p>
+        <button class="btn btn-primary media-card-btn" data-id="${item.id}">Подробнее <i class="fas fa-arrow-right"></i></button>
+      </div>
+    `;
     
     card.addEventListener('click', (e) => {
       if (!e.target.closest('button')) {
@@ -1605,6 +2140,16 @@ function openDetail(id, skipScroll = false) {
   const thumbsContainer = document.getElementById('detailThumbs');
   const galleryMain = document.getElementById('galleryMain');
   const colorSelectorContainer = document.getElementById('colorSelectorContainer');
+  const infoBlock = document.getElementById('detailInfoBlock');
+  const infoContent = document.getElementById('detailInfoContent');
+  
+  // ✅ НОВЫЙ БЛОК ИНФОРМАЦИИ О НОСИТЕЛЕ
+  if (item.info) {
+    infoBlock.style.display = 'block';
+    infoContent.innerHTML = `<p>${item.info}</p>`;
+  } else {
+    infoBlock.style.display = 'none';
+  }
   
   // Определяем активный цвет для товаров с селектором
   let activeColor = item.defaultColor || null;
@@ -1630,7 +2175,7 @@ function openDetail(id, skipScroll = false) {
           // Плавное переключение
           galleryMain.classList.add('fade');
           setTimeout(() => {
-            item.images = newImages;
+            item.gallery = newImages; // ✅ ИСПОЛЬЗУЕМ gallery ВМЕСТО images
             currentImageIndex = 0;
             mainImg.src = newImages[0];
             mainImg.alt = `${item.title} - ${this.title}`;
@@ -1659,18 +2204,21 @@ function openDetail(id, skipScroll = false) {
     gallery.classList.remove('with-colors');
   }
   
+  // ✅ ИСПОЛЬЗУЕМ gallery ВМЕСТО images ДЛЯ ДЕТАЛЬНОГО ПРОСМОТРА
+  const galleryImages = item.gallery || item.images || [];
+  
   // Инициализация галереи
-  if (item.images?.length) { 
+  if (galleryImages.length) { 
     gallery.style.display = 'block'; 
     // Если есть выбор цвета и изображения для активного цвета — используем их
     if (item.hasColorSelector && activeColor && productColors[id]?.images[activeColor]) {
-      item.images = productColors[id].images[activeColor];
+      item.gallery = productColors[id].images[activeColor];
     }
-    mainImg.src = item.images[0]; 
+    mainImg.src = galleryImages[0]; 
     mainImg.alt = item.title; 
     thumbsContainer.innerHTML = '';
     
-    item.images.forEach((src, idx) => { 
+    galleryImages.forEach((src, idx) => { 
       const t = document.createElement('img'); 
       t.src = src; 
       t.className = `thumb ${idx === 0 ? 'active' : ''}`; 
@@ -1685,17 +2233,17 @@ function openDetail(id, skipScroll = false) {
     
     document.getElementById('detailPrev').onclick = (e) => { 
       e.stopPropagation();
-      if (item.images.length > 1) {
-        currentImageIndex = (currentImageIndex - 1 + item.images.length) % item.images.length; 
-        mainImg.src = item.images[currentImageIndex];
+      if (galleryImages.length > 1) {
+        currentImageIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length; 
+        mainImg.src = galleryImages[currentImageIndex];
         updateThumbsActive();
       }
     };
     document.getElementById('detailNext').onclick = (e) => { 
       e.stopPropagation();
-      if (item.images.length > 1) {
-        currentImageIndex = (currentImageIndex + 1) % item.images.length; 
-        mainImg.src = item.images[currentImageIndex];
+      if (galleryImages.length > 1) {
+        currentImageIndex = (currentImageIndex + 1) % galleryImages.length; 
+        mainImg.src = galleryImages[currentImageIndex];
         updateThumbsActive();
       }
     };
@@ -1703,11 +2251,11 @@ function openDetail(id, skipScroll = false) {
     galleryMain.onclick = (e) => {
       if (e.target.tagName === 'IMG') {
         e.stopPropagation();
-        openLightbox(item.images[currentImageIndex], item.title, item.downloads?.[0]?.href || '#', 'light', item.images, currentImageIndex);
+        openLightbox(galleryImages[currentImageIndex], item.title, item.downloads?.[0]?.href || '#', 'light', galleryImages, currentImageIndex);
       }
     };
     
-    setupGallerySwipe(galleryMain, mainImg, item.images);
+    setupGallerySwipe(galleryMain, mainImg, galleryImages);
   } else { 
     gallery.style.display = 'none'; 
   }

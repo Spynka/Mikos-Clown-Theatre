@@ -9514,10 +9514,10 @@ img.team-img,
 }
 
 /* ===== АДАПТИВ ДЛЯ МОБИЛЬНЫХ (≤860px) ===== */
-@media (max-width: 860px) {
+/*@media (max-width: 860px) {
     .hero-content-afisha {
         left: 16px !important;
-        bottom: 75px !important; /* 🔥 Гарантированный зазор над точками */
+        bottom: 75px !important; 
         max-width: calc(100vw - 32px) !important;
         padding: 22px 24px !important;
         border-radius: 16px !important;
@@ -9536,12 +9536,12 @@ img.team-img,
         min-width: 0 !important;
         padding: 12px 16px !important;
         font-size: 14px !important;
-        min-height: 46px !important; /* Удобно для нажатия пальцем */
+        min-height: 46px !important; 
     }
-}
+}*/
 
 /* ===== ОЧЕНЬ УЗКИЕ ЭКРАНЫ (≤400px) ===== */
-@media (max-width: 400px) {
+/* @media (max-width: 400px) {
     .hero-content-afisha {
         bottom: 65px !important;
         padding: 18px 18px !important;
@@ -9550,5 +9550,5 @@ img.team-img,
     .hero-title-afisha { font-size: 22px !important; }
     .hero-subtitle-afisha { font-size: 14px !important; }
     .hero-btn-dark, .hero-btn-light { padding: 10px 14px !important; font-size: 13px !important; }
-}
+}*/
 
