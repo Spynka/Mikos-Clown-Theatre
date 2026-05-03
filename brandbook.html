@@ -1011,6 +1011,19 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   .color-selector { gap: 8px; }
 }
 
+.show-more-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 48px 0;
+  width: 100%;
+}
+
+.show-more-btn {
+  /* Ваши стили кнопки */
+  display: inline-flex; /* или block */
+}
+
 </style>
 </head>
 <body>
@@ -1741,11 +1754,11 @@ const productColors = {
       { id: 'tshirt-beigeblack', name: 'Бежево-чёрная', gradient: 'linear-gradient(135deg, #C9B8A3 50%, #000000 50%)' }
     ],
     images: {
-      'tshirt-bw': ['https://placehold.co/800x500/000000/FFFFFF?text=Футболка+ЧБ', 'https://placehold.co/800x500/FFFFFF/000000?text=Футболка+ЧБ+2'],
-      'tshirt-black': ['https://placehold.co/800x500/000000/FFFFFF?text=Футболка+Чёрная', 'https://placehold.co/800x500/000000/FFFFFF?text=Футболка+Чёрная+2'],
-      'tshirt-white': ['https://placehold.co/800x500/FFFFFF/000000?text=Футболка+Белая', 'https://placehold.co/800x500/FFFFFF/000000?text=Футболка+Белая+2'],
-      'tshirt-redblack': ['https://placehold.co/800x500/E13036/000000?text=Футболка+Красно-чёрная', 'https://placehold.co/800x500/000000/E13036?text=Футболка+Красно-чёрная+2'],
-      'tshirt-beigeblack': ['https://placehold.co/800x500/C9B8A3/000000?text=Футболка+Бежево-чёрная', 'https://placehold.co/800x500/000000/C9B8A3?text=Футболка+Бежево-чёрная+2']
+      'tshirt-bw': ['files/fir-stil/Футболка Лимит/1.png',  'files/fir-stil/Футболка Лимит/2.jpeg'],
+      'tshirt-black': ['files/fir-stil/Футболка Лимит/4.png',  'files/fir-stil/Футболка Лимит/2.jpeg'],
+      'tshirt-white': ['files/fir-stil/Футболка Лимит/3.png',  'files/fir-stil/Футболка Лимит/2.jpeg'],
+      'tshirt-redblack': [ 'files/fir-stil/Футболка Лимит/1.png',  'files/fir-stil/Футболка Лимит/2.jpeg'],
+      'tshirt-beigeblack': ['files/fir-stil/Футболка Лимит/5.png',  'files/fir-stil/Футболка Лимит/2.jpeg']
     }
   },
   'backpack-pendant': {
@@ -1757,10 +1770,10 @@ const productColors = {
       { id: 'pendant-gradient', name: 'Градиент', gradient: 'linear-gradient(135deg, #3685C6 0%, #E13036 100%)' }
     ],
     images: {
-      'pendant-white': ['https://placehold.co/800x500/FFFFFF/000000?text=Подвес+Белый', 'https://placehold.co/800x500/FFFFFF/000000?text=Подвес+Белый+2'],
-      'pendant-black': ['https://placehold.co/800x500/000000/FFFFFF?text=Подвес+Чёрный', 'https://placehold.co/800x500/000000/FFFFFF?text=Подвес+Чёрный+2'],
-      'pendant-blue': ['https://placehold.co/800x500/3685C6/FFFFFF?text=Подвес+Синий', 'https://placehold.co/800x500/3685C6/FFFFFF?text=Подвес+Синий+2'],
-      'pendant-gradient': ['https://placehold.co/800x500/3685C6/E13036?text=Подвес+Градиент', 'https://placehold.co/800x500/E13036/3685C6?text=Подвес+Градиент+2']
+      'pendant-white': ['files/fir-stil/Подвес/Белый/1.jpg','files/fir-stil/Подвес/Белый/2.jpg','files/fir-stil/Подвес/Белый/1.png'],
+      'pendant-black': ['files/fir-stil/Подвес/Черный/1.jpg','files/fir-stil/Подвес/Черный/2.jpg','files/fir-stil/Подвес/Черный/1.png'],
+      'pendant-blue': ['files/fir-stil/Подвес/Голубой/1.jpg','files/fir-stil/Подвес/Голубой/2.jpg','files/fir-stil/Подвес/Голубой/1.png'],
+      'pendant-gradient': ['files/fir-stil/Подвес/Градиент/1.jpg','files/fir-stil/Подвес/Градиент/2.jpg','files/fir-stil/Подвес/Градиент/1.png'],
     }
   }
 };
@@ -1834,16 +1847,6 @@ const mediaItems = [
       downloads:[{label:'Figma', href:'https://figma.com/mikos', icon:'fa-file-ai'}] 
     },
     { 
-      id:'merch', 
-      title:'Фирменный мерч', 
-      category:'souvenirs', 
-      desc:'Футболки, шоперы, значки', 
-      avatar: 'files/fir-stil//1.jpg',
-      gallery: ['files/fir-stil//1.jpg'], 
-      specs:[['Материалы','хлопок']], 
-      downloads:[{label:'Вектор', href:'files/merch.ai', icon:'fa-file-ai'}] 
-    },
-    { 
       id:'ticket', 
       title:'Электронный билет', 
       category:'digital', 
@@ -1903,8 +1906,8 @@ const mediaItems = [
       desc:'Лимитированная серия', 
       hasColorSelector: true,
       defaultColor: 'tshirt-bw',
-      avatar: 'files/fir-stil/Футболка Микос-тут/1.jpg',
-      gallery: ['files/fir-stil/Футболка Микос-тут/1.jpg'], 
+      avatar: 'files/fir-stil/Футболка Лимит/1.png',
+      gallery: [ 'files/fir-stil/Футболка Лимит/1.png'], 
       specs:[['Тираж','100 шт.']], 
       downloads:[{label:'Макет', href:'files/limited-tshirt.ai', icon:'fa-file-ai'}] 
     },
