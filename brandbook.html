@@ -35,6 +35,112 @@
   --grey-90: rgba(35, 31, 32, 0.12);
   --primary-red: #E8454D;
 }
+
+/* ===== НОВЫЕ СТИЛИ ДЛЯ ЦВЕТОВЫХ СЕЛЕКТОРОВ ===== */
+.color-selector { 
+  display: flex; 
+  gap: var(--space-3); 
+  margin: var(--space-4) 0 var(--space-6); 
+  flex-wrap: wrap; 
+  align-items: center;
+  justify-content: center;
+}
+.color-selector-label { 
+  font-family: var(--font-display); 
+  font-weight: 600; 
+  font-size: var(--text-sm); 
+  color: var(--color-text-secondary);
+  margin-right: var(--space-2);
+}
+.color-swatch {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  position: relative;
+  box-shadow: 0 2px 8px var(--color-shadow);
+  background-size: cover;
+  background-position: center;
+  padding: 0;
+}
+.color-swatch:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 16px var(--color-shadow);
+}
+.color-swatch.active {
+  border-color: var(--color-accent-red);
+  transform: scale(1.15);
+  box-shadow: 0 0 0 3px rgba(244, 49, 57, 0.2), 0 4px 16px var(--color-shadow);
+}
+.color-swatch::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  padding: 3px;
+  background: linear-gradient(135deg, var(--color-accent-red), var(--color-deep-blue));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: var(--transition);
+  pointer-events: none;
+}
+.color-swatch.active::after {
+  opacity: 1;
+}
+/* Цвета для подвеса */
+.color-swatch[data-color="pendant-white"] { background: #FFFFFF; border: 2px solid var(--color-border); }
+.color-swatch[data-color="pendant-black"] { background: #000000; }
+.color-swatch[data-color="pendant-blue"] { background: #3685C6; }
+.color-swatch[data-color="pendant-gradient"] { 
+  background: linear-gradient(135deg, #3685C6 0%, #E13036 100%); 
+}
+/* Цвета для футболки */
+.color-swatch[data-color="tshirt-bw"] { 
+  background: linear-gradient(135deg, #000000 50%, #FFFFFF 50%); 
+}
+.color-swatch[data-color="tshirt-black"] { background: #000000; }
+.color-swatch[data-color="tshirt-white"] { background: #FFFFFF; border: 2px solid var(--color-border); }
+.color-swatch[data-color="tshirt-redblack"] { 
+  background: linear-gradient(135deg, #E13036 50%, #000000 50%); 
+}
+.color-swatch[data-color="tshirt-beigeblack"] { 
+  background: linear-gradient(135deg, #C9B8A3 50%, #000000 50%); 
+}
+
+/* Скрытие галереи при выборе цвета */
+.media-gallery.with-colors .gallery-main {
+  transition: opacity 0.2s ease;
+}
+.media-gallery.with-colors .gallery-main.fade {
+  opacity: 0.6;
+}
+
+/* Tooltip для названий цветов */
+.color-swatch[title] {
+  position: relative;
+}
+.color-swatch[title]:hover::before {
+  content: attr(title);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-bg-dark);
+  color: var(--color-text-inverse);
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  padding: 4px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+  z-index: 10;
+  margin-bottom: 6px;
+  box-shadow: 0 2px 8px var(--color-shadow);
+}
+
 /* ===== БАЗОВЫЕ СТИЛИ ===== */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; font-size: 16px; }
@@ -186,7 +292,6 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 .clearspace-inner { width: 100%; height: 100%; padding: 20px; background: transparent; display: flex; align-items: center; justify-content: center; }
 .clearspace-inner img { max-width: 100%; max-height: 100%; }
 
-/* ИСПРАВЛЕНИЕ: Минимальные размеры (оригинальный размер, не сжимаются) */
 .min-size-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-4); margin-bottom: var(--space-10); }
 .min-size-item { background: #fff; border-radius: var(--border-radius-lg); padding: var(--space-4); border: 1px solid var(--color-border); box-shadow: 0 4px 20px var(--color-shadow); text-align: center; }
 .min-size-visual { 
@@ -276,7 +381,6 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   font-weight: 600; font-size: var(--text-sm); text-decoration: none; transition: var(--transition); 
 }
 .lightbox-download:hover { background: #d62a31; }
-/* Навигация в лайтбоксе */
 .lightbox-nav {
   position: absolute; top: 50%; transform: translateY(-50%);
   width: 50px; height: 50px; border-radius: 50%;
@@ -372,7 +476,6 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 .specs-table th { font-weight: 600; color: var(--color-text-primary); width: 45%; }
 .specs-table td { color: var(--color-text-secondary); }
 
-/* Кнопка скачивания - стиль кнопки, не блока */
 .download-btn { 
   display: inline-flex; align-items: center; gap: var(--space-2); 
   padding: var(--space-3) var(--space-5); 
@@ -401,6 +504,8 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   .lightbox-nav { width: 40px; height: 40px; font-size: var(--text-lg); }
   .lightbox-nav.prev { left: 10px; }
   .lightbox-nav.next { right: 10px; }
+  .color-selector { justify-content: center; }
+  .color-selector-label { margin-right: 0; width: 100%; text-align: center; margin-bottom: var(--space-2); }
 }
 
 @media (max-width: 480px) {
@@ -428,6 +533,173 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 .main-footer { background: #2C4068 !important; }
 @media (max-width: 860px) { .page-title, .hero-brand h1, .section-title { padding-top: 20px !important; } .hero-brand { padding-top: clamp(70px, 15vw, 100px) !important; } }
 .text-center { text-align: center; } .mt-4 { margin-top: var(--space-4); } .mt-6 { margin-top: var(--space-6); } .mt-8 { margin-top: var(--space-8); } .mb-4 { margin-bottom: var(--space-4); } .mb-6 { margin-bottom: var(--space-6); } .hidden { display: none !important; }
+/* ===== ЦВЕТОВЫЕ СЕЛЕКТОРЫ (ИСПРАВЛЕННЫЕ) ===== */
+.color-selector { 
+  display: flex; 
+  gap: var(--space-3); 
+  margin: var(--space-4) 0 var(--space-6); 
+  flex-wrap: wrap; 
+  align-items: center;
+  justify-content: center;
+}
+.color-selector-label { 
+  font-family: var(--font-display); 
+  font-weight: 600; 
+  font-size: var(--text-sm); 
+  color: var(--color-text-secondary);
+  margin-right: var(--space-2);
+}
+
+/* Базовый стиль кружка */
+.color-swatch {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  box-shadow: 0 2px 8px var(--color-shadow);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 0;
+  outline: none; /* Убираем стандартную браузерную обводку */
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* При наведении */
+.color-swatch:hover {
+  transform: scale(1.12);
+  box-shadow: 0 6px 16px var(--color-shadow);
+}
+
+/* ✅ АКТИВНОЕ СОСТОЯНИЕ: ЧЁТКАЯ КРАСНАЯ ОБВОДКА */
+.color-swatch.active {
+  transform: scale(1.15);
+  outline: 3px solid var(--color-accent-red);
+  outline-offset: 3px;
+  box-shadow: 0 6px 20px var(--color-shadow);
+  z-index: 2;
+}
+
+/* ===== КОНКРЕТНЫЕ ЦВЕТА ===== */
+/* Белый: добавляем тонкую рамку, чтобы кружок не терялся на светлом фоне */
+.color-swatch[data-color="pendant-white"],
+.color-swatch[data-color="tshirt-white"] { 
+  background: #FFFFFF; 
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.15), 0 2px 8px var(--color-shadow);
+}
+
+.color-swatch[data-color="pendant-black"],
+.color-swatch[data-color="tshirt-black"] { background: #000000; }
+
+.color-swatch[data-color="pendant-blue"] { background: #3685C6; }
+
+.color-swatch[data-color="pendant-gradient"] { 
+  background: linear-gradient(135deg, #3685C6 0%, #E13036 100%); 
+}
+
+.color-swatch[data-color="tshirt-bw"] { 
+  background: linear-gradient(135deg, #000000 50%, #FFFFFF 50%);
+}
+
+.color-swatch[data-color="tshirt-redblack"] { 
+  background: linear-gradient(135deg, #E13036 50%, #000000 50%);
+}
+
+.color-swatch[data-color="tshirt-beigeblack"] { 
+  background: linear-gradient(135deg, #C9B8A3 50%, #000000 50%);
+}
+
+/* Тултип при наведении */
+.color-swatch[title]:hover::before {
+  content: attr(title);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-bg-dark);
+  color: var(--color-text-inverse);
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  padding: 5px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  z-index: 10;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 12px var(--color-shadow);
+  pointer-events: none;
+  opacity: 0;
+  animation: tooltipFade 0.15s ease forwards;
+}
+@keyframes tooltipFade { to { opacity: 1; } }
+
+/* Адаптив */
+@media (max-width: 480px) {
+  .color-swatch { width: 40px; height: 40px; }
+  .color-selector { gap: var(--space-2); }
+}
+
+/* ===== ЦВЕТОВЫЕ СЕЛЕКТОРЫ (ЧИСТАЯ КРАСНАЯ ОБВОДКА) ===== */
+.color-selector { 
+  display: flex; gap: 12px; margin: 16px 0 24px; flex-wrap: wrap; 
+  align-items: center; justify-content: center;
+}
+.color-selector-label { 
+  font-family: var(--font-display); font-weight: 600; font-size: 14px; 
+  color: var(--color-text-secondary); margin-right: 8px;
+}
+
+.color-swatch {
+  width: 44px; height: 44px;
+  border-radius: 50%; border: none; cursor: pointer;
+  background-size: cover; background-position: center; background-repeat: no-repeat;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  outline: none; transition: transform 0.2s ease, box-shadow 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.color-swatch:hover { transform: scale(1.1); }
+
+/* ✅ АКТИВНЫЙ СОСТОЯНИЕ: ТОЛЬКО ЧИСТЫЙ КРАСНЫЙ #F43139 */
+.color-swatch.active {
+  transform: scale(1.15);
+  outline: 3px solid #F43139; /* Жёсткий HEX, без var(), без прозрачности */
+  outline-offset: 3px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  z-index: 2;
+}
+
+/* Убираем проблемные псевдоэлементы полностью */
+.color-swatch::after, .color-swatch::before { display: none !important; }
+
+/* === КОНКРЕТНЫЕ ЦВЕТА === */
+.color-swatch[data-color="pendant-white"],
+.color-swatch[data-color="tshirt-white"] { 
+  background: #FFFFFF; 
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.12), 0 2px 6px rgba(0,0,0,0.15);
+}
+.color-swatch[data-color="pendant-black"],
+.color-swatch[data-color="tshirt-black"] { background: #000000; }
+.color-swatch[data-color="pendant-blue"] { background: #3685C6; }
+.color-swatch[data-color="pendant-gradient"] { 
+  background: linear-gradient(135deg, #3685C6 0%, #E13036 100%); 
+}
+.color-swatch[data-color="tshirt-bw"] { 
+  background: linear-gradient(135deg, #000000 50%, #FFFFFF 50%);
+}
+.color-swatch[data-color="tshirt-redblack"] { 
+  background: linear-gradient(135deg, #E13036 50%, #000000 50%);
+}
+.color-swatch[data-color="tshirt-beigeblack"] { 
+  background: linear-gradient(135deg, #C9B8A3 50%, #000000 50%);
+}
+
+@media (max-width: 480px) {
+  .color-swatch { width: 40px; height: 40px; }
+  .color-selector { gap: 8px; }
+}
+
 </style>
 </head>
 <body>
@@ -459,6 +731,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 </button>
 </div>
 </header>
+
 <!-- МОБИЛЬНОЕ МЕНЮ -->
 <aside class="mobile-nav" id="mobileNav" aria-hidden="true">
 <button class="close-mobile-menu" id="closeMobileMenu" aria-label="Закрыть меню">
@@ -525,20 +798,18 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 <div class="logo-variant-item dark-bg"><div class="variant-placeholder" data-fullscreen="SVG/text-tm.svg" data-name="Текстовый" data-bg="dark"><img src="SVG/text-tm.svg" alt="Текст" onerror="this.src='https://placehold.co/120x60/221E1F/D4BF95?text=ТЕКСТ'"><div class="variant-overlay"><i class="fas fa-expand"></i><span>Полный экран</span></div></div></div>
 </div>
 
-            <!-- 2. СТРУКТУРА ЛОГОТИПА (1 фото) -->
-            <h2 class="section-title mt-8">Структура логотипа</h2>
-            <div style="background:#fff; border-radius:var(--border-radius-lg); padding:var(--space-6); border:1px solid var(--color-border); box-shadow:0 4px 20px var(--color-shadow); margin-bottom:var(--space-10);">
-                <div class="variant-placeholder" style="height:500px; background:var(--color-bg-light); border-radius:var(--border-radius);" 
-                     data-fullscreen="SVG/src.png" 
-                     data-name="Структура логотипа"
-                     data-bg="light">
-                    <img src="SVG/src.png" alt="Структура логотипа" style="max-height:100%;">
-                    <div class="variant-overlay"><i class="fas fa-expand"></i><span>Полный экран</span></div>
-                </div>
-                <p style="margin-top:var(--space-4); font-family:var(--font-display); font-weight:600; color:var(--color-text-secondary); text-align:center;">
-                    Соотношения элементов, пропорции и сетка построения логотипа
-                </p>
-            </div>
+<h2 class="section-title mt-8">Структура логотипа</h2>
+<div style="background:#fff; border-radius:var(--border-radius-lg); padding:var(--space-6); border:1px solid var(--color-border); box-shadow:0 4px 20px var(--color-shadow); margin-bottom:var(--space-10);">
+<div class="variant-placeholder" style="height:500px; background:var(--color-bg-light); border-radius:var(--border-radius);" 
+data-fullscreen="SVG/src.png" data-name="Структура логотипа" data-bg="light">
+<img src="SVG/src.png" alt="Структура логотипа" style="max-height:100%;">
+<div class="variant-overlay"><i class="fas fa-expand"></i><span>Полный экран</span></div>
+</div>
+<p style="margin-top:var(--space-4); font-family:var(--font-display); font-weight:600; color:var(--color-text-secondary); text-align:center;">
+Соотношения элементов, пропорции и сетка построения логотипа
+</p>
+</div>
+
 <h2 class="section-title mt-8">Охранные поля</h2>
 <div class="clearspace-grid">
 <div class="clearspace-demo"><div class="clearspace-box light-bg" data-fullscreen="SVG/znak-ox.svg" data-name="Охранное поле · Горизонтальное" data-bg="light"><div class="clearspace-inner"><img src="SVG/znak-ox.svg" alt="Охранное поле"></div></div><p>Светлый фон · Горизонтальное</p></div>
@@ -546,6 +817,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 <div class="clearspace-demo"><div class="clearspace-box light-bg vertical" data-fullscreen="SVG/text+ox.svg" data-name="Охранное поле · Вертикальное" data-bg="light"><div class="clearspace-inner"><img src="SVG/text+ox.svg" alt="Охранное поле"></div></div><p>Светлый фон · Вертикальное</p></div>
 <div class="clearspace-demo"><div class="clearspace-box light-bg vertical" data-fullscreen="SVG/text-ox.svg" data-name="Охранное поле · Вертикальное" data-bg="light"><div class="clearspace-inner"><img src="SVG/text-ox.svg" alt="Охранное поле"></div></div><p>Светлый фон · Вертикальное</p></div>
 </div>
+
 <h2 class="section-title mt-8">Минимальные размеры для экранов</h2>
 <div class="min-size-grid">
 <div class="min-size-item"><div class="min-size-visual" data-fullscreen="SVG/znak-min-web_2.svg" data-name="Высота 16 px" data-bg="light" style="height: 16px !important; width: auto !important;"><img src="SVG/znak-min-web_2.svg" alt="Мин. размер" style="height: 16px !important; width: auto !important;"><div class="size-indicator">16 px</div></div><p>Минимальная высота 16 px</p></div>
@@ -553,6 +825,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 <div class="min-size-item"><div class="min-size-visual" data-fullscreen="SVG/text+min-web_1.svg" data-name="Высота 32 px" data-bg="light" style="height: 32px !important; width: auto !important;"><img src="SVG/text+min-web_1.svg" alt="Мин. размер" style="height: 32px !important; width: auto !important;"><div class="size-indicator">32 px</div></div><p>Минимальная высота · 32 px</p></div>
 <div class="min-size-item"><div class="min-size-visual" data-fullscreen="SVG/text-min-web_1.svg" data-name="Высота 20 px" data-bg="light" style="height: 20px !important; width: auto !important;"><img src="SVG/text-min-web_1.svg" alt="Мин. знак" style="height: 20px !important; width: auto !important;"><div class="size-indicator">20 px</div></div><p>Минимальная высота · 20 px</p></div>
 </div>
+
 <h2 class="section-title mt-8">Минимальные размеры для печати</h2>
 <div class="min-size-grid">
 <div class="min-size-item"><div class="min-size-visual" data-fullscreen="SVG/znak-min-print_1.svg" data-name="Высота 16 мм" data-bg="light" style="height: 42px !important; width: auto !important;"><img src="SVG/znak-min-print_1.svg" alt="Мин. размер" style="height: 42px !important; width: auto !important;"><div class="size-indicator">15 мм</div></div><p>Минимальная высота · 15 мм</p></div>
@@ -560,172 +833,98 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 <div class="min-size-item"><div class="min-size-visual" data-fullscreen="SVG/text+min-print_1.svg" data-name="Высота 15 мм" data-bg="light" style="height: 42px !important; width: auto !important;"><img src="SVG/text+min-print_1.svg" alt="Мин. знак" style="height: 42px !important; width: auto !important;"><div class="size-indicator" >15 мм</div></div><p>Минимальная высота · 15 мм</p></div>
 <div class="min-size-item"><div class="min-size-visual" data-fullscreen="SVG/text-min-print_1.svg" data-name="Высота 10 мм" data-bg="light" style="height: 28px !important; width: auto !important;"><img src="SVG/text-min-print_1.svg" alt="Мин. знак" style="height: 28px !important; width: auto !important;"><div class="size-indicator">10 мм</div></div><p>Минимальная высота · 10 мм</p></div>
 </div>
- <!-- 5. РАЗРЕШЁННЫЕ МОДИФИКАЦИИ (горизонтальный скролл с кнопками, 6 фото) -->
-            <h2 class="section-title mt-8">Разрешённые модификации</h2>
-            <p style="color:var(--color-text-secondary); margin-bottom:var(--space-4);">Варианты использования логотипа, допустимые в брендбуке:</p>
-            <div class="scroll-gallery-wrapper">
-                <button class="scroll-nav-btn prev" data-target="allowedScroll"><i class="fas fa-chevron-left"></i></button>
-                <div class="scroll-gallery" id="allowedScroll">
-                    <div class="scroll-item">
-                        <div class="scroll-item-image" 
-                             data-fullscreen="https://placehold.co/400x300/F2F1F0/231F20?text=Монохром" 
-                             data-name="Монохромная версия"
-                             data-bg="light">
-                            <img src="https://placehold.co/280x180/F2F1F0/231F20?text=Монохром" alt="Монохром">
-                        </div>
-                        <div class="scroll-item-content">
-                            <h4>Монохром</h4>
-                            <p>Ч/б для газет</p>
-                        </div>
-                    </div>
-                    <div class="scroll-item">
-                        <div class="scroll-item-image" 
-                             data-fullscreen="https://placehold.co/400x300/2C4068/F2F1F0?text=Инверсия" 
-                             data-name="Инверсия цветов"
-                             data-bg="blue">
-                            <img src="https://placehold.co/280x180/2C4068/F2F1F0?text=Инверсия" alt="Инверсия">
-                        </div>
-                        <div class="scroll-item-content">
-                            <h4>Инверсия</h4>
-                            <p>На цветных фонах</p>
-                        </div>
-                    </div>
-                    <div class="scroll-item">
-                        <div class="scroll-item-image" 
-                             data-fullscreen="https://placehold.co/400x300/D4BF95/231F20?text=Золотой+фон" 
-                             data-name="На золотом фоне"
-                             data-bg="gold">
-                            <img src="https://placehold.co/280x180/D4BF95/231F20?text=Золотой+фон" alt="Золотой фон">
-                        </div>
-                        <div class="scroll-item-content">
-                            <h4>Золотой фон</h4>
-                            <p>Премиум-материалы</p>
-                        </div>
-                    </div>
-                    <div class="scroll-item">
-                        <div class="scroll-item-image" 
-                             data-fullscreen="https://placehold.co/400x300/F2F1F0/F43139?text=Красный+текст" 
-                             data-name="Красный текст"
-                             data-bg="light">
-                            <img src="https://placehold.co/280x180/F2F1F0/F43139?text=Красный+текст" alt="Красный текст">
-                        </div>
-                        <div class="scroll-item-content">
-                            <h4>Красный текст</h4>
-                            <p>Акцентные материалы</p>
-                        </div>
-                    </div>
-                    <div class="scroll-item">
-                        <div class="scroll-item-image" 
-                             data-fullscreen="https://placehold.co/400x300/231F20/F2F1F0?text=Тиснение" 
-                             data-name="Тиснение"
-                             data-bg="dark">
-                            <img src="https://placehold.co/280x180/231F20/F2F1F0?text=Тиснение" alt="Тиснение">
-                        </div>
-                        <div class="scroll-item-content">
-                            <h4>Тиснение</h4>
-                            <p>Бизнес-карты</p>
-                        </div>
-                    </div>
-                    <div class="scroll-item">
-                        <div class="scroll-item-image" 
-                             data-fullscreen="https://placehold.co/400x300/F2F1F0/2C4068?text=Вышивка" 
-                             data-name="Вышивка"
-                             data-bg="light">
-                            <img src="https://placehold.co/280x180/F2F1F0/2C4068?text=Вышивка" alt="Вышивка">
-                        </div>
-                        <div class="scroll-item-content">
-                            <h4>Вышивка</h4>
-                            <p>Мерч и одежда</p>
-                        </div>
-                    </div>
-                </div>
-                <button class="scroll-nav-btn next" data-target="allowedScroll"><i class="fas fa-chevron-right"></i></button>
-            </div>
 
-            <!-- 6. ЗАПРЕЩЁННЫЕ МОДИФИКАЦИИ (горизонтальный скролл с кнопками, 6 фото) - ЧЕРНЫЙ ТЕКСТ -->
-            <h2 class="section-title mt-8">Запрещённые модификации</h2>
-            <p style="color:var(--color-text-secondary); margin-bottom:var(--space-4);">Примеры некорректного использования логотипа — <strong>не допускаются</strong>:</p>
-            <div class="scroll-gallery-wrapper">
-                <button class="scroll-nav-btn prev" data-target="forbiddenScroll"><i class="fas fa-chevron-left"></i></button>
-                <div class="scroll-gallery forbidden-scroll" id="forbiddenScroll">
-                    <div class="scroll-item">
-                        <div class="scroll-item-image" 
-                             data-fullscreen="https://placehold.co/400x300/FFCCCC/E8454D?text=Растянут" 
-                             data-name="Растянут по вертикали"
-                             data-bg="light">
-                            <img src="https://placehold.co/280x180/FFCCCC/E8454D?text=Растянут" alt="Растянут">
-                        </div>
-                        <div class="scroll-item-content">
-                            <h4>Растянут</h4>
-                            <p>Нарушение пропорций</p>
-                        </div>
-                    </div>
-                    <div class="scroll-item">
-                        <div class="scroll-item-image" 
-                             data-fullscreen="https://placehold.co/400x300/FFCCCC/E8454D?text=Повёрнут" 
-                             data-name="Повёрнут под углом"
-                             data-bg="light">
-                            <img src="https://placehold.co/280x180/FFCCCC/E8454D?text=Повёрнут" alt="Повёрнут">
-                        </div>
-                        <div class="scroll-item-content">
-                            <h4>Повёрнут</h4>
-                            <p>Угол наклона запрещён</p>
-                        </div>
-                    </div>
-                    <div class="scroll-item">
-                        <div class="scroll-item-image" 
-                             data-fullscreen="https://placehold.co/400x300/FFCCCC/E8454D?text=Тень" 
-                             data-name="Добавлена тень"
-                             data-bg="light">
-                            <img src="https://placehold.co/280x180/FFCCCC/E8454D?text=Тень" alt="Тень">
-                        </div>
-                        <div class="scroll-item-content">
-                            <h4>С тенью</h4>
-                            <p>Эффекты запрещены</p>
-                        </div>
-                    </div>
-                    <div class="scroll-item">
-                        <div class="scroll-item-image" 
-                             data-fullscreen="https://placehold.co/400x300/FFCCCC/E8454D?text=Градиент" 
-                             data-name="Градиентная заливка"
-                             data-bg="light">
-                            <img src="https://placehold.co/280x180/FFCCCC/E8454D?text=Градиент" alt="Градиент">
-                        </div>
-                        <div class="scroll-item-content">
-                            <h4>Градиент</h4>
-                            <p>Только сплошной цвет</p>
-                        </div>
-                    </div>
-                    <div class="scroll-item">
-                        <div class="scroll-item-image" 
-                             data-fullscreen="https://placehold.co/400x300/FFCCCC/E8454D?text=Обводка" 
-                             data-name="Добавлена обводка"
-                             data-bg="light">
-                            <img src="https://placehold.co/280x180/FFCCCC/E8454D?text=Обводка" alt="Обводка">
-                        </div>
-                        <div class="scroll-item-content">
-                            <h4>С обводкой</h4>
-                            <p>Без дополнительных контуров</p>
-                        </div>
-                    </div>
-                    <div class="scroll-item">
-                        <div class="scroll-item-image" 
-                             data-fullscreen="https://placehold.co/400x300/FFCCCC/E8454D?text=Прозрачность" 
-                             data-name="Изменена прозрачность"
-                             data-bg="light">
-                            <img src="https://placehold.co/280x180/FFCCCC/E8454D?text=Прозрачность" alt="Прозрачность">
-                        </div>
-                        <div class="scroll-item-content">
-                            <h4>Прозрачный</h4>
-                            <p>Не менее 100% opacity</p>
-                        </div>
-                    </div>
-                </div>
-                <button class="scroll-nav-btn next" data-target="forbiddenScroll"><i class="fas fa-chevron-right"></i></button>
-            </div>
+<h2 class="section-title mt-8">Разрешённые модификации</h2>
+<p style="color:var(--color-text-secondary); margin-bottom:var(--space-4);">Варианты использования логотипа, допустимые в брендбуке:</p>
+<div class="scroll-gallery-wrapper">
+<button class="scroll-nav-btn prev" data-target="allowedScroll"><i class="fas fa-chevron-left"></i></button>
+<div class="scroll-gallery" id="allowedScroll">
+<div class="scroll-item">
+<div class="scroll-item-image" data-fullscreen="https://placehold.co/400x300/F2F1F0/231F20?text=Монохром" data-name="Монохромная версия" data-bg="light">
+<img src="https://placehold.co/280x180/F2F1F0/231F20?text=Монохром" alt="Монохром">
+</div>
+<div class="scroll-item-content"><h4>Монохром</h4><p>Ч/б для газет</p></div>
+</div>
+<div class="scroll-item">
+<div class="scroll-item-image" data-fullscreen="https://placehold.co/400x300/2C4068/F2F1F0?text=Инверсия" data-name="Инверсия цветов" data-bg="blue">
+<img src="https://placehold.co/280x180/2C4068/F2F1F0?text=Инверсия" alt="Инверсия">
+</div>
+<div class="scroll-item-content"><h4>Инверсия</h4><p>На цветных фонах</p></div>
+</div>
+<div class="scroll-item">
+<div class="scroll-item-image" data-fullscreen="https://placehold.co/400x300/D4BF95/231F20?text=Золотой+фон" data-name="На золотом фоне" data-bg="gold">
+<img src="https://placehold.co/280x180/D4BF95/231F20?text=Золотой+фон" alt="Золотой фон">
+</div>
+<div class="scroll-item-content"><h4>Золотой фон</h4><p>Премиум-материалы</p></div>
+</div>
+<div class="scroll-item">
+<div class="scroll-item-image" data-fullscreen="https://placehold.co/400x300/F2F1F0/F43139?text=Красный+текст" data-name="Красный текст" data-bg="light">
+<img src="https://placehold.co/280x180/F2F1F0/F43139?text=Красный+текст" alt="Красный текст">
+</div>
+<div class="scroll-item-content"><h4>Красный текст</h4><p>Акцентные материалы</p></div>
+</div>
+<div class="scroll-item">
+<div class="scroll-item-image" data-fullscreen="https://placehold.co/400x300/231F20/F2F1F0?text=Тиснение" data-name="Тиснение" data-bg="dark">
+<img src="https://placehold.co/280x180/231F20/F2F1F0?text=Тиснение" alt="Тиснение">
+</div>
+<div class="scroll-item-content"><h4>Тиснение</h4><p>Бизнес-карты</p></div>
+</div>
+<div class="scroll-item">
+<div class="scroll-item-image" data-fullscreen="https://placehold.co/400x300/F2F1F0/2C4068?text=Вышивка" data-name="Вышивка" data-bg="light">
+<img src="https://placehold.co/280x180/F2F1F0/2C4068?text=Вышивка" alt="Вышивка">
+</div>
+<div class="scroll-item-content"><h4>Вышивка</h4><p>Мерч и одежда</p></div>
+</div>
+</div>
+<button class="scroll-nav-btn next" data-target="allowedScroll"><i class="fas fa-chevron-right"></i></button>
+</div>
 
-        </div>
-    </section>
+<h2 class="section-title mt-8">Запрещённые модификации</h2>
+<p style="color:var(--color-text-secondary); margin-bottom:var(--space-4);">Примеры некорректного использования логотипа — <strong>не допускаются</strong>:</p>
+<div class="scroll-gallery-wrapper">
+<button class="scroll-nav-btn prev" data-target="forbiddenScroll"><i class="fas fa-chevron-left"></i></button>
+<div class="scroll-gallery forbidden-scroll" id="forbiddenScroll">
+<div class="scroll-item">
+<div class="scroll-item-image" data-fullscreen="https://placehold.co/400x300/FFCCCC/E8454D?text=Растянут" data-name="Растянут по вертикали" data-bg="light">
+<img src="https://placehold.co/280x180/FFCCCC/E8454D?text=Растянут" alt="Растянут">
+</div>
+<div class="scroll-item-content"><h4>Растянут</h4><p>Нарушение пропорций</p></div>
+</div>
+<div class="scroll-item">
+<div class="scroll-item-image" data-fullscreen="https://placehold.co/400x300/FFCCCC/E8454D?text=Повёрнут" data-name="Повёрнут под углом" data-bg="light">
+<img src="https://placehold.co/280x180/FFCCCC/E8454D?text=Повёрнут" alt="Повёрнут">
+</div>
+<div class="scroll-item-content"><h4>Повёрнут</h4><p>Угол наклона запрещён</p></div>
+</div>
+<div class="scroll-item">
+<div class="scroll-item-image" data-fullscreen="https://placehold.co/400x300/FFCCCC/E8454D?text=Тень" data-name="Добавлена тень" data-bg="light">
+<img src="https://placehold.co/280x180/FFCCCC/E8454D?text=Тень" alt="Тень">
+</div>
+<div class="scroll-item-content"><h4>С тенью</h4><p>Эффекты запрещены</p></div>
+</div>
+<div class="scroll-item">
+<div class="scroll-item-image" data-fullscreen="https://placehold.co/400x300/FFCCCC/E8454D?text=Градиент" data-name="Градиентная заливка" data-bg="light">
+<img src="https://placehold.co/280x180/FFCCCC/E8454D?text=Градиент" alt="Градиент">
+</div>
+<div class="scroll-item-content"><h4>Градиент</h4><p>Только сплошной цвет</p></div>
+</div>
+<div class="scroll-item">
+<div class="scroll-item-image" data-fullscreen="https://placehold.co/400x300/FFCCCC/E8454D?text=Обводка" data-name="Добавлена обводка" data-bg="light">
+<img src="https://placehold.co/280x180/FFCCCC/E8454D?text=Обводка" alt="Обводка">
+</div>
+<div class="scroll-item-content"><h4>С обводкой</h4><p>Без дополнительных контуров</p></div>
+</div>
+<div class="scroll-item">
+<div class="scroll-item-image" data-fullscreen="https://placehold.co/400x300/FFCCCC/E8454D?text=Прозрачность" data-name="Изменена прозрачность" data-bg="light">
+<img src="https://placehold.co/280x180/FFCCCC/E8454D?text=Прозрачность" alt="Прозрачность">
+</div>
+<div class="scroll-item-content"><h4>Прозрачный</h4><p>Не менее 100% opacity</p></div>
+</div>
+</div>
+<button class="scroll-nav-btn next" data-target="forbiddenScroll"><i class="fas fa-chevron-right"></i></button>
+</div>
+</div>
+</section>
 
 <!-- СТРАНИЦА: ЦВЕТА -->
 <section class="page-section" id="page-colors">
@@ -739,76 +938,72 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 <div class="swatch"><div class="swatch-color" style="background:#D4BF95;"></div><div class="swatch-info"><span class="swatch-name">Золотой</span><code>#D4BF95</code></div></div>
 </div>
 
-<!-- Цветовые сочетания -->
 <h2 class="section-title mt-8">Цветовые сочетания</h2>
 <div class="color-combinations">
-  <!-- Разрешённые -->
-  <div class="combination-card allowed">
-    <div class="combination-title"><i class="fas fa-check-circle"></i> Разрешено</div>
-    <div class="combination-preview">
-      <div class="combination-swatch" style="background:#F2F1F0;"></div>
-      <div class="combination-swatch" style="background:#231F20;"></div>
-    </div>
-    <p class="combination-desc">Светлый фон + тёмный текст — базовое сочетание для основного контента.</p>
-  </div>
-  <div class="combination-card allowed">
-    <div class="combination-title"><i class="fas fa-check-circle"></i> Разрешено</div>
-    <div class="combination-preview">
-      <div class="combination-swatch" style="background:#2C4068;"></div>
-      <div class="combination-swatch" style="background:#F2F1F0;"></div>
-    </div>
-    <p class="combination-desc">Синий фон + светлый текст — для акцентных блоков и заголовков.</p>
-  </div>
-  <div class="combination-card allowed">
-    <div class="combination-title"><i class="fas fa-check-circle"></i> Разрешено</div>
-    <div class="combination-preview">
-      <div class="combination-swatch" style="background:#F43139;"></div>
-      <div class="combination-swatch" style="background:#fff;"></div>
-    </div>
-    <p class="combination-desc">Красный акцент + белый текст — для кнопок и призывов к действию.</p>
-  </div>
-  <div class="combination-card allowed">
-    <div class="combination-title"><i class="fas fa-check-circle"></i> Разрешено</div>
-    <div class="combination-preview">
-      <div class="combination-swatch" style="background:#D4BF95;"></div>
-      <div class="combination-swatch" style="background:#231F20;"></div>
-    </div>
-    <p class="combination-desc">Золотой фон + тёмный текст — для премиум-материалов.</p>
-  </div>
-  
-  <!-- Запрещённые -->
-  <div class="combination-card forbidden">
-    <div class="combination-title"><i class="fas fa-times-circle"></i> Запрещено</div>
-    <div class="combination-preview">
-      <div class="combination-swatch" style="background:#F43139;"></div>
-      <div class="combination-swatch" style="background:#2C4068;"></div>
-    </div>
-    <p class="combination-desc">Красный + синий — конфликт акцентных цветов, снижает читаемость.</p>
-  </div>
-  <div class="combination-card forbidden">
-    <div class="combination-title"><i class="fas fa-times-circle"></i> Запрещено</div>
-    <div class="combination-preview">
-      <div class="combination-swatch" style="background:#F2F1F0;"></div>
-      <div class="combination-swatch" style="background:#D4BF95;"></div>
-    </div>
-    <p class="combination-desc">Светлый фон + золотой текст — низкий контраст, текст нечитаем.</p>
-  </div>
-  <div class="combination-card forbidden">
-    <div class="combination-title"><i class="fas fa-times-circle"></i> Запрещено</div>
-    <div class="combination-preview">
-      <div class="combination-swatch" style="background:#231F20;"></div>
-      <div class="combination-swatch" style="background:#F43139;"></div>
-    </div>
-    <p class="combination-desc">Тёмный фон + красный текст — вибрация цветов, утомляет глаза.</p>
-  </div>
-  <div class="combination-card forbidden">
-    <div class="combination-title"><i class="fas fa-times-circle"></i> Запрещено</div>
-    <div class="combination-preview">
-      <div class="combination-swatch" style="background:#888;"></div>
-      <div class="combination-swatch" style="background:#aaa;"></div>
-    </div>
-    <p class="combination-desc">Сторонние серые оттенки — не входят в палитру бренда.</p>
-  </div>
+<div class="combination-card allowed">
+<div class="combination-title"><i class="fas fa-check-circle"></i> Разрешено</div>
+<div class="combination-preview">
+<div class="combination-swatch" style="background:#F2F1F0;"></div>
+<div class="combination-swatch" style="background:#231F20;"></div>
+</div>
+<p class="combination-desc">Светлый фон + тёмный текст — базовое сочетание для основного контента.</p>
+</div>
+<div class="combination-card allowed">
+<div class="combination-title"><i class="fas fa-check-circle"></i> Разрешено</div>
+<div class="combination-preview">
+<div class="combination-swatch" style="background:#2C4068;"></div>
+<div class="combination-swatch" style="background:#F2F1F0;"></div>
+</div>
+<p class="combination-desc">Синий фон + светлый текст — для акцентных блоков и заголовков.</p>
+</div>
+<div class="combination-card allowed">
+<div class="combination-title"><i class="fas fa-check-circle"></i> Разрешено</div>
+<div class="combination-preview">
+<div class="combination-swatch" style="background:#F43139;"></div>
+<div class="combination-swatch" style="background:#fff;"></div>
+</div>
+<p class="combination-desc">Красный акцент + белый текст — для кнопок и призывов к действию.</p>
+</div>
+<div class="combination-card allowed">
+<div class="combination-title"><i class="fas fa-check-circle"></i> Разрешено</div>
+<div class="combination-preview">
+<div class="combination-swatch" style="background:#D4BF95;"></div>
+<div class="combination-swatch" style="background:#231F20;"></div>
+</div>
+<p class="combination-desc">Золотой фон + тёмный текст — для премиум-материалов.</p>
+</div>
+<div class="combination-card forbidden">
+<div class="combination-title"><i class="fas fa-times-circle"></i> Запрещено</div>
+<div class="combination-preview">
+<div class="combination-swatch" style="background:#F43139;"></div>
+<div class="combination-swatch" style="background:#2C4068;"></div>
+</div>
+<p class="combination-desc">Красный + синий — конфликт акцентных цветов, снижает читаемость.</p>
+</div>
+<div class="combination-card forbidden">
+<div class="combination-title"><i class="fas fa-times-circle"></i> Запрещено</div>
+<div class="combination-preview">
+<div class="combination-swatch" style="background:#F2F1F0;"></div>
+<div class="combination-swatch" style="background:#D4BF95;"></div>
+</div>
+<p class="combination-desc">Светлый фон + золотой текст — низкий контраст, текст нечитаем.</p>
+</div>
+<div class="combination-card forbidden">
+<div class="combination-title"><i class="fas fa-times-circle"></i> Запрещено</div>
+<div class="combination-preview">
+<div class="combination-swatch" style="background:#231F20;"></div>
+<div class="combination-swatch" style="background:#F43139;"></div>
+</div>
+<p class="combination-desc">Тёмный фон + красный текст — вибрация цветов, утомляет глаза.</p>
+</div>
+<div class="combination-card forbidden">
+<div class="combination-title"><i class="fas fa-times-circle"></i> Запрещено</div>
+<div class="combination-preview">
+<div class="combination-swatch" style="background:#888;"></div>
+<div class="combination-swatch" style="background:#aaa;"></div>
+</div>
+<p class="combination-desc">Сторонние серые оттенки — не входят в палитру бренда.</p>
+</div>
 </div>
 
 <div class="grid-2col">
@@ -878,14 +1073,14 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 <div class="content-wrapper">
 <article class="brand-card mb-6"><h3>Общие правила</h3><ul style="list-style:none; padding-left:0; display:grid; gap:var(--space-2);"><li>• <strong>Охранное поле:</strong> не менее высоты буквы «М»</li><li>• <strong>Цвета:</strong> только палитра брендбука</li><li>• <strong>Шрифты:</strong> Unbounded / Nunito Sans</li></ul></article>
 <div class="filters-section"><div class="filter-chips" id="filterChips">
-  <div class="filter-chip active" data-filter="all">Все носители</div>
-  <div class="filter-chip" data-filter="clothes">Одежда</div>
-  <div class="filter-chip" data-filter="accessories">Аксессуары</div>
-  <div class="filter-chip" data-filter="printed">Полиграфия</div>
-  <div class="filter-chip" data-filter="digital">Digital</div>
-  <div class="filter-chip" data-filter="home">Товары для дома</div>
-  <div class="filter-chip" data-filter="art">Графика</div>
-  <div class="filter-chip" data-filter="limited-collection">Лимитированная коллекция</div>
+<div class="filter-chip active" data-filter="all">Все носители</div>
+<div class="filter-chip" data-filter="clothes">Одежда</div>
+<div class="filter-chip" data-filter="accessories">Аксессуары</div>
+<div class="filter-chip" data-filter="printed">Полиграфия</div>
+<div class="filter-chip" data-filter="digital">Digital</div>
+<div class="filter-chip" data-filter="home">Товары для дома</div>
+<div class="filter-chip" data-filter="art">Графика</div>
+<div class="filter-chip" data-filter="limited-collection">Лимитированная коллекция</div>
 </div></div>
 <div class="media-grid" id="mediaGrid"></div>
 <div class="show-more-wrapper"><button class="show-more-btn" id="showMoreMediaBtn">Показать ещё</button></div>
@@ -901,18 +1096,21 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 <div class="media-detail-content">
 <!-- Галерея -->
 <div class="media-gallery" id="detailGallery" style="display:none;">
-  <div class="gallery-main" id="galleryMain">
-    <img id="detailMainImg" src="" alt="">
-    <button class="gallery-nav prev" id="detailPrev" aria-label="Предыдущее фото"><i class="fas fa-chevron-left"></i></button>
-    <button class="gallery-nav next" id="detailNext" aria-label="Следующее фото"><i class="fas fa-chevron-right"></i></button>
-  </div>
-  <div class="gallery-thumbs" id="detailThumbs"></div>
+<!-- Селектор цвета -->
+<div id="colorSelectorContainer"></div>
+
+<div class="gallery-main" id="galleryMain">
+<img id="detailMainImg" src="" alt="">
+<button class="gallery-nav prev" id="detailPrev" aria-label="Предыдущее фото"><i class="fas fa-chevron-left"></i></button>
+<button class="gallery-nav next" id="detailNext" aria-label="Следующее фото"><i class="fas fa-chevron-right"></i></button>
+</div>
+<div class="gallery-thumbs" id="detailThumbs"></div>
 </div>
 
 <!-- Двухколоночная сетка: спецификации и скачивание -->
 <div class="media-specs-grid">
-  <div id="detailSpecs"></div>
-  <div id="detailDownloads"></div>
+<div id="detailSpecs"></div>
+<div id="detailDownloads"></div>
 </div>
 </div>
 </div>
@@ -934,8 +1132,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 <!-- FOOTER -->
 <div id="site-footer"></div>
 </div>
-<script src="js/loader-animation.js"></script>
-<script src="js/components-loader.js"></script>
+
 <script>
 // ===== ПЕРСИСТЕНТНОСТЬ СОСТОЯНИЯ =====
 function savePageState(pageId, mediaId = null, scrollY = 0) {
@@ -954,10 +1151,9 @@ function loadPageState() {
     const scroll = parseInt(localStorage.getItem('brandbook_scrollY')) || 0;
     
     if (page === 'media-detail' && mediaId && mediaItems.find(i => i.id === mediaId)) {
-      // Восстанавливаем детальный просмотр носителя
       switchPage('media');
       setTimeout(() => {
-        openDetail(mediaId, true); // true = skip scroll
+        openDetail(mediaId, true);
         setTimeout(() => window.scrollTo({ top: scroll, behavior: 'auto' }), 50);
       }, 100);
       return true;
@@ -1001,7 +1197,6 @@ function switchPage(id) {
       controls?.classList.add('active'); 
       preview?.classList.add('active'); 
       grid?.classList.add('active');
-      // ИСПРАВЛЕНИЕ: инициализируем кнопки начертаний при переключении на типографику
       initWeightButtons();
       updateTypoPreview();
     }
@@ -1146,20 +1341,17 @@ function navigateLightbox(direction) {
   updateLightboxNav();
 }
 
-// Обработчики лайтбокса
 lightboxClose.addEventListener('click', closeLightbox);
 lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
 lightboxPrev.addEventListener('click', (e) => { e.stopPropagation(); navigateLightbox(-1); });
 lightboxNext.addEventListener('click', (e) => { e.stopPropagation(); navigateLightbox(1); });
 
-// Навигация клавиатурой в лайтбоксе
 document.addEventListener('keydown', (e) => {
   if (!lightbox.classList.contains('active')) return;
   if (e.key === 'ArrowLeft') { e.preventDefault(); navigateLightbox(-1); }
   if (e.key === 'ArrowRight') { e.preventDefault(); navigateLightbox(1); }
 });
 
-// Делегирование для открытия лайтбокса
 document.addEventListener('click', function(e) {
   const target = e.target.closest('[data-fullscreen]');
   if (target) {
@@ -1220,6 +1412,75 @@ document.querySelectorAll('.scroll-gallery, .variant-placeholder, .clearspace-bo
   });
 });
 
+// ===== ДАННЫЕ О ЦВЕТАХ ДЛЯ ТОВАРОВ =====
+const productColors = {
+  'limited-tshirt': {
+    label: 'Выберите цвет футболки:',
+    colors: [
+      { id: 'tshirt-bw', name: 'Ч/Б', gradient: 'linear-gradient(135deg, #000000 50%, #FFFFFF 50%)' },
+      { id: 'tshirt-black', name: 'Чёрная', color: '#000000' },
+      { id: 'tshirt-white', name: 'Белая', color: '#FFFFFF', border: '2px solid var(--color-border)' },
+      { id: 'tshirt-redblack', name: 'Красно-чёрная', gradient: 'linear-gradient(135deg, #E13036 50%, #000000 50%)' },
+      { id: 'tshirt-beigeblack', name: 'Бежево-чёрная', gradient: 'linear-gradient(135deg, #C9B8A3 50%, #000000 50%)' }
+    ],
+    images: {
+      'tshirt-bw': ['https://placehold.co/800x500/000000/FFFFFF?text=Футболка+ЧБ', 'https://placehold.co/800x500/FFFFFF/000000?text=Футболка+ЧБ+2'],
+      'tshirt-black': ['https://placehold.co/800x500/000000/FFFFFF?text=Футболка+Чёрная', 'https://placehold.co/800x500/000000/FFFFFF?text=Футболка+Чёрная+2'],
+      'tshirt-white': ['https://placehold.co/800x500/FFFFFF/000000?text=Футболка+Белая', 'https://placehold.co/800x500/FFFFFF/000000?text=Футболка+Белая+2'],
+      'tshirt-redblack': ['https://placehold.co/800x500/E13036/000000?text=Футболка+Красно-чёрная', 'https://placehold.co/800x500/000000/E13036?text=Футболка+Красно-чёрная+2'],
+      'tshirt-beigeblack': ['https://placehold.co/800x500/C9B8A3/000000?text=Футболка+Бежево-чёрная', 'https://placehold.co/800x500/000000/C9B8A3?text=Футболка+Бежево-чёрная+2']
+    }
+  },
+  'backpack-pendant': {
+    label: 'Выберите цвет подвеса:',
+    colors: [
+      { id: 'pendant-white', name: 'Белый', color: '#FFFFFF', border: '2px solid var(--color-border)' },
+      { id: 'pendant-black', name: 'Чёрный', color: '#000000' },
+      { id: 'pendant-blue', name: 'Синий', color: '#3685C6' },
+      { id: 'pendant-gradient', name: 'Градиент', gradient: 'linear-gradient(135deg, #3685C6 0%, #E13036 100%)' }
+    ],
+    images: {
+      'pendant-white': ['https://placehold.co/800x500/FFFFFF/000000?text=Подвес+Белый', 'https://placehold.co/800x500/FFFFFF/000000?text=Подвес+Белый+2'],
+      'pendant-black': ['https://placehold.co/800x500/000000/FFFFFF?text=Подвес+Чёрный', 'https://placehold.co/800x500/000000/FFFFFF?text=Подвес+Чёрный+2'],
+      'pendant-blue': ['https://placehold.co/800x500/3685C6/FFFFFF?text=Подвес+Синий', 'https://placehold.co/800x500/3685C6/FFFFFF?text=Подвес+Синий+2'],
+      'pendant-gradient': ['https://placehold.co/800x500/3685C6/E13036?text=Подвес+Градиент', 'https://placehold.co/800x500/E13036/3685C6?text=Подвес+Градиент+2']
+    }
+  }
+};
+
+// ===== ФУНКЦИЯ ОТРИСОВКИ СЕЛЕКТОРА ЦВЕТА =====
+function renderColorSelector(productId, currentColor, onChange) {
+  const config = productColors[productId];
+  if (!config) return '';
+  
+  let html = `<div class="color-selector">
+    <span class="color-selector-label">${config.label}</span>`;
+  
+  config.colors.forEach(color => {
+    const isActive = color.id === currentColor ? 'active' : '';
+    const style = color.gradient 
+      ? `style="background: ${color.gradient};"` 
+      : `style="background: ${color.color}; ${color.border || ''}"`;
+    
+    html += `<button class="color-swatch ${isActive}" 
+                      data-color="${color.id}" 
+                      ${style}
+                      title="${color.name}"
+                      aria-label="${color.name}"
+                      type="button"></button>`;
+  });
+  
+  html += `</div>`;
+  return html;
+}
+
+// ===== ФУНКЦИЯ ОБНОВЛЕНИЯ ИЗОБРАЖЕНИЙ ПО ЦВЕТУ =====
+function updateImagesByColor(productId, colorId) {
+  const config = productColors[productId];
+  if (!config || !config.images[colorId]) return null;
+  return config.images[colorId];
+}
+
 // ===== НОСИТЕЛИ =====
 const mediaItems = [
     { id:'business-card', title:'Визитная карточка', category:'printed', desc:'Двусторонняя визитка с тиснением', images:['https://placehold.co/800x500/231F20/D4BF95?text=Визитка+лицевая','https://placehold.co/800x500/D4BF95/231F20?text=Визитка+оборот'], specs:[['Формат','90×50 мм'],['Цвет','CMYK / RGB']], downloads:[{label:'PDF макет', href:'files/business-card.pdf', icon:'fa-file-ai'},{label:'INDD шаблон', href:'files/business-card.indd', icon:'fa-file-ai'}] },
@@ -1228,26 +1489,45 @@ const mediaItems = [
     { id:'merch', title:'Фирменный мерч', category:'souvenirs', desc:'Футболки, шоперы, значки', images:['files/fir-stil//1.jpg'], specs:[['Материалы','хлопок']], downloads:[{label:'Вектор', href:'files/merch.ai', icon:'fa-file-ai'}] },
     { id:'ticket', title:'Электронный билет', category:'digital', desc:'QR-код, информация', images:['files/fir-stil//1.jpg'], specs:[['Формат','210×70 мм']], downloads:[{label:'PDF + HTML', href:'files/ticket.zip', icon:'fa-file-ai'}] },
     { id:'panamka', title:'Панамка', category:'clothes', desc:'Лёгкая панама с вышитым знаком', images:['files/fir-stil/Панамка/1.jpg'], specs:[['Материал','хлопок']], downloads:[{label:'Макет вышивки', href:'files/panamka.dst', icon:'fa-file-ai'}] },
-    { id:'backpack-pendant', title:'Подвес на рюкзак', category:'accessories', desc:'Металлический подвес «Микос Team»', images:['files/fir-stil/Подвес/1.jpg'], specs:[['Размер','40×25 мм']], downloads:[{label:'3D-модель', href:'files/pendant.stl', icon:'fa-file-ai'}] },
+    { 
+      id:'backpack-pendant', 
+      title:'Подвес на рюкзак', 
+      category:'accessories', 
+      desc:'Металлический подвес «Микос Team»', 
+      hasColorSelector: true,
+      defaultColor: 'pendant-black',
+      images:['files/fir-stil/Подвес/1.jpg'], 
+      specs:[['Размер','40×25 мм']], 
+      downloads:[{label:'3D-модель', href:'files/pendant.stl', icon:'fa-file-ai'}] 
+    },
     { id:'socks', title:'Носки', category:'clothes', desc:'Принт с логотипом', images:['files/fir-stil/Носки/4.jpg','files/fir-stil/Носки/2.jpg','files/fir-stil/Носки/3.jpg'], specs:[['Состав','хлопок 80%']], downloads:[{label:'Шаблон принта', href:'files/socks.ai', icon:'fa-file-ai'}] },
     { id:'tshirt-mikos', title:'Футболка «Микос тут»', category:'clothes', desc:'Хлопковая футболка с авторским принтом', images:['files/fir-stil/Футболка Микос-тут/1.jpg', 'files/fir-stil/Футболка Микос-тут/Футболка_Макет.png', 'files/fir-stil/Футболка Микос-тут/Микос-тут.png', 'files/fir-stil/Футболка Микос-тут/Микос-тим.png'], specs:[['Размер','L']], downloads:[{label:'Макет AI', href:'files/fir-stil/Футболка Микос-тут/Футболка_Макет.ai', icon:'fa-file-ai'}] },
-    { id:'limited-tshirt', title:'Лимитка-футболка', category:'limited-collection', desc:'Лимитированная серия', images:['https://placehold.co/800x500/2C4068/F2F1F0?text=Лимитка+футболка'], specs:[['Тираж','100 шт.']], downloads:[{label:'Макет', href:'files/limited-tshirt.ai', icon:'fa-file-ai'}] },
+    { 
+      id:'limited-tshirt', 
+      title:'Лимитка-футболка', 
+      category:'limited-collection', 
+      desc:'Лимитированная серия', 
+      hasColorSelector: true,
+      defaultColor: 'tshirt-bw',
+      images:['files/fir-stil/Футболка Микос-тут/1.jpg'], 
+      specs:[['Тираж','100 шт.']], 
+      downloads:[{label:'Макет', href:'files/limited-tshirt.ai', icon:'fa-file-ai'}] 
+    },
     { id:'limited-hoodie', title:'Лимитка-худи', category:'limited-collection', desc:'Худи с принтом', images:['files/fir-stil/Худи/Худи_Мокап_1.jpg', 'files/fir-stil/Худи/Худи_Мокап_2.jpg', 'files/fir-stil/Худи/Худи_Макет.png','files/fir-stil/Худи/Худи.png', 'files/fir-stil/Худи/Нашивка.svg'], specs:[['Размер','XL','52']], downloads:[{label:'Вектор', href:'files/fir-stil/Худи/Худи_Макет.ai', icon:'fa-file-ai'}] },
-    { id:'limited-notebook', title:'Лимитка-блокнот', category:'limited-collection', desc:'Блокнот с символикой', images:['https://placehold.co/800x500/D4BF95/231F20?text=Блокнот'], specs:[['Формат','А5']], downloads:[{label:'Обложка', href:'files/notebook-cover.ai', icon:'fa-file-ai'}] },
-    { id:'badges', title:'Значки', category:'souvenirs', desc:'Набор значков', images:['https://placehold.co/800x500/F43139/white?text=Значки'], specs:[['Диаметр','38 мм']], downloads:[{label:'AI шаблон', href:'files/badges.ai', icon:'fa-file-ai'}] },
-    { id:'thermo-stickers', title:'Термобутылка с наклейками', category:'home', desc:'Бутылка + набор стикеров', images:['https://placehold.co/800x500/2C4068/F2F1F0?text=Термобутылка'], specs:[['Объём','500 мл']], downloads:[{label:'Наклейки', href:'files/stickers.ai', icon:'fa-file-ai'}] },
-    { id:'hoodie-stickers', title:'Худи с наклейками', category:'clothes', desc:'Худи и лист наклеек', images:['https://placehold.co/800x500/231F20/D4BF95?text=Худи+наклейки'], specs:[['Размеры','S–XXL']], downloads:[{label:'Наклейки', href:'files/hoodie-stickers.ai', icon:'fa-file-ai'}] },
-    { id:'ad-booklet', title:'Буклет рекламный', category:'printed', desc:'Информационный буклет', images:['https://placehold.co/800x500/2C4068/F2F1F0?text=Буклет'], specs:[['Формат','А4 (фальц)']], downloads:[{label:'PDF', href:'files/booklet.pdf', icon:'fa-file-ai'}] },
-    { id:'chair', title:'Стул', category:'home', desc:'Брендированный стул', images:['https://placehold.co/800x500/231F20/F2F1F0?text=Стул'], specs:[['Материал','дерево']], downloads:[{label:'Чертёж', href:'files/chair.dwg', icon:'fa-file-ai'}] },
-    { id:'drip-coffee', title:'Дрип-кофе', category:'home', desc:'Порционный кофе в фирменной упаковке', images:['https://placehold.co/800x500/D4BF95/231F20?text=Дрип+кофе'], specs:[['Вес','10 г']], downloads:[{label:'Макет упаковки', href:'files/coffee-pack.ai', icon:'fa-file-ai'}] },
+    { id:'limited-notebook', title:'Лимитка-блокнот', category:'limited-collection', desc:'Блокнот с символикой', images:['files/fir-stil//1.jpg'], specs:[['Формат','А5']], downloads:[{label:'Обложка', href:'files/notebook-cover.ai', icon:'fa-file-ai'}] },
+    { id:'badges', title:'Значки', category:'souvenirs', desc:'Набор значков', images:['files/fir-stil//1.jpg'], specs:[['Диаметр','38 мм']], downloads:[{label:'AI шаблон', href:'files/badges.ai', icon:'fa-file-ai'}] },
+    { id:'thermo-stickers', title:'Термобутылка с наклейками', category:'home', desc:'Бутылка + набор стикеров', images:['files/fir-stil//1.jpg'], specs:[['Объём','500 мл']], downloads:[{label:'Наклейки', href:'files/stickers.ai', icon:'fa-file-ai'}] },
+    { id:'hoodie-stickers', title:'Худи с наклейками', category:'clothes', desc:'Худи и лист наклеек', images:['files/fir-stil//1.jpg'], specs:[['Размеры','S–XXL']], downloads:[{label:'Наклейки', href:'files/hoodie-stickers.ai', icon:'fa-file-ai'}] },
+    { id:'ad-booklet', title:'Буклет рекламный', category:'printed', desc:'Информационный буклет', images:['files/fir-stil//1.jpg'], specs:[['Формат','А4 (фальц)']], downloads:[{label:'PDF', href:'files/booklet.pdf', icon:'fa-file-ai'}] },
+    { id:'chair', title:'Стул', category:'home', desc:'Брендированный стул', images:['files/fir-stil//1.jpg'], specs:[['Материал','дерево']], downloads:[{label:'Чертёж', href:'files/chair.dwg', icon:'fa-file-ai'}] },
+    { id:'drip-coffee', title:'Дрип-кофе', category:'home', desc:'Порционный кофе в фирменной упаковке', images:['files/fir-stil//1.jpg'], specs:[['Вес','10 г']], downloads:[{label:'Макет упаковки', href:'files/coffee-pack.ai', icon:'fa-file-ai'}] },
     { id:'shopper', title:'Шопер', category:'accessories', desc:'Эко-сумка', images:['files/fir-stil/Шопер/1.jpg', 'files/fir-stil/Шопер/2.jpg', 'files/fir-stil/Шопер/Шопер-Макет.png'], specs:[['Размер','35×40 см']], downloads:[{label:'Макет', href:'files/fir-stil/Шопер/Шопер-Макет.ai', icon:'fa-file-ai'}] },
-    { id:'lanyard', title:'Лента с бейджем', category:'accessories', desc:'Репсовая лента + пластиковый бейдж', images:['https://placehold.co/800x500/F43139/white?text=Лента+бейдж'], specs:[['Ширина','15 мм']], downloads:[{label:'Макет', href:'files/lanyard.ai', icon:'fa-file-ai'}] },
-    { id:'envelope', title:'Конверт', category:'printed', desc:'Фирменный конверт', images:['https://placehold.co/800x500/231F20/D4BF95?text=Конверт'], specs:[['Формат','C6']], downloads:[{label:'PDF', href:'files/envelope.pdf', icon:'fa-file-ai'}] },
-    { id:'tshirt-characters', title:'Футболка с персонажами', category:'clothes', desc:'Принт с персонажами спектаклей', images:['https://placehold.co/800x500/2C4068/F2F1F0?text=Футболка+персонажи'], specs:[['Размеры','S–XXL']], downloads:[{label:'Макет', href:'files/tshirt-characters.ai', icon:'fa-file-ai'}] },
-    { id:'two-clowns', title:'Два клоуна смотрят друг на друга', category:'art', desc:'Художественный постер', images:['https://placehold.co/800x500/D4BF95/231F20?text=Два+клоуна'], specs:[['Размер','А3']], downloads:[{label:'TIFF для печати', href:'files/two-clowns.tiff', icon:'fa-file-ai'}] },
-    { id:'social-stickers', title:'Стикеры для соцсетей', category:'digital', desc:'Набор стикеров Telegram / VK', images:['https://placehold.co/800x500/F43139/white?text=Стикеры'], specs:[['Формат','PNG 512×512']], downloads:[{label:'Скачать стикеры', href:'files/stickers-pack.zip', icon:'fa-file-ai'}] }
+    { id:'lanyard', title:'Лента с бейджем', category:'accessories', desc:'Репсовая лента + пластиковый бейдж', images:['files/fir-stil//1.jpg'], specs:[['Ширина','15 мм']], downloads:[{label:'Макет', href:'files/lanyard.ai', icon:'fa-file-ai'}] },
+    { id:'envelope', title:'Конверт', category:'printed', desc:'Фирменный конверт', images:['files/fir-stil//1.jpg'], specs:[['Формат','C6']], downloads:[{label:'PDF', href:'files/envelope.pdf', icon:'fa-file-ai'}] },
+    { id:'tshirt-characters', title:'Футболка с персонажами', category:'clothes', desc:'Принт с персонажами спектаклей', images:['files/fir-stil//1.jpg'], specs:[['Размеры','S–XXL']], downloads:[{label:'Макет', href:'files/tshirt-characters.ai', icon:'fa-file-ai'}] },
+    { id:'two-clowns', title:'Два клоуна смотрят друг на друга', category:'art', desc:'Художественный постер', images:['files/fir-stil//1.jpg'], specs:[['Размер','А3']], downloads:[{label:'TIFF для печати', href:'files/two-clowns.tiff', icon:'fa-file-ai'}] },
+    { id:'social-stickers', title:'Стикеры для соцсетей', category:'digital', desc:'Набор стикеров Telegram / VK', images:['files/fir-stil//1.jpg'], specs:[['Формат','PNG 512×512']], downloads:[{label:'Скачать стикеры', href:'files/stickers-pack.zip', icon:'fa-file-ai'}] }
 ];
-
 let activeCategory = 'all';
 let visibleCount = 8;
 const STEP = 4;
@@ -1324,9 +1604,68 @@ function openDetail(id, skipScroll = false) {
   const mainImg = document.getElementById('detailMainImg'); 
   const thumbsContainer = document.getElementById('detailThumbs');
   const galleryMain = document.getElementById('galleryMain');
+  const colorSelectorContainer = document.getElementById('colorSelectorContainer');
   
+  // Определяем активный цвет для товаров с селектором
+  let activeColor = item.defaultColor || null;
+  
+  // Рендерим селектор цвета если нужно
+  if (item.hasColorSelector && productColors[id]) {
+    colorSelectorContainer.innerHTML = renderColorSelector(id, activeColor);
+    gallery.classList.add('with-colors');
+    
+    // Добавляем обработчики для кнопок цвета
+    colorSelectorContainer.querySelectorAll('.color-swatch').forEach(swatch => {
+      swatch.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const selectedColor = this.dataset.color;
+        
+        // Обновляем активный класс
+        colorSelectorContainer.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('active'));
+        this.classList.add('active');
+        
+        // Получаем новые изображения для выбранного цвета
+        const newImages = updateImagesByColor(id, selectedColor);
+        if (newImages && newImages.length) {
+          // Плавное переключение
+          galleryMain.classList.add('fade');
+          setTimeout(() => {
+            item.images = newImages;
+            currentImageIndex = 0;
+            mainImg.src = newImages[0];
+            mainImg.alt = `${item.title} - ${this.title}`;
+            
+            // Обновляем миниатюры
+            thumbsContainer.innerHTML = '';
+            newImages.forEach((src, idx) => { 
+              const t = document.createElement('img'); 
+              t.src = src; 
+              t.className = `thumb ${idx === 0 ? 'active' : ''}`; 
+              t.alt = item.title;
+              t.addEventListener('click', () => { 
+                mainImg.src = src; 
+                currentImageIndex = idx;
+                document.querySelectorAll('#detailThumbs .thumb').forEach((x, i) => x.classList.toggle('active', i === idx)); 
+              }); 
+              thumbsContainer.appendChild(t); 
+            });
+            galleryMain.classList.remove('fade');
+          }, 150);
+        }
+      });
+    });
+  } else {
+    colorSelectorContainer.innerHTML = '';
+    gallery.classList.remove('with-colors');
+  }
+  
+  // Инициализация галереи
   if (item.images?.length) { 
     gallery.style.display = 'block'; 
+    // Если есть выбор цвета и изображения для активного цвета — используем их
+    if (item.hasColorSelector && activeColor && productColors[id]?.images[activeColor]) {
+      item.images = productColors[id].images[activeColor];
+    }
     mainImg.src = item.images[0]; 
     mainImg.alt = item.title; 
     thumbsContainer.innerHTML = '';
@@ -1361,7 +1700,6 @@ function openDetail(id, skipScroll = false) {
       }
     };
     
-    // Клик по главному изображению открывает полноэкранный просмотр
     galleryMain.onclick = (e) => {
       if (e.target.tagName === 'IMG') {
         e.stopPropagation();
@@ -1374,6 +1712,7 @@ function openDetail(id, skipScroll = false) {
     gallery.style.display = 'none'; 
   }
   
+  // Спецификации
   const specsContainer = document.getElementById('detailSpecs');
   specsContainer.innerHTML = '';
   if (item.specs?.length) { 
@@ -1386,6 +1725,7 @@ function openDetail(id, skipScroll = false) {
     specsContainer.appendChild(c); 
   }
   
+  // Загрузки
   const downloadsContainer = document.getElementById('detailDownloads');
   downloadsContainer.innerHTML = '';
   if (item.downloads?.length) {
@@ -1470,21 +1810,16 @@ showMoreBtn?.addEventListener('click', () => { visibleCount += STEP; renderMedia
 
 // ===== INIT =====
 document.addEventListener('DOMContentLoaded', () => {
-  // Инициализация по умолчанию
   activeCategory = 'all';
   visibleCount = 8;
   
-  // Инициализируем типографику
   initWeightButtons(); 
   updateTypoPreview();
   
-  // Инициализируем карточки носителей ВСЕГДА
   renderMediaCards();
   
-  // Пробуем восстановить состояние страницы ПОСЛЕ инициализации
   loadPageState();
   
-  // Навигация
   document.querySelectorAll('.nav-btn').forEach(btn => { 
     btn.addEventListener('click', e => { 
       e.preventDefault(); 
