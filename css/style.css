@@ -9422,6 +9422,7 @@ img.team-img,
 /* ============================================= */
 /* HERO SLIDER — СТЕКЛЯННАЯ ПЛАШКА (ВЕБ: БОЛЬШАЯ, НЕЙТРАЛЬНАЯ) */
 /* ============================================= */
+@media (min-width: 860px) {
 .hero-content-afisha {
     position: absolute !important;
     z-index: 2 !important;
@@ -9511,6 +9512,7 @@ img.team-img,
 .hero-btn-light:hover {
     background: #FFFFFF !important;
     transform: translateY(-2px) !important;
+}
 }
 
 /* ===== АДАПТИВ ДЛЯ МОБИЛЬНЫХ (≤860px) ===== */
