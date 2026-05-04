@@ -138,7 +138,7 @@ const TOUR_SCHEDULE = [
     {
         id: 'jun-18-kabare-sochi',
         performanceId: 4,
-        title: 'Кабаре-Шапито',
+        title: 'Ушли за...',
         date: '2026-06-18',
         time: '20:00',
         venue: 'Зимний театр',

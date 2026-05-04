@@ -1779,7 +1779,7 @@ const productColors = {
 };
 
 // ===== ФУНКЦИЯ ОТРИСОВКИ СЕЛЕКТОРА ЦВЕТА =====
-function renderColorSelector(productId, currentColor) {
+function renderColorSelector(productId, currentColor, onChange) {
   const config = productColors[productId];
   if (!config) return '';
   
@@ -2086,7 +2086,7 @@ function renderMediaCards() {
   
   toShow.forEach(item => {
     // ✅ ИСПОЛЬЗУЕМ avatar ДЛЯ КАРТОЧКИ
-    const img = item.avatar || item.gallery?.[0] || 'https://placehold.co/600x400/cccccc/white?text=Нет+фото';
+    const img = item.avatar || item.images?.[0] || 'https://placehold.co/600x400/cccccc/white?text=Нет+фото';
     const card = document.createElement('div'); 
     card.className = 'media-card-new';
     
@@ -2120,134 +2120,6 @@ function renderMediaCards() {
   showMoreBtn.style.display = visibleCount >= filtered.length ? 'none' : 'block';
 }
 
-// ===== ВСПОМОГАТЕЛЬНЫЙ МЕТОД ДЛЯ ПОЛНОГО ОБНОВЛЕНИЯ ГАЛЕРЕИ =====
-function refreshDetailGallery(imagesArray) {
-  const gallery = document.getElementById('detailGallery');
-  const mainImg = document.getElementById('detailMainImg');
-  const thumbsContainer = document.getElementById('detailThumbs');
-  const galleryMain = document.getElementById('galleryMain');
-  
-  if (!imagesArray || imagesArray.length === 0) {
-    gallery.style.display = 'none';
-    return;
-  }
-  gallery.style.display = 'block';
-  
-  currentImageIndex = 0;
-  mainImg.src = imagesArray[0];
-  mainImg.alt = currentMediaItem ? currentMediaItem.title : '';
-  
-  // Очищаем миниатюры
-  thumbsContainer.innerHTML = '';
-  imagesArray.forEach((src, idx) => {
-    const t = document.createElement('img');
-    t.src = src;
-    t.className = `thumb ${idx === 0 ? 'active' : ''}`;
-    t.alt = currentMediaItem ? currentMediaItem.title : '';
-    t.addEventListener('click', () => {
-      mainImg.src = src;
-      currentImageIndex = idx;
-      document.querySelectorAll('#detailThumbs .thumb').forEach((x, i) => x.classList.toggle('active', i === idx));
-    });
-    thumbsContainer.appendChild(t);
-  });
-  
-  // Обработчики стрелок
-  const prevBtn = document.getElementById('detailPrev');
-  const nextBtn = document.getElementById('detailNext');
-  if (prevBtn) {
-    prevBtn.onclick = (e) => {
-      e.stopPropagation();
-      if (imagesArray.length > 1) {
-        currentImageIndex = (currentImageIndex - 1 + imagesArray.length) % imagesArray.length;
-        mainImg.src = imagesArray[currentImageIndex];
-        updateThumbsActive();
-      }
-    };
-  }
-  if (nextBtn) {
-    nextBtn.onclick = (e) => {
-      e.stopPropagation();
-      if (imagesArray.length > 1) {
-        currentImageIndex = (currentImageIndex + 1) % imagesArray.length;
-        mainImg.src = imagesArray[currentImageIndex];
-        updateThumbsActive();
-      }
-    };
-  }
-  
-  // Клик по основному изображению для открытия lightbox
-  galleryMain.onclick = (e) => {
-    if (e.target.tagName === 'IMG') {
-      e.stopPropagation();
-      openLightbox(
-        imagesArray[currentImageIndex],
-        currentMediaItem ? currentMediaItem.title : '',
-        currentMediaItem?.downloads?.[0]?.href || '#',
-        'light',
-        imagesArray,
-        currentImageIndex
-      );
-    }
-  };
-  
-  // Удаляем предыдущий обработчик свайпа, если был
-  if (galleryMain._swipeHandler) {
-    galleryMain.removeEventListener('touchstart', galleryMain._swipeHandler.start);
-    galleryMain.removeEventListener('touchmove', galleryMain._swipeHandler.move);
-    galleryMain.removeEventListener('touchend', galleryMain._swipeHandler.end);
-  }
-  // Устанавливаем новый обработчик свайпа
-  setupGallerySwipe(galleryMain, mainImg, imagesArray);
-}
-
-function updateThumbsActive() {
-  document.querySelectorAll('#detailThumbs .thumb').forEach((t, i) => {
-    t.classList.toggle('active', i === currentImageIndex);
-  });
-}
-
-// ===== СВАЙП ДЛЯ ГАЛЕРЕИ =====
-function setupGallerySwipe(element, imgEl, imagesArray) {
-  if (!element || imagesArray.length <= 1) return;
-  
-  let startX = 0, endX = 0, isSwiping = false;
-  
-  const startHandler = (e) => {
-    startX = e.touches[0].clientX;
-    isSwiping = true;
-  };
-  const moveHandler = (e) => {
-    if (!isSwiping) return;
-    endX = e.touches[0].clientX;
-  };
-  const endHandler = () => {
-    if (!isSwiping) return;
-    isSwiping = false;
-    const diff = startX - endX;
-    const threshold = 50;
-    
-    if (Math.abs(diff) > threshold) {
-      if (diff > 0 && currentImageIndex < imagesArray.length - 1) {
-        currentImageIndex++;
-        imgEl.src = imagesArray[currentImageIndex];
-        updateThumbsActive();
-      } else if (diff < 0 && currentImageIndex > 0) {
-        currentImageIndex--;
-        imgEl.src = imagesArray[currentImageIndex];
-        updateThumbsActive();
-      }
-    }
-  };
-  
-  element.addEventListener('touchstart', startHandler, { passive: true });
-  element.addEventListener('touchmove', moveHandler, { passive: true });
-  element.addEventListener('touchend', endHandler);
-  
-  // Сохраняем ссылки на обработчики для возможности удаления
-  element._swipeHandler = { start: startHandler, move: moveHandler, end: endHandler };
-}
-
 // ===== ДЕТАЛЬНЫЙ ПРОСМОТР =====
 function openDetail(id, skipScroll = false) {
   const item = mediaItems.find(i => i.id === id); 
@@ -2266,6 +2138,10 @@ function openDetail(id, skipScroll = false) {
   document.getElementById('detailTitle').textContent = item.title; 
   document.getElementById('detailSubtitle').textContent = item.desc;
   
+  const gallery = document.getElementById('detailGallery'); 
+  const mainImg = document.getElementById('detailMainImg'); 
+  const thumbsContainer = document.getElementById('detailThumbs');
+  const galleryMain = document.getElementById('galleryMain');
   const colorSelectorContainer = document.getElementById('colorSelectorContainer');
   const infoBlock = document.getElementById('detailInfoBlock');
   const infoContent = document.getElementById('detailInfoContent');
@@ -2278,19 +2154,13 @@ function openDetail(id, skipScroll = false) {
     infoBlock.style.display = 'none';
   }
   
-  // Определяем галерею с учётом выбора цвета
-  let galleryImages = item.gallery || [];
+  // Определяем активный цвет для товаров с селектором
   let activeColor = item.defaultColor || null;
   
-  if (item.hasColorSelector && productColors[id] && activeColor) {
-    const colorImages = productColors[id].images[activeColor];
-    if (colorImages && colorImages.length) {
-      galleryImages = colorImages;
-      currentMediaItem.gallery = galleryImages; // синхронизируем для 
-    }
-    // Рендеринг селектора цвета
+  // Рендерим селектор цвета если нужно
+  if (item.hasColorSelector && productColors[id]) {
     colorSelectorContainer.innerHTML = renderColorSelector(id, activeColor);
-    document.getElementById('detailGallery').classList.add('with-colors');
+    gallery.classList.add('with-colors');
     
     // Добавляем обработчики для кнопок цвета
     colorSelectorContainer.querySelectorAll('.color-swatch').forEach(swatch => {
@@ -2302,14 +2172,31 @@ function openDetail(id, skipScroll = false) {
         colorSelectorContainer.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('active'));
         this.classList.add('active');
         
-        // Получаем новые изображения
+        // Получаем новые изображения для выбранного цвета
         const newImages = updateImagesByColor(id, selectedColor);
         if (newImages && newImages.length) {
-          currentMediaItem.gallery = newImages; // обновляем в текущем объекте
-          const galleryMain = document.getElementById('galleryMain');
+          // Плавное переключение
           galleryMain.classList.add('fade');
           setTimeout(() => {
-            refreshDetailGallery(newImages);
+            item.gallery = newImages; // ✅ ИСПОЛЬЗУЕМ gallery ВМЕСТО images
+            currentImageIndex = 0;
+            mainImg.src = newImages[0];
+            mainImg.alt = `${item.title} - ${this.title}`;
+            
+            // Обновляем миниатюры
+            thumbsContainer.innerHTML = '';
+            newImages.forEach((src, idx) => { 
+              const t = document.createElement('img'); 
+              t.src = src; 
+              t.className = `thumb ${idx === 0 ? 'active' : ''}`; 
+              t.alt = item.title;
+              t.addEventListener('click', () => { 
+                mainImg.src = src; 
+                currentImageIndex = idx;
+                document.querySelectorAll('#detailThumbs .thumb').forEach((x, i) => x.classList.toggle('active', i === idx)); 
+              }); 
+              thumbsContainer.appendChild(t); 
+            });
             galleryMain.classList.remove('fade');
           }, 150);
         }
@@ -2317,11 +2204,64 @@ function openDetail(id, skipScroll = false) {
     });
   } else {
     colorSelectorContainer.innerHTML = '';
-    document.getElementById('detailGallery').classList.remove('with-colors');
+    gallery.classList.remove('with-colors');
   }
   
-  // Обновляем галерею
-  refreshDetailGallery(galleryImages);
+  // ✅ ИСПОЛЬЗУЕМ gallery ВМЕСТО images ДЛЯ ДЕТАЛЬНОГО ПРОСМОТРА
+  const galleryImages = item.gallery || item.images || [];
+  
+  // Инициализация галереи
+  if (galleryImages.length) { 
+    gallery.style.display = 'block'; 
+    // Если есть выбор цвета и изображения для активного цвета — используем их
+    if (item.hasColorSelector && activeColor && productColors[id]?.images[activeColor]) {
+      item.gallery = productColors[id].images[activeColor];
+    }
+    mainImg.src = galleryImages[0]; 
+    mainImg.alt = item.title; 
+    thumbsContainer.innerHTML = '';
+    
+    galleryImages.forEach((src, idx) => { 
+      const t = document.createElement('img'); 
+      t.src = src; 
+      t.className = `thumb ${idx === 0 ? 'active' : ''}`; 
+      t.alt = item.title;
+      t.addEventListener('click', () => { 
+        mainImg.src = src; 
+        currentImageIndex = idx;
+        document.querySelectorAll('#detailThumbs .thumb').forEach((x, i) => x.classList.toggle('active', i === idx)); 
+      }); 
+      thumbsContainer.appendChild(t); 
+    });
+    
+    document.getElementById('detailPrev').onclick = (e) => { 
+      e.stopPropagation();
+      if (galleryImages.length > 1) {
+        currentImageIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length; 
+        mainImg.src = galleryImages[currentImageIndex];
+        updateThumbsActive();
+      }
+    };
+    document.getElementById('detailNext').onclick = (e) => { 
+      e.stopPropagation();
+      if (galleryImages.length > 1) {
+        currentImageIndex = (currentImageIndex + 1) % galleryImages.length; 
+        mainImg.src = galleryImages[currentImageIndex];
+        updateThumbsActive();
+      }
+    };
+    
+    galleryMain.onclick = (e) => {
+      if (e.target.tagName === 'IMG') {
+        e.stopPropagation();
+        openLightbox(galleryImages[currentImageIndex], item.title, item.downloads?.[0]?.href || '#', 'light', galleryImages, currentImageIndex);
+      }
+    };
+    
+    setupGallerySwipe(galleryMain, mainImg, galleryImages);
+  } else { 
+    gallery.style.display = 'none'; 
+  }
   
   // Спецификации
   const specsContainer = document.getElementById('detailSpecs');
@@ -2358,6 +2298,48 @@ function openDetail(id, skipScroll = false) {
   detailContainer.style.display = 'block';
   if (!skipScroll) window.scrollTo({top:0,behavior:'smooth'});
   savePageState('media-detail', id, 0);
+}
+
+function updateThumbsActive() {
+  document.querySelectorAll('#detailThumbs .thumb').forEach((t, i) => {
+    t.classList.toggle('active', i === currentImageIndex);
+  });
+}
+
+// ===== СВАЙП ДЛЯ ГАЛЕРЕИ =====
+function setupGallerySwipe(element, imgEl, images) {
+  if (!element || images.length <= 1) return;
+  
+  let startX = 0, endX = 0, isSwiping = false;
+  
+  element.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].clientX;
+    isSwiping = true;
+  }, { passive: true });
+  
+  element.addEventListener('touchmove', (e) => {
+    if (!isSwiping) return;
+    endX = e.touches[0].clientX;
+  }, { passive: true });
+  
+  element.addEventListener('touchend', () => {
+    if (!isSwiping) return;
+    isSwiping = false;
+    const diff = startX - endX;
+    const threshold = 50;
+    
+    if (Math.abs(diff) > threshold) {
+      if (diff > 0 && currentImageIndex < images.length - 1) {
+        currentImageIndex++;
+        imgEl.src = images[currentImageIndex];
+        updateThumbsActive();
+      } else if (diff < 0 && currentImageIndex > 0) {
+        currentImageIndex--;
+        imgEl.src = images[currentImageIndex];
+        updateThumbsActive();
+      }
+    }
+  });
 }
 
 // Кнопка "Назад"
