@@ -215,3 +215,20 @@ html {
 }}
 
 
+@media (min-width: 860px) {
+.social-circle {
+    width: 48px !important;
+    height: 48px !important;
+    min-width: 48px !important;
+    min-height: 48px !important;
+    background: #2A3D5E;
+    border-radius: 10px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #3A5078;
+    color: #DCE4F0;
+    font-size: 20px !important;
+    transition: .2s;
+    text-decoration: none;
+}}

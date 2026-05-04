@@ -9554,3 +9554,8 @@ img.team-img,
     .hero-btn-dark, .hero-btn-light { padding: 10px 14px !important; font-size: 13px !important; }
 }*/
 
+@media (max-width: 768px) {
+    .hero-subtitle-afisha {
+        display: none;
+    }
+}

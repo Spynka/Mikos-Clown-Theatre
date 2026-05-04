@@ -299,7 +299,34 @@
             dot.onclick = () => { showSlide(i); startAutoPlay(); };
         });
         
-        // Пауза при наведении
+        // 🔥 СВАЙП-ЖЕСТЫ ДЛЯ МОБИЛЬНЫХ
+        let touchStartX = 0;
+        let touchEndX = 0;
+        const minSwipeDistance = 50; // минимальное расстояние для свайпа
+
+        slider.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+            stopAutoPlay(); // при касании пауза
+        }, { passive: true });
+
+        slider.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            const diff = touchEndX - touchStartX;
+
+            if (Math.abs(diff) > minSwipeDistance) {
+                if (diff < 0) {
+                    // свайп влево → следующий слайд
+                    nextSlide();
+                } else {
+                    // свайп вправо → предыдущий слайд
+                    prevSlide();
+                }
+            }
+            // после свайпа или простого касания возобновляем автоплей
+            startAutoPlay();
+        });
+
+        // Пауза при наведении мыши (для десктопа)
         slider.onmouseenter = stopAutoPlay;
         slider.onmouseleave = startAutoPlay;
         
