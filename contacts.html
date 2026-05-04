@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/header-footer.css"> 
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="js/emailjs-integration.js"></script>
     <!-- ✅ Яндекс.Карты API (замените ВАШ_API_KEY на реальный ключ) -->
     <!-- Получить ключ: https://developer.tech.yandex.ru/ -->
     <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&apikey=ВАШ_API_KEY" defer></script>
@@ -639,7 +641,7 @@ if (document.readyState === 'loading') {
         }
         
         // Отправка формы
-        contactForm.addEventListener('submit', (e) => {
+        contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             
             let isValid = true;
@@ -670,43 +672,24 @@ if (document.readyState === 'loading') {
             
             // Сбор данных формы
             const formData = {
-                name: nameInput.value.trim(),
-                email: emailInput.value.trim(),
-                phone: phoneInput.value.trim(),
-                subject: selectedValue,
-                message: messageInput.value.trim(),
-                timestamp: new Date().toISOString(),
-                source: 'contacts-page'
-            };
-            
-            // Сохранение в localStorage (для демонстрации)
-            localStorage.setItem('mikos_contact_form', JSON.stringify(formData));
-            
-            // Очистка формы
-            contactForm.reset();
-            nameInput.classList.remove('valid', 'error');
-            emailInput.classList.remove('valid', 'error');
-            phoneInput.classList.remove('valid', 'error');
-            messageInput.classList.remove('valid', 'error');
-            
-            // Сброс селекта
-            selectedValue = 'Выберите тему';
-            selectedSubject.textContent = 'Выберите тему';
-            document.querySelectorAll('.custom-option').forEach(opt => opt.classList.remove('selected'));
-            document.querySelector('.custom-option[data-value="Выберите тему"]')?.classList.add('selected');
-            
-            // Сброс маски
-            if (phoneMask) {
-                phoneMask.value = '';
-            }
-            
-            // Показ модального окна успеха
-            openSuccessModal(
-                'Сообщение отправлено! ✨', 
-                `Спасибо, ${formData.name}! Мы получили ваше сообщение и ответим в течение одного рабочего дня на указанный email.`,
-                null
-            );
-        });
+        name: nameInput.value.trim(),
+        email: emailInput.value.trim(),
+        phone: phoneInput.value.trim(),
+        subject: selectedValue,
+        message: messageInput.value.trim()
+    };
+
+    try {
+        await window.sendContactForm(formData);  // ← отправка письма клиенту
+        // Очистка формы и показ модалки
+        contactForm.reset();
+        // сброс селекта, ошибок и т.д.
+        openSuccessModal('Сообщение отправлено!', `Спасибо, ${formData.name}! Мы ответим в течение рабочего дня. Письмо с подтверждением уже у вас на почте.`);
+    } catch(e) {
+        console.error(e);
+        openSuccessModal('Ошибка отправки', 'Не удалось отправить письмо. Попробуйте позже.');
+    }
+});
     }
     
     // ===== ИНИЦИАЛИЗАЦИЯ =====

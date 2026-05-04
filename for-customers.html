@@ -8,6 +8,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="js/emailjs-integration.js"></script>
     <link rel="stylesheet" href="css/header-footer.css"> 
     <style>
     /* --- Базовые стили для формы --- */
@@ -874,37 +876,45 @@
         // Отправка
         const sendBtn = document.getElementById('sendRequestBtn');
         if (sendBtn) {
-            sendBtn.onclick = function() {
-                let valid = true;
-                if (!validateField(document.getElementById('requestName'), 'name')) valid = false;
-                if (!validateField(document.getElementById('requestEmail'), 'email')) valid = false;
-                if (!validateField(document.getElementById('requestPhone'), 'phone')) valid = false;
-                if (!valid) { openModal('Ошибка', 'Проверьте обязательные поля.'); return; }
+            sendBtn.onclick = async function() {
+    let valid = true;
+    if (!validateField(document.getElementById('requestName'), 'name')) valid = false;
+    if (!validateField(document.getElementById('requestEmail'), 'email')) valid = false;
+    if (!validateField(document.getElementById('requestPhone'), 'phone')) valid = false;
+    if (!valid) { openModal('Ошибка', 'Проверьте обязательные поля.'); return; }
 
-                const getVal = function(id) {
-                    const el = document.querySelector('.custom-select-wrapper select#' + id) || document.getElementById(id);
-                    return el ? el.value : '';
-                };
+    const getVal = function(id) {
+        const el = document.querySelector('.custom-select-wrapper select#' + id) || document.getElementById(id);
+        return el ? el.value : '';
+    };
 
-                console.log('Form data:', {
-                    name: document.getElementById('requestName')?.value,
-                    company: document.getElementById('requestCompany')?.value,
-                    email: document.getElementById('requestEmail')?.value,
-                    phone: document.getElementById('requestPhone')?.value,
-                    type: getVal('eventType'),
-                    date: document.getElementById('eventDate')?.value,
-                    audience: getVal('audienceCount'),
-                    format: getVal('eventFormat'),
-                    wishes: document.getElementById('extraWishes')?.value
-                });
-                openModal('Запрос отправлен!', 'Менеджер свяжется с вами в ближайшее время.');
-            };
+    const params = {
+        name: document.getElementById('requestName').value,
+        company: document.getElementById('requestCompany').value,
+        email: document.getElementById('requestEmail').value,
+        phone: document.getElementById('requestPhone').value,
+        event_type: getVal('eventType'),
+        event_date: document.getElementById('eventDate').value,
+        audience: getVal('audienceCount'),
+        format: getVal('eventFormat'),
+        wishes: document.getElementById('extraWishes').value
+    };
+
+    // Отправка через EmailJS
+    try {
+        await window.sendRequestBuilder(params);
+        openModal('Запрос отправлен!', 'Менеджер свяжется с вами в ближайшее время. Письмо с деталями отправлено на ваш email.');
+    } catch(e) {
+        console.error(e);
+        openModal('Ошибка отправки', 'Не удалось отправить письмо. Попробуйте позже.');
+    }
+};
         }
 
         // Контактная форма
-        const contactForm = document.getElementById('contactForm');
+                const contactForm = document.getElementById('contactForm');
         if (contactForm) {
-            contactForm.onsubmit = function(e) {
+            contactForm.onsubmit = async function(e) {
                 e.preventDefault();
                 let valid = true;
                 if (!validateField(document.getElementById('contactName'), 'name')) valid = false;
@@ -912,8 +922,23 @@
                 if (!validateField(document.getElementById('contactPhone'), 'phone')) valid = false;
                 if (!validateField(document.getElementById('contactMessage'), 'required')) valid = false;
                 if (!valid) { openModal('Ошибка', 'Заполните все поля корректно.'); return; }
-                contactForm.reset();
-                openModal('Сообщение отправлено!', 'Спасибо! Мы ответим в течение 2 часов.');
+
+                const params = {
+                    name: document.getElementById('contactName').value.trim(),
+                    company: document.getElementById('contactCompany')?.value.trim() || '',
+                    email: document.getElementById('contactEmail').value.trim(),
+                    phone: document.getElementById('contactPhone').value.trim(),
+                    message: document.getElementById('contactMessage').value.trim()
+                };
+
+                try {
+                    await window.sendContactForm(params);
+                    contactForm.reset();
+                    openModal('Сообщение отправлено!', 'Спасибо! Мы ответим в течение 2 часов. Письмо с подтверждением уже на вашей почте.');
+                } catch(e) {
+                    console.error(e);
+                    openModal('Ошибка отправки', 'Не удалось отправить письмо. Попробуйте позже.');
+                }
             };
         }
     }

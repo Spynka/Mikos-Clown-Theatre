@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" type="image/svg+xml" href="SVG/logo-2.svg" sizes="any">
     <script src="js/tour-data.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="js/emailjs-integration.js"></script>
     <!-- Подключаем IMask для масок ввода -->
     <script src="https://cdn.jsdelivr.net/npm/imask@7.3.0/dist/imask.min.js"></script>
     <style>
@@ -1931,7 +1933,7 @@
     // ===== ФОРМА ЗАКАЗЧИКАМ С ВАЛИДАЦИЕЙ =====
     const clientForm = document.getElementById('clientFormMain');
     if (clientForm) {
-        clientForm.addEventListener('submit', (e) => {
+        clientForm.addEventListener('submit',  async (e) => {
             e.preventDefault();
             
             const fields = [
@@ -1956,6 +1958,8 @@
                 timestamp: new Date().toISOString(),
                 source: 'index-clients-form'
             };
+
+      try { await window.sendClientRequest(formData); } catch(err) { console.error(err); }
             
             // Сохранение в localStorage (для демонстрации)
             localStorage.setItem('mikos_client_request', JSON.stringify(formData));

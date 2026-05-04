@@ -8,6 +8,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <link rel="stylesheet" href="css/header-footer.css">
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="js/emailjs-integration.js"></script>
 <script src="js/tour-data.js"></script>
 <style>
 /* ============================================= */
@@ -2310,24 +2312,39 @@ function initEventListeners() {
     showStep(3);
   });
   document.getElementById('backBtn3')?.addEventListener('click', () => showStep(2));
-  document.getElementById('payBtn')?.addEventListener('click', () => {
+  document.getElementById('payBtn')?.addEventListener('click', async () => {
     const orderNum = 'МК-' + new Date().getFullYear() + (new Date().getMonth()+1).toString().padStart(2,'0') + '-' + Math.floor(Math.random()*9000+1000);
-    document.getElementById('orderNumber').textContent = orderNum;
-    document.getElementById('successBuyer').textContent = (document.getElementById('lastName')?.value || '') + ' ' + (document.getElementById('firstName')?.value || '');
+    const firstName = document.getElementById('firstName')?.value || '';
+    const lastName = document.getElementById('lastName')?.value || '';
     const email = document.getElementById('email')?.value || '';
+    const finalTotal = calculateFinalTotal();
+
+    // Заполняем визуальные поля (как было раньше)
+    document.getElementById('orderNumber').textContent = orderNum;
+    document.getElementById('successBuyer').textContent = lastName + ' ' + firstName;
     document.getElementById('successEmail').textContent = email;
     document.getElementById('successEmailHint').textContent = email;
-    const finalTotal = calculateFinalTotal();
-    const ticketsContainer = document.getElementById('successTickets');
-    if (performanceData.freeSeating) {
-      const ticketWord = getTicketWordForm(freeQuantity);
-      ticketsContainer.innerHTML = `<div class="ticket-item"><div class="ticket-icon"><i class="fas fa-ticket-alt"></i></div><div class="ticket-info"><div class="ticket-title">Свободная рассадка (${freeQuantity} ${ticketWord})</div><div class="ticket-meta">Электронный билет · вход по QR-коду</div></div><div class="ticket-price">${formatPrice(finalTotal)}</div></div>`;
-    } else {
-      ticketsContainer.innerHTML = selectedSeats.map(seat => `<div class="ticket-item"><div class="ticket-icon"><i class="fas fa-ticket-alt"></i></div><div class="ticket-info"><div class="ticket-title">Ряд ${seat.row}, место ${seat.seat}</div><div class="ticket-meta">Электронный билет · вход по QR-коду</div></div><div class="ticket-price">${formatPrice(performanceData.price)}</div></div>`).join('');
+    // ... формируем список билетов ...
+
+    // Отправляем билеты на email
+    try {
+        await window.sendTicketEmail({
+            orderNumber: orderNum,
+            performanceTitle: performanceData.title,
+            dateTime: performanceData.dateTime,
+            hall: performanceData.hall,
+            buyerName: `${lastName} ${firstName}`,
+            buyerEmail: email,
+            ticketsListHtml: document.getElementById('successTickets').innerHTML,
+            totalPrice: formatPrice(finalTotal)
+        });
+    } catch(e) {
+        console.error('Ошибка отправки билетов:', e);
+        alert('Билеты не удалось отправить на email. Но вы можете скачать их.');
     }
-    document.getElementById('successTotal').textContent = formatPrice(finalTotal);
+
     showStep(4);
-  });
+});
 
   document.querySelectorAll('.payment-method').forEach(method => {
     method.addEventListener('click', () => {

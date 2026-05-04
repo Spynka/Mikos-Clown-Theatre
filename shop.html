@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/header-footer.css"> 
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="js/emailjs-integration.js"></script>
     <style>
         /* ===== СТИЛИ ГАЛЕРЕИ ИЗОБРАЖЕНИЙ ТОВАРА ===== */
         .product-gallery-overlay {
@@ -1066,20 +1068,31 @@ window.addEventListener('resize', () => {
         
         const submitOrderBtn = document.getElementById('submitOrderBtn');
         if (submitOrderBtn) {
-            submitOrderBtn.addEventListener('click', () => {
-                const name = document.getElementById('contactName')?.value.trim();
-                const phone = document.getElementById('contactPhone')?.value.trim();
-                const email = document.getElementById('contactEmail')?.value.trim();
-                const method = document.getElementById('contactMethod')?.value.trim();
-                
-                if (!name || !phone || !email || !method) {
-                    alert("Заполните все поля");
-                    return;
-                }
-                
-                document.getElementById('modalContacts')?.classList.remove('active');
-                showSuccess(name);
-            });
+            submitOrderBtn.addEventListener('click', async () => {
+    const name = document.getElementById('contactName')?.value.trim();
+    const phone = document.getElementById('contactPhone')?.value.trim();
+    const email = document.getElementById('contactEmail')?.value.trim();
+    const method = document.getElementById('contactMethod')?.value.trim();
+    const orderSummary = document.getElementById('orderSummaryFull')?.innerHTML || '';
+
+    if (!name || !phone || !email || !method) {
+        alert("Заполните все поля");
+        return;
+    }
+
+    try {
+        await window.sendOrderMerch({
+            name, phone, email,
+            contact_method: method,
+            order_summary: orderSummary
+        });
+        document.getElementById('modalContacts')?.classList.remove('active');
+        showSuccess(name);
+    } catch(e) {
+        console.error(e);
+        alert('Ошибка отправки письма. Попробуйте позже.');
+    }
+});
         }
         
         const subscribeBtn = document.getElementById('subscribeBtn');
