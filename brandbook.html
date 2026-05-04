@@ -1024,6 +1024,108 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   display: inline-flex; /* или block */
 }
 
+
+
+
+
+
+
+
+
+/* ===== МОБИЛЬНОЕ МЕНЮ БРЕНДБУКА — ЕДИНЫЙ СТИЛЬ ===== */
+
+/* Базовые стили ссылок меню (для всех экранов) */
+#mobileNav ul li a {
+    color: #F2F1F0 !important;
+    font-family: 'Unbounded', sans-serif !important;
+    font-size: 15px !important;
+    font-weight: 400 !important;
+    text-decoration: none !important;
+    display: block !important;
+    padding: 6px 0 !important;
+    line-height: 1.2 !important;
+    transition: color 0.2s ease !important;
+    letter-spacing: 0 !important;
+}
+
+#mobileNav ul li a:hover,
+#mobileNav ul li a.active {
+    color: #E8454D !important; /* Красный акцент при наведении/активе */
+}
+
+/* ===== АДАПТИВ ДЛЯ МОБИЛЬНЫХ (≤860px) ===== */
+@media (max-width: 860px) {
+    /* Увеличенные тап-зоны и отступы как на других страницах */
+    #mobileNav ul li a {
+        padding: 12px 0 !important;      /* Вертикальный отступ для удобного нажатия */
+        font-size: 16px !important;      /* Чуть крупнее шрифт */
+        min-height: 44px !important;     /* Минимальная высота для пальца */
+        display: flex !important;
+        align-items: center !important;
+    }
+
+    /* Логотип в мобильном меню */
+    .mobile-logo-group {
+        padding-top: 10px !important;
+        padding-bottom: 20px !important;
+        gap: 14px !important;
+    }
+
+    .mobile-logo-group img {
+        max-width: 120px !important;
+        height: auto !important;
+    }
+
+    /* Кнопка закрытия меню */
+    #closeMobileMenu {
+        width: 44px !important;
+        height: 44px !important;
+        font-size: 22px !important;
+        top: 18px !important;
+        right: 18px !important;
+    }
+
+    /* Контейнер меню — отступы и скролл */
+    #mobileNav {
+        padding: 70px 24px 30px !important;
+    }
+
+    /* Разделитель под лого */
+    #mobileNav > .mobile-logo-group {
+        border-bottom-color: rgba(255, 255, 255, 0.1) !important;
+        margin-bottom: 20px !important;
+    }
+}
+
+/* ===== ОЧЕНЬ УЗКИЕ ЭКРАНЫ (≤400px) ===== */
+@media (max-width: 400px) {
+    #mobileNav ul li a {
+        padding: 10px 0 !important;
+        font-size: 15px !important;
+        min-height: 40px !important;
+    }
+
+    #mobileNav {
+        padding: 60px 20px 24px !important;
+    }
+
+    .mobile-logo-group img {
+        max-width: 100px !important;
+    }
+}
+
+/* ===== FIX: Z-INDEX И ПЕРЕКРЫТИЯ ===== */
+@media (max-width: 860px) {
+    #mobileNav {
+        z-index: 100000 !important;
+    }
+    #overlay {
+        z-index: 99999 !important;
+    }
+    #burgerIcon {
+        z-index: 100001 !important;
+    }
+}
 </style>
 </head>
 <body>
