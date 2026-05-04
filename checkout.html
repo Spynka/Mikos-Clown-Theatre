@@ -1210,6 +1210,137 @@ body {
 .order-summary .promo-section {
     margin-top: 20px;
 }
+
+
+
+
+
+
+
+
+/* ----- АДАПТИВНЫЕ СТИЛИ ДЛЯ ПОЛЯ ПРОМОКОДА (МОБИЛЬНАЯ ВЕРСИЯ) ----- */
+
+/* Базовые стили для контейнера промокода */
+.promo-section {
+    margin-bottom: 24px;
+    width: 100%;
+}
+
+.promo-input-row {
+    display: flex;
+    gap: 12px;
+    align-items: flex-end;
+    flex-wrap: wrap;
+}
+
+.promo-input-row .form-group {
+    flex: 1;
+    min-width: 0; /* Разрешаем сжатие */
+    margin-bottom: 0;
+}
+
+.promo-input-row .form-group label {
+    font-size: 14px;
+    margin-bottom: 16px;
+    display: block;
+}
+
+.promo-input-row input {
+    width: 100%;
+    padding: 12px 12px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.promo-apply-btn {
+    padding: 12px 20px;
+    white-space: nowrap;
+    height: auto;
+    min-height: 46px;
+    font-size: 13px;
+    flex-shrink: 0;
+}
+
+/* МОБИЛЬНАЯ АДАПТАЦИЯ (до 560px) */
+@media (max-width: 560px) {
+    .promo-input-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+    }
+    
+    .promo-input-row .form-group {
+        width: 100%;
+    }
+    
+    .promo-apply-btn {
+        width: 100%;
+        margin-top: 0 !important;
+        padding: 12px 16px;
+        white-space: normal;
+        text-align: center;
+    }
+    
+    /* Убираем margin-top: 22px, который был прописан инлайн */
+    .promo-apply-btn {
+        margin-top: 0 !important;
+    }
+    
+    /* Делаем поле ввода полной ширины */
+    .promo-input-row input {
+        font-size: 16px; /* Предотвращает зум на iOS при фокусе */
+        padding: 12px 14px;
+    }
+    
+    /* Сообщение о промокоде */
+    .promo-message {
+        font-size: 12px;
+        margin-top: 6px;
+        word-break: break-word;
+    }
+    
+    /* Строка со скидкой */
+    .promo-discount-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        font-size: 14px;
+    }
+    
+    .promo-discount-row .discount-badge {
+        align-self: flex-start;
+        font-size: 12px;
+        padding: 4px 10px;
+    }
+}
+
+/* Для очень маленьких экранов (до 400px) */
+@media (max-width: 400px) {
+    .promo-apply-btn {
+        padding: 10px 14px;
+        font-size: 12px;
+    }
+    
+    .promo-input-row input {
+        padding: 10px 12px;
+    }
+}
+
+/* Для планшетов и небольших десктопов, где кнопка прилегает нормально */
+@media (min-width: 561px) and (max-width: 768px) {
+    .promo-input-row {
+        gap: 10px;
+    }
+    
+    .promo-apply-btn {
+        padding: 12px 18px;
+        font-size: 13px;
+    }
+    
+    .promo-input-row input {
+        font-size: 14px;
+    }
+}
     </style>
 </head>
 <body>
@@ -1257,7 +1388,7 @@ body {
                             <label>Промокод</label>
                             <input type="text" id="promoCodeInput1" placeholder="Введите промокод" autocomplete="off">
                         </div>
-                        <button class="promo-apply-btn" id="applyPromoBtn1" style="margin-top: 22px;">Применить</button>
+                        <button class="promo-apply-btn" id="applyPromoBtn1">Применить</button>
                     </div>
                     <div class="promo-message" id="promoMessage1"></div>
                 </div>
@@ -1349,7 +1480,7 @@ body {
                                 <label>Промокод</label>
                                 <input type="text" id="promoCodeInput2" placeholder="Введите промокод" autocomplete="off">
                             </div>
-                            <button class="promo-apply-btn" id="applyPromoBtn2" style="margin-top: 22px;">Применить</button>
+                            <button class="promo-apply-btn" id="applyPromoBtn2">Применить</button>
                         </div>
                         <div class="promo-message" id="promoMessage2"></div>
                     </div>
@@ -1453,7 +1584,7 @@ body {
                                     <label>Промокод</label>
                                     <input type="text" id="promoCodeInput3" placeholder="Введите промокод" autocomplete="off">
                                 </div>
-                                <button class="promo-apply-btn" id="applyPromoBtn3" style="margin-top: 22px;">Применить</button>
+                                <button class="promo-apply-btn" id="applyPromoBtn3">Применить</button>
                             </div>
                             <div class="promo-message" id="promoMessage3"></div>
                         </div>
