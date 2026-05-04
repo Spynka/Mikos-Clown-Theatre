@@ -643,9 +643,10 @@ body {
 /* ============================================= */
 /* ПРОМОКОД */
 /* ============================================= */
+
 .promo-section {
-  margin-bottom: 24px;
-  width: 100%;
+    padding: 24px 0px 24px 0px;
+    width: 100%;
 }
 .promo-input-row {
   display: flex;
@@ -2313,32 +2314,62 @@ function initEventListeners() {
   });
   document.getElementById('backBtn3')?.addEventListener('click', () => showStep(2));
   document.getElementById('payBtn')?.addEventListener('click', async () => {
-    const orderNum = 'МК-' + new Date().getFullYear() + (new Date().getMonth()+1).toString().padStart(2,'0') + '-' + Math.floor(Math.random()*9000+1000);
+    // 1. Формируем номер заказа
+    const orderNum = 'МК-' + new Date().getFullYear() +
+        (new Date().getMonth() + 1).toString().padStart(2, '0') +
+        '-' + Math.floor(Math.random() * 9000 + 1000);
+
+    // 2. Данные покупателя (из шага 2)
     const firstName = document.getElementById('firstName')?.value || '';
     const lastName = document.getElementById('lastName')?.value || '';
     const email = document.getElementById('email')?.value || '';
+
+    // 3. Итоговая стоимость (функция calculateFinalTotal уже есть в вашем скрипте)
     const finalTotal = calculateFinalTotal();
 
-    // Заполняем визуальные поля (как было раньше)
+    // 4. Список билетов (HTML для письма и для отображения на странице)
+    let ticketsHtml = '';
+    if (performanceData.freeSeating) {
+        // свободная рассадка – показываем количество
+        ticketsHtml = `<div class="ticket-item"><div class="ticket-icon"><i class="fas fa-ticket-alt"></i></div><div class="ticket-info"><div class="ticket-title">Свободная рассадка (${freeQuantity} билет.)</div><div class="ticket-meta">Электронный билет · вход по QR-коду</div></div><div class="ticket-price">${formatPrice(finalTotal)}</div></div>`;
+    } else {
+        // нумерованные места – перебираем selectedSeats
+        ticketsHtml = selectedSeats.map(seat => `
+            <div class="ticket-item">
+                <div class="ticket-icon"><i class="fas fa-ticket-alt"></i></div>
+                <div class="ticket-info">
+                    <div class="ticket-title">Ряд ${seat.row}, место ${seat.seat}</div>
+                    <div class="ticket-meta">Электронный билет · вход по QR-коду</div>
+                </div>
+                <div class="ticket-price">${formatPrice(performanceData.price)}</div>
+            </div>
+        `).join('');
+    }
+
+    // 5. Заполняем визуальные поля на шаге 4 (успех)
     document.getElementById('orderNumber').textContent = orderNum;
-    document.getElementById('successBuyer').textContent = lastName + ' ' + firstName;
+    document.getElementById('successBuyer').textContent = `${lastName} ${firstName}`;
     document.getElementById('successEmail').textContent = email;
     document.getElementById('successEmailHint').textContent = email;
-    // ... формируем список билетов ...
+    document.getElementById('successTitle').textContent = performanceData.title;
+    document.getElementById('successDateTime').textContent = performanceData.dateTime;
+    document.getElementById('successHall').textContent = performanceData.hall;
+    document.getElementById('successTickets').innerHTML = ticketsHtml;
+    document.getElementById('successTotal').textContent = formatPrice(finalTotal);
 
-    // Отправляем билеты на email
+    // 6. Отправляем письмо через EmailJS
     try {
         await window.sendTicketEmail({
             orderNumber: orderNum,
-            performanceTitle: performanceData.title,
-            dateTime: performanceData.dateTime,
+            performance: performanceData.title,
+            datetime: performanceData.dateTime,
             hall: performanceData.hall,
             buyerName: `${lastName} ${firstName}`,
             buyerEmail: email,
-            ticketsListHtml: document.getElementById('successTickets').innerHTML,
+            ticketsListHtml: ticketsHtml,
             totalPrice: formatPrice(finalTotal)
         });
-    } catch(e) {
+    } catch (e) {
         console.error('Ошибка отправки билетов:', e);
         alert('Билеты не удалось отправить на email. Но вы можете скачать их.');
     }
