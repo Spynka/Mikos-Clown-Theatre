@@ -9559,3 +9559,9 @@ img.team-img,
         display: none;
     }
 }
+
+@media (max-width: 400px) {
+    .hero-subtitle-afisha {
+        display: none;
+    }
+}
