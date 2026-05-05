@@ -146,7 +146,6 @@ class PageLoader {
         40% { opacity: 1; transform: scale(1.4); }
       }
 
-      /* 🔑 Стили для контента — скрываем только direct children, не вложенные */
       body.loader-active .shop-container:not(.visible),
       body.loader-active .page-content:not(.visible),
       body.loader-active [data-content-wrapper]:not(.visible) {
@@ -156,7 +155,6 @@ class PageLoader {
         pointer-events: none;
       }
 
-      /* 🔑 Когда лоадер НЕ активен — всё видно */
       body:not(.loader-active) .shop-container,
       body:not(.loader-active) .page-content,
       body:not(.loader-active) [data-content-wrapper] {
@@ -173,7 +171,6 @@ class PageLoader {
         pointer-events: auto !important;
       }
 
-      /* Убираем возможные конфликты */
       body.loader-active {
         overflow: hidden !important;
         padding-top: 0 !important;
@@ -351,26 +348,30 @@ class PageLoader {
     if (this.isFinished) return;
     this.isFinished = true;
     
-    // 🔑 Сначала убираем класс loader-active — это сразу показывает контент
     document.body.classList.remove('loader-active');
     document.body.style.overflow = '';
     
-    // 🔑 Показываем контент
-    if (this.content) {
-      this.content.classList.add('visible');
-      this.content.style.opacity = '1';
-      this.content.style.transform = 'translateY(0)';
-      this.content.style.pointerEvents = 'auto';
-    }
+    // Вспомогательная функция: делает элемент видимым и убирает transform
+    const showAndFix = (el) => {
+      if (!el) return;
+      el.classList.add('visible');
+      el.style.opacity = '1';
+      el.style.pointerEvents = 'auto';
+      // Принудительно сбрасываем transform, чтобы не мешать position: fixed
+      el.style.setProperty('transform', 'none', 'important');
+      el.style.setProperty('will-change', 'auto', 'important');
+    };
     
-    // 🔑 Также показываем родительский shop-container если есть
+    showAndFix(this.content);
+    
     const shopContainer = document.querySelector('.shop-container');
     if (shopContainer && shopContainer !== this.content) {
-      shopContainer.classList.add('visible');
-      shopContainer.style.opacity = '1';
-      shopContainer.style.transform = 'translateY(0)';
-      shopContainer.style.pointerEvents = 'auto';
-    }
+    showAndFix(shopContainer);
+    // Убираем clipping, чтобы fixed-элементы (бургер) не обрезались
+    shopContainer.style.setProperty('overflow', 'visible', 'important');
+    shopContainer.style.setProperty('overflow-x', 'visible', 'important');
+    shopContainer.style.setProperty('overflow-y', 'visible', 'important');
+}
     
     document.body.style.background = '#FFFFFF';
     
@@ -430,7 +431,6 @@ class PageLoader {
     
     this.loader = document.getElementById(this.options.loaderId);
     
-    // 🔑 Поиск контента
     if (contentSelector) {
       this.content = document.querySelector(contentSelector);
     }
@@ -448,7 +448,6 @@ class PageLoader {
       this.content = document.querySelector('.shop-container');
     }
     
-    // 🔑 Если нашли shop-container и внутри есть #mainContent — используем его
     if (this.content && this.content.classList.contains('shop-container')) {
       const mainContent = this.content.querySelector('#mainContent');
       if (mainContent) {
