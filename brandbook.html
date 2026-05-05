@@ -5,7 +5,9 @@
 <title>Театр клоунады «Микос» | Брендбук</title>
 <meta name="description" content="Кодекс визуальной и смысловой идентичности театра клоунады «Микос»">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-<!-- Шрифты -->
+<!-- Preconnect для шрифтов -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;800&family=Nunito+Sans:opsz,wght@6..12,300;400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <link rel="stylesheet" href="css/header-footer.css">
@@ -204,6 +206,9 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 .swatch-info { padding: var(--space-3); text-align: center; }
 .swatch-name { font-family: var(--font-display); font-weight: 600; font-size: var(--text-sm); display: block; margin-bottom: var(--space-1); }
 .swatch-info code { font-family: monospace; font-size: var(--text-xs); color: var(--color-text-secondary); background: rgba(0,0,0,0.04); padding: 2px 6px; border-radius: 4px; }
+/* расширенная информация по цветам */
+.extended-palette .swatch-info { font-size: 0.7rem; }
+.extended-palette .swatch-info small { display: block; color: #5a5a5a; line-height: 1.3; }
 
 /* Цветовые сочетания */
 .color-combinations { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--space-6); margin: var(--space-8) 0; }
@@ -844,287 +849,16 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 .mb-6 { margin-bottom: var(--space-6); } 
 .hidden { display: none !important; }
 
-/* ===== ЦВЕТОВЫЕ СЕЛЕКТОРЫ (ИСПРАВЛЕННЫЕ) ===== */
-.color-selector { 
-  display: flex; 
-  gap: var(--space-3); 
-  margin: var(--space-4) 0 var(--space-6); 
-  flex-wrap: wrap; 
-  align-items: center;
-  justify-content: center;
-}
-.color-selector-label { 
-  font-family: var(--font-display); 
-  font-weight: 600; 
-  font-size: var(--text-sm); 
-  color: var(--color-text-secondary);
-  margin-right: var(--space-2);
-}
-
-/* Базовый стиль кружка */
-.color-swatch {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  border: none;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  position: relative;
-  box-shadow: 0 2px 8px var(--color-shadow);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  padding: 0;
-  outline: none;
-  -webkit-tap-highlight-color: transparent;
-}
-
-/* При наведении */
-.color-swatch:hover {
-  transform: scale(1.12);
-  box-shadow: 0 6px 16px var(--color-shadow);
-}
-
-/* ✅ АКТИВНОЕ СОСТОЯНИЕ: ЧЁТКАЯ КРАСНАЯ ОБВОДКА */
-.color-swatch.active {
-  transform: scale(1.15);
-  outline: 3px solid var(--color-accent-red);
-  outline-offset: 3px;
-  box-shadow: 0 6px 20px var(--color-shadow);
-  z-index: 2;
-}
-
-/* ===== КОНКРЕТНЫЕ ЦВЕТА ===== */
-/* Белый: добавляем тонкую рамку, чтобы кружок не терялся на светлом фоне */
-.color-swatch[data-color="pendant-white"],
-.color-swatch[data-color="tshirt-white"] { 
-  background: #FFFFFF; 
-  box-shadow: 0 0 0 1px rgba(0,0,0,0.15), 0 2px 8px var(--color-shadow);
-}
-
-.color-swatch[data-color="pendant-black"],
-.color-swatch[data-color="tshirt-black"] { background: #000000; }
-
-.color-swatch[data-color="pendant-blue"] { background: #3685C6; }
-
-.color-swatch[data-color="pendant-gradient"] { 
-  background: linear-gradient(135deg, #3685C6 0%, #E13036 100%); 
-}
-
-.color-swatch[data-color="tshirt-bw"] { 
-  background: linear-gradient(135deg, #000000 50%, #FFFFFF 50%);
-}
-
-.color-swatch[data-color="tshirt-redblack"] { 
-  background: linear-gradient(135deg, #E13036 50%, #000000 50%);
-}
-
-.color-swatch[data-color="tshirt-beigeblack"] { 
-  background: linear-gradient(135deg, #C9B8A3 50%, #000000 50%);
-}
-
-/* Тултип при наведении */
-.color-swatch[title]:hover::before {
-  content: attr(title);
-  position: absolute;
-  bottom: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  background: var(--color-bg-dark);
-  color: var(--color-text-inverse);
-  font-family: var(--font-display);
-  font-size: var(--text-xs);
-  padding: 5px 10px;
-  border-radius: 6px;
-  white-space: nowrap;
-  z-index: 10;
-  margin-bottom: 10px;
-  box-shadow: 0 4px 12px var(--color-shadow);
-  pointer-events: none;
-  opacity: 0;
-  animation: tooltipFade 0.15s ease forwards;
-}
-@keyframes tooltipFade { to { opacity: 1; } }
-
-/* Адаптив */
-@media (max-width: 480px) {
-  .color-swatch { width: 40px; height: 40px; }
-  .color-selector { gap: var(--space-2); }
-}
-
-/* ===== ЦВЕТОВЫЕ СЕЛЕКТОРЫ (ЧИСТАЯ КРАСНАЯ ОБВОДКА) ===== */
-.color-selector { 
-  display: flex; gap: 12px; margin: 16px 0 24px; flex-wrap: wrap; 
-  align-items: center; justify-content: center;
-}
-.color-selector-label { 
-  font-family: var(--font-display); font-weight: 600; font-size: 14px; 
-  color: var(--color-text-secondary); margin-right: 8px;
-}
-
-.color-swatch {
-  width: 44px; height: 44px;
-  border-radius: 50%; border: none; cursor: pointer;
-  background-size: cover; background-position: center; background-repeat: no-repeat;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-  outline: none; transition: transform 0.2s ease, box-shadow 0.2s ease;
-  -webkit-tap-highlight-color: transparent;
-}
-.color-swatch:hover { transform: scale(1.1); }
-
-/* ✅ АКТИВНЫЙ СОСТОЯНИЕ: ТОЛЬКО ЧИСТЫЙ КРАСНЫЙ #F43139 */
-.color-swatch.active {
-  transform: scale(1.15);
-  outline: 3px solid #F43139;
-  outline-offset: 3px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  z-index: 2;
-}
-
-/* Убираем проблемные псевдоэлементы полностью */
-.color-swatch::after, .color-swatch::before { display: none !important; }
-
-/* === КОНКРЕТНЫЕ ЦВЕТА === */
-.color-swatch[data-color="pendant-white"],
-.color-swatch[data-color="tshirt-white"] { 
-  background: #FFFFFF; 
-  box-shadow: 0 0 0 1px rgba(0,0,0,0.12), 0 2px 6px rgba(0,0,0,0.15);
-}
-.color-swatch[data-color="pendant-black"],
-.color-swatch[data-color="tshirt-black"] { background: #000000; }
-.color-swatch[data-color="pendant-blue"] { background: #3685C6; }
-.color-swatch[data-color="pendant-gradient"] { 
-  background: linear-gradient(135deg, #3685C6 0%, #E13036 100%); 
-}
-.color-swatch[data-color="tshirt-bw"] { 
-  background: linear-gradient(135deg, #000000 50%, #FFFFFF 50%);
-}
-.color-swatch[data-color="tshirt-redblack"] { 
-  background: linear-gradient(135deg, #E13036 50%, #000000 50%);
-}
-.color-swatch[data-color="tshirt-beigeblack"] { 
-  background: linear-gradient(135deg, #C9B8A3 50%, #000000 50%);
-}
-
-@media (max-width: 480px) {
-  .color-swatch { width: 40px; height: 40px; }
-  .color-selector { gap: 8px; }
-}
+/* ===== НОВЫЕ СТИЛИ ДЛЯ РАСШИРЕННОГО БЛОКА ЦВЕТОВ ===== */
+.extended-palette .swatch-info { font-size: 0.7rem; }
+.extended-palette .swatch-info small { display: block; color: #5a5a5a; line-height: 1.3; }
 
 .show-more-wrapper {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 48px 0;
-  width: 100%;
-}
-
-.show-more-btn {
-  /* Ваши стили кнопки */
-  display: inline-flex; /* или block */
-}
-
-
-
-
-
-
-
-
-
-/* ===== МОБИЛЬНОЕ МЕНЮ БРЕНДБУКА — ЕДИНЫЙ СТИЛЬ ===== */
-
-/* Базовые стили ссылок меню (для всех экранов) */
-#mobileNav ul li a {
-    color: #F2F1F0 !important;
-    font-family: 'Unbounded', sans-serif !important;
-    font-size: 15px !important;
-    font-weight: 400 !important;
-    text-decoration: none !important;
-    display: block !important;
-    padding: 6px 0 !important;
-    line-height: 1.2 !important;
-    transition: color 0.2s ease !important;
-    letter-spacing: 0 !important;
-}
-
-#mobileNav ul li a:hover,
-#mobileNav ul li a.active {
-    color: #E8454D !important; /* Красный акцент при наведении/активе */
-}
-
-/* ===== АДАПТИВ ДЛЯ МОБИЛЬНЫХ (≤860px) ===== */
-@media (max-width: 860px) {
-    /* Увеличенные тап-зоны и отступы как на других страницах */
-    #mobileNav ul li a {
-        padding: 12px 0 !important;      /* Вертикальный отступ для удобного нажатия */
-        font-size: 16px !important;      /* Чуть крупнее шрифт */
-        min-height: 44px !important;     /* Минимальная высота для пальца */
-        display: flex !important;
-        align-items: center !important;
-    }
-
-    /* Логотип в мобильном меню */
-    .mobile-logo-group {
-        padding-top: 10px !important;
-        padding-bottom: 20px !important;
-        gap: 14px !important;
-    }
-
-    .mobile-logo-group img {
-        max-width: 120px !important;
-        height: auto !important;
-    }
-
-    /* Кнопка закрытия меню */
-    #closeMobileMenu {
-        width: 44px !important;
-        height: 44px !important;
-        font-size: 22px !important;
-        top: 18px !important;
-        right: 18px !important;
-    }
-
-    /* Контейнер меню — отступы и скролл */
-    #mobileNav {
-        padding: 70px 24px 30px !important;
-    }
-
-    /* Разделитель под лого */
-    #mobileNav > .mobile-logo-group {
-        border-bottom-color: rgba(255, 255, 255, 0.1) !important;
-        margin-bottom: 20px !important;
-    }
-}
-
-/* ===== ОЧЕНЬ УЗКИЕ ЭКРАНЫ (≤400px) ===== */
-@media (max-width: 400px) {
-    #mobileNav ul li a {
-        padding: 10px 0 !important;
-        font-size: 15px !important;
-        min-height: 40px !important;
-    }
-
-    #mobileNav {
-        padding: 60px 20px 24px !important;
-    }
-
-    .mobile-logo-group img {
-        max-width: 100px !important;
-    }
-}
-
-/* ===== FIX: Z-INDEX И ПЕРЕКРЫТИЯ ===== */
-@media (max-width: 860px) {
-    #mobileNav {
-        z-index: 100000 !important;
-    }
-    #overlay {
-        z-index: 99999 !important;
-    }
-    #burgerIcon {
-        z-index: 100001 !important;
-    }
+  justify-content: center;   /* горизонтальное центрирование */
+  align-items: center;       /* вертикальное (если будет высота) */
+  width: 100%;               /* растягиваем на всю ширину родителя */
+  margin: 48px 0;            /* отступы сверху и снизу */
 }
 </style>
 </head>
@@ -1136,8 +870,8 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 <div class="header-left">
 <a href="index.html" class="logo-link" aria-label="На главную">
 <div class="logo-group">
-<img class="logo-img" src="SVG/logo-2.svg" alt="Знак" loading="lazy">
-<img class="logo-img" src="SVG/logo.svg" alt="Логотип" loading="lazy">
+<img class="logo-img" src="SVG/logo-2.svg" alt="Знак" loading="lazy" width="32" height="32">
+<img class="logo-img" src="SVG/logo.svg" alt="Логотип" loading="lazy" width="120" height="32">
 </div>
 </a>
 <span class="brandbook-label">Брендбук</span>
@@ -1165,8 +899,8 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 </button>
 <a href="index.html" class="logo-link mobile-logo-link" aria-label="На главную">
 <div class="mobile-logo-group">
-<img class="logo-img" src="SVG/logo-black.svg" alt="Знак">
-<img class="logo-img" src="SVG/logo-black-2.svg" alt="Логотип">
+<img class="logo-img" src="SVG/logo-black.svg" alt="Знак" loading="lazy">
+<img class="logo-img" src="SVG/logo-black-2.svg" alt="Логотип" loading="lazy">
 </div>
 </a>
 <nav aria-label="Мобильная навигация">
@@ -1193,7 +927,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 <article class="brand-card"><h3>Цели бренда</h3><p>Создать узнаваемый культурный бренд с сильным визуальным кодом, привлечь новую интеллектуальную аудиторию.</p></article>
 <article class="brand-card"><h3>Задачи брендбука</h3><p>Единая система коммуникации: от афиш до соцсетей, сохранение характера «структурированного спектакля».</p></article>
 </div>
-<figure class="photo-large"><img src="https://placehold.co/1400x420/2C4068/F2F1F0?text=МИССИЯ+ТЕАТРА+КЛОУНАДЫ" alt="Миссия" loading="lazy"></figure>
+<figure class="photo-large"><img src="https://placehold.co/1400x420/2C4068/F2F1F0?text=МИССИЯ+ТЕАТРА+КЛОУНАДЫ" alt="Миссия" loading="lazy" width="1400" height="420"></figure>
 <div class="grid-2col">
 <article class="brand-card"><h3>Миссия</h3><p>Дарить зрителю опыт живого сопереживания через синтез клоунады, драмы и пластики. Смех, который остаётся в сердце.</p><h3 class="mt-6">Ключевое сообщение</h3><p><strong>«Искусство улыбаться всерьёз»</strong></p></article>
 <article class="brand-card"><h3>Позиционирование</h3><p>Новаторский театр для думающей аудитории 20–45 лет, семьи, корпоративные клиенты.</p><h3 class="mt-4">Задачи</h3><p>Рост узнаваемости на 40%, увеличение продаж билетов, формирование комьюнити вокруг бренда.</p></article>
@@ -1211,24 +945,24 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 <h2 class="section-title">Вариации логотипа</h2>
 <h3 style="font-family:var(--font-display); font-weight:600; margin: var(--space-6) 0 var(--space-4); color: var(--color-text-secondary);">На светлом фоне</h3>
 <div class="logo-variants-grid">
-<div class="logo-variant-item light-bg"><div class="variant-placeholder" data-fullscreen="SVG/znak-sv.svg" data-name="Знаковая часть" data-bg="light"><img src="SVG/znak-sv.svg" alt="Знак" onerror="this.src='https://placehold.co/120x60/F2F1F0/231F20?text=ЗНАК'"><div class="variant-overlay"><i class="fas fa-expand"></i><span>Полный экран</span></div></div></div>
-<div class="logo-variant-item light-bg"><div class="variant-placeholder" data-fullscreen="SVG/all-sv.svg" data-name="Полный логотип" data-bg="light"><img src="SVG/all-sv.svg" alt="Полный" onerror="this.src='https://placehold.co/120x60/F2F1F0/F43139?text=ПОЛНЫЙ'"><div class="variant-overlay"><i class="fas fa-expand"></i><span>Полный экран</span></div></div></div>
-<div class="logo-variant-item light-bg"><div class="variant-placeholder" data-fullscreen="SVG/text+sv.svg" data-name="Текст + знак" data-bg="light"><img src="SVG/text+sv.svg" alt="Текст+" onerror="this.src='https://placehold.co/120x60/F2F1F0/2C4068?text=ТЕКСТ+'"><div class="variant-overlay"><i class="fas fa-expand"></i><span>Полный экран</span></div></div></div>
-<div class="logo-variant-item light-bg"><div class="variant-placeholder" data-fullscreen="SVG/text-sv.svg" data-name="Текстовый" data-bg="light"><img src="SVG/text-sv.svg" alt="Текст" onerror="this.src='https://placehold.co/120x60/F2F1F0/D4BF95?text=ТЕКСТ'"><div class="variant-overlay"><i class="fas fa-expand"></i><span>Полный экран</span></div></div></div>
+<div class="logo-variant-item light-bg"><div class="variant-placeholder" data-fullscreen="SVG/znak-sv.svg" data-name="Знаковая часть" data-bg="light"><img src="SVG/znak-sv.svg" alt="Знак" onerror="this.src='https://placehold.co/120x60/F2F1F0/231F20?text=ЗНАК'" loading="lazy"><div class="variant-overlay"><i class="fas fa-expand"></i><span>Полный экран</span></div></div></div>
+<div class="logo-variant-item light-bg"><div class="variant-placeholder" data-fullscreen="SVG/all-sv.svg" data-name="Полный логотип" data-bg="light"><img src="SVG/all-sv.svg" alt="Полный" onerror="this.src='https://placehold.co/120x60/F2F1F0/F43139?text=ПОЛНЫЙ'" loading="lazy"><div class="variant-overlay"><i class="fas fa-expand"></i><span>Полный экран</span></div></div></div>
+<div class="logo-variant-item light-bg"><div class="variant-placeholder" data-fullscreen="SVG/text+sv.svg" data-name="Текст + знак" data-bg="light"><img src="SVG/text+sv.svg" alt="Текст+" onerror="this.src='https://placehold.co/120x60/F2F1F0/2C4068?text=ТЕКСТ+'" loading="lazy"><div class="variant-overlay"><i class="fas fa-expand"></i><span>Полный экран</span></div></div></div>
+<div class="logo-variant-item light-bg"><div class="variant-placeholder" data-fullscreen="SVG/text-sv.svg" data-name="Текстовый" data-bg="light"><img src="SVG/text-sv.svg" alt="Текст" onerror="this.src='https://placehold.co/120x60/F2F1F0/D4BF95?text=ТЕКСТ'" loading="lazy"><div class="variant-overlay"><i class="fas fa-expand"></i><span>Полный экран</span></div></div></div>
 </div>
 <h3 style="font-family:var(--font-display); font-weight:600; margin: var(--space-6) 0 var(--space-4); color: var(--color-text-secondary);">На тёмном фоне</h3>
 <div class="logo-variants-grid">
-<div class="logo-variant-item dark-bg"><div class="variant-placeholder" data-fullscreen="SVG/znak-tm.svg" data-name="Знак тёмный" data-bg="dark"><img src="SVG/znak-tm.svg" alt="Знак" onerror="this.src='https://placehold.co/120x60/221E1F/F2F1F0?text=ЗНАК'"><div class="variant-overlay"><i class="fas fa-expand"></i><span>Полный экран</span></div></div></div>
-<div class="logo-variant-item dark-bg"><div class="variant-placeholder" data-fullscreen="SVG/all-tm.svg" data-name="Полный красный" data-bg="dark"><img src="SVG/all-tm.svg" alt="Полный" onerror="this.src='https://placehold.co/120x60/221E1F/F43139?text=ПОЛНЫЙ'"><div class="variant-overlay"><i class="fas fa-expand"></i><span>Полный экран</span></div></div></div>
-<div class="logo-variant-item dark-bg"><div class="variant-placeholder" data-fullscreen="SVG/text+tm.svg" data-name="Текст + знак" data-bg="dark"><img src="SVG/text+tm.svg" alt="Текст+" onerror="this.src='https://placehold.co/120x60/221E1F/2C4068?text=ТЕКСТ+'"><div class="variant-overlay"><i class="fas fa-expand"></i><span>Полный экран</span></div></div></div>
-<div class="logo-variant-item dark-bg"><div class="variant-placeholder" data-fullscreen="SVG/text-tm.svg" data-name="Текстовый" data-bg="dark"><img src="SVG/text-tm.svg" alt="Текст" onerror="this.src='https://placehold.co/120x60/221E1F/D4BF95?text=ТЕКСТ'"><div class="variant-overlay"><i class="fas fa-expand"></i><span>Полный экран</span></div></div></div>
+<div class="logo-variant-item dark-bg"><div class="variant-placeholder" data-fullscreen="SVG/znak-tm.svg" data-name="Знак тёмный" data-bg="dark"><img src="SVG/znak-tm.svg" alt="Знак" onerror="this.src='https://placehold.co/120x60/221E1F/F2F1F0?text=ЗНАК'" loading="lazy"><div class="variant-overlay"><i class="fas fa-expand"></i><span>Полный экран</span></div></div></div>
+<div class="logo-variant-item dark-bg"><div class="variant-placeholder" data-fullscreen="SVG/all-tm.svg" data-name="Полный красный" data-bg="dark"><img src="SVG/all-tm.svg" alt="Полный" onerror="this.src='https://placehold.co/120x60/221E1F/F43139?text=ПОЛНЫЙ'" loading="lazy"><div class="variant-overlay"><i class="fas fa-expand"></i><span>Полный экран</span></div></div></div>
+<div class="logo-variant-item dark-bg"><div class="variant-placeholder" data-fullscreen="SVG/text+tm.svg" data-name="Текст + знак" data-bg="dark"><img src="SVG/text+tm.svg" alt="Текст+" onerror="this.src='https://placehold.co/120x60/221E1F/2C4068?text=ТЕКСТ+'" loading="lazy"><div class="variant-overlay"><i class="fas fa-expand"></i><span>Полный экран</span></div></div></div>
+<div class="logo-variant-item dark-bg"><div class="variant-placeholder" data-fullscreen="SVG/text-tm.svg" data-name="Текстовый" data-bg="dark"><img src="SVG/text-tm.svg" alt="Текст" onerror="this.src='https://placehold.co/120x60/221E1F/D4BF95?text=ТЕКСТ'" loading="lazy"><div class="variant-overlay"><i class="fas fa-expand"></i><span>Полный экран</span></div></div></div>
 </div>
 
 <h2 class="section-title mt-8">Структура логотипа</h2>
 <div style="background:#fff; border-radius:var(--border-radius-lg); padding:var(--space-6); border:1px solid var(--color-border); box-shadow:0 4px 20px var(--color-shadow); margin-bottom:var(--space-10);">
 <div class="variant-placeholder" style="height:500px; background:var(--color-bg-light); border-radius:var(--border-radius);" 
 data-fullscreen="SVG/src.png" data-name="Структура логотипа" data-bg="light">
-<img src="SVG/src.png" alt="Структура логотипа" style="max-height:100%;">
+<img src="SVG/src.png" alt="Структура логотипа" style="max-height:100%;" loading="lazy">
 <div class="variant-overlay"><i class="fas fa-expand"></i><span>Полный экран</span></div>
 </div>
 <p style="margin-top:var(--space-4); font-family:var(--font-display); font-weight:600; color:var(--color-text-secondary); text-align:center;">
@@ -1238,26 +972,26 @@ data-fullscreen="SVG/src.png" data-name="Структура логотипа" da
 
 <h2 class="section-title mt-8">Охранные поля</h2>
 <div class="clearspace-grid">
-<div class="clearspace-demo"><div class="clearspace-box light-bg" data-fullscreen="SVG/znak-ox.svg" data-name="Охранное поле · Горизонтальное" data-bg="light"><div class="clearspace-inner"><img src="SVG/znak-ox.svg" alt="Охранное поле"></div></div><p>Светлый фон · Горизонтальное</p></div>
-<div class="clearspace-demo"><div class="clearspace-box light-bg" data-fullscreen="SVG/all-ox.svg" data-name="Охранное поле · Горизонтальное" data-bg="light"><div class="clearspace-inner"><img src="SVG/all-ox.svg" alt="Охранное поле"></div></div><p>Светлый фон · Горизонтальное</p></div>
-<div class="clearspace-demo"><div class="clearspace-box light-bg vertical" data-fullscreen="SVG/text+ox.svg" data-name="Охранное поле · Вертикальное" data-bg="light"><div class="clearspace-inner"><img src="SVG/text+ox.svg" alt="Охранное поле"></div></div><p>Светлый фон · Вертикальное</p></div>
-<div class="clearspace-demo"><div class="clearspace-box light-bg vertical" data-fullscreen="SVG/text-ox.svg" data-name="Охранное поле · Вертикальное" data-bg="light"><div class="clearspace-inner"><img src="SVG/text-ox.svg" alt="Охранное поле"></div></div><p>Светлый фон · Вертикальное</p></div>
+<div class="clearspace-demo"><div class="clearspace-box light-bg" data-fullscreen="SVG/znak-ox.svg" data-name="Охранное поле · Горизонтальное" data-bg="light"><div class="clearspace-inner"><img src="SVG/znak-ox.svg" alt="Охранное поле" loading="lazy"></div></div><p>Светлый фон · Горизонтальное</p></div>
+<div class="clearspace-demo"><div class="clearspace-box light-bg" data-fullscreen="SVG/all-ox.svg" data-name="Охранное поле · Горизонтальное" data-bg="light"><div class="clearspace-inner"><img src="SVG/all-ox.svg" alt="Охранное поле" loading="lazy"></div></div><p>Светлый фон · Горизонтальное</p></div>
+<div class="clearspace-demo"><div class="clearspace-box light-bg vertical" data-fullscreen="SVG/text+ox.svg" data-name="Охранное поле · Вертикальное" data-bg="light"><div class="clearspace-inner"><img src="SVG/text+ox.svg" alt="Охранное поле" loading="lazy"></div></div><p>Светлый фон · Вертикальное</p></div>
+<div class="clearspace-demo"><div class="clearspace-box light-bg vertical" data-fullscreen="SVG/text-ox.svg" data-name="Охранное поле · Вертикальное" data-bg="light"><div class="clearspace-inner"><img src="SVG/text-ox.svg" alt="Охранное поле" loading="lazy"></div></div><p>Светлый фон · Вертикальное</p></div>
 </div>
 
 <h2 class="section-title mt-8">Минимальные размеры для экранов</h2>
 <div class="min-size-grid">
-<div class="min-size-item"><div class="min-size-visual" data-fullscreen="SVG/znak-min-web_2.svg" data-name="Высота 16 px" data-bg="light" style="height: 16px !important; width: auto !important;"><img src="SVG/znak-min-web_2.svg" alt="Мин. размер" style="height: 16px !important; width: auto !important;"><div class="size-indicator">16 px</div></div><p>Минимальная высота 16 px</p></div>
-<div class="min-size-item"><div class="min-size-visual" data-fullscreen="SVG/all-min-web_1.svg" data-name="Высота 104 px" data-bg="light" style="height: 104px !important; width: auto !important;"><img src="SVG/all-min-web_1.svg" alt="Мин. размер" style="height: 104px !important; width: auto !important;"><div class="size-indicator">104 px</div></div><p>Минимальная высота · 104 px</p></div>
-<div class="min-size-item"><div class="min-size-visual" data-fullscreen="SVG/text+min-web_1.svg" data-name="Высота 32 px" data-bg="light" style="height: 32px !important; width: auto !important;"><img src="SVG/text+min-web_1.svg" alt="Мин. размер" style="height: 32px !important; width: auto !important;"><div class="size-indicator">32 px</div></div><p>Минимальная высота · 32 px</p></div>
-<div class="min-size-item"><div class="min-size-visual" data-fullscreen="SVG/text-min-web_1.svg" data-name="Высота 20 px" data-bg="light" style="height: 20px !important; width: auto !important;"><img src="SVG/text-min-web_1.svg" alt="Мин. знак" style="height: 20px !important; width: auto !important;"><div class="size-indicator">20 px</div></div><p>Минимальная высота · 20 px</p></div>
+<div class="min-size-item"><div class="min-size-visual" data-fullscreen="SVG/znak-min-web_2.svg" data-name="Высота 16 px" data-bg="light" style="height: 16px !important; width: auto !important;"><img src="SVG/znak-min-web_2.svg" alt="Мин. размер" style="height: 16px !important; width: auto !important;" loading="lazy"><div class="size-indicator">16 px</div></div><p>Минимальная высота 16 px</p></div>
+<div class="min-size-item"><div class="min-size-visual" data-fullscreen="SVG/all-min-web_1.svg" data-name="Высота 104 px" data-bg="light" style="height: 104px !important; width: auto !important;"><img src="SVG/all-min-web_1.svg" alt="Мин. размер" style="height: 104px !important; width: auto !important;" loading="lazy"><div class="size-indicator">104 px</div></div><p>Минимальная высота · 104 px</p></div>
+<div class="min-size-item"><div class="min-size-visual" data-fullscreen="SVG/text+min-web_1.svg" data-name="Высота 32 px" data-bg="light" style="height: 32px !important; width: auto !important;"><img src="SVG/text+min-web_1.svg" alt="Мин. размер" style="height: 32px !important; width: auto !important;" loading="lazy"><div class="size-indicator">32 px</div></div><p>Минимальная высота · 32 px</p></div>
+<div class="min-size-item"><div class="min-size-visual" data-fullscreen="SVG/text-min-web_1.svg" data-name="Высота 20 px" data-bg="light" style="height: 20px !important; width: auto !important;"><img src="SVG/text-min-web_1.svg" alt="Мин. знак" style="height: 20px !important; width: auto !important;" loading="lazy"><div class="size-indicator">20 px</div></div><p>Минимальная высота · 20 px</p></div>
 </div>
 
 <h2 class="section-title mt-8">Минимальные размеры для печати</h2>
 <div class="min-size-grid">
-<div class="min-size-item"><div class="min-size-visual" data-fullscreen="SVG/znak-min-print_1.svg" data-name="Высота 16 мм" data-bg="light" style="height: 42px !important; width: auto !important;"><img src="SVG/znak-min-print_1.svg" alt="Мин. размер" style="height: 42px !important; width: auto !important;"><div class="size-indicator">15 мм</div></div><p>Минимальная высота · 15 мм</p></div>
-<div class="min-size-item"><div class="min-size-visual" data-fullscreen="SVG/all-min-print_1.svg" data-name="Высота 40 мм" data-bg="light" style="height: 114px !important; width: auto !important;"><img src="SVG/all-min-print_1.svg" alt="Мин. размер" style="height: 114px !important; width: auto !important;"><div class="size-indicator">40 мм</div></div><p>Минимальная высота · 40 мм</p></div>
-<div class="min-size-item"><div class="min-size-visual" data-fullscreen="SVG/text+min-print_1.svg" data-name="Высота 15 мм" data-bg="light" style="height: 42px !important; width: auto !important;"><img src="SVG/text+min-print_1.svg" alt="Мин. знак" style="height: 42px !important; width: auto !important;"><div class="size-indicator" >15 мм</div></div><p>Минимальная высота · 15 мм</p></div>
-<div class="min-size-item"><div class="min-size-visual" data-fullscreen="SVG/text-min-print_1.svg" data-name="Высота 10 мм" data-bg="light" style="height: 28px !important; width: auto !important;"><img src="SVG/text-min-print_1.svg" alt="Мин. знак" style="height: 28px !important; width: auto !important;"><div class="size-indicator">10 мм</div></div><p>Минимальная высота · 10 мм</p></div>
+<div class="min-size-item"><div class="min-size-visual" data-fullscreen="SVG/znak-min-print_1.svg" data-name="Высота 16 мм" data-bg="light" style="height: 42px !important; width: auto !important;"><img src="SVG/znak-min-print_1.svg" alt="Мин. размер" style="height: 42px !important; width: auto !important;" loading="lazy"><div class="size-indicator">15 мм</div></div><p>Минимальная высота · 15 мм</p></div>
+<div class="min-size-item"><div class="min-size-visual" data-fullscreen="SVG/all-min-print_1.svg" data-name="Высота 40 мм" data-bg="light" style="height: 114px !important; width: auto !important;"><img src="SVG/all-min-print_1.svg" alt="Мин. размер" style="height: 114px !important; width: auto !important;" loading="lazy"><div class="size-indicator">40 мм</div></div><p>Минимальная высота · 40 мм</p></div>
+<div class="min-size-item"><div class="min-size-visual" data-fullscreen="SVG/text+min-print_1.svg" data-name="Высота 15 мм" data-bg="light" style="height: 42px !important; width: auto !important;"><img src="SVG/text+min-print_1.svg" alt="Мин. знак" style="height: 42px !important; width: auto !important;" loading="lazy"><div class="size-indicator" >15 мм</div></div><p>Минимальная высота · 15 мм</p></div>
+<div class="min-size-item"><div class="min-size-visual" data-fullscreen="SVG/text-min-print_1.svg" data-name="Высота 10 мм" data-bg="light" style="height: 28px !important; width: auto !important;"><img src="SVG/text-min-print_1.svg" alt="Мин. знак" style="height: 28px !important; width: auto !important;" loading="lazy"><div class="size-indicator">10 мм</div></div><p>Минимальная высота · 10 мм</p></div>
 </div>
 
 <h2 class="section-title mt-8">Разрешённые модификации</h2>
@@ -1267,37 +1001,37 @@ data-fullscreen="SVG/src.png" data-name="Структура логотипа" da
 <div class="scroll-gallery" id="allowedScroll">
 <div class="scroll-item">
 <div class="scroll-item-image" data-fullscreen="https://placehold.co/400x300/F2F1F0/231F20?text=Монохром" data-name="Монохромная версия" data-bg="light">
-<img src="https://placehold.co/280x180/F2F1F0/231F20?text=Монохром" alt="Монохром">
+<img src="https://placehold.co/280x180/F2F1F0/231F20?text=Монохром" alt="Монохром" loading="lazy">
 </div>
 <div class="scroll-item-content"><h4>Монохром</h4><p>Ч/б для газет</p></div>
 </div>
 <div class="scroll-item">
 <div class="scroll-item-image" data-fullscreen="https://placehold.co/400x300/2C4068/F2F1F0?text=Инверсия" data-name="Инверсия цветов" data-bg="blue">
-<img src="https://placehold.co/280x180/2C4068/F2F1F0?text=Инверсия" alt="Инверсия">
+<img src="https://placehold.co/280x180/2C4068/F2F1F0?text=Инверсия" alt="Инверсия" loading="lazy">
 </div>
 <div class="scroll-item-content"><h4>Инверсия</h4><p>На цветных фонах</p></div>
 </div>
 <div class="scroll-item">
 <div class="scroll-item-image" data-fullscreen="https://placehold.co/400x300/D4BF95/231F20?text=Золотой+фон" data-name="На золотом фоне" data-bg="gold">
-<img src="https://placehold.co/280x180/D4BF95/231F20?text=Золотой+фон" alt="Золотой фон">
+<img src="https://placehold.co/280x180/D4BF95/231F20?text=Золотой+фон" alt="Золотой фон" loading="lazy">
 </div>
 <div class="scroll-item-content"><h4>Золотой фон</h4><p>Премиум-материалы</p></div>
 </div>
 <div class="scroll-item">
 <div class="scroll-item-image" data-fullscreen="https://placehold.co/400x300/F2F1F0/F43139?text=Красный+текст" data-name="Красный текст" data-bg="light">
-<img src="https://placehold.co/280x180/F2F1F0/F43139?text=Красный+текст" alt="Красный текст">
+<img src="https://placehold.co/280x180/F2F1F0/F43139?text=Красный+текст" alt="Красный текст" loading="lazy">
 </div>
 <div class="scroll-item-content"><h4>Красный текст</h4><p>Акцентные материалы</p></div>
 </div>
 <div class="scroll-item">
 <div class="scroll-item-image" data-fullscreen="https://placehold.co/400x300/231F20/F2F1F0?text=Тиснение" data-name="Тиснение" data-bg="dark">
-<img src="https://placehold.co/280x180/231F20/F2F1F0?text=Тиснение" alt="Тиснение">
+<img src="https://placehold.co/280x180/231F20/F2F1F0?text=Тиснение" alt="Тиснение" loading="lazy">
 </div>
 <div class="scroll-item-content"><h4>Тиснение</h4><p>Бизнес-карты</p></div>
 </div>
 <div class="scroll-item">
 <div class="scroll-item-image" data-fullscreen="https://placehold.co/400x300/F2F1F0/2C4068?text=Вышивка" data-name="Вышивка" data-bg="light">
-<img src="https://placehold.co/280x180/F2F1F0/2C4068?text=Вышивка" alt="Вышивка">
+<img src="https://placehold.co/280x180/F2F1F0/2C4068?text=Вышивка" alt="Вышивка" loading="lazy">
 </div>
 <div class="scroll-item-content"><h4>Вышивка</h4><p>Мерч и одежда</p></div>
 </div>
@@ -1312,37 +1046,37 @@ data-fullscreen="SVG/src.png" data-name="Структура логотипа" da
 <div class="scroll-gallery forbidden-scroll" id="forbiddenScroll">
 <div class="scroll-item">
 <div class="scroll-item-image" data-fullscreen="https://placehold.co/400x300/FFCCCC/E8454D?text=Растянут" data-name="Растянут по вертикали" data-bg="light">
-<img src="https://placehold.co/280x180/FFCCCC/E8454D?text=Растянут" alt="Растянут">
+<img src="https://placehold.co/280x180/FFCCCC/E8454D?text=Растянут" alt="Растянут" loading="lazy">
 </div>
 <div class="scroll-item-content"><h4>Растянут</h4><p>Нарушение пропорций</p></div>
 </div>
 <div class="scroll-item">
 <div class="scroll-item-image" data-fullscreen="https://placehold.co/400x300/FFCCCC/E8454D?text=Повёрнут" data-name="Повёрнут под углом" data-bg="light">
-<img src="https://placehold.co/280x180/FFCCCC/E8454D?text=Повёрнут" alt="Повёрнут">
+<img src="https://placehold.co/280x180/FFCCCC/E8454D?text=Повёрнут" alt="Повёрнут" loading="lazy">
 </div>
 <div class="scroll-item-content"><h4>Повёрнут</h4><p>Угол наклона запрещён</p></div>
 </div>
 <div class="scroll-item">
 <div class="scroll-item-image" data-fullscreen="https://placehold.co/400x300/FFCCCC/E8454D?text=Тень" data-name="Добавлена тень" data-bg="light">
-<img src="https://placehold.co/280x180/FFCCCC/E8454D?text=Тень" alt="Тень">
+<img src="https://placehold.co/280x180/FFCCCC/E8454D?text=Тень" alt="Тень" loading="lazy">
 </div>
 <div class="scroll-item-content"><h4>С тенью</h4><p>Эффекты запрещены</p></div>
 </div>
 <div class="scroll-item">
 <div class="scroll-item-image" data-fullscreen="https://placehold.co/400x300/FFCCCC/E8454D?text=Градиент" data-name="Градиентная заливка" data-bg="light">
-<img src="https://placehold.co/280x180/FFCCCC/E8454D?text=Градиент" alt="Градиент">
+<img src="https://placehold.co/280x180/FFCCCC/E8454D?text=Градиент" alt="Градиент" loading="lazy">
 </div>
 <div class="scroll-item-content"><h4>Градиент</h4><p>Только сплошной цвет</p></div>
 </div>
 <div class="scroll-item">
 <div class="scroll-item-image" data-fullscreen="https://placehold.co/400x300/FFCCCC/E8454D?text=Обводка" data-name="Добавлена обводка" data-bg="light">
-<img src="https://placehold.co/280x180/FFCCCC/E8454D?text=Обводка" alt="Обводка">
+<img src="https://placehold.co/280x180/FFCCCC/E8454D?text=Обводка" alt="Обводка" loading="lazy">
 </div>
 <div class="scroll-item-content"><h4>С обводкой</h4><p>Без дополнительных контуров</p></div>
 </div>
 <div class="scroll-item">
 <div class="scroll-item-image" data-fullscreen="https://placehold.co/400x300/FFCCCC/E8454D?text=Прозрачность" data-name="Изменена прозрачность" data-bg="light">
-<img src="https://placehold.co/280x180/FFCCCC/E8454D?text=Прозрачность" alt="Прозрачность">
+<img src="https://placehold.co/280x180/FFCCCC/E8454D?text=Прозрачность" alt="Прозрачность" loading="lazy">
 </div>
 <div class="scroll-item-content"><h4>Прозрачный</h4><p>Не менее 100% opacity</p></div>
 </div>
@@ -1356,12 +1090,14 @@ data-fullscreen="SVG/src.png" data-name="Структура логотипа" da
 <section class="page-section" id="page-colors">
 <div class="hero-brand" data-color="gold"><div class="hero-brand-content"><h1>Фирменные цвета</h1><p>Палитра контрастов и театрального света</p></div></div>
 <div class="content-wrapper">
-<div class="color-palette">
-<div class="swatch"><div class="swatch-color" style="background:#F2F1F0;"></div><div class="swatch-info"><span class="swatch-name">Светлый фон</span><code>#F2F1F0</code></div></div>
-<div class="swatch"><div class="swatch-color" style="background:#231F20;"></div><div class="swatch-info"><span class="swatch-name">Тёмный</span><code>#231F20</code></div></div>
-<div class="swatch"><div class="swatch-color" style="background:#F43139;"></div><div class="swatch-info"><span class="swatch-name">Красный</span><code>#F43139</code></div></div>
-<div class="swatch"><div class="swatch-color" style="background:#2C4068;"></div><div class="swatch-info"><span class="swatch-name">Синий</span><code>#2C4068</code></div></div>
-<div class="swatch"><div class="swatch-color" style="background:#D4BF95;"></div><div class="swatch-info"><span class="swatch-name">Золотой</span><code>#D4BF95</code></div></div>
+<!-- НОВОЕ: заголовок для основных цветов -->
+<h2 class="section-title">Цвета для сайта</h2>
+<div class="color-palette extended-palette">
+<div class="swatch"><div class="swatch-color" style="background:#F2F1F0;"></div><div class="swatch-info"><span class="swatch-name">Светлый фон</span><code>#F2F1F0</code><small>RGB: 242,241,240<br>CMYK: 0,1,2,5<br>PANTONE: Cool Gray 1 C</small></div></div>
+<div class="swatch"><div class="swatch-color" style="background:#231F20;"></div><div class="swatch-info"><span class="swatch-name">Тёмный</span><code>#231F20</code><small>RGB: 35,31,32<br>CMYK: 70,67,64,74<br>PANTONE: Neutral Black C</small></div></div>
+<div class="swatch"><div class="swatch-color" style="background:#F43139;"></div><div class="swatch-info"><span class="swatch-name">Красный</span><code>#F43139</code><small>RGB: 244,49,57<br>CMYK: 0,90,76,0<br>PANTONE: 185 C</small></div></div>
+<div class="swatch"><div class="swatch-color" style="background:#2C4068;"></div><div class="swatch-info"><span class="swatch-name">Синий</span><code>#2C4068</code><small>RGB: 44,64,104<br>CMYK: 80,60,0,40<br>PANTONE: 534 C</small></div></div>
+<div class="swatch"><div class="swatch-color" style="background:#D4BF95;"></div><div class="swatch-info"><span class="swatch-name">Золотой</span><code>#D4BF95</code><small>RGB: 212,191,149<br>CMYK: 0,15,35,17<br>PANTONE: 7501 C</small></div></div>
 </div>
 
 <h2 class="section-title mt-8">Цветовые сочетания</h2>
@@ -1436,6 +1172,54 @@ data-fullscreen="SVG/src.png" data-name="Структура логотипа" da
 <article class="brand-card"><h3>Палитра</h3><p><strong>Основная:</strong> <code>#F2F1F0</code> + <code>#231F20</code><br><strong>Акцентные:</strong> <code>#F43139</code> (драйв), <code>#2C4068</code> (интеллект), <code>#D4BF95</code> (теплота).</p></article>
 <article class="brand-card"><h3>Сочетания</h3><p>Тёмный текст на светлом, красный для кнопок, синий для фонов. Запрещены сторонние оттенки.</p></article>
 </div>
+
+<!-- ===== БЛОК: ЦВЕТА ДЛЯ ФИРМЕННОГО СТИЛЯ (ОСТАЁТСЯ) ===== -->
+<h2 class="section-title mt-8">Цвета для фирменного стиля</h2>
+<div class="color-palette extended-palette">
+<div class="swatch"><div class="swatch-color" style="background:#0C8CE9;"></div><div class="swatch-info"><span class="swatch-name">Ярко-синий</span><code>#0C8CE9</code><small>RGB: 12,140,233<br>CMYK: 90,40,0,0<br>PANTONE: 2995 C</small></div></div>
+<div class="swatch"><div class="swatch-color" style="background:#D4BF95;"></div><div class="swatch-info"><span class="swatch-name">Золотой</span><code>#D4BF95</code><small>RGB: 212,191,149<br>CMYK: 0,15,35,17<br>PANTONE: 7501 C</small></div></div>
+<div class="swatch"><div class="swatch-color" style="background:#F2F1F0;"></div><div class="swatch-info"><span class="swatch-name">Светлый фон</span><code>#F2F1F0</code><small>RGB: 242,241,240<br>CMYK: 0,1,2,5<br>PANTONE: Cool Gray 1 C</small></div></div>
+<div class="swatch"><div class="swatch-color" style="background:#F43139;"></div><div class="swatch-info"><span class="swatch-name">Красный</span><code>#F43139</code><small>RGB: 244,49,57<br>CMYK: 0,90,76,0<br>PANTONE: 185 C</small></div></div>
+<div class="swatch"><div class="swatch-color" style="background:#231F20;"></div><div class="swatch-info"><span class="swatch-name">Тёмный</span><code>#231F20</code><small>RGB: 35,31,32<br>CMYK: 70,67,64,74<br>PANTONE: Neutral Black C</small></div></div>
+</div>
+
+<h3 class="section-title mt-6">Разрешённые модификации фирменных цветов</h3>
+<div class="color-combinations">
+<div class="combination-card allowed">
+<div class="combination-title"><i class="fas fa-check-circle"></i> Разрешено</div>
+<div class="combination-preview"><div class="combination-swatch" style="background:#0C8CE9;"></div><div class="combination-swatch" style="background:#F2F1F0;"></div></div>
+<p class="combination-desc">Ярко-синий фон + светлый текст — современный акцент, высокая читаемость.</p>
+</div>
+<div class="combination-card allowed">
+<div class="combination-title"><i class="fas fa-check-circle"></i> Разрешено</div>
+<div class="combination-preview"><div class="combination-swatch" style="background:#D4BF95;"></div><div class="combination-swatch" style="background:#231F20;"></div></div>
+<p class="combination-desc">Золотой фон + тёмный текст — элегантность и премиальность.</p>
+</div>
+<div class="combination-card allowed">
+<div class="combination-title"><i class="fas fa-check-circle"></i> Разрешено</div>
+<div class="combination-preview"><div class="combination-swatch" style="background:#231F20;"></div><div class="combination-swatch" style="background:#F2F1F0;"></div></div>
+<p class="combination-desc">Тёмный фон + светлый текст — классический контраст.</p>
+</div>
+</div>
+
+<h3 class="section-title mt-6">Запрещённые модификации фирменных цветов</h3>
+<div class="color-combinations">
+<div class="combination-card forbidden">
+<div class="combination-title"><i class="fas fa-times-circle"></i> Запрещено</div>
+<div class="combination-preview"><div class="combination-swatch" style="background:#F43139;"></div><div class="combination-swatch" style="background:#0C8CE9;"></div></div>
+<p class="combination-desc">Красный + ярко-синий — конфликт двух активных цветов.</p>
+</div>
+<div class="combination-card forbidden">
+<div class="combination-title"><i class="fas fa-times-circle"></i> Запрещено</div>
+<div class="combination-preview"><div class="combination-swatch" style="background:#D4BF95;"></div><div class="combination-swatch" style="background:#F2F1F0;"></div></div>
+<p class="combination-desc">Золотой текст на светлом фоне — недостаточный контраст.</p>
+</div>
+<div class="combination-card forbidden">
+<div class="combination-title"><i class="fas fa-times-circle"></i> Запрещено</div>
+<div class="combination-preview"><div class="combination-swatch" style="background:#F43139;"></div><div class="combination-swatch" style="background:#231F20;"></div></div>
+<p class="combination-desc">Красный текст на тёмном — вибрация и утомление глаз.</p>
+</div>
+</div>
 </div>
 </section>
 
@@ -1475,7 +1259,7 @@ data-fullscreen="SVG/src.png" data-name="Структура логотипа" da
 <article class="brand-card"><h3>Линии кулис</h3><p>Вертикальные и горизонтальные полосы для динамики.</p></article>
 <article class="brand-card"><h3>Условия</h3><p>Только фирменные цвета. Не перекрывать логотип.</p></article>
 </div>
-<figure class="photo-medium mt-8" style="max-width: 900px; margin: 0 auto;"><img src="https://placehold.co/900x450/2C4068/F2F1F0?text=ГРАФИЧЕСКИЙ+ЭЛЕМЕНТ" alt="Графика"></figure>
+<figure class="photo-medium mt-8" style="max-width: 900px; margin: 0 auto;"><img src="https://placehold.co/900x450/2C4068/F2F1F0?text=ГРАФИЧЕСКИЙ+ЭЛЕМЕНТ" alt="Графика" loading="lazy" width="900" height="450"></figure>
 </div>
 </section>
 
@@ -1483,11 +1267,11 @@ data-fullscreen="SVG/src.png" data-name="Структура логотипа" da
 <section class="page-section" id="page-photo">
 <div class="hero-brand" data-color="red"><div class="hero-brand-content"><h1>Фотостиль</h1><p>Эмоция, свет, театральный контраст</p></div></div>
 <div class="content-wrapper">
-<figure class="photo-large"><img src="https://placehold.co/1400x450/231F20/F2F1F0?text=КРУПНЫЙ+ПЛАН+ЭМОЦИИ" alt="Эмоция"></figure>
+<figure class="photo-large"><img src="https://placehold.co/1400x450/231F20/F2F1F0?text=КРУПНЫЙ+ПЛАН+ЭМОЦИИ" alt="Эмоция" loading="lazy" width="1400" height="450"></figure>
 <div class="grid-3col">
-<figure class="photo-medium"><img src="https://placehold.co/500x350/2C4068/white?text=ДВИЖЕНИЕ" alt="Движение"></figure>
-<figure class="photo-medium"><img src="https://placehold.co/500x350/D4BF95/231F20?text=ЗАКУЛИСЬЕ" alt="Закулисье"></figure>
-<figure class="photo-medium"><img src="https://placehold.co/500x350/F43139/white?text=РЕПЕТИЦИЯ" alt="Репетиция"></figure>
+<figure class="photo-medium"><img src="https://placehold.co/500x350/2C4068/white?text=ДВИЖЕНИЕ" alt="Движение" loading="lazy" width="500" height="350"></figure>
+<figure class="photo-medium"><img src="https://placehold.co/500x350/D4BF95/231F20?text=ЗАКУЛИСЬЕ" alt="Закулисье" loading="lazy" width="500" height="350"></figure>
+<figure class="photo-medium"><img src="https://placehold.co/500x350/F43139/white?text=РЕПЕТИЦИЯ" alt="Репетиция" loading="lazy" width="500" height="350"></figure>
 </div>
 <article class="brand-card mt-8"><h3>Принципы фотостиля</h3><p>Естественное освещение, крупные портреты, высокий контраст. Красный — единственный яркий акцент.</p></article>
 </div>
@@ -1526,7 +1310,7 @@ data-fullscreen="SVG/src.png" data-name="Структура логотипа" da
 <div id="colorSelectorContainer"></div>
 
 <div class="gallery-main" id="galleryMain">
-<img id="detailMainImg" src="" alt="">
+<img id="detailMainImg" src="" alt="" loading="lazy">
 <button class="gallery-nav prev" id="detailPrev" aria-label="Предыдущее фото"><i class="fas fa-chevron-left"></i></button>
 <button class="gallery-nav next" id="detailNext" aria-label="Следующее фото"><i class="fas fa-chevron-right"></i></button>
 </div>
@@ -1918,8 +1702,8 @@ const mediaItems = [
       title:'Визитная карточка', 
       category:'printed', 
       desc:'Двусторонняя визитка с тиснением',
-      avatar: 'https://placehold.co/600x400/231F20/D4BF95?text=Визитка+аватар', // ОДНО ФОТО ДЛЯ КАРТОЧКИ
-      gallery: ['https://placehold.co/800x500/231F20/D4BF95?text=Визитка+лицевая','https://placehold.co/800x500/D4BF95/231F20?text=Визитка+оборот'], // ОТДЕЛЬНЫЕ ФОТО ДЛЯ ГАЛЕРЕИ
+      avatar: 'https://placehold.co/600x400/231F20/D4BF95?text=Визитка+аватар',
+      gallery: ['https://placehold.co/800x500/231F20/D4BF95?text=Визитка+лицевая','https://placehold.co/800x500/D4BF95/231F20?text=Визитка+оборот'],
       info: 'Классическая двусторонняя визитка формата 90×50 мм. Лицевая сторона — минималистичный дизайн с логотипом и названием театра. Оборотная сторона — контактная информация. Рекомендуется печать на плотной матовой бумаге с выборочным УФ-лаком или тиснением фольгой для акцента на логотипе.',
       specs:[['Формат','90×50 мм'],['Цвет','CMYK / RGB']], 
       downloads:[{label:'PDF макет', href:'files/business-card.pdf', icon:'fa-file-ai'},{label:'INDD шаблон', href:'files/business-card.indd', icon:'fa-file-ai'}] 
@@ -1931,7 +1715,6 @@ const mediaItems = [
       desc:'Формат А2 и А1', 
       avatar: 'files/fir-stil//1.jpg',
       gallery: ['files/fir-stil//1.jpg'], 
-      info: 'Афиша для анонса спектаклей. Используется как в печатном виде (размещение в городе), так и в цифровом (соцсети, сайт). Основной акцент — на названии спектакля и дате. Допускается использование фирменных графических элементов (линии кулис, маска) в качестве фона.',
       specs:[['Форматы','А1, А2']], 
       downloads:[{label:'PDF', href:'files/poster.pdf', icon:'fa-file-ai'}] 
     },
@@ -1942,7 +1725,6 @@ const mediaItems = [
       desc:'Stories, посты, обложки', 
       avatar: 'files/fir-stil//1.jpg',
       gallery: ['files/fir-stil//1.jpg'], 
-      info: 'Набор адаптивных шаблонов для социальных сетей. Включает обложки профилей, шаблоны для постов, stories и highlight covers. Все макеты созданы с учётом технических требований площадок (размеры, безопасные зоны).',
       specs:[['Размеры','1080×1920 px']], 
       downloads:[{label:'Figma', href:'https://figma.com/mikos', icon:'fa-file-ai'}] 
     },
@@ -1973,8 +1755,8 @@ const mediaItems = [
       desc:'Металлический подвес «Микос Team»', 
       hasColorSelector: true,
       defaultColor: 'pendant-black',
-      avatar: 'files/fir-stil/Подвес/1.jpg', // ОДНО ФОТО ДЛЯ КАРТОЧКИ
-      gallery: ['files/fir-stil/Подвес/1.jpg'], // ОТДЕЛЬНЫЕ ФОТО ДЛЯ ГАЛЕРЕИ (могут совпадать)
+      avatar: 'files/fir-stil/Подвес/1.jpg',
+      gallery: ['files/fir-stil/Подвес/1.jpg'],
       info: 'Металлический подвес на карабине для рюкзаков и сумок. Изготавливается из нержавеющей стали с гравировкой логотипа. Доступен в четырёх цветовых вариантах. Идеальный сувенир для поклонников театра и участников мероприятий.',
       specs:[['Размер','40×25 мм']], 
       downloads:[{label:'3D-модель', href:'files/pendant.stl', icon:'fa-file-ai'}] 
@@ -1986,8 +1768,8 @@ const mediaItems = [
       desc:'Принт с логотипом', 
       avatar: 'files/fir-stil/Носки/4.jpg',
       gallery: ['files/fir-stil/Носки/4.jpg','files/fir-stil/Носки/2.jpg','files/fir-stil/Носки/3.jpg'], 
-      specs:[['Состав','хлопок 80%']], 
-      downloads:[{label:'Шаблон принта', href:'files/socks.ai', icon:'fa-file-ai'}] 
+      specs:[['Состав','хлопок 80%', 'Размер', '25']], 
+      downloads:[{label:'Макет', href:'files/socks.ai', icon:'fa-file-ai'}] 
     },
     { 
       id:'tshirt-mikos', 
@@ -2007,7 +1789,7 @@ const mediaItems = [
       hasColorSelector: true,
       defaultColor: 'tshirt-bw',
       avatar: 'files/fir-stil/Футболка Лимит/15.png',
-      gallery: [ 'files/fir-stil/Футболка Лимит/15.png'], 
+      gallery: ['files/fir-stil/Футболка Лимит/15.png'], 
       specs:[['Тираж','100 шт.']], 
       downloads:[{label:'Макет', href:'files/limited-tshirt.ai', icon:'fa-file-ai'}] 
     },
@@ -2025,71 +1807,11 @@ const mediaItems = [
       id:'limited-notebook', 
       title:'Лимитированный блокнот', 
       category:'limited-collection', 
-      desc:'Блокнот с символикой', 
-      avatar: 'files/fir-stil//1.jpg',
-      gallery: ['files/fir-stil/Блокнот/Макет.png'], 
+      desc:'Блокнот с принтом', 
+      avatar: 'files/fir-stil/Блокнот/2.png',
+      gallery: ['files/fir-stil/Блокнот/2.png','files/fir-stil/Блокнот/1.png','files/fir-stil/Блокнот/Макет.png'], 
       specs:[['Формат','А5']], 
-      downloads:[{label:'Обложка', href:'files/notebook-cover.ai', icon:'fa-file-ai'}] 
-    },
-    { 
-      id:'badges', 
-      title:'Значки', 
-      category:'souvenirs', 
-      desc:'Набор значков', 
-      avatar: 'files/fir-stil//1.jpg',
-      gallery: ['files/fir-stil//1.jpg'], 
-      specs:[['Диаметр','38 мм']], 
-      downloads:[{label:'AI шаблон', href:'files/badges.ai', icon:'fa-file-ai'}] 
-    },
-    { 
-      id:'thermo-stickers', 
-      title:'Термобутылка с наклейками', 
-      category:'home', 
-      desc:'Бутылка + набор стикеров', 
-      avatar: 'files/fir-stil//1.jpg',
-      gallery: ['files/fir-stil//1.jpg'], 
-      specs:[['Объём','500 мл']], 
-      downloads:[{label:'Наклейки', href:'files/stickers.ai', icon:'fa-file-ai'}] 
-    },
-    { 
-      id:'hoodie-stickers', 
-      title:'Худи с наклейками', 
-      category:'clothes', 
-      desc:'Худи и лист наклеек', 
-      avatar: 'files/fir-stil//1.jpg',
-      gallery: ['files/fir-stil//1.jpg'], 
-      specs:[['Размеры','S–XXL']], 
-      downloads:[{label:'Наклейки', href:'files/hoodie-stickers.ai', icon:'fa-file-ai'}] 
-    },
-    { 
-      id:'ad-booklet', 
-      title:'Буклет рекламный', 
-      category:'printed', 
-      desc:'Информационный буклет', 
-      avatar: 'files/fir-stil//1.jpg',
-      gallery: ['files/fir-stil//1.jpg'], 
-      specs:[['Формат','А4 (фальц)']], 
-      downloads:[{label:'PDF', href:'files/booklet.pdf', icon:'fa-file-ai'}] 
-    },
-    { 
-      id:'chair', 
-      title:'Стул', 
-      category:'home', 
-      desc:'Брендированный стул', 
-      avatar: 'files/fir-stil//1.jpg',
-      gallery: ['files/fir-stil//1.jpg'], 
-      specs:[['Материал','дерево']], 
-      downloads:[{label:'Чертёж', href:'files/chair.dwg', icon:'fa-file-ai'}] 
-    },
-    { 
-      id:'drip-coffee', 
-      title:'Дрип-кофе', 
-      category:'home', 
-      desc:'Порционный кофе в фирменной упаковке', 
-      avatar: 'files/fir-stil//1.jpg',
-      gallery: ['files/fir-stil//1.jpg'], 
-      specs:[['Вес','10 г']], 
-      downloads:[{label:'Макет упаковки', href:'files/coffee-pack.ai', icon:'fa-file-ai'}] 
+      downloads:[{label:'Макет', href:'files/fir-stil/Блокнот/Макет.ai', icon:'fa-file-ai'}] 
     },
     { 
       id:'shopper', 
@@ -2100,56 +1822,6 @@ const mediaItems = [
       gallery: ['files/fir-stil/Шопер/1.jpg', 'files/fir-stil/Шопер/2.jpg', 'files/fir-stil/Шопер/Шопер-Макет.png'], 
       specs:[['Размер','35×40 см']], 
       downloads:[{label:'Макет', href:'files/fir-stil/Шопер/Шопер-Макет.ai', icon:'fa-file-ai'}] 
-    },
-    { 
-      id:'lanyard', 
-      title:'Лента с бейджем', 
-      category:'accessories', 
-      desc:'Репсовая лента + пластиковый бейдж', 
-      avatar: 'files/fir-stil//1.jpg',
-      gallery: ['files/fir-stil//1.jpg'], 
-      specs:[['Ширина','15 мм']], 
-      downloads:[{label:'Макет', href:'files/lanyard.ai', icon:'fa-file-ai'}] 
-    },
-    { 
-      id:'envelope', 
-      title:'Конверт', 
-      category:'printed', 
-      desc:'Фирменный конверт', 
-      avatar: 'files/fir-stil//1.jpg',
-      gallery: ['files/fir-stil//1.jpg'], 
-      specs:[['Формат','C6']], 
-      downloads:[{label:'PDF', href:'files/envelope.pdf', icon:'fa-file-ai'}] 
-    },
-    { 
-      id:'tshirt-characters', 
-      title:'Футболка с персонажами', 
-      category:'clothes', 
-      desc:'Принт с персонажами спектаклей', 
-      avatar: 'files/fir-stil//1.jpg',
-      gallery: ['files/fir-stil//1.jpg'], 
-      specs:[['Размеры','S–XXL']], 
-      downloads:[{label:'Макет', href:'files/tshirt-characters.ai', icon:'fa-file-ai'}] 
-    },
-    { 
-      id:'two-clowns', 
-      title:'Два клоуна смотрят друг на друга', 
-      category:'art', 
-      desc:'Художественный постер', 
-      avatar: 'files/fir-stil//1.jpg',
-      gallery: ['files/fir-stil//1.jpg'], 
-      specs:[['Размер','А3']], 
-      downloads:[{label:'TIFF для печати', href:'files/two-clowns.tiff', icon:'fa-file-ai'}] 
-    },
-    { 
-      id:'social-stickers', 
-      title:'Стикеры для соцсетей', 
-      category:'digital', 
-      desc:'Набор стикеров Telegram / VK', 
-      avatar: 'files/fir-stil//1.jpg',
-      gallery: ['files/fir-stil//1.jpg'], 
-      specs:[['Формат','PNG 512×512']], 
-      downloads:[{label:'Скачать стикеры', href:'files/stickers-pack.zip', icon:'fa-file-ai'}] 
     }
 ];
 
@@ -2185,15 +1857,13 @@ function renderMediaCards() {
   }
   
   toShow.forEach(item => {
-    // ✅ ИСПОЛЬЗУЕМ avatar ДЛЯ КАРТОЧКИ
     const img = item.avatar || item.gallery?.[0] || 'https://placehold.co/600x400/cccccc/white?text=Нет+фото';
     const card = document.createElement('div'); 
     card.className = 'media-card-new';
     
-    // ✅ НОВАЯ СТРУКТУРА КАРТОЧКИ С avatar
     card.innerHTML = `
       <div class="media-card-avatar">
-        <img src="${img}" alt="${item.title}" loading="lazy">
+        <img src="${img}" alt="${item.title}" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/white?text=Нет+фото';">
         <span class="media-card-tag">${categoryLabel(item.category)}</span>
       </div>
       <div class="media-card-content">
@@ -2220,7 +1890,6 @@ function renderMediaCards() {
   showMoreBtn.style.display = visibleCount >= filtered.length ? 'none' : 'block';
 }
 
-// ===== ВСПОМОГАТЕЛЬНЫЙ МЕТОД ДЛЯ ПОЛНОГО ОБНОВЛЕНИЯ ГАЛЕРЕИ =====
 function refreshDetailGallery(imagesArray) {
   const gallery = document.getElementById('detailGallery');
   const mainImg = document.getElementById('detailMainImg');
@@ -2237,13 +1906,14 @@ function refreshDetailGallery(imagesArray) {
   mainImg.src = imagesArray[0];
   mainImg.alt = currentMediaItem ? currentMediaItem.title : '';
   
-  // Очищаем миниатюры
   thumbsContainer.innerHTML = '';
   imagesArray.forEach((src, idx) => {
     const t = document.createElement('img');
     t.src = src;
     t.className = `thumb ${idx === 0 ? 'active' : ''}`;
     t.alt = currentMediaItem ? currentMediaItem.title : '';
+    t.loading = 'lazy';
+    t.onerror = function() { this.onerror=null; this.src='https://placehold.co/100x66/cccccc/white?text=...'; };
     t.addEventListener('click', () => {
       mainImg.src = src;
       currentImageIndex = idx;
@@ -2252,7 +1922,6 @@ function refreshDetailGallery(imagesArray) {
     thumbsContainer.appendChild(t);
   });
   
-  // Обработчики стрелок
   const prevBtn = document.getElementById('detailPrev');
   const nextBtn = document.getElementById('detailNext');
   if (prevBtn) {
@@ -2276,7 +1945,6 @@ function refreshDetailGallery(imagesArray) {
     };
   }
   
-  // Клик по основному изображению для открытия lightbox
   galleryMain.onclick = (e) => {
     if (e.target.tagName === 'IMG') {
       e.stopPropagation();
@@ -2291,13 +1959,11 @@ function refreshDetailGallery(imagesArray) {
     }
   };
   
-  // Удаляем предыдущий обработчик свайпа, если был
   if (galleryMain._swipeHandler) {
     galleryMain.removeEventListener('touchstart', galleryMain._swipeHandler.start);
     galleryMain.removeEventListener('touchmove', galleryMain._swipeHandler.move);
     galleryMain.removeEventListener('touchend', galleryMain._swipeHandler.end);
   }
-  // Устанавливаем новый обработчик свайпа
   setupGallerySwipe(galleryMain, mainImg, imagesArray);
 }
 
@@ -2307,13 +1973,13 @@ function updateThumbsActive() {
   });
 }
 
-// ===== СВАЙП ДЛЯ ГАЛЕРЕИ =====
 function setupGallerySwipe(element, imgEl, imagesArray) {
   if (!element || imagesArray.length <= 1) return;
   
   let startX = 0, endX = 0, isSwiping = false;
   
   const startHandler = (e) => {
+    if (e.target.closest('button')) return;
     startX = e.touches[0].clientX;
     isSwiping = true;
   };
@@ -2344,11 +2010,9 @@ function setupGallerySwipe(element, imgEl, imagesArray) {
   element.addEventListener('touchmove', moveHandler, { passive: true });
   element.addEventListener('touchend', endHandler);
   
-  // Сохраняем ссылки на обработчики для возможности удаления
   element._swipeHandler = { start: startHandler, move: moveHandler, end: endHandler };
 }
 
-// ===== ДЕТАЛЬНЫЙ ПРОСМОТР =====
 function openDetail(id, skipScroll = false) {
   const item = mediaItems.find(i => i.id === id); 
   if(!item) return;
@@ -2370,7 +2034,6 @@ function openDetail(id, skipScroll = false) {
   const infoBlock = document.getElementById('detailInfoBlock');
   const infoContent = document.getElementById('detailInfoContent');
   
-  // ✅ НОВЫЙ БЛОК ИНФОРМАЦИИ О НОСИТЕЛЕ
   if (item.info) {
     infoBlock.style.display = 'block';
     infoContent.innerHTML = `<p>${item.info}</p>`;
@@ -2378,7 +2041,6 @@ function openDetail(id, skipScroll = false) {
     infoBlock.style.display = 'none';
   }
   
-  // Определяем галерею с учётом выбора цвета
   let galleryImages = item.gallery || [];
   let activeColor = item.defaultColor || null;
   
@@ -2386,26 +2048,22 @@ function openDetail(id, skipScroll = false) {
     const colorImages = productColors[id].images[activeColor];
     if (colorImages && colorImages.length) {
       galleryImages = colorImages;
-      currentMediaItem.gallery = galleryImages; // синхронизируем для 
+      currentMediaItem.gallery = galleryImages;
     }
-    // Рендеринг селектора цвета
     colorSelectorContainer.innerHTML = renderColorSelector(id, activeColor);
     document.getElementById('detailGallery').classList.add('with-colors');
     
-    // Добавляем обработчики для кнопок цвета
     colorSelectorContainer.querySelectorAll('.color-swatch').forEach(swatch => {
       swatch.addEventListener('click', function(e) {
         e.stopPropagation();
         const selectedColor = this.dataset.color;
         
-        // Обновляем активный класс
         colorSelectorContainer.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('active'));
         this.classList.add('active');
         
-        // Получаем новые изображения
         const newImages = updateImagesByColor(id, selectedColor);
         if (newImages && newImages.length) {
-          currentMediaItem.gallery = newImages; // обновляем в текущем объекте
+          currentMediaItem.gallery = newImages;
           const galleryMain = document.getElementById('galleryMain');
           galleryMain.classList.add('fade');
           setTimeout(() => {
@@ -2420,10 +2078,8 @@ function openDetail(id, skipScroll = false) {
     document.getElementById('detailGallery').classList.remove('with-colors');
   }
   
-  // Обновляем галерею
   refreshDetailGallery(galleryImages);
   
-  // Спецификации
   const specsContainer = document.getElementById('detailSpecs');
   specsContainer.innerHTML = '';
   if (item.specs?.length) { 
@@ -2436,7 +2092,6 @@ function openDetail(id, skipScroll = false) {
     specsContainer.appendChild(c); 
   }
   
-  // Загрузки
   const downloadsContainer = document.getElementById('detailDownloads');
   downloadsContainer.innerHTML = '';
   if (item.downloads?.length) {
@@ -2460,10 +2115,8 @@ function openDetail(id, skipScroll = false) {
   savePageState('media-detail', id, 0);
 }
 
-// Кнопка "Назад"
 document.getElementById('mediaBackBtn')?.addEventListener('click', closeMediaDetail);
 
-// Фильтры
 document.querySelectorAll('.filter-chip').forEach(chip => { 
   chip.addEventListener('click', function() { 
     document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active')); 
