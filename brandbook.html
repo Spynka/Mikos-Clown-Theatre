@@ -924,6 +924,32 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   width: 100%;
   margin: 48px 0;
 }
+
+
+
+.scroll-gallery, .color-scroll-gallery {
+  cursor: grab;
+  -webkit-user-select: none;
+  user-select: none;
+  touch-action: pan-x; /* Разрешаем только горизонтальный скролл на тач-устройствах */
+}
+.scroll-gallery:active, .color-scroll-gallery:active {
+  cursor: grabbing;
+}
+
+
+@media (max-width: 860px) {
+    .header-inner {
+        height: 0px !important; 
+        padding: 0 12px !important;
+    }
+}
+@media (max-width: 400px) {
+    .header-inner {
+        height: 0px !important; 
+        padding: 0 12px !important;
+    }
+}
 </style>
 </head>
 <body>
@@ -1447,6 +1473,15 @@ data-fullscreen="SVG/src.png" data-name="Структура логотипа" da
     <p>Паттерны, декоративные элементы и иллюстрации бренда</p>
   </div>
 </div>
+
+<!-- ДОБАВИТЬ ЭТУ КНОПКУ -->
+<div class="content-wrapper" style="text-align: right; padding-top: var(--space-6);">
+  <a href="files/graphics/graphics-pack.zip" class="btn btn-primary" download>
+    <i class="fas fa-download"></i> Скачать все графические элементы
+  </a>
+</div>
+<!-- КОНЕЦ ДОБАВЛЕНИЯ -->
+
 <div class="content-wrapper">
 
   <!-- ===== ПАТТЕРНЫ (одно фото, без скролла) ===== -->
@@ -1457,16 +1492,16 @@ data-fullscreen="SVG/src.png" data-name="Структура логотипа" da
   <div style="display: flex; justify-content: flex-start; margin-bottom: var(--space-8);">
     <div class="scroll-item" style="flex: 0 0 400px; max-width: 100%;">
       <div class="scroll-item-image" 
-           data-fullscreen="https://placehold.co/600x400/2C4068/F2F1F0?text=ПАТТЕРН+МАСКА" 
+           data-fullscreen="files/Графика/Паттерн.svg" 
            data-name="Паттерн «Маска»" 
            data-bg="blue">
-        <img src="https://placehold.co/400x300/2C4068/F2F1F0?text=ПАТТЕРН+МАСКА" 
-             alt="Паттерн Маска" 
+        <img src="files/Графика/Паттерн.svg" 
+             alt="Паттерн" 
              loading="lazy">
       </div>
       <div class="scroll-item-content">
-        <h4>Паттерн «Маска»</h4>
-        <p>Базовый повторяющийся элемент</p>
+        <h4>Паттерн</h4>
+        <p>Вертикальные черно-белые линии. Часто встречаются в костюмах и оформлении. </p>
       </div>
     </div>
   </div>
@@ -1474,7 +1509,7 @@ data-fullscreen="SVG/src.png" data-name="Структура логотипа" da
   <!-- ===== ГРАФИЧЕСКИЕ ЭЛЕМЕНТЫ (горизонтальный скролл) ===== -->
   <h2 class="section-title mt-8">Графические элементы</h2>
   <p style="color:var(--color-text-secondary); margin-bottom:var(--space-4);">
-    Декоративные элементы для оформления материалов:
+    Графические элементы для оформления носителей:
   </p>
   <div class="scroll-gallery-wrapper">
     <button class="scroll-nav-btn prev" data-target="graphicsScroll">
@@ -1483,72 +1518,86 @@ data-fullscreen="SVG/src.png" data-name="Структура логотипа" da
     <div class="scroll-gallery" id="graphicsScroll">
       <div class="scroll-item">
         <div class="scroll-item-image" 
-             data-fullscreen="https://placehold.co/400x300/F2F1F0/F43139?text=ЛИНИИ+КУЛИС" 
+             data-fullscreen="files/Графика/Башмак.svg" 
              data-name="Линии кулис" 
              data-bg="light">
-          <img src="https://placehold.co/280x180/F2F1F0/F43139?text=ЛИНИИ+КУЛИС" 
-               alt="Линии кулис" 
+          <img src="files/Графика/Башмак.svg" 
+               alt="Башмачок" 
                loading="lazy">
         </div>
         <div class="scroll-item-content">
-          <h4>Линии кулис</h4>
-          <p>Вертикальные акценты</p>
+          <h4>Башмачок</h4>
+          <p>Клоунский башмачок</p>
         </div>
       </div>
       <div class="scroll-item">
         <div class="scroll-item-image" 
-             data-fullscreen="https://placehold.co/400x300/F2F1F0/2C4068?text=ВОЛНЫ" 
+             data-fullscreen="files/Графика/Нос.svg" 
              data-name="Волны" 
              data-bg="light">
-          <img src="https://placehold.co/280x180/F2F1F0/2C4068?text=ВОЛНЫ" 
-               alt="Волны" 
+          <img src="files/Графика/Нос.svg" 
+               alt="Клоунский нос" 
                loading="lazy">
         </div>
         <div class="scroll-item-content">
-          <h4>Волны</h4>
-          <p>Динамичные кривые</p>
+          <h4>Клоунский нос</h4>
+          <p>Клоунский нос круглый</p>
         </div>
       </div>
       <div class="scroll-item">
         <div class="scroll-item-image" 
-             data-fullscreen="https://placehold.co/400x300/F2F1F0/D4BF95?text=ТОЧКИ" 
-             data-name="Точки" 
+             data-fullscreen="files/Графика/Нос-2.svg" 
+             data-name="Клоунский нос" 
              data-bg="light">
-          <img src="https://placehold.co/280x180/F2F1F0/D4BF95?text=ТОЧКИ" 
+          <img src="files/Графика/Нос-2.svg" 
                alt="Точки" 
                loading="lazy">
         </div>
         <div class="scroll-item-content">
-          <h4>Точки</h4>
-          <p>Ритмичный паттерн</p>
+          <h4>Клоунский нос</h4>
+          <p>Клоунский нос фирменный</p>
         </div>
       </div>
       <div class="scroll-item">
         <div class="scroll-item-image" 
-             data-fullscreen="https://placehold.co/400x300/F2F1F0/231F20?text=ЗВЁЗДЫ" 
-             data-name="Звёзды" 
+             data-fullscreen="files/Графика/Знак.svg" 
+             data-name="Знак" 
              data-bg="light">
-          <img src="https://placehold.co/280x180/F2F1F0/231F20?text=ЗВЁЗДЫ" 
+          <img src="files/Графика/Знак.svg"
                alt="Звёзды" 
                loading="lazy">
         </div>
         <div class="scroll-item-content">
-          <h4>Звёзды</h4>
-          <p>Театральная атмосфера</p>
+          <h4>Штаны</h4>
+          <p>Знаковая часть логотипа</p>
         </div>
       </div>
       <div class="scroll-item">
         <div class="scroll-item-image" 
-             data-fullscreen="https://placehold.co/400x300/F2F1F0/F43139?text=КОНФЕТТИ" 
+             data-fullscreen="files/Графика/Текст.svg"
              data-name="Конфетти" 
              data-bg="light">
-          <img src="https://placehold.co/280x180/F2F1F0/F43139?text=КОНФЕТТИ" 
-               alt="Конфетти" 
+          <img src="files/Графика/Текст-2.svg"
+               alt="Лого" 
                loading="lazy">
         </div>
         <div class="scroll-item-content">
-          <h4>Конфетти</h4>
-          <p>Праздничный элемент</p>
+          <h4>Текстовая часть логотипа</h4>
+          <p>Текстовая часть логотипа</p>
+        </div>
+      </div>
+            <div class="scroll-item">
+        <div class="scroll-item-image" 
+             data-fullscreen="files/Графика/Текст-2.svg"
+             data-name="Конфетти" 
+             data-bg="light">
+          <img src="files/Графика/Текст-2.svg"
+               alt="Лого" 
+               loading="lazy">
+        </div>
+        <div class="scroll-item-content">
+          <h4>Текстовая часть логотипа</h4>
+          <p>Текстовая часть логотипа</p>
         </div>
       </div>
     </div>
@@ -1567,77 +1616,217 @@ data-fullscreen="SVG/src.png" data-name="Структура логотипа" da
       <i class="fas fa-chevron-left"></i>
     </button>
     <div class="scroll-gallery" id="illustrationsScroll">
+      <!-- 1-->
       <div class="scroll-item">
         <div class="scroll-item-image" 
-             data-fullscreen="https://placehold.co/400x300/2C4068/F2F1F0?text=ПЕРСОНАЖ+1" 
-             data-name="Персонаж «Мик»" 
+             data-fullscreen="files/Графика/Иллюстрации/main.svg" 
+             data-name="Персонаж " 
              data-bg="blue">
-          <img src="https://placehold.co/280x180/2C4068/F2F1F0?text=ПЕРСОНАЖ+1" 
-               alt="Персонаж Мик" 
+          <img src="files/Графика/Иллюстрации/main.svg" 
+               alt="Персонаж " 
                loading="lazy">
         </div>
         <div class="scroll-item-content">
-          <h4>Персонаж «Мик»</h4>
+          <h4>Персонаж </h4>
           <p>Главный герой бренда</p>
         </div>
       </div>
+      <!-- 2-->
       <div class="scroll-item">
         <div class="scroll-item-image" 
-             data-fullscreen="https://placehold.co/400x300/D4BF95/231F20?text=ПЕРСОНАЖ+2" 
-             data-name="Персонаж «Ос»" 
-             data-bg="gold">
-          <img src="https://placehold.co/280x180/D4BF95/231F20?text=ПЕРСОНАЖ+2" 
-               alt="Персонаж Ос" 
+             data-fullscreen="files/Графика/Иллюстрации/Zercalo.svg" 
+             data-name="Персонаж " 
+             data-bg="blue">
+          <img src="files/Графика/Иллюстрации/Zercalo.svg" 
+               alt="Персонаж " 
                loading="lazy">
         </div>
         <div class="scroll-item-content">
-          <h4>Персонаж «Ос»</h4>
-          <p>Комический напарник</p>
+          <h4>Персонаж </h4>
+          <p>Главный герой бренда</p>
         </div>
       </div>
+      <!-- 3-->
       <div class="scroll-item">
         <div class="scroll-item-image" 
-             data-fullscreen="https://placehold.co/400x300/F43139/white?text=СЦЕНА+1" 
-             data-name="Сцена из спектакля" 
-             data-bg="red">
-          <img src="https://placehold.co/280x180/F43139/white?text=СЦЕНА+1" 
-               alt="Сцена" 
+             data-fullscreen="files/Графика/Иллюстрации/Visit.svg" 
+             data-name="Персонаж " 
+             data-bg="blue">
+          <img src="files/Графика/Иллюстрации/Visit.svg" 
+               alt="Персонаж " 
                loading="lazy">
         </div>
         <div class="scroll-item-content">
-          <h4>Сцена из спектакля</h4>
-          <p>Ключевой момент</p>
+          <h4>Персонаж </h4>
+          <p>Главный герой бренда</p>
         </div>
       </div>
+      <!-- 4-->
       <div class="scroll-item">
         <div class="scroll-item-image" 
-             data-fullscreen="https://placehold.co/400x300/231F20/F2F1F0?text=АФИША" 
-             data-name="Иллюстрация для афиши" 
-             data-bg="dark">
-          <img src="https://placehold.co/280x180/231F20/F2F1F0?text=АФИША" 
-               alt="Афиша" 
+             data-fullscreen="files/Графика/Иллюстрации/Гамаюнов-сидит.svg" 
+             data-name="Персонаж " 
+             data-bg="blue">
+          <img src="files/Графика/Иллюстрации/Гамаюнов-сидит.svg" 
+               alt="Персонаж " 
                loading="lazy">
         </div>
         <div class="scroll-item-content">
-          <h4>Для афиши</h4>
-          <p>Композиция для печати</p>
+          <h4>Персонаж </h4>
+          <p>Главный герой бренда</p>
         </div>
       </div>
+      <!-- 5-->
       <div class="scroll-item">
         <div class="scroll-item-image" 
-             data-fullscreen="https://placehold.co/400x300/F2F1F0/2C4068?text=СОЦСЕТИ" 
-             data-name="Для соцсетей" 
-             data-bg="light">
-          <img src="https://placehold.co/280x180/F2F1F0/2C4068?text=СОЦСЕТИ" 
-               alt="Для соцсетей" 
+             data-fullscreen="files/Графика/Иллюстрации/Давыдов-сидит.svg" 
+             data-name="Персонаж " 
+             data-bg="blue">
+          <img src="files/Графика/Иллюстрации/Давыдов-сидит.svg" 
+               alt="Персонаж " 
                loading="lazy">
         </div>
         <div class="scroll-item-content">
-          <h4>Для соцсетей</h4>
-          <p>Формат для digital</p>
+          <h4>Персонаж </h4>
+          <p>Главный герой бренда</p>
         </div>
       </div>
-    </div>
+      <!-- 6-->
+      <div class="scroll-item">
+        <div class="scroll-item-image" 
+             data-fullscreen="files/Графика/Иллюстрации/Иванова-вбок.svg" 
+             data-name="Персонаж " 
+             data-bg="blue">
+          <img src="files/Графика/Иллюстрации/Иванова-вбок.svg" 
+               alt="Персонаж " 
+               loading="lazy">
+        </div>
+        <div class="scroll-item-content">
+          <h4>Персонаж </h4>
+          <p>Главный герой бренда</p>
+        </div>
+      </div>
+      <!-- 7-->
+      <div class="scroll-item">
+        <div class="scroll-item-image" 
+             data-fullscreen="files/Графика/Иллюстрации/Давыдов-вбок.svg" 
+             data-name="Персонаж " 
+             data-bg="blue">
+          <img src="files/Графика/Иллюстрации/Давыдов-вбок.svg" 
+               alt="Персонаж " 
+               loading="lazy">
+        </div>
+        <div class="scroll-item-content">
+          <h4>Персонаж </h4>
+          <p>Главный герой бренда</p>
+        </div>
+      </div>
+      <!-- 8-->
+      <div class="scroll-item">
+        <div class="scroll-item-image" 
+             data-fullscreen="files/Графика/Иллюстрации/Циукаев-вбок.svg" 
+             data-name="Персонаж " 
+             data-bg="blue">
+          <img src="files/Графика/Иллюстрации/Циукаев-вбок.svg" 
+               alt="Персонаж " 
+               loading="lazy">
+        </div>
+        <div class="scroll-item-content">
+          <h4>Персонаж </h4>
+          <p>Главный герой бренда</p>
+        </div>
+      </div>
+      <!-- 9-->
+      <div class="scroll-item">
+        <div class="scroll-item-image" 
+             data-fullscreen="files/Графика/Иллюстрации/Гамаюнов-вбок.svg" 
+             data-name="Персонаж " 
+             data-bg="blue">
+          <img src="files/Графика/Иллюстрации/Гамаюнов-вбок.svg" 
+               alt="Персонаж " 
+               loading="lazy">
+        </div>
+        <div class="scroll-item-content">
+          <h4>Персонаж </h4>
+          <p>Главный герой бренда</p>
+        </div>
+      </div>
+      <!-- 10-->
+      <div class="scroll-item">
+        <div class="scroll-item-image" 
+             data-fullscreen="files/Графика/Иллюстрации/Промокод.svg" 
+             data-name="Персонаж " 
+             data-bg="blue">
+          <img src="files/Графика/Иллюстрации/Промокод.svg" 
+               alt="Персонаж " 
+               loading="lazy">
+        </div>
+        <div class="scroll-item-content">
+          <h4>Персонаж </h4>
+          <p>Главный герой бренда</p>
+        </div>
+      </div>
+      <!-- 11-->
+      <div class="scroll-item">
+        <div class="scroll-item-image" 
+             data-fullscreen="files/Графика/Иллюстрации/Давыдов-прямо.svg" 
+             data-name="Персонаж " 
+             data-bg="blue">
+          <img src="files/Графика/Иллюстрации/Давыдов-прямо.svg" 
+               alt="Персонаж " 
+               loading="lazy">
+        </div>
+        <div class="scroll-item-content">
+          <h4>Персонаж </h4>
+          <p>Главный герой бренда</p>
+        </div>
+      </div>
+      <!-- 12-->
+      <div class="scroll-item">
+        <div class="scroll-item-image" 
+             data-fullscreen="files/Графика/Иллюстрации/Циукаев-прямо.svg" 
+             data-name="Персонаж " 
+             data-bg="blue">
+          <img src="files/Графика/Иллюстрации/Циукаев-прямо.svg" 
+               alt="Персонаж " 
+               loading="lazy">
+        </div>
+        <div class="scroll-item-content">
+          <h4>Персонаж </h4>
+          <p>Главный герой бренда</p>
+        </div>
+      </div>
+      <!-- 13-->
+      <div class="scroll-item">
+        <div class="scroll-item-image" 
+             data-fullscreen="files/Графика/Иллюстрации/Иванова-прямо.svg" 
+             data-name="Персонаж " 
+             data-bg="blue">
+          <img src="files/Графика/Иллюстрации/Иванова-прямо.svg" 
+               alt="Персонаж " 
+               loading="lazy">
+        </div>
+        <div class="scroll-item-content">
+          <h4>Персонаж </h4>
+          <p>Главный герой бренда</p>
+        </div>
+      </div>
+      <!-- 14-->
+      <div class="scroll-item">
+        <div class="scroll-item-image" 
+             data-fullscreen="files/Графика/Иллюстрации/Гамаюнов-прямо.svg" 
+             data-name="Персонаж " 
+             data-bg="blue">
+          <img src="files/Графика/Иллюстрации/Гамаюнов-прямо.svg" 
+               alt="Персонаж " 
+               loading="lazy">
+        </div>
+        <div class="scroll-item-content">
+          <h4>Персонаж </h4>
+          <p>Главный герой бренда</p>
+        </div>
+      </div>
+
     <button class="scroll-nav-btn next" data-target="illustrationsScroll">
       <i class="fas fa-chevron-right"></i>
     </button>
@@ -1650,11 +1839,12 @@ data-fullscreen="SVG/src.png" data-name="Структура логотипа" da
 <section class="page-section" id="page-photo">
 <div class="hero-brand" data-color="red"><div class="hero-brand-content"><h1>Фотостиль</h1><p>Эмоция, свет, театральный контраст</p></div></div>
 <div class="content-wrapper">
-<figure class="photo-large"><img src="https://placehold.co/1400x450/231F20/F2F1F0?text=КРУПНЫЙ+ПЛАН+ЭМОЦИИ" alt="Эмоция" loading="lazy" width="1400" height="450"></figure>
+<figure class="photo-large"><img src="files/Фотостиль/Ксюша.jpg" alt="Эмоция" loading="lazy" width="1400" height="450"></figure>
 <div class="grid-3col">
-<figure class="photo-medium"><img src="https://placehold.co/500x350/2C4068/white?text=ДВИЖЕНИЕ" alt="Движение" loading="lazy" width="500" height="350"></figure>
-<figure class="photo-medium"><img src="https://placehold.co/500x350/D4BF95/231F20?text=ЗАКУЛИСЬЕ" alt="Закулисье" loading="lazy" width="500" height="350"></figure>
-<figure class="photo-medium"><img src="https://placehold.co/500x350/F43139/white?text=РЕПЕТИЦИЯ" alt="Репетиция" loading="lazy" width="500" height="350"></figure>
+<figure class="photo-medium"><img src="files/Фотостиль/Ксюша.jpg" alt="Движение" loading="lazy" width="500" height="350"></figure>
+<figure class="photo-medium"><img src="files/Фотостиль/Ксюша.jpg" alt="Закулисье" loading="lazy" width="500" height="350"></figure>
+<figure class="photo-medium"><img src="files/Фотостиль/Ксюша.jpg" alt="Репетиция" loading="lazy" width="500" height="350"></figure>
+
 </div>
 <article class="brand-card mt-8"><h3>Принципы фотостиля</h3><p>Естественное освещение, крупные портреты, высокий контраст. Красный — единственный яркий акцент.</p></article>
 </div>
@@ -2024,28 +2214,41 @@ document.querySelectorAll('.color-scroll-gallery').forEach(gallery => {
   update();
 });
 
-// Drag-to-scroll для всех галерей
-document.querySelectorAll('.scroll-gallery, .color-scroll-gallery, .variant-placeholder, .clearspace-box, .min-size-visual, .scroll-item-image').forEach(el => {
-  let isDown = false, startX, scrollLeft;
-  el.addEventListener('mousedown', e => { 
-    if (e.target.closest('a') || e.target.closest('button')) return; 
-    isDown = true; 
-    el.classList.add('active'); 
-    startX = e.pageX - el.offsetLeft; 
-    scrollLeft = el.scrollLeft || 0; 
-    e.preventDefault(); 
+// ===== ПРАВИЛЬНЫЙ DRAG-TO-SCROLL ДЛЯ ГОРИЗОНТАЛЬНЫХ ГАЛЕРЕЙ =====
+document.querySelectorAll('.scroll-gallery, .color-scroll-gallery').forEach(gallery => {
+  let isDown = false;
+  let startX;
+  let scrollLeftStart;
+
+  gallery.addEventListener('mousedown', (e) => {
+    if (e.target.closest('button, a, [data-fullscreen]')) return; // Игнорируем клики по интерактивным элементам
+    isDown = true;
+    gallery.style.cursor = 'grabbing';
+    gallery.style.userSelect = 'none'; // Запрещаем выделение при перетаскивании
+    startX = e.clientX - gallery.getBoundingClientRect().left;
+    scrollLeftStart = gallery.scrollLeft;
   });
-  el.addEventListener('mouseleave mouseup', () => { 
-    isDown = false; 
-    el.classList.remove('active'); 
+
+  gallery.addEventListener('mouseleave', () => {
+    isDown = false;
+    gallery.style.cursor = 'grab';
   });
-  el.addEventListener('mousemove', e => { 
-    if (!isDown) return; 
-    e.preventDefault(); 
-    const x = e.pageX - el.offsetLeft; 
-    const walk = (x - startX) * 2; 
-    if (el.scrollLeft !== undefined) el.scrollLeft = scrollLeft - walk; 
+
+  gallery.addEventListener('mouseup', () => {
+    isDown = false;
+    gallery.style.cursor = 'grab';
+    gallery.style.userSelect = 'auto';
   });
+
+  gallery.addEventListener('mousemove', (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.clientX - gallery.getBoundingClientRect().left;
+    const walk = (x - startX) * 1.2; // Плавный коэффициент (было *2, вызывало рывки)
+    gallery.scrollLeft = scrollLeftStart - walk;
+  });
+
+  gallery.style.cursor = 'grab';
 });
 
 // ===== ДАННЫЕ О ЦВЕТАХ ДЛЯ ТОВАРОВ =====
