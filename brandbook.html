@@ -950,6 +950,12 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
         padding: 0 12px !important;
     }
 }
+@media (max-width: 860px) {
+.typo-controls { position: sticky; top: 0px; z-index: 150; background: rgba(242, 241, 240, 0.98); backdrop-filter: blur(12px); border-bottom: 1px solid var(--color-border); border-top: 1px solid var(--color-border); padding: var(--space-4) var(--container-padding); display: none; flex-wrap: wrap; gap: var(--space-4); align-items: center; justify-content: space-between; transition: var(--transition); }
+.typo-controls.active { display: flex; }}
+@media (max-width: 400px) {
+.typo-controls { position: sticky; top: 0px; z-index: 150; background: rgba(242, 241, 240, 0.98); backdrop-filter: blur(12px); border-bottom: 1px solid var(--color-border); border-top: 1px solid var(--color-border); padding: var(--space-4) var(--container-padding); display: none; flex-wrap: wrap; gap: var(--space-4); align-items: center; justify-content: space-between; transition: var(--transition); }
+.typo-controls.active { display: flex; }}
 </style>
 </head>
 <body>
@@ -1841,12 +1847,12 @@ data-fullscreen="SVG/src.png" data-name="Структура логотипа" da
 <div class="content-wrapper">
 <figure class="photo-large"><img src="files/Фотостиль/Ксюша.jpg" alt="Эмоция" loading="lazy" width="1400" height="450"></figure>
 <div class="grid-3col">
-<figure class="photo-medium"><img src="files/Фотостиль/Ксюша.jpg" alt="Движение" loading="lazy" width="500" height="350"></figure>
-<figure class="photo-medium"><img src="files/Фотостиль/Ксюша.jpg" alt="Закулисье" loading="lazy" width="500" height="350"></figure>
-<figure class="photo-medium"><img src="files/Фотостиль/Ксюша.jpg" alt="Репетиция" loading="lazy" width="500" height="350"></figure>
+<figure class="photo-medium"><img src="files/Фотостиль/15.jpg" alt="Движение" loading="lazy" width="500" height="350"></figure>
+<figure class="photo-medium"><img src="files/Фотостиль/40.jpg" alt="Закулисье" loading="lazy" width="500" height="350"></figure>
+<figure class="photo-medium"><img src="files/Фотостиль/21.jpg" alt="Репетиция" loading="lazy" width="500" height="350"></figure>
 
 </div>
-<article class="brand-card mt-8"><h3>Принципы фотостиля</h3><p>Естественное освещение, крупные портреты, высокий контраст. Красный — единственный яркий акцент.</p></article>
+<article class="brand-card mt-8"><h3>Принципы фотостиля</h3><p>Естественное освещение, крупные портреты, высокий контраст.</p></article>
 </div>
 </section>
 

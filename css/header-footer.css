@@ -269,3 +269,57 @@ html {
   }
   /* … и остальные правила для мобильного меню */
 }
+
+/* ===== FIX: Лого слева, две строки текста справа ===== */
+.footer-brand-header {
+    display: flex;
+    align-items: flex-start; /* выравнивание по верхнему краю */
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.footer-text-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px; /* расстояние между заголовком и описанием */
+}
+
+.footer-logo-img {
+    width: clamp(50px, 5vw, 70px);
+    height: clamp(50px, 5vw, 70px);
+    object-fit: contain;
+    flex-shrink: 0; /* запрещаем сжатие логотипа */
+    margin-bottom: 0; /* убираем старые отступы */
+}
+
+.footer-theater-title {
+    margin: 0;
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 700;
+    font-size: clamp(16px, 1.8vw, 24px);
+    color: #fff;
+    line-height: 1.2;
+    white-space: normal; /* разрешаем перенос на узких экранах */
+}
+
+.footer-description {
+    margin: 0;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: clamp(13px, 1.4vw, 17px);
+    line-height: 1.4;
+    color: var(--blue-200);
+}
+
+/* Адаптив для мобильных */
+@media (max-width: 860px) {
+    .footer-brand-header {
+        flex-direction: column; /* на мобилке: лого сверху, текст под ним */
+        align-items: center;
+        text-align: center;
+        gap: 12px;
+        margin-bottom: 20px;
+    }
+    .footer-text-group {
+        align-items: center;
+    }
+}

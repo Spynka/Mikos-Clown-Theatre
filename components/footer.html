@@ -3,13 +3,17 @@
     <div class="footer-container">
         <div class="footer-top">
             <div class="footer-brand">
-                <div class="footer-logo">
-                    <img class="footer-logo-img" src="SVG/logo-black.svg" alt="Микос">
-                    <div class="footer-theater-title">Театр клоунады «Микос»</div>
-                </div>
-                <div class="footer-description">Откройте для себя театр заново.</div>
-                
-                <div class="newsletter-title">Подписаться на новости</div>
+    <!-- Группируем лого и текст -->
+    <div class="footer-brand-header">
+        <img class="footer-logo-img" src="SVG/logo-black.svg" alt="Микос">
+        <div class="footer-text-group">
+            <div class="footer-theater-title">Театр клоунады «Микос»</div>
+            <div class="footer-description">Откройте для себя театр заново.</div>
+        </div>
+    </div>
+    
+    <!-- Остальное остаётся без изменений -->
+    <div class="newsletter-title">Подписаться на новости</div>
                 <div class="subscribe-form">
                     <input type="email" placeholder="Ваш email" class="subscribe-input" id="subscribeEmail">
                     <button class="subscribe-btn" id="subscribeBtn">Подписаться</button>
