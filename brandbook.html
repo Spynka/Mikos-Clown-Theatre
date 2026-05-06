@@ -956,6 +956,111 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 @media (max-width: 400px) {
 .typo-controls { position: sticky; top: 0px; z-index: 150; background: rgba(242, 241, 240, 0.98); backdrop-filter: blur(12px); border-bottom: 1px solid var(--color-border); border-top: 1px solid var(--color-border); padding: var(--space-4) var(--container-padding); display: none; flex-wrap: wrap; gap: var(--space-4); align-items: center; justify-content: space-between; transition: var(--transition); }
 .typo-controls.active { display: flex; }}
+
+
+
+
+
+
+/* ===== ОБНОВЛЁННЫЕ СТИЛИ ДЛЯ ЦВЕТОВЫХ СЕЛЕКТОРОВ ===== */
+.color-selector {
+  display: flex;
+  gap: var(--space-3);
+  margin: var(--space-4) 0 var(--space-6);
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.color-selector-label {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  margin-right: var(--space-2);
+}
+
+/* УВЕЛИЧЕННЫЕ КРУЖКИ С ЦВЕТАМИ */
+.color-swatch {
+  width: 48px;          /* Было: 36px */
+  height: 48px;         /* Было: 36px */
+  border-radius: 50%;
+  border: 3px solid transparent;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  position: relative;
+  box-shadow: 0 2px 8px var(--color-shadow);
+  background-size: cover;
+  background-position: center;
+  padding: 0;
+  overflow: hidden;     /* ВАЖНО: обрезает градиенты по кругу */
+}
+
+.color-swatch:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 16px var(--color-shadow);
+}
+
+/* АКТИВНОЕ СОСТОЯНИЕ - ТОЛЬКО КРАСНАЯ ОБВОДКА */
+.color-swatch.active {
+  border-color: var(--color-accent-red);  /* Красная обводка */
+  transform: scale(1.15);
+  box-shadow: 0 0 0 3px rgba(244, 49, 57, 0.2), 0 4px 16px var(--color-shadow);
+}
+
+/* УБРАТЬ ГРАДИЕНТНУЮ ОБВОДКУ */
+.color-swatch::after {
+  display: none;        /* Убираем псевдоэлемент с градиентом */
+}
+
+/* Цвета для подвеса */
+.color-swatch[data-color="pendant-white"] { 
+  background: #FFFFFF; 
+  border: 2px solid var(--color-border); 
+}
+.color-swatch[data-color="pendant-black"] { background: #000000; }
+.color-swatch[data-color="pendant-blue"] { background: #3685C6; }
+.color-swatch[data-color="pendant-gradient"] {
+  background: linear-gradient(135deg, #3685C6 0%, #E13036 100%);
+}
+
+/* Цвета для футболки */
+.color-swatch[data-color="tshirt-bw"] {
+  background: linear-gradient(135deg, #000000 50%, #FFFFFF 50%);
+}
+.color-swatch[data-color="tshirt-black"] { background: #000000; }
+.color-swatch[data-color="tshirt-white"] { 
+  background: #FFFFFF; 
+  border: 2px solid var(--color-border); 
+}
+.color-swatch[data-color="tshirt-redblack"] {
+  background: linear-gradient(135deg, #E13036 50%, #000000 50%);
+}
+.color-swatch[data-color="tshirt-beigeblack"] {
+  background: linear-gradient(135deg, #C9B8A3 50%, #000000 50%);
+}
+
+/* Tooltip для названий цветов */
+.color-swatch[title] {
+  position: relative;
+}
+.color-swatch[title]:hover::before {
+  content: attr(title);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-bg-dark);
+  color: var(--color-text-inverse);
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  padding: 4px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+  z-index: 10;
+  margin-bottom: 6px;
+  box-shadow: 0 2px 8px var(--color-shadow);
+}
 </style>
 </head>
 <body>
@@ -2334,7 +2439,7 @@ const mediaItems = [
       avatar: 'files/fir-stil/Рюкзак/1.png',
       gallery: ['files/fir-stil/Рюкзак/1.png'], 
       specs:[['Материал','хлопок']], 
-      downloads:[{label:'Макет вышивки', href:'files/panamka.dst', icon:'fa-file-ai'}] 
+      downloads:[{label:'Макет AI', href:'files/panamka.dst', icon:'fa-file-ai'}] 
     },
     { 
       id:'panamka', 
@@ -2344,7 +2449,7 @@ const mediaItems = [
       avatar: 'files/fir-stil/Панамка/1.jpg',
       gallery: ['files/fir-stil/Панамка/1.jpg'], 
       specs:[['Материал','хлопок']], 
-      downloads:[{label:'Макет вышивки', href:'files/panamka.dst', icon:'fa-file-ai'}] 
+      downloads:[{label:'Макет AI', href:'files/panamka.dst', icon:'fa-file-ai'}] 
     },
     { 
       id:'backpack-pendant', 
@@ -2357,7 +2462,7 @@ const mediaItems = [
       gallery: ['files/fir-stil/Подвес/1.png'],
       info: 'Металлический подвес на карабине для рюкзаков и сумок. Изготавливается из нержавеющей стали с гравировкой логотипа. Доступен в четырёх цветовых вариантах. Идеальный сувенир для поклонников театра и участников мероприятий.',
       specs:[['Размер','40×25 мм']], 
-      downloads:[{label:'3D-модель', href:'files/pendant.stl', icon:'fa-file-ai'}] 
+      downloads:[{label:'Макет AI', href:'files/pendant.stl', icon:'fa-file-ai'}] 
     },
     { 
       id:'socks', 
@@ -2367,7 +2472,7 @@ const mediaItems = [
       avatar: 'files/fir-stil/Носки/4.jpg',
       gallery: ['files/fir-stil/Носки/4.jpg','files/fir-stil/Носки/2.jpg','files/fir-stil/Носки/3.jpg','files/fir-stil/Носки/Макет.png'], 
       specs:[['Состав','хлопок 80%', 'Размер', '25']], 
-      downloads:[{label:'Макет', href:'files/fir-stil/Носки/Макет.ai', icon:'fa-file-ai'}] 
+      downloads:[{label:'Макет AI', href:'files/fir-stil/Носки/Макет.ai', icon:'fa-file-ai'}] 
     },
     { 
       id:'tshirt-mikos', 
@@ -2389,7 +2494,7 @@ const mediaItems = [
       avatar: 'files/fir-stil/Футболка Лимит/15.png',
       gallery: ['files/fir-stil/Футболка Лимит/15.png'], 
       specs:[['Тираж','100 шт.']], 
-      downloads:[{label:'Макет', href:'files/limited-tshirt.ai', icon:'fa-file-ai'}] 
+      downloads:[{label:'Макет AI', href:'files/limited-tshirt.ai', icon:'fa-file-ai'}] 
     },
     { 
       id:'limited-hoodie', 
@@ -2399,7 +2504,7 @@ const mediaItems = [
       avatar: 'files/fir-stil/Худи/Худи_Мокап_1.jpg',
       gallery: ['files/fir-stil/Худи/Худи_Мокап_1.jpg', 'files/fir-stil/Худи/Худи_Мокап_2.jpg', 'files/fir-stil/Худи/Худи_Макет.png','files/fir-stil/Худи/Худи.png', 'files/fir-stil/Худи/Нашивка.svg'], 
       specs:[['Размер','XL','52']], 
-      downloads:[{label:'Вектор', href:'files/fir-stil/Худи/Худи_Макет.ai', icon:'fa-file-ai'}] 
+      downloads:[{label:'Макет AI', href:'files/fir-stil/Худи/Худи_Макет.ai', icon:'fa-file-ai'}] 
     },
     { 
       id:'limited-notebook', 
@@ -2409,7 +2514,7 @@ const mediaItems = [
       avatar: 'files/fir-stil/Блокнот/2.png',
       gallery: ['files/fir-stil/Блокнот/2.png','files/fir-stil/Блокнот/1.png','files/fir-stil/Блокнот/Макет.png'], 
       specs:[['Формат','А5']], 
-      downloads:[{label:'Макет', href:'files/fir-stil/Блокнот/Макет.ai', icon:'fa-file-ai'}] 
+      downloads:[{label:'Макет AI', href:'files/fir-stil/Блокнот/Макет.ai', icon:'fa-file-ai'}] 
     },
     { 
       id:'shopper', 
@@ -2419,7 +2524,7 @@ const mediaItems = [
       avatar: 'files/fir-stil/Шопер/1.png',
       gallery: ['files/fir-stil/Шопер/1.png', 'files/fir-stil/Шопер/2.png', 'files/fir-stil/Шопер/Шопер-Макет.png'], 
       specs:[['Размер','35×40 см']], 
-      downloads:[{label:'Макет', href:'files/fir-stil/Шопер/Шопер-Макет.ai', icon:'fa-file-ai'}] 
+      downloads:[{label:'Макет AI', href:'files/fir-stil/Шопер/Шопер-Макет.ai', icon:'fa-file-ai'}] 
     },
     { 
       id:'shopper-2', 
@@ -2429,17 +2534,17 @@ const mediaItems = [
       avatar: 'files/fir-stil/Шопер-2/1.png',
       gallery: ['files/fir-stil/Шопер-2/1.png'], 
       specs:[['Размер','35×40 см']], 
-      downloads:[{label:'Макет', href:'files/fir-stil/Шопер/Шопер-Макет.ai', icon:'fa-file-ai'}] 
+      downloads:[{label:'Макет AI', href:'files/fir-stil/Шопер/Шопер-Макет.ai', icon:'fa-file-ai'}] 
     },
     { 
       id:'badges', 
       title:'Значки', 
       category:'souvenirs', 
       desc:'Набор значков', 
-      avatar: 'files/fir-stil/Значки/1.png',
-      gallery: ['files/fir-stil/Значки/1.png','files/fir-stil/Значки/4.png'], 
+      avatar: 'files/fir-stil/Значки/2.png',
+      gallery: ['files/fir-stil/Значки/1.png','files/fir-stil/Значки/2.png','files/fir-stil/Значки/3.png','files/fir-stil/Значки/Значки.png'], 
       specs:[['Диаметр','38 мм']], 
-      downloads:[{label:'AI шаблон', href:'files/badges.ai', icon:'fa-file-ai'}] 
+      downloads:[{label:'Макет AI', href:'files/badges.ai', icon:'fa-file-ai'}] 
     },
     { 
       id:'thermo-stickers', 
@@ -2449,7 +2554,7 @@ const mediaItems = [
       avatar: 'files/fir-stil/Бутылка/1.png',
       gallery: ['files/fir-stil/Бутылка/1.png','files/fir-stil/Бутылка/2.png','files/fir-stil/Бутылка/3.png','files/fir-stil/Бутылка/4.png','files/fir-stil/Бутылка/5.png'], 
       specs:[['Объём','500 мл']], 
-      downloads:[{label:'Наклейки', href:'files/stickers.ai', icon:'fa-file-ai'}] 
+      downloads:[{label:'Макет AI', href:'files/stickers.ai', icon:'fa-file-ai'}] 
     },
     { 
       id:'hoodie-stickers', 
@@ -2459,7 +2564,7 @@ const mediaItems = [
       avatar: 'files/fir-stil//1.jpg',
       gallery: ['files/fir-stil//1.jpg'], 
       specs:[['Размеры','S–XXL']], 
-      downloads:[{label:'Наклейки', href:'files/hoodie-stickers.ai', icon:'fa-file-ai'}] 
+      downloads:[{label:'Макет AI', href:'files/hoodie-stickers.ai', icon:'fa-file-ai'}] 
     },
     { 
       id:'ad-booklet', 
@@ -2469,7 +2574,7 @@ const mediaItems = [
       avatar: 'files/fir-stil//1.jpg',
       gallery: ['files/fir-stil//1.jpg'], 
       specs:[['Формат','А4 (фальц)']], 
-      downloads:[{label:'PDF', href:'files/booklet.pdf', icon:'fa-file-ai'}] 
+      downloads:[{label:'Макет AI', href:'files/booklet.pdf', icon:'fa-file-ai'}] 
     },
     { 
       id:'chair', 
@@ -2479,7 +2584,7 @@ const mediaItems = [
       avatar: 'files/fir-stil/Стул/1.png',
       gallery: ['files/fir-stil/Стул/1.png','files/fir-stil/Стул/Макет.png','files/fir-stil/Стул/Макет-2.png'], 
       specs:[['Материал','дерево']], 
-      downloads:[{label:'Чертёж', href:'files/chair.dwg', icon:'fa-file-ai'}] 
+      downloads:[{label:'Макет AI', href:'files/chair.dwg', icon:'fa-file-ai'}] 
     },
     { 
       id:'drip-coffee', 
@@ -2489,7 +2594,7 @@ const mediaItems = [
       avatar: 'files/fir-stil//1.jpg',
       gallery: ['files/fir-stil//1.jpg'], 
       specs:[['Вес','10 г']], 
-      downloads:[{label:'Макет упаковки', href:'files/coffee-pack.ai', icon:'fa-file-ai'}] 
+      downloads:[{label:'Макет AI', href:'files/coffee-pack.ai', icon:'fa-file-ai'}] 
     },
     { 
       id:'lanyard', 
@@ -2499,7 +2604,7 @@ const mediaItems = [
       avatar: 'files/fir-stil//1.jpg',
       gallery: ['files/fir-stil//1.jpg'], 
       specs:[['Ширина','15 мм']], 
-      downloads:[{label:'Макет', href:'files/lanyard.ai', icon:'fa-file-ai'}] 
+      downloads:[{label:'Макет AI', href:'files/lanyard.ai', icon:'fa-file-ai'}] 
     },
     { 
       id:'envelope', 
@@ -2509,7 +2614,7 @@ const mediaItems = [
       avatar: 'files/fir-stil/Конверт/1.png',
       gallery: ['files/fir-stil/Конверт/1.png'], 
       specs:[['Формат','C6']], 
-      downloads:[{label:'PDF', href:'files/envelope.pdf', icon:'fa-file-ai'}] 
+      downloads:[{label:'Макет AI', href:'files/envelope.pdf', icon:'fa-file-ai'}] 
     },
     { 
       id:'tshirt-characters', 
@@ -2519,7 +2624,7 @@ const mediaItems = [
       avatar: 'files/fir-stil//1.jpg',
       gallery: ['files/fir-stil//1.jpg'], 
       specs:[['Размеры','S–XXL']], 
-      downloads:[{label:'Макет', href:'files/tshirt-characters.ai', icon:'fa-file-ai'}] 
+      downloads:[{label:'Макет AI', href:'files/tshirt-characters.ai', icon:'fa-file-ai'}] 
     },
     { 
       id:'two-clowns', 
@@ -2529,7 +2634,7 @@ const mediaItems = [
       avatar: 'files/fir-stil/Открытки/2.png',
       gallery: ['files/fir-stil/Открытки/2.png', 'files/fir-stil/Открытки/1.png'], 
       specs:[['Размер','А3']], 
-      downloads:[{label:'TIFF для печати', href:'files/two-clowns.tiff', icon:'fa-file-ai'}] 
+      downloads:[{label:'Макет AI', href:'files/two-clowns.tiff', icon:'fa-file-ai'}] 
     },
     { 
       id:'social-stickers', 
@@ -2539,7 +2644,7 @@ const mediaItems = [
       avatar: 'files/fir-stil//1.jpg',
       gallery: ['files/fir-stil//1.jpg'], 
       specs:[['Формат','PNG 512×512']], 
-      downloads:[{label:'Скачать стикеры', href:'files/stickers-pack.zip', icon:'fa-file-ai'}] 
+      downloads:[{label:'Макет AI', href:'files/stickers-pack.zip', icon:'fa-file-ai'}] 
     }
 ];
 
