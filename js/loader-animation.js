@@ -33,7 +33,7 @@ class PageLoader {
           <div class="ball light" id="ball3"></div>
         </div>
         <div class="loader-caption">
-          ща загрузится
+          щас загрузится
           <div class="dots"><span></span><span></span><span></span></div>
         </div>
       </div>

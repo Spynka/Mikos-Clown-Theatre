@@ -38,6 +38,19 @@
   --primary-red: #E8454D;
 }
 
+/* ===== HEADER ===== */
+.main-header { position: sticky; top: 0; z-index: 200; background: rgba(242, 241, 240, 0.98); backdrop-filter: blur(12px); border-bottom: 1px solid var(--color-border); transition: var(--transition); }
+.main-header.scrolled { box-shadow: 0 4px 20px var(--color-shadow); }
+.header-inner { max-width: var(--container-max); margin: 0 auto; padding: var(--space-4) var(--container-padding); display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); }
+.header-left { display: flex; align-items: center; gap: var(--space-6); flex: 1; }
+.logo-group { display: flex; align-items: center; gap: var(--space-3); }
+.logo-img { height: 32px; width: auto; object-fit: contain; }
+.brandbook-label { font-family: var(--font-display); font-weight: 700; font-size: var(--text-xl); color: var(--color-accent-red); letter-spacing: -0.02em; padding-left: var(--space-4); border-left: 2px solid var(--color-border); }
+.nav-menu { display: flex; align-items: center; gap: var(--space-2); list-style: none; margin-left: auto; flex-wrap: wrap; }
+.nav-btn { padding: var(--space-2) var(--space-4); font-family: var(--font-display); font-weight: 600; font-size: var(--text-sm); color: var(--color-text-secondary); border-radius: 8px; transition: var(--transition); position: relative; white-space: nowrap; }
+.nav-btn:hover, .nav-btn.active { color: var(--color-bg-dark); background: rgba(244, 49, 57, 0.08); }
+.nav-btn.active::after { content: ''; position: absolute; bottom: -2px; left: 50%; transform: translateX(-50%); width: 20px; height: 3px; background: var(--color-accent-red); border-radius: 2px; }
+
 /* ===== НОВЫЕ СТИЛИ ДЛЯ ЦВЕТОВЫХ СЕЛЕКТОРОВ ===== */
 .color-selector { 
   display: flex; 
@@ -153,21 +166,6 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 .brandbook-container { min-height: 100vh; display: flex; flex-direction: column; }
 .content-wrapper { max-width: var(--container-max); margin: 0 auto; padding: var(--space-12) var(--container-padding); width: 100%; }
 
-/* ===== HEADER ===== */
-.main-header { position: sticky; top: 0; z-index: 200; background: rgba(242, 241, 240, 0.98); backdrop-filter: blur(12px); border-bottom: 1px solid var(--color-border); transition: var(--transition); }
-.main-header.scrolled { box-shadow: 0 4px 20px var(--color-shadow); }
-.header-inner { max-width: var(--container-max); margin: 0 auto; padding: var(--space-4) var(--container-padding); display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); }
-.header-left { display: flex; align-items: center; gap: var(--space-6); flex: 1; }
-.logo-group { display: flex; align-items: center; gap: var(--space-3); }
-.logo-img { height: 32px; width: auto; object-fit: contain; }
-.brandbook-label { font-family: var(--font-display); font-weight: 700; font-size: var(--text-xl); color: var(--color-accent-red); letter-spacing: -0.02em; padding-left: var(--space-4); border-left: 2px solid var(--color-border); }
-.nav-menu { display: flex; align-items: center; gap: var(--space-2); list-style: none; margin-left: auto; flex-wrap: wrap; }
-.nav-btn { padding: var(--space-2) var(--space-4); font-family: var(--font-display); font-weight: 600; font-size: var(--text-sm); color: var(--color-text-secondary); border-radius: 8px; transition: var(--transition); position: relative; white-space: nowrap; }
-.nav-btn:hover, .nav-btn.active { color: var(--color-bg-dark); background: rgba(244, 49, 57, 0.08); }
-.nav-btn.active::after { content: ''; position: absolute; bottom: -2px; left: 50%; transform: translateX(-50%); width: 20px; height: 3px; background: var(--color-accent-red); border-radius: 2px; }
-.burger-icon { display: none; font-size: var(--text-2xl); color: var(--color-bg-dark); padding: var(--space-2); border-radius: 8px; transition: var(--transition); order: 99; margin-left: auto; }
-.burger-icon:hover { background: rgba(35, 31, 32, 0.08); }
-
 
 /* ===== HERO ===== */
 .hero-brand { padding: var(--space-16) var(--container-padding); text-align: center; color: var(--color-text-inverse); position: relative; overflow: hidden; }
@@ -199,18 +197,109 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 .extended-palette .swatch-info { font-size: 0.7rem; }
 .extended-palette .swatch-info small { display: block; color: #5a5a5a; line-height: 1.3; }
 
-/* Цветовые сочетания */
+/* ===== ЦВЕТОВЫЕ СОЧЕТАНИЯ - ГОРИЗОНТАЛЬНЫЙ СКРОЛЛ ===== */
+.color-scroll-section { margin: var(--space-8) 0; }
+.color-scroll-wrapper { position: relative; margin-bottom: var(--space-6); }
+.color-scroll-gallery { 
+  display: flex; 
+  gap: var(--space-4); 
+  overflow-x: auto; 
+  scroll-snap-type: x mandatory; 
+  scroll-behavior: smooth; 
+  padding: var(--space-2) var(--space-8); 
+  scrollbar-width: none; 
+  -webkit-overflow-scrolling: touch; 
+}
+.color-scroll-gallery::-webkit-scrollbar { display: none; }
+.color-scroll-item { 
+  flex: 0 0 320px; 
+  scroll-snap-align: start; 
+}
+.color-scroll-item .combination-card {
+  margin: 0 !important;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--border-radius-lg);
+}
+.color-scroll-item .combination-desc {
+  flex: 1;
+  margin-bottom: 0;
+}
+.color-scroll-nav-btn { 
+  position: absolute; 
+  top: 50%; 
+  transform: translateY(-50%); 
+  width: 40px; 
+  height: 40px; 
+  border-radius: 50%; 
+  background: #fff; 
+  border: 1px solid var(--color-border); 
+  color: var(--color-bg-dark); 
+  font-size: var(--text-lg); 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  box-shadow: 0 4px 12px var(--color-shadow); 
+  transition: var(--transition); 
+  z-index: 10; 
+  cursor: pointer; 
+}
+.color-scroll-nav-btn:hover { 
+  background: var(--color-accent-red); 
+  color: #fff; 
+  border-color: var(--color-accent-red); 
+}
+.color-scroll-nav-btn.prev { left: 0; }
+.color-scroll-nav-btn.next { right: 0; }
+.color-scroll-nav-btn:disabled { 
+  opacity: 0.4; 
+  cursor: not-allowed; 
+  background: #fff; 
+  color: var(--color-border); 
+}
+
+/* Карточки сочетаний */
 .color-combinations { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--space-6); margin: var(--space-8) 0; }
-.combination-card { background: #fff; border-radius: var(--border-radius-lg); padding: var(--space-5); border: 1px solid var(--color-border); box-shadow: 0 4px 20px var(--color-shadow); }
+.combination-card { 
+  background: #fff; 
+  border-radius: var(--border-radius-lg); 
+  padding: var(--space-5); 
+  border: 1px solid var(--color-border); 
+  box-shadow: 0 4px 20px var(--color-shadow); 
+  transition: var(--transition-smooth);
+}
 .combination-card.allowed { border-left: 4px solid #22c55e; }
 .combination-card.forbidden { border-left: 4px solid #ef4444; }
-.combination-title { font-family: var(--font-display); font-weight: 700; font-size: var(--text-lg); margin-bottom: var(--space-4); display: flex; align-items: center; gap: var(--space-2); }
+.combination-title { 
+  font-family: var(--font-display); 
+  font-weight: 700; 
+  font-size: var(--text-lg); 
+  margin-bottom: var(--space-4); 
+  display: flex; 
+  align-items: center; 
+  gap: var(--space-2); 
+}
 .combination-title i { font-size: var(--text-xl); }
 .combination-title.allowed i { color: #22c55e; }
 .combination-title.forbidden i { color: #ef4444; }
-.combination-preview { display: flex; gap: var(--space-2); margin-bottom: var(--space-3); flex-wrap: wrap; }
-.combination-swatch { width: 40px; height: 40px; border-radius: 8px; border: 2px solid var(--color-border); }
-.combination-desc { font-size: var(--text-sm); color: var(--color-text-secondary); line-height: 1.5; }
+.combination-preview { 
+  display: flex; 
+  gap: var(--space-2); 
+  margin-bottom: var(--space-3); 
+  flex-wrap: wrap; 
+}
+.combination-swatch { 
+  width: 40px; 
+  height: 40px; 
+  border-radius: 8px; 
+  border: 2px solid var(--color-border); 
+}
+.combination-desc { 
+  font-size: var(--text-sm); 
+  color: var(--color-text-secondary); 
+  line-height: 1.5; 
+}
 
 /* ===== ФОТО ===== */
 .photo-large, .photo-medium { border-radius: var(--border-radius-lg); overflow: hidden; box-shadow: 0 8px 32px var(--color-shadow); margin: var(--space-6) 0; }
@@ -740,6 +829,19 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   }
 }
 
+/* ===== АДАПТИВ ДЛЯ ЦВЕТОВОГО СКРОЛЛА ===== */
+@media (max-width: 768px) {
+  .color-scroll-item {
+    flex: 0 0 calc(100vw - 48px);
+  }
+  .color-scroll-gallery {
+    padding: var(--space-2) var(--space-4);
+  }
+  .color-scroll-nav-btn {
+    display: none;
+  }
+}
+
 /* ===== АДАПТИВ ===== */
 @media (max-width: 1024px) { 
   .nav-menu { display: none; } 
@@ -790,40 +892,13 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   .preview-content { font-size: 1.5rem !important; } 
 }
 
-@media (max-width: 860px) { 
-  .mobile-nav { z-index: 100000 !important; } 
-  .overlay { z-index: 99999 !important; } 
-  .burger-icon { z-index: 100001 !important; } 
-  .main-header { z-index: 99998 !important; } 
-  .content-wrapper { padding: var(--space-6) var(--space-4) !important; } 
-  .main-header { background: transparent !important; backdrop-filter: none !important; border-bottom: none !important; box-shadow: none !important; position: absolute !important; top: 0 !important; left: 0 !important; width: 100% !important; } 
-  .header-inner { justify-content: flex-end !important; height: 0 !important; padding: 0 var(--space-4) !important; background: transparent !important; } 
-  .header-left { display: none !important; } 
-  .nav-menu { display: none !important; } 
-  .burger-icon { display: flex !important; position: fixed !important; top: 19px !important; right: 20px !important; width: 52px !important; height: 52px !important; background: #fff !important; border-radius: 50% !important; box-shadow: 0 2px 10px rgba(0,0,0,.15) !important; color: #231F20 !important; font-size: 26px !important; align-items: center !important; justify-content: center !important; } 
-}
-
-@media (max-width: 860px) { 
-  .mobile-nav ul li a { padding: 12px 0 !important; font-size: 16px !important; min-height: 44px !important; display: flex !important; align-items: center !important; } 
-  .mobile-logo-group { padding-top: 10px !important; } 
-  .close-mobile-menu { width: 44px !important; height: 44px !important; font-size: 22px !important; } 
-}
 
 @media (max-width: 860px) { 
   .photo-large img { aspect-ratio: 4/3 !important; object-fit: cover !important; } 
   .photo-medium img { aspect-ratio: 1/1 !important; } 
 }
 
-@supports (-webkit-touch-callout: none) { 
-  .mobile-nav { height: -webkit-fill-available !important; 
-  } 
-}
 
-.mobile-logo-group { display: flex !important; flex-direction: column !important; align-items: center !important; gap: 12px !important; margin-bottom: 16px !important; padding-bottom: 16px !important; border-bottom: 1px solid rgba(255,255,255,.08) !important; }
-.mobile-logo-group img { max-width: 110px !important; height: auto !important; }
-.mobile-nav ul li a { color: #F2F1F0 !important; font-family: 'Unbounded', sans-serif !important; font-size: 15px !important; text-decoration: none !important; display: block !important; padding: 6px 0 !important; line-height: 1.2 !important; transition: color .2s !important; }
-.mobile-nav ul li a:hover, .mobile-nav ul li a.active { color: #E8454D !important; }
-.main-footer { background: #2C4068 !important; }
 
 @media (max-width: 860px) { 
   .page-title, .hero-brand h1, .section-title { padding-top: 20px !important; } 
@@ -844,10 +919,10 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 
 .show-more-wrapper {
   display: flex;
-  justify-content: center;   /* горизонтальное центрирование */
-  align-items: center;       /* вертикальное (если будет высота) */
-  width: 100%;               /* растягиваем на всю ширину родителя */
-  margin: 48px 0;            /* отступы сверху и снизу */
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 48px 0;
 }
 </style>
 </head>
@@ -1079,7 +1154,8 @@ data-fullscreen="SVG/src.png" data-name="Структура логотипа" da
 <section class="page-section" id="page-colors">
 <div class="hero-brand" data-color="gold"><div class="hero-brand-content"><h1>Фирменные цвета</h1><p>Палитра контрастов и театрального света</p></div></div>
 <div class="content-wrapper">
-<!-- НОВОЕ: заголовок для основных цветов -->
+
+<!-- ===== ОСНОВНЫЕ ЦВЕТА ДЛЯ САЙТА ===== -->
 <h2 class="section-title">Цвета для сайта</h2>
 <div class="color-palette extended-palette">
 <div class="swatch"><div class="swatch-color" style="background:#F2F1F0;"></div><div class="swatch-info"><span class="swatch-name">Светлый фон</span><code>#F2F1F0</code><small>RGB: 242,241,240<br>CMYK: 0,1,2,5<br>PANTONE: Cool Gray 1 C</small></div></div>
@@ -1089,72 +1165,130 @@ data-fullscreen="SVG/src.png" data-name="Структура логотипа" da
 <div class="swatch"><div class="swatch-color" style="background:#D4BF95;"></div><div class="swatch-info"><span class="swatch-name">Золотой</span><code>#D4BF95</code><small>RGB: 212,191,149<br>CMYK: 0,15,35,17<br>PANTONE: 7501 C</small></div></div>
 </div>
 
+<!-- ===== ЦВЕТОВЫЕ СОЧЕТАНИЯ - ГОРИЗОНТАЛЬНЫЙ СКРОЛЛ ===== -->
 <h2 class="section-title mt-8">Цветовые сочетания</h2>
-<div class="color-combinations">
-<div class="combination-card allowed">
-<div class="combination-title"><i class="fas fa-check-circle"></i> Разрешено</div>
-<div class="combination-preview">
-<div class="combination-swatch" style="background:#F2F1F0;"></div>
-<div class="combination-swatch" style="background:#231F20;"></div>
+
+<!-- РАЗРЕШЁННЫЕ СОЧЕТАНИЯ (ОСНОВНЫЕ) -->
+<div class="color-scroll-section">
+  <h3 style="font-family:var(--font-display); font-weight:600; margin: var(--space-6) 0 var(--space-4); color: var(--color-text-secondary);">✅ Разрешённые сочетания</h3>
+  <div class="color-scroll-wrapper">
+    <button class="color-scroll-nav-btn prev" data-target="colorsAllowed"><i class="fas fa-chevron-left"></i></button>
+    <div class="color-scroll-gallery" id="colorsAllowed">
+      <div class="color-scroll-item">
+        <div class="combination-card allowed">
+          <div class="combination-title"><i class="fas fa-check-circle"></i> Разрешено</div>
+          <div class="combination-preview">
+            <div class="combination-swatch" style="background:#F2F1F0;"></div>
+            <div class="combination-swatch" style="background:#231F20;"></div>
+          </div>
+          <p class="combination-desc">Светлый фон + тёмный текст — базовое сочетание для основного контента.</p>
+        </div>
+      </div>
+      <div class="color-scroll-item">
+        <div class="combination-card allowed">
+          <div class="combination-title"><i class="fas fa-check-circle"></i> Разрешено</div>
+          <div class="combination-preview">
+            <div class="combination-swatch" style="background:#2C4068;"></div>
+            <div class="combination-swatch" style="background:#F2F1F0;"></div>
+          </div>
+          <p class="combination-desc">Синий фон + светлый текст — для акцентных блоков и заголовков.</p>
+        </div>
+      </div>
+      <div class="color-scroll-item">
+        <div class="combination-card allowed">
+          <div class="combination-title"><i class="fas fa-check-circle"></i> Разрешено</div>
+          <div class="combination-preview">
+            <div class="combination-swatch" style="background:#F43139;"></div>
+            <div class="combination-swatch" style="background:#fff;"></div>
+          </div>
+          <p class="combination-desc">Красный акцент + белый текст — для кнопок и призывов к действию.</p>
+        </div>
+      </div>
+      <div class="color-scroll-item">
+        <div class="combination-card allowed">
+          <div class="combination-title"><i class="fas fa-check-circle"></i> Разрешено</div>
+          <div class="combination-preview">
+            <div class="combination-swatch" style="background:#D4BF95;"></div>
+            <div class="combination-swatch" style="background:#231F20;"></div>
+          </div>
+          <p class="combination-desc">Золотой фон + тёмный текст — для премиум-материалов.</p>
+        </div>
+      </div>
+      <div class="color-scroll-item">
+        <div class="combination-card allowed">
+          <div class="combination-title"><i class="fas fa-check-circle"></i> Разрешено</div>
+          <div class="combination-preview">
+            <div class="combination-swatch" style="background:#231F20;"></div>
+            <div class="combination-swatch" style="background:#F2F1F0;"></div>
+          </div>
+          <p class="combination-desc">Тёмный фон + светлый текст — классический контраст для заголовков.</p>
+        </div>
+      </div>
+            <div class="color-scroll-item">
+        <div class="combination-card allowed">
+          <div class="combination-title"><i class="fas fa-times-circle"></i> Разпрещено</div>
+          <div class="combination-preview">
+            <div class="combination-swatch" style="background:#231F20;"></div>
+            <div class="combination-swatch" style="background:#F43139;"></div>
+          </div>
+          <p class="combination-desc">Тёмный фон + красный текст — высокий контраст.</p>
+        </div>
+      </div>
+    </div>
+    <button class="color-scroll-nav-btn next" data-target="colorsAllowed"><i class="fas fa-chevron-right"></i></button>
+  </div>
 </div>
-<p class="combination-desc">Светлый фон + тёмный текст — базовое сочетание для основного контента.</p>
-</div>
-<div class="combination-card allowed">
-<div class="combination-title"><i class="fas fa-check-circle"></i> Разрешено</div>
-<div class="combination-preview">
-<div class="combination-swatch" style="background:#2C4068;"></div>
-<div class="combination-swatch" style="background:#F2F1F0;"></div>
-</div>
-<p class="combination-desc">Синий фон + светлый текст — для акцентных блоков и заголовков.</p>
-</div>
-<div class="combination-card allowed">
-<div class="combination-title"><i class="fas fa-check-circle"></i> Разрешено</div>
-<div class="combination-preview">
-<div class="combination-swatch" style="background:#F43139;"></div>
-<div class="combination-swatch" style="background:#fff;"></div>
-</div>
-<p class="combination-desc">Красный акцент + белый текст — для кнопок и призывов к действию.</p>
-</div>
-<div class="combination-card allowed">
-<div class="combination-title"><i class="fas fa-check-circle"></i> Разрешено</div>
-<div class="combination-preview">
-<div class="combination-swatch" style="background:#D4BF95;"></div>
-<div class="combination-swatch" style="background:#231F20;"></div>
-</div>
-<p class="combination-desc">Золотой фон + тёмный текст — для премиум-материалов.</p>
-</div>
-<div class="combination-card forbidden">
-<div class="combination-title"><i class="fas fa-times-circle"></i> Запрещено</div>
-<div class="combination-preview">
-<div class="combination-swatch" style="background:#F43139;"></div>
-<div class="combination-swatch" style="background:#2C4068;"></div>
-</div>
-<p class="combination-desc">Красный + синий — конфликт акцентных цветов, снижает читаемость.</p>
-</div>
-<div class="combination-card forbidden">
-<div class="combination-title"><i class="fas fa-times-circle"></i> Запрещено</div>
-<div class="combination-preview">
-<div class="combination-swatch" style="background:#F2F1F0;"></div>
-<div class="combination-swatch" style="background:#D4BF95;"></div>
-</div>
-<p class="combination-desc">Светлый фон + золотой текст — низкий контраст, текст нечитаем.</p>
-</div>
-<div class="combination-card forbidden">
-<div class="combination-title"><i class="fas fa-times-circle"></i> Запрещено</div>
-<div class="combination-preview">
-<div class="combination-swatch" style="background:#231F20;"></div>
-<div class="combination-swatch" style="background:#F43139;"></div>
-</div>
-<p class="combination-desc">Тёмный фон + красный текст — вибрация цветов, утомляет глаза.</p>
-</div>
-<div class="combination-card forbidden">
-<div class="combination-title"><i class="fas fa-times-circle"></i> Запрещено</div>
-<div class="combination-preview">
-<div class="combination-swatch" style="background:#888;"></div>
-<div class="combination-swatch" style="background:#aaa;"></div>
-</div>
-<p class="combination-desc">Сторонние серые оттенки — не входят в палитру бренда.</p>
-</div>
+
+<!-- ЗАПРЕЩЁННЫЕ СОЧЕТАНИЯ (ОСНОВНЫЕ) -->
+<div class="color-scroll-section">
+  <h3 style="font-family:var(--font-display); font-weight:600; margin: var(--space-6) 0 var(--space-4); color: var(--color-text-secondary);">❌ Запрещённые сочетания</h3>
+  <div class="color-scroll-wrapper">
+    <button class="color-scroll-nav-btn prev" data-target="colorsForbidden"><i class="fas fa-chevron-left"></i></button>
+    <div class="color-scroll-gallery forbidden-scroll" id="colorsForbidden">
+      <div class="color-scroll-item">
+        <div class="combination-card forbidden">
+          <div class="combination-title"><i class="fas fa-times-circle"></i> Запрещено</div>
+          <div class="combination-preview">
+            <div class="combination-swatch" style="background:#F43139;"></div>
+            <div class="combination-swatch" style="background:#2C4068;"></div>
+          </div>
+          <p class="combination-desc">Красный + синий — конфликт акцентных цветов, снижает читаемость.</p>
+        </div>
+      </div>
+      <div class="color-scroll-item">
+        <div class="combination-card forbidden">
+          <div class="combination-title"><i class="fas fa-times-circle"></i> Запрещено</div>
+          <div class="combination-preview">
+            <div class="combination-swatch" style="background:#F2F1F0;"></div>
+            <div class="combination-swatch" style="background:#D4BF95;"></div>
+          </div>
+          <p class="combination-desc">Светлый фон + золотой текст — низкий контраст, текст нечитаем.</p>
+        </div>
+      </div>
+
+      <div class="color-scroll-item">
+        <div class="combination-card forbidden">
+          <div class="combination-title"><i class="fas fa-times-circle"></i> Запрещено</div>
+          <div class="combination-preview">
+            <div class="combination-swatch" style="background:#888;"></div>
+            <div class="combination-swatch" style="background:#aaa;"></div>
+          </div>
+          <p class="combination-desc">Сторонние серые оттенки — не входят в палитру бренда.</p>
+        </div>
+      </div>
+      <div class="color-scroll-item">
+        <div class="combination-card forbidden">
+          <div class="combination-title"><i class="fas fa-times-circle"></i> Запрещено</div>
+          <div class="combination-preview">
+            <div class="combination-swatch" style="background:#F43139;"></div>
+            <div class="combination-swatch" style="background:#0C8CE9;"></div>
+          </div>
+          <p class="combination-desc">Красный + ярко-синий — конфликт двух активных цветов.</p>
+        </div>
+      </div>
+    </div>
+    <button class="color-scroll-nav-btn next" data-target="colorsForbidden"><i class="fas fa-chevron-right"></i></button>
+  </div>
 </div>
 
 <div class="grid-2col">
@@ -1162,7 +1296,7 @@ data-fullscreen="SVG/src.png" data-name="Структура логотипа" da
 <article class="brand-card"><h3>Сочетания</h3><p>Тёмный текст на светлом, красный для кнопок, синий для фонов. Запрещены сторонние оттенки.</p></article>
 </div>
 
-<!-- ===== БЛОК: ЦВЕТА ДЛЯ ФИРМЕННОГО СТИЛЯ (ОСТАЁТСЯ) ===== -->
+<!-- ===== ЦВЕТА ДЛЯ ФИРМЕННОГО СТИЛЯ - ТЕПЕРЬ ТОЖЕ СКРОЛЛ ===== -->
 <h2 class="section-title mt-8">Цвета для фирменного стиля</h2>
 <div class="color-palette extended-palette">
 <div class="swatch"><div class="swatch-color" style="background:#0C8CE9;"></div><div class="swatch-info"><span class="swatch-name">Ярко-синий</span><code>#0C8CE9</code><small>RGB: 12,140,233<br>CMYK: 90,40,0,0<br>PANTONE: 2995 C</small></div></div>
@@ -1172,43 +1306,109 @@ data-fullscreen="SVG/src.png" data-name="Структура логотипа" da
 <div class="swatch"><div class="swatch-color" style="background:#231F20;"></div><div class="swatch-info"><span class="swatch-name">Тёмный</span><code>#231F20</code><small>RGB: 35,31,32<br>CMYK: 70,67,64,74<br>PANTONE: Neutral Black C</small></div></div>
 </div>
 
+<!-- РАЗРЕШЁННЫЕ МОДИФИКАЦИИ ФИРМЕННЫХ ЦВЕТОВ - СКРОЛЛ -->
 <h3 class="section-title mt-6">Разрешённые модификации фирменных цветов</h3>
-<div class="color-combinations">
-<div class="combination-card allowed">
-<div class="combination-title"><i class="fas fa-check-circle"></i> Разрешено</div>
-<div class="combination-preview"><div class="combination-swatch" style="background:#0C8CE9;"></div><div class="combination-swatch" style="background:#F2F1F0;"></div></div>
-<p class="combination-desc">Ярко-синий фон + светлый текст — современный акцент, высокая читаемость.</p>
-</div>
-<div class="combination-card allowed">
-<div class="combination-title"><i class="fas fa-check-circle"></i> Разрешено</div>
-<div class="combination-preview"><div class="combination-swatch" style="background:#D4BF95;"></div><div class="combination-swatch" style="background:#231F20;"></div></div>
-<p class="combination-desc">Золотой фон + тёмный текст — элегантность и премиальность.</p>
-</div>
-<div class="combination-card allowed">
-<div class="combination-title"><i class="fas fa-check-circle"></i> Разрешено</div>
-<div class="combination-preview"><div class="combination-swatch" style="background:#231F20;"></div><div class="combination-swatch" style="background:#F2F1F0;"></div></div>
-<p class="combination-desc">Тёмный фон + светлый текст — классический контраст.</p>
-</div>
+<div class="color-scroll-section">
+  <div class="color-scroll-wrapper">
+    <button class="color-scroll-nav-btn prev" data-target="corpAllowed"><i class="fas fa-chevron-left"></i></button>
+    <div class="color-scroll-gallery" id="corpAllowed">
+      <div class="color-scroll-item">
+        <div class="combination-card allowed">
+          <div class="combination-title"><i class="fas fa-check-circle"></i> Разрешено</div>
+          <div class="combination-preview">
+            <div class="combination-swatch" style="background:#0C8CE9;"></div>
+            <div class="combination-swatch" style="background:#F2F1F0;"></div>
+          </div>
+          <p class="combination-desc">Ярко-синий фон + светлый текст — современный акцент, высокая читаемость.</p>
+        </div>
+      </div>
+      <div class="color-scroll-item">
+        <div class="combination-card allowed">
+          <div class="combination-title"><i class="fas fa-check-circle"></i> Разрешено</div>
+          <div class="combination-preview">
+            <div class="combination-swatch" style="background:#D4BF95;"></div>
+            <div class="combination-swatch" style="background:#231F20;"></div>
+          </div>
+          <p class="combination-desc">Золотой фон + тёмный текст — элегантность и премиальность.</p>
+        </div>
+      </div>
+      <div class="color-scroll-item">
+        <div class="combination-card allowed">
+          <div class="combination-title"><i class="fas fa-check-circle"></i> Разрешено</div>
+          <div class="combination-preview">
+            <div class="combination-swatch" style="background:#231F20;"></div>
+            <div class="combination-swatch" style="background:#F2F1F0;"></div>
+          </div>
+          <p class="combination-desc">Тёмный фон + светлый текст — классический контраст.</p>
+        </div>
+      </div>
+      <div class="color-scroll-item">
+        <div class="combination-card allowed">
+          <div class="combination-title"><i class="fas fa-check-circle"></i> Разрешено</div>
+          <div class="combination-preview">
+            <div class="combination-swatch" style="background:#231F20;"></div>
+            <div class="combination-swatch" style="background:#F43139;"></div>
+          </div>
+          <p class="combination-desc">Тёмный фон + красный текст — контрастное сочетание для акцентов.</p>
+        </div>
+      </div>
+            <div class="color-scroll-item">
+        <div class="combination-card allowed">
+          <div class="combination-title"><i class="fas fa-times-circle"></i> Разрешено</div>
+          <div class="combination-preview">
+            <div class="combination-swatch" style="background:#F43139;"></div>
+            <div class="combination-swatch" style="background:#231F20;"></div>
+          </div>
+          <p class="combination-desc">Красный текст на тёмном — высокий контраст.</p>
+        </div>
+    </div>
+    <button class="color-scroll-nav-btn next" data-target="corpAllowed"><i class="fas fa-chevron-right"></i></button>
+  </div>
 </div>
 
+<!-- ЗАПРЕЩЁННЫЕ МОДИФИКАЦИИ ФИРМЕННЫХ ЦВЕТОВ - СКРОЛЛ -->
 <h3 class="section-title mt-6">Запрещённые модификации фирменных цветов</h3>
-<div class="color-combinations">
-<div class="combination-card forbidden">
-<div class="combination-title"><i class="fas fa-times-circle"></i> Запрещено</div>
-<div class="combination-preview"><div class="combination-swatch" style="background:#F43139;"></div><div class="combination-swatch" style="background:#0C8CE9;"></div></div>
-<p class="combination-desc">Красный + ярко-синий — конфликт двух активных цветов.</p>
+<div class="color-scroll-section">
+  <div class="color-scroll-wrapper">
+    <button class="color-scroll-nav-btn prev" data-target="corpForbidden"><i class="fas fa-chevron-left"></i></button>
+    <div class="color-scroll-gallery forbidden-scroll" id="corpForbidden">
+      <div class="color-scroll-item">
+        <div class="combination-card forbidden">
+          <div class="combination-title"><i class="fas fa-times-circle"></i> Запрещено</div>
+          <div class="combination-preview">
+            <div class="combination-swatch" style="background:#F43139;"></div>
+            <div class="combination-swatch" style="background:#0C8CE9;"></div>
+          </div>
+          <p class="combination-desc">Красный + ярко-синий — конфликт двух активных цветов.</p>
+        </div>
+      </div>
+      <div class="color-scroll-item">
+        <div class="combination-card forbidden">
+          <div class="combination-title"><i class="fas fa-times-circle"></i> Запрещено</div>
+          <div class="combination-preview">
+            <div class="combination-swatch" style="background:#D4BF95;"></div>
+            <div class="combination-swatch" style="background:#F2F1F0;"></div>
+          </div>
+          <p class="combination-desc">Золотой текст на светлом фоне — недостаточный контраст.</p>
+        </div>
+      </div>
+
+  
+      <div class="color-scroll-item">
+        <div class="combination-card forbidden">
+          <div class="combination-title"><i class="fas fa-times-circle"></i> Запрещено</div>
+          <div class="combination-preview">
+            <div class="combination-swatch" style="background:#999;"></div>
+            <div class="combination-swatch" style="background:#ccc;"></div>
+          </div>
+          <p class="combination-desc">Сторонние оттенки серого — не входят в палитру бренда.</p>
+        </div>
+      </div>
+    </div>
+    <button class="color-scroll-nav-btn next" data-target="corpForbidden"><i class="fas fa-chevron-right"></i></button>
+  </div>
 </div>
-<div class="combination-card forbidden">
-<div class="combination-title"><i class="fas fa-times-circle"></i> Запрещено</div>
-<div class="combination-preview"><div class="combination-swatch" style="background:#D4BF95;"></div><div class="combination-swatch" style="background:#F2F1F0;"></div></div>
-<p class="combination-desc">Золотой текст на светлом фоне — недостаточный контраст.</p>
-</div>
-<div class="combination-card forbidden">
-<div class="combination-title"><i class="fas fa-times-circle"></i> Запрещено</div>
-<div class="combination-preview"><div class="combination-swatch" style="background:#F43139;"></div><div class="combination-swatch" style="background:#231F20;"></div></div>
-<p class="combination-desc">Красный текст на тёмном — вибрация и утомление глаз.</p>
-</div>
-</div>
+
 </div>
 </section>
 
@@ -1241,14 +1441,208 @@ data-fullscreen="SVG/src.png" data-name="Структура логотипа" da
 
 <!-- СТРАНИЦА: ГРАФИКА -->
 <section class="page-section" id="page-graphics">
-<div class="hero-brand" data-color="dark"><div class="hero-brand-content"><h1>Графические элементы</h1></div></div>
-<div class="content-wrapper">
-<div class="grid-3col">
-<article class="brand-card"><h3>Маска / знак</h3><p>Стилизованная клоунская маска — самостоятельный паттерн.</p></article>
-<article class="brand-card"><h3>Линии кулис</h3><p>Вертикальные и горизонтальные полосы для динамики.</p></article>
-<article class="brand-card"><h3>Условия</h3><p>Только фирменные цвета. Не перекрывать логотип.</p></article>
+<div class="hero-brand" data-color="dark">
+  <div class="hero-brand-content">
+    <h1>Графические элементы</h1>
+    <p>Паттерны, декоративные элементы и иллюстрации бренда</p>
+  </div>
 </div>
-<figure class="photo-medium mt-8" style="max-width: 900px; margin: 0 auto;"><img src="https://placehold.co/900x450/2C4068/F2F1F0?text=ГРАФИЧЕСКИЙ+ЭЛЕМЕНТ" alt="Графика" loading="lazy" width="900" height="450"></figure>
+<div class="content-wrapper">
+
+  <!-- ===== ПАТТЕРНЫ (одно фото, без скролла) ===== -->
+  <h2 class="section-title">Паттерны</h2>
+  <p style="color:var(--color-text-secondary); margin-bottom:var(--space-4);">
+    Фирменные паттерны на основе клоунской маски и театральных мотивов:
+  </p>
+  <div style="display: flex; justify-content: flex-start; margin-bottom: var(--space-8);">
+    <div class="scroll-item" style="flex: 0 0 400px; max-width: 100%;">
+      <div class="scroll-item-image" 
+           data-fullscreen="https://placehold.co/600x400/2C4068/F2F1F0?text=ПАТТЕРН+МАСКА" 
+           data-name="Паттерн «Маска»" 
+           data-bg="blue">
+        <img src="https://placehold.co/400x300/2C4068/F2F1F0?text=ПАТТЕРН+МАСКА" 
+             alt="Паттерн Маска" 
+             loading="lazy">
+      </div>
+      <div class="scroll-item-content">
+        <h4>Паттерн «Маска»</h4>
+        <p>Базовый повторяющийся элемент</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== ГРАФИЧЕСКИЕ ЭЛЕМЕНТЫ (горизонтальный скролл) ===== -->
+  <h2 class="section-title mt-8">Графические элементы</h2>
+  <p style="color:var(--color-text-secondary); margin-bottom:var(--space-4);">
+    Декоративные элементы для оформления материалов:
+  </p>
+  <div class="scroll-gallery-wrapper">
+    <button class="scroll-nav-btn prev" data-target="graphicsScroll">
+      <i class="fas fa-chevron-left"></i>
+    </button>
+    <div class="scroll-gallery" id="graphicsScroll">
+      <div class="scroll-item">
+        <div class="scroll-item-image" 
+             data-fullscreen="https://placehold.co/400x300/F2F1F0/F43139?text=ЛИНИИ+КУЛИС" 
+             data-name="Линии кулис" 
+             data-bg="light">
+          <img src="https://placehold.co/280x180/F2F1F0/F43139?text=ЛИНИИ+КУЛИС" 
+               alt="Линии кулис" 
+               loading="lazy">
+        </div>
+        <div class="scroll-item-content">
+          <h4>Линии кулис</h4>
+          <p>Вертикальные акценты</p>
+        </div>
+      </div>
+      <div class="scroll-item">
+        <div class="scroll-item-image" 
+             data-fullscreen="https://placehold.co/400x300/F2F1F0/2C4068?text=ВОЛНЫ" 
+             data-name="Волны" 
+             data-bg="light">
+          <img src="https://placehold.co/280x180/F2F1F0/2C4068?text=ВОЛНЫ" 
+               alt="Волны" 
+               loading="lazy">
+        </div>
+        <div class="scroll-item-content">
+          <h4>Волны</h4>
+          <p>Динамичные кривые</p>
+        </div>
+      </div>
+      <div class="scroll-item">
+        <div class="scroll-item-image" 
+             data-fullscreen="https://placehold.co/400x300/F2F1F0/D4BF95?text=ТОЧКИ" 
+             data-name="Точки" 
+             data-bg="light">
+          <img src="https://placehold.co/280x180/F2F1F0/D4BF95?text=ТОЧКИ" 
+               alt="Точки" 
+               loading="lazy">
+        </div>
+        <div class="scroll-item-content">
+          <h4>Точки</h4>
+          <p>Ритмичный паттерн</p>
+        </div>
+      </div>
+      <div class="scroll-item">
+        <div class="scroll-item-image" 
+             data-fullscreen="https://placehold.co/400x300/F2F1F0/231F20?text=ЗВЁЗДЫ" 
+             data-name="Звёзды" 
+             data-bg="light">
+          <img src="https://placehold.co/280x180/F2F1F0/231F20?text=ЗВЁЗДЫ" 
+               alt="Звёзды" 
+               loading="lazy">
+        </div>
+        <div class="scroll-item-content">
+          <h4>Звёзды</h4>
+          <p>Театральная атмосфера</p>
+        </div>
+      </div>
+      <div class="scroll-item">
+        <div class="scroll-item-image" 
+             data-fullscreen="https://placehold.co/400x300/F2F1F0/F43139?text=КОНФЕТТИ" 
+             data-name="Конфетти" 
+             data-bg="light">
+          <img src="https://placehold.co/280x180/F2F1F0/F43139?text=КОНФЕТТИ" 
+               alt="Конфетти" 
+               loading="lazy">
+        </div>
+        <div class="scroll-item-content">
+          <h4>Конфетти</h4>
+          <p>Праздничный элемент</p>
+        </div>
+      </div>
+    </div>
+    <button class="scroll-nav-btn next" data-target="graphicsScroll">
+      <i class="fas fa-chevron-right"></i>
+    </button>
+  </div>
+
+  <!-- ===== ИЛЛЮСТРАЦИИ (горизонтальный скролл) ===== -->
+  <h2 class="section-title mt-8">Иллюстрации</h2>
+  <p style="color:var(--color-text-secondary); margin-bottom:var(--space-4);">
+    Авторские иллюстрации персонажей и сцен:
+  </p>
+  <div class="scroll-gallery-wrapper">
+    <button class="scroll-nav-btn prev" data-target="illustrationsScroll">
+      <i class="fas fa-chevron-left"></i>
+    </button>
+    <div class="scroll-gallery" id="illustrationsScroll">
+      <div class="scroll-item">
+        <div class="scroll-item-image" 
+             data-fullscreen="https://placehold.co/400x300/2C4068/F2F1F0?text=ПЕРСОНАЖ+1" 
+             data-name="Персонаж «Мик»" 
+             data-bg="blue">
+          <img src="https://placehold.co/280x180/2C4068/F2F1F0?text=ПЕРСОНАЖ+1" 
+               alt="Персонаж Мик" 
+               loading="lazy">
+        </div>
+        <div class="scroll-item-content">
+          <h4>Персонаж «Мик»</h4>
+          <p>Главный герой бренда</p>
+        </div>
+      </div>
+      <div class="scroll-item">
+        <div class="scroll-item-image" 
+             data-fullscreen="https://placehold.co/400x300/D4BF95/231F20?text=ПЕРСОНАЖ+2" 
+             data-name="Персонаж «Ос»" 
+             data-bg="gold">
+          <img src="https://placehold.co/280x180/D4BF95/231F20?text=ПЕРСОНАЖ+2" 
+               alt="Персонаж Ос" 
+               loading="lazy">
+        </div>
+        <div class="scroll-item-content">
+          <h4>Персонаж «Ос»</h4>
+          <p>Комический напарник</p>
+        </div>
+      </div>
+      <div class="scroll-item">
+        <div class="scroll-item-image" 
+             data-fullscreen="https://placehold.co/400x300/F43139/white?text=СЦЕНА+1" 
+             data-name="Сцена из спектакля" 
+             data-bg="red">
+          <img src="https://placehold.co/280x180/F43139/white?text=СЦЕНА+1" 
+               alt="Сцена" 
+               loading="lazy">
+        </div>
+        <div class="scroll-item-content">
+          <h4>Сцена из спектакля</h4>
+          <p>Ключевой момент</p>
+        </div>
+      </div>
+      <div class="scroll-item">
+        <div class="scroll-item-image" 
+             data-fullscreen="https://placehold.co/400x300/231F20/F2F1F0?text=АФИША" 
+             data-name="Иллюстрация для афиши" 
+             data-bg="dark">
+          <img src="https://placehold.co/280x180/231F20/F2F1F0?text=АФИША" 
+               alt="Афиша" 
+               loading="lazy">
+        </div>
+        <div class="scroll-item-content">
+          <h4>Для афиши</h4>
+          <p>Композиция для печати</p>
+        </div>
+      </div>
+      <div class="scroll-item">
+        <div class="scroll-item-image" 
+             data-fullscreen="https://placehold.co/400x300/F2F1F0/2C4068?text=СОЦСЕТИ" 
+             data-name="Для соцсетей" 
+             data-bg="light">
+          <img src="https://placehold.co/280x180/F2F1F0/2C4068?text=СОЦСЕТИ" 
+               alt="Для соцсетей" 
+               loading="lazy">
+        </div>
+        <div class="scroll-item-content">
+          <h4>Для соцсетей</h4>
+          <p>Формат для digital</p>
+        </div>
+      </div>
+    </div>
+    <button class="scroll-nav-btn next" data-target="illustrationsScroll">
+      <i class="fas fa-chevron-right"></i>
+    </button>
+  </div>
+
 </div>
 </section>
 
@@ -1577,6 +1971,7 @@ document.addEventListener('click', function(e) {
 });
 
 // ===== НАВИГАЦИЯ И СКРОЛЛ =====
+// Навигация для обычных скролл-галерей (логотипы, графика)
 document.querySelectorAll('.scroll-nav-btn').forEach(btn => {
   btn.addEventListener('click', function() {
     const targetId = this.dataset.target; 
@@ -1586,21 +1981,51 @@ document.querySelectorAll('.scroll-nav-btn').forEach(btn => {
   });
 });
 
+// Обновление состояния кнопок для обычных скролл-галерей
 document.querySelectorAll('.scroll-gallery').forEach(gallery => {
   const update = () => {
-    const p = gallery.parentElement.querySelector('.scroll-nav-btn.prev'); 
-    const n = gallery.parentElement.querySelector('.scroll-nav-btn.next');
-    if (!p || !n) return; 
-    const m = gallery.scrollWidth - gallery.clientWidth; 
-    p.disabled = gallery.scrollLeft <= 0; 
-    n.disabled = gallery.scrollLeft >= m - 1;
+    const wrapper = gallery.parentElement;
+    const prev = wrapper?.querySelector('.scroll-nav-btn.prev'); 
+    const next = wrapper?.querySelector('.scroll-nav-btn.next');
+    if (!prev || !next) return; 
+    const maxScroll = gallery.scrollWidth - gallery.clientWidth; 
+    prev.disabled = gallery.scrollLeft <= 1; 
+    next.disabled = gallery.scrollLeft >= maxScroll - 1;
   }; 
   gallery.addEventListener('scroll', update); 
   window.addEventListener('resize', update); 
   update();
 });
 
-document.querySelectorAll('.scroll-gallery, .variant-placeholder, .clearspace-box, .min-size-visual, .scroll-item-image').forEach(el => {
+// ===== НОВЫЕ СКРИПТЫ ДЛЯ ЦВЕТОВОГО СКРОЛЛА =====
+// Навигация для цветовых скролл-галерей
+document.querySelectorAll('.color-scroll-nav-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    const targetId = this.dataset.target; 
+    const gallery = document.getElementById(targetId); 
+    if (!gallery) return;
+    gallery.scrollBy({ left: this.classList.contains('prev') ? -340 : 340, behavior: 'smooth' });
+  });
+});
+
+// Обновление состояния кнопок для цветовых скролл-галерей
+document.querySelectorAll('.color-scroll-gallery').forEach(gallery => {
+  const update = () => {
+    const wrapper = gallery.parentElement;
+    const prev = wrapper?.querySelector('.color-scroll-nav-btn.prev'); 
+    const next = wrapper?.querySelector('.color-scroll-nav-btn.next');
+    if (!prev || !next) return; 
+    const maxScroll = gallery.scrollWidth - gallery.clientWidth; 
+    prev.disabled = gallery.scrollLeft <= 1; 
+    next.disabled = gallery.scrollLeft >= maxScroll - 1;
+  }; 
+  gallery.addEventListener('scroll', update); 
+  window.addEventListener('resize', update); 
+  update();
+});
+
+// Drag-to-scroll для всех галерей
+document.querySelectorAll('.scroll-gallery, .color-scroll-gallery, .variant-placeholder, .clearspace-box, .min-size-visual, .scroll-item-image').forEach(el => {
   let isDown = false, startX, scrollLeft;
   el.addEventListener('mousedown', e => { 
     if (e.target.closest('a') || e.target.closest('button')) return; 
@@ -2272,6 +2697,22 @@ document.addEventListener('DOMContentLoaded', () => {
     e.target.value = typoState.size; 
     updateTypoPreview(); 
   });
+  
+  // Инициализация состояния кнопок для всех скролл-галерей после загрузки
+  setTimeout(() => {
+    document.querySelectorAll('.scroll-gallery, .color-scroll-gallery').forEach(gallery => {
+      const update = () => {
+        const wrapper = gallery.parentElement;
+        const prev = wrapper?.querySelector('.scroll-nav-btn.prev, .color-scroll-nav-btn.prev'); 
+        const next = wrapper?.querySelector('.scroll-nav-btn.next, .color-scroll-nav-btn.next');
+        if (!prev || !next) return; 
+        const maxScroll = gallery.scrollWidth - gallery.clientWidth; 
+        prev.disabled = gallery.scrollLeft <= 1; 
+        next.disabled = gallery.scrollLeft >= maxScroll - 1;
+      }; 
+      update();
+    });
+  }, 100);
 });
 </script>
 </body>
