@@ -13,8 +13,10 @@
 <link rel="stylesheet" href="css/header-footer.css">
 <!-- Favicon -->
 <link rel="icon" type="image/svg+xml" href="SVG/logo-2.svg">
+
 <style>
 /* ===== DESIGN TOKENS ===== */
+@import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;800&display=swap');
 :root {
   --color-bg-light: #F2F1F0; --color-bg-dark: #231F20;
   --color-accent-red: #F43139; --color-deep-blue: #2C4068; --color-gold: #D4BF95;
@@ -1075,6 +1077,16 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 /* Если в мобильном меню используются ссылки с классом .nav-btn */
 .mobile-nav .nav-btn {
   font-family: var(--font-display) !important;
+}
+
+
+/* Принудительно задаём Unbounded для всех ссылок в мобильном меню */
+.mobile-nav a {
+  font-family: 'Unbounded', system-ui, sans-serif !important;
+  font-weight: 600 !important;
+  font-size: 15px !important;
+  letter-spacing: -0.02em !important;
+  text-decoration: none; /* опционально, чтобы убрать подчёркивание */
 }
 </style>
 </head>
