@@ -9565,3 +9565,22 @@ img.team-img,
         display: none;
     }
 }
+
+
+
+
+
+@media (max-width: 400px) {
+  /* Включаем автоматическую расстановку переносов (требует lang="ru" в <html>) */
+  p, h1, h2, h3, h4, h5, h6, li, .director-bio, .timeline-desc, .award-desc, 
+  .performance-desc, .merch-content p, .legal-value, .contact-text p {
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    
+    /* Улучшает баланс строк в современных браузерах (Chrome 120+, Safari 17.4+) */
+    text-wrap: pretty;
+    
+    /* Небольшое растягивание пробелов помогает браузеру реже разрывать короткие слова */
+    word-spacing: 0.03em;
+  }
+}

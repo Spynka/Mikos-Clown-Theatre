@@ -144,3 +144,48 @@
     });
 	
 })();
+
+/**
+ * Устраняет висячие предлоги и короткие союзы в конце строк
+ * Работает через TreeWalker → не пересоздаёт DOM, не сбивает eventListeners
+ */
+document.addEventListener('DOMContentLoaded', () => {
+  const fixHangingPrepositions = () => {
+    const walker = document.createTreeWalker(
+      document.body,
+      NodeFilter.SHOW_TEXT,
+      { acceptNode: (node) => node.parentElement.tagName !== 'SCRIPT' && node.parentElement.tagName !== 'STYLE' ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT }
+    );
+
+    // Список слов, которые не должны оставаться в конце строки
+    const shortWords = [
+      'в','на','с','со','к','ко','о','об','по','за','до','под','над','из','изо','без','безо','у','при','через','между',
+      'и','а','но','или','да','же','ли','бы','что','как','не','ни','то','так','вот','вдруг','для','от','про','при'
+    ];
+    
+    const regexCache = new Map();
+    
+    let textNode;
+    while (textNode = walker.nextNode()) {
+      let text = textNode.textContent;
+      if (!text || text.length < 10) continue; // Пропускаем очень короткие фрагменты
+
+      let changed = false;
+      shortWords.forEach(word => {
+        if (!regexCache.has(word)) {
+          regexCache.set(word, new RegExp(`(\\s)(${word})(\\s)`, 'gi'));
+        }
+        const regex = regexCache.get(word);
+        if (regex.test(text)) {
+          text = text.replace(regex, '$1$2\u00A0'); // \u00A0 = &nbsp;
+          changed = true;
+        }
+      });
+
+      if (changed) textNode.textContent = text;
+    }
+  };
+
+  // Запуск с небольшой задержкой, чтобы контент успел отрендериться
+  setTimeout(fixHangingPrepositions, 150);
+});
