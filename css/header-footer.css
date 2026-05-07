@@ -323,3 +323,19 @@ html {
         align-items: center;
     }
 }
+
+
+/* === FIX: Шрифт Unbounded для кнопок мобильного меню === */
+.mobile-nav button,
+.mobile-nav ul li button,
+.mobile-nav .nav-btn {
+  font-family: 'Unbounded', system-ui, sans-serif !important;
+  font-weight: 600 !important;
+  font-size: 15px !important;
+  letter-spacing: -0.02em !important;
+}
+
+/* Если в мобильном меню используются ссылки с классом .nav-btn */
+.mobile-nav .nav-btn {
+  font-family: var(--font-display) !important;
+}
