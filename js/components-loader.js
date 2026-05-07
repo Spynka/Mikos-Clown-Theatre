@@ -113,76 +113,90 @@ const showContentImmediately = () => {
     setupLinkHandling();
     
     // ===== ЗАГРУЗКА КОМПОНЕНТОВ =====
-    try {
-        // 1. Загрузка хедера
-        const headerRes = await fetch(`${basePath}components/header.html`);
-        if (!headerRes.ok) throw new Error('header.html');
-        const headerPlaceholder = document.getElementById('site-header');
-        if (headerPlaceholder) {
-            headerPlaceholder.innerHTML = await headerRes.text();
+try {
+    // 1. Загрузка хедера
+    const headerRes = await fetch(`${basePath}components/header.html`);
+    if (!headerRes.ok) throw new Error('header.html');
+    const headerPlaceholder = document.getElementById('site-header');
+    if (headerPlaceholder) {
+        headerPlaceholder.innerHTML = await headerRes.text();
+    }
+    
+    // 2. Загрузка футера
+    const footerRes = await fetch(`${basePath}components/footer.html`);
+    if (!footerRes.ok) throw new Error('footer.html');
+    const footerPlaceholder = document.getElementById('site-footer');
+    if (footerPlaceholder) {
+        footerPlaceholder.innerHTML = await footerRes.text();
+    }
+    
+    // 3. Загрузка hero-слайдера
+    if (currentPage === 'index' || currentPage === 'affiche') {
+        const sliderRes = await fetch(`${basePath}components/hero-slider.html`);
+        if (!sliderRes.ok) throw new Error('hero-slider.html');
+        const sliderHTML = await sliderRes.text();
+        
+        const sliderPlaceholder = document.getElementById('site-hero-slider');
+        if (sliderPlaceholder) {
+            sliderPlaceholder.innerHTML = sliderHTML;
         }
-        
-        // 2. Загрузка футера
-        const footerRes = await fetch(`${basePath}components/footer.html`);
-        if (!footerRes.ok) throw new Error('footer.html');
-        const footerPlaceholder = document.getElementById('site-footer');
-        if (footerPlaceholder) {
-            footerPlaceholder.innerHTML = await footerRes.text();
+    }
+    
+    // 🔥 4. Загрузка модалок (НОВОЕ)
+    const modalsRes = await fetch(`${basePath}components/modals.html`);
+    if (!modalsRes.ok) throw new Error('modals.html');
+    const modalsPlaceholder = document.getElementById('site-modals');
+    if (modalsPlaceholder) {
+        modalsPlaceholder.innerHTML = await modalsRes.text();
+    }
+    
+    // 5. Подсветка активной ссылки
+    document.querySelectorAll('.nav-link').forEach(link => {
+        if (link.dataset.page === currentPage) {
+            link.classList.add('active');
         }
-        
-        // 3. Загрузка hero-слайдера
-        if (currentPage === 'index' || currentPage === 'affiche') {
-            const sliderRes = await fetch(`${basePath}components/hero-slider.html`);
-            if (!sliderRes.ok) throw new Error('hero-slider.html');
-            const sliderHTML = await sliderRes.text();
-            
-            const sliderPlaceholder = document.getElementById('site-hero-slider');
-            if (sliderPlaceholder) {
-                sliderPlaceholder.innerHTML = sliderHTML;
-            }
+    });
+    
+    // 6. Инициализация скриптов
+    setTimeout(() => {
+        if (typeof window.initHeaderScripts === 'function') {
+            window.initHeaderScripts();
         }
-        
-        // 4. Подсветка активной ссылки
-        document.querySelectorAll('.nav-link').forEach(link => {
-            if (link.dataset.page === currentPage) {
-                link.classList.add('active');
-            }
-        });
-        
-        // 5. Инициализация скриптов
-        setTimeout(() => {
-            if (typeof window.initHeaderScripts === 'function') {
-                window.initHeaderScripts();
-            }
-            if ((currentPage === 'index' || currentPage === 'affiche') && 
-                typeof window.initHeroSlider === 'function') {
-                window.initHeroSlider();
-            }
-        }, 50);
-        
-        // ===== ЗАВЕРШЕНИЕ ЛОУДЕРА =====
-        setTimeout(() => {
-            if (window.__pageLoader && typeof window.__pageLoader.finish === 'function') {
-                window.__pageLoader.finish();
-            } else {
-                showContentImmediately();
-            }
-        }, 300);
-        
-    } catch (err) {
-        console.error('❌ Ошибка загрузки компонентов:', err.message);
-        
+        if ((currentPage === 'index' || currentPage === 'affiche') && 
+            typeof window.initHeroSlider === 'function') {
+            window.initHeroSlider();
+        }
+        // 🔥 Инициализация скриптов модалок (если есть)
+        if (typeof window.initModals === 'function') {
+            window.initModals();
+        }
+    }, 50);
+    
+    // ===== ЗАВЕРШЕНИЕ ЛОУДЕРА =====
+    setTimeout(() => {
         if (window.__pageLoader && typeof window.__pageLoader.finish === 'function') {
             window.__pageLoader.finish();
+        } else {
+            showContentImmediately();
         }
-        showContentImmediately();
-        
-        const errorPlaceholder = '<div style="padding:20px;text-align:center;color:#E8454D;background:#fff;border-radius:8px;margin:20px">⚠️ Не удалось загрузить компонент</div>';
-        const headerEl = document.getElementById('site-header');
-        const footerEl = document.getElementById('site-footer');
-        if (headerEl && !headerEl.innerHTML.trim()) headerEl.innerHTML = errorPlaceholder;
-        if (footerEl && !footerEl.innerHTML.trim()) footerEl.innerHTML = errorPlaceholder;
+    }, 300);
+    
+} catch (err) {
+    console.error('❌ Ошибка загрузки компонентов:', err.message);
+    
+    if (window.__pageLoader && typeof window.__pageLoader.finish === 'function') {
+        window.__pageLoader.finish();
     }
+    showContentImmediately();
+    
+    const errorPlaceholder = '<div style="padding:20px;text-align:center;color:#E8454D;background:#fff;border-radius:8px;margin:20px">⚠️ Не удалось загрузить компонент</div>';
+    const headerEl = document.getElementById('site-header');
+    const footerEl = document.getElementById('site-footer');
+    const modalsEl = document.getElementById('site-modals'); // 🔥 Обработка ошибки для модалок
+    if (headerEl && !headerEl.innerHTML.trim()) headerEl.innerHTML = errorPlaceholder;
+    if (footerEl && !footerEl.innerHTML.trim()) footerEl.innerHTML = errorPlaceholder;
+    if (modalsEl && !modalsEl.innerHTML.trim()) modalsEl.innerHTML = errorPlaceholder;
+}
     
     // ===== ОБРАБОТКА ВОЗВРАТА ЧЕРЕЗ ИСТОРИЮ =====
     window.addEventListener('pageshow', function(e) {
