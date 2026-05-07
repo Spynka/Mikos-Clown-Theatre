@@ -3,6 +3,7 @@
  * Вызывается после подгрузки компонентов
  */
 
+
 function initHeaderScripts() {
     // ===== Десктоп: выпадающее меню "⋯" =====
     const dotsIcon = document.getElementById('dotsIcon');

@@ -1088,6 +1088,27 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   letter-spacing: -0.02em !important;
   text-decoration: none; /* опционально, чтобы убрать подчёркивание */
 }
+
+
+
+/* Исправление выхода заголовков за экран на мобильных устройствах */
+@media (max-width: 640px) {
+  /* Уменьшаем основной заголовок hero-блока */
+  .hero-brand h1 {
+    font-size: clamp(1.75rem, 9vw, 2.5rem) !important;  /* меньше дефолтного clamp */
+    line-height: 1.2;
+    letter-spacing: -0.01em;            /* чуть уменьшаем межбуквенное расстояние */
+
+    padding-left: 8px;
+    padding-right: 8px;
+    margin-bottom: var(--space-3);
+  }
+  
+  /* Подзаголовок hero (описание) также делаем чуть меньше */
+  .hero-brand p {
+    font-size: var(--text-base);
+    line-height: 1.4;
+  }}
 </style>
 </head>
 <body>
