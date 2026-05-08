@@ -1689,6 +1689,26 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 
 
 
+
+
+
+.mobile-nav button,
+.mobile-nav ul li button,
+.mobile-nav .nav-btn {
+  font-family: 'Unbounded', system-ui, sans-serif !important;
+  font-weight: 400 !important;           /* ← Regular (обычный) */
+  font-size: 15px !important;
+  letter-spacing: -0.02em !important;
+}
+
+.mobile-nav a {
+  font-family: 'Unbounded', system-ui, sans-serif !important;
+  font-weight: 400 !important;           /* ← Regular (обычный) */
+  font-size: 15px !important;
+  letter-spacing: -0.02em !important;
+  text-decoration: none;
+}
+
   
 </style>
 </head>
@@ -1723,7 +1743,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 </header>
 
 <!-- МОБИЛЬНОЕ МЕНЮ -->
-<aside class="mobile-nav" id="mobileNav" aria-hidden="true" style="font-family: 'Unbounded', sans-serif !important;">
+<aside class="mobile-nav" id="mobileNav" aria-hidden="true">
 <button class="close-mobile-menu" id="closeMobileMenu" aria-label="Закрыть меню">
 <i class="fas fa-times"></i>
 </button>
@@ -1860,7 +1880,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 
         <!-- Карточка Юлии -->
         <div class="client-profile-card mt-8" id="openClientProfile">
-          <img src="https://placehold.co/120x120/F2F1F0/231F20?text=Юлия" alt="Юлия Сидорова" class="client-avatar">
+          <img src="files/О бренде/ava.png" alt="Юлия Сидорова" class="client-avatar">
           <div class="client-info">
             <h3>Юлия Сидорова</h3>
             <p>27 лет, event‑менеджер, Санкт‑Петербург</p>
@@ -1957,7 +1977,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
     <div style="max-height: 80vh; overflow-y: auto; padding-right: 8px;">
       <div class="profile-grid">
         <div class="avatar-col">
-          <img src="https://placehold.co/120x120/F2F1F0/231F20?text=Юлия" alt="Юлия Сидорова">
+          <img src="files/О бренде/ava.png" alt="Юлия Сидорова">
         </div>
         <div class="profile-details">
           <h2>Юлия Сидорова</h2>
