@@ -1283,8 +1283,9 @@ async function generatePDF(data) {
     });
 
     // 🔥 ИСПОЛЬЗУЕМ COURIER — он гарантированно поддерживает кириллицу в PDF
-    const font = 'courier';
-    const boldFont = 'courier';
+   // Замените на (пробуем разные варианты):
+    const font = 'helvetica';  // Самый надёжный для кириллицы
+    const boldFont = 'helvetica';
     
     const pageWidth = doc.internal.pageSize.getWidth();
     const pageHeight = doc.internal.pageSize.getHeight();
@@ -1550,13 +1551,14 @@ function initAllEventListeners() {
   // Шаг 3 → Шаг 2
   document.getElementById('backBtn3')?.addEventListener('click', () => showStep(2));
 
-  // Шаг 3 → Шаг 4 (ОПЛАТА)
+  // Шаг 3 → Шаг 4 (ОПЛАТА) — мгновенный переход, письмо в фоне
   const payBtn = document.getElementById('payBtn');
   if (payBtn) {
       const newPayBtn = payBtn.cloneNode(true);
       payBtn.parentNode.replaceChild(newPayBtn, payBtn);
       
-      newPayBtn.addEventListener('click', async () => {
+      newPayBtn.addEventListener('click', () => {
+          // 1. Собираем данные
           const orderNum = 'МК-' + new Date().getFullYear() +
               (new Date().getMonth() + 1).toString().padStart(2, '0') +
               '-' + Math.floor(Math.random() * 9000 + 1000);
@@ -1583,6 +1585,7 @@ function initAllEventListeners() {
               `).join('');
           }
 
+          // 2. Заполняем шаг 4
           document.getElementById('orderNumber').textContent = orderNum;
           document.getElementById('successBuyer').textContent = `${lastName} ${firstName}`;
           document.getElementById('successEmail').textContent = email;
@@ -1593,23 +1596,24 @@ function initAllEventListeners() {
           document.getElementById('successTickets').innerHTML = ticketsHtml;
           document.getElementById('successTotal').textContent = totalFormatted;
 
-          try {
-              await window.sendTicketEmail({
-                  order_number: orderNum,
-                  performance: performanceData.title,
-                  datetime: performanceData.dateTime,
-                  hall: performanceData.hall,
-                  buyer_name: `${lastName} ${firstName}`,
-                  buyer_email: email,
-                  tickets_list: ticketsHtml,
-                  total_price: totalFormatted
-              });
-              console.log('✅ Письмо отправлено');
-          } catch (e) {
-              console.error('❌ Ошибка отправки:', e);
-              alert('Билеты не удалось отправить на email, но вы можете скачать их.');
-          }
+          // 3. Переходим на шаг 4 МГНОВЕННО (без await!)
           showStep(4);
+
+          // 4. Отправляем письмо В ФОНЕ (не ждём ответа)
+          /*window.sendTicketEmail({
+              order_number: orderNum,
+              performance: performanceData.title,
+              datetime: performanceData.dateTime,
+              hall: performanceData.hall,
+              buyer_name: `${lastName} ${firstName}`,
+              buyer_email: email,
+              tickets_list: ticketsHtml,
+              total_price: totalFormatted
+          }).then(() => {
+              console.log('✅ Письмо отправлено (фон)');
+          }).catch(e => {
+              console.error('❌ Ошибка отправки (фон):', e);
+          });*/
       });
   }
 
@@ -1655,7 +1659,19 @@ function initAllEventListeners() {
           };
           
           try {
-              await generatePDF(pdfData);
+              const doc = await generatePDF(pdfData);
+              
+              // 🔥 Принудительное скачивание через Blob
+              const pdfBlob = doc.output('blob');
+              const url = URL.createObjectURL(pdfBlob);
+              const a = document.createElement('a');
+              a.href = url;
+              a.download = `Билеты_${pdfData.orderNumber}.pdf`;
+              document.body.appendChild(a);
+              a.click();
+              document.body.removeChild(a);
+              URL.revokeObjectURL(url);
+              
               console.log('✅ PDF сохранён');
           } catch (e) {
               console.error('❌ Ошибка PDF:', e);
