@@ -213,14 +213,25 @@ ${contactsHtml ? `<div style="background:#F8F7F6;border-radius:8px;padding:20px;
     return await sendEmailHtml('Заказ оформлен — театр «Микос»', html, params.email);
   };
 
-  // checkout.html – отправка билетов
-  window.sendTicketEmail = async function (data) {
-    if (!data || !data.buyerEmail) {
-      console.error('sendTicketEmail: нет данных');
-      return false;
+// checkout.html – отправка билетов
+window.sendTicketEmail = async function (data) {
+    // Принимаем оба варианта имени параметра: и buyerEmail, и buyer_email
+    const buyerEmail = data.buyerEmail || data.buyer_email;
+    
+    if (!data || !buyerEmail) {
+        console.error('sendTicketEmail: нет данных или email');
+        console.log('Полученные данные:', data);
+        return false;
     }
-    const html = buildTicketEmail(data);
-    return await sendEmailHtml('Ваши билеты — театр «Микос»', html, data.buyerEmail);
-  };
+    
+    const params = {
+        ...data,
+        buyer_email: buyerEmail, 
+        buyerEmail: buyerEmail   
+    };
+    
+    const html = buildTicketEmail(params);
+    return await sendEmailHtml('Ваши билеты — театр «Микос»', html, buyerEmail);
+};
 
 })();

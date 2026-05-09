@@ -4,28 +4,96 @@
     <meta charset="UTF-8">
     <title>Театр клоунады «Микос» | Афиша</title>
     
-    <!-- Предзагрузка критических шрифтов -->
+  <!-- ========================================== -->
+    <!-- КРИТИЧЕСКИЙ CSS АНИМАЦИИ ПРОМОКОДА         -->
+    <!-- Загружается ПЕРВЫМ, не ждёт скриптов       -->
+    <!-- ========================================== -->
+    <link rel="preload" as="image" href="SVG/Промокод.svg" type="image/svg+xml">
+    <style>
+        .promo-runner-section {
+            position: relative;
+            width: 100%;
+            height: clamp(200px, 40vw, 520px);
+            overflow: hidden;
+            border-radius: 16px;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            user-select: none;
+            background: #fff;
+            min-height: 200px;
+        }
+        .promo-runner-track {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            left: 100%;
+            width: min(800px, 60vw);
+            height: min(650px, 50vw);
+            cursor: pointer;
+            z-index: 10;
+            will-change: left;
+            /* Анимация запускается СРАЗУ, до загрузки любых скриптов */
+            animation: runAcross 4s linear infinite;
+        }
+        .promo-runner-track img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transform: rotate(-5deg);
+            filter: drop-shadow(4px 8px 12px rgba(0,0,0,0.15));
+        }
+        @keyframes runAcross {
+            0% { left: 100%; }
+            100% { left: -850px; }
+        }
+        .promo-caption {
+            position: absolute;
+            bottom: 14px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Nunito Sans', sans-serif;
+            font-size: clamp(12px, 2vw, 16px);
+            font-weight: 600;
+            color: #4A6294;
+            background: rgba(255,255,255,0.9);
+            padding: 6px 20px;
+            border-radius: 16px;
+            white-space: nowrap;
+            z-index: 5;
+            pointer-events: none;
+        }
+    </style>
+    
+    <!-- Предзагрузка шрифтов (не блокирует рендеринг) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&display=swap">
-    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&display=swap" media="print" onload="this.media='all'">
     
+    <!-- Font Awesome с отложенной загрузкой -->
     <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" media="print" onload="this.media='all'">
+    
+    <!-- Основные стили -->
     <link rel="stylesheet" href="css/header-footer.css"> 
     <link rel="stylesheet" href="css/style.css">
-    <script src="js/tour-data.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-<script src="js/emailjs-integration.js"></script>
+    
+    <!-- ========================================== -->
+    <!-- СКРИПТЫ С DEFER — не блокируют рендеринг!  -->
+    <!-- ========================================== -->
+    <script src="js/tour-data.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js" defer></script>
+    <script src="js/emailjs-integration.js" defer></script>
+    
     <link rel="icon" type="image/svg+xml" href="SVG/logo-2.svg" sizes="any">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     
-    <!-- Отложенная загрузка API Яндекс.Карт -->
+    <!-- Яндекс.Карты загружаются асинхронно -->
     <script>
         function loadYandexMaps() {
             const script = document.createElement('script');
             script.src = 'https://api-maps.yandex.ru/2.1/?lang=ru_RU&onload=onYandexMapsReady';
-            script.type = 'text/javascript';
             script.async = true;
             document.head.appendChild(script);
         }
@@ -38,8 +106,10 @@
             }
         };
         
-        setTimeout(loadYandexMaps, 500);
+        // Загружаем карты с задержкой, чтобы не мешать анимации
+        setTimeout(loadYandexMaps, 800);
     </script>
+    
     
     <style>
 /* ===== БАЗОВЫЕ НАСТРОЙКИ ===== */

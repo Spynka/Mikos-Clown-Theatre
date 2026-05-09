@@ -2068,28 +2068,46 @@ data-fullscreen="SVG/src.png" data-name="Структура логотипа" da
 <button class="scroll-nav-btn prev" data-target="allowedScroll"><i class="fas fa-chevron-left"></i></button>
 <div class="scroll-gallery" id="allowedScroll">
 <div class="scroll-item">
+<div class="scroll-item-image" data-fullscreen="files/Логотип/yes-4.svg" data-name="Инверсия цветов" data-bg="blue">
+<img src="files/Логотип/yes-4.svg" alt="Инверсия" loading="lazy">
+</div>
+<div class="scroll-item-content"><h4>Полноценный</h4><p>Знак+текст+подстрочник</p></div>
+</div>
+<div class="scroll-item">
+<div class="scroll-item-image" data-fullscreen="files/Логотип/yes-7.svg" data-name="Инверсия цветов" data-bg="blue">
+<img src="files/Логотип/yes-7.svg" alt="Инверсия" loading="lazy">
+</div>
+<div class="scroll-item-content"><h4>Полноценный</h4><p>Знак+текст и подстрочник сбоку</p></div>
+</div>
+<div class="scroll-item">
+<div class="scroll-item-image" data-fullscreen="files/Логотип/yes-3.svg" data-name="Инверсия цветов" data-bg="blue">
+<img src="files/Логотип/yes-3.svg" alt="Инверсия" loading="lazy">
+</div>
+<div class="scroll-item-content"><h4>Знак</h4><p>Знаковая часть логотипа</p></div>
+</div>
+<div class="scroll-item">
+<div class="scroll-item-image" data-fullscreen="files/Логотип/yes-5.svg" data-name="Инверсия цветов" data-bg="blue">
+<img src="files/Логотип/yes-5.svg" alt="Инверсия" loading="lazy">
+</div>
+<div class="scroll-item-content"><h4>Текстовый</h4><p>Текст+подстрочник</p></div>
+</div>
+<div class="scroll-item">
+<div class="scroll-item-image" data-fullscreen="files/Логотип/yes-6.svg" data-name="Инверсия цветов" data-bg="blue">
+<img src="files/Логотип/yes-6.svg" alt="Инверсия" loading="lazy">
+</div>
+<div class="scroll-item-content"><h4>Текстовый</h4><p>Текст</p></div>
+</div>
+<div class="scroll-item">
 <div class="scroll-item-image" data-fullscreen="files/Логотип/yes-1.svg" data-name="Монохромная версия" data-bg="light">
 <img src="files/Логотип/yes-1.svg" alt="Монохром" loading="lazy">
 </div>
 <div class="scroll-item-content"><h4>Монохром</h4><p>Ч/б для газет</p></div>
 </div>
 <div class="scroll-item">
-<div class="scroll-item-image" data-fullscreen="files/Логотип/yes-.svg" data-name="Инверсия цветов" data-bg="blue">
-<img src="files/Логотип/yes-.svg" alt="Инверсия" loading="lazy">
+<div class="scroll-item-image" data-fullscreen="files/Логотип/yes-2.svg" data-name="Инверсия цветов" data-bg="blue">
+<img src="files/Логотип/yes-2.svg" alt="Инверсия" loading="lazy">
 </div>
 <div class="scroll-item-content"><h4>Инверсия</h4><p>На цветных фонах</p></div>
-</div>
-<div class="scroll-item">
-<div class="scroll-item-image" data-fullscreen="files/Логотип/yes-.svg" data-name="На золотом фоне" data-bg="gold">
-<img src="files/Логотип/yes-.svg" alt="Золотой фон" loading="lazy">
-</div>
-<div class="scroll-item-content"><h4>Золотой фон</h4><p>Премиум-материалы</p></div>
-</div>
-<div class="scroll-item">
-<div class="scroll-item-image" data-fullscreen="files/Логотип/yes-.svg" data-name="Красный текст" data-bg="light">
-<img src="files/Логотип/yes-.svg" alt="Красный текст" loading="lazy">
-</div>
-<div class="scroll-item-content"><h4>Красный текст</h4><p>Акцентные материалы</p></div>
 </div>
 <div class="scroll-item">
 <div class="scroll-item-image" data-fullscreen="files/Логотип/yes-.svg" data-name="Тиснение" data-bg="dark">
@@ -2820,10 +2838,11 @@ data-fullscreen="SVG/src.png" data-name="Структура логотипа" da
 <div class="filters-section"><div class="filter-chips" id="filterChips">
 <div class="filter-chip active" data-filter="all">Все носители</div>
 <div class="filter-chip" data-filter="clothes">Одежда</div>
+<div class="filter-chip" data-filter="clothes">Одежда</div>
 <div class="filter-chip" data-filter="accessories">Аксессуары</div>
 <div class="filter-chip" data-filter="printed">Полиграфия</div>
 <div class="filter-chip" data-filter="digital">Digital</div>
-<div class="filter-chip" data-filter="home">Товары для дома</div>
+<div class="filter-chip" data-filter="home">Внутренние носители</div>
 <div class="filter-chip" data-filter="art">Графика</div>
 <div class="filter-chip" data-filter="limited-collection">Лимитированная коллекция</div>
 </div></div>
@@ -3305,7 +3324,7 @@ const mediaItems = [
     { 
       id:'backpack-pendant', 
       title:'Подвес на рюкзак', 
-      category:'accessories', 
+      category:'accessories',
       desc:'Металлический подвес «Микос Team»', 
       hasColorSelector: true,
       defaultColor: 'pendant-black',
