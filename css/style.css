@@ -9382,7 +9382,7 @@ img.team-img,
     width: 100% !important;
     height: 100% !important;
     background-color: rgba(0, 0, 0, 0.85);
-    backdrop-filter: blur(6px);
+    backdrop-filter: blur(14px);
     z-index: 100020 !important; /* Увеличьте, если нужно быть выше глобальных стилей */
     
     /* Центрирование с !important */
@@ -9438,7 +9438,7 @@ img.team-img,
     width: fit-content !important;
 
     /* 🔥 Стеклянный эффект БЕЗ синего оттенка */
-    backdrop-filter: blur(6px) !important;
+    backdrop-filter: blur(14px) !important;
     -webkit-backdrop-filter: blur(14px) !important;
     border-radius: 20px !important;
     border: 1px solid rgba(255, 255, 255, 0.12) !important;
