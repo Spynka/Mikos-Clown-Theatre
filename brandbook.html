@@ -2901,11 +2901,11 @@ data-fullscreen="SVG/src.png" data-name="Структура логотипа" da
 <div class="filters-section"><div class="filter-chips" id="filterChips">
 <div class="filter-chip active" data-filter="all">Все носители</div>
 <div class="filter-chip" data-filter="clothes">Одежда</div>
-<div class="filter-chip" data-filter="clothes">Одежда</div>
+<div class="filter-chip" data-filter="brand">Внутренние носители</div>
 <div class="filter-chip" data-filter="accessories">Аксессуары</div>
 <div class="filter-chip" data-filter="printed">Полиграфия</div>
 <div class="filter-chip" data-filter="digital">Digital</div>
-<div class="filter-chip" data-filter="home">Внутренние носители</div>
+<div class="filter-chip" data-filter="home">Товары для дома</div>
 <div class="filter-chip" data-filter="art">Графика</div>
 <div class="filter-chip" data-filter="limited-collection">Лимитированная коллекция</div>
 </div></div>
@@ -3597,69 +3597,95 @@ function categoryLabel(cat) {
     art:'Графика', 'limited-collection':'Лимитированная коллекция'
   }[cat] || cat; 
 }
-async function renderMediaCards() {
-  const filtered = activeCategory === 'all' 
-    ? mediaItems 
-    : mediaItems.filter(i => i.category === activeCategory);
-  
-  const toShow = filtered.slice(0, visibleCount); 
-  grid.innerHTML = '';
-  
-  if (toShow.length === 0) { 
-    grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:#5A5A5A;">Носителей не найдено</p>'; 
-    showMoreBtn.style.display = 'none'; 
-    return; 
-  }
-  
-  for (const item of toShow) {
-    const rawImg = item.avatar || item.gallery?.[0] || 'https://placehold.co/600x400/cccccc/white?text=Нет+фото';
-    const normalizedImg = normalizeImagePath(rawImg);
-    
-    // Проверяем и исправляем путь если нужно
-    let imgSrc = normalizedImg;
-    const imgExists = await checkImageExists(normalizedImg);
-    if (!imgExists) {
-      imgSrc = await findCorrectImagePath(normalizedImg);
-    }
-    
-    const card = document.createElement('div'); 
-    card.className = 'media-card-new';
-    
-    card.innerHTML = `
-      <div class="media-card-avatar">
-        <img src="${imgSrc}" 
-             alt="${item.title}" 
-             loading="lazy" 
-             onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/white?text=Нет+фото';">
-        <span class="media-card-tag">${categoryLabel(item.category)}</span>
-      </div>
-      <div class="media-card-content">
-        <h3>${item.title}</h3>
-        <p>${item.desc}</p>
-        <button class="btn btn-primary media-card-btn" data-id="${item.id}">
-          Подробнее <i class="fas fa-arrow-right"></i>
-        </button>
-      </div>
-    `;
-    
-    card.addEventListener('click', (e) => {
-      if (!e.target.closest('button')) {
-        e.preventDefault();
-        openDetail(item.id);
-      }
-    });
-    
-    const btn = card.querySelector('.media-card-btn');
-    btn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      openDetail(item.id);
-    });
-    grid.appendChild(card);
-  }
-  
-  showMoreBtn.style.display = visibleCount >= filtered.length ? 'none' : 'block';
-}
+// 1. Глобальный счётчик вызовов (разместите в начале скрипта, рядом с другими переменными)
+let _renderToken = 0;
 
+// 2. Полностью переписанная функция
+async function renderMediaCards() {
+    const currentToken = ++_renderToken;
+    const filtered = activeCategory === 'all' 
+        ? mediaItems 
+        : mediaItems.filter(i => i.category === activeCategory);
+    const toShow = filtered.slice(0, visibleCount);
+
+    // Защита: если контейнер не найден или вызов устарел, прерываем
+    if (!grid) return;
+    grid.innerHTML = '';
+    if (_renderToken !== currentToken) return;
+
+    // Пустой результат
+    if (toShow.length === 0) {
+        grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:#5A5A5A;padding:var(--space-8);">Носителей не найдено</p>';
+        if (showMoreBtn) showMoreBtn.style.display = 'none';
+        return;
+    }
+
+    // Параллельная проверка путей для всех карточек (ускоряет загрузку)
+    const resolvedItems = await Promise.all(toShow.map(async (item) => {
+        // Если за время проверки вызов был отменён, выходим
+        if (_renderToken !== currentToken) return null;
+
+        const rawImg = item.avatar || item.gallery?.[0] || 'https://placehold.co/600x400/cccccc/white?text=Нет+фото';
+        const normalizedImg = normalizeImagePath(rawImg);
+        let imgSrc = normalizedImg;
+
+        const imgExists = await checkImageExists(normalizedImg);
+        if (!imgExists) {
+            imgSrc = await findCorrectImagePath(normalizedImg);
+        }
+        return { ...item, resolvedImg: imgSrc };
+    }));
+
+    // Финальная проверка перед рендером
+    if (_renderToken !== currentToken) return;
+
+    const fragment = document.createDocumentFragment();
+    const validItems = resolvedItems.filter(Boolean);
+
+    for (const item of validItems) {
+        const card = document.createElement('div');
+        card.className = 'media-card-new';
+        card.innerHTML = `
+            <div class="media-card-avatar">
+                <img src="${item.resolvedImg}" alt="${item.title}" loading="lazy"
+                     onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/white?text=Нет+фото';">
+                <span class="media-card-tag">${categoryLabel(item.category)}</span>
+            </div>
+            <div class="media-card-content">
+                <h3>${item.title}</h3>
+                <p>${item.desc}</p>
+                <button class="btn btn-primary media-card-btn" data-id="${item.id}">
+                    Подробнее <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        `;
+
+        // Обработчики событий
+        card.addEventListener('click', (e) => {
+            if (!e.target.closest('button')) {
+                e.preventDefault();
+                openDetail(item.id);
+            }
+        });
+
+        const btn = card.querySelector('.media-card-btn');
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            openDetail(item.id);
+        });
+
+        fragment.appendChild(card);
+    }
+
+    // Вставка в DOM одной операцией (высокая производительность)
+    if (_renderToken !== currentToken) return;
+    grid.appendChild(fragment);
+
+    // Управление кнопкой "Показать ещё"
+    if (showMoreBtn) {
+        showMoreBtn.style.display = visibleCount >= filtered.length ? 'none' : 'block';
+    }
+}
 function refreshDetailGallery(imagesArray) {
   const gallery = document.getElementById('detailGallery');
   const mainImg = document.getElementById('detailMainImg');
