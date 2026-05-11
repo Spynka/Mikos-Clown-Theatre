@@ -108,7 +108,7 @@ const showContentImmediately = () => {
         });
     };
     
-    // ===== ЗАПУСК ЛОУДЕРА =====
+
     initLoader();
     setupLinkHandling();
     
@@ -142,7 +142,7 @@ try {
         }
     }
     
-    // 🔥 4. Загрузка модалок (НОВОЕ)
+    //  4. Загрузка модалок (НОВОЕ)
     const modalsRes = await fetch(`${basePath}components/modals.html`);
     if (!modalsRes.ok) throw new Error('modals.html');
     const modalsPlaceholder = document.getElementById('site-modals');

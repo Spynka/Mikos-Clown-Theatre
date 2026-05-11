@@ -423,22 +423,43 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 .lightbox { position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 100000; display: none; align-items: center; justify-content: center; padding: var(--space-6); animation: fadeIn 0.3s ease; }
 .lightbox.active { display: flex; }
 .lightbox-content { 
-  max-width: 95vw; max-height: 95vh; position: relative; background: #fff; 
-  border-radius: var(--border-radius); padding: var(--space-6); 
-  box-shadow: 0 20px 60px rgba(0,0,0,0.5); display: flex; flex-direction: column; 
+  max-width: 95vw; 
+  max-height: 95vh; 
+  width: 95vw;           /* ДОБАВИТЬ - занимает почти всю ширину */
+  height: 95vh;          /* ДОБАВИТЬ - занимает почти всю высоту */
+  position: relative; 
+  background: #fff; 
+  border-radius: var(--border-radius); 
+  padding: var(--space-6); 
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5); 
+  display: flex; 
+  flex-direction: column; 
   transition: background 0.2s ease; 
+  margin: auto;          /* ДОБАВИТЬ - центрирование */
 }
 .lightbox-content[data-bg="light"] { background: var(--color-bg-light); }
 .lightbox-content[data-bg="dark"] { background: #221E1F; }
 .lightbox-content[data-bg="blue"] { background: var(--color-deep-blue); }
 .lightbox-content[data-bg="gold"] { background: var(--color-gold); }
 .lightbox-media-container { 
-  flex: 1; display: flex; align-items: center; justify-content: center; 
-  min-height: 0; margin-bottom: var(--space-4); position: relative;
+  flex: 1; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  min-height: 0; 
+  margin-bottom: var(--space-4); 
+  position: relative;
+  overflow: hidden;      /* ДОБАВИТЬ */
 }
+
 .lightbox-media-container img { 
-  max-width: 100%; max-height: 80vh; width: auto; height: auto; 
-  object-fit: contain; display: block; border-radius: var(--border-radius); 
+  max-width: 100%; 
+  max-height: 80vh;      /* Было 80vh, увеличиваем */
+  width: auto; 
+  height: auto; 
+  object-fit: contain; 
+  display: block; 
+  border-radius: var(--border-radius); 
 }
 .lightbox-close { 
   position: absolute; top: 15px; right: 15px; color: #fff; font-size: var(--text-2xl); 
@@ -457,7 +478,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   font-size: var(--text-sm); background: rgba(0,0,0,0.08); padding: var(--space-2) var(--space-4); 
   border-radius: 20px; 
 }
-.lightbox-content[data-bg="dark"] .lightbox-info, .lightbox-content[data-bg="blue"] .lightbox-info { 
+.lightbox-content[data-bg="dark"] .lightbox-info, .lightbox-content[data-bg="light"] .lightbox-info { 
   background: rgba(255,255,255,0.15); color: #fff; 
 }
 .lightbox-download { 
@@ -1709,7 +1730,49 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   text-decoration: none;
 }
 
+@media (max-width: 768px) {
+  .lightbox-content {
+    width: 98vw;
+    height: 90vh;
+    padding: var(--space-3);
+  }
   
+  .lightbox-media-container img {
+    max-height: 70vh;
+  }
+}
+
+
+
+/* Базовый стиль для всех фонов */
+.lightbox-info { 
+  color: var(--color-text-primary); 
+  font-family: var(--font-display); 
+  font-weight: 600; 
+  font-size: var(--text-sm); 
+  background: rgba(0,0,0,0.08); 
+  padding: var(--space-2) var(--space-4); 
+  border-radius: 20px; 
+}
+
+/* Тёмный фон - белый текст */
+.lightbox-content[data-bg="dark"] .lightbox-info,
+.lightbox-content[data-bg="blue"] .lightbox-info { 
+  background: rgba(255,255,255,0.15); 
+  color: #fff; 
+}
+
+/* Светлый фон - тёмный текст */
+.lightbox-content[data-bg="light"] .lightbox-info {
+  background: rgba(0,0,0,0.08);
+  color: var(--color-text-primary);
+}
+
+/* Золотой фон - тёмный текст */
+.lightbox-content[data-bg="gold"] .lightbox-info {
+  background: rgba(0,0,0,0.1);
+  color: var(--color-bg-dark);
+}
 </style>
 </head>
 <body>
@@ -2068,31 +2131,31 @@ data-fullscreen="SVG/src.png" data-name="Структура логотипа" da
 <button class="scroll-nav-btn prev" data-target="allowedScroll"><i class="fas fa-chevron-left"></i></button>
 <div class="scroll-gallery" id="allowedScroll">
 <div class="scroll-item">
-<div class="scroll-item-image" data-fullscreen="files/Логотип/yes-4.svg" data-name="Инверсия цветов" data-bg="blue">
+<div class="scroll-item-image" data-fullscreen="files/Логотип/yes-4.svg" data-name="Инверсия цветов" data-bg="light">
 <img src="files/Логотип/yes-4.svg" alt="Инверсия" loading="lazy">
 </div>
 <div class="scroll-item-content"><h4>Полноценный</h4><p>Знак+текст+подстрочник</p></div>
 </div>
 <div class="scroll-item">
-<div class="scroll-item-image" data-fullscreen="files/Логотип/yes-7.svg" data-name="Инверсия цветов" data-bg="blue">
+<div class="scroll-item-image" data-fullscreen="files/Логотип/yes-7.svg" data-name="Инверсия цветов" data-bg="light">
 <img src="files/Логотип/yes-7.svg" alt="Инверсия" loading="lazy">
 </div>
 <div class="scroll-item-content"><h4>Полноценный</h4><p>Знак+текст и подстрочник сбоку</p></div>
 </div>
 <div class="scroll-item">
-<div class="scroll-item-image" data-fullscreen="files/Логотип/yes-3.svg" data-name="Инверсия цветов" data-bg="blue">
+<div class="scroll-item-image" data-fullscreen="files/Логотип/yes-3.svg" data-name="Инверсия цветов" data-bg="light">
 <img src="files/Логотип/yes-3.svg" alt="Инверсия" loading="lazy">
 </div>
 <div class="scroll-item-content"><h4>Знак</h4><p>Знаковая часть логотипа</p></div>
 </div>
 <div class="scroll-item">
-<div class="scroll-item-image" data-fullscreen="files/Логотип/yes-5.svg" data-name="Инверсия цветов" data-bg="blue">
+<div class="scroll-item-image" data-fullscreen="files/Логотип/yes-5.svg" data-name="Инверсия цветов" data-bg="light">
 <img src="files/Логотип/yes-5.svg" alt="Инверсия" loading="lazy">
 </div>
 <div class="scroll-item-content"><h4>Текстовый</h4><p>Текст+подстрочник</p></div>
 </div>
 <div class="scroll-item">
-<div class="scroll-item-image" data-fullscreen="files/Логотип/yes-6.svg" data-name="Инверсия цветов" data-bg="blue">
+<div class="scroll-item-image" data-fullscreen="files/Логотип/yes-6.svg" data-name="Инверсия цветов" data-bg="light">
 <img src="files/Логотип/yes-6.svg" alt="Инверсия" loading="lazy">
 </div>
 <div class="scroll-item-content"><h4>Текстовый</h4><p>Текст</p></div>
@@ -2104,7 +2167,7 @@ data-fullscreen="SVG/src.png" data-name="Структура логотипа" da
 <div class="scroll-item-content"><h4>Монохром</h4><p>Ч/б для газет</p></div>
 </div>
 <div class="scroll-item">
-<div class="scroll-item-image" data-fullscreen="files/Логотип/yes-2.svg" data-name="Инверсия цветов" data-bg="blue">
+<div class="scroll-item-image" data-fullscreen="files/Логотип/yes-2.svg" data-name="Инверсия цветов" data-bg="light">
 <img src="files/Логотип/yes-2.svg" alt="Инверсия" loading="lazy">
 </div>
 <div class="scroll-item-content"><h4>Инверсия</h4><p>На цветных фонах</p></div>
@@ -2502,7 +2565,7 @@ data-fullscreen="SVG/src.png" data-name="Структура логотипа" da
       <div class="scroll-item-image" 
            data-fullscreen="files/Графика/Паттерн.svg" 
            data-name="Паттерн «Маска»" 
-           data-bg="blue">
+           data-bg="light">
         <img src="files/Графика/Паттерн.svg" 
              alt="Паттерн" 
              loading="lazy">
@@ -2601,7 +2664,7 @@ data-fullscreen="SVG/src.png" data-name="Структура логотипа" da
         <div class="scroll-item-image" 
              data-fullscreen="files/Графика/Иллюстрации/main.svg" 
              data-name="Персонаж " 
-             data-bg="blue">
+             data-bg="light">
           <img src="files/Графика/Иллюстрации/main.svg" 
                alt="Персонаж " 
                loading="lazy">
@@ -2616,7 +2679,7 @@ data-fullscreen="SVG/src.png" data-name="Структура логотипа" da
         <div class="scroll-item-image" 
              data-fullscreen="files/Графика/Иллюстрации/Zercalo.svg" 
              data-name="Персонаж " 
-             data-bg="blue">
+             data-bg="light">
           <img src="files/Графика/Иллюстрации/Zercalo.svg" 
                alt="Персонаж " 
                loading="lazy">
@@ -2631,7 +2694,7 @@ data-fullscreen="SVG/src.png" data-name="Структура логотипа" da
         <div class="scroll-item-image" 
              data-fullscreen="files/Графика/Иллюстрации/Visit.svg" 
              data-name="Персонаж " 
-             data-bg="blue">
+             data-bg="light">
           <img src="files/Графика/Иллюстрации/Visit.svg" 
                alt="Персонаж " 
                loading="lazy">
@@ -2646,7 +2709,7 @@ data-fullscreen="SVG/src.png" data-name="Структура логотипа" da
         <div class="scroll-item-image" 
              data-fullscreen="files/Графика/Иллюстрации/Гамаюнов-сидит.svg" 
              data-name="Персонаж " 
-             data-bg="blue">
+             data-bg="light">
           <img src="files/Графика/Иллюстрации/Гамаюнов-сидит.svg" 
                alt="Персонаж " 
                loading="lazy">
@@ -2661,7 +2724,7 @@ data-fullscreen="SVG/src.png" data-name="Структура логотипа" da
         <div class="scroll-item-image" 
              data-fullscreen="files/Графика/Иллюстрации/Давыдов-сидит.svg" 
              data-name="Персонаж " 
-             data-bg="blue">
+             data-bg="light">
           <img src="files/Графика/Иллюстрации/Давыдов-сидит.svg" 
                alt="Персонаж " 
                loading="lazy">
@@ -2676,7 +2739,7 @@ data-fullscreen="SVG/src.png" data-name="Структура логотипа" da
         <div class="scroll-item-image" 
              data-fullscreen="files/Графика/Иллюстрации/Иванова-вбок.svg" 
              data-name="Персонаж " 
-             data-bg="blue">
+             data-bg="light">
           <img src="files/Графика/Иллюстрации/Иванова-вбок.svg" 
                alt="Персонаж " 
                loading="lazy">
@@ -2691,7 +2754,7 @@ data-fullscreen="SVG/src.png" data-name="Структура логотипа" da
         <div class="scroll-item-image" 
              data-fullscreen="files/Графика/Иллюстрации/Давыдов-вбок.svg" 
              data-name="Персонаж " 
-             data-bg="blue">
+             data-bg="light">
           <img src="files/Графика/Иллюстрации/Давыдов-вбок.svg" 
                alt="Персонаж " 
                loading="lazy">
@@ -2706,7 +2769,7 @@ data-fullscreen="SVG/src.png" data-name="Структура логотипа" da
         <div class="scroll-item-image" 
              data-fullscreen="files/Графика/Иллюстрации/Циукаев-вбок.svg" 
              data-name="Персонаж " 
-             data-bg="blue">
+             data-bg="light">
           <img src="files/Графика/Иллюстрации/Циукаев-вбок.svg" 
                alt="Персонаж " 
                loading="lazy">
@@ -2721,7 +2784,7 @@ data-fullscreen="SVG/src.png" data-name="Структура логотипа" da
         <div class="scroll-item-image" 
              data-fullscreen="files/Графика/Иллюстрации/Гамаюнов-вбок.svg" 
              data-name="Персонаж " 
-             data-bg="blue">
+             data-bg="light">
           <img src="files/Графика/Иллюстрации/Гамаюнов-вбок.svg" 
                alt="Персонаж " 
                loading="lazy">
@@ -2736,7 +2799,7 @@ data-fullscreen="SVG/src.png" data-name="Структура логотипа" da
         <div class="scroll-item-image" 
              data-fullscreen="files/Графика/Иллюстрации/Промокод.svg" 
              data-name="Персонаж " 
-             data-bg="blue">
+             data-bg="light">
           <img src="files/Графика/Иллюстрации/Промокод.svg" 
                alt="Персонаж " 
                loading="lazy">
@@ -2751,7 +2814,7 @@ data-fullscreen="SVG/src.png" data-name="Структура логотипа" da
         <div class="scroll-item-image" 
              data-fullscreen="files/Графика/Иллюстрации/Давыдов-прямо.svg" 
              data-name="Персонаж " 
-             data-bg="blue">
+             data-bg="light">
           <img src="files/Графика/Иллюстрации/Давыдов-прямо.svg" 
                alt="Персонаж " 
                loading="lazy">
@@ -2766,7 +2829,7 @@ data-fullscreen="SVG/src.png" data-name="Структура логотипа" da
         <div class="scroll-item-image" 
              data-fullscreen="files/Графика/Иллюстрации/Циукаев-прямо.svg" 
              data-name="Персонаж " 
-             data-bg="blue">
+             data-bg="light">
           <img src="files/Графика/Иллюстрации/Циукаев-прямо.svg" 
                alt="Персонаж " 
                loading="lazy">
@@ -2781,7 +2844,7 @@ data-fullscreen="SVG/src.png" data-name="Структура логотипа" da
         <div class="scroll-item-image" 
              data-fullscreen="files/Графика/Иллюстрации/Иванова-прямо.svg" 
              data-name="Персонаж " 
-             data-bg="blue">
+             data-bg="light">
           <img src="files/Графика/Иллюстрации/Иванова-прямо.svg" 
                alt="Персонаж " 
                loading="lazy">
@@ -2796,7 +2859,7 @@ data-fullscreen="SVG/src.png" data-name="Структура логотипа" da
         <div class="scroll-item-image" 
              data-fullscreen="files/Графика/Иллюстрации/Гамаюнов-прямо.svg" 
              data-name="Персонаж " 
-             data-bg="blue">
+             data-bg="light">
           <img src="files/Графика/Иллюстрации/Гамаюнов-прямо.svg" 
                alt="Персонаж " 
                loading="lazy">
@@ -3534,8 +3597,7 @@ function categoryLabel(cat) {
     art:'Графика', 'limited-collection':'Лимитированная коллекция'
   }[cat] || cat; 
 }
-
-function renderMediaCards() {
+async function renderMediaCards() {
   const filtered = activeCategory === 'all' 
     ? mediaItems 
     : mediaItems.filter(i => i.category === activeCategory);
@@ -3549,20 +3611,34 @@ function renderMediaCards() {
     return; 
   }
   
-  toShow.forEach(item => {
-    const img = item.avatar || item.gallery?.[0] || 'https://placehold.co/600x400/cccccc/white?text=Нет+фото';
+  for (const item of toShow) {
+    const rawImg = item.avatar || item.gallery?.[0] || 'https://placehold.co/600x400/cccccc/white?text=Нет+фото';
+    const normalizedImg = normalizeImagePath(rawImg);
+    
+    // Проверяем и исправляем путь если нужно
+    let imgSrc = normalizedImg;
+    const imgExists = await checkImageExists(normalizedImg);
+    if (!imgExists) {
+      imgSrc = await findCorrectImagePath(normalizedImg);
+    }
+    
     const card = document.createElement('div'); 
     card.className = 'media-card-new';
     
     card.innerHTML = `
       <div class="media-card-avatar">
-        <img src="${img}" alt="${item.title}" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/white?text=Нет+фото';">
+        <img src="${imgSrc}" 
+             alt="${item.title}" 
+             loading="lazy" 
+             onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/white?text=Нет+фото';">
         <span class="media-card-tag">${categoryLabel(item.category)}</span>
       </div>
       <div class="media-card-content">
         <h3>${item.title}</h3>
         <p>${item.desc}</p>
-        <button class="btn btn-primary media-card-btn" data-id="${item.id}">Подробнее <i class="fas fa-arrow-right"></i></button>
+        <button class="btn btn-primary media-card-btn" data-id="${item.id}">
+          Подробнее <i class="fas fa-arrow-right"></i>
+        </button>
       </div>
     `;
     
@@ -3579,7 +3655,8 @@ function renderMediaCards() {
       openDetail(item.id);
     });
     grid.appendChild(card);
-  });
+  }
+  
   showMoreBtn.style.display = visibleCount >= filtered.length ? 'none' : 'block';
 }
 
@@ -3974,6 +4051,45 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 });
+
+// Функция для исправления путей к изображениям
+function normalizeImagePath(path) {
+  if (!path) return path;
+  
+  // Заменяем проблемные символы и пробелы
+  return path
+    .replace(/ /g, '%20')        // Кодируем пробелы
+    .replace(/\\/g, '/')         // Меняем обратные слеши на прямые
+    .replace(/\/{2,}/g, '/');    // Убираем двойные слеши
+}
+
+// Функция проверки существования файла
+function checkImageExists(url) {
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.onload = () => resolve(true);
+    img.onerror = () => resolve(false);
+    img.src = url;
+  });
+}
+
+// Функция поиска правильного расширения файла
+async function findCorrectImagePath(basePath) {
+  // Убираем расширение
+  const pathWithoutExt = basePath.replace(/\.[^.]+$/, '');
+  
+  // Пробуем разные расширения
+  const extensions = ['.png', '.PNG', '.jpg', '.JPG', '.jpeg', '.JPEG', '.svg', '.SVG'];
+  
+  for (const ext of extensions) {
+    const testPath = pathWithoutExt + ext;
+    const exists = await checkImageExists(testPath);
+    if (exists) return testPath;
+  }
+  
+  // Если ничего не найдено, возвращаем оригинальный путь
+  return basePath;
+}
 </script>
 </body>
 </html>
