@@ -3068,41 +3068,96 @@ window.addEventListener('beforeunload', () => {
 
 // ===== ТИПОГРАФИКА =====
 const fonts = {
-  unbounded: { name:'Unbounded', weights:[{value:400,label:'Regular'},{value:600,label:'SemiBold'},{value:700,label:'Bold'},{value:800,label:'ExtraBold'}], defaultWeight:700 },
-  nunito:   { name:'Nunito Sans', weights:[{value:300,label:'Light'},{value:400,label:'Regular'},{value:600,label:'SemiBold'},{value:700,label:'Bold'}], defaultWeight:400 }
+  unbounded: { 
+    name:'Unbounded', 
+    weights:[
+      {value:400, label:'Regular'},
+      {value:600, label:'SemiBold'},
+      {value:700, label:'Bold'},
+      {value:800, label:'ExtraBold'}
+    ], 
+    defaultWeight:700 
+  },
+  nunito: { 
+    name:'Nunito Sans', 
+    weights:[
+      {value:300, label:'Light'},
+      {value:400, label:'Regular'},
+      {value:600, label:'SemiBold'},
+      {value:700, label:'Bold'}
+    ], 
+    defaultWeight:400 
+  }
 };
+
 let typoState = { font:'unbounded', weight:700, size:40 };
-const pages = { about: document.getElementById('page-about'), logo: document.getElementById('page-logo'), colors: document.getElementById('page-colors'), typo: document.getElementById('page-typo'), graphics: document.getElementById('page-graphics'), photo: document.getElementById('page-photo'), media: document.getElementById('page-media') };
+
+const pages = { 
+  about: document.getElementById('page-about'), 
+  logo: document.getElementById('page-logo'), 
+  colors: document.getElementById('page-colors'), 
+  typo: document.getElementById('page-typo'), 
+  graphics: document.getElementById('page-graphics'), 
+  photo: document.getElementById('page-photo'), 
+  media: document.getElementById('page-media') 
+};
 
 function switchPage(id) {
   const det = document.getElementById('mediaDetailContainer');
   if (det && det.classList.contains('active')) closeMediaDetail();
-  Object.values(pages).forEach(p => { if(p) { p.classList.remove('active'); p.style.display='none'; } });
+  
+  Object.values(pages).forEach(p => { 
+    if(p) { 
+      p.classList.remove('active'); 
+      p.style.display='none'; 
+    } 
+  });
+  
   if (pages[id]) {
-    pages[id].classList.add('active'); pages[id].style.display='block';
-    const controls = document.querySelector('.typo-controls'), preview = document.querySelector('.font-preview'), grid = document.querySelector('.symbols-grid');
-    if (id==='typo') { 
+    pages[id].classList.add('active'); 
+    pages[id].style.display='block';
+    
+    const controls = document.querySelector('.typo-controls');
+    const preview = document.querySelector('.font-preview');
+    const grid = document.querySelector('.symbols-grid');
+    
+    if (id === 'typo') { 
       controls?.classList.add('active'); 
       preview?.classList.add('active'); 
       grid?.classList.add('active');
       initWeightButtons();
       updateTypoPreview();
+    } else { 
+      controls?.classList.remove('active'); 
+      preview?.classList.remove('active'); 
+      grid?.classList.remove('active'); 
     }
-    else { controls?.classList.remove('active'); preview?.classList.remove('active'); grid?.classList.remove('active'); }
-    window.scrollTo({top:0,behavior:'smooth'});
+    
+    window.scrollTo({top:0, behavior:'smooth'});
   }
-  document.querySelectorAll('.nav-btn').forEach(b => b.classList.toggle('active', b.dataset.page===id));
+  
+  document.querySelectorAll('.nav-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.page === id);
+  });
+  
   savePageState(id);
 }
 
 function closeMediaDetail() {
   const det = document.getElementById('mediaDetailContainer');
-  if (det) { det.classList.remove('active'); det.style.display = 'none'; }
+  if (det) { 
+    det.classList.remove('active'); 
+    det.style.display = 'none'; 
+  }
+  
   const mp = document.getElementById('page-media');
   if (mp) { 
-    const hero = mp.querySelector('.hero-brand'); if (hero) hero.style.display=''; 
-    const cw = mp.querySelector('.content-wrapper'); if (cw) cw.style.display=''; 
+    const hero = mp.querySelector('.hero-brand'); 
+    if (hero) hero.style.display=''; 
+    const cw = mp.querySelector('.content-wrapper'); 
+    if (cw) cw.style.display=''; 
   }
+  
   currentMediaItem = null;
   savePageState('media');
 }
@@ -3111,30 +3166,37 @@ function initWeightButtons() {
   const container = document.getElementById('weightButtons'); 
   if (!container) return; 
   container.innerHTML = '';
+  
   fonts[typoState.font].weights.forEach(w => {
     const btn = document.createElement('button'); 
-    btn.className = `weight-btn ${w.value===typoState.weight?'active':''}`; 
+    btn.className = `weight-btn ${w.value === typoState.weight ? 'active' : ''}`; 
     btn.textContent = w.label; 
     btn.dataset.weight = w.value;
+    
     btn.addEventListener('click', () => { 
       typoState.weight = parseInt(w.value); 
       document.querySelectorAll('.weight-btn').forEach(b => b.classList.remove('active')); 
       btn.classList.add('active'); 
       updateTypoPreview(); 
     });
+    
     container.appendChild(btn);
   });
 }
 
 function updateTypoPreview() {
-  const preview = document.getElementById('previewText'); if(!preview) return;
+  const preview = document.getElementById('previewText'); 
+  if(!preview) return;
+  
   const fd = fonts[typoState.font];
   preview.style.fontFamily = `'${fd.name}'`; 
   preview.style.fontWeight = typoState.weight; 
   preview.style.fontSize = `${typoState.size}px`;
+  
   document.getElementById('currentFont') && (document.getElementById('currentFont').textContent = fd.name);
   document.getElementById('currentWeight') && (document.getElementById('currentWeight').textContent = fd.weights.find(w => w.value === typoState.weight)?.label || typoState.weight);
   document.getElementById('currentSize') && (document.getElementById('currentSize').textContent = `${typoState.size}px`);
+  
   document.querySelectorAll('.symbol-block').forEach(b => { 
     b.style.fontFamily = `'${fd.name}'`; 
     b.style.fontWeight = typoState.weight; 
@@ -3142,20 +3204,21 @@ function updateTypoPreview() {
 }
 
 // ===== МОБИЛЬНОЕ МЕНЮ =====
-const mobileNav = document.getElementById('mobileNav'), 
-      overlay = document.getElementById('overlay'), 
-      burgerIcon = document.getElementById('burgerIcon'), 
-      closeMobileBtn = document.getElementById('closeMobileMenu');
+const mobileNav = document.getElementById('mobileNav');
+const overlay = document.getElementById('overlay');
+const burgerIcon = document.getElementById('burgerIcon');
+const closeMobileBtn = document.getElementById('closeMobileMenu');
 
-function openMobileMenu(){ 
-  if(!mobileNav||!overlay) return; 
+function openMobileMenu() { 
+  if(!mobileNav || !overlay) return; 
   mobileNav.classList.add('open'); 
   overlay.classList.add('active'); 
   document.body.style.overflow='hidden'; 
   burgerIcon?.setAttribute('aria-expanded','true'); 
 }
-function closeMobileMenu(){ 
-  if(!mobileNav||!overlay) return; 
+
+function closeMobileMenu() { 
+  if(!mobileNav || !overlay) return; 
   mobileNav.classList.remove('open'); 
   overlay.classList.remove('active'); 
   document.body.style.overflow=''; 
@@ -3196,10 +3259,12 @@ function openLightbox(src, name, downloadHref, bgType = 'light', images = [], in
   lightboxImg.src = '';
   void lightboxImg.offsetWidth;
   lightboxImg.src = cleanSrc + '?v=' + Date.now();
+  
   lightboxImg.onload = () => { 
     lightboxImg.style.display = 'block'; 
     updateLightboxNav(); 
   };
+  
   lightboxImg.onerror = () => { 
     lightboxImg.src = 'https://placehold.co/800x600/F2F1F0/231F20?text=Изображение+не+найдено'; 
     updateLightboxNav(); 
@@ -3243,7 +3308,8 @@ document.addEventListener('keydown', (e) => {
 document.addEventListener('click', function(e) {
   const target = e.target.closest('[data-fullscreen]');
   if (target) {
-    e.preventDefault(); e.stopPropagation();
+    e.preventDefault(); 
+    e.stopPropagation();
     let src = target.dataset.fullscreen;
     const name = target.dataset.name || 'Изображение';
     const bgType = target.dataset.bg || 'light';
@@ -3254,7 +3320,6 @@ document.addEventListener('click', function(e) {
 });
 
 // ===== НАВИГАЦИЯ И СКРОЛЛ =====
-// Навигация для обычных скролл-галерей (логотипы, графика)
 document.querySelectorAll('.scroll-nav-btn').forEach(btn => {
   btn.addEventListener('click', function() {
     const targetId = this.dataset.target; 
@@ -3264,7 +3329,6 @@ document.querySelectorAll('.scroll-nav-btn').forEach(btn => {
   });
 });
 
-// Обновление состояния кнопок для обычных скролл-галерей
 document.querySelectorAll('.scroll-gallery').forEach(gallery => {
   const update = () => {
     const wrapper = gallery.parentElement;
@@ -3280,8 +3344,7 @@ document.querySelectorAll('.scroll-gallery').forEach(gallery => {
   update();
 });
 
-// ===== НОВЫЕ СКРИПТЫ ДЛЯ ЦВЕТОВОГО СКРОЛЛА =====
-// Навигация для цветовых скролл-галерей
+// ===== НАВИГАЦИЯ ДЛЯ ЦВЕТОВОГО СКРОЛЛА =====
 document.querySelectorAll('.color-scroll-nav-btn').forEach(btn => {
   btn.addEventListener('click', function() {
     const targetId = this.dataset.target; 
@@ -3291,7 +3354,6 @@ document.querySelectorAll('.color-scroll-nav-btn').forEach(btn => {
   });
 });
 
-// Обновление состояния кнопок для цветовых скролл-галерей
 document.querySelectorAll('.color-scroll-gallery').forEach(gallery => {
   const update = () => {
     const wrapper = gallery.parentElement;
@@ -3307,17 +3369,17 @@ document.querySelectorAll('.color-scroll-gallery').forEach(gallery => {
   update();
 });
 
-// ===== ПРАВИЛЬНЫЙ DRAG-TO-SCROLL ДЛЯ ГОРИЗОНТАЛЬНЫХ ГАЛЕРЕЙ =====
+// ===== DRAG-TO-SCROLL ДЛЯ ГОРИЗОНТАЛЬНЫХ ГАЛЕРЕЙ =====
 document.querySelectorAll('.scroll-gallery, .color-scroll-gallery').forEach(gallery => {
   let isDown = false;
   let startX;
   let scrollLeftStart;
 
   gallery.addEventListener('mousedown', (e) => {
-    if (e.target.closest('button, a, [data-fullscreen]')) return; // Игнорируем клики по интерактивным элементам
+    if (e.target.closest('button, a, [data-fullscreen]')) return;
     isDown = true;
     gallery.style.cursor = 'grabbing';
-    gallery.style.userSelect = 'none'; // Запрещаем выделение при перетаскивании
+    gallery.style.userSelect = 'none';
     startX = e.clientX - gallery.getBoundingClientRect().left;
     scrollLeftStart = gallery.scrollLeft;
   });
@@ -3337,7 +3399,7 @@ document.querySelectorAll('.scroll-gallery, .color-scroll-gallery').forEach(gall
     if (!isDown) return;
     e.preventDefault();
     const x = e.clientX - gallery.getBoundingClientRect().left;
-    const walk = (x - startX) * 1.2; // Плавный коэффициент (было *2, вызывало рывки)
+    const walk = (x - startX) * 1.2;
     gallery.scrollLeft = scrollLeftStart - walk;
   });
 
@@ -3355,10 +3417,10 @@ const productColors = {
       { id: 'tshirt-beigeblack', name: 'Бежево-чёрная', gradient: 'linear-gradient(135deg, #C9B8A3 50%, #000000 50%)' }
     ],
     images: {
-      'tshirt-black': ['files/fir-stil/Футболка Лимит/4.png',  'files/fir-stil/Футболка Лимит/8.png' ,  'files/fir-stil/Футболка Лимит/11.png' ,  'files/fir-stil/Футболка Лимит/14.png'],
-      'tshirt-white': ['files/fir-stil/Футболка Лимит/3.png',  'files/fir-stil/Футболка Лимит/6.png',  'files/fir-stil/Футболка Лимит/10.png' ,  'files/fir-stil/Футболка Лимит/14.png'],
-      'tshirt-redblack': [ 'files/fir-stil/Футболка Лимит/1.png',  'files/fir-stil/Футболка Лимит/2.png',  'files/fir-stil/Футболка Лимит/3.png',  'files/fir-stil/Футболка Лимит/12.png' ,  'files/fir-stil/Футболка Лимит/14.png'],
-      'tshirt-beigeblack': ['files/fir-stil/Футболка Лимит/5.png',  'files/fir-stil/Футболка Лимит/7.png',  'files/fir-stil/Футболка Лимит/13.png' ,  'files/fir-stil/Футболка Лимит/14.png']
+      'tshirt-black': ['files/fir-stil/Футболка Лимит/4.png', 'files/fir-stil/Футболка Лимит/8.png', 'files/fir-stil/Футболка Лимит/11.png', 'files/fir-stil/Футболка Лимит/14.png'],
+      'tshirt-white': ['files/fir-stil/Футболка Лимит/3.png', 'files/fir-stil/Футболка Лимит/6.png', 'files/fir-stil/Футболка Лимит/10.png', 'files/fir-stil/Футболка Лимит/14.png'],
+      'tshirt-redblack': ['files/fir-stil/Футболка Лимит/1.png', 'files/fir-stil/Футболка Лимит/2.png', 'files/fir-stil/Футболка Лимит/3.png', 'files/fir-stil/Футболка Лимит/12.png', 'files/fir-stil/Футболка Лимит/14.png'],
+      'tshirt-beigeblack': ['files/fir-stil/Футболка Лимит/5.png', 'files/fir-stil/Футболка Лимит/7.png', 'files/fir-stil/Футболка Лимит/13.png', 'files/fir-stil/Футболка Лимит/14.png']
     }
   },
   'backpack-pendant': {
@@ -3411,242 +3473,241 @@ function updateImagesByColor(productId, colorId) {
   return config.images[colorId];
 }
 
-// ===== НОСИТЕЛИ - ОБНОВЛЁННАЯ СТРУКТУРА =====
+// ===== ДАННЫЕ НОСИТЕЛЕЙ =====
 const mediaItems = [
-{ 
-      id:'bag', 
-      title:'Рюкзак', 
-      category:'accessories', 
-      desc:'городской рюкзак', 
-      avatar: 'files/fir-stil/Рюкзак/1.png',
-      gallery: ['files/fir-stil/Рюкзак/1.png','files/fir-stil/Рюкзак/Макет.png'], 
-      specs:[['Материал','хлопок']], 
-      downloads:[{label:'Макет AI', href:'files/panamka.dst', icon:'fa-file-ai'}] 
-    },
-    { 
-      id:'panamka', 
-      title:'Панамка', 
-      category:'clothes', 
-      desc:'Лёгкая панама с вышитым знаком', 
-      avatar: 'files/fir-stil/Панамка/1.jpg',
-      gallery: ['files/fir-stil/Панамка/1.jpg','files/fir-stil/Панамка/Макет.png', 'files/fir-stil/Панамка/2.png'], 
-      specs:[['Материал','хлопок']], 
-      downloads:[{label:'Макет AI', href:'files/fir-stil/Панамка/Макет.ai', icon:'fa-file-ai'}] 
-    },
-    { 
-      id:'backpack-pendant', 
-      title:'Подвес на рюкзак', 
-      category: ['accessories', 'brand'],
-      desc:'Металлический подвес «Микос Team»', 
-      hasColorSelector: true,
-      defaultColor: 'pendant-black',
-      avatar: 'files/fir-stil/Подвес/1.png',
-      gallery: ['files/fir-stil/Подвес/1.png'],
-      info: 'Металлический подвес на карабине для рюкзаков и сумок. Изготавливается из нержавеющей стали с гравировкой логотипа. Доступен в четырёх цветовых вариантах. Идеальный сувенир для поклонников театра и участников мероприятий.',
-      specs:[['Размер','40×25 мм']], 
-      downloads:[{label:'Макет AI', href:'files/pendant.stl', icon:'fa-file-ai'}] 
-    },
-    { 
-      id:'socks', 
-      title:'Носки', 
-      category:'clothes', 
-      desc:'Принт с логотипом', 
-      avatar: 'files/fir-stil/Носки/5.jpg',
-      gallery: ['files/fir-stil/Носки/5.jpg','files/fir-stil/Носки/4.jpg','files/fir-stil/Носки/2.jpg','files/fir-stil/Носки/3.jpg','files/fir-stil/Носки/Макет.png'], 
-      specs:[['Состав','хлопок 80%', 'Размер', '25']], 
-      downloads:[{label:'Макет AI', href:'files/fir-stil/Носки/Макет.ai', icon:'fa-file-ai'}] 
-    },
-    { 
-      id:'tshirt-mikos', 
-      title:'Футболка «Микос тут»', 
-      category:['clothes', 'brand'],
-      desc:'Хлопковая футболка с авторским принтом', 
-      avatar: 'files/fir-stil/Футболка Микос-тут/1.jpg',
-      gallery: ['files/fir-stil/Футболка Микос-тут/1.jpg', 'files/fir-stil/Футболка Микос-тут/Футболка_Макет.png', 'files/fir-stil/Футболка Микос-тут/Микос-тут.png', 'files/fir-stil/Футболка Микос-тут/Микос-тим.png'], 
-      specs:[['Размер','L']], 
-      downloads:[{label:'Макет AI', href:'files/fir-stil/Футболка Микос-тут/Футболка_Макет.ai', icon:'fa-file-ai'}] 
-    },
-    { 
-      id:'limited-tshirt', 
-      title:'Лимитированная футболка', 
-      category:'limited-collection', 
-      desc:'Лимитированная серия', 
-      hasColorSelector: true,
-      defaultColor: 'tshirt-bw',
-      avatar: 'files/fir-stil/Футболка Лимит/15.png',
-      gallery: ['files/fir-stil/Футболка Лимит/15.png'], 
-      specs:[['Тираж','100 шт.']], 
-      downloads:[{label:'Макет AI', href:'files/limited-tshirt.ai', icon:'fa-file-ai'}] 
-    },
-    { 
-      id:'limited-hoodie', 
-      title:'Лимитированная худи', 
-      category:'limited-collection', 
-      desc:'Худи с принтом', 
-      avatar: 'files/fir-stil/hoddie/Худи_Мокап_1.jpg',
-      gallery: ['files/fir-stil/hoddie/Худи_Мокап_1.jpg', 'files/fir-stil/hoddie/Худи_Мокап_2.jpg', 'files/fir-stil/hoddie/1.png','files/fir-stil/hoddie/2.png', 'files/fir-stil/hoddie/Нашивка.svg'], 
-      specs:[['Размер','XL','52']], 
-      downloads:[{label:'Макет AI', href:'files/fir-stil/Худи/Худи_Макет.ai', icon:'fa-file-ai'}] 
-    },
-    { 
-      id:'limited-notebook', 
-      title:'Лимитированный блокнот', 
-      category:'limited-collection', 
-      desc:'Блокнот с принтом', 
-      avatar: 'files/fir-stil/Блокнот/2.png',
-      gallery: ['files/fir-stil/Блокнот/2.png','files/fir-stil/Блокнот/1.png','files/fir-stil/Блокнот/Макет.png'], 
-      specs:[['Формат','А5']], 
-      downloads:[{label:'Макет AI', href:'files/fir-stil/Блокнот/Макет.ai', icon:'fa-file-ai'}] 
-    },
-    { 
-      id:'shopper', 
-      title:'Шопер', 
-      category:'accessories', 
-      desc:'Эко-сумка', 
-      avatar: 'files/fir-stil/Шопер/1.png',
-      gallery: ['files/fir-stil/Шопер/1.png', 'files/fir-stil/Шопер/2.png', 'files/fir-stil/Шопер/Шопер-Макет.png'], 
-      specs:[['Размер','35×40 см']], 
-      downloads:[{label:'Макет AI', href:'files/fir-stil/Шопер/Шопер-Макет.ai', icon:'fa-file-ai'}] 
-    },
-    { 
-      id:'shopper-2', 
-      title:'Шопер', 
-      category:'accessories', 
-      desc:'Эко-сумка', 
-      avatar: 'files/fir-stil/Шопер-2/1.png',
-      gallery: ['files/fir-stil/Шопер-2/1.png'], 
-      specs:[['Размер','35×40 см']], 
-      downloads:[{label:'Макет AI', href:'files/fir-stil/Шопер/Шопер-Макет.ai', icon:'fa-file-ai'}] 
-    },
-    { 
-      id:'badges', 
-      title:'Значки', 
-      category:'souvenirs', 
-      desc:'Набор значков', 
-      avatar: 'files/fir-stil/Значки/2.png',
-      gallery: ['files/fir-stil/Значки/1.png','files/fir-stil/Значки/2.png','files/fir-stil/Значки/3.png','files/fir-stil/Значки/Значки.png'], 
-      specs:[['Диаметр','38 мм']], 
-      downloads:[{label:'Макет AI', href:'files/badges.ai', icon:'fa-file-ai'}] 
-    },
-        { 
-      id:'thermo-stickers', 
-      title:'Термобутылка', 
-      category:'home', 
-      desc:'Бутылка', 
-      avatar: 'files/fir-stil/Бутылка/6.png',
-      gallery: ['files/fir-stil/Бутылка/6.png'], 
-      specs:[['Объём','500 мл']], 
-      downloads:[{label:'Макет AI', href:'files/stickers.ai', icon:'fa-file-ai'}] 
-    },
-    { 
-      id:'thermo-stickers', 
-      title:'Термобутылка с наклейками', 
-      category:'home', 
-      desc:'Бутылка + набор стикеров', 
-      avatar: 'files/fir-stil/Бутылка/1.png',
-      gallery: ['files/fir-stil/Бутылка/1.png','files/fir-stil/Бутылка/2.png','files/fir-stil/Бутылка/3.png','files/fir-stil/Бутылка/4.png','files/fir-stil/Бутылка/5.png'], 
-      specs:[['Объём','500 мл']], 
-      downloads:[{label:'Макет AI', href:'files/stickers.ai', icon:'fa-file-ai'}] 
-    },
-    { 
-      id:'hoodie-stickers', 
-      title:'Худи с наклейками', 
-      category:'clothes', 
-      desc:'Худи и лист наклеек', 
-      avatar: 'files/fir-stil//1.jpg',
-      gallery: ['files/fir-stil//1.jpg'], 
-      specs:[['Размеры','S–XXL']], 
-      downloads:[{label:'Макет AI', href:'files/hoodie-stickers.ai', icon:'fa-file-ai'}] 
-    },
-    { 
-      id:'ad-booklet', 
-      title:'Буклет рекламный', 
-      category:'printed', 
-      desc:'Рекламный буклет', 
-      avatar: 'files/fir-stil/Буклет/1.png',
-      gallery: ['files/fir-stil/Буклет/1.png','files/fir-stil/Буклет/2.png','files/fir-stil/Буклет/Буклет.png'], 
-      specs:[['Формат','А4 (фальц)']], 
-      downloads:[{label:'Макет AI', href:'files/fir-stil/Буклет/Буклет.ai', icon:'fa-file-ai'}] 
-    },
-    { 
-      id:'chair', 
-      title:'Раскладной табурет', 
-      category:'home', 
-      desc:'Брендированный раскладной табурет', 
-      avatar: 'files/fir-stil/Стул/1.png',
-      gallery: ['files/fir-stil/Стул/1.png','files/fir-stil/Стул/Макет.png','files/fir-stil/Стул/Макет-2.png'], 
-      specs:[['Материал','дерево']], 
-      downloads:[{label:'Макет AI', href:'files/chair.dwg', icon:'fa-file-ai'}] 
-    },
-    { 
-      id:'drip-coffee', 
-      title:'Дрип-кофе', 
-      category:'home', 
-      desc:'Порционный кофе в фирменной упаковке', 
-      avatar: 'files/fir-stil//1.jpg',
-      gallery: ['files/fir-stil//1.jpg'], 
-      specs:[['Вес','10 г']], 
-      downloads:[{label:'Макет AI', href:'files/coffee-pack.ai', icon:'fa-file-ai'}] 
-    },
-    { 
-      id:'lanyard', 
-      title:'Лента с бейджем', 
-      category:'accessories', 
-      desc:'Репсовая лента + пластиковый бейдж', 
-      avatar: 'files/fir-stil//1.jpg',
-      gallery: ['files/fir-stil//1.jpg'], 
-      specs:[['Ширина','15 мм']], 
-      downloads:[{label:'Макет AI', href:'files/lanyard.ai', icon:'fa-file-ai'}] 
-    },
-    { 
-      id:'envelope', 
-      title:'Конверт', 
-      category:'printed', 
-      desc:'Фирменный конверт', 
-      avatar: 'files/fir-stil/Конверт/2.png',
-      gallery: ['files/fir-stil/Конверт/2.png','files/fir-stil/Конверт/Макет.png'], 
-      specs:[['Формат','C6']], 
-      downloads:[{label:'Макет AI', href:'files/fir-stil/Конверт/Макет.ai', icon:'fa-file-ai'}] 
-    },
-    { 
-      id:'two-clowns', 
-      title:'Открытки', 
-      category:'art', 
-      desc:'Художественный постер', 
-      avatar: 'files/fir-stil/Открытки/2.png',
-      gallery: ['files/fir-stil/Открытки/2.png', 'files/fir-stil/Открытки/1.png'], 
-      specs:[['Размер','А3']], 
-      downloads:[{label:'Макет AI', href:'files/two-clowns.tiff', icon:'fa-file-ai'}] 
-    },
-
+  { 
+    id:'bag', 
+    title:'Рюкзак', 
+    category:'accessories', 
+    desc:'городской рюкзак', 
+    avatar: 'files/fir-stil/Рюкзак/1.png',
+    gallery: ['files/fir-stil/Рюкзак/1.png','files/fir-stil/Рюкзак/Макет.png'], 
+    specs:[['Материал','хлопок']], 
+    downloads:[{label:'Макет AI', href:'files/panamka.dst', icon:'fa-file-ai'}] 
+  },
+  { 
+    id:'panamka', 
+    title:'Панамка', 
+    category:'clothes', 
+    desc:'Лёгкая панама с вышитым знаком', 
+    avatar: 'files/fir-stil/Панамка/1.jpg',
+    gallery: ['files/fir-stil/Панамка/1.jpg','files/fir-stil/Панамка/Макет.png', 'files/fir-stil/Панамка/2.png'], 
+    specs:[['Материал','хлопок']], 
+    downloads:[{label:'Макет AI', href:'files/fir-stil/Панамка/Макет.ai', icon:'fa-file-ai'}] 
+  },
+  { 
+    id:'backpack-pendant', 
+    title:'Подвес на рюкзак', 
+    category: ['accessories', 'brand'],
+    desc:'Металлический подвес «Микос Team»', 
+    hasColorSelector: true,
+    defaultColor: 'pendant-black',
+    avatar: 'files/fir-stil/Подвес/1.png',
+    gallery: ['files/fir-stil/Подвес/1.png'],
+    info: 'Металлический подвес на карабине для рюкзаков и сумок. Изготавливается из нержавеющей стали с гравировкой логотипа. Доступен в четырёх цветовых вариантах. Идеальный сувенир для поклонников театра и участников мероприятий.',
+    specs:[['Размер','40×25 мм']], 
+    downloads:[{label:'Макет AI', href:'files/pendant.stl', icon:'fa-file-ai'}] 
+  },
+  { 
+    id:'socks', 
+    title:'Носки', 
+    category:'clothes', 
+    desc:'Принт с логотипом', 
+    avatar: 'files/fir-stil/Носки/5.jpg',
+    gallery: ['files/fir-stil/Носки/5.jpg','files/fir-stil/Носки/4.jpg','files/fir-stil/Носки/2.jpg','files/fir-stil/Носки/3.jpg','files/fir-stil/Носки/Макет.png'], 
+    specs:[['Состав','хлопок 80%'], ['Размер', '25']], 
+    downloads:[{label:'Макет AI', href:'files/fir-stil/Носки/Макет.ai', icon:'fa-file-ai'}] 
+  },
+  { 
+    id:'tshirt-mikos', 
+    title:'Футболка «Микос тут»', 
+    category:['clothes', 'brand'],
+    desc:'Хлопковая футболка с авторским принтом', 
+    avatar: 'files/fir-stil/Футболка Микос-тут/1.jpg',
+    gallery: ['files/fir-stil/Футболка Микос-тут/1.jpg', 'files/fir-stil/Футболка Микос-тут/Футболка_Макет.png', 'files/fir-stil/Футболка Микос-тут/Микос-тут.png', 'files/fir-stil/Футболка Микос-тут/Микос-тим.png'], 
+    specs:[['Размер','L']], 
+    downloads:[{label:'Макет AI', href:'files/fir-stil/Футболка Микос-тут/Футболка_Макет.ai', icon:'fa-file-ai'}] 
+  },
+  { 
+    id:'limited-tshirt', 
+    title:'Лимитированная футболка', 
+    category:'limited-collection', 
+    desc:'Лимитированная серия', 
+    hasColorSelector: true,
+    defaultColor: 'tshirt-bw',
+    avatar: 'files/fir-stil/Футболка Лимит/15.png',
+    gallery: ['files/fir-stil/Футболка Лимит/15.png'], 
+    specs:[['Тираж','100 шт.']], 
+    downloads:[{label:'Макет AI', href:'files/limited-tshirt.ai', icon:'fa-file-ai'}] 
+  },
+  { 
+    id:'limited-hoodie', 
+    title:'Лимитированная худи', 
+    category:'limited-collection', 
+    desc:'Худи с принтом', 
+    avatar: 'files/fir-stil/hoddie/Худи_Мокап_1.jpg',
+    gallery: ['files/fir-stil/hoddie/Худи_Мокап_1.jpg', 'files/fir-stil/hoddie/Худи_Мокап_2.jpg', 'files/fir-stil/hoddie/1.png','files/fir-stil/hoddie/2.png', 'files/fir-stil/hoddie/Нашивка.svg'], 
+    specs:[['Размер','XL'], ['Размер','52']], 
+    downloads:[{label:'Макет AI', href:'files/fir-stil/Худи/Худи_Макет.ai', icon:'fa-file-ai'}] 
+  },
+  { 
+    id:'limited-notebook', 
+    title:'Лимитированный блокнот', 
+    category:'limited-collection', 
+    desc:'Блокнот с принтом', 
+    avatar: 'files/fir-stil/Блокнот/2.png',
+    gallery: ['files/fir-stil/Блокнот/2.png','files/fir-stil/Блокнот/1.png','files/fir-stil/Блокнот/Макет.png'], 
+    specs:[['Формат','А5']], 
+    downloads:[{label:'Макет AI', href:'files/fir-stil/Блокнот/Макет.ai', icon:'fa-file-ai'}] 
+  },
+  { 
+    id:'shopper', 
+    title:'Шопер', 
+    category:'accessories', 
+    desc:'Эко-сумка', 
+    avatar: 'files/fir-stil/Шопер/1.png',
+    gallery: ['files/fir-stil/Шопер/1.png', 'files/fir-stil/Шопер/2.png', 'files/fir-stil/Шопер/Шопер-Макет.png'], 
+    specs:[['Размер','35×40 см']], 
+    downloads:[{label:'Макет AI', href:'files/fir-stil/Шопер/Шопер-Макет.ai', icon:'fa-file-ai'}] 
+  },
+  { 
+    id:'shopper-2', 
+    title:'Шопер', 
+    category:'accessories', 
+    desc:'Эко-сумка', 
+    avatar: 'files/fir-stil/Шопер-2/1.png',
+    gallery: ['files/fir-stil/Шопер-2/1.png'], 
+    specs:[['Размер','35×40 см']], 
+    downloads:[{label:'Макет AI', href:'files/fir-stil/Шопер/Шопер-Макет.ai', icon:'fa-file-ai'}] 
+  },
+  { 
+    id:'badges', 
+    title:'Значки', 
+    category:'souvenirs', 
+    desc:'Набор значков', 
+    avatar: 'files/fir-stil/Значки/2.png',
+    gallery: ['files/fir-stil/Значки/1.png','files/fir-stil/Значки/2.png','files/fir-stil/Значки/3.png','files/fir-stil/Значки/Значки.png'], 
+    specs:[['Диаметр','38 мм']], 
+    downloads:[{label:'Макет AI', href:'files/badges.ai', icon:'fa-file-ai'}] 
+  },
+  { 
+    id:'thermo-stickers-bottle', 
+    title:'Термобутылка', 
+    category:'home', 
+    desc:'Бутылка', 
+    avatar: 'files/fir-stil/Бутылка/6.png',
+    gallery: ['files/fir-stil/Бутылка/6.png'], 
+    specs:[['Объём','500 мл']], 
+    downloads:[{label:'Макет AI', href:'files/stickers.ai', icon:'fa-file-ai'}] 
+  },
+  { 
+    id:'stickers', 
+    title:'Наклейки', 
+    category:'home', 
+    desc:'Набор стикеров', 
+    avatar: 'files/fir-stil/Наклейки/1.jpg',
+    gallery: ['files/fir-stil/Наклейки/1.jpg'], 
+    specs:[['Объём','500 мл']], 
+    downloads:[{label:'Макет AI', href:'files/stickers.ai', icon:'fa-file-ai'}] 
+  },
+  { 
+    id:'thermo-stickers-full', 
+    title:'Термобутылка с наклейками', 
+    category:'home', 
+    desc:'Бутылка + набор стикеров', 
+    avatar: 'files/fir-stil/Бутылка/1.png',
+    gallery: ['files/fir-stil/Бутылка/1.png','files/fir-stil/Бутылка/2.png','files/fir-stil/Бутылка/3.png','files/fir-stil/Бутылка/4.png','files/fir-stil/Бутылка/5.png'], 
+    specs:[['Объём','500 мл']], 
+    downloads:[{label:'Макет AI', href:'files/stickers.ai', icon:'fa-file-ai'}] 
+  },
+  { 
+    id:'hoodie-stickers', 
+    title:'Худи с наклейками', 
+    category:'clothes', 
+    desc:'Худи и лист наклеек', 
+    avatar: 'files/fir-stil/Худи с наклейками/1.jpg',
+    gallery: ['files/fir-stil/Худи с наклейками/1.jpg'], 
+    specs:[['Размеры','S–XXL']], 
+    downloads:[{label:'Макет AI', href:'files/hoodie-stickers.ai', icon:'fa-file-ai'}] 
+  },
+  { 
+    id:'ad-booklet', 
+    title:'Буклет рекламный', 
+    category:'printed', 
+    desc:'Рекламный буклет', 
+    avatar: 'files/fir-stil/Буклет/1.png',
+    gallery: ['files/fir-stil/Буклет/1.png','files/fir-stil/Буклет/2.png','files/fir-stil/Буклет/Буклет.png'], 
+    specs:[['Формат','А4 (фальц)']], 
+    downloads:[{label:'Макет AI', href:'files/fir-stil/Буклет/Буклет.ai', icon:'fa-file-ai'}] 
+  },
+  { 
+    id:'chair', 
+    title:'Раскладной табурет', 
+    category:'home', 
+    desc:'Брендированный раскладной табурет', 
+    avatar: 'files/fir-stil/Стул/1.png',
+    gallery: ['files/fir-stil/Стул/1.png','files/fir-stil/Стул/Макет.png','files/fir-stil/Стул/Макет-2.png'], 
+    specs:[['Материал','дерево']], 
+    downloads:[{label:'Макет AI', href:'files/chair.dwg', icon:'fa-file-ai'}] 
+  },
+  { 
+    id:'drip-coffee', 
+    title:'Дрип-кофе', 
+    category:'home', 
+    desc:'Порционный кофе в фирменной упаковке', 
+    avatar: 'files/fir-stil/Дрип-кофе/1.jpg',
+    gallery: ['files/fir-stil/Дрип-кофе/1.jpg'], 
+    specs:[['Вес','10 г']], 
+    downloads:[{label:'Макет AI', href:'files/coffee-pack.ai', icon:'fa-file-ai'}] 
+  },
+  { 
+    id:'lanyard', 
+    title:'Лента с бейджем', 
+    category:'accessories', 
+    desc:'Репсовая лента + пластиковый бейдж', 
+    avatar: 'files/fir-stil/Лента с бейджем/1.jpg',
+    gallery: ['files/fir-stil/Лента с бейджем/1.jpg'], 
+    specs:[['Ширина','15 мм']], 
+    downloads:[{label:'Макет AI', href:'files/lanyard.ai', icon:'fa-file-ai'}] 
+  },
+  { 
+    id:'envelope', 
+    title:'Конверт', 
+    category:'printed', 
+    desc:'Фирменный конверт', 
+    avatar: 'files/fir-stil/Конверт/2.png',
+    gallery: ['files/fir-stil/Конверт/2.png','files/fir-stil/Конверт/Макет.png'], 
+    specs:[['Формат','C6']], 
+    downloads:[{label:'Макет AI', href:'files/fir-stil/Конверт/Макет.ai', icon:'fa-file-ai'}] 
+  },
+  { 
+    id:'postcards', 
+    title:'Открытки', 
+    category:'art', 
+    desc:'Художественный постер', 
+    avatar: 'files/fir-stil/Открытки/2.png',
+    gallery: ['files/fir-stil/Открытки/2.png', 'files/fir-stil/Открытки/1.png'], 
+    specs:[['Размер','А3']], 
+    downloads:[{label:'Макет AI', href:'files/two-clowns.tiff', icon:'fa-file-ai'}] 
+  },
 ];
 
+// ===== СОСТОЯНИЕ НОСИТЕЛЕЙ =====
 let activeCategory = 'all';
 let visibleCount = 8;
 const STEP = 4;
+let isRendering = false;
+let renderAbortController = null;
+
 const grid = document.getElementById('mediaGrid');
 const showMoreBtn = document.getElementById('showMoreMediaBtn');
 const detailContainer = document.getElementById('mediaDetailContainer');
 let currentMediaItem = null;
 let currentImageIndex = 0;
 
+// ===== ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ =====
 function categoryLabel(cat) {
-  // Если передан массив — возвращаем массив лейблов
-  if (Array.isArray(cat)) {
-    return cat.map(c => ({
-      clothes: 'Одежда',
-      accessories: 'Аксессуары',
-      printed: 'Полиграфия',
-      souvenirs: 'Сувениры',
-      digital: 'Digital',
-      home: 'Товары для дома',
-      art: 'Графика',
-      'limited-collection': 'Лимитированная коллекция',
-      brand: 'Внутренние носители'
-    }[c] || c));
-  }
-  // Если строка — возвращаем один лейбл (для обратной совместимости)
-  return {
+  const labels = {
     clothes: 'Одежда',
     accessories: 'Аксессуары',
     printed: 'Полиграфия',
@@ -3656,109 +3717,176 @@ function categoryLabel(cat) {
     art: 'Графика',
     'limited-collection': 'Лимитированная коллекция',
     brand: 'Внутренние носители'
-  }[cat] || cat;
+  };
+  
+  if (Array.isArray(cat)) {
+    return cat.map(c => labels[c] || c);
+  }
+  return labels[cat] || cat;
 }
-// 1. Глобальный счётчик вызовов (разместите в начале скрипта, рядом с другими переменными)
-let _renderToken = 0;
 
-// 2. Полностью переписанная функция
-async function renderMediaCards() {
-    const currentToken = ++_renderToken;
-    const filtered = activeCategory === 'all' 
-  ? mediaItems 
-  : mediaItems.filter(i => {
-      // Правильно обрабатываем и строку, и массив в поле category
-      const cats = Array.isArray(i.category) 
-        ? i.category 
-        : i.category ? [i.category] : [];
-      return cats.includes(activeCategory);
-    });
-    const toShow = filtered.slice(0, visibleCount);
+function normalizeImagePath(path) {
+  if (!path) return path;
+  return path
+    .replace(/ /g, '%20')
+    .replace(/\\/g, '/')
+    .replace(/\/{2,}/g, '/');
+}
 
-    // Защита: если контейнер не найден или вызов устарел, прерываем
-    if (!grid) return;
+function checkImageExists(url) {
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.onload = () => resolve(true);
+    img.onerror = () => resolve(false);
+    img.src = url;
+  });
+}
+
+async function findCorrectImagePath(basePath) {
+  const pathWithoutExt = basePath.replace(/\.[^.]+$/, '');
+  const extensions = ['.png', '.PNG', '.jpg', '.JPG', '.jpeg', '.JPEG', '.svg', '.SVG'];
+  
+  for (const ext of extensions) {
+    const testPath = pathWithoutExt + ext;
+    const exists = await checkImageExists(testPath);
+    if (exists) return testPath;
+  }
+  
+  return basePath;
+}
+
+// ===== ОСНОВНАЯ ФУНКЦИЯ РЕНДЕРА НОСИТЕЛЕЙ =====
+async function renderMediaCards(isInitial = false) {
+  // Блокируем повторный вызов
+  if (isRendering) return;
+  isRendering = true;
+  
+  // Отменяем предыдущий рендер
+  if (renderAbortController) renderAbortController.abort();
+  renderAbortController = new AbortController();
+  const signal = renderAbortController.signal;
+  
+  const filtered = activeCategory === 'all' 
+    ? mediaItems 
+    : mediaItems.filter(i => {
+        const cats = Array.isArray(i.category) 
+          ? i.category 
+          : i.category ? [i.category] : [];
+        return cats.includes(activeCategory);
+      });
+  
+  const currentVisibleCount = visibleCount;
+  const toRender = filtered.slice(0, currentVisibleCount);
+  
+  if (!grid) {
+    isRendering = false;
+    return;
+  }
+  
+  // При первом рендере или смене фильтра очищаем полностью
+  if (isInitial) {
     grid.innerHTML = '';
-    if (_renderToken !== currentToken) return;
-
-    // Пустой результат
-    if (toShow.length === 0) {
-        grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:#5A5A5A;padding:var(--space-8);">Носителей не найдено</p>';
-        if (showMoreBtn) showMoreBtn.style.display = 'none';
-        return;
+  }
+  
+  if (signal.aborted) {
+    isRendering = false;
+    return;
+  }
+  
+  // Пустой результат
+  if (toRender.length === 0) {
+    grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:#5A5A5A;padding:var(--space-8);">Носителей не найдено</p>';
+    if (showMoreBtn) showMoreBtn.style.display = 'none';
+    isRendering = false;
+    return;
+  }
+  
+  // Сколько карточек уже отрендерено
+  const alreadyRendered = grid.children.length;
+  const newItems = toRender.slice(alreadyRendered);
+  
+  if (newItems.length === 0) {
+    isRendering = false;
+    return;
+  }
+  
+  // Создаём фрагмент для новых карточек
+  const fragment = document.createDocumentFragment();
+  
+  for (const item of newItems) {
+    if (signal.aborted) {
+      isRendering = false;
+      return;
     }
-
-    // Параллельная проверка путей для всех карточек (ускоряет загрузку)
-    const resolvedItems = await Promise.all(toShow.map(async (item) => {
-        // Если за время проверки вызов был отменён, выходим
-        if (_renderToken !== currentToken) return null;
-
-        const rawImg = item.avatar || item.gallery?.[0] || 'https://placehold.co/600x400/cccccc/white?text=Нет+фото';
-        const normalizedImg = normalizeImagePath(rawImg);
-        let imgSrc = normalizedImg;
-
-        const imgExists = await checkImageExists(normalizedImg);
-        if (!imgExists) {
-            imgSrc = await findCorrectImagePath(normalizedImg);
-        }
-        return { ...item, resolvedImg: imgSrc };
-    }));
-
-    // Финальная проверка перед рендером
-    if (_renderToken !== currentToken) return;
-
-    const fragment = document.createDocumentFragment();
-    const validItems = resolvedItems.filter(Boolean);
-
-    for (const item of validItems) {
-        const card = document.createElement('div');
-        card.className = 'media-card-new';
-        card.innerHTML = `
-            <div class="media-card-avatar">
-                <img src="${item.resolvedImg}" alt="${item.title}" loading="lazy"
-                     onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/white?text=Нет+фото';">
-                ${(() => {
-  const labels = categoryLabel(item.categories || item.category);
-  const tags = Array.isArray(labels) ? labels : [labels];
-  return tags.map(tag => 
-    `<span class="media-card-tag">${tag}</span>`
-  ).join('');
-})()}
-            </div>
-            <div class="media-card-content">
-                <h3>${item.title}</h3>
-                <p>${item.desc}</p>
-                <button class="btn btn-primary media-card-btn" data-id="${item.id}">
-                    Подробнее <i class="fas fa-arrow-right"></i>
-                </button>
-            </div>
-        `;
-
-        // Обработчики событий
-        card.addEventListener('click', (e) => {
-            if (!e.target.closest('button')) {
-                e.preventDefault();
-                openDetail(item.id);
-            }
-        });
-
-        const btn = card.querySelector('.media-card-btn');
-        btn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            openDetail(item.id);
-        });
-
-        fragment.appendChild(card);
+    
+    const rawImg = item.avatar || item.gallery?.[0] || 'https://placehold.co/600x400/cccccc/white?text=Нет+фото';
+    const imgSrc = normalizeImagePath(rawImg);
+    
+    const card = document.createElement('div');
+    card.className = 'media-card-new';
+    
+    // Исправляем получение категорий для тегов
+    const cats = Array.isArray(item.category) ? item.category : [item.category];
+    const tagsHTML = cats.map(c => {
+      const label = categoryLabel(c);
+      return typeof label === 'string' ? `<span class="media-card-tag">${label}</span>` : '';
+    }).join('');
+    
+    card.innerHTML = `
+      <div class="media-card-avatar">
+        <img src="${imgSrc}" alt="${item.title}" loading="lazy"
+             onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/white?text=Нет+фото';this.style.objectFit='cover';">
+        ${tagsHTML}
+      </div>
+      <div class="media-card-content">
+        <h3>${item.title}</h3>
+        <p>${item.desc}</p>
+        <button class="btn btn-primary media-card-btn" data-id="${item.id}">
+          Подробнее <i class="fas fa-arrow-right"></i>
+        </button>
+      </div>
+    `;
+    
+    // Обработчики событий
+    card.addEventListener('click', (e) => {
+      if (!e.target.closest('button')) {
+        e.preventDefault();
+        openDetail(item.id);
+      }
+    });
+    
+    const btn = card.querySelector('.media-card-btn');
+    if (btn) {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        openDetail(item.id);
+      });
     }
-
-    // Вставка в DOM одной операцией (высокая производительность)
-    if (_renderToken !== currentToken) return;
-    grid.appendChild(fragment);
-
-    // Управление кнопкой "Показать ещё"
-    if (showMoreBtn) {
-        showMoreBtn.style.display = visibleCount >= filtered.length ? 'none' : 'block';
-    }
+    
+    fragment.appendChild(card);
+  }
+  
+  if (signal.aborted) {
+    isRendering = false;
+    return;
+  }
+  
+  // Вставляем новые карточки в сетку
+  grid.appendChild(fragment);
+  
+  // Управление кнопкой "Показать ещё"
+  const hasMore = currentVisibleCount < filtered.length;
+  if (showMoreBtn) {
+    showMoreBtn.style.display = hasMore ? 'block' : 'none';
+    showMoreBtn.disabled = false;
+    showMoreBtn.textContent = 'Показать ещё';
+  }
+  
+  isRendering = false;
+  renderAbortController = null;
 }
+
+// ===== ДЕТАЛЬНЫЙ ПРОСМОТР НОСИТЕЛЕЙ =====
 function refreshDetailGallery(imagesArray) {
   const gallery = document.getElementById('detailGallery');
   const mainImg = document.getElementById('detailMainImg');
@@ -3769,6 +3897,7 @@ function refreshDetailGallery(imagesArray) {
     gallery.style.display = 'none';
     return;
   }
+  
   gallery.style.display = 'block';
   
   currentImageIndex = 0;
@@ -3782,7 +3911,10 @@ function refreshDetailGallery(imagesArray) {
     t.className = `thumb ${idx === 0 ? 'active' : ''}`;
     t.alt = currentMediaItem ? currentMediaItem.title : '';
     t.loading = 'lazy';
-    t.onerror = function() { this.onerror=null; this.src='https://placehold.co/100x66/cccccc/white?text=...'; };
+    t.onerror = function() { 
+      this.onerror=null; 
+      this.src='https://placehold.co/100x66/cccccc/white?text=...'; 
+    };
     t.addEventListener('click', () => {
       mainImg.src = src;
       currentImageIndex = idx;
@@ -3793,6 +3925,7 @@ function refreshDetailGallery(imagesArray) {
   
   const prevBtn = document.getElementById('detailPrev');
   const nextBtn = document.getElementById('detailNext');
+  
   if (prevBtn) {
     prevBtn.onclick = (e) => {
       e.stopPropagation();
@@ -3803,6 +3936,7 @@ function refreshDetailGallery(imagesArray) {
       }
     };
   }
+  
   if (nextBtn) {
     nextBtn.onclick = (e) => {
       e.stopPropagation();
@@ -3845,17 +3979,21 @@ function updateThumbsActive() {
 function setupGallerySwipe(element, imgEl, imagesArray) {
   if (!element || imagesArray.length <= 1) return;
   
-  let startX = 0, endX = 0, isSwiping = false;
+  let startX = 0;
+  let endX = 0;
+  let isSwiping = false;
   
   const startHandler = (e) => {
     if (e.target.closest('button')) return;
     startX = e.touches[0].clientX;
     isSwiping = true;
   };
+  
   const moveHandler = (e) => {
     if (!isSwiping) return;
     endX = e.touches[0].clientX;
   };
+  
   const endHandler = () => {
     if (!isSwiping) return;
     isSwiping = false;
@@ -3891,11 +4029,15 @@ function openDetail(id, skipScroll = false) {
   
   const mp = document.getElementById('page-media'); 
   if (mp) { 
-    const hero = mp.querySelector('.hero-brand'); if (hero) hero.style.display = 'none'; 
-    const cw = mp.querySelector('.content-wrapper'); if (cw) cw.style.display = 'none'; 
+    const hero = mp.querySelector('.hero-brand'); 
+    if (hero) hero.style.display = 'none'; 
+    const cw = mp.querySelector('.content-wrapper'); 
+    if (cw) cw.style.display = 'none'; 
   }
   
-  document.getElementById('detailTag').textContent = categoryLabel(item.category);
+  // Устанавливаем теги категорий
+  const cats = Array.isArray(item.category) ? item.category : [item.category];
+  document.getElementById('detailTag').textContent = cats.map(c => categoryLabel(c)).join(' · ');
   document.getElementById('detailTitle').textContent = item.title; 
   document.getElementById('detailSubtitle').textContent = item.desc;
   
@@ -3972,7 +4114,10 @@ function openDetail(id, skipScroll = false) {
       const btn = document.createElement('button'); 
       btn.className = 'download-btn';
       btn.innerHTML = `<i class="fas fa-file-ai"></i> ${dl.label}`;
-      btn.onclick = (e) => { e.preventDefault(); if(dl.href && dl.href !== '#') window.location.href = dl.href; };
+      btn.onclick = (e) => { 
+        e.preventDefault(); 
+        if(dl.href && dl.href !== '#') window.location.href = dl.href; 
+      };
       downloadsGrid.appendChild(btn); 
     });
     downloadsContainer.appendChild(card);
@@ -3984,30 +4129,42 @@ function openDetail(id, skipScroll = false) {
   savePageState('media-detail', id, 0);
 }
 
+// ===== ОБРАБОТЧИКИ СОБЫТИЙ =====
 document.getElementById('mediaBackBtn')?.addEventListener('click', closeMediaDetail);
 
 document.querySelectorAll('.filter-chip').forEach(chip => { 
   chip.addEventListener('click', function() { 
     document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active')); 
     this.classList.add('active'); 
+    
+    if (renderAbortController) renderAbortController.abort();
+    
     activeCategory = this.dataset.filter; 
     visibleCount = 8; 
-    renderMediaCards(); 
+    renderMediaCards(true);
     if (detailContainer.classList.contains('active')) closeMediaDetail(); 
   }); 
 });
 
-showMoreBtn?.addEventListener('click', () => { visibleCount += STEP; renderMediaCards(); });
+showMoreBtn?.addEventListener('click', () => { 
+  visibleCount += STEP; 
+  showMoreBtn.disabled = true;
+  showMoreBtn.textContent = 'Загрузка...';
+  renderMediaCards(false).finally(() => {
+    if (showMoreBtn) {
+      showMoreBtn.disabled = false;
+      showMoreBtn.textContent = 'Показать ещё';
+    }
+  });
+});
 
-// ===== INIT =====
+// ===== ИНИЦИАЛИЗАЦИЯ =====
 document.addEventListener('DOMContentLoaded', () => {
-  activeCategory = 'all';
-  visibleCount = 8;
-  
   initWeightButtons(); 
   updateTypoPreview();
   
-  renderMediaCards();
+  // Первый рендер носителей
+  renderMediaCards(true);
   
   loadPageState();
   
@@ -4026,12 +4183,17 @@ document.addEventListener('DOMContentLoaded', () => {
     link.addEventListener('click', e => { 
       e.preventDefault(); 
       const id = link.dataset.mobilePage; 
-      if (id) { switchPage(id); closeMobileMenu(); } 
+      if (id) { 
+        switchPage(id); 
+        closeMobileMenu(); 
+      }
     }); 
   });
   
   const header = document.getElementById('mainHeader'); 
-  window.addEventListener('scroll', () => header?.classList.toggle('scrolled', window.scrollY > 10), {passive: true});
+  window.addEventListener('scroll', () => {
+    header?.classList.toggle('scrolled', window.scrollY > 10);
+  }, {passive: true});
   
   document.addEventListener('keydown', e => { 
     if (e.key === 'Escape') { 
@@ -4058,7 +4220,7 @@ document.addEventListener('DOMContentLoaded', () => {
     updateTypoPreview(); 
   });
   
-  // Инициализация состояния кнопок для всех скролл-галерей после загрузки
+  // Инициализация состояния кнопок скролл-галерей
   setTimeout(() => {
     document.querySelectorAll('.scroll-gallery, .color-scroll-gallery').forEach(gallery => {
       const update = () => {
@@ -4073,11 +4235,11 @@ document.addEventListener('DOMContentLoaded', () => {
       update();
     });
   }, 100);
-});
-document.addEventListener('DOMContentLoaded', function() {
-  // Табы
+  
+  // Инициализация вкладок "О бренде"
   const tabBtns = document.querySelectorAll('.about-tab-btn');
   const tabContents = document.querySelectorAll('.about-tab-content');
+  
   tabBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       const tabId = btn.dataset.tab;
@@ -4098,97 +4260,22 @@ document.addEventListener('DOMContentLoaded', function() {
       modal.classList.add('active');
       document.body.style.overflow = 'hidden';
     });
+    
     const closeModal = () => {
       modal.classList.remove('active');
       document.body.style.overflow = '';
     };
+    
     closeBtn.addEventListener('click', closeModal);
     modal.addEventListener('click', (e) => {
       if (e.target === modal) closeModal();
     });
+    
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
     });
   }
 });
-
-// ===== ИНТЕРАКТИВНЫЕ ВКЛАДКИ «О БРЕНДЕ» =====
-document.addEventListener('DOMContentLoaded', function() {
-  const tabBtns = document.querySelectorAll('.about-tab-btn');
-  const tabContents = document.querySelectorAll('.about-tab-content');
-
-  tabBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const tabId = btn.dataset.tab;
-      tabBtns.forEach(b => b.classList.remove('active'));
-      tabContents.forEach(c => c.classList.remove('active'));
-      btn.classList.add('active');
-      document.getElementById(tabId).classList.add('active');
-    });
-  });
-
-  // Модальное окно профиля Юлии
-  const openBtn = document.getElementById('openClientProfile');
-  const modal = document.getElementById('clientModal');
-  const closeBtn = document.getElementById('closeClientModal');
-
-  if (openBtn && modal && closeBtn) {
-    openBtn.addEventListener('click', () => {
-      modal.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    });
-    const closeModal = () => {
-      modal.classList.remove('active');
-      document.body.style.overflow = '';
-    };
-    closeBtn.addEventListener('click', closeModal);
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) closeModal();
-    });
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
-    });
-  }
-});
-
-// Функция для исправления путей к изображениям
-function normalizeImagePath(path) {
-  if (!path) return path;
-  
-  // Заменяем проблемные символы и пробелы
-  return path
-    .replace(/ /g, '%20')        // Кодируем пробелы
-    .replace(/\\/g, '/')         // Меняем обратные слеши на прямые
-    .replace(/\/{2,}/g, '/');    // Убираем двойные слеши
-}
-
-// Функция проверки существования файла
-function checkImageExists(url) {
-  return new Promise((resolve) => {
-    const img = new Image();
-    img.onload = () => resolve(true);
-    img.onerror = () => resolve(false);
-    img.src = url;
-  });
-}
-
-// Функция поиска правильного расширения файла
-async function findCorrectImagePath(basePath) {
-  // Убираем расширение
-  const pathWithoutExt = basePath.replace(/\.[^.]+$/, '');
-  
-  // Пробуем разные расширения
-  const extensions = ['.png', '.PNG', '.jpg', '.JPG', '.jpeg', '.JPEG', '.svg', '.SVG'];
-  
-  for (const ext of extensions) {
-    const testPath = pathWithoutExt + ext;
-    const exists = await checkImageExists(testPath);
-    if (exists) return testPath;
-  }
-  
-  // Если ничего не найдено, возвращаем оригинальный путь
-  return basePath;
-}
 </script>
 </body>
 </html>
