@@ -3419,7 +3419,7 @@ const mediaItems = [
       category:'accessories', 
       desc:'городской рюкзак', 
       avatar: 'files/fir-stil/Рюкзак/1.png',
-      gallery: ['files/fir-stil/Рюкзак/1.png'], 
+      gallery: ['files/fir-stil/Рюкзак/1.png','files/fir-stil/Рюкзак/Макет.png'], 
       specs:[['Материал','хлопок']], 
       downloads:[{label:'Макет AI', href:'files/panamka.dst', icon:'fa-file-ai'}] 
     },
@@ -3528,6 +3528,16 @@ const mediaItems = [
       specs:[['Диаметр','38 мм']], 
       downloads:[{label:'Макет AI', href:'files/badges.ai', icon:'fa-file-ai'}] 
     },
+        { 
+      id:'thermo-stickers', 
+      title:'Термобутылка', 
+      category:'home', 
+      desc:'Бутылка', 
+      avatar: 'files/fir-stil/Бутылка/6.png',
+      gallery: ['files/fir-stil/Бутылка/6.png'], 
+      specs:[['Объём','500 мл']], 
+      downloads:[{label:'Макет AI', href:'files/stickers.ai', icon:'fa-file-ai'}] 
+    },
     { 
       id:'thermo-stickers', 
       title:'Термобутылка с наклейками', 
@@ -3553,10 +3563,10 @@ const mediaItems = [
       title:'Буклет рекламный', 
       category:'printed', 
       desc:'Рекламный буклет', 
-      avatar: 'files/fir-stil/Буклет/Буклет.png',
-      gallery: ['files/fir-stil/Буклет/Буклет.png'], 
+      avatar: 'files/fir-stil/Буклет/1.png',
+      gallery: ['files/fir-stil/Буклет/1.png','files/fir-stil/Буклет/2.png','files/fir-stil/Буклет/Буклет.png'], 
       specs:[['Формат','А4 (фальц)']], 
-      downloads:[{label:'Макет AI', href:'files/booklet.pdf', icon:'fa-file-ai'}] 
+      downloads:[{label:'Макет AI', href:'files/fir-stil/Буклет/Буклет.ai', icon:'fa-file-ai'}] 
     },
     { 
       id:'chair', 
@@ -3594,19 +3604,9 @@ const mediaItems = [
       category:'printed', 
       desc:'Фирменный конверт', 
       avatar: 'files/fir-stil/Конверт/2.png',
-      gallery: ['files/fir-stil/Конверт/2.png','files/fir-stil/Конверт/1.png'], 
+      gallery: ['files/fir-stil/Конверт/2.png','files/fir-stil/Конверт/Макет.png'], 
       specs:[['Формат','C6']], 
-      downloads:[{label:'Макет AI', href:'files/envelope.pdf', icon:'fa-file-ai'}] 
-    },
-    { 
-      id:'tshirt-characters', 
-      title:'Футболка с персонажами', 
-      category:'clothes', 
-      desc:'Принт с персонажами спектаклей', 
-      avatar: 'files/fir-stil//1.jpg',
-      gallery: ['files/fir-stil//1.jpg'], 
-      specs:[['Размеры','S–XXL']], 
-      downloads:[{label:'Макет AI', href:'files/tshirt-characters.ai', icon:'fa-file-ai'}] 
+      downloads:[{label:'Макет AI', href:'files/fir-stil/Конверт/Макет.ai', icon:'fa-file-ai'}] 
     },
     { 
       id:'two-clowns', 
@@ -3618,16 +3618,7 @@ const mediaItems = [
       specs:[['Размер','А3']], 
       downloads:[{label:'Макет AI', href:'files/two-clowns.tiff', icon:'fa-file-ai'}] 
     },
-    { 
-      id:'social-stickers', 
-      title:'Стикеры для соцсетей', 
-      category:'digital', 
-      desc:'Набор стикеров Telegram / VK', 
-      avatar: 'files/fir-stil//1.jpg',
-      gallery: ['files/fir-stil//1.jpg'], 
-      specs:[['Формат','PNG 512×512']], 
-      downloads:[{label:'Макет AI', href:'files/stickers-pack.zip', icon:'fa-file-ai'}] 
-    }
+
 ];
 
 let activeCategory = 'all';
