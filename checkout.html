@@ -630,7 +630,6 @@
 }
 
   @media (max-width: 860px) {
-  /* ... остальные стили ... */
   .card-details {
     padding: 20px 16px;
   }
@@ -1349,7 +1348,7 @@ function initAllEventListeners() {
           showStep(4);
 
           // 4. Отправляем письмо В ФОНЕ (не ждём ответа)
-          /*window.sendTicketEmail({
+          window.sendTicketEmail({
               order_number: orderNum,
               performance: performanceData.title,
               datetime: performanceData.dateTime,
@@ -1362,7 +1361,7 @@ function initAllEventListeners() {
               console.log('✅ Письмо отправлено (фон)');
           }).catch(e => {
               console.error('❌ Ошибка отправки (фон):', e);
-          });*/
+          });
       });
   }
 
