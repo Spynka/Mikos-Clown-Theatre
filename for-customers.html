@@ -873,43 +873,74 @@
             };
         }
 
-        // Отправка
-        const sendBtn = document.getElementById('sendRequestBtn');
-        if (sendBtn) {
-            sendBtn.onclick = async function() {
-    let valid = true;
-    if (!validateField(document.getElementById('requestName'), 'name')) valid = false;
-    if (!validateField(document.getElementById('requestEmail'), 'email')) valid = false;
-    if (!validateField(document.getElementById('requestPhone'), 'phone')) valid = false;
-    if (!valid) { openModal('Ошибка', 'Проверьте обязательные поля.'); return; }
-
-    const getVal = function(id) {
-        const el = document.querySelector('.custom-select-wrapper select#' + id) || document.getElementById(id);
-        return el ? el.value : '';
-    };
-
-    const params = {
-        name: document.getElementById('requestName').value,
-        company: document.getElementById('requestCompany').value,
-        email: document.getElementById('requestEmail').value,
-        phone: document.getElementById('requestPhone').value,
-        event_type: getVal('eventType'),
-        event_date: document.getElementById('eventDate').value,
-        audience: getVal('audienceCount'),
-        format: getVal('eventFormat'),
-        wishes: document.getElementById('extraWishes').value
-    };
-
-    // Отправка через EmailJS
-    try {
-        await window.sendRequestBuilder(params);
-        openModal('Запрос отправлен!', 'Менеджер свяжется с вами в ближайшее время. Письмо с деталями отправлено на ваш email.');
-    } catch(e) {
-        console.error(e);
-        openModal('Ошибка отправки', 'Не удалось отправить письмо. Попробуйте позже.');
-    }
-};
+   // Отправка
+const sendBtn = document.getElementById('sendRequestBtn');
+if (sendBtn) {
+    sendBtn.onclick = async function() {
+        console.log('Кнопка отправки нажата'); // Для отладки
+        
+        let valid = true;
+        if (!validateField(document.getElementById('requestName'), 'name')) valid = false;
+        if (!validateField(document.getElementById('requestEmail'), 'email')) valid = false;
+        if (!validateField(document.getElementById('requestPhone'), 'phone')) valid = false;
+        
+        if (!valid) { 
+            openModal('Ошибка', 'Проверьте обязательные поля.'); 
+            return; 
         }
+
+        // Получаем значения из кастомных селектов
+        const getEventType = () => {
+            const select = document.getElementById('eventType');
+            return select ? select.value : 'corporate';
+        };
+        
+        const getAudience = () => {
+            const select = document.getElementById('audienceCount');
+            return select ? select.value : 'up-to-100';
+        };
+        
+        const getFormat = () => {
+            const select = document.getElementById('eventFormat');
+            return select ? select.value : 'ready';
+        };
+
+        const params = {
+            name: document.getElementById('requestName').value.trim(),
+            company: document.getElementById('requestCompany').value.trim() || '',
+            email: document.getElementById('requestEmail').value.trim(),
+            phone: document.getElementById('requestPhone').value.trim(),
+            event_type: getEventType(),
+            event_date: document.getElementById('eventDate').value.trim(),
+            audience: getAudience(),
+            format: getFormat(),
+            wishes: document.getElementById('extraWishes').value.trim() || ''
+        };
+        
+        console.log('Отправляемые параметры:', params); // Для отладки
+
+        // Отправка через EmailJS
+        try {
+            // Проверяем, существует ли функция
+            if (typeof window.sendRequestBuilder !== 'function') {
+                console.error('sendRequestBuilder не определена!');
+                openModal('Ошибка', 'Функция отправки не найдена. Проверьте подключение emailjs-integration.js');
+                return;
+            }
+            
+            await window.sendRequestBuilder(params);
+            console.log('Письмо успешно отправлено');
+            openModal('Запрос отправлен!', 'Менеджер свяжется с вами в ближайшее время. Письмо с деталями отправлено на ваш email.');
+            
+            // Опционально: очистить форму после успешной отправки
+            // document.getElementById('requestForm').reset();
+            
+        } catch(e) {
+            console.error('Ошибка при отправке:', e);
+            openModal('Ошибка отправки', 'Не удалось отправить письмо. Попробуйте позже или свяжитесь с нами по телефону.');
+        }
+    };
+}
 
         // Контактная форма
                 const contactForm = document.getElementById('contactForm');
