@@ -215,7 +215,7 @@
             <div class="work-content">
                 <h3 class="work-title">Хотите с нами работать?</h3>
                 <p class="work-text">Заполните небольшую анкету, перейдя по кнопке ниже.<br>Мы вам обязательно напишем в течение одного дня.</p>
-                <button class="work-btn">Хочу тут работать</button>
+                <button class="work-btn" onclick="window.open('https://docs.google.com/forms/d/e/1FAIpQLSeBBsGzjMC1148PDM9eYWsuVpf3MA2oyGa4Th8PBIzzqKg1zg/viewform?usp=publish-editor', '_blank')">Хочу тут работать</button>
             </div>
         </div>
 
@@ -525,10 +525,7 @@
         }, 150);
     });
 
-    // ===== ОБРАБОТЧИК КНОПКИ "ХОЧУ ТУТ РАБОТАТЬ" =====
-    document.querySelector('.work-btn')?.addEventListener('click', () => {
-        alert('Форма для заполнения анкеты будет доступна скоро');
-    });
+
 
     // ===== БУРГЕР-МЕНЮ =====
     const burgerIcon = document.getElementById('burgerIcon');

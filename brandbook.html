@@ -10,6 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;800&family=Nunito+Sans:opsz,wght@6..12,300;400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 <link rel="stylesheet" href="css/header-footer.css">
 <!-- Favicon -->
 <link rel="icon" type="image/svg+xml" href="SVG/logo-2.svg">
@@ -1821,6 +1822,79 @@ letter-spacing: 0.03em;
 white-space: nowrap;
 line-height: 1;
 }
+
+/* Отключаем ненужную лупу для графики */
+.scroll-item-image::after {
+  display: none !important;
+}
+
+/* Или замените на более подходящую иконку */
+.scroll-item-image:hover::after {
+  content: '\f065' !important; /* Иконка лупы вместо квадрата */
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0,0,0,0.7);
+  color: white;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.scroll-item-image:hover::after {
+  opacity: 1;
+}
+
+/* Убираем квадрат, если он появляется из другого места */
+.scroll-item-image .variant-overlay {
+  display: none !important;
+}
+/* Принудительно показываем иконки стрелок */
+.color-scroll-nav-btn i,
+.scroll-nav-btn i {
+  font-family: 'Font Awesome 6 Free' !important;
+  font-weight: 900 !important;
+  display: inline-block !important;
+  font-style: normal !important;
+  font-variant: normal !important;
+  text-rendering: auto !important;
+  line-height: 1 !important;
+}
+
+.color-scroll-nav-btn.prev i::before,
+.scroll-nav-btn.prev i::before {
+  content: '\f053' !important; /* Стрелка влево */
+}
+
+.color-scroll-nav-btn.next i::before,
+.scroll-nav-btn.next i::before {
+  content: '\f054' !important; /* Стрелка вправо */
+}
+
+/* Если иконки все еще не видны, добавьте фон */
+.color-scroll-nav-btn,
+.scroll-nav-btn {
+  background: var(--color-accent-red) !important;
+  color: white !important;
+  border: none !important;
+}
+
+.color-scroll-nav-btn i,
+.scroll-nav-btn i {
+  color: white !important;
+  font-size: 18px !important;
+}
 </style>
 </head>
 <body>
@@ -2714,12 +2788,12 @@ data-fullscreen="SVG/src.png" data-name="Структура логотипа" da
              data-name="Персонаж " 
              data-bg="light">
           <img src="files/Графика/Иллюстрации/main.svg" 
-               alt="Персонаж " 
+               alt="Персонажи Микос " 
                loading="lazy">
         </div>
         <div class="scroll-item-content">
-          <h4>Персонаж </h4>
-          <p>Главный герой бренда</p>
+          <h4>Персонажи Микос </h4>
+          <p>Главные герои бренда</p>
         </div>
       </div>
       <!-- 2-->
@@ -2733,8 +2807,8 @@ data-fullscreen="SVG/src.png" data-name="Структура логотипа" da
                loading="lazy">
         </div>
         <div class="scroll-item-content">
-          <h4>Персонаж </h4>
-          <p>Главный герой бренда</p>
+          <h4>Два клоуна смотрят друг на друга </h4>
+          <p>Иллюстрация</p>
         </div>
       </div>
       <!-- 3-->
@@ -2748,7 +2822,7 @@ data-fullscreen="SVG/src.png" data-name="Структура логотипа" da
                loading="lazy">
         </div>
         <div class="scroll-item-content">
-          <h4>Персонаж </h4>
+          <h4>Персонаж Ксюша</h4>
           <p>Главный герой бренда</p>
         </div>
       </div>
@@ -2763,7 +2837,7 @@ data-fullscreen="SVG/src.png" data-name="Структура логотипа" da
                loading="lazy">
         </div>
         <div class="scroll-item-content">
-          <h4>Персонаж </h4>
+          <h4>Персонаж Гам</h4>
           <p>Главный герой бренда</p>
         </div>
       </div>
@@ -2778,7 +2852,7 @@ data-fullscreen="SVG/src.png" data-name="Структура логотипа" da
                loading="lazy">
         </div>
         <div class="scroll-item-content">
-          <h4>Персонаж </h4>
+          <h4>Персонаж Паганель</h4>
           <p>Главный герой бренда</p>
         </div>
       </div>
@@ -2793,7 +2867,7 @@ data-fullscreen="SVG/src.png" data-name="Структура логотипа" da
                loading="lazy">
         </div>
         <div class="scroll-item-content">
-          <h4>Персонаж </h4>
+          <h4>Персонаж Ксюша</h4>
           <p>Главный герой бренда</p>
         </div>
       </div>
@@ -2808,7 +2882,7 @@ data-fullscreen="SVG/src.png" data-name="Структура логотипа" da
                loading="lazy">
         </div>
         <div class="scroll-item-content">
-          <h4>Персонаж </h4>
+          <h4>Персонаж Паганель</h4>
           <p>Главный герой бренда</p>
         </div>
       </div>
@@ -2823,7 +2897,7 @@ data-fullscreen="SVG/src.png" data-name="Структура логотипа" da
                loading="lazy">
         </div>
         <div class="scroll-item-content">
-          <h4>Персонаж </h4>
+          <h4>Персонаж Тот</h4>
           <p>Главный герой бренда</p>
         </div>
       </div>
@@ -2838,7 +2912,7 @@ data-fullscreen="SVG/src.png" data-name="Структура логотипа" da
                loading="lazy">
         </div>
         <div class="scroll-item-content">
-          <h4>Персонаж </h4>
+          <h4>Персонаж Гам</h4>
           <p>Главный герой бренда</p>
         </div>
       </div>
@@ -2853,7 +2927,7 @@ data-fullscreen="SVG/src.png" data-name="Структура логотипа" da
                loading="lazy">
         </div>
         <div class="scroll-item-content">
-          <h4>Персонаж </h4>
+          <h4>Персонаж Ксюша</h4>
           <p>Главный герой бренда</p>
         </div>
       </div>
@@ -2868,7 +2942,7 @@ data-fullscreen="SVG/src.png" data-name="Структура логотипа" da
                loading="lazy">
         </div>
         <div class="scroll-item-content">
-          <h4>Персонаж </h4>
+          <h4>Персонаж Паганель</h4>
           <p>Главный герой бренда</p>
         </div>
       </div>
@@ -2883,7 +2957,7 @@ data-fullscreen="SVG/src.png" data-name="Структура логотипа" da
                loading="lazy">
         </div>
         <div class="scroll-item-content">
-          <h4>Персонаж </h4>
+          <h4>Персонаж Тот</h4>
           <p>Главный герой бренда</p>
         </div>
       </div>
@@ -2898,7 +2972,7 @@ data-fullscreen="SVG/src.png" data-name="Структура логотипа" da
                loading="lazy">
         </div>
         <div class="scroll-item-content">
-          <h4>Персонаж </h4>
+          <h4>Персонаж Ксюша</h4>
           <p>Главный герой бренда</p>
         </div>
       </div>
@@ -2913,7 +2987,7 @@ data-fullscreen="SVG/src.png" data-name="Структура логотипа" da
                loading="lazy">
         </div>
         <div class="scroll-item-content">
-          <h4>Персонаж </h4>
+          <h4>Персонаж Гам</h4>
           <p>Главный герой бренда</p>
         </div>
       </div>
@@ -3304,18 +3378,35 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'ArrowRight') { e.preventDefault(); navigateLightbox(1); }
 });
 
+// ===== ИСПРАВЛЕННЫЙ ОБРАБОТЧИК КЛИКА ДЛЯ LIGHTBOX =====
 document.addEventListener('click', function(e) {
   const target = e.target.closest('[data-fullscreen]');
-  if (target) {
-    e.preventDefault(); 
-    e.stopPropagation();
-    let src = target.dataset.fullscreen;
-    const name = target.dataset.name || 'Изображение';
-    const bgType = target.dataset.bg || 'light';
-    const parent = target.closest('.logo-variant-item, .min-size-item, .clearspace-demo, .scroll-item');
-    const downloadLink = parent?.querySelector('.logo-download')?.href || '#';
-    openLightbox(src, name, downloadLink, bgType);
+  if (!target) return;
+  
+  e.preventDefault(); 
+  e.stopPropagation();
+  
+  let src = target.dataset.fullscreen;
+  const name = target.dataset.name || 'Изображение';
+  const bgType = target.dataset.bg || 'light';
+  
+  // Ищем родительскую галерею (scroll-gallery или любой контейнер с изображениями)
+  const galleryContainer = target.closest('.scroll-gallery, .gallery-thumbs, .logo-variants-grid, .min-size-grid, .clearspace-grid');
+  let imagesArray = [src];
+  let currentIndex = 0;
+  
+  if (galleryContainer) {
+    // Собираем все data-fullscreen элементы внутри контейнера
+    const allFullscreenItems = Array.from(galleryContainer.querySelectorAll('[data-fullscreen]'));
+    imagesArray = allFullscreenItems.map(item => item.dataset.fullscreen);
+    currentIndex = allFullscreenItems.indexOf(target);
+    if (currentIndex === -1) currentIndex = 0;
   }
+  
+  const parent = target.closest('.logo-variant-item, .min-size-item, .clearspace-demo, .scroll-item');
+  const downloadLink = parent?.querySelector('.logo-download')?.href || '#';
+  
+  openLightbox(src, name, downloadLink, bgType, imagesArray, currentIndex);
 });
 
 // ===== НАВИГАЦИЯ И СКРОЛЛ =====
@@ -3498,7 +3589,7 @@ const mediaItems = [
     id:'backpack-pendant', 
     title:'Подвес на рюкзак', 
     category: ['accessories', 'brand'],
-    desc:'Металлический подвес «Микос Team»', 
+    desc:'Тканевый подвес «Микос Team»', 
     hasColorSelector: true,
     defaultColor: 'pendant-black',
     avatar: 'files/fir-stil/Подвес/1.png',
@@ -3512,8 +3603,8 @@ const mediaItems = [
     title:'Носки', 
     category:'clothes', 
     desc:'Принт с логотипом', 
-    avatar: 'files/fir-stil/Носки/5.jpg',
-    gallery: ['files/fir-stil/Носки/5.jpg','files/fir-stil/Носки/4.jpg','files/fir-stil/Носки/2.jpg','files/fir-stil/Носки/3.jpg','files/fir-stil/Носки/Макет.png'], 
+    avatar: 'files/fir-stil/Носки/4.jpg',
+    gallery: ['files/fir-stil/Носки/4.jpg','files/fir-stil/Носки/2.jpg','files/fir-stil/Носки/3.jpg','files/fir-stil/Носки/5.jpg','files/fir-stil/Носки/Макет.png'], 
     specs:[['Состав','хлопок 80%'], ['Размер', '25']], 
     downloads:[{label:'Макет AI', href:'files/fir-stil/Носки/Макет.ai', icon:'fa-file-ai'}] 
   },
@@ -3620,16 +3711,6 @@ const mediaItems = [
     downloads:[{label:'Макет AI', href:'files/stickers.ai', icon:'fa-file-ai'}] 
   },
   { 
-    id:'hoodie-stickers', 
-    title:'Худи с наклейками', 
-    category:'clothes', 
-    desc:'Худи и лист наклеек', 
-    avatar: 'files/fir-stil/Худи с наклейками/1.jpg',
-    gallery: ['files/fir-stil/Худи с наклейками/1.jpg'], 
-    specs:[['Размеры','S–XXL']], 
-    downloads:[{label:'Макет AI', href:'files/hoodie-stickers.ai', icon:'fa-file-ai'}] 
-  },
-  { 
     id:'ad-booklet', 
     title:'Буклет рекламный', 
     category:'printed', 
@@ -3648,26 +3729,6 @@ const mediaItems = [
     gallery: ['files/fir-stil/Стул/1.png','files/fir-stil/Стул/Макет.png','files/fir-stil/Стул/Макет-2.png'], 
     specs:[['Материал','дерево']], 
     downloads:[{label:'Макет AI', href:'files/chair.dwg', icon:'fa-file-ai'}] 
-  },
-  { 
-    id:'drip-coffee', 
-    title:'Дрип-кофе', 
-    category:'home', 
-    desc:'Порционный кофе в фирменной упаковке', 
-    avatar: 'files/fir-stil/Дрип-кофе/1.jpg',
-    gallery: ['files/fir-stil/Дрип-кофе/1.jpg'], 
-    specs:[['Вес','10 г']], 
-    downloads:[{label:'Макет AI', href:'files/coffee-pack.ai', icon:'fa-file-ai'}] 
-  },
-  { 
-    id:'lanyard', 
-    title:'Лента с бейджем', 
-    category:'accessories', 
-    desc:'Репсовая лента + пластиковый бейдж', 
-    avatar: 'files/fir-stil/Лента с бейджем/1.jpg',
-    gallery: ['files/fir-stil/Лента с бейджем/1.jpg'], 
-    specs:[['Ширина','15 мм']], 
-    downloads:[{label:'Макет AI', href:'files/lanyard.ai', icon:'fa-file-ai'}] 
   },
   { 
     id:'envelope', 

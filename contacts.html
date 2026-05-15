@@ -372,8 +372,17 @@
 <script src="js/header-scripts.js"></script>
 <script src="js/common.js"></script>
 
-<!-- ✅ СКРИПТ КАРТЫ ЯНДЕКС -->
+
 <script>
+const downloadBtn = document.querySelector('.download-btn');
+if (downloadBtn) {
+    downloadBtn.addEventListener('click', function() {
+        const link = document.createElement('a');
+        link.href = 'files/docs/Реквизиты.pdf'; 
+        link.download = 'Реквизиты.pdf';  
+        link.click();
+    });
+}
 // Инициализация карты после загрузки API
 function initYandexMap() {
     // Проверяем, что API загрузился
