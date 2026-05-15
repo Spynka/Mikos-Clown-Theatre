@@ -554,7 +554,6 @@
 
     whenReady(function() {
         initAll();
-        // Дополнительные попытки для динамических компонентов
         setTimeout(initAll, 800);
         setTimeout(initAll, 2000);
     });
@@ -682,7 +681,6 @@
                 return;
             }
             
-            // Проверяем, не обернут ли уже
             if (select.parentElement && select.parentElement.classList.contains('custom-select-wrapper')) {
                 console.log('Already wrapped:', id);
                 return;
@@ -690,7 +688,6 @@
 
             console.log('Wrapping select:', id);
 
-            // Создаем обертку
             const wrapper = document.createElement('div');
             wrapper.className = 'custom-select-wrapper';
             wrapper.style.display = 'block';
@@ -698,7 +695,6 @@
             wrapper.style.visibility = 'visible';
             wrapper.style.opacity = '1';
 
-            // Создаем кнопку
             const btn = document.createElement('button');
             btn.type = 'button';
             btn.className = 'custom-select-btn';
@@ -707,7 +703,6 @@
             btn.style.visibility = 'visible';
             btn.style.opacity = '1';
 
-            // Создаем выпадающий список
             const dropdown = document.createElement('div');
             dropdown.className = 'custom-select-dropdown';
 
@@ -733,14 +728,12 @@
                 dropdown.appendChild(item);
             });
 
-            // Обработчик клика по кнопке
             btn.addEventListener('click', function(e) {
                 e.stopPropagation();
                 e.preventDefault();
                 
                 const isOpen = dropdown.classList.contains('show');
                 
-                // Закрываем все другие дропдауны
                 document.querySelectorAll('.custom-select-dropdown.show').forEach(function(d) {
                     d.classList.remove('show');
                     if (d.previousElementSibling) {
@@ -757,7 +750,6 @@
                 }
             });
 
-            // Замена оригинального селекта
             select.parentNode.insertBefore(wrapper, select);
             wrapper.appendChild(btn);
             wrapper.appendChild(dropdown);
@@ -765,7 +757,6 @@
             select.style.display = 'none';
         });
 
-        // Закрытие дропдаунов при клике вне
         document.addEventListener('click', function(e) {
             if (!e.target.closest('.custom-select-wrapper')) {
                 document.querySelectorAll('.custom-select-dropdown.show').forEach(function(d) {
@@ -777,7 +768,6 @@
             }
         });
 
-        // Закрытие дропдаунов по Escape
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 document.querySelectorAll('.custom-select-dropdown.show').forEach(function(d) {
@@ -873,77 +863,73 @@
             };
         }
 
-   // Отправка
-const sendBtn = document.getElementById('sendRequestBtn');
-if (sendBtn) {
-    sendBtn.onclick = async function() {
-        console.log('Кнопка отправки нажата'); // Для отладки
-        
-        let valid = true;
-        if (!validateField(document.getElementById('requestName'), 'name')) valid = false;
-        if (!validateField(document.getElementById('requestEmail'), 'email')) valid = false;
-        if (!validateField(document.getElementById('requestPhone'), 'phone')) valid = false;
-        
-        if (!valid) { 
-            openModal('Ошибка', 'Проверьте обязательные поля.'); 
-            return; 
+        // ОТПРАВКА - МОДАЛЬНОЕ ОКНО ПОКАЗЫВАЕТСЯ СРАЗУ!
+        const sendBtn = document.getElementById('sendRequestBtn');
+        if (sendBtn) {
+            sendBtn.onclick = async function() {
+                console.log('Кнопка отправки нажата');
+                
+                // Валидация полей
+                let valid = true;
+                if (!validateField(document.getElementById('requestName'), 'name')) valid = false;
+                if (!validateField(document.getElementById('requestEmail'), 'email')) valid = false;
+                if (!validateField(document.getElementById('requestPhone'), 'phone')) valid = false;
+                
+                if (!valid) { 
+                    openModal('Ошибка', 'Проверьте обязательные поля.'); 
+                    return; 
+                }
+
+                // Получаем значения из кастомных селектов
+                const getEventType = () => {
+                    const select = document.getElementById('eventType');
+                    return select ? select.value : 'corporate';
+                };
+                
+                const getAudience = () => {
+                    const select = document.getElementById('audienceCount');
+                    return select ? select.value : 'up-to-100';
+                };
+                
+                const getFormat = () => {
+                    const select = document.getElementById('eventFormat');
+                    return select ? select.value : 'ready';
+                };
+
+                const params = {
+                    name: document.getElementById('requestName').value.trim(),
+                    company: document.getElementById('requestCompany').value.trim() || '',
+                    email: document.getElementById('requestEmail').value.trim(),
+                    phone: document.getElementById('requestPhone').value.trim(),
+                    event_type: getEventType(),
+                    event_date: document.getElementById('eventDate').value.trim(),
+                    audience: getAudience(),
+                    format: getFormat(),
+                    wishes: document.getElementById('extraWishes').value.trim() || ''
+                };
+                
+                console.log('Отправляемые параметры:', params);
+
+                // ✅ ПОКАЗЫВАЕМ МОДАЛЬНОЕ ОКНО СРАЗУ ПОСЛЕ ВАЛИДАЦИИ
+                openModal('Запрос отправлен!', 'Спасибо за обращение! Наш менеджер свяжется с вами в ближайшее время.');
+                
+                // Отправка письма в фоновом режиме (не блокирует модальное окно)
+                if (typeof window.sendRequestBuilder === 'function') {
+                    // Отправляем письмо асинхронно, не дожидаясь результата
+                    window.sendRequestBuilder(params)
+                        .then(() => console.log('Письмо успешно отправлено в фоне'))
+                        .catch(e => console.error('Ошибка при отправке письма (фон):', e));
+                } else {
+                    console.warn('sendRequestBuilder не определена, письмо не отправлено');
+                }
+                
+                // Опционально: очистить форму
+                // document.getElementById('requestForm').reset();
+            };
         }
-
-        // Получаем значения из кастомных селектов
-        const getEventType = () => {
-            const select = document.getElementById('eventType');
-            return select ? select.value : 'corporate';
-        };
-        
-        const getAudience = () => {
-            const select = document.getElementById('audienceCount');
-            return select ? select.value : 'up-to-100';
-        };
-        
-        const getFormat = () => {
-            const select = document.getElementById('eventFormat');
-            return select ? select.value : 'ready';
-        };
-
-        const params = {
-            name: document.getElementById('requestName').value.trim(),
-            company: document.getElementById('requestCompany').value.trim() || '',
-            email: document.getElementById('requestEmail').value.trim(),
-            phone: document.getElementById('requestPhone').value.trim(),
-            event_type: getEventType(),
-            event_date: document.getElementById('eventDate').value.trim(),
-            audience: getAudience(),
-            format: getFormat(),
-            wishes: document.getElementById('extraWishes').value.trim() || ''
-        };
-        
-        console.log('Отправляемые параметры:', params); // Для отладки
-
-        // Отправка через EmailJS
-        try {
-            // Проверяем, существует ли функция
-            if (typeof window.sendRequestBuilder !== 'function') {
-                console.error('sendRequestBuilder не определена!');
-                openModal('Ошибка', 'Функция отправки не найдена. Проверьте подключение emailjs-integration.js');
-                return;
-            }
-            
-            await window.sendRequestBuilder(params);
-            console.log('Письмо успешно отправлено');
-            openModal('Запрос отправлен!', 'Менеджер свяжется с вами в ближайшее время. Письмо с деталями отправлено на ваш email.');
-            
-            // Опционально: очистить форму после успешной отправки
-            // document.getElementById('requestForm').reset();
-            
-        } catch(e) {
-            console.error('Ошибка при отправке:', e);
-            openModal('Ошибка отправки', 'Не удалось отправить письмо. Попробуйте позже или свяжитесь с нами по телефону.');
-        }
-    };
-}
 
         // Контактная форма
-                const contactForm = document.getElementById('contactForm');
+        const contactForm = document.getElementById('contactForm');
         if (contactForm) {
             contactForm.onsubmit = async function(e) {
                 e.preventDefault();
@@ -952,7 +938,10 @@ if (sendBtn) {
                 if (!validateField(document.getElementById('contactEmail'), 'email')) valid = false;
                 if (!validateField(document.getElementById('contactPhone'), 'phone')) valid = false;
                 if (!validateField(document.getElementById('contactMessage'), 'required')) valid = false;
-                if (!valid) { openModal('Ошибка', 'Заполните все поля корректно.'); return; }
+                if (!valid) { 
+                    openModal('Ошибка', 'Заполните все поля корректно.'); 
+                    return; 
+                }
 
                 const params = {
                     name: document.getElementById('contactName').value.trim(),
@@ -962,13 +951,17 @@ if (sendBtn) {
                     message: document.getElementById('contactMessage').value.trim()
                 };
 
-                try {
-                    await window.sendContactForm(params);
-                    contactForm.reset();
-                    openModal('Сообщение отправлено!', 'Спасибо! Мы ответим в течение 2 часов. Письмо с подтверждением уже на вашей почте.');
-                } catch(e) {
-                    console.error(e);
-                    openModal('Ошибка отправки', 'Не удалось отправить письмо. Попробуйте позже.');
+                // ✅ ПОКАЗЫВАЕМ МОДАЛЬНОЕ ОКНО СРАЗУ
+                openModal('Сообщение отправлено!', 'Спасибо! Мы ответим в течение 2 часов.');
+                
+                // Отправка письма в фоне
+                if (typeof window.sendContactForm === 'function') {
+                    window.sendContactForm(params)
+                        .then(() => {
+                            console.log('Контактная форма отправлена в фоне');
+                            contactForm.reset();
+                        })
+                        .catch(e => console.error('Ошибка отправки контактной формы:', e));
                 }
             };
         }
