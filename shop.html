@@ -1072,7 +1072,7 @@ window.addEventListener('resize', () => {
         
         const submitOrderBtn = document.getElementById('submitOrderBtn');
         if (submitOrderBtn) {
-            submitOrderBtn.addEventListener('click', async () => {
+   submitOrderBtn.addEventListener('click', () => {
     const name = document.getElementById('contactName')?.value.trim();
     const phone = document.getElementById('contactPhone')?.value.trim();
     const email = document.getElementById('contactEmail')?.value.trim();
@@ -1084,17 +1084,21 @@ window.addEventListener('resize', () => {
         return;
     }
 
-    try {
-        await window.sendOrderMerch({
+    document.getElementById('modalContacts')?.classList.remove('active');
+    showSuccess(name);
+
+    // 📧 Отправляем письмо в фоне (без блокировки)
+    if (typeof window.sendOrderMerch === 'function') {
+        window.sendOrderMerch({
             name, phone, email,
             contact_method: method,
             order_summary: orderSummary
+        })
+        .then(() => console.log('✅ Письмо отправлено'))
+        .catch((e) => {
+            console.error('❌ Ошибка отправки:', e);
+         
         });
-        document.getElementById('modalContacts')?.classList.remove('active');
-        showSuccess(name);
-    } catch(e) {
-        console.error(e);
-        alert('Ошибка отправки письма. Попробуйте позже.');
     }
 });
         }
