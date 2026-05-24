@@ -1086,8 +1086,6 @@ window.addEventListener('resize', () => {
 
     document.getElementById('modalContacts')?.classList.remove('active');
     showSuccess(name);
-
-    // 📧 Отправляем письмо в фоне (без блокировки)
     if (typeof window.sendOrderMerch === 'function') {
         window.sendOrderMerch({
             name, phone, email,
