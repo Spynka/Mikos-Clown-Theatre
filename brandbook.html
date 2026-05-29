@@ -113,9 +113,7 @@
 .color-swatch[data-color="pendant-white"] { background: #FFFFFF; border: 2px solid var(--color-border); }
 .color-swatch[data-color="pendant-black"] { background: #000000; }
 .color-swatch[data-color="pendant-blue"] { background: #3685C6; }
-.color-swatch[data-color="pendant-gradient"] { 
-  background: linear-gradient(135deg, #3685C6 0%, #E13036 100%); 
-}
+
 /* Цвета для футболки */
 .color-swatch[data-color="tshirt-bw"] { 
   background: linear-gradient(135deg, #000000 50%, #FFFFFF 50%); 
@@ -3024,6 +3022,7 @@ data-fullscreen="SVG/src.png" data-name="Структура логотипа" da
 <div class="filter-chip active" data-filter="all">Все носители</div>
 <div class="filter-chip" data-filter="clothes">Одежда</div>
 <div class="filter-chip" data-filter="brand">Внутренние носители</div>
+<div class="filter-chip" data-filter="children">Для детей</div>
 <div class="filter-chip" data-filter="accessories">Аксессуары</div>
 <div class="filter-chip" data-filter="printed">Полиграфия</div>
 <div class="filter-chip" data-filter="digital">Digital</div>
@@ -3519,13 +3518,12 @@ const productColors = {
       { id: 'pendant-white', name: 'Белый', color: '#FFFFFF', border: '2px solid var(--color-border)' },
       { id: 'pendant-black', name: 'Чёрный', color: '#000000' },
       { id: 'pendant-blue', name: 'Синий', color: '#3685C6' },
-      { id: 'pendant-gradient', name: 'Градиент', gradient: 'linear-gradient(135deg, #3685C6 0%, #E13036 100%)' }
     ],
     images: {
       'pendant-white': ['files/fir-stil/Подвес/Белый/1.jpg','files/fir-stil/Подвес/Белый/2.jpg','files/fir-stil/Подвес/Белый/1.png'],
       'pendant-black': ['files/fir-stil/Подвес/Черный/1.jpg','files/fir-stil/Подвес/Черный/2.jpg','files/fir-stil/Подвес/Черный/1.png'],
       'pendant-blue': ['files/fir-stil/Подвес/Голубой/1.jpg','files/fir-stil/Подвес/Голубой/2.jpg','files/fir-stil/Подвес/Голубой/1.png'],
-      'pendant-gradient': ['files/fir-stil/Подвес/Градиент/1.jpg','files/fir-stil/Подвес/Градиент/2.jpg','files/fir-stil/Подвес/Градиент/1.png'],
+     
     }
   }
 };
@@ -3750,6 +3748,36 @@ const mediaItems = [
     specs:[['Размер','А3']], 
     downloads:[{label:'Макет AI', href:'files/two-clowns.tiff', icon:'fa-file-ai'}] 
   },
+  { 
+    id:'postcards', 
+    title:'Накладной нос', 
+    category:'children', 
+    desc:'Накладной нос', 
+    avatar: 'files/fir-stil/Нос/2.png',
+    gallery: ['files/fir-stil/Нос/2.png', 'files/fir-stil/Открытки/1.png'], 
+    specs:[['Размер','А3']], 
+    downloads:[{label:'Макет AI', href:'files/two-clowns.tiff', icon:'fa-file-ai'}] 
+  },
+    { 
+    id:'postcards', 
+    title:'Набор браслетов', 
+    category:'children', 
+    desc:'Набор браслетов', 
+    avatar: 'files/fir-stil/Браслеты/2.png',
+    gallery: ['files/fir-stil/Браслеты/2.png', 'files/fir-stil/Открытки/1.png'], 
+    specs:[['Размер','А3']], 
+    downloads:[{label:'Макет AI', href:'files/two-clowns.tiff', icon:'fa-file-ai'}] 
+  },
+     { 
+    id:'postcards', 
+    title:'Электронный билет', 
+    category:'Digital', 
+    desc:'Электронный билет', 
+    avatar: 'files/fir-stil/Билет/1.png',
+    gallery: ['files/fir-stil/Билет/1.png', 'files/fir-stil/Билет/2.png'], 
+    specs:[['Размер','А4']], 
+    downloads:[{label:'Макет AI', href:'files/two-clowns.tiff', icon:'fa-file-ai'}] 
+  },
 ];
 
 // ===== СОСТОЯНИЕ НОСИТЕЛЕЙ =====
@@ -3776,7 +3804,8 @@ function categoryLabel(cat) {
     home: 'Сувениры',
     art: 'Графика',
     'limited-collection': 'Лимитированная коллекция',
-    brand: 'Внутренние носители'
+    brand: 'Внутренние носители',
+    children: 'Для детей'
   };
   
   if (Array.isArray(cat)) {

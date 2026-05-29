@@ -368,18 +368,30 @@
     'use strict';
     
     // ===== ДАННЫЕ ТОВАРОВ С МАССИВОМ ИЗОБРАЖЕНИЙ =====
-    const products = [
-               { id: 1, name: 'Носки', desc: 'Принт с логотипом театра', price: 500, isClothing: false, images: ['images/content/shop/2.png'], category: 'clothes' },
-        { id: 2, name: 'Подвес на рюкзак "Микос Team"', desc: 'Современный аксессуар', price: 900, isClothing: false, images: ['images/content/shop/3.png'], category: 'accessories' },
-        { id: 3, name: 'Футболка', desc: 'Хлопковая футболка', price: 2500, isClothing: true, images: ['images/content/shop/5.png', 'images/content/shop/1.png'], category: 'clothes' },
-        { id: 4, name: 'Футболка', desc: 'Хлопковая футболка', price: 2500, isClothing: true, images: ['images/content/shop/7.png', 'images/content/shop/5.png'], category: 'clothes' },
-        { id: 5, name: 'Футболка', desc: 'Хлопковая футболка', price: 2500, isClothing: true, images: ['images/content/shop/8.png', 'images/content/shop/5.png'], category: 'clothes' },
-        { id: 6, name: 'Сумка шоппер', desc: 'Эко-сумка', price: 1800, isClothing: false, images: ['images/content/shop/9.png'], category: 'accessories' },
-        { id: 7, name: 'Футболка', desc: 'Хлопковая футболка с логотипом театра', price: 2500, isClothing: true, images: ['images/content/shop/1.png', 'images/content/shop/5.png'], category: 'clothes' },
-        { id: 8, name: 'Кружка театральная', desc: 'Фарфор', price: 1200, isClothing: false, images: ['https://placehold.co/428x220/2A3D5E/white?text=Кружка'], category: 'tableware' },
-        { id: 9, name: 'Магнит символ', desc: 'Сувенирный магнит', price: 450, isClothing: false, images: ['https://placehold.co/428x220/4A6294/white?text=Магнит'], category: 'souvenirs' },
-        { id: 10, name: 'Программа спектакля', desc: 'Иллюстрированная', price: 350, isClothing: false, images: ['https://placehold.co/428x220/2A3D5E/white?text=Программа'], category: 'printed' }
-    ];
+const products = [
+    { id: 1, name: 'Носки', desc: 'Вышивка с логотипом театра', price: 500, isClothing: false, images: ['files/fir-stil/Носки/5.jpg'], category: 'clothes' },
+    { id: 2, name: 'Футболка', desc: 'Коллаборация с фестивалем «АйДа Фест»', price: 2500, isClothing: true, images: ['files/fir-stil/Футболка Лимит/3 (2).png', 'files/fir-stil/Футболка Лимит/1.png', 'files/fir-stil/Футболка Лимит/2.png'], category: 'clothes' },
+    { id: 3, name: 'Футболка', desc: 'Коллаборация с фестивалем «АйДа Фест', price: 2500, isClothing: true, images: ['files/fir-stil/Футболка Лимит/6.png', 'files/fir-stil/Футболка Лимит/3.png'], category: 'clothes' },
+    { id: 4, name: 'Футболка', desc: 'Коллаборация с фестивалем «АйДа Фест', price: 2500, isClothing: true, images: ['files/fir-stil/Футболка Лимит/8.png', 'files/fir-stil/Футболка Лимит/4.png'], category: 'clothes' },
+    { id: 5, name: 'Футболка', desc: 'Коллаборация с фестивалем «АйДа Фест', price: 2500, isClothing: true, images: ['files/fir-stil/Футболка Лимит/7.png', 'files/fir-stil/Футболка Лимит/5.png'], category: 'clothes' },
+    { id: 6, name: 'Сумка шоппер', desc: 'Эко-сумка', price: 1800, isClothing: false, images: ['files/fir-stil/Шопер/1.png','files/fir-stil/Шопер/2.png'], category: 'accessories' },
+    { id: 7, name: 'Худи', desc: 'Коллаборация с фестивалем «АйДа Фест»', price: 3500, isClothing: true, images: ['files/fir-stil/hoddie/Худи_Мокап_1.jpg','files/fir-stil/hoddie/1.png'], category: 'clothes' },
+    { id: 8, name: 'Панама', desc: 'Двухсторонняя панама с лого театра', price: 1200, isClothing: true, images: ['files/fir-stil/Панамка/1.jpg','files/fir-stil/Панамка/2.png'], category: 'clothes' },
+
+    // ---------- Добавленные товары из mediaItems (без повторов и внутренних носителей) ----------
+    { id: 9, name: 'Рюкзак', desc: 'городской рюкзак', price: 2000, isClothing: false, images: ['files/fir-stil/Рюкзак/1.png', 'files/fir-stil/Рюкзак/Макет.png'], category: 'accessories' },
+   
+    { id: 13, name: 'Лимитированный блокнот', desc: 'Блокнот с принтом', price: 800, isClothing: false, images: ['files/fir-stil/Блокнот/2.png', 'files/fir-stil/Блокнот/1.png', 'files/fir-stil/Блокнот/Макет.png'], category: 'limited-collection' },
+   
+    { id: 15, name: 'Шопер', desc: 'Эко-сумка', price: 1800, isClothing: false, images: ['files/fir-stil/Шопер-2/1.png'], category: 'accessories' },
+    { id: 16, name: 'Значки', desc: 'Набор значков', price: 300, isClothing: false, images: ['files/fir-stil/Значки/1.png', 'files/fir-stil/Значки/2.png', 'files/fir-stil/Значки/3.png', 'files/fir-stil/Значки/Значки.png'], category: 'souvenirs' },
+    { id: 17, name: 'Термобутылка', desc: 'Бутылка', price: 1200, isClothing: false, images: ['files/fir-stil/Бутылка/6.png'], category: 'home' },
+    { id: 18, name: 'Наклейки', desc: 'Набор стикеров', price: 200, isClothing: false, images: ['files/fir-stil/Наклейки/1.jpg'], category: 'home' },
+    { id: 19, name: 'Термобутылка с наклейками', desc: 'Бутылка + набор стикеров', price: 1500, isClothing: false, images: ['files/fir-stil/Бутылка/1.png', 'files/fir-stil/Бутылка/2.png', 'files/fir-stil/Бутылка/3.png', 'files/fir-stil/Бутылка/4.png', 'files/fir-stil/Бутылка/5.png'], category: 'home' },
+    { id: 20, name: 'Раскладной табурет', desc: 'Брендированный раскладной табурет', price: 2500, isClothing: false, images: ['files/fir-stil/Стул/1.png', 'files/fir-stil/Стул/Макет.png', 'files/fir-stil/Стул/Макет-2.png'], category: 'home' },
+    { id: 21, name: 'Накладной нос', desc: 'Накладной нос', price: 300, isClothing: false, images: ['files/fir-stil/Нос/2.png'], category: 'children' },
+    { id: 22, name: 'Набор браслетов', desc: 'Набор браслетов', price: 400, isClothing: false, images: ['files/fir-stil/Браслеты/2.png'], category: 'children' }
+];
 
     // ===== СОСТОЯНИЕ =====
     let cartItems = [], currentProduct = null, editingIndex = -1, returnToContacts = false;
@@ -887,7 +899,6 @@ function checkMerchCardsVisibility() {
         return true;
     }
     
-    // ===== СОХРАНИТЬ ИЗМЕНЕНИЯ ТОВАРА =====
     function saveEditItem() {
         if (editingIndex === -1) return false;
         
@@ -1031,12 +1042,10 @@ function checkMerchCardsVisibility() {
             renderProducts();
         });
         
-        // Добавляем отслеживание скролла для проверки видимости тегов
         window.addEventListener('scroll', () => {
     requestAnimationFrame(checkMerchCardsVisibility);
 });
 
-// Также добавьте:
 window.addEventListener('resize', () => {
     renderProducts();
     requestAnimationFrame(() => {
@@ -1057,7 +1066,6 @@ window.addEventListener('resize', () => {
             if (e.target === modalContacts) closeModals();
         });
         
-        // Глобальный обработчик Escape
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 if (productGallery && productGallery.classList.contains('active')) {
@@ -1126,8 +1134,6 @@ window.addEventListener('resize', () => {
         document.querySelector('.footer-btn-secondary')?.addEventListener('click', () => {
             alert('Заказ шоу: свяжитесь с нами по телефону');
         });
-        
-        // ✅ ПЕРВЫЙ ВЫЗОВ ОТРИСОВКИ
         renderProducts();
     }
     
@@ -1139,8 +1145,6 @@ window.addEventListener('resize', () => {
     
 })();
 </script>
-
-<!-- ✅ common.js подключаем ТОЛЬКО ОДИН РАЗ и ПОСЛЕ нашего скрипта -->
 <script src="js/common.js"></script>
 
 </body>
