@@ -417,7 +417,55 @@
         }
     }
 
-        
+        /* Стили для разрешения 360px (ширина экрана 360px и меньше) */
+@media (max-width: 360px) {
+    /* 1. Текст "черновик" — под заголовком и слева */
+    .builder-preview .preview-header {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 6px !important;
+    }
+    
+    /* 2. Небольшой отступ между заголовками и ссылками в секциях */
+    .section-header-custom {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 10px !important;
+        margin-bottom: 20px !important; /* дополнительный отступ снизу для разделения блоков */
+    }
+    
+    /* Дополнительно: чтобы ссылка не наезжала на заголовок */
+    .section-link-custom {
+        margin-top: 0 !important;
+        padding-left: 0 !important;
+    }
+}
+
+/* Также можно продублировать правила для max-width: 480px, если нужно единообразие на всех мобильных */
+@media (max-width: 480px) {
+    .builder-preview .preview-header {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+    
+    .section-header-custom {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        margin-bottom: 16px;
+    }
+}
+
+@media (max-width: 360px) {
+    .rider-card {
+        padding: clamp(20px, 3vw, 32px) 0 0 0 !important; /* отступ только сверху */
+        background: #FFFFFF !important; /* белый фон вместо серого */
+        outline: 1px solid #E5E3E1; /* границу можно оставить или убрать */
+    }
+}
         .dash-icon { width: 20px; height: 16px; margin-right: 8px; vertical-align: middle; }
     </style>
 </head>

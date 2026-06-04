@@ -4436,8 +4436,7 @@ body {
     }
     
     #moreItemsBtn {
-        min-width: 130px !important;
-        max-width: 160px !important;
+  
         padding: 10px 12px !important;
         white-space: normal !important;
         line-height: 1.3 !important;
@@ -8197,7 +8196,7 @@ body {
         color: #4A6294 !important;
         font-size: 14px !important;
         display: block !important;
-        margin-top: -10px !important;
+        margin-top: 10px !important;
         margin-bottom: 20px !important;
     }
     
@@ -8923,7 +8922,7 @@ body {
     }
 
     .clients-form {
-        padding: 16px 12px !important;
+        padding: 60px 12px !important;
     }
 
     .clients-form .form-group input,
@@ -9584,3 +9583,714 @@ img.team-img,
     word-spacing: 0.03em;
   }
 }
+
+/* ============================================= */
+/* АДАПТАЦИЯ ДЛЯ 360×740 (малые мобильные)      */
+/* ============================================= */
+
+/* Базовые отступы для очень узких экранов */
+@media (min-width: 360px) and (max-width: 375px) and (max-height: 740px) {
+  
+  /* ===== ОБЩИЕ ОТСТУПЫ КОНТЕЙНЕРОВ ===== */
+  .container-main,
+  .afisha-page,
+  .performances-page,
+  .contacts-page,
+  .team-page,
+  .about-page,
+  .customers-page,
+  #mainContent {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+  
+  /* ===== ЗАГОЛОВКИ И ПОДЗАГОЛОВКИ ===== */
+  .section-header {
+    gap: 8px !important;
+    margin-bottom: 20px !important;
+  }
+  
+  .section-title {
+    font-size: 24px !important;
+    line-height: 1.3 !important;
+    margin-bottom: 4px !important;
+  }
+  
+  .section-link,
+  .section-link-custom,
+  .tour-all-link {
+    font-size: 13px !important;
+    margin-left: 0 !important;
+    margin-top: 4px !important;
+  }
+  
+  .page-title,
+  .page-title-customers,
+  .page-title-team,
+  .page-title-about,
+  .page-title-contacts {
+    font-size: 26px !important;
+    padding-left: 12px !important;
+    margin-bottom: 8px !important;
+    line-height: 1.25 !important;
+  }
+  
+  .page-description,
+  .page-subtitle,
+  .page-subtitle-customers,
+  .page-subtitle-team {
+    font-size: 14px !important;
+    line-height: 1.4 !important;
+    margin-top: 4px !important;
+  }
+  
+  /* ===== БЛОК "ЧЕРНОВИК" В КОНСТРУКТОРЕ ЗАПРОСА ===== */
+  .preview-header {
+    flex-wrap: wrap !important;
+    gap: 4px !important;
+  }
+  
+  .preview-title {
+    font-size: 16px !important;
+    flex-basis: 100% !important; /* Занимает всю строку */
+  }
+  
+  .preview-draft {
+    /* ✅ Перенос "черновик" на новую строку */
+    display: block !important;
+    width: 100% !important;
+    text-align: right !important;
+    font-size: 11px !important;
+    color: #8A8886 !important;
+    margin-top: -2px !important;
+    padding-right: 4px !important;
+  }
+  
+  /* Элементы превью */
+  .preview-item {
+    flex-wrap: wrap !important;
+    padding: 8px 0 !important;
+    gap: 4px !important;
+  }
+  
+  .preview-label {
+    width: 100% !important;
+    font-size: 12px !important;
+    margin-bottom: 2px !important;
+  }
+  
+  .preview-value {
+    width: 100% !important;
+    font-size: 13px !important;
+    padding-left: 4px !important;
+  }
+  
+  /* ===== ФОРМЫ ===== */
+  .form-group-custom label,
+  .clients-form .form-group label,
+  .contact-form-right label {
+    font-size: 12px !important;
+    margin-bottom: 6px !important;
+  }
+  
+  .form-group-custom input,
+  .form-group-custom select,
+  .form-group-custom textarea,
+  .clients-form .form-group input,
+  .clients-form .form-group textarea,
+  .contact-form-right input,
+  .contact-form-right textarea {
+    font-size: 15px !important; /* Предотвращает зум на iOS */
+    padding: 10px 12px !important;
+  }
+  
+  /* Кастомные select */
+  .custom-select-btn,
+  .custom-select-wrapper select {
+    padding: 10px 36px 10px 12px !important;
+    font-size: 14px !important;
+  }
+  
+  .custom-select-dropdown {
+    max-height: 200px !important;
+  }
+  
+  .custom-select-option {
+    padding: 10px 14px !important;
+    font-size: 14px !important;
+  }
+  
+  /* Поле даты с календарём */
+  #eventDate {
+    padding: 10px 40px 10px 12px !important;
+    background-position: right 12px center !important;
+    font-size: 14px !important;
+  }
+  
+  /* ===== КНОПКИ ===== */
+  .submit-request-btn,
+  #sendRequestBtn,
+  #sendContactBtn,
+  .submit-client-btn,
+  .submit-btn,
+  .modal-confirm-btn {
+    padding: 12px 16px !important;
+    font-size: 14px !important;
+    min-height: 44px !important; /* Удобно для пальца */
+  }
+  
+  /* Кнопки в модальных окнах */
+  .modal-buttons {
+    gap: 10px !important;
+    flex-direction: column !important;
+  }
+  
+  .modal-btn {
+    width: 100% !important;
+    padding: 12px !important;
+    font-size: 14px !important;
+  }
+  
+  /* ===== КАРТОЧКИ В СЛАЙДЕРАХ ===== */
+  .performance-card,
+  .merch-card,
+  .performance-card-afisha {
+    flex: 0 0 calc(100vw - 24px) !important;
+    width: calc(100vw - 24px) !important;
+    min-width: calc(100vw - 24px) !important;
+    max-width: calc(100vw - 24px) !important;
+  }
+  
+  .performance-content,
+  .performance-content-afisha,
+  .merch-content,
+  .product-info {
+    padding: 14px !important;
+    gap: 8px !important;
+  }
+  
+  .performance-name,
+  .performance-name-afisha {
+    font-size: 18px !important;
+    line-height: 1.3 !important;
+  }
+  
+  .performance-date,
+  .performance-date-afisha {
+    font-size: 15px !important;
+  }
+  
+  .performance-desc,
+  .performance-desc-afisha {
+    font-size: 13px !important;
+    line-height: 1.4 !important;
+  }
+  
+  .btn-details,
+  .btn-buy,
+  .btn-buy-afisha,
+  .merch-btn,
+  .buy-now-btn {
+    padding: 10px 14px !important;
+    font-size: 13px !important;
+    min-height: 40px !important;
+  }
+  
+  /* ===== СЕКЦИЯ "О ТЕАТРЕ" ===== */
+  .about-content {
+    gap: 20px !important;
+  }
+  
+  .about-text h3 {
+    font-size: 20px !important;
+    margin-bottom: 12px !important;
+  }
+  
+  .about-text p {
+    font-size: 14px !important;
+    line-height: 1.5 !important;
+  }
+  
+  /* ===== СЕКЦИЯ "ЗАКАЗЧИКАМ" ===== */
+  .clients-grid {
+    gap: 24px !important;
+  }
+  
+  .clients-info h3 {
+    font-size: 20px !important;
+    margin-bottom: 12px !important;
+  }
+  
+  .clients-info p {
+    font-size: 14px !important;
+  }
+  
+  .feature-item {
+    padding: 12px 14px 12px 44px !important;
+  }
+  
+  .feature-item i {
+    left: 14px !important;
+    top: 14px !important;
+    font-size: 16px !important;
+  }
+  
+  .feature-item strong {
+    font-size: 14px !important;
+  }
+  
+  .feature-item span {
+    font-size: 12px !important;
+  }
+  
+  /* ===== ТЕХНИЧЕСКИЙ РАЙДЕР ===== */
+  .rider-file {
+    padding: 12px !important;
+    gap: 10px !important;
+    flex-wrap: wrap !important;
+  }
+  
+  .rider-file-name {
+    font-size: 13px !important;
+    max-width: 200px !important;
+  }
+  
+  .rider-file-date {
+    font-size: 11px !important;
+  }
+  
+  .rider-file i {
+    font-size: 20px !important;
+  }
+  
+  /* ===== УСЛОВИЯ СОТРУДНИЧЕСТВА ===== */
+  .terms-card {
+    padding: 16px !important;
+  }
+  
+  .terms-card h4 {
+    font-size: 16px !important;
+    margin-bottom: 12px !important;
+  }
+  
+  .terms-list li {
+    padding: 8px 0 !important;
+    font-size: 13px !important;
+  }
+  
+  .terms-list li .dash-icon {
+    width: 16px !important;
+    height: 12px !important;
+    margin-right: 6px !important;
+  }
+  
+  /* ===== КОНТАКТНАЯ ИНФОРМАЦИЯ ===== */
+  .contact-details .contact-item {
+    gap: 4px !important;
+    padding: 10px 0 !important;
+  }
+  
+  .contact-label {
+    font-size: 11px !important;
+  }
+  
+  .contact-value {
+    font-size: 14px !important;
+  }
+  
+  .contact-value a {
+    font-size: 14px !important;
+  }
+  
+  /* ===== МОДАЛЬНЫЕ ОКНА ===== */
+  .modal-container {
+    width: calc(100vw - 24px) !important;
+    max-width: none !important;
+    border-radius: 16px !important;
+    padding: 20px !important;
+  }
+  
+  .modal-header {
+    padding: 16px 16px 12px !important;
+  }
+  
+  .modal-header h3 {
+    font-size: 18px !important;
+  }
+  
+  .modal-body {
+    padding: 20px !important;
+  }
+  
+  .modal-footer {
+    padding: 16px 20px !important;
+  }
+  
+  /* Сессии в модалке */
+  .session-item {
+    padding: 12px 14px !important;
+  }
+  
+  .session-date {
+    font-size: 15px !important;
+  }
+  
+  .session-meta {
+    font-size: 13px !important;
+    gap: 12px !important;
+  }
+  
+  .filter-btn {
+    padding: 6px 12px !important;
+    font-size: 12px !important;
+  }
+  
+  /* ===== ГАЛЕРЕЯ ТОВАРОВ ===== */
+  .gallery-nav-btn {
+    width: 36px !important;
+    height: 36px !important;
+    font-size: 16px !important;
+  }
+  
+  .gallery-nav-btn.prev { left: 8px !important; }
+  .gallery-nav-btn.next { right: 8px !important; }
+  
+  .gallery-close-btn {
+    top: 8px !important;
+    right: 8px !important;
+    width: 36px !important;
+    height: 36px !important;
+  }
+  
+  .gallery-counter {
+    bottom: 12px !important;
+    padding: 6px 12px !important;
+    font-size: 11px !important;
+  }
+  
+  .gallery-thumbnails {
+    bottom: 56px !important;
+    gap: 4px !important;
+  }
+  
+  .gallery-thumb {
+    width: 28px !important;
+    height: 28px !important;
+  }
+  
+  /* ===== КОМАНДА ===== */
+  .team-scroll-wrapper {
+    gap: 16px !important;
+  }
+  
+  .team-img {
+    height: 200px !important;
+  }
+  
+  .team-name {
+    font-size: 16px !important;
+    margin-top: 12px !important;
+  }
+  
+  .team-position {
+    font-size: 13px !important;
+  }
+  
+  /* Модальное окно команды */
+  .team-modal-content {
+    border-radius: 20px !important;
+  }
+  
+  .team-modal-photo {
+    height: 280px !important;
+  }
+  
+  .team-modal-info {
+    padding: 20px !important;
+  }
+  
+  .team-modal-name {
+    font-size: 24px !important;
+  }
+  
+  .team-modal-nickname {
+    font-size: 16px !important;
+  }
+  
+  .team-modal-position {
+    font-size: 12px !important;
+  }
+  
+  .team-modal-section-title {
+    font-size: 16px !important;
+    margin-top: 20px !important;
+  }
+  
+  .team-modal-bio {
+    font-size: 14px !important;
+  }
+  
+  .team-performance-item {
+    padding: 10px 0 !important;
+    font-size: 14px !important;
+  }
+  
+  /* ===== УСПЕШНОЕ ОКНО ===== */
+  .success-modal-content {
+    padding: 28px 20px !important;
+  }
+  
+  .success-icon {
+    width: 64px !important;
+    height: 64px !important;
+  }
+  
+  .success-icon i {
+    font-size: 28px !important;
+  }
+  
+  .success-modal-title {
+    font-size: 18px !important;
+  }
+  
+  .success-modal-text {
+    font-size: 14px !important;
+  }
+  
+  .success-modal-btn {
+    padding: 12px 24px !important;
+    font-size: 14px !important;
+  }
+  
+  /* ===== БЕГУЩАЯ СТРОКА ===== */
+  .ticker {
+    padding: 8px 0 !important;
+  }
+  
+  .ticker-content {
+    font-size: 13px !important;
+  }
+  
+  .ticker-content .red-dot {
+    margin: 0 8px !important;
+  }
+  
+
+  
+  .hero-title-afisha {
+    font-size: 20px !important;
+    line-height: 1.25 !important;
+  }
+  
+  .hero-subtitle-afisha {
+    display: none !important; /* Скрываем подзаголовок на очень узких */
+  }
+  
+  .hero-buttons-afisha {
+    gap: 8px !important;
+    margin-top: 12px !important;
+  }
+  
+  .hero-btn-dark,
+  .hero-btn-light {
+    padding: 10px 14px !important;
+    font-size: 13px !important;
+    min-width: 130px !important;
+  }
+  
+  .slider-dot {
+    width: 14px !important;
+    height: 4px !important;
+  }
+  
+  .slider-dot.active {
+    width: 20px !important;
+  }
+  
+  /* ===== КАРТА ГАСТРОЛЕЙ ===== */
+  .tour-map-section {
+    padding: 20px 12px !important;
+    margin: 32px 0 !important;
+    border-radius: 16px !important;
+  }
+  
+  .tour-title {
+    font-size: 22px !important;
+  }
+  
+  #yandexMap {
+    height: 220px !important;
+    border-radius: 12px !important;
+  }
+  
+  .tour-item {
+    gap: 12px !important;
+  }
+  
+  .tour-city {
+    font-size: 13px !important;
+    width: 100px !important;
+  }
+  
+  .tour-dates span,
+  .tour-venue {
+    font-size: 12px !important;
+  }
+  
+  .tour-status {
+    padding: 4px 10px !important;
+    font-size: 11px !important;
+    min-width: 70px !important;
+  }
+  
+  /* Мобильный балун карты */
+  .mobile-balloon {
+    bottom: 12px !important;
+    left: 12px !important;
+    right: 12px !important;
+    padding: 14px !important;
+    border-radius: 14px !important;
+  }
+  
+  .mobile-balloon-title {
+    font-size: 14px !important;
+    margin-bottom: 6px !important;
+  }
+  
+  .mobile-balloon-info {
+    font-size: 12px !important;
+    margin-bottom: 2px !important;
+  }
+  
+  .mobile-balloon-price {
+    font-size: 14px !important;
+    margin: 6px 0 !important;
+  }
+  
+  .mobile-balloon-btn {
+    padding: 10px !important;
+    font-size: 13px !important;
+  }
+  
+  /* ===== ФИЛЬТРЫ (афиша) ===== */
+  .filter-chips-afisha {
+    gap: 6px !important;
+    padding-bottom: 2px !important;
+  }
+  
+  .filter-chip-afisha,
+  .custom-month-trigger {
+    padding: 8px 14px !important;
+    font-size: 12px !important;
+    min-height: 38px !important;
+  }
+  
+  .custom-month-trigger .arrow-icon {
+    font-size: 10px !important;
+    margin-left: 4px !important;
+  }
+  
+  .custom-month-dropdown {
+    width: calc(100vw - 24px) !important;
+    max-width: 312px !important;
+    border-radius: 10px !important;
+  }
+  
+  .custom-month-option {
+    padding: 12px 16px !important;
+    font-size: 14px !important;
+    min-height: 44px !important;
+  }
+  
+  /* ===== ИЛЛЮСТРАЦИИ ПЕРСОНАЖЕЙ ===== */
+  .clients-form-illustration,
+  .service-card-illustration {
+    height: 160px !important;
+    top: -45% !important;
+    right: 0 !important;
+    transform: translateX(15%) !important;
+  }
+  
+  /* ===== ВАЛИДАЦИЯ ФОРМ ===== */
+  .error-message {
+    font-size: 11px !important;
+    margin-top: 4px !important;
+  }
+  
+  .form-input.error,
+  .form-select.error,
+  .form-textarea.error {
+    padding: 10px 12px !important;
+  }
+  
+  /* ===== ПРОЧЕЕ ===== */
+  .show-more-btn,
+  .load-more-btn {
+    padding: 10px 24px !important;
+    font-size: 13px !important;
+    width: 100% !important;
+    max-width: 280px !important;
+  }
+  
+  .scroll-btn {
+    width: 36px !important;
+    height: 36px !important;
+  }
+  
+  .scroll-btn i {
+    font-size: 14px !important;
+  }
+  
+  /* Улучшаем читаемость текста */
+  p, li, span, div {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+  
+  /* Предотвращаем горизонтальный скролл */
+  html, body {
+    max-width: 100vw !important;
+    overflow-x: hidden !important;
+  }
+  
+  * {
+    box-sizing: border-box !important;
+  }
+}
+
+/* Дополнительные фиксы для portrait-ориентации 360×740 */
+@media (max-width: 360px) and (max-height: 740px) and (orientation: portrait) {
+  
+  /* Ещё более компактные заголовки */
+  .section-title {
+    font-size: 22px !important;
+  }
+  
+  .page-title,
+  .page-title-customers {
+    font-size: 24px !important;
+  }
+  
+  /* Компактная форма */
+  .form-row {
+    flex-direction: column !important;
+    gap: 12px !important;
+  }
+  
+  /* Кнопки на всю ширину */
+  #requestForm > div:last-child {
+    flex-direction: column !important;
+    gap: 8px !important;
+  }
+  
+  /* Превью: "черновик" всегда на новой строке */
+  .preview-draft {
+    display: block !important;
+    width: 100% !important;
+    text-align: leftt !important;
+    margin-top: 2px !important;
+  }
+  
+
+}
+
