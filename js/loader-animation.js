@@ -2,8 +2,7 @@
 class PageLoader {
   constructor(options = {}) {
     this.options = {
-      minDuration: options.minDuration || 2000,
-      removeAfter: options.removeAfter || 500,
+      removeAfter: options.removeAfter || 300,   // только время на fade-out
       loaderId: options.loaderId || 'loaderOverlay',
       contentId: options.contentId || 'mainContent',
       ...options
@@ -13,11 +12,8 @@ class PageLoader {
     this.content = null;
     this.animationActive = false;
     this.animationFrameId = null;
-    this.startTime = null;
     this.isFinished = false;
     this._loadHandler = null;
-    this._safetyTimer = null;
-    this._physicsTimer = null;
   }
 
   createLoaderHTML() {
@@ -58,7 +54,7 @@ class PageLoader {
         align-items: center;
         justify-content: center;
         z-index: 10001;
-        transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+        transition: opacity 0.3s ease-out, visibility 0.3s ease-out;
         padding: 0 !important;
         margin: 0 !important;
         box-sizing: border-box !important;
@@ -196,8 +192,6 @@ class PageLoader {
     if (!stage || !ball1 || !ball2 || !ball3) return;
 
     this.animationActive = true;
-    this.startTime = Date.now();
-
     const centerX = stage.offsetWidth / 2;
     const centerY = stage.offsetHeight / 2;
     const radiusX = 55;
@@ -249,99 +243,9 @@ class PageLoader {
       cancelAnimationFrame(this.animationFrameId);
       this.animationFrameId = null;
     }
-
-    if (this._safetyTimer) {
-      clearTimeout(this._safetyTimer);
-      this._safetyTimer = null;
-    }
     
-    if (this._physicsTimer) {
-      clearTimeout(this._physicsTimer);
-      this._physicsTimer = null;
-    }
-
-    const stage = document.getElementById('jugglingStage');
-    const balls = [
-      document.getElementById('ball1'), 
-      document.getElementById('ball2'), 
-      document.getElementById('ball3')
-    ];
-    
-    if (!stage || balls.some(b => !b)) {
-      this.hideLoader();
-      return;
-    }
-
-    const groundY = stage.offsetHeight + 30;
-    let completedBalls = 0;
-    
-    balls.forEach((ball, index) => {
-      const style = ball.style.transform || 'translate(0px, 0px)';
-      const match = style.match(/translate\(([-\d.]+)px,\s*([-\d.]+)px\)/);
-      let startX = match ? parseFloat(match[1]) : 0;
-      let startY = match ? parseFloat(match[2]) : 0;
-
-      const targetX = startX + (index - 1) * 35;
-      let velY = 1.2;
-      let velX = (targetX - startX) * 0.08;
-      let posX = startX;
-      let posY = startY;
-      let opacity = 1;
-      let bounceCount = 0;
-      const gravity = 1.0;
-      const bounceFactor = 0.2;
-      
-      const physicsStep = () => {
-        if (this.isFinished) {
-          ball.style.opacity = '0';
-          return;
-        }
-        
-        velY += gravity;
-        posY += velY;
-        posX += velX;
-        
-        if (posY >= groundY - 48) {
-          posY = groundY - 48;
-          velY = -velY * bounceFactor;
-          velX *= 0.6;
-          bounceCount++;
-        }
-        
-        if (Math.abs(velY) < 0.5 && posY >= groundY - 50) {
-          posY = groundY - 48;
-          velY = 0;
-          velX = 0;
-        }
-        
-        ball.style.transform = `translate(${posX}px, ${posY}px)`;
-        ball.style.width = '48px';
-        ball.style.height = '48px';
-        
-        if (bounceCount >= 2 && Math.abs(velY) < 0.7) {
-          opacity -= 0.05;
-          ball.style.opacity = Math.max(opacity, 0);
-        }
-        
-        if (opacity > 0.02 && (Math.abs(velY) > 0.1 || bounceCount < 3)) {
-          requestAnimationFrame(physicsStep);
-        } else {
-          ball.style.opacity = '0';
-          completedBalls++;
-          if (completedBalls >= 3) {
-            setTimeout(() => this.hideLoader(), 200);
-          }
-        }
-      };
-      
-      setTimeout(() => physicsStep(), index * 60);
-    });
-
-    this._physicsTimer = setTimeout(() => {
-      if (!this.isFinished) {
-        this.hideLoader();
-      }
-    }, 1500);
+    // Немедленно скрываем лоадер (без задержки на физику падения)
+    this.hideLoader();
   }
 
   hideLoader() {
@@ -351,13 +255,11 @@ class PageLoader {
     document.body.classList.remove('loader-active');
     document.body.style.overflow = '';
     
-    // Вспомогательная функция: делает элемент видимым и убирает transform
     const showAndFix = (el) => {
       if (!el) return;
       el.classList.add('visible');
       el.style.opacity = '1';
       el.style.pointerEvents = 'auto';
-      // Принудительно сбрасываем transform, чтобы не мешать position: fixed
       el.style.setProperty('transform', 'none', 'important');
       el.style.setProperty('will-change', 'auto', 'important');
     };
@@ -366,12 +268,11 @@ class PageLoader {
     
     const shopContainer = document.querySelector('.shop-container');
     if (shopContainer && shopContainer !== this.content) {
-    showAndFix(shopContainer);
-    // Убираем clipping, чтобы fixed-элементы (бургер) не обрезались
-    shopContainer.style.setProperty('overflow', 'visible', 'important');
-    shopContainer.style.setProperty('overflow-x', 'visible', 'important');
-    shopContainer.style.setProperty('overflow-y', 'visible', 'important');
-}
+      showAndFix(shopContainer);
+      shopContainer.style.setProperty('overflow', 'visible', 'important');
+      shopContainer.style.setProperty('overflow-x', 'visible', 'important');
+      shopContainer.style.setProperty('overflow-y', 'visible', 'important');
+    }
     
     document.body.style.background = '#FFFFFF';
     
@@ -394,14 +295,6 @@ class PageLoader {
       cancelAnimationFrame(this.animationFrameId);
       this.animationFrameId = null;
     }
-    if (this._safetyTimer) {
-      clearTimeout(this._safetyTimer);
-      this._safetyTimer = null;
-    }
-    if (this._physicsTimer) {
-      clearTimeout(this._physicsTimer);
-      this._physicsTimer = null;
-    }
     if (this._loadHandler) {
       window.removeEventListener('load', this._loadHandler);
       this._loadHandler = null;
@@ -414,6 +307,36 @@ class PageLoader {
   }
 
   init(contentSelector = null) {
+    // Проверяем, загружена ли страница уже
+    const isAlreadyLoaded = document.readyState === 'complete';
+    
+    // Находим контент, который нужно показать после загрузки
+    if (contentSelector) {
+      this.content = document.querySelector(contentSelector);
+    }
+    if (!this.content) {
+      this.content = document.getElementById(this.options.contentId);
+    }
+    if (!this.content) {
+      this.content = document.querySelector('.page-content') ||
+                     document.querySelector('[data-content-wrapper]');
+    }
+    if (!this.content) {
+      this.content = document.querySelector('.shop-container');
+    }
+    if (this.content && this.content.classList.contains('shop-container')) {
+      const mainContent = this.content.querySelector('#mainContent');
+      if (mainContent) this.content = mainContent;
+    }
+    
+    // Если страница уже загружена и контент есть – не показываем лоадер совсем
+    if (isAlreadyLoaded && this.content) {
+      console.log('PageLoader: страница уже загружена, лоадер не нужен');
+      this.showContentImmediately();
+      return this;
+    }
+    
+    // Иначе – показываем лоадер и ждём события load
     if (document.getElementById(this.options.loaderId)) {
       console.warn('PageLoader: лоадер уже существует в DOM');
       return this;
@@ -431,64 +354,46 @@ class PageLoader {
     
     this.loader = document.getElementById(this.options.loaderId);
     
-    if (contentSelector) {
-      this.content = document.querySelector(contentSelector);
-    }
-    
-    if (!this.content) {
-      this.content = document.getElementById(this.options.contentId);
-    }
-    
-    if (!this.content) {
-      this.content = document.querySelector('.page-content') ||
-                     document.querySelector('[data-content-wrapper]');
-    }
-    
-    if (!this.content) {
-      this.content = document.querySelector('.shop-container');
-    }
-    
-    if (this.content && this.content.classList.contains('shop-container')) {
-      const mainContent = this.content.querySelector('#mainContent');
-      if (mainContent) {
-        this.content = mainContent;
-      }
-    }
-    
     if (!this.content) {
       console.warn('PageLoader: контент не найден, скрываем лоадер');
       setTimeout(() => this.hideLoader(), 100);
       return this;
     }
     
-    console.log('PageLoader: контент найден:', this.content.id || this.content.className);
-    
+    console.log('PageLoader: ожидание полной загрузки страницы');
     setTimeout(() => this.initJuggling(), 100);
     
     this._loadHandler = () => {
-      const elapsed = Date.now() - (this.startTime || Date.now());
-      const remaining = Math.max(0, this.options.minDuration - elapsed);
-      
-      setTimeout(() => {
-        if (!this.isFinished) {
-          this.finish();
-        }
-      }, remaining);
+      console.log('PageLoader: страница полностью загружена – скрываем лоадер');
+      this.finish();
     };
     window.addEventListener('load', this._loadHandler);
     
+    // Если load уже произошёл между проверкой и добавлением слушателя (гонка)
     if (document.readyState === 'complete') {
       this._loadHandler();
     }
     
-    this._safetyTimer = setTimeout(() => {
-      if (this.animationActive && !this.isFinished) {
-        console.warn('PageLoader: принудительное завершение по таймауту');
-        this.finish();
-      }
-    }, this.options.minDuration + 5000);
-    
     return this;
+  }
+  
+  showContentImmediately() {
+    // Убираем блокировку скролла и делаем контент видимым без лоадера
+    document.body.classList.remove('loader-active');
+    document.body.style.overflow = '';
+    if (this.content) {
+      this.content.classList.add('visible');
+      this.content.style.opacity = '1';
+      this.content.style.pointerEvents = 'auto';
+      this.content.style.setProperty('transform', 'none', 'important');
+    }
+    const shopContainer = document.querySelector('.shop-container');
+    if (shopContainer) {
+      shopContainer.classList.add('visible');
+      shopContainer.style.opacity = '1';
+      shopContainer.style.setProperty('overflow', 'visible', 'important');
+    }
+    this.dispatchEvent('loaderHidden');
   }
 }
 
