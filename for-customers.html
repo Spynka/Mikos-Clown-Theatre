@@ -11,11 +11,11 @@
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/header-footer.css">
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script src="js/emailjs-integration.js"></script>
-    <link rel="stylesheet" href="css/header-footer.css">
     <style>
-        /* --- Базовые стили для формы --- */
+        /* ---------- Базовые стили ---------- */
         .form-group-custom {
             margin-bottom: 16px;
             width: 100%;
@@ -33,7 +33,7 @@
             min-width: 0;
         }
 
-        /* --- SVG-иконки --- */
+        /* ---------- SVG-иконки ---------- */
         #eventDate {
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%234A6294' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='18' rx='2' ry='2'%3E%3C/rect%3E%3Cline x1='16' y1='2' x2='16' y2='6'%3E%3C/line%3E%3Cline x1='8' y1='2' x2='8' y2='6'%3E%3C/line%3E%3Cline x1='3' y1='10' x2='21' y2='10'%3E%3C/line%3E%3C/svg%3E") !important;
             background-repeat: no-repeat !important;
@@ -55,7 +55,7 @@
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23E8454D' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='18 15 12 9 6 15'%3E%3C/polyline%3E%3C/svg%3E") !important;
         }
 
-        /* --- Валидация --- */
+        /* ---------- Валидация ---------- */
         .form-input-customers.error {
             border-color: #E8454D !important;
             box-shadow: 0 0 0 3px rgba(232, 69, 77, 0.1) !important;
@@ -74,19 +74,16 @@
             height: 0;
         }
 
-        /* --- Кастомные селекты --- */
+        /* ---------- Кастомные селекты ---------- */
         .custom-select-wrapper {
             position: relative;
             display: block !important;
             width: 100% !important;
-            min-width: 0 !important;
-            visibility: visible !important;
-            opacity: 1 !important;
         }
 
         .custom-select-btn {
             width: 100% !important;
-            background-color: #FFFFFF;
+            background: #FFFFFF;
             border: 2px solid #E5E3E1;
             border-radius: 8px;
             padding: 12px 16px;
@@ -95,7 +92,6 @@
             font-size: 15px;
             color: #1A1718;
             cursor: pointer;
-            transition: all 0.2s;
             display: flex !important;
             justify-content: space-between;
             align-items: center;
@@ -111,7 +107,7 @@
             top: 100%;
             left: 0;
             right: 0;
-            background: #FFFFFF;
+            background: #FFF;
             border: 2px solid #4A6294;
             border-radius: 8px;
             margin-top: 4px;
@@ -130,8 +126,6 @@
             padding: 10px 16px;
             cursor: pointer;
             font-family: 'Nunito Sans', sans-serif;
-            transition: background 0.2s;
-            color: #1A1718;
         }
 
         .custom-select-option:hover {
@@ -144,7 +138,7 @@
             color: #2A3D5E;
         }
 
-        /* --- Модальное окно успеха --- */
+        /* ---------- Модальное окно успеха ---------- */
         .success-modal-overlay {
             position: fixed;
             top: 0;
@@ -177,7 +171,6 @@
             padding: 40px 32px;
             text-align: center;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(232, 69, 77, 0.2);
             transform: scale(0.9);
             transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
             position: relative;
@@ -247,16 +240,9 @@
             font-weight: 600;
             font-size: 15px;
             cursor: pointer;
-            transition: all 0.2s;
             display: inline-flex;
             align-items: center;
             gap: 8px;
-        }
-
-        .success-modal-btn:hover {
-            background: #D62830;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(232, 69, 77, 0.3);
         }
 
         .success-modal-close {
@@ -274,16 +260,14 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: all 0.2s;
         }
 
         .success-modal-close:hover {
             background: #E8454D;
             color: white;
-            border-color: #E8454D;
         }
 
-        /* --- НОВОЕ: Информационное модальное окно --- */
+        /* ---------- Информационное модальное окно ---------- */
         .info-modal-overlay {
             position: fixed;
             top: 0;
@@ -337,17 +321,15 @@
             border: 1px solid #E5E3E1;
             color: #5A5556;
             font-size: 20px;
-            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.2s;
+            cursor: pointer;
         }
 
         .info-modal-close:hover {
             background: #E8454D;
             color: white;
-            border-color: #E8454D;
             transform: rotate(90deg);
         }
 
@@ -403,14 +385,13 @@
             font-weight: 600;
             font-size: 13px;
             cursor: pointer;
-            transition: all 0.2s;
         }
 
         .info-modal-btn:hover {
             background: #2A3D5E;
         }
 
-        /* --- Другие стили страницы --- */
+        /* ---------- Другие стили страницы ---------- */
         .form-group-custom .required-star {
             color: #E8454D;
             margin-left: 2px;
@@ -443,7 +424,6 @@
             vertical-align: middle;
         }
 
-        /* --- Адаптив --- */
         @media (max-width: 768px) {
             .form-row {
                 flex-direction: column;
@@ -455,18 +435,12 @@
             }
 
             .custom-select-btn {
-                background-position: right 12px center !important;
-                padding: 12px 36px 12px 14px !important;
                 font-size: 14px;
+                padding: 12px 36px 12px 14px !important;
             }
 
             #eventDate {
-                background-position: right 8px center !important;
                 padding-right: 34px !important;
-            }
-
-            .builder-preview {
-                scroll-margin-top: 20px;
             }
 
             .service-card-illustration {
@@ -477,22 +451,7 @@
         }
 
         @media (max-width: 480px) {
-            .form-group-custom {
-                margin-bottom: 12px;
-                width: 100% !important;
-            }
-
-            .form-row .form-group-custom {
-                width: 100% !important;
-                flex: none !important;
-            }
-
-            .custom-select-wrapper {
-                width: 100% !important;
-            }
-
             .custom-select-btn {
-                width: 100% !important;
                 font-size: 14px;
                 padding: 10px 36px 10px 12px !important;
             }
@@ -578,10 +537,8 @@
                     <article class="service-card">
                         <div class="service-number">/01</div>
                         <h3 class="service-title">Корпоративные показы</h3>
-                        <p class="service-desc">
-                            Закрытые спектакли для компаний. Полное техническое сопровождение,
-                            <span class="text-nowrap">адаптация под любую площадку.</span>
-                        </p>
+                        <p class="service-desc">Закрытые спектакли для компаний. Полное техническое сопровождение,
+                            адаптация под любую площадку.</p>
                         <a href="#" class="service-link" data-service="corporate">Подробнее <i
                                 class="fas fa-arrow-right"></i></a>
                     </article>
@@ -669,44 +626,7 @@
                     <aside class="builder-preview" id="builderPreview">
                         <div class="preview-header"><span class="preview-title">Предварительный запрос</span><span
                                 class="preview-draft">черновик</span></div>
-                        <div id="previewContent">
-                            <div class="preview-item">
-                                <div class="preview-label">Имя</div>
-                                <div class="preview-value">—</div>
-                            </div>
-                            <div class="preview-item">
-                                <div class="preview-label">Компания</div>
-                                <div class="preview-value">—</div>
-                            </div>
-                            <div class="preview-item">
-                                <div class="preview-label">Email</div>
-                                <div class="preview-value">—</div>
-                            </div>
-                            <div class="preview-item">
-                                <div class="preview-label">Телефон</div>
-                                <div class="preview-value">—</div>
-                            </div>
-                            <div class="preview-item">
-                                <div class="preview-label">Тип</div>
-                                <div class="preview-value">—</div>
-                            </div>
-                            <div class="preview-item">
-                                <div class="preview-label">Дата</div>
-                                <div class="preview-value">—</div>
-                            </div>
-                            <div class="preview-item">
-                                <div class="preview-label">Зрителей</div>
-                                <div class="preview-value">—</div>
-                            </div>
-                            <div class="preview-item">
-                                <div class="preview-label">Формат</div>
-                                <div class="preview-value">—</div>
-                            </div>
-                            <div class="preview-item">
-                                <div class="preview-label">Пожелания</div>
-                                <div class="preview-value">—</div>
-                            </div>
-                        </div>
+                        <div id="previewContent"></div>
                         <button class="submit-request-btn" id="sendRequestBtn">Отправить запрос</button>
                     </aside>
                 </div>
@@ -839,7 +759,7 @@
         <div id="site-footer"></div>
     </div>
 
-    <!-- МОДАЛЬНОЕ ОКНО УСПЕХА -->
+    <!-- Модальное окно успеха -->
     <div class="success-modal-overlay" id="successModal">
         <div class="success-modal-content">
             <button class="success-modal-close" id="successModalClose">&times;</button>
@@ -851,7 +771,7 @@
         </div>
     </div>
 
-    <!-- НОВОЕ: ИНФОРМАЦИОННОЕ МОДАЛЬНОЕ ОКНО -->
+    <!-- Информационное модальное окно -->
     <div class="info-modal-overlay" id="infoModal">
         <div class="info-modal-content">
             <button class="info-modal-close" id="infoModalClose">&times;</button>
@@ -869,75 +789,38 @@
         (function () {
             'use strict';
 
-            // ---------- КОНТЕНТ ДЛЯ МОДАЛЬНЫХ ОКОН ----------
+            // ---------- КОНТЕНТ ДЛЯ ИНФОМОДАЛОК ----------
             const infoContent = {
                 allServices: {
                     title: "Все услуги театра «Микос»",
                     body: `<p>Мы предлагаем полный спектр услуг для организации мероприятий любого формата:</p>
-                        <ul>
-                            <li><strong>Корпоративные показы</strong> — закрытые спектакли для компаний с адаптацией под вашу площадку.</li>
-                            <li><strong>Частные события</strong> — эксклюзивные постановки для свадеб, юбилеев, дней рождения.</li>
-                            <li><strong>Образовательные проекты</strong> — мастер-классы и лекции от ведущих артистов и режиссёров.</li>
-                            <li><strong>Гастрольное сопровождение</strong> — организация выездных спектаклей в любом регионе.</li>
-                            <li><strong>Создание спектаклей под заказ</strong> — от сценария до сценического воплощения.</li>
-                        </ul>
-                        <p>Для уточнения деталей свяжитесь с нашим менеджером через форму обратной связи.</p>`
+                        <ul><li><strong>Корпоративные показы</strong> — закрытые спектакли для компаний.</li><li><strong>Частные события</strong> — эксклюзивные постановки для свадеб, юбилеев.</li><li><strong>Образовательные проекты</strong> — мастер-классы и лекции.</li><li><strong>Гастрольное сопровождение</strong> — выездные спектакли в любом регионе.</li><li><strong>Создание спектаклей под заказ</strong> — от сценария до воплощения.</li></ul>`
                 },
                 howItWorks: {
                     title: "Как это работает",
-                    body: `<p>Процесс организации мероприятия с театром «Микос» включает несколько этапов:</p>
-                        <ol>
-                            <li><strong>Заявка</strong> — вы заполняете форму, указывая тип мероприятия, предполагаемую дату и пожелания.</li>
-                            <li><strong>Расчёт и предложение</strong> — в течение 2 рабочих дней менеджер готовит коммерческое предложение.</li>
-                            <li><strong>Согласование</strong> — обсуждаются детали: площадка, технические требования, декорации, актёрский состав.</li>
-                            <li><strong>Предпродакшн</strong> — подготовка реквизита, репетиции, логистика (1–3 недели).</li>
-                            <li><strong>Показ</strong> — приезд труппы, монтаж за 4–6 часов до мероприятия, проведение спектакля.</li>
-                            <li><strong>Постпродакшн</strong> — фотоотчёт, закрывающие документы, обратная связь.</li>
-                        </ol>
-                        <p>Все этапы прозрачны и фиксируются в договоре.</p>`
+                    body: `<p>Процесс организации мероприятия с театром «Микос» включает этапы:</p>
+                        <ol><li><strong>Заявка</strong> — вы заполняете форму.</li><li><strong>Расчёт и предложение</strong> — в течение 2 рабочих дней.</li><li><strong>Согласование</strong> — площадка, техника, актёры.</li><li><strong>Предпродакшн</strong> — подготовка реквизита, репетиции.</li><li><strong>Показ</strong> — приезд труппы, монтаж, спектакль.</li><li><strong>Постпродакшн</strong> — фотоотчёт, закрывающие документы.</li></ol>`
                 },
                 contract: {
                     title: "Скачать договор",
-                    body: `<p>Договор на оказание услуг является стандартным документом, регламентирующим сотрудничество. Вы можете скачать шаблон договора по ссылке ниже или запросить индивидуальный проект.</p>
-                        <p style="margin: 20px 0; text-align: center;"><a href="images/content/dogovor_mikos.pdf" download style="background:#E8454D; color:white; padding:12px 24px; border-radius:8px; text-decoration:none; display:inline-block;"><i class="fas fa-download"></i> Скачать типовой договор (PDF)</a></p>
-                        <p>Также мы работаем по вашим формам договора при условии согласования юридических нюансов.</p>`
+                    body: `<p>Вы можете скачать типовой договор. Также работаем по вашим формам.</p>
+                        <p style="margin:20px 0;text-align:center;"><a href="images/content/dogovor_mikos.pdf" download style="background:#E8454D;color:white;padding:12px 24px;border-radius:8px;text-decoration:none;display:inline-block;"><i class="fas fa-download"></i> Скачать договор (PDF)</a></p>`
                 },
                 corporate: {
                     title: "Корпоративные показы",
-                    body: `<p><strong>Гибкие форматы для вашего бизнеса:</strong> мы проводим закрытые спектакли для сотрудников, партнёров и клиентов.</p>
-                        <ul>
-                            <li>Полное техническое оснащение (свет, звук, видео).</li>
-                            <li>Адаптация под любую площадку — от конференц-зала до open-air.</li>
-                            <li>Возможность интегрировать логотип компании в сценографию.</li>
-                            <li>Фото- и видеосъёмка, приветственный фуршет.</li>
-                        </ul>
-                        <p>Стоимость рассчитывается индивидуально в зависимости от выбранного спектакля, количества зрителей и сложности монтажа.</p>`
+                    body: `<p><strong>Гибкие форматы для вашего бизнеса:</strong> полное техническое оснащение, адаптация под любую площадку, возможность интеграции логотипа, фото- и видеосъёмка.</p><p>Стоимость рассчитывается индивидуально.</p>`
                 },
                 private: {
                     title: "Частные события",
-                    body: `<p><strong>Эксклюзивные постановки для вашего праздника:</strong> свадьба, юбилей, день рождения, семейный вечер.</p>
-                        <ul>
-                            <li>Разработка уникального сценария с учётом ваших пожеланий.</li>
-                            <li>Интерактивные элементы, вовлечение гостей в представление.</li>
-                            <li>Возможность выбора актёров и персонажей.</li>
-                            <li>Длительность шоу от 30 до 90 минут.</li>
-                        </ul>
-                        <p>Мы создаём атмосферу настоящего театра прямо у вас дома или на арендованной площадке.</p>`
+                    body: `<p><strong>Эксклюзивные постановки для вашего праздника:</strong> свадьба, юбилей, день рождения. Разработка уникального сценария, интерактивные элементы, выбор актёров.</p>`
                 },
                 education: {
                     title: "Образовательные проекты",
-                    body: `<p><strong>Мастер-классы и лекции для детей и взрослых:</strong> развитие творческого мышления, актёрское мастерство, сценическая речь.</p>
-                        <ul>
-                            <li>Мастер-классы от ведущих актёров театра «Микос».</li>
-                            <li>Лекции по истории клоунады и театрального искусства.</li>
-                            <li>Интерактивные занятия для школьников и студентов.</li>
-                            <li>Корпоративные тренинги по ораторскому мастерству и командообразованию.</li>
-                        </ul>
-                        <p>Программа адаптируется под возраст участников и ваши цели.</p>`
+                    body: `<p><strong>Мастер-классы и лекции:</strong> развитие творческого мышления, актёрское мастерство, сценическая речь. Программа адаптируется под возраст участников.</p>`
                 }
             };
 
-            // Элементы модального окна
+            // ----- Модальное окно информации -----
             const infoModal = document.getElementById('infoModal');
             const infoModalTitle = document.getElementById('infoModalTitle');
             const infoModalBody = document.getElementById('infoModalBody');
@@ -945,6 +828,7 @@
             const infoModalOkBtn = document.getElementById('infoModalOkBtn');
 
             function openInfoModal(key) {
+                if (!infoModal) return;
                 const content = infoContent[key];
                 if (!content) return;
                 infoModalTitle.textContent = content.title;
@@ -954,23 +838,18 @@
             }
 
             function closeInfoModalHandler() {
-                infoModal.classList.remove('active');
+                if (infoModal) infoModal.classList.remove('active');
                 document.body.style.overflow = '';
             }
 
             if (closeInfoModal) closeInfoModal.addEventListener('click', closeInfoModalHandler);
             if (infoModalOkBtn) infoModalOkBtn.addEventListener('click', closeInfoModalHandler);
-            if (infoModal) {
-                infoModal.addEventListener('click', (e) => {
-                    if (e.target === infoModal) closeInfoModalHandler();
-                });
-            }
+            if (infoModal) infoModal.addEventListener('click', (e) => { if (e.target === infoModal) closeInfoModalHandler(); });
 
-            // Привязка ссылок
+            // Привязка ссылок на инфо-модалки
             document.getElementById('allServicesLink')?.addEventListener('click', (e) => { e.preventDefault(); openInfoModal('allServices'); });
             document.getElementById('howItWorksLink')?.addEventListener('click', (e) => { e.preventDefault(); openInfoModal('howItWorks'); });
             document.getElementById('contractLink')?.addEventListener('click', (e) => { e.preventDefault(); openInfoModal('contract'); });
-
             document.querySelectorAll('.service-link[data-service]').forEach(link => {
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
@@ -982,141 +861,96 @@
                 });
             });
 
-            // ---------- ОСТАЛЬНОЙ ФУНКЦИОНАЛ (формы, валидация, селекты) БЕЗ ИЗМЕНЕНИЙ ----------
-            function whenReady(callback) {
-                if (document.readyState === 'complete' || document.readyState === 'interactive') {
-                    setTimeout(callback, 300);
-                } else {
-                    document.addEventListener('DOMContentLoaded', function () {
-                        setTimeout(callback, 300);
-                    });
-                }
-            }
-
-            whenReady(function () {
-                initAll();
-                setTimeout(initAll, 800);
-                setTimeout(initAll, 2000);
-            });
-
-            function initAll() {
-                initCustomSelects();
-                initDateField();
-                initPhoneMasks();
-                initFormHandlers();
-                initModalHandlers();
-            }
-
-            // Модалка успеха
-            function initModalHandlers() {
-                const successModal = document.getElementById('successModal');
-                const successModalClose = document.getElementById('successModalClose');
-                const successModalBtn = document.getElementById('successModalBtn');
-                if (!successModal) return;
-                if (successModalClose) successModalClose.onclick = closeModal;
-                if (successModalBtn) successModalBtn.onclick = closeModal;
-                successModal.onclick = function (e) { if (e.target === successModal) closeModal(); };
-                document.addEventListener('keydown', function (e) {
-                    if (e.key === 'Escape' && successModal.classList.contains('active')) closeModal();
-                });
-            }
+            // ----- Модальное окно успеха -----
+            const successModal = document.getElementById('successModal');
+            const successModalClose = document.getElementById('successModalClose');
+            const successModalBtn = document.getElementById('successModalBtn');
 
             function openModal(title, message) {
-                const modal = document.getElementById('successModal');
+                if (!successModal) return;
                 const titleEl = document.getElementById('successModalTitle');
                 const textEl = document.getElementById('successModalText');
-                if (!modal || !titleEl || !textEl) return;
-                titleEl.textContent = title;
-                textEl.textContent = message;
-                modal.classList.add('active');
+                if (titleEl) titleEl.textContent = title;
+                if (textEl) textEl.textContent = message;
+                successModal.classList.add('active');
                 document.body.style.overflow = 'hidden';
             }
 
             function closeModal() {
-                const modal = document.getElementById('successModal');
-                if (!modal) return;
-                modal.classList.remove('active');
+                if (successModal) successModal.classList.remove('active');
                 document.body.style.overflow = '';
             }
 
-            function initPhoneMasks() {
-                applyPhoneMask('requestPhone');
-                applyPhoneMask('contactPhone');
-            }
+            if (successModalClose) successModalClose.onclick = closeModal;
+            if (successModalBtn) successModalBtn.onclick = closeModal;
+            if (successModal) successModal.onclick = (e) => { if (e.target === successModal) closeModal(); };
+            document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && successModal?.classList.contains('active')) closeModal(); });
 
+            // ----- Вспомогательные функции -----
             function applyPhoneMask(inputId) {
                 const input = document.getElementById(inputId);
                 if (!input) return;
                 input.addEventListener('input', function () {
-                    let value = this.value.replace(/\D/g, '');
-                    if (value.length > 11) value = value.slice(0, 11);
+                    let v = this.value.replace(/\D/g, '');
+                    if (v.length > 11) v = v.slice(0, 11);
                     let formatted = '';
-                    if (value.length > 0) {
+                    if (v.length > 0) {
                         formatted = '+7';
-                        if (value.length > 1) formatted += ' (' + value.slice(1, 4);
-                        if (value.length >= 4) formatted += ') ' + value.slice(4, 7);
-                        if (value.length >= 7) formatted += '-' + value.slice(7, 9);
-                        if (value.length >= 9) formatted += '-' + value.slice(9, 11);
+                        if (v.length > 1) formatted += ' (' + v.slice(1, 4);
+                        if (v.length >= 4) formatted += ') ' + v.slice(4, 7);
+                        if (v.length >= 7) formatted += '-' + v.slice(7, 9);
+                        if (v.length >= 9) formatted += '-' + v.slice(9, 11);
                     }
                     this.value = formatted;
                 });
-                input.addEventListener('focus', function () {
-                    if (!this.value || this.value === '+7' || this.value === '+7 (') this.value = '+7 (';
-                });
-                input.addEventListener('blur', function () {
-                    if (this.value === '+7 (' || this.value === '+7') this.value = '';
-                });
+                input.addEventListener('focus', function () { if (!this.value || this.value === '+7' || this.value === '+7 (') this.value = '+7 ('; });
+                input.addEventListener('blur', function () { if (this.value === '+7 (' || this.value === '+7') this.value = ''; });
             }
 
             function validateField(field, type) {
                 if (!field) return true;
-                const value = field.value.trim();
+                const val = field.value.trim();
                 let isValid = true;
-                switch (type) {
-                    case 'name': isValid = value.length >= 2; break;
-                    case 'email': isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value); break;
-                    case 'phone': { const d = value.replace(/\D/g, ''); isValid = d.length === 11 && d.startsWith('7'); } break;
-                    case 'required': isValid = value.length > 0; break;
-                }
+                if (type === 'name') isValid = val.length >= 2;
+                else if (type === 'email') isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
+                else if (type === 'phone') { const d = val.replace(/\D/g, ''); isValid = d.length === 11 && d.startsWith('7'); }
+                else if (type === 'required') isValid = val.length > 0;
                 field.classList.remove('error', 'valid');
-                if (value.length > 0) field.classList.add(isValid ? 'valid' : 'error');
+                if (val.length > 0) field.classList.add(isValid ? 'valid' : 'error');
                 return isValid;
             }
 
             function initCustomSelects() {
                 const ids = ['eventType', 'audienceCount', 'eventFormat'];
-                ids.forEach(function (id) {
+                ids.forEach(id => {
                     const select = document.getElementById(id);
-                    if (!select) return;
-                    if (select.parentElement && select.parentElement.classList.contains('custom-select-wrapper')) return;
+                    if (!select || select.parentElement?.classList.contains('custom-select-wrapper')) return;
                     const wrapper = document.createElement('div');
                     wrapper.className = 'custom-select-wrapper';
-                    wrapper.style.display = 'block';
-                    wrapper.style.width = '100%';
                     const btn = document.createElement('button');
                     btn.type = 'button';
                     btn.className = 'custom-select-btn';
                     btn.textContent = select.options[select.selectedIndex]?.text || 'Выберите...';
                     const dropdown = document.createElement('div');
                     dropdown.className = 'custom-select-dropdown';
-                    Array.from(select.options).forEach(function (option, index) {
+                    Array.from(select.options).forEach((opt, idx) => {
                         const item = document.createElement('div');
                         item.className = 'custom-select-option';
-                        if (index === select.selectedIndex) item.classList.add('selected');
-                        item.textContent = option.text;
-                        item.dataset.value = option.value;
-                        item.addEventListener('click', function (e) {
+                        if (idx === select.selectedIndex) item.classList.add('selected');
+                        item.textContent = opt.text;
+                        item.dataset.value = opt.value;
+                        item.addEventListener('click', (e) => {
                             e.stopPropagation();
-                            select.value = this.dataset.value;
-                            btn.textContent = this.textContent;
+                            select.value = item.dataset.value;
+                            btn.textContent = item.textContent;
                             dropdown.querySelectorAll('.custom-select-option').forEach(el => el.classList.remove('selected'));
-                            this.classList.add('selected');
+                            item.classList.add('selected');
                             dropdown.classList.remove('show');
                             btn.classList.remove('active');
                         });
                         dropdown.appendChild(item);
                     });
-                    btn.addEventListener('click', function (e) {
+                    btn.addEventListener('click', (e) => {
                         e.stopPropagation();
                         e.preventDefault();
                         document.querySelectorAll('.custom-select-dropdown.show').forEach(d => {
@@ -1132,16 +966,8 @@
                     wrapper.appendChild(select);
                     select.style.display = 'none';
                 });
-                document.addEventListener('click', function (e) {
+                document.addEventListener('click', (e) => {
                     if (!e.target.closest('.custom-select-wrapper')) {
-                        document.querySelectorAll('.custom-select-dropdown.show').forEach(d => {
-                            d.classList.remove('show');
-                            if (d.previousElementSibling) d.previousElementSibling.classList.remove('active');
-                        });
-                    }
-                });
-                document.addEventListener('keydown', function (e) {
-                    if (e.key === 'Escape') {
                         document.querySelectorAll('.custom-select-dropdown.show').forEach(d => {
                             d.classList.remove('show');
                             if (d.previousElementSibling) d.previousElementSibling.classList.remove('active');
@@ -1155,8 +981,6 @@
                 if (!dateInput || dateInput.dataset.initialized === 'true') return;
                 const wrapper = dateInput.closest('.date-input-wrapper');
                 if (!wrapper) return;
-                const oldPicker = wrapper.querySelector('.hidden-date-picker');
-                if (oldPicker) oldPicker.remove();
                 const picker = document.createElement('input');
                 picker.type = 'date';
                 picker.className = 'hidden-date-picker';
@@ -1164,7 +988,11 @@
                 dateInput.addEventListener('input', function () {
                     let v = this.value.replace(/\D/g, '').slice(0, 8);
                     let f = '';
-                    if (v.length > 0) { f = v.slice(0, 2); if (v.length > 2) f += '.' + v.slice(2, 4); if (v.length > 4) f += '.' + v.slice(4, 8); }
+                    if (v.length > 0) {
+                        f = v.slice(0, 2);
+                        if (v.length > 2) f += '.' + v.slice(2, 4);
+                        if (v.length > 4) f += '.' + v.slice(4, 8);
+                    }
                     this.value = f;
                 });
                 dateInput.addEventListener('click', function () {
@@ -1184,9 +1012,9 @@
             function updatePreview() {
                 const pc = document.getElementById('previewContent');
                 if (!pc) return;
-                const getText = (id) => {
-                    const el = document.querySelector('.custom-select-wrapper select#' + id) || document.getElementById(id);
-                    return el?.options[el.selectedIndex]?.text || '—';
+                const getSelectText = (id) => {
+                    const s = document.getElementById(id);
+                    return s?.options[s.selectedIndex]?.text || '—';
                 };
                 const v = (id) => document.getElementById(id)?.value.trim() || '—';
                 pc.innerHTML = `
@@ -1194,52 +1022,76 @@
                 <div class="preview-item"><div class="preview-label">Компания</div><div class="preview-value">${v('requestCompany')}</div></div>
                 <div class="preview-item"><div class="preview-label">Email</div><div class="preview-value">${v('requestEmail')}</div></div>
                 <div class="preview-item"><div class="preview-label">Телефон</div><div class="preview-value">${v('requestPhone')}</div></div>
-                <div class="preview-item"><div class="preview-label">Тип</div><div class="preview-value">${getText('eventType')}</div></div>
+                <div class="preview-item"><div class="preview-label">Тип</div><div class="preview-value">${getSelectText('eventType')}</div></div>
                 <div class="preview-item"><div class="preview-label">Дата</div><div class="preview-value">${v('eventDate')}</div></div>
-                <div class="preview-item"><div class="preview-label">Зрителей</div><div class="preview-value">${getText('audienceCount')}</div></div>
-                <div class="preview-item"><div class="preview-label">Формат</div><div class="preview-value">${getText('eventFormat')}</div></div>
+                <div class="preview-item"><div class="preview-label">Зрителей</div><div class="preview-value">${getSelectText('audienceCount')}</div></div>
+                <div class="preview-item"><div class="preview-label">Формат</div><div class="preview-value">${getSelectText('eventFormat')}</div></div>
                 <div class="preview-item"><div class="preview-label">Пожелания</div><div class="preview-value">${v('extraWishes')}</div></div>
             `;
             }
 
             function resetPreview() {
                 const pc = document.getElementById('previewContent');
-                if (pc) pc.innerHTML = ['Имя', 'Компания', 'Email', 'Телефон', 'Тип', 'Дата', 'Зрителей', 'Формат', 'Пожелания']
-                    .map(l => `<div class="preview-item"><div class="preview-label">${l}</div><div class="preview-value">—</div></div>`).join('');
+                if (pc) {
+                    pc.innerHTML = ['Имя', 'Компания', 'Email', 'Телефон', 'Тип', 'Дата', 'Зрителей', 'Формат', 'Пожелания']
+                        .map(l => `<div class="preview-item"><div class="preview-label">${l}</div><div class="preview-value">—</div></div>`).join('');
+                }
             }
 
-            function initFormHandlers() {
-                document.getElementById('previewBtn')?.addEventListener('click', () => {
-                    let valid = true;
-                    if (!validateField(document.getElementById('requestName'), 'name')) valid = false;
-                    if (!validateField(document.getElementById('requestEmail'), 'email')) valid = false;
-                    if (!validateField(document.getElementById('requestPhone'), 'phone')) valid = false;
-                    if (!valid) return;
+            // ----- ИНИЦИАЛИЗАЦИЯ (один раз!) -----
+            let initialized = false;
+
+            function initAll() {
+                if (initialized) return;
+                initialized = true;
+                initCustomSelects();
+                initDateField();
+                applyPhoneMask('requestPhone');
+                applyPhoneMask('contactPhone');
+
+                // Кнопка "Сформировать запрос"
+                const previewBtn = document.getElementById('previewBtn');
+                if (previewBtn) previewBtn.onclick = () => {
+                    let ok = true;
+                    if (!validateField(document.getElementById('requestName'), 'name')) ok = false;
+                    if (!validateField(document.getElementById('requestEmail'), 'email')) ok = false;
+                    if (!validateField(document.getElementById('requestPhone'), 'phone')) ok = false;
+                    if (!ok) return;
                     updatePreview();
                     if (window.innerWidth <= 768) document.getElementById('builderPreview')?.scrollIntoView({ behavior: 'smooth' });
-                });
-                document.getElementById('resetBtn')?.addEventListener('click', () => {
-                    document.getElementById('requestForm')?.reset();
+                };
+
+                // Сброс формы
+                const resetBtn = document.getElementById('resetBtn');
+                if (resetBtn) resetBtn.onclick = () => {
+                    const form = document.getElementById('requestForm');
+                    if (form) form.reset();
                     document.querySelectorAll('.custom-select-wrapper select').forEach(s => {
                         s.selectedIndex = 0;
                         const w = s.closest('.custom-select-wrapper');
                         if (w) {
                             const btn = w.querySelector('.custom-select-btn');
                             if (btn) btn.textContent = s.options[0].text;
-                            w.querySelectorAll('.custom-select-option').forEach((o, i) => o.classList.toggle('selected', i === 0));
+                            w.querySelectorAll('.custom-select-option').forEach((opt, idx) => opt.classList.toggle('selected', idx === 0));
                         }
                     });
-                    document.querySelectorAll('.error, .valid').forEach(e => e.classList.remove('error', 'valid'));
-                    const ph = document.getElementById('requestPhone');
-                    if (ph) ph.value = '';
+                    document.querySelectorAll('.error, .valid').forEach(el => el.classList.remove('error', 'valid'));
+                    const phone = document.getElementById('requestPhone');
+                    if (phone) phone.value = '';
                     resetPreview();
-                });
-                document.getElementById('sendRequestBtn')?.addEventListener('click', async function () {
-                    let valid = true;
-                    if (!validateField(document.getElementById('requestName'), 'name')) valid = false;
-                    if (!validateField(document.getElementById('requestEmail'), 'email')) valid = false;
-                    if (!validateField(document.getElementById('requestPhone'), 'phone')) valid = false;
-                    if (!valid) { openModal('Ошибка', 'Проверьте обязательные поля.'); return; }
+                };
+
+                // Отправка запроса (один обработчик через onclick)
+                const sendBtn = document.getElementById('sendRequestBtn');
+                if (sendBtn) sendBtn.onclick = async () => {
+                    let ok = true;
+                    if (!validateField(document.getElementById('requestName'), 'name')) ok = false;
+                    if (!validateField(document.getElementById('requestEmail'), 'email')) ok = false;
+                    if (!validateField(document.getElementById('requestPhone'), 'phone')) ok = false;
+                    if (!ok) {
+                        openModal('Ошибка', 'Проверьте обязательные поля.');
+                        return;
+                    }
                     const params = {
                         name: document.getElementById('requestName').value.trim(),
                         company: document.getElementById('requestCompany').value.trim() || '',
@@ -1252,17 +1104,26 @@
                         wishes: document.getElementById('extraWishes').value.trim() || ''
                     };
                     openModal('Запрос отправлен!', 'Спасибо за обращение! Наш менеджер свяжется с вами в ближайшее время.');
-                    if (typeof window.sendRequestBuilder === 'function') window.sendRequestBuilder(params).catch(e => console.error(e));
-                    else console.warn('sendRequestBuilder не определена');
-                });
-                document.getElementById('contactForm')?.addEventListener('submit', async function (e) {
+                    if (typeof window.sendRequestBuilder === 'function') {
+                        window.sendRequestBuilder(params).catch(e => console.error(e));
+                    } else {
+                        console.warn('sendRequestBuilder не определена');
+                    }
+                };
+
+                // Контактная форма
+                const contactForm = document.getElementById('contactForm');
+                if (contactForm) contactForm.onsubmit = async (e) => {
                     e.preventDefault();
-                    let valid = true;
-                    if (!validateField(document.getElementById('contactName'), 'name')) valid = false;
-                    if (!validateField(document.getElementById('contactEmail'), 'email')) valid = false;
-                    if (!validateField(document.getElementById('contactPhone'), 'phone')) valid = false;
-                    if (!validateField(document.getElementById('contactMessage'), 'required')) valid = false;
-                    if (!valid) { openModal('Ошибка', 'Заполните все поля корректно.'); return; }
+                    let ok = true;
+                    if (!validateField(document.getElementById('contactName'), 'name')) ok = false;
+                    if (!validateField(document.getElementById('contactEmail'), 'email')) ok = false;
+                    if (!validateField(document.getElementById('contactPhone'), 'phone')) ok = false;
+                    if (!validateField(document.getElementById('contactMessage'), 'required')) ok = false;
+                    if (!ok) {
+                        openModal('Ошибка', 'Заполните все поля корректно.');
+                        return;
+                    }
                     const params = {
                         name: document.getElementById('contactName').value.trim(),
                         company: document.getElementById('contactCompany')?.value.trim() || '',
@@ -1272,9 +1133,18 @@
                     };
                     openModal('Сообщение отправлено!', 'Спасибо! Мы ответим в течение 2 часов.');
                     if (typeof window.sendContactForm === 'function') {
-                        window.sendContactForm(params).then(() => { document.getElementById('contactForm').reset(); }).catch(e => console.error(e));
+                        window.sendContactForm(params).then(() => {
+                            contactForm.reset();
+                        }).catch(e => console.error(e));
                     }
-                });
+                };
+            }
+
+            // Запуск после полной загрузки DOM
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initAll);
+            } else {
+                initAll();
             }
         })();
     </script>
