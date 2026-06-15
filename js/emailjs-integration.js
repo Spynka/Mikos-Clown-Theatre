@@ -97,7 +97,7 @@ ${contactsHtml ? `<div style="background:#F8F7F6;border-radius:8px;padding:20px;
         { label: 'Сообщение', value: params.message?.replace(/\n/g, '<br>') }
       ]
     });
-    const contacts = '<p style="margin:0 0 8px;font-weight:600;color:#1A1718;">Если возникнут вопросы:</p><p style="margin:0;font-size:14px;color:#3D393A;"><a href="mailto:partner@teatr-sreda.ru" style="color:#4A6294;text-decoration:none;">partner@teatr-sreda.ru</a> &nbsp;|&nbsp; <a href="tel:+74951234567" style="color:#4A6294;text-decoration:none;">+7 (495) 123-45-67</a></p>';
+    const contacts = '<p style="margin:0 0 8px;font-weight:600;color:#1A1718;">Если возникнут вопросы:</p><p style="margin:0;font-size:14px;color:#3D393A;"><a href="mailto:micos.clown@gmail.com" style="color:#4A6294;text-decoration:none;">micos.clown@gmail.com</a> &nbsp;|&nbsp; <a href="tel:+74951234567" style="color:#4A6294;text-decoration:none;">+7 (961) 018-56-17</a></p>';
     return wrapEmail('Заявка принята', 'Спасибо, что выбираете нас!', greeting, details, contacts, 'С уважением и клоунским обаянием, команда «Микос»');
   }
 
@@ -131,7 +131,7 @@ ${contactsHtml ? `<div style="background:#F8F7F6;border-radius:8px;padding:20px;
         ]
     });
 
-    const contacts = '<p style="margin:0 0 8px;font-weight:600;color:#1A1718;">Контакты для связи:</p><p style="margin:0;font-size:14px;color:#3D393A;"><a href="mailto:partner@teatr-sreda.ru" style="color:#4A6294;text-decoration:none;">partner@teatr-sreda.ru</a> &nbsp;|&nbsp; <a href="tel:+74951234567" style="color:#4A6294;text-decoration:none;">+7 (495) 123-45-67</a></p>';
+    const contacts = '<p style="margin:0 0 8px;font-weight:600;color:#1A1718;">Контакты для связи:</p><p style="margin:0;font-size:14px;color:#3D393A;"><a href="mailto:micos.clown@gmail.com" style="color:#4A6294;text-decoration:none;">micos.clown@gmail.com</a> &nbsp;|&nbsp; <a href="tel:+74951234567" style="color:#4A6294;text-decoration:none;">+7 (961) 018-56-17</a></p>';
     return wrapEmail('Запрос сформирован', 'Ваш персональный запрос принят', greeting, details, contacts, 'С клоунским приветом, команда «Микос»');
   }
 
@@ -148,7 +148,7 @@ ${contactsHtml ? `<div style="background:#F8F7F6;border-radius:8px;padding:20px;
     items.push({ label: 'Сообщение', value: params.message?.replace(/\n/g, '<br>') });
 
     const details = buildDetailsTable({ caption: 'Ваше обращение', items });
-    const contacts = '<p style="margin:0 0 8px;font-weight:600;color:#1A1718;">Наши контакты</p><p style="margin:0;font-size:14px;color:#3D393A;"><a href="mailto:info@mikos-teatr.ru" style="color:#4A6294;text-decoration:none;">info@mikos-teatr.ru</a> &nbsp;|&nbsp; <a href="tel:+74951234567" style="color:#4A6294;text-decoration:none;">+7 (495) 123-45-67</a></p>';
+    const contacts = '<p style="margin:0 0 8px;font-weight:600;color:#1A1718;">Наши контакты</p><p style="margin:0;font-size:14px;color:#3D393A;"><a href="mailto:micos.clown@gmail.com" style="color:#4A6294;text-decoration:none;">micos.clown@gmail.com</a> &nbsp;|&nbsp; <a href="tel:+74951234567" style="color:#4A6294;text-decoration:none;">+7 (961) 018-56-17</a></p>';
     return wrapEmail('Спасибо за обратную связь', 'Ваше сообщение получено', greeting, details, contacts, 'Всегда вам рады, команда «Микос»');
   }
 
